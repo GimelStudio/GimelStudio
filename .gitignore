@@ -1,0 +1,9 @@
+
+# Ignore .pyc folders/files
+__pycache__
+*.pyc
+
+# Ignore pyinstaller build folders/files
+build
+dist
+*.spec
