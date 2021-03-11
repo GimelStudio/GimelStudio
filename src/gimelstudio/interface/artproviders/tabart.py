@@ -216,7 +216,7 @@ class UITabArt(object):
         tab_x = in_rect.x
 
         if page.active:
-            tab_y = in_rect.y + in_rect.height - tab_height
+            tab_y = in_rect.y + in_rect.height - tab_height + 2
         else:
             tab_y = in_rect.y + in_rect.height - 28
 
