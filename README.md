@@ -13,6 +13,14 @@ Gimel Studio is a non-destructive, node-based 2D image graphics editor.
 This repository tracks the next step of Gimel Studio to become a truly usable and serious node-based, non-destructive image editor. It is currently in *planning stage* and things will probably change from what is currently here.
 
 
+# Running the code
+
+There's not much here right now, but if you'd like to see the latest (initial) updates to the GUI and backend, you can do so by following the steps below:
+
+1. ``pip install wxpython`` and ``pip install pillow``
+2. ``python src/__main__.py``
+
+
 # Join this project
 
 You're welcome to join us in planning/development for the next step of Gimel Studio!
