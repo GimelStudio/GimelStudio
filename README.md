@@ -4,6 +4,7 @@ Gimel Studio
 Gimel Studio is a non-destructive, node-based 2D image graphics editor.
 
 [![GitHub license](https://img.shields.io/github/license/Correct-Syntax/Gimel-Studio?color=light-green)](https://github.com/GimelStudio/GimelStudio/blob/master/LICENSE)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/GimelStudio/GimelStudio.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/GimelStudio/GimelStudio/context:python)
 
 
 # Status
