@@ -1,0 +1,3 @@
+wxpython==4.1.0
+numpy
+opencv-python
