@@ -21,6 +21,7 @@ from PIL import Image
 
 from .utils import ConvertImageToWx
 from .basewidgets import ZoomPanel
+from gimelstudio.datafiles.icons import ICON_BRUSH_CHECKERBOARD
 
 
 class ImageViewport(ZoomPanel):
@@ -32,7 +33,9 @@ class ImageViewport(ZoomPanel):
         self._renderTime = 0.00
         self._rendering = False
 
-        self._viewportImage = ConvertImageToWx(Image.new('RGBA', (500, 500), "gold"))
+        img = Image.new('RGBA', (500, 500), (0, 0, 0, 120))
+
+        self._viewportImage = ConvertImageToWx(img)
 
         self.Bind(wx.EVT_KEY_DOWN, self.OnKeyEvent)
 
@@ -44,6 +47,13 @@ class ImageViewport(ZoomPanel):
         image = self._viewportImage
         x = (self.Size[0] - image.Width) / 2.0
         y = (self.Size[1] - image.Height) / 2.0
+
+        # draw checkerboard bg
+        dc.SetPen(wx.TRANSPARENT_PEN)
+        dc.SetBrush(wx.Brush(ICON_BRUSH_CHECKERBOARD.GetBitmap()))
+        dc.DrawRectangle(wx.Rect(x, y, image.Width, image.Height))
+
+        # Draw image
         dc.DrawBitmap(image, x, y, useMask=False)
 
     def OnDrawInterface(self, dc):
