@@ -18,8 +18,8 @@ This repository tracks the next step of Gimel Studio to become a truly usable an
 
 There's not much here right now, but if you'd like to see the latest (initial) updates to the GUI and backend, you can do so by following the steps below:
 
-1. ``pip install wxpython`` and ``pip install pillow``
-2. ``python src/__main__.py``
+1. ``pip install -r requirements.txt``
+2. ``python src/main.py``
 
 
 # Join this project
