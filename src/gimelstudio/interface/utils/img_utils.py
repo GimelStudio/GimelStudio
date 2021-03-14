@@ -15,18 +15,20 @@
 # ----------------------------------------------------------------------------
 
 import wx
+import cv2
 
 
 def ConvertImageToWx(image):
-    """ Converts the given ``PIL Image`` object into a
+    """ Converts the given ``numpy.ndarray`` object into a
     ``wx.Bitmap`` with RGBA.
-
-    :param image: ``PIL Image`` to convert
+    :param image: ``numpy.ndarray`` to convert
     :returns: ``wx.Bitmap``
     """
-    bitmap = wx.Bitmap.FromBufferRGBA(
-        image.size[0],
-        image.size[1],
-        image.convert('RGBA').tobytes()
-    )
-    return bitmap
+    height, width = image.shape[:2]
+
+    if image.shape[2] == 3:
+        image_rgba = cv2.cvtColor(image, cv2.COLOR_RGB2RGBA)
+    else:
+        image_rgba = image
+
+    return wx.Bitmap.FromBufferRGBA(width, height, image_rgba.astype("uint8"))

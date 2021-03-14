@@ -17,7 +17,7 @@
 import wx
 import wx.adv
 
-from PIL import Image
+import numpy as np
 
 from .utils import ConvertImageToWx
 from .basewidgets import ZoomPanel
@@ -33,7 +33,7 @@ class ImageViewport(ZoomPanel):
         self._renderTime = 0.00
         self._rendering = False
 
-        img = Image.new('RGBA', (500, 500), (0, 0, 0, 120))
+        img = np.zeros((256, 256, 4), dtype=np.uint16)
 
         self._viewportImage = ConvertImageToWx(img)
 
@@ -60,8 +60,7 @@ class ImageViewport(ZoomPanel):
         gc = wx.GraphicsContext.Create(dc)
 
         self.UpdateZoomValue()
-        text = self.CreateInfoText(self._renderTime,
-                                   self._zoom, self._rendering)
+        text = "Zoom {0}%".format(self._zoom)
 
         fnt = self._parent.GetFont().Bold()
         gc.SetFont(fnt, wx.Colour('#ccc'))
@@ -78,15 +77,6 @@ class ImageViewport(ZoomPanel):
         elif code == wx.WXK_NUMPAD_SUBTRACT:
             self.ScenePostScale(0.9, 0.9, mouse[0], mouse[1])
 
-        self.UpdateDrawing()
-
-    def CreateInfoText(self, render_time, zoom, rendering=False):
-        if rendering is False:
-            info = "Zoom {0}%".format(zoom)
-        return info
-
-    def UpdateInfoText(self, rendering=False):
-        self._rendering = rendering
         self.UpdateDrawing()
 
     def UpdateZoomValue(self):
