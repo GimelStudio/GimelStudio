@@ -35,14 +35,14 @@ There's not much here right now, but if you'd like to see the latest (initial) u
 
 You're welcome to join us in planning/development for the next step of Gimel Studio!
 
-If you'd like to join development or have questions, comments or ideas you can join the Gimel Studio [discord server](https://discord.gg/RqwbDrVDpK).
+If you'd like to join development or have questions, comments or ideas you can join the Gimel Studio [Discord](https://discord.gg/RqwbDrVDpK).
 
 
 # Tech Stack
 
 [Python](https://python.org) - We can effectively use Python's strong suits (ease-of-use, portability, multitude of packages, large community, etc) and get the performance required by relying on lower-level and performant external libraries to do the heavy lifting (where implementing something in Python would be a bottleneck). This should also lower the bar on contributing to Gimel Studio and thus (hopefully) allow for a greater contributor base.
 
-We also plan to use GLSL and/or it's variants in addition to Python for image-editing, as applicable, via [ModernGL](https://github.com/moderngl/moderngl), [glnext]("https://github.com/cprogrammer1994/glnext") or another graphics rendering API (suggestions welcome!). **(This is still undecided)**
+We also plan to use GLSL and/or it's variants in addition to Python for image-editing, as applicable, via [ModernGL](https://github.com/moderngl/moderngl), [glnext](https://github.com/cprogrammer1994/glnext) or another graphics rendering API (suggestions welcome!). **(This is still undecided)**
 
 [Numpy](https://numpy.org/) - Numpy will be the "data-exchange" format, the core image format used for the backend of Gimel Studio. It will be used as "glue" to combine OIIO, GMIC, etc.
 
@@ -55,5 +55,3 @@ We also plan to use GLSL and/or it's variants in addition to Python for image-ed
 [wxPython](https://wxpython.org) -  Will be used as the **primary GUI front-end** as it's a powerful, native, cross-platform GUI toolkit based on wxWidgets. For good examples of wxpython used as a toolkit for graphics applications see [sK1 vector graphics editor](https://sk1project.net/) and [ImagePy](https://github.com/Image-Py).
 
 **API Scripting Language:** Python, of course. :)
-
-*Other possible libs (undecided): OpenCV, Scipy, etc*
