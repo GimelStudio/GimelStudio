@@ -1,3 +1,5 @@
+!["Gimel Studio banner"](/assets/banner/banner.png "Gimel Studio")
+
 Gimel Studio
 ============
 
