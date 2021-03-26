@@ -6,13 +6,13 @@ Gimel Studio
 [![GitHub license](https://img.shields.io/github/license/Correct-Syntax/Gimel-Studio?color=light-green)](https://github.com/GimelStudio/GimelStudio/blob/master/LICENSE)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/GimelStudio/GimelStudio.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/GimelStudio/GimelStudio/context:python)
 
-Gimel Studio is a non-destructive, node-based 2D image graphics editor.
+Gimel Studio is a non-destructive, node-based 2D image graphics editor focused on **simplicity, speed, elegance and usability**.
 
-The goal is to expand on and greatly improve upon the concepts from the [original version](https://github.com/Correct-Syntax/Gimel-Studio) of Gimel Studio to create a serious 2D graphics editor. 
+The main goal is to expand on and greatly improve upon the concepts from the [original version](https://github.com/Correct-Syntax/Gimel-Studio) of Gimel Studio to create a serious 2D graphics editor. 
 
-This includes a re-designed UI, better file-type support and a concept of layers *and* nodes for image editing where pre-created node-based effects can be applied to layers in a stack and composited without messing with the nodes directly. Nodes can be used to create new effects and/or composite raster and vector graphics on-demand. Custom nodes can be scripted with the built-in Python API for maximum flexibility.
+This includes a re-designed UI (highly inspired by blender), improved file-type support and a concept of layers *and* nodes for image editing. Nodes can be used to composite, create/add new effects and/or composite raster and vector graphics on-demand. Custom nodes can be scripted with the built-in Python API for maximum flexibility.
 
-With a fully non-destructive workflow that uses both GPU and CPU processing while being seamlessly cross-platform on Windows, Linux and MacOs (for 64-bit systems), Gimel Studio aims to be a powerful 2d graphics editing tool for beginners and pros alike.
+With a fully non-destructive workflow that uses both GPU and CPU processing while being seamlessly cross-platform on Windows, Linux and MacOs (for 64-bit systems), Gimel Studio aims to be a simple, yet powerful 2d graphics editing tool for beginners and pros alike.
 
 
 # Status
@@ -37,7 +37,7 @@ There's not much here right now, but if you'd like to see the latest (initial) u
 
 You're welcome to join us in planning/development for the next step of Gimel Studio!
 
-If you'd like to join development or have questions, comments or ideas you can join the Gimel Studio [Discord](https://discord.gg/RqwbDrVDpK).
+If you'd like to join development or have questions, comments or ideas you can join the Gimel Studio [Discord](https://discord.gg/RqwbDrVDpK). This is where you can chat with the developers and get the latest development updates (at the moment).
 
 
 # Tech Stack
@@ -50,7 +50,7 @@ We also plan to use GLSL and/or it's variants in addition to Python for image-ed
 
 [OpenImageIO](https://openimageio.readthedocs.io/en/release-2.2.8.0/) - OIIO will be used for image IO and (possibly) some image editing. OpenImageIO (OIIO) is a library for reading, writing, and processing images in a wide variety of file formats, using a format-agnostic API. It is used in professional, large-scale visual effects and feature film animation, and it is used ubiquitously by large VFX studios, as well as incorporated into many commercial products.
 
-[Cario](https://pycairo.readthedocs.io/en/latest/) - Cairo is a 2D graphics library with support for multiple output devices, including SVG, etc. We will use cario for vector graphics support.
+[Cario](https://pycairo.readthedocs.io/en/latest/) - Cairo is a 2D graphics library with support for multiple output devices, including SVG, etc. We will use either cario or [Skia graphics engine](https://skia.org/) for vector graphics support.
 
 [G'MIC](https://gmic.eu/) - For additional image effects and filters (CPU-based). *Mainly need to wait for the [GMIC python bindings](https://github.com/myselfhimself/gmic-py) to support Windows and MacOs before implementing this into Gimel Studio, but this probably won't be implemented until after the core is stable anyway.*
 
