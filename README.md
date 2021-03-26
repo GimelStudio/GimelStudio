@@ -21,11 +21,8 @@ With a fully non-destructive workflow that uses both GPU and CPU processing whil
 
 This repository tracks the *next step* of Gimel Studio to become a truly usable and serious node-based, non-destructive image editor. It is currently in *planning/initial development stage* and things will probably change (a lot) from what is currently here.
 
-!["Gimel Studio mockup"](https://i.ibb.co/jJDpNQg/early-mockup-2.jpg "Gimel Studio")
-*Early WIP mockup of the redesigned UI (General tab)*
-
-!["Gimel Studio mockup"](https://i.ibb.co/Bnvz4pn/early-ui-mockup-nodes-tab.jpg "Gimel Studio")
-*Early WIP mockup of the redesigned UI (Nodes tab)*
+!["Gimel Studio mockup"](https://i.ibb.co/0C2sf3Y/Full-HD.jpg "Gimel Studio")
+*Early WIP mockup of the redesigned UI*
 
 
 # Running the code
