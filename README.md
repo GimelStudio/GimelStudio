@@ -8,9 +8,9 @@ Gimel Studio
 
 Gimel Studio is a non-destructive, node-based 2D image graphics editor focused on **simplicity, speed, elegance and usability**.
 
-The main goal is to expand on and greatly improve upon the concepts from the [original version](https://github.com/Correct-Syntax/Gimel-Studio) of Gimel Studio to create a serious 2D graphics editor. 
+The main goal is to expand on and greatly improve upon the concepts from the [original version](https://github.com/Correct-Syntax/Gimel-Studio) of Gimel Studio to create a serious (yet fun!) 2D graphics editor. 
 
-This includes a re-designed UI (highly inspired by blender), improved file-type support and a concept of layers *and* nodes for image editing. Nodes can be used to composite, create/add new effects and/or composite raster and vector graphics on-demand. Custom nodes can be scripted with the built-in Python API for maximum flexibility.
+This includes a re-designed UI (highly inspired by Blender and Sketch), improved file-type support and a concept of layers *and* nodes for image editing. Nodes can be used to composite, create/add new effects and/or composite raster and vector graphics on-demand. Custom nodes can be scripted with the built-in Python API for maximum flexibility.
 
 With a fully non-destructive workflow that uses both GPU and CPU processing while being seamlessly cross-platform on Windows, Linux and MacOs (for 64-bit systems), Gimel Studio aims to be a simple, yet powerful 2d graphics editing tool for beginners and pros alike.
 
@@ -25,19 +25,19 @@ This repository tracks the *next step* of Gimel Studio to become a truly usable 
 *Early WIP mockup of the redesigned UI*
 
 
+# Join this project
+
+You're welcome to join us in planning/development for the next step of Gimel Studio!
+
+If you'd like to join development or have questions, comments or ideas you can join the Gimel Studio [Discord](https://discord.gg/RqwbDrVDpK). This is where you can chat with the developers and get the latest development updates (at the moment).
+
+
 # Running the code
 
 There's not much here right now, but if you'd like to see the latest (initial) updates to the GUI and backend, you can do so by following the steps below:
 
 1. ``pip install -r requirements.txt``
 2. ``python src/main.py``
-
-
-# Join this project
-
-You're welcome to join us in planning/development for the next step of Gimel Studio!
-
-If you'd like to join development or have questions, comments or ideas you can join the Gimel Studio [Discord](https://discord.gg/RqwbDrVDpK). This is where you can chat with the developers and get the latest development updates (at the moment).
 
 
 # Tech Stack
@@ -50,7 +50,7 @@ We also plan to use GLSL and/or it's variants in addition to Python for image-ed
 
 [OpenImageIO](https://openimageio.readthedocs.io/en/release-2.2.8.0/) - OIIO will be used for image IO and (possibly) some image editing. OpenImageIO (OIIO) is a library for reading, writing, and processing images in a wide variety of file formats, using a format-agnostic API. It is used in professional, large-scale visual effects and feature film animation, and it is used ubiquitously by large VFX studios, as well as incorporated into many commercial products.
 
-[Cario](https://pycairo.readthedocs.io/en/latest/) - Cairo is a 2D graphics library with support for multiple output devices, including SVG, etc. We will use either cario or [Skia graphics engine](https://skia.org/) for vector graphics support.
+[Cario](https://pycairo.readthedocs.io/en/latest/) - Cairo is a 2D graphics library with support for multiple output devices, including SVG, etc. We will use either cairo or [Skia graphics engine](https://skia.org/) for vector graphics support.
 
 [G'MIC](https://gmic.eu/) - For additional image effects and filters (CPU-based). *Mainly need to wait for the [GMIC python bindings](https://github.com/myselfhimself/gmic-py) to support Windows and MacOs before implementing this into Gimel Studio, but this probably won't be implemented until after the core is stable anyway.*
 
