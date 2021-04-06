@@ -8,6 +8,9 @@ Gimel Studio
 
 Gimel Studio is a non-destructive, node-based 2D image graphics editor focused on **simplicity, speed, elegance and usability**.
 
+
+# Vision
+
 The main goal is to expand on and greatly improve upon the concepts from the [original version](https://github.com/Correct-Syntax/Gimel-Studio) of Gimel Studio to create a serious (yet fun!) 2D graphics editor. 
 
 This includes a re-designed UI (highly inspired by Blender and Sketch), improved file-type support and a concept of layers *and* nodes for image editing. Nodes can be used to composite, create/add new effects and/or composite raster and vector graphics on-demand. Custom nodes can be scripted with the built-in Python API for maximum flexibility.
@@ -21,8 +24,24 @@ With a fully non-destructive workflow that uses both GPU and CPU processing whil
 
 This repository tracks the *next step* of Gimel Studio to become a truly usable and serious node-based, non-destructive image editor. It is currently in *planning/initial development stage* and things will probably change (a lot) from what is currently here.
 
+A greatly improved nodegraph for Gimel Studio is currently in development via the [GS Nodegraph](https://github.com/Correct-Syntax/gsnodegraph) library.
+
 !["Gimel Studio mockup"](https://i.ibb.co/0C2sf3Y/Full-HD.jpg "Gimel Studio")
 *Early WIP mockup of the redesigned UI*
+
+
+# Roadmap
+
+For now, we're trying to keep the roadmap limited to realistic goals, keeping fun (of course!) and on-par with the amount of developers/contributors we have. *(Hint: we could possibly do more if you contribute.)*
+
+Currently, we're still planning the roadmap, but it's safe to say it will include:
+
+- A redesigned UI + nodegraph
+- File support via OpenImageIO
+- Vector support (in some way, at least)
+- Python API for scripting nodes
+
+...and More...
 
 
 # Join this project
