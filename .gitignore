@@ -11,3 +11,7 @@ dist
 # Ignore test images 
 src/*.jpg
 src/*.png
+
+# Ignore the local version of libs
+gsnodegraph
+tests
