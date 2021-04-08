@@ -34,11 +34,11 @@ class UITabArt(object):
         self._agwFlags = 0
         self._fixed_tab_width = 300
 
-        base_colour = wx.Colour("#252525")
+        base_colour = wx.Colour("#232323")
 
         background_colour = base_colour
-        normaltab_colour = wx.Colour("#333333")
-        selectedtab_colour = wx.Colour("#434343")
+        normaltab_colour = wx.Colour("#303030")
+        selectedtab_colour = wx.Colour("#424242")
 
         self._bkbrush = wx.Brush(background_colour)
         self._normal_bkbrush = wx.Brush(normaltab_colour)
@@ -213,7 +213,7 @@ class UITabArt(object):
 
         tab_height = tab_size[1]
         tab_width = tab_size[0]
-        tab_x = in_rect.x
+        tab_x = in_rect.x - 4
 
         if page.active:
             tab_y = in_rect.y + in_rect.height - tab_height + 2
@@ -624,4 +624,3 @@ class UITabArt(object):
                 self._disabled_windowlist_bmp = bmp
             else:
                 self._active_windowlist_bmp = bmp
-
