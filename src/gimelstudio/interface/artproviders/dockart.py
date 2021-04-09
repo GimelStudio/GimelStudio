@@ -30,7 +30,7 @@ class UIDockArt(object):
 
         isMac = wx.Platform == "__WXMAC__"
 
-        self._caption_font = wx.SystemSettings.GetFont(wx.SYS_DEFAULT_GUI_FONT).Bold()
+        self._caption_font = wx.SystemSettings.GetFont(wx.SYS_DEFAULT_GUI_FONT)
 
         self.SetDefaultPaneBitmaps(isMac)
         self._restore_bitmap = wx.Bitmap(aui.restore_xpm)
