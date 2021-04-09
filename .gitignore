@@ -15,3 +15,6 @@ src/*.png
 # Ignore the local version of libs
 gsnodegraph
 tests
+
+# Ignore .sketch files
+*.sketch
