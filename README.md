@@ -30,7 +30,7 @@ A greatly improved nodegraph for Gimel Studio is currently in development via th
 *Early WIP mockup of the redesigned UI*
 
 
-# Roadmap
+# Roadmap Goals
 
 For now, we're trying to keep the roadmap limited to realistic goals, keeping fun (of course!) and on-par with the amount of developers/contributors we have. *(Hint: we could possibly do more if you contribute.)*
 
@@ -42,6 +42,15 @@ Currently, we're still planning the roadmap, but it's safe to say it will includ
 - Python API for scripting nodes
 
 ...and More...
+
+
+# Immediate Tasks
+
+- [ ] Complete and implement [GS Nodegraph](https://github.com/Correct-Syntax/gsnodegraph) library (a greatly improved nodegraph for Gimel Studio)
+- [ ] Create official website for Gimel Studio at https://gimelstudio.github.io (currently just an ugly landing page)
+- [ ] Create updated design mockups for UI
+
+and more...
 
 
 # Join this project
