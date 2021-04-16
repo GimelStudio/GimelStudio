@@ -13,7 +13,7 @@ Gimel Studio is a non-destructive, node-based 2D image graphics editor focused o
 
 The main goal is to expand on and greatly improve upon the concepts from the [original version](https://github.com/Correct-Syntax/Gimel-Studio) of Gimel Studio to create a serious (yet fun!) 2D graphics editor. 
 
-This includes a re-designed UI (highly inspired by Blender and Sketch), improved file-type support and a concept of layers *and* nodes for image editing. Nodes can be used to composite, create/add new effects and/or composite raster and vector graphics on-demand. Custom nodes can be scripted with the built-in Python API for maximum flexibility.
+This includes a re-designed UI (highly inspired by Blender and Sketch), improved file-type support, node-graph and overall workflow for image editing. Nodes can be used to composite, create/add new effects and/or composite raster and vector graphics on-demand. Helpful gizmos in the interative viewport can be used to do various editing tasks and speed up the workflow. Preset node graph templates can be created, used and re-used to save time setting up common node-setups. Custom nodes can be scripted with the built-in Python API for maximum flexibility.
 
 With a fully non-destructive workflow that uses both GPU and CPU processing while being seamlessly cross-platform on Windows, Linux and MacOs (for 64-bit systems), Gimel Studio aims to be a simple, yet powerful 2d graphics editing tool for beginners and pros alike.
 
