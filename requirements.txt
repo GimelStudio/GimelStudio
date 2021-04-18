@@ -1,4 +1,4 @@
 wxpython==4.1.0
-gsnodegraph
+gsnodegraph==0.1.4
 numpy
 opencv-python
