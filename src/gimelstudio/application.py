@@ -18,9 +18,17 @@ import wx
 import wx.lib.agw.aui as aui
 import wx.lib.agw.flatmenu as flatmenu
 
+from .config import AppData
 from .interface import ImageViewport
 from .interface import artproviders
-from .datafiles.icons import ICON_LAYERS, ICON_GIMELSTUDIO_ICO
+from .datafiles.icons import (ICON_LAYERS, ICON_PROPERTIES, 
+                              ICON_NODEGRAPH, ICON_GIMELSTUDIO_ICO)
+
+# for early testing with gsnodegraph lib:
+# (https://github.com/Correct-Syntax/gsnodegraph) 
+
+from gsnodegraph import NodeGraph
+from nodes import OutputNode, MixNode, ImageNode
 
 
 class AUIManager(aui.AuiManager):
@@ -33,33 +41,21 @@ class ApplicationFrame(wx.Frame):
     def __init__(self):
         wx.Frame.__init__(self, None, title="Gimel Studio", size=(1000, 800))
 
+        self.appdata = AppData(self)
+
         # Set the program icon
         self.SetIcon(ICON_GIMELSTUDIO_ICO.GetIcon())
-
-        self._mgr = AUIManager(self)
-        art = self._mgr.GetArtProvider()
-        extra_flags = aui.AUI_MGR_LIVE_RESIZE
-        self._mgr.SetAGWFlags(self._mgr.GetAGWFlags() ^ extra_flags)
-
-        art.SetMetric(aui.AUI_DOCKART_SASH_SIZE, 0)
-        art.SetMetric(aui.AUI_DOCKART_PANE_BORDER_SIZE, 0)
-        art.SetColour(aui.AUI_DOCKART_BORDER_COLOUR, wx.Colour("#252525"))
-        art.SetColour(aui.AUI_DOCKART_SASH_COLOUR, wx.Colour("#252525"))
-        art.SetColour(aui.AUI_DOCKART_BACKGROUND_COLOUR, wx.Colour("#252525"))
 
         # Create main sizer
         self.mainSizer = wx.BoxSizer(wx.VERTICAL)
 
         # Create the menubar
-        self._menubar = flatmenu.FlatMenuBar(self, wx.ID_ANY, 40, 8, options=0)
+        self._menubar = flatmenu.FlatMenuBar(self, wx.ID_ANY, 40, 6, options=0)
 
         # Set the dark theme
         rm = self._menubar.GetRendererManager()
         theme = rm.AddRenderer(artproviders.UIMenuBarRenderer())
         rm.SetTheme(theme)
-
-        self._menubar.Refresh()
-        self.Update()
 
         # Init menus
         file_menu = flatmenu.FlatMenu()
@@ -137,84 +133,86 @@ class ApplicationFrame(wx.Frame):
         # Add menubar to main sizer
         self.mainSizer.Add(self._menubar, 0, wx.EXPAND)
 
-        # Main notebook
-        self.notebook = aui.AuiNotebook(self, style=wx.BORDER_NONE)
-        self.notebook.SetArtProvider(artproviders.UITabArt())
-
-        # Panel
-        self.panel = wx.Panel(self, style=wx.BORDER_NONE)
-
-        self.panel._mgr = AUIManager(self.panel)
-        self.panel._mgr.SetArtProvider(artproviders.UIDockArt())
-        art = self.panel._mgr.GetArtProvider()
+        # Window manager
+        self._mgr = AUIManager(self)
+        #self._mgr.SetArtProvider(artproviders.UIDockArt())
+        art = self._mgr.GetArtProvider()
         extra_flags = aui.AUI_MGR_LIVE_RESIZE | aui.AUI_MGR_ALLOW_ACTIVE_PANE
-        self.panel._mgr.SetAGWFlags(self.panel._mgr.GetAGWFlags() ^ extra_flags)
+        self._mgr.SetAGWFlags(self._mgr.GetAGWFlags() ^ extra_flags)
 
         art.SetMetric(aui.AUI_DOCKART_CAPTION_SIZE, 29)
         art.SetMetric(aui.AUI_DOCKART_GRIPPER_SIZE, 3)
         art.SetMetric(aui.AUI_DOCKART_SASH_SIZE, 6)
         art.SetMetric(aui.AUI_DOCKART_PANE_BORDER_SIZE, 0)
         art.SetMetric(aui.AUI_DOCKART_GRADIENT_TYPE, aui.AUI_GRADIENT_NONE)
-        art.SetColour(aui.AUI_DOCKART_INACTIVE_CAPTION_COLOUR, wx.Colour("#3c3c3c"))
-        art.SetColour(aui.AUI_DOCKART_ACTIVE_CAPTION_COLOUR, wx.Colour("#595959"))
+        art.SetColour(aui.AUI_DOCKART_INACTIVE_CAPTION_COLOUR, wx.Colour("#424242"))
+        art.SetColour(aui.AUI_DOCKART_ACTIVE_CAPTION_COLOUR, wx.Colour("#4D4D4D"))
         art.SetColour(aui.AUI_DOCKART_INACTIVE_CAPTION_TEXT_COLOUR, wx.Colour("#fff"))
-        art.SetColour(aui.AUI_DOCKART_SASH_COLOUR, wx.Colour("#252525"))
+        art.SetColour(aui.AUI_DOCKART_SASH_COLOUR, wx.Colour("#232323"))
 
         # Other panels
-        imageviewport_pnl = ImageViewport(self.panel)
-        imageviewport_pnl.SetBackgroundColour(wx.Colour("#434343"))
+        imageviewport_pnl = ImageViewport(self)
+        imageviewport_pnl.SetBackgroundColour(wx.Colour("#393939"))
 
-        layer_pnl = wx.Panel(self.panel, size=(350, 500))
-        layer_pnl.SetBackgroundColour(wx.Colour("#434343"))
+        # layer_pnl = wx.Panel(self, size=(350, 500))
+        # layer_pnl.SetBackgroundColour(wx.Colour("#393939"))
 
-        prop_pnl = wx.Panel(self.panel, size=(350, 500))
-        prop_pnl.SetBackgroundColour(wx.Colour("#434343"))
+        prop_pnl = wx.Panel(self, size=(350, 500))
+        prop_pnl.SetBackgroundColour(wx.Colour("#393939"))
+        
+        registry = {
+            'image_node': ImageNode,
+            'mix_node': MixNode,
+            'output_node': OutputNode
+        }
+        nodegraph_pnl = NodeGraph(self, registry, size=(100, 100))
+
+        nodegraph_pnl.AddNode('image_node', wx.Point(100, 10))
+        nodegraph_pnl.AddNode('image_node', wx.Point(400, 100))
+        nodegraph_pnl.AddNode('mix_node', wx.Point(600, 200))
+        nodegraph_pnl.AddNode('output_node', wx.Point(300, 270))
 
         # Add panes
-        self.panel._mgr.AddPane(
-            layer_pnl,
+        self._mgr.AddPane(
+            nodegraph_pnl,
             aui.AuiPaneInfo()
-            .Name('layers')
-            .Caption('Composite Layer Stack')
-            .Left()
+            .Name('nodegraph')
+            .Caption('Node Graph')
+            .Bottom()
             .CloseButton(visible=False)
-            .Icon(ICON_LAYERS.GetBitmap())
+            .Icon(ICON_NODEGRAPH.GetBitmap())
+            .BestSize(750, 800)
             )
-
-        self.panel._mgr.AddPane(
+        self._mgr.AddPane(
+            prop_pnl,
+            aui.AuiPaneInfo()
+            .Name('nodeproperties')
+            .Caption('Node Properties')
+            .Right()
+            .CloseButton(visible=False)
+            .Icon(ICON_PROPERTIES.GetBitmap())
+            .BestSize(750, 500)
+            )
+        self._mgr.AddPane(
             imageviewport_pnl,
             aui.AuiPaneInfo()
-            .Name('viewport')
+            .Name('imageviewport')
             .CaptionVisible(False)
             .Center()
             .CloseButton(visible=False)
+            .BestSize(750, 500)
             )
 
-        self.panel._mgr.AddPane(
-            prop_pnl,
-            aui.AuiPaneInfo()
-            .Name('props')
-            .Caption('Effect Properties')
-            .Right()
-            .CloseButton(visible=False)
-            .Icon(ICON_LAYERS.GetBitmap())
-            )
-        self.panel._mgr.Update()
-
-        # Add pages to notebook
-        self.notebook.AddPage(self.panel, "General", True)
-        self.notebook.AddPage(self.CreatePanel(self.panel), "Editing", False)
-        self.notebook.AddPage(self.CreatePanel(self.panel), "Compositing", False)
-        self.notebook.AddPage(self.CreatePanel(self.panel), "Nodes", False)
-        self.notebook.AddPage(self.CreatePanel(self.panel), "Scripting", False)
-
-        # Add the Main notebook to the main aui manager
-        self._mgr.AddPane(
-            self.notebook,
-            aui.AuiPaneInfo()
-            .Center()
-            .CaptionVisible(visible=False)
-            )
+        # self._mgr.AddPane(
+        #     layer_pnl,
+        #     aui.AuiPaneInfo()
+        #     .Name('layers')
+        #     .Caption('Layers')
+        #     .Left()
+        #     .CloseButton(visible=False)
+        #     .Icon(ICON_LAYERS.GetBitmap())
+        #     .BestSize(750, 500)
+        #     )
 
         # Maximize the window & tell the AUI window
         # manager to "commit" all the changes just made, etc
@@ -222,10 +220,3 @@ class ApplicationFrame(wx.Frame):
         self._menubar.PositionAUI(self._mgr)
         self._mgr.Update()
         self._menubar.Refresh()
-
-    def CreatePanel(self, parent):
-        """ This is just here for now. In reality, we will 
-        want to create panels with widgets, etc. """
-        pnl = wx.Panel(parent)
-        pnl.SetBackgroundColour(wx.Colour("#434343"))
-        return pnl
