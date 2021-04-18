@@ -13,9 +13,11 @@ Gimel Studio is a non-destructive, node-based 2D image graphics editor focused o
 
 The main goal is to expand on and greatly improve upon the concepts from the [original version](https://github.com/Correct-Syntax/Gimel-Studio) of Gimel Studio to create a serious (yet fun!) 2D graphics editor. 
 
-This includes a re-designed UI (highly inspired by Blender and Sketch), improved file-type support, node-graph and overall workflow for image editing. Nodes can be used to composite, create/add new effects and/or composite raster and vector graphics on-demand. Helpful gizmos in the interative viewport can be used to do various editing tasks and speed up the workflow. Preset node graph templates can be created, used and re-used to save time setting up common node-setups. Custom nodes can be scripted with the built-in Python API for maximum flexibility.
+This includes a re-designed UI (highly inspired by Blender and Sketch), improved file-type support, node-graph and overall workflow for image editing. Nodes can be used to composite, create/add new effects and/or composite raster and vector graphics on-demand. Helpful gizmos in the interactive viewport can be used to do various editing tasks and speed up the workflow. Preset node graph templates can be created, used and re-used to save time setting up common node-setups. Custom nodes can be scripted with the built-in Python API for maximum flexibility.
 
 With a fully non-destructive workflow that uses both GPU and CPU processing while being seamlessly cross-platform on Windows, Linux and MacOs (for 64-bit systems), Gimel Studio aims to be a simple, yet powerful 2d graphics editing tool for beginners and pros alike.
+
+**Visit our new home landing-page [here](https://gimelstudio.github.io) for some more detailed information on the project goals, vision, etc**
 
 
 # Status
@@ -27,27 +29,20 @@ This repository tracks the *next step* of Gimel Studio to become a truly usable 
 A greatly improved nodegraph for Gimel Studio is currently in development via the [GS Nodegraph](https://github.com/Correct-Syntax/gsnodegraph) library.
 
 !["Gimel Studio mockup"](https://i.ibb.co/0C2sf3Y/Full-HD.jpg "Gimel Studio")
-*Early WIP mockup of the redesigned UI*
+*Early (now outdated) WIP mockup of the redesigned UI*
 
 
 # Roadmap Goals
 
 For now, we're trying to keep the roadmap limited to realistic goals, keeping fun (of course!) and on-par with the amount of developers/contributors we have. *(Hint: we could possibly do more if you contribute.)*
 
-Currently, we're still planning the roadmap, but it's safe to say it will include:
-
-- A redesigned UI + nodegraph
-- File support via OpenImageIO
-- Vector support (in some way, at least)
-- Python API for scripting nodes
-
-...and More...
+**Visit our new home landing-page [here](https://gimelstudio.github.io) for some more detailed information on the project goals, vision, etc**
 
 
 # Immediate Tasks
 
 - [ ] Complete and implement [GS Nodegraph](https://github.com/Correct-Syntax/gsnodegraph) library (a greatly improved nodegraph for Gimel Studio)
-- [ ] Create official website for Gimel Studio at https://gimelstudio.github.io (currently just an ugly landing page)
+- [ ] Create official website for Gimel Studio at https://gimelstudio.github.io
 - [ ] Create updated design mockups for UI
 
 and more...
