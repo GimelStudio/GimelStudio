@@ -40,7 +40,7 @@ class ImageViewport(ZoomPanel):
         self.Bind(wx.EVT_KEY_DOWN, self.OnKeyEvent)
 
     def OnDrawBackground(self, dc):
-        dc.SetBackground(wx.Brush('#434343'))
+        dc.SetBackground(wx.Brush('#393939'))
         dc.Clear()
 
     def OnDrawScene(self, dc):
