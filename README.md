@@ -28,8 +28,12 @@ This repository tracks the *next step* of Gimel Studio to become a truly usable 
 
 A greatly improved nodegraph for Gimel Studio is currently in development via the [GS Nodegraph](https://github.com/Correct-Syntax/gsnodegraph) library.
 
-!["Gimel Studio mockup"](https://i.ibb.co/0C2sf3Y/Full-HD.jpg "Gimel Studio")
-*Early (now outdated) WIP mockup of the redesigned UI*
+
+# WIP Mockup
+
+Here is a **WIP mockup** of the redesigned UI:
+
+!["Gimel Studio mockup"](https://i.ibb.co/SPKdJxg/Updated-UI-Mockup.png "Gimel Studio")
 
 
 # Roadmap Goals
@@ -41,18 +45,14 @@ For now, we're trying to keep the roadmap limited to realistic goals, keeping fu
 
 # Immediate Tasks
 
-- [ ] Complete and implement [GS Nodegraph](https://github.com/Correct-Syntax/gsnodegraph) library (a greatly improved nodegraph for Gimel Studio)
-- [ ] Create official website for Gimel Studio at https://gimelstudio.github.io
-- [ ] Create updated design mockups for UI
-
-and more...
+Take a look at the [Github Issues](https://github.com/GimelStudio/GimelStudio/issues) for some immediate and future tasks. PRs are welcome! :)
 
 
-# Join this project
+# Discord & Gitter
 
 You're welcome to join us in planning/development for the next step of Gimel Studio!
 
-If you'd like to join development or have questions, comments or ideas you can join the Gimel Studio [Discord](https://discord.gg/RqwbDrVDpK). This is where you can chat with the developers and get the latest development updates (at the moment).
+If you'd like to join development or have questions, comments or ideas you can join the Gimel Studio [Discord](https://discord.gg/RqwbDrVDpK) or [Gitter](https://gitter.im/Gimel-Studio/community). These are places where you can chat with the developers and get the latest development updates (at the moment).
 
 
 # Running the code
