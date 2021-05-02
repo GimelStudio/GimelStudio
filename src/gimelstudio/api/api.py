@@ -14,42 +14,4 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-import uuid
-
-
-def Parameter(object):
-    def __init__(self):
-        self.input = None
-
-
-def Property(object):
-    def __init__(self):
-        self.input = None
-
-
-class NodeModel(object):
-    def __init__(self, label):
-        self._id = uuid.uuid4()
-        self.label = label
-
-
-class Node(NodeModel):
-    def __init__(self, label):
-        NodeModel.__init__(self, label)
-
-
-class NodeGraph(object):
-    def __init__(self):
-
-        self._id = uuid.uuid4()
-        self.nodes = {}
-
-
-if __name__ == '__main__':
-
-    nd1 = Node("image")
-    nd2 = Node("image")
-    nd3 = Node("mix")
-
-    print(nd1._id)
-    
+# Nothing here yet...

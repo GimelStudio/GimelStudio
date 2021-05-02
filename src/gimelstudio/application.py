@@ -19,16 +19,13 @@ import wx.lib.agw.aui as aui
 import wx.lib.agw.flatmenu as flatmenu
 
 from .config import AppData
-from .interface import ImageViewport
+from .interface import ImageViewportPanel, NodePropertiesPanel, NodeGraphPanel
 from .interface import artproviders
-from .datafiles.icons import (ICON_LAYERS, ICON_PROPERTIES, 
-                              ICON_NODEGRAPH, ICON_GIMELSTUDIO_ICO)
+from .datafiles.icons import (ICON_NODEPROPERTIES_PANEL, 
+                              ICON_NODEGRAPH_PANEL, ICON_GIMELSTUDIO_ICO)
+from .corenodes import OutputNode, MixNode, ImageNode, BlurNode
 
-# for early testing with gsnodegraph lib:
-# (https://github.com/Correct-Syntax/gsnodegraph) 
-
-from gsnodegraph import NodeGraph
-from nodes import OutputNode, MixNode, ImageNode
+from .core.renderer import Renderer
 
 
 class AUIManager(aui.AuiManager):
@@ -42,6 +39,7 @@ class ApplicationFrame(wx.Frame):
         wx.Frame.__init__(self, None, title="Gimel Studio", size=(1000, 800))
 
         self.appdata = AppData(self)
+        self.renderer = Renderer(self)
 
         # Set the program icon
         self.SetIcon(ICON_GIMELSTUDIO_ICO.GetIcon())
@@ -72,7 +70,7 @@ class ApplicationFrame(wx.Frame):
             helpString="Open and load a Gimel Studio project file",
             kind=wx.ITEM_NORMAL,
             subMenu=None,
-            normalBmp=ICON_LAYERS.GetBitmap()
+            normalBmp=ICON_NODEPROPERTIES_PANEL.GetBitmap()
         )
 
         self.saveprojectfile_menuitem = flatmenu.FlatMenuItem(
@@ -113,8 +111,9 @@ class ApplicationFrame(wx.Frame):
             helpString="Quit Gimel Studio",
             kind=wx.ITEM_NORMAL,
             subMenu=None,
-            normalBmp=ICON_LAYERS.GetBitmap()
+            normalBmp=ICON_NODEPROPERTIES_PANEL.GetBitmap()
         )
+
 
         # Append menu items to menus
         file_menu.AppendItem(self.openprojectfile_menuitem)
@@ -135,7 +134,7 @@ class ApplicationFrame(wx.Frame):
 
         # Window manager
         self._mgr = AUIManager(self)
-        #self._mgr.SetArtProvider(artproviders.UIDockArt())
+        self._mgr.SetArtProvider(artproviders.UIDockArt())
         art = self._mgr.GetArtProvider()
         extra_flags = aui.AUI_MGR_LIVE_RESIZE | aui.AUI_MGR_ALLOW_ACTIVE_PANE
         self._mgr.SetAGWFlags(self._mgr.GetAGWFlags() ^ extra_flags)
@@ -150,51 +149,40 @@ class ApplicationFrame(wx.Frame):
         art.SetColour(aui.AUI_DOCKART_INACTIVE_CAPTION_TEXT_COLOUR, wx.Colour("#fff"))
         art.SetColour(aui.AUI_DOCKART_SASH_COLOUR, wx.Colour("#232323"))
 
-        # Other panels
-        imageviewport_pnl = ImageViewport(self)
-        imageviewport_pnl.SetBackgroundColour(wx.Colour("#393939"))
 
-        # layer_pnl = wx.Panel(self, size=(350, 500))
-        # layer_pnl.SetBackgroundColour(wx.Colour("#393939"))
+        self.imageviewport_pnl = ImageViewportPanel(self)
 
-        prop_pnl = wx.Panel(self, size=(350, 500))
-        prop_pnl.SetBackgroundColour(wx.Colour("#393939"))
-        
+        self.prop_pnl = NodePropertiesPanel(self, size=(350, 500))
+
         registry = {
             'image_node': ImageNode,
             'mix_node': MixNode,
-            'output_node': OutputNode
+            'output_node': OutputNode,
+            'blur_node': BlurNode
         }
-        nodegraph_pnl = NodeGraph(self, registry, size=(100, 100))
-
-        nodegraph_pnl.AddNode('image_node', wx.Point(100, 10))
-        nodegraph_pnl.AddNode('image_node', wx.Point(400, 100))
-        nodegraph_pnl.AddNode('mix_node', wx.Point(600, 200))
-        nodegraph_pnl.AddNode('output_node', wx.Point(300, 270))
+        self.nodegraph_pnl = NodeGraphPanel(self, registry, size=(100, 100))
 
         # Add panes
         self._mgr.AddPane(
-            nodegraph_pnl,
+            self.nodegraph_pnl,
             aui.AuiPaneInfo()
             .Name('nodegraph')
-            .Caption('Node Graph')
+            .CaptionVisible(False)
             .Bottom()
             .CloseButton(visible=False)
-            .Icon(ICON_NODEGRAPH.GetBitmap())
             .BestSize(750, 800)
             )
         self._mgr.AddPane(
-            prop_pnl,
+            self.prop_pnl,
             aui.AuiPaneInfo()
             .Name('nodeproperties')
-            .Caption('Node Properties')
             .Right()
+            .CaptionVisible(False)
             .CloseButton(visible=False)
-            .Icon(ICON_PROPERTIES.GetBitmap())
             .BestSize(750, 500)
             )
         self._mgr.AddPane(
-            imageviewport_pnl,
+            self.imageviewport_pnl,
             aui.AuiPaneInfo()
             .Name('imageviewport')
             .CaptionVisible(False)
@@ -220,3 +208,24 @@ class ApplicationFrame(wx.Frame):
         self._menubar.PositionAUI(self._mgr)
         self._mgr.Update()
         self._menubar.Refresh()
+
+    def Render(self):
+        try:
+            import OpenImageIO as oiio
+            # import time
+            # start = time.time()
+            image = self.renderer.Render(self.NodeGraph._nodes)
+            # end = time.time()
+            # print(end - start)
+
+            self.imageviewport_pnl.UpdateViewerImage(image.Image("numpy"), 0)
+        except ImportError:
+            print("""OpenImageIO is required to render image! Disabling render!""")
+
+    @property
+    def NodeGraph(self):
+        return self.nodegraph_pnl.NodeGraph
+
+    @property
+    def ImageViewport(self):
+        return self.imageviewport_pnl

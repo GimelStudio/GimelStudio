@@ -14,21 +14,43 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
+import copy
+
 import wx
 import cv2
+import numpy as np
 
 
-def ConvertImageToWx(image):
-    """ Converts the given ``numpy.ndarray`` object into a
-    ``wx.Bitmap`` with RGBA.
-    :param image: ``numpy.ndarray`` to convert
-    :returns: ``wx.Bitmap``
-    """
-    height, width = image.shape[:2]
+# def _ConvertImageToWx(image):
+#     """ Converts the given ``numpy.ndarray`` object into a
+#     ``wx.Bitmap`` with RGBA.
+#     :param image: ``numpy.ndarray`` to convert
+#     :returns: ``wx.Bitmap``
+#     """
+#     height, width = image.shape[:2]
 
-    if image.shape[2] == 3:
-        image_rgba = cv2.cvtColor(image, cv2.COLOR_RGB2RGBA)
-    else:
-        image_rgba = image
+#     image = copy.deepcopy(image)
 
-    return wx.Bitmap.FromBufferRGBA(width, height, image_rgba.astype("uint8"))
+#     if image.shape[2] == 3:
+#         image_rgba = cv2.cvtColor(image, cv2.COLOR_RGB2RGBA)
+#     else:
+#         image_rgba = image
+
+#     # info = np.iinfo(image.dtype) # Get the information of the incoming image type
+#     # data = image.astype(np.float64) / 200#info.max # normalize the data to 0 - 1
+#     # data = 255 * data # Now scale by 255
+#     image = image_rgba.astype(np.uint8)
+
+#     return wx.Bitmap.FromBufferRGBA(width, height, image)
+
+
+def ConvertImageToWx(cv2_image):
+    height, width = cv2_image.shape[:2]
+
+    info = np.iinfo(cv2_image.dtype) # Get the information of the incoming image type
+    data = cv2_image.astype(np.float64) / info.max # normalize the data to 0 - 1
+    data = 255 * data # Now scale by 255
+    cv2_image = data.astype(np.uint8)
+
+    cv2_image_rgb = cv2.cvtColor(cv2_image, cv2.COLOR_RGB2RGBA)
+    return wx.Bitmap.FromBufferRGBA(width, height, cv2_image_rgb)

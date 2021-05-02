@@ -1,3 +1,4 @@
+
 # ----------------------------------------------------------------------------
 # Gimel Studio Copyright 2019-2021 by Noah Rahm and contributors
 #
@@ -14,39 +15,30 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-from layer import Layer
-from nodes import NodeGraph
+from .eval_info import EvalInfo
 
 
-class LayerStack(object):
+class OutputNode(object):
+    """ 
+    Represents the evaluation of the composite output node. 
+    """
     def __init__(self):
-        self.layers = {}
+        self.node = None
 
-    def GetLayers(self):
-        return self.layers
+    def SetNode(self, node):
+        """ Set the node object connected to the output node
+        this class represents.
 
-    def AddLayer(self, layer):
-        self.layers[layer._id] = layer
+        :param node: output node object
+        """
+        # TODO: don't hardcode this
+        self.node = node._parameters["Image"].binding
 
-
-
-if __name__ == '__main__':
-
-    nodegraph = NodeGraph()
-
-    layer_stack = LayerStack()
-
-    layer1 = Layer(1000, 1200)
-    layer2 = Layer(1700, 1100)
-    layer2.SetVisible(False)
-    layer3 = Layer(800, 100)
-
-    layer_stack.AddLayer(layer1)
-    layer_stack.AddLayer(layer2)
-    layer_stack.AddLayer(layer3)
-
-    for layer_id in layer_stack.layers:
-        layer = layer_stack.layers[layer_id]
-        if layer.GetIsVisible() is True:
-            print(layer, layer.height)
-            print(layer.NodeGraph, "<<<")
+    def RenderImage(self):
+        """ Render the image for this output node. If the output
+        node is not connected then the default image will be rendered.
+        """
+        if self.node is not None:
+            eval_info = EvalInfo(self.node)
+            image = eval_info.node.EvaluateNode(eval_info)
+            return image

@@ -21,10 +21,10 @@ import numpy as np
 
 from .utils import ConvertImageToWx
 from .basewidgets import ZoomPanel
-from gimelstudio.datafiles.icons import ICON_BRUSH_CHECKERBOARD
+from gimelstudio.datafiles import ICON_BRUSH_CHECKERBOARD
 
 
-class ImageViewport(ZoomPanel):
+class ImageViewportPanel(ZoomPanel):
     def __init__(self, parent):
         ZoomPanel.__init__(self, parent)
 
@@ -33,18 +33,21 @@ class ImageViewport(ZoomPanel):
         self._renderTime = 0.00
         self._rendering = False
 
-        img = np.zeros((256, 256, 4), dtype=np.uint16)
+        img = np.zeros((200, 200, 4), dtype=np.uint16)
 
         self._viewportImage = ConvertImageToWx(img)
 
         self.Bind(wx.EVT_KEY_DOWN, self.OnKeyEvent)
 
+    def GetImage(self):
+        return self._viewportImage
+
     def OnDrawBackground(self, dc):
-        dc.SetBackground(wx.Brush('#393939'))
+        dc.SetBackground(wx.Brush('#464646'))
         dc.Clear()
 
     def OnDrawScene(self, dc):
-        image = self._viewportImage
+        image = self.GetImage()
         x = (self.Size[0] - image.Width) / 2.0
         y = (self.Size[1] - image.Height) / 2.0
 
@@ -90,5 +93,5 @@ class ImageViewport(ZoomPanel):
         :param float render_time: float value of the image's render time
         """
         self._renderTime = render_time
-        self._viewportImage = image
+        self._viewportImage = ConvertImageToWx(image)
         self.UpdateDrawing()
