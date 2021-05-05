@@ -22,6 +22,12 @@ import wx
 from wx.lib import buttons
 import wx.lib.agw.cubecolourdialog as CCD
 
+from gswidgetkit import (NumberField, EVT_NUMBERFIELD, 
+                         Button, EVT_BUTTON, TextCtrl)
+
+from gimelstudio.datafiles import ICON_ARROW_DOWN, ICON_ARROW_RIGHT
+
+
 
 # Enum-like constants for widgets
 SLIDER_WIDGET = "slider"
@@ -243,29 +249,28 @@ class OpenFileChooserProp(Property):
         return self.btn_lbl
 
     def CreateUI(self, parent, sizer):
-        fold_panel = sizer.AddFoldPanel(self.GetLabel())
+
+        images = wx.ImageList(24, 24)
+        images.Add(ICON_ARROW_DOWN.GetBitmap())
+        images.Add(ICON_ARROW_RIGHT.GetBitmap())
+
+        fold_panel = sizer.AddFoldPanel(self.GetLabel(), foldIcons=images)
 
         pnl = wx.Panel(fold_panel)
+        pnl.SetBackgroundColour(wx.Colour("#464646"))
 
         vbox = wx.BoxSizer(wx.VERTICAL)
         hbox = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.textcontrol = wx.TextCtrl(
-            pnl,
-            id=wx.ID_ANY,
-            value=self.GetValue(),
-            style=wx.TE_READONLY
-        )
-        hbox.Add(self.textcontrol, proportion=1)
+        self.textcontrol = TextCtrl(pnl, 
+                            value=self.GetValue(), style=wx.BORDER_SIMPLE,
+                            placeholder="", size=(-1, 32))
+        hbox.Add(self.textcontrol, proportion=1, flag=wx.EXPAND | wx.BOTH)
 
-        self.button = wx.Button(
-            pnl,
-            id=wx.ID_ANY,
-            label=self.GetBtnLabel()
-        )
+        self.button = Button(pnl, label=self.GetBtnLabel(), size=(-1, 32))
         hbox.Add(self.button, flag=wx.LEFT, border=5)
         self.button.Bind(
-            wx.EVT_BUTTON,
+            EVT_BUTTON,
             self.WidgetEvent
         )
 
@@ -274,6 +279,10 @@ class OpenFileChooserProp(Property):
         vbox.Fit(pnl)
         pnl.SetSizer(vbox)
 
+        # From https://discuss.wxpython.org/t/how-do-you-get-the-
+        # captionbar-from-a-foldpanelbar/24795
+        fold_panel._captionBar.SetSize(fold_panel._captionBar.DoGetBestSize())
+        
         sizer.AddFoldPanelWindow(fold_panel, pnl,  spacing=10)
 
     def WidgetEvent(self, event):
