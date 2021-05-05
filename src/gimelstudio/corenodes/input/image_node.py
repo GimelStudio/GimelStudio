@@ -15,7 +15,6 @@
 # ----------------------------------------------------------------------------
 
 import os
-from PIL import Image
 
 from gimelstudio import api
 from gimelstudio.core.eval_info import EvalInfo

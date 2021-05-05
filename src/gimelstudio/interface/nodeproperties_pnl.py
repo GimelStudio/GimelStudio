@@ -57,8 +57,8 @@ class NodePropertiesPanel(wx.Panel):
             style = fpb.CaptionBarStyle()
             style.SetCaptionFont(self.Parent.GetFont())
             style.SetCaptionColour(wx.Colour("#fff"))
-            style.SetFirstColour(wx.Colour('#424242'))
-            style.SetSecondColour(wx.Colour('#424242'))
+            style.SetFirstColour(wx.Colour('#5c5c5c'))
+            style.SetSecondColour(wx.Colour('#5c5c5c'))
             panel_bar.ApplyCaptionStyleAll(style)
 
             self._mainSizer.Layout()

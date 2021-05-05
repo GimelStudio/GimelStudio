@@ -16,8 +16,6 @@
 
 from gsnodegraph import NodeBase as NodeView
 
-from .property import Property
-from .parameter import Parameter
 from gimelstudio.core import RenderImage
 
 
@@ -129,7 +127,7 @@ class Node(NodeView):
 
     def IsInCache(self, name):
         try:
-            c = self._cache[name]
+            self._cache[name]
             return True
         except KeyError:
             return False
