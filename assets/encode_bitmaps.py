@@ -24,7 +24,6 @@ generated.
 """
 
 import os
-import sys
 from wx.tools import img2py
 
 

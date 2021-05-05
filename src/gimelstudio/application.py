@@ -149,9 +149,8 @@ class ApplicationFrame(wx.Frame):
         art.SetColour(aui.AUI_DOCKART_INACTIVE_CAPTION_TEXT_COLOUR, wx.Colour("#fff"))
         art.SetColour(aui.AUI_DOCKART_SASH_COLOUR, wx.Colour("#232323"))
 
-
+        # Panels
         self.imageviewport_pnl = ImageViewportPanel(self)
-
         self.prop_pnl = NodePropertiesPanel(self, size=(350, 500))
 
         registry = {

@@ -45,7 +45,7 @@ class NodeGraphPanel(wx.Panel):
         topbar_sizer = wx.GridBagSizer(vgap=1, hgap=1)
 
         self.area_icon = wx.StaticBitmap(topbar, bitmap=ICON_NODEGRAPH_PANEL.GetBitmap())
-        self.area_label = wx.StaticText(topbar, label="Node Graph")
+        self.area_label = wx.StaticText(topbar, label="")
         self.area_label.SetForegroundColour("#fff")
         self.area_label.SetFont(self.area_label.GetFont().Bold())
 

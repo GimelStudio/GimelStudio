@@ -31,7 +31,6 @@ from gimelstudio.datafiles import (ICON_BRUSH_CHECKERBOARD,
 imageviewport_mousezoom_cmd_event, EVT_IMAGEVIEWPORT_MOUSEZOOM = NewCommandEvent()
 
 
-
 class ImageViewportPanel(wx.Panel):
     def __init__(self, parent, id=wx.ID_ANY, pos=wx.DefaultPosition, size=wx.DefaultSize,
                  style=wx.NO_BORDER | wx.TAB_TRAVERSAL):
@@ -52,7 +51,7 @@ class ImageViewportPanel(wx.Panel):
         topbar_sizer = wx.GridBagSizer(vgap=1, hgap=1)
 
         self.area_icon = wx.StaticBitmap(topbar, bitmap=ICON_IMAGEVIEWPORT_PANEL.GetBitmap())
-        self.area_label = wx.StaticText(topbar, label="Image Viewport")
+        self.area_label = wx.StaticText(topbar, label="")
         self.area_label.SetForegroundColour("#fff")
         self.area_label.SetFont(self.area_label.GetFont().Bold())
 
