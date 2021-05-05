@@ -101,6 +101,12 @@ ICON_IMAGEVIEWPORT_PANEL = PyEmbeddedImage(
     b'uUDeTztwelv/yQyApInJjM1FvwAAAABJRU5ErkJggg==')
 
 #----------------------------------------------------------------------
+ICON_MORE_MENU_SMALL = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAZ0lEQVQ4jdWSMQ3AMAwEA8EQ'
+    b'CqEQDCEQAqEQyiBQC+G6uEqVKdJ7aE/yenrbX8qvAAw4ga6KKoOmiLaQXIBLqR6hLEkDcHmt'
+    b'zGP7S1QzUjXAJFEaKUmAPcqI1KXpa4ciMqDHfOTYq9xPRoSQrhVVwAAAAABJRU5ErkJggg==')
+
+#----------------------------------------------------------------------
 ICON_NODEGRAPH_PANEL = PyEmbeddedImage(
     b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAqklEQVQ4jdWSUQ2EMBBEkYAE'
     b'JJyESjgJSEDCOaiESqgEJFTCSUDC42dJ5jYNx/J1N0nTpGRfdoYZhr8UMAIvYLVTgTkKeAAF'
