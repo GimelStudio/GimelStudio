@@ -20,82 +20,6 @@ import wx.lib.agw.foldpanelbar as fpb
 
 # TODO: this is highly WIP
 
-# text = """
-# <html>
-# <body style='background-color: #424242;'>
-# <div>
-# <span style='color: #E5E5E5;'>Blur Node</span>
-# <p> <span style='color: #ADADAD;'>Blur the image pixels with the given filter type and blur radius.</span></p>
-# </div>
-# </body>
-# </html>
-# """
-
-
-# class _PropertiesPanel(wx.Panel):
-#     def __init__(self, parent, size=wx.DefaultSize):
-#         wx.Panel.__init__(self, parent, wx.ID_ANY, size=size)
-#         self._parent = parent
-#         self._selectedNode = None
-
-#         self._mainSizer = wx.BoxSizer(wx.VERTICAL)
-
-#         self.SetSizer(self._mainSizer)
-#         self._mainSizer.Fit(self)
-
-#         self.SetBackgroundColour(wx.Colour("#404040"))
-
-#     @property
-#     def Parent(self):
-#         return self._parent
-
-#     @property
-#     def AUIManager(self):
-#         return self._parent._mgr
-
-#     def UpdatePanelContents(self, selected_node):
-#         self.DestroyChildren()
-
-#         if selected_node != None:
-
-#             scrollbar_size = wx.SystemSettings.GetMetric(wx.SYS_VSCROLL_X)
-#             calc_size = wx.Size(self.Size[0] - scrollbar_size - 10, self.Size[1])
-
-#             self.panel_staticbox = wx.Panel(self, id=wx.ID_ANY,
-#                                             # label=selected_node.GetLabel(),
-#                                             size=calc_size)
-
-#             # This gets the recommended amount of border space to use for items
-#             # within in the static box for the current platform.
-#             #top_bd, other_bd = self.panel_staticbox.GetBordersForSizer()
-
-#             staticbox_sizer = wx.BoxSizer(wx.VERTICAL)
-#             staticbox_sizer.AddSpacer(8)
-
-#             inner_sizer = wx.BoxSizer(wx.VERTICAL)
-
-#             flagsExpand = wx.SizerFlags(1)
-#             flagsExpand.Expand().Border(wx.ALL, 18)
-#             staticbox_sizer.Add(inner_sizer, flagsExpand)
-
-#             self.panel_staticbox.SetSizer(staticbox_sizer)
-
-#             panel_sizer = wx.BoxSizer(wx.VERTICAL)
-#             panel_sizer.Add(self.panel_staticbox, 1, wx.EXPAND | wx.ALL, 8)
-
-#             # Node Properties UI
-#             selected_node.NodePanelUI(self.panel_staticbox, inner_sizer)
-
-#             self._mainSizer.Add(panel_sizer, wx.EXPAND | wx.ALL)
-
-#         else:
-#             # Delete the window if the node is not selected
-#             self._mainSizer.Clear(delete_windows=True)
-
-#         self.AUIManager.Update()
-#         self.Parent.Refresh()
-#         self.Parent.Update()
-
 
 class NodePropertiesPanel(wx.Panel):
     def __init__(self, parent, id=wx.ID_ANY, pos=wx.DefaultPosition, size=wx.DefaultSize,
@@ -123,39 +47,21 @@ class NodePropertiesPanel(wx.Panel):
     def UpdatePanelContents(self, selected_node):
         self.DestroyChildren()
 
-        if selected_node != None:
+        if selected_node is not None:
 
             panel_bar = fpb.FoldPanelBar(self, -1, agwStyle=fpb.FPB_VERTICAL)
 
-            # fold_panel = panel_bar.AddFoldPanel(selected_node._label)
-            # #thing = wx.TextCtrl(fold_panel, -1, size=(400, -1), style=wx.TE_MULTILINE)
-
-            # selected_node
-
-            
             # Node Properties UI
             selected_node.NodePanelUI(self, panel_bar)
-            
-
-
-            #thing2 = wx.TextCtrl(fold_panel2, -1, size=(400, -1), style=wx.TE_MULTILINE)
-
-            
-
-            
-            #main_sizer.Add(st, flag=wx.EXPAND|wx.BOTH, border=20)
-            #main_sizer.Add(panel_bar, 1, wx.EXPAND)
 
             self._mainSizer.Add(panel_bar, 1, wx.EXPAND | wx.ALL)
             
-
             style = fpb.CaptionBarStyle()
             style.SetCaptionFont(self.Parent.GetFont())
             style.SetCaptionColour(wx.Colour("#fff"))
             style.SetFirstColour(wx.Colour('#424242'))
             style.SetSecondColour(wx.Colour('#424242'))
             panel_bar.ApplyCaptionStyleAll(style)
-
 
         else:
             # Delete the window if the node is not selected
@@ -164,7 +70,6 @@ class NodePropertiesPanel(wx.Panel):
         self.AUIManager.Update()
         self.Parent.Refresh()
         self.Parent.Update()
-
 
         # sz = wx.BoxSizer(wx.VERTICAL)
 
@@ -187,4 +92,3 @@ class NodePropertiesPanel(wx.Panel):
         # htmlwin.SetPage(text)
 
         # st = htmlwin
-
