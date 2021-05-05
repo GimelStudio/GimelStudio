@@ -243,38 +243,38 @@ class OpenFileChooserProp(Property):
         return self.btn_lbl
 
     def CreateUI(self, parent, sizer):
-        # label = wx.StaticText(parent, label=self.GetLabel())
-        # label.SetForegroundColour("#fff")
-        # sizer.Add(label, flag=wx.LEFT | wx.TOP, border=5)
-
         fold_panel = sizer.AddFoldPanel(self.GetLabel())
 
-        # vbox = wx.BoxSizer(wx.VERTICAL)
-        # hbox = wx.BoxSizer(wx.HORIZONTAL)
+        pnl = wx.Panel(fold_panel)
 
-        # self.textcontrol = wx.TextCtrl(
-        #     fold_panel,
-        #     id=wx.ID_ANY,
-        #     value=self.GetValue(),
-        #     style=wx.TE_READONLY
-        # )
-        # hbox.Add(self.textcontrol, proportion=1)
+        vbox = wx.BoxSizer(wx.VERTICAL)
+        hbox = wx.BoxSizer(wx.HORIZONTAL)
+
+        self.textcontrol = wx.TextCtrl(
+            pnl,
+            id=wx.ID_ANY,
+            value=self.GetValue(),
+            style=wx.TE_READONLY
+        )
+        hbox.Add(self.textcontrol, proportion=1)
 
         self.button = wx.Button(
-            fold_panel,
+            pnl,
             id=wx.ID_ANY,
             label=self.GetBtnLabel()
         )
-        #hbox.Add(self.button, flag=wx.LEFT, border=5)
+        hbox.Add(self.button, flag=wx.LEFT, border=5)
         self.button.Bind(
             wx.EVT_BUTTON,
             self.WidgetEvent
         )
 
-        #vbox.Add(hbox, flag=wx.EXPAND)
+        vbox.Add(hbox, flag=wx.EXPAND | wx.BOTH | wx.ALL, border=6)
 
-        sizer.AddFoldPanelWindow(fold_panel, self.button)
-        #sizer.Add(vbox, flag=wx.ALL | wx.EXPAND, border=5)
+        vbox.Fit(pnl)
+        pnl.SetSizer(vbox)
+
+        sizer.AddFoldPanelWindow(fold_panel, pnl,  spacing=10)
 
     def WidgetEvent(self, event):
         dlg = wx.FileDialog(
@@ -289,7 +289,7 @@ class OpenFileChooserProp(Property):
         if dlg.ShowModal() == wx.ID_OK:
             paths = dlg.GetPaths()
             self.SetValue(paths[0])
-            #self.textcontrol.ChangeValue(self.GetValue())
+            self.textcontrol.ChangeValue(self.GetValue())
 
 
 class LabelProp(Property):

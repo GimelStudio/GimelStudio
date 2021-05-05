@@ -18,8 +18,6 @@ import wx
 import wx.html
 import wx.lib.agw.foldpanelbar as fpb
 
-# TODO: this is highly WIP
-
 
 class NodePropertiesPanel(wx.Panel):
     def __init__(self, parent, id=wx.ID_ANY, pos=wx.DefaultPosition, size=wx.DefaultSize,
@@ -49,7 +47,7 @@ class NodePropertiesPanel(wx.Panel):
 
         if selected_node is not None:
 
-            panel_bar = fpb.FoldPanelBar(self, -1, agwStyle=fpb.FPB_VERTICAL)
+            panel_bar = fpb.FoldPanelBar(self, agwStyle=fpb.FPB_VERTICAL)
 
             # Node Properties UI
             selected_node.NodePanelUI(self, panel_bar)
@@ -63,6 +61,8 @@ class NodePropertiesPanel(wx.Panel):
             style.SetSecondColour(wx.Colour('#424242'))
             panel_bar.ApplyCaptionStyleAll(style)
 
+            self._mainSizer.Layout()
+
         else:
             # Delete the window if the node is not selected
             self._mainSizer.Clear(delete_windows=True)
@@ -70,25 +70,3 @@ class NodePropertiesPanel(wx.Panel):
         self.AUIManager.Update()
         self.Parent.Refresh()
         self.Parent.Update()
-
-        # sz = wx.BoxSizer(wx.VERTICAL)
-
-        # ctrl1 = NumberField(self, default_value=70, label="Resolution X",
-        #                     min_value=0, max_value=100, suffix="%")
-        # ctrl2 = NumberField(self, default_value=10, label="Resolution Y",
-        #                     min_value=0, max_value=100, suffix="%")
-
-        # ctrl3 = wx.Button(self, label="hello")
-
-        # sz.Add(ctrl1, flag=wx.EXPAND|wx.BOTH, border=20)
-        # sz.Add(ctrl2, flag=wx.EXPAND|wx.BOTH, border=20)
-        # sz.Add(ctrl3)
-        # self.SetSizer(sz)
-
-        # self.Bind(wx.EVT_BUTTON, self.OnC, ctrl3)
-        # self.Bind(EVT_NUMBERFIELD, self.OnChange, ctrl1)
-
-        # htmlwin = wx.html.HtmlWindow(self, size=(-1, 100))
-        # htmlwin.SetPage(text)
-
-        # st = htmlwin
