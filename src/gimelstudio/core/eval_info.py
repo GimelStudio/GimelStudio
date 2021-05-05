@@ -20,7 +20,7 @@ class EvalInfo(object):
     Evaluate node properties and parameters
     """
     def __init__(self, node):
-        if node == None:
+        if node is None:
             raise TypeError
         self.node = node
 

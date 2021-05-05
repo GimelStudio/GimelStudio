@@ -73,7 +73,7 @@ class RenderImage(object):
         try:
             # Open the image as an array
             img_input = oiio.ImageInput.open(path)
-            if img_input == None:
+            if img_input is None:
                 print("IO ERROR: ", oiio.geterror())
             image = img_input.read_image(format="uint16")
 
