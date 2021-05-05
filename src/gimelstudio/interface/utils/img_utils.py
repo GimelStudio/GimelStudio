@@ -14,8 +14,6 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-import copy
-
 import wx
 import cv2
 import numpy as np

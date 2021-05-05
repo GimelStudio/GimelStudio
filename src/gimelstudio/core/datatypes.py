@@ -54,7 +54,7 @@ class RenderImage(object):
                 return self._img
         
         else:
-            TypeError("Not a valid datatype!")
+            raise TypeError("Not a valid datatype!")
 
     def NumpyArrayToImageBuf(self):
         """ Converts a np.ndarray to an OIIO ImageBuf image.
