@@ -14,6 +14,7 @@ src/*.png
 
 # Ignore the local version of libs
 gsnodegraph
+gswidgetkit
 tests
 
 # Ignore .sketch files
