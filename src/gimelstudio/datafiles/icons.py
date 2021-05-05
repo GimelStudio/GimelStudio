@@ -94,6 +94,15 @@ ICON_GIMELSTUDIO_ICO = PyEmbeddedImage(
     b'Yk2sZYcAAAAASUVORK5CYII=')
 
 #----------------------------------------------------------------------
+ICON_HELP = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAA80lEQVRIid2UXRGEMAyEkVAJ'
+    b'SEACEpBQCUjAARKQgAQkVAISKuG7B3o3hUv6A2/sTGf6kOxu0yRN83oAPTADDvDhOGABhifE'
+    b'HbCShwPaWnIbnNZgLCUfK4nLRYA24XznqPsS7hq6lMCmJM2AucQumhGNfEg4NyGmJ+qcxEus'
+    b'JKA6AibOf2NDzqzkrJKAU4IlDBlTXhLYC4g3jhY2GVOiQEnff4kNenkAuFWiitj/TkKv5x2I'
+    b'n6y16Q9RbA7yEiTz9EIBx2UoY4G2wF0KHuhF8kjkybKbkuQPRHzIkUujiHSUTbcjtUELhCzn'
+    b'Fe3DfSOa6vfiAwEo0JjF3wSZAAAAAElFTkSuQmCC')
+
+#----------------------------------------------------------------------
 ICON_IMAGEVIEWPORT_PANEL = PyEmbeddedImage(
     b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAiElEQVQ4jc3TTQ2AMAyG4UlA'
     b'wiQgYRKQgJQ5QAoSkIAUJLwcGFB+Gmi58CU7bFmetM0Wwi8D1MDgWD2QJJRZYoUA8gVydKJD'
