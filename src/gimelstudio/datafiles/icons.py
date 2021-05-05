@@ -1,5 +1,17 @@
 from wx.lib.embeddedimage import PyEmbeddedImage
 #--------------------
+ICON_ARROW_DOWN = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAOElEQVRIiWNgGAWjYBQMY/D/'
+    b'///+/8SDflpaQp7hRFpCmeEELKGO4Tgsoa7haJbQxvBRMAqGMQAArJyiGXdCm44AAAAASUVO'
+    b'RK5CYII=')
+
+#----------------------------------------------------------------------
+ICON_ARROW_RIGHT = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAASUlEQVRIie3NuREAIAwDQZdM'
+    b'J5QsEmb4DJFEpCvgNsK5bwEoagBSBCMNgjU+gjMukgBc5AJUJcCbJwB3vgH8+QRo5h3QzZ17'
+    b'1gDJRaFfFkEleQAAAABJRU5ErkJggg==')
+
+#----------------------------------------------------------------------
 ICON_BRUSH_CHECKERBOARD = PyEmbeddedImage(
     b'iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAABhGlDQ1BJQ0MgcHJvZmlsZQAA'
     b'KJF9kT1Iw0AcxV9TRdGKoB1EFDJUJwuioo5SxSJYKG2FVh1MLv2CJg1Jiouj4Fpw8GOx6uDi'
