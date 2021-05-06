@@ -83,6 +83,25 @@ class Property(object):
     def WidgetEventHook(self, idname, value, render):
         self.widget_eventhook(idname, value, render)
 
+    def CreateFoldPanel(self, panel_bar, label=None):
+        images = wx.ImageList(24, 24)
+        images.Add(ICON_ARROW_DOWN.GetBitmap())
+        images.Add(ICON_ARROW_RIGHT.GetBitmap())
+
+        if label is None:
+            lbl = self.GetLabel()
+        else:
+            lbl = label
+        return panel_bar.AddFoldPanel(lbl, foldIcons=images)
+
+    def AddToFoldPanel(self, panel_bar, fold_panel, item, spacing=10):
+
+        # From https://discuss.wxpython.org/t/how-do-you-get-the-
+        # captionbar-from-a-foldpanelbar/24795
+        fold_panel._captionBar.SetSize(fold_panel._captionBar.DoGetBestSize())
+        
+        panel_bar.AddFoldPanelWindow(fold_panel, item, spacing=spacing)
+
 
 class PositiveIntegerProp(Property):
     """ Allows the user to select a positive integer. """
@@ -113,66 +132,23 @@ class PositiveIntegerProp(Property):
         return self.max_value
 
     def CreateUI(self, parent, sizer):
+        fold_panel = self.CreateFoldPanel(sizer)
+        fold_panel.SetBackgroundColour(wx.Colour("#464646"))
 
-        fold_panel = sizer.AddFoldPanel(self.GetLabel())
+        self.numberfield = NumberField(fold_panel, 
+                                       default_value=self.GetValue(), 
+                                       label=self.GetLabel(),
+                                       min_value=self.GetMinValue(), 
+                                       max_value=self.GetMaxValue(), 
+                                       suffix="px", show_p=False,
+                                       size=(-1, 32))
 
-        if self.widget == "slider":
-            self.slider = wx.Slider(
-                fold_panel,
-                id=wx.ID_ANY,
-                value=self.GetValue(),
-                minValue=self.GetMinValue(),
-                maxValue=self.GetMaxValue(),
-                style=wx.SL_HORIZONTAL | wx.SL_AUTOTICKS | wx.SL_LABELS
-            )
-            self.slider.SetForegroundColour("#fff")
-            self.slider.SetTickFreq(10)
+        self.AddToFoldPanel(sizer, fold_panel, self.numberfield, spacing=10)
 
-            sizer.AddFoldPanelWindow(fold_panel, self.slider)
-
-            #sizer.Add(self.slider, flag=wx.EXPAND | wx.ALL, border=5)
-            self.slider.Bind(
-                wx.EVT_SCROLL,
-                self.WidgetEvent
-            )
-
-        # elif self.widget == "number":
-        #     self.number = NumberField(parent, default_value=self.GetValue(), label=self.GetLabel(),
-        #     min_value=self.GetMinValue(), max_value=self.GetMaxValue(), suffix="px", show_p=False)
-        #     sizer.Add(self.number, flag=wx.EXPAND | wx.LEFT | wx.RIGHT)
-
-        #     self.number.Bind(EVT_NUMBERFIELD, self.WidgetEvent)
-
-        elif self.widget == "spinbox":
-            self.spinbox = wx.SpinCtrl(
-                parent,
-                id=wx.NewIdRef(),
-                min=self.GetMinValue(),
-                max=self.GetMaxValue(),
-                initial=self.GetValue()
-            )
-            sizer.Add(self.spinbox, flag=wx.ALL | wx.EXPAND, border=5)
-            self.spinbox.Bind(
-                wx.EVT_SPINCTRL,
-                self.WidgetEvent
-            )
-            self.spinbox.Bind(
-                wx.EVT_TEXT,
-                self.WidgetEvent
-            )
-
-        else:
-            raise TypeError(
-                "PositiveIntegerField 'widget' param must be either: 'spinbox' or 'slider'!"
-            )
+        self.numberfield.Bind(EVT_NUMBERFIELD, self.WidgetEvent)
 
     def WidgetEvent(self, event):
-        if self.widget == "slider":
-            self.SetValue(self.slider.GetValue())
-        elif self.widget == "spinbox":
-            self.SetValue(self.spinbox.GetValue())
-        # elif self.widget == "number":
-        #     self.SetValue(event.value)
+        self.SetValue(event.value)
 
 
 class ChoiceProp(Property):
@@ -191,11 +167,7 @@ class ChoiceProp(Property):
         self.choices = choices
 
     def CreateUI(self, parent, sizer):
-        # label = wx.StaticText(parent, label=self.GetLabel())
-        # label.SetForegroundColour("#fff")
-        # sizer.Add(label, flag=wx.LEFT | wx.TOP, border=5)
-
-        fold_panel = sizer.AddFoldPanel(self.GetLabel())
+        fold_panel = self.CreateFoldPanel(sizer)
 
         self.combobox = wx.ComboBox(
             fold_panel,
@@ -204,12 +176,8 @@ class ChoiceProp(Property):
             choices=self.GetChoices(),
             style=wx.CB_READONLY
         )
-        sizer.AddFoldPanelWindow(fold_panel, self.combobox)
-        #sizer.Add(self.combobox, flag=wx.EXPAND | wx.ALL, border=5)
-        self.combobox.Bind(
-            wx.EVT_COMBOBOX,
-            self.WidgetEvent
-        )
+        self.AddToFoldPanel(sizer, fold_panel, self.combobox, spacing=10)
+        self.combobox.Bind(wx.EVT_COMBOBOX, self.WidgetEvent)
 
     def WidgetEvent(self, event):
         value = event.GetString()
@@ -249,12 +217,7 @@ class OpenFileChooserProp(Property):
         return self.btn_lbl
 
     def CreateUI(self, parent, sizer):
-
-        images = wx.ImageList(24, 24)
-        images.Add(ICON_ARROW_DOWN.GetBitmap())
-        images.Add(ICON_ARROW_RIGHT.GetBitmap())
-
-        fold_panel = sizer.AddFoldPanel(self.GetLabel(), foldIcons=images)
+        fold_panel = self.CreateFoldPanel(sizer)
 
         pnl = wx.Panel(fold_panel)
         pnl.SetBackgroundColour(wx.Colour("#464646"))
@@ -269,21 +232,15 @@ class OpenFileChooserProp(Property):
 
         self.button = Button(pnl, label=self.GetBtnLabel(), size=(-1, 32))
         hbox.Add(self.button, flag=wx.LEFT, border=5)
-        self.button.Bind(
-            EVT_BUTTON,
-            self.WidgetEvent
-        )
+        self.button.Bind(EVT_BUTTON, self.WidgetEvent)
 
         vbox.Add(hbox, flag=wx.EXPAND | wx.BOTH | wx.ALL, border=6)
 
         vbox.Fit(pnl)
         pnl.SetSizer(vbox)
 
-        # From https://discuss.wxpython.org/t/how-do-you-get-the-
-        # captionbar-from-a-foldpanelbar/24795
-        fold_panel._captionBar.SetSize(fold_panel._captionBar.DoGetBestSize())
-        
-        sizer.AddFoldPanelWindow(fold_panel, pnl,  spacing=10)
+        self.AddToFoldPanel(sizer, fold_panel, pnl, spacing=10)
+
 
     def WidgetEvent(self, event):
         dlg = wx.FileDialog(

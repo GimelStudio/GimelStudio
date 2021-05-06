@@ -16,7 +16,7 @@
 
 import wx
 import wx.html
-import wx.lib.agw.foldpanelbar as fpb
+import gimelstudio.interface.basewidgets.foldpanelbar as fpb
 
 from gswidgetkit import Button
 
@@ -81,7 +81,7 @@ class NodePropertiesPanel(wx.Panel):
         self.main_panel.DestroyChildren()
 
         if selected_node is not None:
-                     
+  
             # Node info
             nodeinfo_pnl = wx.Panel(self.main_panel, size=(-1, 50))
             nodeinfo_pnl.SetBackgroundColour("#464646")
@@ -96,7 +96,7 @@ class NodePropertiesPanel(wx.Panel):
                                       bmp=(ICON_HELP.GetBitmap(), 'left'))
 
             nodeinfo_pnl_sizer.Add(node_label, (0, 1), 
-                                   flag=wx.TOP | wx.BOTTOM | wx.LEFT, border=6)
+                                   flag=wx.TOP | wx.BOTTOM, border=6)
             nodeinfo_pnl_sizer.Add(self.help_button, (0, 4), 
                                    flag=wx.TOP | wx.BOTTOM | wx.RIGHT, border=6)
             nodeinfo_pnl_sizer.AddGrowableCol(2)
