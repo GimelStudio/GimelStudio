@@ -102,15 +102,17 @@ class MainApp(wx.App):
         # Get Language from last run if set.
         # config = wx.GetApp().GetConfig()
         # language = config.Read("Language", "LANGUAGE_DEFAULT")
-        self.language = "LANGUAGE_ENGLISH"
+        self.language = "LANGUAGE_FRENCH"
         self.InitI18n()
         self.Setlang(self.language)
 
         # Splash screen
         #splash = StartupSplashScreen()
         #splash.CenterOnScreen(wx.BOTH)
-        frame = ApplicationFrame()
-        frame.Show()
+
+        self.frame = ApplicationFrame()
+        self.SetTopWindow(self.frame)
+        self.frame.Show(True)
 
         return True
 
