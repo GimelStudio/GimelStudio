@@ -99,16 +99,13 @@ class MainApp(wx.App):
         # Used to identify app in $HOME/
         self.SetAppName("GimelStudio")
 
-        # Get Language from last run if set.
-        # config = wx.GetApp().GetConfig()
-        # language = config.Read("Language", "LANGUAGE_DEFAULT")
-        self.language = "LANGUAGE_FRENCH"
+        self.language = "LANGUAGE_ENGLISH"
         self.InitI18n()
         self.Setlang(self.language)
 
         # Splash screen
-        #splash = StartupSplashScreen()
-        #splash.CenterOnScreen(wx.BOTH)
+        # splash = StartupSplashScreen()
+        # splash.CenterOnScreen(wx.BOTH)
 
         self.frame = ApplicationFrame()
         self.SetTopWindow(self.frame)
