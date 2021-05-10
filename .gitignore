@@ -19,3 +19,6 @@ tests
 
 # Ignore .sketch files
 *.sketch
+
+# Ignore other misc.
+src/gimelstudio/locale_old
