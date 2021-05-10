@@ -57,6 +57,7 @@ class ApplicationFrame(wx.Frame):
 
         # Init menus
         file_menu = flatmenu.FlatMenu()
+        edit_menu = flatmenu.FlatMenu()
         view_menu = flatmenu.FlatMenu()
         render_menu = flatmenu.FlatMenu()
         window_menu = flatmenu.FlatMenu()
@@ -66,8 +67,8 @@ class ApplicationFrame(wx.Frame):
         self.openprojectfile_menuitem = flatmenu.FlatMenuItem(
             file_menu,
             id=wx.ID_ANY,
-            label="Open Project\tCtrl+O",
-            helpString="Open and load a Gimel Studio project file",
+            label="{0}{1}".format(_("Open Project"), "\tCtrl+O"),
+            helpString=_("Open and load a Gimel Studio project file"),
             kind=wx.ITEM_NORMAL,
             subMenu=None,
             normalBmp=ICON_NODEPROPERTIES_PANEL.GetBitmap()
@@ -76,8 +77,8 @@ class ApplicationFrame(wx.Frame):
         self.saveprojectfile_menuitem = flatmenu.FlatMenuItem(
             file_menu,
             id=wx.ID_ANY,
-            label="Save Project...\tCtrl+S",
-            helpString="Save the current project file",
+            label="{0}{1}".format(_("Save Project..."), "\tCtrl+S"),
+            helpString=_("Save the current project file"),
             kind=wx.ITEM_NORMAL,
             subMenu=None
         )
@@ -85,8 +86,8 @@ class ApplicationFrame(wx.Frame):
         self.saveprojectfileas_menuitem = flatmenu.FlatMenuItem(
             file_menu,
             id=wx.ID_ANY,
-            label="Save Project As...\tCtrl+Shift+S",
-            helpString="Save the current project as a Gimel Studio project",
+            label="{0}{1}".format(_("Save Project As..."), "\tCtrl+Shift+S"),
+            helpString=_("Save the current project as a Gimel Studio project"),
             kind=wx.ITEM_NORMAL,
             subMenu=None
         )
@@ -96,8 +97,8 @@ class ApplicationFrame(wx.Frame):
         self.exportasimage_menuitem = flatmenu.FlatMenuItem(
             file_menu,
             id=wx.ID_ANY,
-            label="Export Image As...\tShift+E",
-            helpString="Export rendered composite image to a file",
+            label="{0}{1}".format(_("Export Image As..."), "\tShift+E"),
+            helpString=_("Export rendered image to a file"),
             kind=wx.ITEM_NORMAL,
             subMenu=None
         )
@@ -107,13 +108,12 @@ class ApplicationFrame(wx.Frame):
         self.quit_menuitem = flatmenu.FlatMenuItem(
             file_menu,
             id=wx.ID_ANY,
-            label="Quit\tShift+Q",
-            helpString="Quit Gimel Studio",
+            label="{0}{1}".format(_("Quit"), "\tShift+Q"),
+            helpString=_("Quit Gimel Studio"),
             kind=wx.ITEM_NORMAL,
             subMenu=None,
             normalBmp=ICON_NODEPROPERTIES_PANEL.GetBitmap()
         )
-
 
         # Append menu items to menus
         file_menu.AppendItem(self.openprojectfile_menuitem)
@@ -123,11 +123,12 @@ class ApplicationFrame(wx.Frame):
         file_menu.AppendItem(self.quit_menuitem)
 
         # Append menus to the menubar
-        self._menubar.Append(file_menu, "File")
-        self._menubar.Append(view_menu, "View")
-        self._menubar.Append(render_menu, "Render")
-        self._menubar.Append(window_menu, "Window")
-        self._menubar.Append(help_menu, "Help")
+        self._menubar.Append(file_menu, _("File"))
+        self._menubar.Append(edit_menu, _("Edit"))
+        self._menubar.Append(view_menu, _("View"))
+        self._menubar.Append(render_menu, _("Render"))
+        self._menubar.Append(window_menu, _("Window"))
+        self._menubar.Append(help_menu, _("Help"))
 
         # Add menubar to main sizer
         self.mainSizer.Add(self._menubar, 0, wx.EXPAND)

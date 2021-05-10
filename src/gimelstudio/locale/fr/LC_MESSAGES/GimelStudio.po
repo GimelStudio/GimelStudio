@@ -1,0 +1,83 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Gimel Studio\n"
+"POT-Creation-Date: 2021-05-10 10:59-0500\n"
+"PO-Revision-Date: 2021-05-10 11:11-0500\n"
+"Last-Translator: \n"
+"Language-Team: Gimel Studio translation team\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: application.py:70
+msgid "Open Project"
+msgstr ""
+
+#: application.py:71
+msgid "Open and load a Gimel Studio project file"
+msgstr ""
+
+#: application.py:80
+msgid "Save Project..."
+msgstr ""
+
+#: application.py:81
+msgid "Save the current project file"
+msgstr ""
+
+#: application.py:89
+msgid "Save Project As..."
+msgstr ""
+
+#: application.py:90
+msgid "Save the current project as a Gimel Studio project"
+msgstr ""
+
+#: application.py:100
+msgid "Export Image As..."
+msgstr ""
+
+#: application.py:101
+msgid "Export rendered image to a file"
+msgstr ""
+
+#: application.py:111
+msgid "Quit"
+msgstr ""
+
+#: application.py:112
+msgid "Quit Gimel Studio"
+msgstr ""
+
+#: application.py:126
+msgid "File"
+msgstr ""
+
+#: application.py:127
+msgid "Edit"
+msgstr ""
+
+#: application.py:128
+msgid "View"
+msgstr ""
+
+#: application.py:129
+msgid "Render"
+msgstr ""
+
+#: application.py:130
+msgid "Window"
+msgstr ""
+
+#: application.py:131
+msgid "Help"
+msgstr ""
+
+#: interface/imageviewport_pnl.py:58 interface/nodegraph_pnl.py:52
+msgid "Zoom"
+msgstr ""

@@ -55,7 +55,7 @@ class ImageViewportPanel(wx.Panel):
         self.area_label.SetForegroundColour("#fff")
         self.area_label.SetFont(self.area_label.GetFont().Bold())
 
-        self.zoom_field = NumberField(topbar, default_value=100, label="Zoom",
+        self.zoom_field = NumberField(topbar, default_value=100, label=_("Zoom"),
                                       min_value=25, max_value=250, suffix="%", 
                                       show_p=False)
         self.menu_button = Button(topbar, label="", flat=True,

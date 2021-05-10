@@ -14,6 +14,10 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
+import os
+import sys
+import platform
+
 import wx
 import wx.adv
 
@@ -25,6 +29,20 @@ try:
     ctypes.windll.shcore.SetProcessDpiAwareness(True)
 except Exception:
     pass
+
+# Install a custom displayhook to keep Python from setting the global
+# _ (underscore) to the value of the last evaluated expression.
+# If we don't do this, our mapping of _ to gettext can get overwritten.
+# This is useful/needed in interactive debugging with PyShell.
+def _displayHook(obj):
+    """ Custom display hook to prevent Python stealing '_'. """
+
+    if obj is not None:
+        print(repr(obj))
+
+# Add translation macro to builtin similar to what gettext does.
+import builtins
+builtins.__dict__['_'] = wx.GetTranslation
 
 
 class StartupSplashScreen(wx.adv.SplashScreen):
@@ -69,17 +87,24 @@ class StartupSplashScreen(wx.adv.SplashScreen):
         frame.Show()
 
 
-
 class MainApp(wx.App):
 
     def OnInit(self):
 
-        # Make sure only one instance is running
-        self.name = "SingleApp-%s" % wx.GetUserId()
-        self.instance = wx.SingleInstanceChecker(self.name)
-        if self.instance.IsAnotherRunning():
-            wx.MessageBox("Another instance of Gimel Studio is running.", "ERROR")
-            return False
+        # Work around for Python stealing "_".
+        sys.displayhook = _displayHook
+
+        self.installDir = os.path.split(os.path.abspath(sys.argv[0]))[0]
+
+        # Used to identify app in $HOME/
+        self.SetAppName("GimelStudio")
+
+        # Get Language from last run if set.
+        # config = wx.GetApp().GetConfig()
+        # language = config.Read("Language", "LANGUAGE_DEFAULT")
+        self.language = "LANGUAGE_ENGLISH"
+        self.InitI18n()
+        self.Setlang(self.language)
 
         # Splash screen
         #splash = StartupSplashScreen()
@@ -89,10 +114,36 @@ class MainApp(wx.App):
 
         return True
 
+    def InitI18n(self):
+        """ Setup locale for the app. """
+        
+        # Setup the Locale
+        self.locale = wx.Locale(getattr(wx, self.language))
+        path = os.path.abspath("./gimelstudio/locale") + os.path.sep
+        self.locale.AddCatalogLookupPathPrefix(path)
+        self.locale.AddCatalog(self.GetAppName())
+
+    def Setlang(self, language):
+        """ To get some language settings to display properly on Linux. """
+
+        if language == "LANGUAGE_ENGLISH":
+            if platform.system() == "Linux":
+                try:
+                    os.environ["LANGUAGE"] = "en"
+                    
+                except (ValueError, KeyError):
+                    pass
+
+        elif language == "LANGUAGE_FRENCH":
+            if platform.system() == "Linux":
+                try:
+                    os.environ["LANGUAGE"] = "fr"
+        
+                except (ValueError, KeyError):
+                    pass
 
 
 if __name__ == '__main__':
-
     # Create the app and startup
     app = MainApp(redirect=False)
     app.MainLoop()
