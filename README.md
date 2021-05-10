@@ -9,29 +9,13 @@ Gimel Studio
 Gimel Studio is a non-destructive, node-based 2D image graphics editor written in Python, focused on **simplicity, speed, elegance and usability**.
 
 
-# Vision
-
-The main goal is to expand on and greatly improve upon the concepts from the [original version](https://github.com/Correct-Syntax/Gimel-Studio) of Gimel Studio to create a serious (yet fun!) 2D graphics editor. 
-
-This includes a re-designed UI (highly inspired by Blender and Sketch), improved file-type support, node-graph and overall workflow for image editing. Nodes can be used to composite, create/add new effects and/or composite raster and vector graphics on-demand. Helpful gizmos in the interactive viewport can be used to do various editing tasks and speed up the workflow. Preset node graph templates can be created, used and re-used to save time setting up common node-setups. Custom nodes can be scripted with the built-in Python API for maximum flexibility. Integrations with other softwares like Blender are planned.
-
-With a fully non-destructive workflow that uses both GPU and CPU processing while being seamlessly cross-platform on Windows, Linux and MacOs (for 64-bit systems), Gimel Studio aims to be a simple, yet powerful 2d graphics editing tool for beginners and pros alike.
-
-**Visit our new home landing-page [here](https://gimelstudio.github.io) for some more detailed information on the project goals, vision, etc**
-
-
 # About the Next Generation of Gimel Studio
 
 **The original (more stable) version of Gimel Studio is available [here](https://github.com/Correct-Syntax/Gimel-Studio).**
 
-This repository tracks the *next step* of Gimel Studio (the v0.6.x series) to become a truly usable and serious node-based, non-destructive image editor. It is currently in *initial development stage* and things will probably change (a lot) from what is currently here.
+This repository tracks the *next step* of Gimel Studio (the v0.6.x series) to become a truly usable and serious node-based, non-destructive image editor. It is currently in *initial development stage* and things will probably change from what is currently here. 
 
-
-# Discord & Gitter
-
-You're welcome to join us in planning/development for the next step of Gimel Studio!
-
-If you'd like to join development or have questions, comments or ideas you can join the Gimel Studio [Discord](https://discord.gg/RqwbDrVDpK) or [Gitter](https://gitter.im/Gimel-Studio/community). These are places where you can chat with the developers and get the latest development updates.
+**We're especially seeking Python and/or GLSL developers, 3D artists, photographers and UI designers to help with the project.** However, even if you have none of these skills you're still welcome, of course, to give feedback and suggest ideas and improvements. :)
 
 
 # WIP Mockup
@@ -41,21 +25,52 @@ Here is a **WIP mockup** of the redesigned UI:
 !["Gimel Studio mockup"](https://i.ibb.co/SPKdJxg/Updated-UI-Mockup.png "Gimel Studio")
 
 
-# Roadmap Goals
+# Discord & Gitter
 
-For now, we're trying to keep the roadmap limited to realistic goals, keeping fun (of course!) and on-par with the amount of developers/contributors we have. *(Hint: we could possibly do more if you contribute.)*
+If you'd like to join development, help with the UI design or have questions, comments or ideas you can join the Gimel Studio [Discord](https://discord.gg/RqwbDrVDpK) or [Gitter](https://gitter.im/Gimel-Studio/community). These are places where you can chat with the developers and project contributors and get the latest development updates.
 
-**Visit our new home landing-page [here](https://gimelstudio.github.io) for some more detailed information on the project goals, vision, etc**
+
+# Vision
+
+The main goal is to expand on and greatly improve upon the concepts from the [original version](https://github.com/Correct-Syntax/Gimel-Studio) of Gimel Studio to create a serious (yet fun!) 2D graphics editor. 
+
+This includes:
+
+- Re-designed UI (highly inspired by the Blender 2.8x UI and parts of Sketch)
+- Improved file-type support (.tiff, .exr files, etc)
+- 16-bit workflow support
+- CPU and GPU based processing
+- Highly improved node-graph and overall workflow for image editing
+- Greater emphasis on re-usabilty of nodegraph setups via templates, etc
+- User preferences and UI translations
+- Continued improvement and additions to the Python API for scripting custom nodes
+
+Nodes can be used to composite, create/add new effects and/or composite raster and vector graphics on-demand. Helpful gizmos in the interactive viewport can be used to do various editing tasks and speed up the workflow. Preset node graph templates can be created, used and re-used to save time setting up common node-setups. 
+
+Custom nodes can be scripted with the built-in Python API for maximum flexibility. Integrations with other softwares like Blender are planned.
+
+With a fully non-destructive workflow that uses both GPU and CPU processing while being seamlessly cross-platform on Windows, Linux and MacOs (for 64-bit systems), Gimel Studio aims to be a simple, yet powerful 2d graphics editing tool for beginners and pros alike.
+
+**Visit our new home landing-page [here](https://gimelstudio.github.io) for detailed information on the project goals, etc**
 
 
 # Immediate Tasks
 
-Take a look at the [Github Issues](https://github.com/GimelStudio/GimelStudio/issues) for some immediate and future tasks. PRs are welcome! :)
+This is a short list of some immediate tasks we're working on:
+
+- [ ] Finish main window code
+- [ ] Continue to implement and refine custom widgets for the UI
+- [ ] Integrate UI translation support
+- [ ] Implement Node Registry
+
+You can also take a look at the [Github Issues](https://github.com/GimelStudio/GimelStudio/issues) for details on these and other immediate and future tasks. 
+
+PRs are always welcome! :)
 
 
 # Running the WIP code
 
-At this early stage of development, the code is very WIP and likely to change a lot. Many things are not implemented, buggy and/or roughly implemented.
+At this early stage of development, the code is very WIP and likely to change a lot. Many things are not implemented and/or not stable.
 
 However, if you'd like to see the latest updates to the GUI and backend, you can do so by following the steps below:
 
