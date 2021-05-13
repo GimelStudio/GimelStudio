@@ -22,7 +22,7 @@ This repository tracks the *next step* of Gimel Studio (the v0.6.x series) to be
 
 Here is a **WIP mockup** of the redesigned UI:
 
-!["Gimel Studio mockup"](https://i.ibb.co/SPKdJxg/Updated-UI-Mockup.png "Gimel Studio")
+!["Gimel Studio mockup"](https://i.ibb.co/1ZdrWfT/wip-ui-revision3.png "Gimel Studio")
 
 
 # Discord & Gitter
@@ -59,8 +59,7 @@ With a fully non-destructive workflow that uses both GPU and CPU processing whil
 This is a short list of some immediate tasks we're working on:
 
 - [ ] Finish main window code
-- [ ] Continue to implement and refine custom widgets for the UI
-- [ ] Integrate UI translation support
+- [ ] Continue to implement and refine custom widgets and the nodegraph
 - [ ] Implement Node Registry
 
 You can also take a look at the [Github Issues](https://github.com/GimelStudio/GimelStudio/issues) for details on these and other immediate and future tasks. 
