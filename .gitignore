@@ -21,4 +21,5 @@ tests
 *.sketch
 
 # Ignore other misc.
+.vscode
 src/gimelstudio/locale_old
