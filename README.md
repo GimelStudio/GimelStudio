@@ -43,6 +43,7 @@ This includes:
 - Highly improved node-graph and overall workflow for image editing
 - Greater emphasis on re-usabilty of nodegraph setups via templates, etc
 - User preferences and UI translations
+- Gizmos for the viewport to allow for WYSIWYG-like interaction for transforms, etc (e.g: crop, rotate, etc)
 - Continued improvement and additions to the Python API for scripting custom nodes
 
 Nodes can be used to composite, create/add new effects and/or composite raster and vector graphics on-demand. Helpful gizmos in the interactive viewport can be used to do various editing tasks and speed up the workflow. Preset node graph templates can be created, used and re-used to save time setting up common node-setups. 
@@ -58,26 +59,38 @@ With a fully non-destructive workflow that uses both GPU and CPU processing whil
 
 This is a short list of some immediate tasks we're working on:
 
-- [ ] Finish main window code
+- [ ] Finish UI main window code
 - [ ] Continue to implement and refine custom widgets and the nodegraph
-- [ ] Implement Node Registry
+- [ ] Continue to fully transition to custom widgets (vs. native widgets)
+- [ ] Node Registry 
+- [ ] Add Node menu
+- [ ] Preferences/Configuration dialog and backend
+- [ ] Pre-built Python wheels for OpenImageIO
 
 You can also take a look at the [Github Issues](https://github.com/GimelStudio/GimelStudio/issues) for details on these and other immediate and future tasks. 
 
 PRs are always welcome! :)
 
 
-# Running the WIP code
+# Running the code
 
-At this early stage of development, the code is very WIP and likely to change a lot. Many things are not implemented and/or not stable.
+*At this early stage of development, the code is very WIP and likely to change a lot. Many things are not implemented and/or not stable.*
 
-However, if you'd like to see the latest updates to the GUI and backend, you can do so by following the steps below:
+## Windows
 
 1. ``pip install -r requirements.txt``
 2. Get the OIIO (OpenImageIO) pre-built python wheel (Windows only) [here](https://www.lfd.uci.edu/~gohlke/pythonlibs/#openimageio) and install it.
-2. ``python src/main.py``
+3. ``python src/main.py``
 
-Please note that the renderer, which relies on OIIO will be **disabled if OIIO is not found**. For platforms other than Windows, OIIO will need to be [built from source](https://github.com/OpenImageIO/oiio/blob/master/INSTALL.md#building-from-source) since pre-built wheels are not yet available. See [this issue](https://github.com/GimelStudio/GimelStudio/issues/1).
+## Linux
+
+1. ``pip install -r requirements.txt``
+2. If building wxPython fails, Download the wheel file for wxpython which matches your Python version and Linux OS version from https://extras.wxpython.org/wxPython4/extras/linux/ and install the wxpython package with ```pip3 install <pathtothewheelfilehere>``
+3. ``python src/main.py``
+
+Please note that the renderer, which relies on OIIO (OpenImageIO) will be **disabled if OIIO is not found**. The rest of the application will run, but the renderer will not work.
+
+For platforms other than Windows, OIIO will need to be [built from source](https://github.com/OpenImageIO/oiio/blob/master/INSTALL.md#building-from-source) since pre-built wheels are not yet available. See [this issue](https://github.com/GimelStudio/GimelStudio/issues/1).
 
 
 # Tech Stack
