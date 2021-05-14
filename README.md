@@ -13,7 +13,7 @@ Gimel Studio is a non-destructive, node-based 2D image graphics editor written i
 
 **The original (more stable) version of Gimel Studio is available [here](https://github.com/Correct-Syntax/Gimel-Studio).**
 
-This repository tracks the *next step* of Gimel Studio (the v0.6.x series) to become a truly usable and serious node-based, non-destructive image editor. It is currently in *initial development stage* and things will probably change from what is currently here. 
+This repository tracks the *next step* of Gimel Studio (the v0.6.x series) to become a truly usable and serious node-based, non-destructive image editor. It is currently in ``initial development stage`` and things will probably change from what is currently here. 
 
 **We're especially seeking Python and/or GLSL developers, 3D artists, photographers and UI designers to help with the project.** However, even if you have none of these skills you're still welcome, of course, to give feedback and suggest ideas and improvements. :)
 
@@ -85,7 +85,7 @@ PRs are always welcome! :)
 ## Linux
 
 1. ``pip install -r requirements.txt``
-2. If building wxPython fails, Download the wheel file for wxpython which matches your Python version and Linux OS version from https://extras.wxpython.org/wxPython4/extras/linux/ and install the wxpython package with ```pip3 install <pathtothewheelfilehere>``
+2. If building wxPython fails, Download the wheel file for wxpython which matches your Python version and Linux OS version from https://extras.wxpython.org/wxPython4/extras/linux/ and install the wxpython package with ``pip3 install <pathtothewheelfilehere>``
 3. ``python src/main.py``
 
 Please note that the renderer, which relies on OIIO (OpenImageIO) will be **disabled if OIIO is not found**. The rest of the application will run, but the renderer will not work.
@@ -97,7 +97,7 @@ For platforms other than Windows, OIIO will need to be [built from source](https
 
 [Python](https://python.org) - We can effectively use Python's strong suits (ease-of-use, portability, multitude of packages, large community, etc) and get the performance required by relying on lower-level and performant external libraries to do the heavy lifting (where implementing something in Python would be a bottleneck). This should also lower the bar on contributing to Gimel Studio and thus (hopefully) allow for a greater contributor base.
 
-We also plan to use **GLSL and/or it's variants in addition to Python** for image-editing, as applicable, via [ModernGL](https://github.com/moderngl/moderngl), [glnext](https://github.com/cprogrammer1994/glnext) or another graphics rendering API (suggestions welcome!). **(This is still undecided)**
+We also plan to use **GLSL and/or it's variants in addition to Python** for image-editing, as applicable, via [ModernGL](https://github.com/moderngl/moderngl), [glnext](https://github.com/cprogrammer1994/glnext) or another graphics rendering API (suggestions welcome!).
 
 [Numpy](https://numpy.org/) - Numpy will be the "data-exchange" format, the core image format used for the backend of Gimel Studio. It will be used as "glue" to combine OIIO, GMIC, etc.
 
