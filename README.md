@@ -27,7 +27,7 @@ Here is a **WIP mockup** of the redesigned UI:
 
 # Discord & Gitter
 
-If you'd like to join development, help with the UI design or have questions, comments or ideas you can join the Gimel Studio [Discord](https://discord.gg/RqwbDrVDpK) or [Gitter](https://gitter.im/Gimel-Studio/community). These are places where you can chat with the developers and project contributors and get the latest development updates.
+If you'd like to join development, help with the UI design or have questions, comments or ideas you can join the Gimel Studio [Discord](https://discord.gg/RqwbDrVDpK) or [Gitter](https://gitter.im/Gimel-Studio/community). These are places where you can chat with the developers and project contributors and get the latest updates on development.
 
 
 # Vision
@@ -84,7 +84,7 @@ PRs are always welcome! :)
 
 ## Linux
 
-1. ``pip install -r requirements.txt``
+1. ``pip3 install -r requirements.txt``
 2. If building wxPython fails, Download the wheel file for wxpython which matches your Python version and Linux OS version from https://extras.wxpython.org/wxPython4/extras/linux/ and install the wxpython package with ``pip3 install <pathtothewheelfilehere>``
 3. ``python src/main.py``
 
