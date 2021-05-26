@@ -48,7 +48,7 @@ This includes:
 
 Nodes can be used to composite, create/add new effects and/or composite raster and vector graphics on-demand. Helpful gizmos in the interactive viewport can be used to do various editing tasks and speed up the workflow. Preset node graph templates can be created, used and re-used to save time setting up common node-setups. 
 
-Custom nodes can be scripted with the built-in Python API for maximum flexibility. Integrations with other softwares like Blender are planned.
+Custom nodes can be scripted with the built-in Python API for maximum flexibility. Integrations with other software like Blender are planned.
 
 With a fully non-destructive workflow that uses both GPU and CPU processing while being seamlessly cross-platform on Windows, Linux and MacOs (for 64-bit systems), Gimel Studio aims to be a simple, yet powerful 2d graphics editing tool for beginners and pros alike.
 
@@ -69,7 +69,7 @@ This is a short list of some immediate tasks we're working on:
 
 You can also take a look at the [Github Issues](https://github.com/GimelStudio/GimelStudio/issues) for details on these and other immediate and future tasks. 
 
-PRs are always welcome! :)
+Pull requests are always welcome! :)
 
 
 # Running the code
