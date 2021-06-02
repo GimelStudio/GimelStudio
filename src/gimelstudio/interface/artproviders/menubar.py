@@ -436,3 +436,133 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
             menubar.DrawMoreButton(dc, menubar._dropDownButtonState)
             # Set the button rect
             menubar._dropDownButtonArea = moreMenubtnBgBmpRect
+
+
+    def DrawMenuBarButton(self, dc, rect, state):
+        """
+        Draws the highlight on a :class:`FlatMenuBar`.
+
+        :param `dc`: an instance of :class:`wx.DC`;
+        :param `rect`: an instance of :class:`wx.Rect`, representing the button client rectangle;
+        :param integer `state`: the button state.
+        """
+
+        # switch according to the status
+        if state == ControlFocus:
+            penColour   = self.menuBarFocusBorderColour
+            brushColour = self.menuBarFocusFaceColour
+        elif state == ControlPressed:
+            penColour   = self.menuBarPressedBorderColour
+            brushColour = self.menuBarPressedFaceColour
+
+        dcsaver = DCSaver(dc)
+        dc.SetPen(wx.Pen(penColour))
+        dc.SetBrush(wx.Brush(brushColour))
+        dc.DrawRoundedRectangle(rect, 3)
+
+
+    def DrawMenuButton(self, dc, rect, state):
+        """
+        Draws the highlight on a FlatMenu
+
+        :param `dc`: an instance of :class:`wx.DC`;
+        :param `rect`: an instance of :class:`wx.Rect`, representing the button client rectangle;
+        :param integer `state`: the button state.
+        """
+
+        # switch according to the status
+        if state == ControlFocus:
+            penColour   = self.menuFocusBorderColour
+            brushColour = self.menuFocusFaceColour
+        elif state == ControlPressed:
+            penColour   = self.menuPressedBorderColour
+            brushColour = self.menuPressedFaceColour
+
+        dcsaver = DCSaver(dc)
+        dc.SetPen(wx.Pen(penColour))
+        dc.SetBrush(wx.Brush(brushColour))
+        dc.DrawRoundedRectangle(rect, 3)
+
+
+    def DrawMenu(self, flatmenu, dc):
+        """
+        Draws the menu.
+
+        :param `flatmenu`: the :class:`FlatMenu` instance we need to paint;
+        :param `dc`: an instance of :class:`wx.DC`.
+        """
+        
+        menuRect = flatmenu.GetClientRect()
+        menuBmp = wx.Bitmap(menuRect.width, menuRect.height)
+
+        mem_dc = wx.MemoryDC()
+        mem_dc.SelectObject(menuBmp)
+
+        # colour the menu face with background colour
+        backColour = self.menuFaceColour
+        backBrush = wx.Brush(backColour)
+        pen = wx.Pen(wx.TRANSPARENT_PEN)
+
+        mem_dc.SetPen(pen)
+        mem_dc.SetBrush(backBrush)
+        mem_dc.DrawRectangle(menuRect)
+
+        backgroundImage = flatmenu._backgroundImage
+
+        if backgroundImage:
+            mem_dc.DrawBitmap(backgroundImage, flatmenu._leftMarginWidth, 0, True)
+
+        # draw items
+        posy = 3
+        nItems = len(flatmenu._itemsArr)
+
+        # make all items as non-visible first
+        for item in flatmenu._itemsArr:
+            item.Show(False)
+
+        visibleItems = 0
+        screenHeight = wx.SystemSettings.GetMetric(wx.SYS_SCREEN_Y)
+
+        numCols = flatmenu.GetNumberColumns()
+        switch, posx, index = 1e6, 0, 0
+        if numCols > 1:
+            switch = int(math.ceil((nItems - flatmenu._first)/float(numCols)))
+
+        # If we have to scroll and are not using the scroll bar buttons we need to draw
+        # the scroll up menu item at the top.
+        if not self.scrollBarButtons and flatmenu._showScrollButtons:
+            posy += flatmenu.GetItemHeight()
+
+        for nCount in range(flatmenu._first, nItems):
+
+            visibleItems += 1
+            item = flatmenu._itemsArr[nCount]
+            self.DrawMenuItem(item, mem_dc, posx, posy,
+                              flatmenu._imgMarginX, flatmenu._markerMarginX,
+                              flatmenu._textX, flatmenu._rightMarginPosX,
+                              nCount == flatmenu._selectedItem,
+                              backgroundImage=backgroundImage)
+            posy += item.GetHeight()
+            item.Show()
+
+            if visibleItems >= switch:
+                posy = 2
+                index += 1
+                posx = flatmenu._menuWidth*index
+                visibleItems = 0
+
+            # make sure we draw only visible items
+            pp = flatmenu.ClientToScreen(wx.Point(0, posy))
+
+            menuBottom = (self.scrollBarButtons and [pp.y] or [pp.y + flatmenu.GetItemHeight()*2])[0]
+
+            if menuBottom > screenHeight:
+                break
+
+        if flatmenu._showScrollButtons:
+            if flatmenu._upButton:
+                flatmenu._upButton.Draw(mem_dc)
+            if flatmenu._downButton:
+                flatmenu._downButton.Draw(mem_dc)
+
+        dc.Blit(0, 0, menuBmp.GetWidth(), menuBmp.GetHeight(), mem_dc, 0, 0)
