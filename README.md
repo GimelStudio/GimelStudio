@@ -22,7 +22,7 @@ This repository tracks the *next step* of Gimel Studio (the v0.6.x series) to be
 
 Here is a **WIP mockup** of the redesigned UI:
 
-!["Gimel Studio mockup"](https://i.ibb.co/1ZdrWfT/wip-ui-revision3.png "Gimel Studio")
+!["Gimel Studio mockup"](https://i.ibb.co/Pr5RKyn/gimel-studio-ui-mockup.png "Gimel Studio")
 
 
 # Discord & Gitter
