@@ -144,10 +144,10 @@ class NodeGraphPanel(wx.Panel):
 
         undockpanel_menuitem = flatmenu.FlatMenuItem(self.area_dropdownmenu,
                                                      ID_MENU_UNDOCKPANEL,
-                                                     "Undock panel", "", wx.ITEM_NORMAL)
+                                                     _("Undock panel"), "", wx.ITEM_NORMAL)
         self.area_dropdownmenu.AppendItem(undockpanel_menuitem)
 
         hidepanel_menuitem = flatmenu.FlatMenuItem(self.area_dropdownmenu,
                                                    ID_MENU_HIDEPANEL,
-                                                   "Hide panel", "", wx.ITEM_NORMAL)
+                                                   _("Hide panel"), "", wx.ITEM_NORMAL)
         self.area_dropdownmenu.AppendItem(hidepanel_menuitem)
