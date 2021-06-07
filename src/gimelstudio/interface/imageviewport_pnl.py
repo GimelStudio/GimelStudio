@@ -17,18 +17,22 @@
 import wx
 import wx.adv
 from wx.lib.newevent import NewCommandEvent
+import wx.lib.agw.flatmenu as flatmenu
 
 import numpy as np
 
-from gswidgetkit import Button, NumberField, EVT_NUMBERFIELD_CHANGE
+from gswidgetkit import Button, EVT_BUTTON, NumberField, EVT_NUMBERFIELD_CHANGE
 
-from .utils import ConvertImageToWx
+from .utils import ConvertImageToWx, ComputeMenuPosAlignedLeft
 from .basewidgets import ZoomPanel
 from gimelstudio.datafiles import (ICON_BRUSH_CHECKERBOARD, 
                                    ICON_IMAGEVIEWPORT_PANEL, 
                                    ICON_MORE_MENU_SMALL)
 
 imageviewport_mousezoom_cmd_event, EVT_IMAGEVIEWPORT_MOUSEZOOM = NewCommandEvent()
+
+ID_MENU_UNDOCKPANEL = wx.NewIdRef()
+ID_MENU_HIDEPANEL = wx.NewIdRef()
 
 
 class ImageViewportPanel(wx.Panel):
@@ -76,8 +80,16 @@ class ImageViewportPanel(wx.Panel):
 
         self.SetSizer(main_sizer)
 
+        # Event bindings
         self.imageviewport.Bind(EVT_IMAGEVIEWPORT_MOUSEZOOM, self.ZoomImageViewport)
         self.zoom_field.Bind(EVT_NUMBERFIELD_CHANGE, self.ChangeZoom)
+        self.menu_button.Bind(EVT_BUTTON, self.OnAreaMenuButton)
+        self.Bind(wx.EVT_MENU, self.OnMenuUndockPanel, id=ID_MENU_UNDOCKPANEL)
+        self.Bind(wx.EVT_MENU, self.OnMenuHidePanel, id=ID_MENU_HIDEPANEL)
+
+    @property
+    def AUIManager(self):
+        return self._parent._mgr
 
     def UpdateViewerImage(self, image, render_time):
         self.imageviewport.UpdateViewerImage(image, render_time)
@@ -92,6 +104,32 @@ class ImageViewportPanel(wx.Panel):
         self.imageviewport.UpdateDrawing()
         self.zoom_field.Refresh()
         self.Refresh()
+
+    def OnAreaMenuButton(self, event):
+        self.CreateAreaMenu()
+        pos = ComputeMenuPosAlignedLeft(self.area_dropdownmenu, self.menu_button)
+        self.area_dropdownmenu.Popup(pos, self)
+
+    def OnMenuUndockPanel(self, event):
+        self.AUIManager.GetPane("imageviewport").Float()
+        self.AUIManager.Update()
+
+    def OnMenuHidePanel(self, event):
+        self.AUIManager.GetPane("imageviewport").Hide()
+        self.AUIManager.Update()
+        
+    def CreateAreaMenu(self):
+        self.area_dropdownmenu = flatmenu.FlatMenu()
+
+        undockpanel_menuitem = flatmenu.FlatMenuItem(self.area_dropdownmenu,
+                                                     ID_MENU_UNDOCKPANEL,
+                                                     "Undock panel", "", wx.ITEM_NORMAL)
+        self.area_dropdownmenu.AppendItem(undockpanel_menuitem)
+
+        hidepanel_menuitem = flatmenu.FlatMenuItem(self.area_dropdownmenu,
+                                                   ID_MENU_HIDEPANEL,
+                                                   "Hide panel", "", wx.ITEM_NORMAL)
+        self.area_dropdownmenu.AppendItem(hidepanel_menuitem)
 
 
 class ImageViewport(ZoomPanel):

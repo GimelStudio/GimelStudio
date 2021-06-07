@@ -15,13 +15,18 @@
 # ----------------------------------------------------------------------------
 
 import wx
+import wx.lib.agw.flatmenu as flatmenu
 
-from gswidgetkit import Button, NumberField, EVT_NUMBERFIELD_CHANGE
+from gswidgetkit import Button, EVT_BUTTON, NumberField, EVT_NUMBERFIELD_CHANGE
 from gsnodegraph import (NodeGraph, EVT_GSNODEGRAPH_NODESELECT,
                          EVT_GSNODEGRAPH_NODECONNECT,
                          EVT_GSNODEGRAPH_NODEDISCONNECT,
                          EVT_GSNODEGRAPH_MOUSEZOOM)
 from gimelstudio.datafiles import ICON_NODEGRAPH_PANEL, ICON_MORE_MENU_SMALL
+from .utils import ComputeMenuPosAlignedLeft
+
+ID_MENU_UNDOCKPANEL = wx.NewIdRef()
+ID_MENU_HIDEPANEL = wx.NewIdRef()
 
 
 class NodeGraphPanel(wx.Panel):
@@ -82,6 +87,13 @@ class NodeGraphPanel(wx.Panel):
         self.nodegraph.Bind(EVT_GSNODEGRAPH_NODEDISCONNECT, self.NodeDisconnectEvent)
         self.nodegraph.Bind(EVT_GSNODEGRAPH_MOUSEZOOM, self.ZoomNodeGraph)
         self.zoom_field.Bind(EVT_NUMBERFIELD_CHANGE, self.ChangeZoom)
+        self.menu_button.Bind(EVT_BUTTON, self.OnAreaMenuButton)
+        self.Bind(wx.EVT_MENU, self.OnMenuUndockPanel, id=ID_MENU_UNDOCKPANEL)
+        self.Bind(wx.EVT_MENU, self.OnMenuHidePanel, id=ID_MENU_HIDEPANEL)
+
+    @property
+    def AUIManager(self):
+        return self.parent._mgr
 
     @property
     def NodeGraph(self):
@@ -112,3 +124,30 @@ class NodeGraphPanel(wx.Panel):
         self.zoom_field.SetValue(event.value)
         self.zoom_field.UpdateDrawing()
         self.zoom_field.Refresh()
+
+    def OnAreaMenuButton(self, event):
+        print("menu")
+        self.CreateAreaMenu()
+        pos = ComputeMenuPosAlignedLeft(self.area_dropdownmenu, self.menu_button)
+        self.area_dropdownmenu.Popup(pos, self)
+
+    def OnMenuUndockPanel(self, event):
+        self.AUIManager.GetPane("nodegraph").Float()
+        self.AUIManager.Update()
+
+    def OnMenuHidePanel(self, event):
+        self.AUIManager.GetPane("nodegraph").Hide()
+        self.AUIManager.Update()
+        
+    def CreateAreaMenu(self):
+        self.area_dropdownmenu = flatmenu.FlatMenu()
+
+        undockpanel_menuitem = flatmenu.FlatMenuItem(self.area_dropdownmenu,
+                                                     ID_MENU_UNDOCKPANEL,
+                                                     "Undock panel", "", wx.ITEM_NORMAL)
+        self.area_dropdownmenu.AppendItem(undockpanel_menuitem)
+
+        hidepanel_menuitem = flatmenu.FlatMenuItem(self.area_dropdownmenu,
+                                                   ID_MENU_HIDEPANEL,
+                                                   "Hide panel", "", wx.ITEM_NORMAL)
+        self.area_dropdownmenu.AppendItem(hidepanel_menuitem)

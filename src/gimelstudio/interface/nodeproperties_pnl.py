@@ -16,13 +16,17 @@
 
 import wx
 import wx.html
+import wx.lib.agw.flatmenu as flatmenu
+
 import gimelstudio.interface.basewidgets.foldpanelbar as fpb
-
-from gswidgetkit import Button
-
+from .utils import ComputeMenuPosAlignedLeft
+from gswidgetkit import EVT_BUTTON, Button
 from gimelstudio.datafiles import (ICON_NODEPROPERTIES_PANEL, 
                                    ICON_MORE_MENU_SMALL,
                                    ICON_HELP)
+
+ID_MENU_UNDOCKPANEL = wx.NewIdRef()
+ID_MENU_HIDEPANEL = wx.NewIdRef()
 
 
 class NodePropertiesPanel(wx.Panel):
@@ -77,6 +81,10 @@ class NodePropertiesPanel(wx.Panel):
 
         self.SetSizer(main_sizer)
 
+        self.menu_button.Bind(EVT_BUTTON, self.OnAreaMenuButton)
+        self.Bind(wx.EVT_MENU, self.OnMenuUndockPanel, id=ID_MENU_UNDOCKPANEL)
+        self.Bind(wx.EVT_MENU, self.OnMenuHidePanel, id=ID_MENU_HIDEPANEL)
+
     def UpdatePanelContents(self, selected_node):
         self.main_panel.DestroyChildren()
 
@@ -127,3 +135,29 @@ class NodePropertiesPanel(wx.Panel):
         self.AUIManager.Update()
         self.Parent.Refresh()
         self.Parent.Update()
+
+    def OnAreaMenuButton(self, event):
+        self.CreateAreaMenu()
+        pos = ComputeMenuPosAlignedLeft(self.area_dropdownmenu, self.menu_button)
+        self.area_dropdownmenu.Popup(pos, self)
+
+    def OnMenuUndockPanel(self, event):
+        self.AUIManager.GetPane("nodeproperties").Float()
+        self.AUIManager.Update()
+
+    def OnMenuHidePanel(self, event):
+        self.AUIManager.GetPane("nodeproperties").Hide()
+        self.AUIManager.Update()
+        
+    def CreateAreaMenu(self):
+        self.area_dropdownmenu = flatmenu.FlatMenu()
+
+        undockpanel_menuitem = flatmenu.FlatMenuItem(self.area_dropdownmenu,
+                                                     ID_MENU_UNDOCKPANEL,
+                                                     "Undock panel", "", wx.ITEM_NORMAL)
+        self.area_dropdownmenu.AppendItem(undockpanel_menuitem)
+
+        hidepanel_menuitem = flatmenu.FlatMenuItem(self.area_dropdownmenu,
+                                                   ID_MENU_HIDEPANEL,
+                                                   "Hide panel", "", wx.ITEM_NORMAL)
+        self.area_dropdownmenu.AppendItem(hidepanel_menuitem)

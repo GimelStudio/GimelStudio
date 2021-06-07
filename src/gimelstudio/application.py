@@ -191,17 +191,6 @@ class ApplicationFrame(wx.Frame):
             .BestSize(750, 500)
             )
 
-        # self._mgr.AddPane(
-        #     layer_pnl,
-        #     aui.AuiPaneInfo()
-        #     .Name('layers')
-        #     .Caption('Layers')
-        #     .Left()
-        #     .CloseButton(visible=False)
-        #     .Icon(ICON_LAYERS.GetBitmap())
-        #     .BestSize(750, 500)
-        #     )
-
         # Maximize the window & tell the AUI window
         # manager to "commit" all the changes just made, etc
         self.Maximize()
