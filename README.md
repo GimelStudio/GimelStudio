@@ -3,12 +3,11 @@
 <h1 align="center">Gimel Studio</h1>
 
 <p align="center">
-[![GitHub license](https://img.shields.io/github/license/GimelStudio/GimelStudio?color=light-green)](https://github.com/GimelStudio/GimelStudio/blob/master/LICENSE)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/GimelStudio/GimelStudio.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/GimelStudio/GimelStudio/context:python)
-
-[Website](https://gimelstudio.github.io) | [Discord](https://discord.gg/RqwbDrVDpK) | [Gitter](https://gitter.im/Gimel-Studio/community)
-
-Gimel Studio is a non-destructive, node-based 2D image graphics editor written in Python, focused on **simplicity, speed, elegance and usability**.
+  <img href="https://github.com/GimelStudio/GimelStudio/blob/master/LICENSE" src="https://img.shields.io/badge/License-Apache2.0-green.svg" />
+  <img href="https://lgtm.com/projects/g/GimelStudio/GimelStudio/" src="https://img.shields.io/lgtm/grade/python/g/GimelStudio/GimelStudio.svg?logo=lgtm&logoWidth=18" />
+  <br/>
+  Non-destructive, node-based 2D image graphics editor written in Python, focused on simplicity, speed, elegance and usability<br/>
+  <a href="https://gimelstudio.github.io">Official Website</a> | <a href="https://discord.gg/RqwbDrVDpK" >Join Our Discord Server</a> | <a href="https://gitter.im/Gimel-Studio/community" >Gitter Community</a>
 </p>
 
 
