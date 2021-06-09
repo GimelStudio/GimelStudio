@@ -328,11 +328,9 @@ class UIDockArt(object):
             dc.SetBrush(wx.WHITE_BRUSH)
             dc.DrawRoundedRectangle(rect.x, rect.y, rect.width, rect.height, 8)
 
-        dc.SetBrush(wx.Brush(self._background_brush.GetColour()))
-        dc.DrawRoundedRectangle(rect.x, rect.y, rect.width, rect.height, 8)
-        # aui.DrawGradientRectangle(dc, rect, self._background_brush.GetColour(),
-        #                       self._background_gradient_colour,
-        #                       aui.AUI_GRADIENT_HORIZONTAL, rect.x, 700)
+        # Panel backdrop
+        dc.SetBrush(wx.Brush(wx.Colour("#232323")))
+        dc.DrawRectangle(rect.x, rect.y, rect.width, rect.height)
 
 
     def DrawBorder(self, dc, window, rect, pane):
