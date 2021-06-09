@@ -1,12 +1,14 @@
+<h1 align="center">Gimel Studio</h1>
+
+<p align="center">
+  <img href="https://github.com/GimelStudio/GimelStudio/blob/master/LICENSE" src="https://img.shields.io/badge/License-Apache2.0-green.svg" />
+  <img href="https://lgtm.com/projects/g/GimelStudio/GimelStudio/" src="https://img.shields.io/lgtm/grade/python/g/GimelStudio/GimelStudio.svg?logo=lgtm&logoWidth=18" />
+  <br/>
+  Non-destructive, node-based 2D image graphics editor written in Python, focused on simplicity, speed, elegance and usability<br/>
+  <a href="https://gimelstudio.github.io">Official Website</a> | <a href="https://discord.gg/RqwbDrVDpK" >Join Our Discord Server</a> | <a href="https://gitter.im/Gimel-Studio/community" >Gitter Community</a>
+</p>
+
 !["Gimel Studio banner"](/assets/banner/banner.png "Gimel Studio")
-
-Gimel Studio
-============
-
-[![GitHub license](https://img.shields.io/github/license/GimelStudio/GimelStudio?color=light-green)](https://github.com/GimelStudio/GimelStudio/blob/master/LICENSE)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/GimelStudio/GimelStudio.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/GimelStudio/GimelStudio/context:python)
-
-Gimel Studio is a non-destructive, node-based 2D image graphics editor written in Python, focused on **simplicity, speed, elegance and usability**.
 
 
 # About the Next Generation of Gimel Studio
@@ -55,19 +57,19 @@ With a fully non-destructive workflow that uses both GPU and CPU processing whil
 **Visit our new home landing-page [here](https://gimelstudio.github.io) for detailed information on the project goals, etc**
 
 
-# Immediate Tasks
+# Immediate Tasks before MVP
 
 This is a short list of some immediate tasks we're working on:
 
-- [ ] Finish UI main window code
+- [ ] Improve Node graph to include image thumbnails, shortcuts, etc (via GS Nodegraph)
 - [ ] Continue to implement and refine custom widgets and the nodegraph
 - [ ] Continue to fully transition to custom widgets (vs. native widgets)
 - [ ] Node Registry 
-- [ ] Add Node menu
+- [ ] Add Node menu/wheel
 - [ ] Preferences/Configuration dialog and backend
 - [ ] Pre-built Python wheels for OpenImageIO
 
-You can also take a look at the [Github Issues](https://github.com/GimelStudio/GimelStudio/issues) for details on these and other immediate and future tasks. 
+Take a look at the [Github Issues](https://github.com/GimelStudio/GimelStudio/issues) for details on these and other immediate and future tasks to be done. 
 
 Pull requests are always welcome! :)
 
@@ -91,6 +93,10 @@ Pull requests are always welcome! :)
 Please note that the renderer, which relies on OIIO (OpenImageIO) will be **disabled if OIIO is not found**. The rest of the application will run, but the renderer will not work.
 
 For platforms other than Windows, OIIO will need to be [built from source](https://github.com/OpenImageIO/oiio/blob/master/INSTALL.md#building-from-source) since pre-built wheels are not yet available. See [this issue](https://github.com/GimelStudio/GimelStudio/issues/1).
+
+## MacOs
+
+Building should be the same as for Linux, **but it has never been tested.** We're looking for a maintainer to handle MacOs-related fixes, etc since the current developers do not own a Mac. If you would like to do so feel free to say so in Discord or Gitter.
 
 
 # Tech Stack
