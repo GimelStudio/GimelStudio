@@ -164,32 +164,40 @@ class ApplicationFrame(wx.Frame):
 
         # Add panes
         self._mgr.AddPane(
-            self.nodegraph_pnl,
+            self.imageviewport_pnl,
             aui.AuiPaneInfo()
-            .Name('nodegraph')
+            .Name('imageviewport')
             .CaptionVisible(False)
-            .Bottom()
+            .Top()
+            .Row(0)
+            .Maximize()
             .CloseButton(visible=False)
-            .BestSize(750, 800)
+            .BestSize(500, 500)
             )
         self._mgr.AddPane(
             self.prop_pnl,
             aui.AuiPaneInfo()
             .Name('nodeproperties')
-            .Right()
+            .Top()
+            .Position(1)
+            .Row(0)
             .CaptionVisible(False)
             .CloseButton(visible=False)
-            .BestSize(750, 500)
+            .BestSize(500, 500)
             )
         self._mgr.AddPane(
-            self.imageviewport_pnl,
+            self.nodegraph_pnl,
             aui.AuiPaneInfo()
-            .Name('imageviewport')
+            .Name('nodegraph')
             .CaptionVisible(False)
             .Center()
             .CloseButton(visible=False)
-            .BestSize(750, 500)
+            .BestSize(500, 500)
             )
+
+        # This sorta feels like a hack to get the default proportions correct!
+        self._mgr.GetPane("nodeproperties").dock_proportion = 10
+        self._mgr.GetPane("imageviewport").dock_proportion = 25
 
         # Maximize the window & tell the AUI window
         # manager to "commit" all the changes just made, etc
