@@ -19,9 +19,10 @@ import wx.lib.agw.aui as aui
 import wx.lib.agw.flatmenu as flatmenu
 
 from .config import AppData
-from .interface import ImageViewportPanel, NodePropertiesPanel, NodeGraphPanel
+from .interface import (ImageViewportPanel, NodePropertiesPanel,
+                        NodeGraphPanel, StatusBar)
 from .interface import artproviders
-from .datafiles.icons import (ICON_NODEPROPERTIES_PANEL, 
+from .datafiles.icons import (ICON_NODEPROPERTIES_PANEL,
                               ICON_NODEGRAPH_PANEL, ICON_GIMELSTUDIO_ICO)
 from .corenodes import OutputNode, MixNode, ImageNode, BlurNode
 
@@ -133,6 +134,10 @@ class ApplicationFrame(wx.Frame):
         # Add menubar to main sizer
         self.mainSizer.Add(self._menubar, 0, wx.EXPAND)
 
+        # Create the statusbar
+        self.statusbar = StatusBar(self)
+        self.SetStatusBar(self.statusbar)
+
         # Window manager
         self._mgr = AUIManager(self)
         self._mgr.SetArtProvider(artproviders.UIDockArt())
@@ -204,6 +209,8 @@ class ApplicationFrame(wx.Frame):
         self.Maximize()
         self._menubar.PositionAUI(self._mgr)
         self._mgr.Update()
+        self.statusbar.UpdateStatusBar()
+        self.statusbar.Refresh()
         self._menubar.Refresh()
 
     def Render(self):

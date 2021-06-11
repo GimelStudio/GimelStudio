@@ -21,9 +21,7 @@ import wx.lib.agw.flatmenu as flatmenu
 import gimelstudio.interface.basewidgets.foldpanelbar as fpb
 from .utils import ComputeMenuPosAlignedLeft
 from gswidgetkit import EVT_BUTTON, Button
-from gimelstudio.datafiles import (ICON_NODEPROPERTIES_PANEL, 
-                                   ICON_MORE_MENU_SMALL,
-                                   ICON_HELP)
+from gimelstudio.datafiles import *
 
 ID_MENU_UNDOCKPANEL = wx.NewIdRef()
 ID_MENU_HIDEPANEL = wx.NewIdRef()
@@ -34,7 +32,7 @@ class NodePropertiesPanel(wx.Panel):
                  style=wx.NO_BORDER | wx.TAB_TRAVERSAL):
         wx.Panel.__init__(self, parent, id, pos, size, style)
 
-        self._parent = parent
+        self.parent = parent
 
         self.SetBackgroundColour(wx.Colour("#464646"))
 
@@ -42,11 +40,15 @@ class NodePropertiesPanel(wx.Panel):
 
     @property
     def Parent(self):
-        return self._parent
+        return self.parent
 
     @property
     def AUIManager(self):
-        return self._parent._mgr
+        return self.parent._mgr
+
+    @property
+    def Statusbar(self):
+        return self.parent.statusbar
 
     def BuildUI(self):
         main_sizer = wx.BoxSizer(wx.VERTICAL)
@@ -84,12 +86,13 @@ class NodePropertiesPanel(wx.Panel):
         self.menu_button.Bind(EVT_BUTTON, self.OnAreaMenuButton)
         self.Bind(wx.EVT_MENU, self.OnMenuUndockPanel, id=ID_MENU_UNDOCKPANEL)
         self.Bind(wx.EVT_MENU, self.OnMenuHidePanel, id=ID_MENU_HIDEPANEL)
+        self.main_panel.Bind(wx.EVT_ENTER_WINDOW, self.OnAreaFocus)
 
     def UpdatePanelContents(self, selected_node):
         self.main_panel.DestroyChildren()
 
         if selected_node is not None:
-  
+
             # Node info
             nodeinfo_pnl = wx.Panel(self.main_panel, size=(-1, 50))
             nodeinfo_pnl.SetBackgroundColour("#464646")
@@ -103,9 +106,9 @@ class NodePropertiesPanel(wx.Panel):
             self.help_button = Button(nodeinfo_pnl, label="", flat=True,
                                       bmp=(ICON_HELP.GetBitmap(), 'left'))
 
-            nodeinfo_pnl_sizer.Add(node_label, (0, 1), 
+            nodeinfo_pnl_sizer.Add(node_label, (0, 1),
                                    flag=wx.TOP | wx.BOTTOM, border=6)
-            nodeinfo_pnl_sizer.Add(self.help_button, (0, 4), 
+            nodeinfo_pnl_sizer.Add(self.help_button, (0, 4),
                                    flag=wx.TOP | wx.BOTTOM | wx.RIGHT, border=6)
             nodeinfo_pnl_sizer.AddGrowableCol(2)
             nodeinfo_pnl.SetSizer(nodeinfo_pnl_sizer)
@@ -116,7 +119,7 @@ class NodePropertiesPanel(wx.Panel):
             panel_bar = fpb.FoldPanelBar(self.main_panel, agwStyle=fpb.FPB_VERTICAL)
 
             selected_node.NodePanelUI(self.main_panel, panel_bar)
-            
+
             style = fpb.CaptionBarStyle()
             style.SetCaptionFont(self.Parent.GetFont())
             style.SetCaptionColour(wx.Colour("#fff"))
@@ -128,6 +131,10 @@ class NodePropertiesPanel(wx.Panel):
 
             self._mainsizer.Layout()
 
+            # Also bind the focus handler to the main panel and panel_bar
+            nodeinfo_pnl.Bind(wx.EVT_ENTER_WINDOW, self.OnAreaFocus)
+            panel_bar.Bind(wx.EVT_ENTER_WINDOW, self.OnAreaFocus)
+
         else:
             # Delete the window if the node is not selected
             self._mainsizer.Clear(delete_windows=True)
@@ -135,6 +142,13 @@ class NodePropertiesPanel(wx.Panel):
         self.AUIManager.Update()
         self.Parent.Refresh()
         self.Parent.Update()
+
+    def OnAreaFocus(self, event):
+        self.Statusbar.PushContextHints(2, mouseicon=ICON_MOUSE_LMB, text="", clear=True)
+        self.Statusbar.PushContextHints(3, mouseicon=ICON_MOUSE_MMB, text="")
+        self.Statusbar.PushContextHints(4, mouseicon=ICON_MOUSE_RMB, text="")
+        self.Statusbar.PushMessage("Node Properties Area")
+        self.Statusbar.UpdateStatusBar()
 
     def OnAreaMenuButton(self, event):
         self.CreateAreaMenu()
@@ -148,7 +162,7 @@ class NodePropertiesPanel(wx.Panel):
     def OnMenuHidePanel(self, event):
         self.AUIManager.GetPane("nodeproperties").Hide()
         self.AUIManager.Update()
-        
+
     def CreateAreaMenu(self):
         self.area_dropdownmenu = flatmenu.FlatMenu()
 

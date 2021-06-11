@@ -122,10 +122,77 @@ ICON_IMAGEVIEWPORT_PANEL = PyEmbeddedImage(
     b'uUDeTztwelv/yQyApInJjM1FvwAAAABJRU5ErkJggg==')
 
 #----------------------------------------------------------------------
+ICON_KEY_CTRL = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAABHNCSVQICAgIfAhkiAAAASRJ'
+    b'REFUOI3tk7FKxEAYhL8RtY6dZSxEEIS0gqClpZWNTWpB8A0sfIFw2HsgCHbX2Cq+QRAEywiC'
+    b'bVSwEsbiNoeXy8ktWN7Awuzuv98/u7Aw139LjbG9BhwBG8BXJOcTuJd0O4LaXgV6wCvwBrxH'
+    b'QreAdeBS0k2TMrd9FQkak+0T2wXAQlhbJv7KbT0xTDyCtrtmtrPg0yk1qe2Drr0JaChMg0+A'
+    b'M9u7tpMwMtuppArIZoICmaSBpFJSDbxIegg+BwjAqeqCVk2ajr1EUvkXsBMqqc/wWnthqbB9'
+    b'Gp6i3yof2M7bjMWuTgHc+BoowrRu1ZXARPIm6Qqw1NUgQhlQ/U56DVzYPg6dPyKBm8AOcAfj'
+    b'f/8Q2Ae2ge9I6CPwLOk88txcM+oH9MB2WhAJ2rEAAAAASUVORK5CYII=')
+
+#----------------------------------------------------------------------
 ICON_MORE_MENU_SMALL = PyEmbeddedImage(
     b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAZ0lEQVQ4jdWSMQ3AMAwEA8EQ'
     b'CqEQDCEQAqEQyiBQC+G6uEqVKdJ7aE/yenrbX8qvAAw4ga6KKoOmiLaQXIBLqR6hLEkDcHmt'
     b'zGP7S1QzUjXAJFEaKUmAPcqI1KXpa4ciMqDHfOTYq9xPRoSQrhVVwAAAAABJRU5ErkJggg==')
+
+#----------------------------------------------------------------------
+ICON_MOUSE_LMB = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABHNCSVQICAgIfAhkiAAAANtJ'
+    b'REFUOI3llLENwkAMRb8RAzBCCgZIRQeipGQflmABJDpaMkHCBGQDaEFIYYNH40gh3CmHKPnN'
+    b'Kf72c2zlIv2dLGYAM0kbSXNJd0kHtyozO33VBVjwrgdQAVd/LoHJN8BbD1h0vAyogX0qbMmn'
+    b'il7OGiBUPwrEVgl967Z5CnA6RDOza8wbB2JPP3eSLkPwQXV2+DFOLy+YExr5J4WA0f20ArJk'
+    b'YGfh0SJJuZ/1UPP2DbZAA+QBLwPOyR+2F02Aoy++8atWAhePVbGrF/05ODiXtO6Fj2aWNup/'
+    b'6AWZmMcaMEb7kwAAAABJRU5ErkJggg==')
+
+#----------------------------------------------------------------------
+ICON_MOUSE_LMB_MOVEMENT = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAABHNCSVQICAgIfAhkiAAAASJJ'
+    b'REFUOI3lk71KA0EUhb8jiggKWwi2a2GlQqzsxMLGzofwAXwAkTxCnsMqL6AGLEVYtBRMCvtN'
+    b'YWEhORbOQtzM/kTtcpqBOXe+e+fOHVhoqc60vQ8cAbvAI3AjafTrbLYvXa07250Qd9oWeBIB'
+    b'nds+tn1mO7Od205sX5XPR69v+xnYK20fSMqCnwAZ0AeGwBtwKykHWIoAVyPAn5VI4wDsACvA'
+    b'IbBR+DNQYKcOOKVxWCdh3SqM5UjwWgicAJ8t4OvA5nTsDFTSg+17YCCp2wL6AbwC73WVzqsR'
+    b'8CTp5d+gkq7Le7GHKpQ28JK5stu+KIa7wk9sD233Yn7V8BfDnQM9vvs2XWEX2AbSMLOtq01t'
+    b'9yv+/sB2U3saEyTh3/8NtBj6AslJw3VkXzCiAAAAAElFTkSuQmCC')
+
+#----------------------------------------------------------------------
+ICON_MOUSE_MMB = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAABHNCSVQICAgIfAhkiAAAAOBJ'
+    b'REFUOI3tlLENwkAMRb8RDV3YIJRUhA3YgIzAKIzACIzABgkTQE9BNkhH+yiwEETKkQvQ5UvW'
+    b'3f2zvy2ffNKAf8M+OQCZpHWDLs3s2CsjkAAFD1RA6VY5VwBJW/wooL2VtJS0NLNU0s1tLmkm'
+    b'aSpp16digM3L+ebcxM85QFTFQOrbKpD77L6rzsKS0hb+CTMLJQ32+CuMI3wXfxE2s0uMcFsr'
+    b'gv2T3h64u/DLw4SCM1/Pn4poVrQDah/p5l0KnIB9lKgHJ8DBh6L2ES6Aq3NlaKS7fkJ5gz6Y'
+    b'WVwLBvwcdwUtlkoxX7/2AAAAAElFTkSuQmCC')
+
+#----------------------------------------------------------------------
+ICON_MOUSE_MMB_MOVEMENT = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAABHNCSVQICAgIfAhkiAAAARpJ'
+    b'REFUOI3tlDFOw1AQRN8EkBAFMjcwLVVSUnAG0tLRcI8cIRISNQUHCCeIKaAlEmUK3FCByA0Y'
+    b'CjbIfMU2jqDLSCt75+/Orv56DRv8N9QWYLsPnCZ0IelurYq2M9tTf6G0XYSVwU0jZmT7KM3v'
+    b'NWiPgAEwkJQDt2FnwCFwAIyBV6DfpWPbPq/4D8Edhz8M/8L2pe2T1o5t5/FaNtSexXMPeAN2'
+    b'W4WBvIb/hqRl0R1gP6xVuCt6wFaV2O6QfBOW4gOYA/drCUu6qjkqgSdJL1Wy7iqahgb8GPC7'
+    b'pHl6vlK4MpimIS6/3VlDzMqOxrYXsdLpWW770fZ1J9FIzmxPYgkWscJT28/BFbazuvzf/oSG'
+    b'CT2R1O0KNvhzfALR3q2bBzN7gQAAAABJRU5ErkJggg==')
+
+#----------------------------------------------------------------------
+ICON_MOUSE_RMB = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABHNCSVQICAgIfAhkiAAAAOJJ'
+    b'REFUOI3llLENwjAQRf8hBohER4WYgBHYAEZATAA7MAAjILEAG5ANoEQ0IBYIDQUNjwJHBMvE'
+    b'jij5lf3je3f22ZH+Tlb3ERhIGrnpXNJDUi5pZmaX5CxABmx56QzkwI237kC/CXAJXF2FpXfg'
+    b'U8cmQICJ5/lAgK4f2wrAem54Tsg9jQIl9QLeN3V8o90geO3NF3p1vV7A0J3PMLIuuCa05Z8U'
+    b'AkabUWlcHGhmJbCuOeX93MeSlxUsgaJ6savVATtglQRzQRmwcQdfuGe4BU7Oy4EsFJvycxh7'
+    b'9sbM0rb6H3oCP7XGOZL1xVkAAAAASUVORK5CYII=')
+
+#----------------------------------------------------------------------
+ICON_MOUSE_RMB_MOVEMENT = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAABHNCSVQICAgIfAhkiAAAARNJ'
+    b'REFUOI3llD1KA1EURs8VLSyECQhaWIwbsBWs0toJ2ongDhQXoFlC1mFjViDaWUmwtdAVmIAK'
+    b'SoRjkRmYhBlnEst83f15576fex8stKJJkpoCx8AIeATuI2I0czU1VW8s15d6kuXtNwUm6ova'
+    b'V0/VtnpVAt9UL5tCz9WhmhR8RyXQB/VMPVRbee5SBfcA6EXEsKb+DrAC7AJrdVCA19ojwWqB'
+    b'sdEE2lQtYB34yR3LMyy+BbYK9gWwBwyAT+BjZmhEvBVt9R34ZnxNTxHxPM9Oq4pdT/v+utO0'
+    b'hpfUxCeV9emg2KdT8Xw4umXx0tnPYH3Gj9Blsr0SoANsA2mDXp4Ap2qvYvbvsk9mfmXHbf8b'
+    b'tBj6BZFQ3OkN9voTAAAAAElFTkSuQmCC')
 
 #----------------------------------------------------------------------
 ICON_NODEGRAPH_PANEL = PyEmbeddedImage(

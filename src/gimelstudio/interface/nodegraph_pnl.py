@@ -22,7 +22,7 @@ from gsnodegraph import (NodeGraph, EVT_GSNODEGRAPH_NODESELECT,
                          EVT_GSNODEGRAPH_NODECONNECT,
                          EVT_GSNODEGRAPH_NODEDISCONNECT,
                          EVT_GSNODEGRAPH_MOUSEZOOM)
-from gimelstudio.datafiles import ICON_NODEGRAPH_PANEL, ICON_MORE_MENU_SMALL
+from gimelstudio.datafiles import *
 from .utils import ComputeMenuPosAlignedLeft
 
 ID_MENU_UNDOCKPANEL = wx.NewIdRef()
@@ -30,7 +30,7 @@ ID_MENU_HIDEPANEL = wx.NewIdRef()
 
 
 class NodeGraphPanel(wx.Panel):
-    def __init__(self, parent, registry, id=wx.ID_ANY, pos=wx.DefaultPosition, 
+    def __init__(self, parent, registry, id=wx.ID_ANY, pos=wx.DefaultPosition,
                  size=wx.DefaultSize, style=wx.NO_BORDER | wx.TAB_TRAVERSAL):
         wx.Panel.__init__(self, parent, id, pos, size, style)
 
@@ -55,7 +55,7 @@ class NodeGraphPanel(wx.Panel):
         self.area_label.SetFont(self.area_label.GetFont().Bold())
 
         self.zoom_field = NumberField(topbar, default_value=100, label=_("Zoom"),
-                                      min_value=25, max_value=250, suffix="%", 
+                                      min_value=25, max_value=250, suffix="%",
                                       show_p=False)
         self.menu_button = Button(topbar, label="", flat=True,
                                   bmp=(ICON_MORE_MENU_SMALL.GetBitmap(), 'left'))
@@ -90,6 +90,7 @@ class NodeGraphPanel(wx.Panel):
         self.menu_button.Bind(EVT_BUTTON, self.OnAreaMenuButton)
         self.Bind(wx.EVT_MENU, self.OnMenuUndockPanel, id=ID_MENU_UNDOCKPANEL)
         self.Bind(wx.EVT_MENU, self.OnMenuHidePanel, id=ID_MENU_HIDEPANEL)
+        self.nodegraph.Bind(wx.EVT_ENTER_WINDOW, self.OnAreaFocus)
 
     @property
     def AUIManager(self):
@@ -102,6 +103,10 @@ class NodeGraphPanel(wx.Panel):
     @property
     def PropertiesPanel(self):
         return self.parent.prop_pnl
+
+    @property
+    def Statusbar(self):
+        return self.parent.statusbar
 
     @property
     def ImageViewport(self):
@@ -125,8 +130,16 @@ class NodeGraphPanel(wx.Panel):
         self.zoom_field.UpdateDrawing()
         self.zoom_field.Refresh()
 
+    def OnAreaFocus(self, event):
+        self.Statusbar.PushContextHints(2, mouseicon=ICON_MOUSE_LMB_MOVEMENT, text="Box Select Nodes", clear=True)
+        self.Statusbar.PushContextHints(3, mouseicon=ICON_MOUSE_LMB, text="Select Node")
+        self.Statusbar.PushContextHints(4, mouseicon=ICON_MOUSE_LMB, keyicon=ICON_KEY_CTRL, text="Connect Selected Node To Output")
+        self.Statusbar.PushContextHints(5, mouseicon=ICON_MOUSE_MMB_MOVEMENT, text="Pan Nodegraph")
+        self.Statusbar.PushContextHints(6, mouseicon=ICON_MOUSE_RMB, text="Node Context Menu")
+        self.Statusbar.PushMessage("Nodegraph Area")
+        self.Statusbar.UpdateStatusBar()
+
     def OnAreaMenuButton(self, event):
-        print("menu")
         self.CreateAreaMenu()
         pos = ComputeMenuPosAlignedLeft(self.area_dropdownmenu, self.menu_button)
         self.area_dropdownmenu.Popup(pos, self)
@@ -138,7 +151,7 @@ class NodeGraphPanel(wx.Panel):
     def OnMenuHidePanel(self, event):
         self.AUIManager.GetPane("nodegraph").Hide()
         self.AUIManager.Update()
-        
+
     def CreateAreaMenu(self):
         self.area_dropdownmenu = flatmenu.FlatMenu()
 

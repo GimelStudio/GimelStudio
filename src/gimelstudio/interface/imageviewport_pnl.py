@@ -25,9 +25,7 @@ from gswidgetkit import Button, EVT_BUTTON, NumberField, EVT_NUMBERFIELD_CHANGE
 
 from .utils import ConvertImageToWx, ComputeMenuPosAlignedLeft
 from .basewidgets import ZoomPanel
-from gimelstudio.datafiles import (ICON_BRUSH_CHECKERBOARD, 
-                                   ICON_IMAGEVIEWPORT_PANEL, 
-                                   ICON_MORE_MENU_SMALL)
+from gimelstudio.datafiles import *
 
 imageviewport_mousezoom_cmd_event, EVT_IMAGEVIEWPORT_MOUSEZOOM = NewCommandEvent()
 
@@ -60,7 +58,7 @@ class ImageViewportPanel(wx.Panel):
         self.area_label.SetFont(self.area_label.GetFont().Bold())
 
         self.zoom_field = NumberField(topbar, default_value=100, label=_("Zoom"),
-                                      min_value=25, max_value=250, suffix="%", 
+                                      min_value=25, max_value=250, suffix="%",
                                       show_p=False)
         self.menu_button = Button(topbar, label="", flat=True,
                                   bmp=(ICON_MORE_MENU_SMALL.GetBitmap(), 'left'))
@@ -86,10 +84,15 @@ class ImageViewportPanel(wx.Panel):
         self.menu_button.Bind(EVT_BUTTON, self.OnAreaMenuButton)
         self.Bind(wx.EVT_MENU, self.OnMenuUndockPanel, id=ID_MENU_UNDOCKPANEL)
         self.Bind(wx.EVT_MENU, self.OnMenuHidePanel, id=ID_MENU_HIDEPANEL)
+        self.imageviewport.Bind(wx.EVT_ENTER_WINDOW, self.OnAreaFocus)
 
     @property
     def AUIManager(self):
         return self._parent._mgr
+
+    @property
+    def Statusbar(self):
+        return self._parent.statusbar
 
     def UpdateViewerImage(self, image, render_time):
         self.imageviewport.UpdateViewerImage(image, render_time)
@@ -105,6 +108,14 @@ class ImageViewportPanel(wx.Panel):
         self.zoom_field.Refresh()
         self.Refresh()
 
+    def OnAreaFocus(self, event):
+        self.Statusbar.PushContextHints(2, mouseicon=ICON_MOUSE_MMB, text="Zoom Viewport",
+                                        clear=True)
+        self.Statusbar.PushContextHints(3, mouseicon=ICON_MOUSE_MMB_MOVEMENT,
+                                        text="Pan Viewport")
+        self.Statusbar.PushMessage("Image Viewport Area")
+        self.Statusbar.UpdateStatusBar()
+
     def OnAreaMenuButton(self, event):
         self.CreateAreaMenu()
         pos = ComputeMenuPosAlignedLeft(self.area_dropdownmenu, self.menu_button)
@@ -117,7 +128,7 @@ class ImageViewportPanel(wx.Panel):
     def OnMenuHidePanel(self, event):
         self.AUIManager.GetPane("imageviewport").Hide()
         self.AUIManager.Update()
-        
+
     def CreateAreaMenu(self):
         self.area_dropdownmenu = flatmenu.FlatMenu()
 
@@ -209,8 +220,8 @@ class ImageViewport(ZoomPanel):
         self.UpdateDrawing()
 
     def SendMouseZoomEvent(self):
-        wx.PostEvent(self, 
-                     imageviewport_mousezoom_cmd_event(id=self.GetId(), 
+        wx.PostEvent(self,
+                     imageviewport_mousezoom_cmd_event(id=self.GetId(),
                      value=self._zoom))
 
     def UpdateViewerImage(self, image, render_time):
