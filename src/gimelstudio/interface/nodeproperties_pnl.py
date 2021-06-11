@@ -58,7 +58,8 @@ class NodePropertiesPanel(wx.Panel):
 
         topbar_sizer = wx.GridBagSizer(vgap=1, hgap=1)
 
-        self.area_icon = wx.StaticBitmap(topbar, bitmap=ICON_NODEPROPERTIES_PANEL.GetBitmap())
+        self.area_icon = wx.StaticBitmap(topbar,
+                                         bitmap=ICON_NODEPROPERTIES_PANEL.GetBitmap())
         self.area_label = wx.StaticText(topbar, label="")
         self.area_label.SetForegroundColour("#fff")
         self.area_label.SetFont(self.area_label.GetFont().Bold())
@@ -66,7 +67,8 @@ class NodePropertiesPanel(wx.Panel):
         self.menu_button = Button(topbar, label="", flat=True,
                                   bmp=(ICON_MORE_MENU_SMALL.GetBitmap(), 'left'))
 
-        topbar_sizer.Add(self.area_icon, (0, 0), flag=wx.LEFT | wx.TOP | wx.BOTTOM, border=8)
+        topbar_sizer.Add(self.area_icon, (0, 0), flag=wx.LEFT | wx.TOP | wx.BOTTOM,
+                         border=8)
         topbar_sizer.Add(self.area_label, (0, 1), flag=wx.ALL, border=8)
         topbar_sizer.Add(self.menu_button, (0, 4), flag=wx.ALL, border=3)
         topbar_sizer.AddGrowableCol(2)
@@ -144,10 +146,11 @@ class NodePropertiesPanel(wx.Panel):
         self.Parent.Update()
 
     def OnAreaFocus(self, event):
-        self.Statusbar.PushContextHints(2, mouseicon=ICON_MOUSE_LMB, text="", clear=True)
+        self.Statusbar.PushContextHints(2, mouseicon=ICON_MOUSE_LMB, text="",
+                                        clear=True)
         self.Statusbar.PushContextHints(3, mouseicon=ICON_MOUSE_MMB, text="")
         self.Statusbar.PushContextHints(4, mouseicon=ICON_MOUSE_RMB, text="")
-        self.Statusbar.PushMessage("Node Properties Area")
+        self.Statusbar.PushMessage(_("Node Properties Area"))
         self.Statusbar.UpdateStatusBar()
 
     def OnAreaMenuButton(self, event):

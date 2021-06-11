@@ -131,12 +131,18 @@ class NodeGraphPanel(wx.Panel):
         self.zoom_field.Refresh()
 
     def OnAreaFocus(self, event):
-        self.Statusbar.PushContextHints(2, mouseicon=ICON_MOUSE_LMB_MOVEMENT, text="Box Select Nodes", clear=True)
-        self.Statusbar.PushContextHints(3, mouseicon=ICON_MOUSE_LMB, text="Select Node")
-        self.Statusbar.PushContextHints(4, mouseicon=ICON_MOUSE_LMB, keyicon=ICON_KEY_CTRL, text="Connect Selected Node To Output")
-        self.Statusbar.PushContextHints(5, mouseicon=ICON_MOUSE_MMB_MOVEMENT, text="Pan Nodegraph")
-        self.Statusbar.PushContextHints(6, mouseicon=ICON_MOUSE_RMB, text="Node Context Menu")
-        self.Statusbar.PushMessage("Nodegraph Area")
+        self.Statusbar.PushContextHints(2, mouseicon=ICON_MOUSE_LMB_MOVEMENT,
+                                        text=_("Box Select Nodes"), clear=True)
+        self.Statusbar.PushContextHints(3, mouseicon=ICON_MOUSE_LMB,
+                                        text=_("Select Node"))
+        self.Statusbar.PushContextHints(4, mouseicon=ICON_MOUSE_LMB,
+                                        keyicon=ICON_KEY_CTRL,
+                                        text=_("Connect Selected Node To Output"))
+        self.Statusbar.PushContextHints(5, mouseicon=ICON_MOUSE_MMB_MOVEMENT,
+                                        text=_("Pan Nodegraph"))
+        self.Statusbar.PushContextHints(6, mouseicon=ICON_MOUSE_RMB,
+                                        text=_("Node Context Menu"))
+        self.Statusbar.PushMessage(_("Nodegraph Area"))
         self.Statusbar.UpdateStatusBar()
 
     def OnAreaMenuButton(self, event):

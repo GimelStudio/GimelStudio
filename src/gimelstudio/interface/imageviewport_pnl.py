@@ -109,11 +109,11 @@ class ImageViewportPanel(wx.Panel):
         self.Refresh()
 
     def OnAreaFocus(self, event):
-        self.Statusbar.PushContextHints(2, mouseicon=ICON_MOUSE_MMB, text="Zoom Viewport",
-                                        clear=True)
+        self.Statusbar.PushContextHints(2, mouseicon=ICON_MOUSE_MMB,
+                                        text=_("Zoom Viewport"), clear=True)
         self.Statusbar.PushContextHints(3, mouseicon=ICON_MOUSE_MMB_MOVEMENT,
-                                        text="Pan Viewport")
-        self.Statusbar.PushMessage("Image Viewport Area")
+                                        text=_("Pan Viewport"))
+        self.Statusbar.PushMessage(_("Image Viewport Area"))
         self.Statusbar.UpdateStatusBar()
 
     def OnAreaMenuButton(self, event):

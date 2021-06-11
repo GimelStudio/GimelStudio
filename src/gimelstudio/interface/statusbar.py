@@ -126,7 +126,7 @@ class StatusBar(wx.Panel, wx.StatusBar):
 
     def PushStatusText(self, message, null):
         """ Override method for menu item help messages. """
-        self.info_message = "Menu: " + message
+        self.info_message = _("Menu: ") + message
         self.UpdateStatusBar()
 
     def PopStatusText(self, null):
