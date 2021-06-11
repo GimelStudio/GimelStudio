@@ -59,6 +59,8 @@ class StatusBar(wx.Panel, wx.StatusBar):
         self.context_hints.append(context_hint)
 
     def UpdateContextHints(self):
+        """ Updates the context hints to show the elements that
+        make up thespecified hints. """
         self.main_sizer.Clear(delete_windows=True)
 
         # Context hints area
@@ -122,7 +124,17 @@ class StatusBar(wx.Panel, wx.StatusBar):
         """ Updates the statusbar info message area with the given message. """
         self.info_message = message
 
+    def PushStatusText(self, message, null):
+        """ Override method for menu item help messages. """
+        self.info_message = "Menu: " + message
+        self.UpdateStatusBar()
+
+    def PopStatusText(self, null):
+        """ Just a blank override method. """
+        pass
+
     def UpdateStatusBar(self):
+        """ Update the statusbar. """
         self.UpdateContextHints()
         self.Layout()
         self.Refresh()
