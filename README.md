@@ -15,7 +15,7 @@
 
 **The original (more stable) version of Gimel Studio is available [here](https://github.com/Correct-Syntax/Gimel-Studio).**
 
-This repository tracks the *next step* of Gimel Studio (the v0.6.x series) to become a truly usable and serious node-based, non-destructive image editor. It is currently in ``initial planning/development stage`` and things will probably change from what is currently here. 
+This repository tracks the *next step* of Gimel Studio (the v0.6.x series) to become a truly usable and serious node-based, non-destructive image editor. It is currently in ``initial planning/development stage`` and things will probably change from what is currently here.
 
 **We're especially seeking Python and/or GLSL developers, 3D artists, photographers and UI designers to help with the project.** However, even if you have none of these skills you're still welcome, of course, to give feedback and suggest ideas and improvements. :)
 
@@ -24,7 +24,7 @@ This repository tracks the *next step* of Gimel Studio (the v0.6.x series) to be
 
 Here is a **WIP mockup** of the redesigned UI:
 
-!["Gimel Studio mockup"](https://i.ibb.co/Pr5RKyn/gimel-studio-ui-mockup.png "Gimel Studio")
+!["Gimel Studio mockup"](https://i.ibb.co/QNNY2vX/gimel-studio-wip-ui.png "Gimel Studio")
 
 
 # Discord & Gitter
@@ -34,7 +34,7 @@ If you'd like to join development, help with the UI design or have questions, co
 
 # Vision
 
-The main goal is to expand on and greatly improve upon the concepts from the [original version](https://github.com/Correct-Syntax/Gimel-Studio) of Gimel Studio to create a serious (yet fun!) 2D graphics editor. 
+The main goal is to expand on and greatly improve upon the concepts from the [original version](https://github.com/Correct-Syntax/Gimel-Studio) of Gimel Studio to create a serious (yet fun!) 2D graphics editor.
 
 This includes:
 
@@ -48,7 +48,7 @@ This includes:
 - Gizmos for the viewport to allow for WYSIWYG-like interaction for transforms, etc (e.g: crop, rotate, etc)
 - Continued improvement and additions to the Python API for scripting custom nodes
 
-Nodes can be used to composite, create/add new effects and/or composite raster and vector graphics on-demand. Helpful gizmos in the interactive viewport can be used to do various editing tasks and speed up the workflow. Preset node graph templates can be created, used and re-used to save time setting up common node-setups. 
+Nodes can be used to composite, create/add new effects and/or composite raster and vector graphics on-demand. Helpful gizmos in the interactive viewport can be used to do various editing tasks and speed up the workflow. Preset node graph templates can be created, used and re-used to save time setting up common node-setups.
 
 Custom nodes can be scripted with the built-in Python API for maximum flexibility. Integrations with other software like Blender are planned.
 
@@ -64,12 +64,12 @@ This is a short list of some immediate tasks we're working on:
 - [ ] Improve Node graph to include image thumbnails, shortcuts, etc (via GS Nodegraph)
 - [ ] Continue to implement and refine custom widgets and the nodegraph
 - [ ] Continue to fully transition to custom widgets (vs. native widgets)
-- [ ] Node Registry 
+- [ ] Node Registry
 - [ ] Add Node menu/wheel
 - [ ] Preferences/Configuration dialog and backend
 - [ ] Pre-built Python wheels for OpenImageIO
 
-Take a look at the [Github Issues](https://github.com/GimelStudio/GimelStudio/issues) for details on these and other immediate and future tasks to be done. 
+Take a look at the [Github Issues](https://github.com/GimelStudio/GimelStudio/issues) for details on these and other immediate and future tasks to be done.
 
 Pull requests are always welcome! :)
 
