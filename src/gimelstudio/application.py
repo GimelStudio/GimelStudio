@@ -14,6 +14,8 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
+import webbrowser
+
 import wx
 import wx.lib.agw.aui as aui
 import wx.lib.agw.flatmenu as flatmenu
@@ -65,14 +67,22 @@ class ApplicationFrame(wx.Frame):
         help_menu = flatmenu.FlatMenu()
 
         # File
+        self.newprojectfile_menuitem = flatmenu.FlatMenuItem(
+            file_menu,
+            id=wx.ID_ANY,
+            label="{0}{1}".format(_("New Project"), "\tCtrl+N"),
+            helpString=_("Create a new Gimel Studio project file"),
+            kind=wx.ITEM_NORMAL,
+            subMenu=None
+        )
+
         self.openprojectfile_menuitem = flatmenu.FlatMenuItem(
             file_menu,
             id=wx.ID_ANY,
             label="{0}{1}".format(_("Open Project"), "\tCtrl+O"),
             helpString=_("Open and load a Gimel Studio project file"),
             kind=wx.ITEM_NORMAL,
-            subMenu=None,
-            normalBmp=ICON_NODEPROPERTIES_PANEL.GetBitmap()
+            subMenu=None
         )
 
         self.saveprojectfile_menuitem = flatmenu.FlatMenuItem(
@@ -116,12 +126,137 @@ class ApplicationFrame(wx.Frame):
             normalBmp=ICON_NODEPROPERTIES_PANEL.GetBitmap()
         )
 
+        # Edit
+        self.copytoclipboard_menuitem = flatmenu.FlatMenuItem(
+            edit_menu,
+            id=wx.ID_ANY,
+            label=_("Copy Image to Clipboard"),
+            helpString=_("Copy the current rendered image to the system clipboard"),
+            kind=wx.ITEM_NORMAL,
+            subMenu=None
+        )
+
+        self.preferences_menuitem = flatmenu.FlatMenuItem(
+            edit_menu,
+            id=wx.ID_ANY,
+            label=_("User Preferences"),
+            helpString=_("Edit user preferences and settings for Gimel Studio"),
+            kind=wx.ITEM_NORMAL,
+            subMenu=None
+        )
+
+        # View
+        self.showstatusbar_menuitem = flatmenu.FlatMenuItem(
+            edit_menu,
+            id=wx.ID_ANY,
+            label=_("Toggle Statusbar"),
+            helpString=_("Toggle showing the statusbar"),
+            kind=wx.ITEM_CHECK,
+            subMenu=None
+        )
+
+        # Render
+        self.toggleautorender_menuitem = flatmenu.FlatMenuItem(
+            render_menu,
+            id=wx.ID_ANY,
+            label=_("Auto Render"),
+            helpString=_("Toggle auto rendering after editing node properties, connections, etc"),
+            kind=wx.ITEM_CHECK,
+            subMenu=None
+        )
+
+        self.renderimage_menuitem = flatmenu.FlatMenuItem(
+            render_menu,
+            id=wx.ID_ANY,
+            label="{0}{1}".format(_("Render Image"), "\tF12"),
+            helpString=_("Force an immediate, updated render of the current node graph"),
+            kind=wx.ITEM_NORMAL,
+            subMenu=None
+        )
+
+        # Window
+        self.togglewindowfullscreen_menuitem = flatmenu.FlatMenuItem(
+            window_menu,
+            id=wx.ID_ANY,
+            label=_("Toggle Window Fullscreen"),
+            helpString=_("Toggle the window to be fullscreen"),
+            kind=wx.ITEM_CHECK,
+            subMenu=None
+        )
+
+        self.maximizewindow_menuitem = flatmenu.FlatMenuItem(
+            window_menu,
+            id=wx.ID_ANY,
+            label=_("Maximize Window"),
+            helpString=_("Maximize the window size"),
+            kind=wx.ITEM_NORMAL,
+            subMenu=None
+        )
+
+        # Help
+        self.onlinemanual_menuitem = flatmenu.FlatMenuItem(
+            help_menu,
+            id=wx.ID_ANY,
+            label=_("Online Manual"),
+            helpString=_("Open the online Gimel Studio manual in your browser"),
+            kind=wx.ITEM_NORMAL,
+            subMenu=None
+        )
+
+        self.visitwebsite_menuitem = flatmenu.FlatMenuItem(
+            help_menu,
+            id=wx.ID_ANY,
+            label=_("Visit Website"),
+            helpString=_("Open the offical Gimel Studio website in your browser"),
+            kind=wx.ITEM_NORMAL,
+            subMenu=None
+        )
+
+        self.reportabug_menuitem = flatmenu.FlatMenuItem(
+            help_menu,
+            id=wx.ID_ANY,
+            label=_("Report a Bug"),
+            helpString=_("Report a bug in Gimel Studio"),
+            kind=wx.ITEM_NORMAL,
+            subMenu=None
+        )
+
+        self.about_menuitem = flatmenu.FlatMenuItem(
+            help_menu,
+            id=wx.ID_ANY,
+            label=_("About Gimel Studio"),
+            helpString=_("Information about Gimel Studio"),
+            kind=wx.ITEM_NORMAL,
+            subMenu=None
+        )
+
+        # Set defaults
+        self.showstatusbar_menuitem.Check(True)
+        self.toggleautorender_menuitem.Check(True)
+
         # Append menu items to menus
+        file_menu.AppendItem(self.newprojectfile_menuitem)
         file_menu.AppendItem(self.openprojectfile_menuitem)
         file_menu.AppendItem(self.saveprojectfile_menuitem)
         file_menu.AppendItem(self.saveprojectfileas_menuitem)
         file_menu.AppendItem(self.exportasimage_menuitem)
         file_menu.AppendItem(self.quit_menuitem)
+
+        edit_menu.AppendItem(self.copytoclipboard_menuitem)
+        edit_menu.AppendItem(self.preferences_menuitem)
+
+        view_menu.AppendItem(self.showstatusbar_menuitem)
+
+        render_menu.AppendItem(self.toggleautorender_menuitem)
+        render_menu.AppendItem(self.renderimage_menuitem)
+
+        window_menu.AppendItem(self.togglewindowfullscreen_menuitem)
+        window_menu.AppendItem(self.maximizewindow_menuitem)
+
+        help_menu.AppendItem(self.onlinemanual_menuitem)
+        help_menu.AppendItem(self.visitwebsite_menuitem)
+        help_menu.AppendItem(self.reportabug_menuitem)
+        help_menu.AppendItem(self.about_menuitem)
 
         # Append menus to the menubar
         self._menubar.Append(file_menu, _("File"))
@@ -130,6 +265,36 @@ class ApplicationFrame(wx.Frame):
         self._menubar.Append(render_menu, _("Render"))
         self._menubar.Append(window_menu, _("Window"))
         self._menubar.Append(help_menu, _("Help"))
+
+        # Menu event bindings
+        self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
+                  self.OnQuit,
+                  self.quit_menuitem)
+
+        self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
+                  self.OnPreferencesDialog,
+                  self.preferences_menuitem)
+
+        self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
+                  self.OnToggleStatusbar,
+                  self.showstatusbar_menuitem)
+
+        self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
+                  self.OnToggleFullscreen,
+                  self.togglewindowfullscreen_menuitem)
+        self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
+                  self.OnMaximizeWindow,
+                  self.maximizewindow_menuitem)
+
+        self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
+                  self.OnOnlineManual,
+                  self.onlinemanual_menuitem)
+        self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
+                  self.OnReportABug,
+                  self.reportabug_menuitem)
+        self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
+                  self.OnVisitWebsite,
+                  self.visitwebsite_menuitem)
 
         # Add menubar to main sizer
         self.mainSizer.Add(self._menubar, 0, wx.EXPAND)
@@ -214,6 +379,7 @@ class ApplicationFrame(wx.Frame):
         self._menubar.Refresh()
 
     def Render(self):
+        # FIXME
         try:
             import OpenImageIO as oiio
             # import time
@@ -233,3 +399,49 @@ class ApplicationFrame(wx.Frame):
     @property
     def ImageViewport(self):
         return self.imageviewport_pnl
+
+    def OnQuit(self, event):
+        quitdialog = wx.MessageDialog(self,
+                                      _("Do you really want to quit? You will lose any unsaved data."),
+                                      _("Quit Gimel Studio?"),
+                                      wx.YES_NO | wx.YES_DEFAULT)
+
+        if quitdialog.ShowModal() == wx.ID_YES:
+            quitdialog.Destroy()
+            self._mgr.UnInit()
+            del self._mgr
+            self.Destroy()
+        else:
+            event.Skip()
+
+    def OnPreferencesDialog(self, event):
+        pass
+
+    def OnToggleStatusbar(self, event):
+        if self.showstatusbar_menuitem.IsChecked() is False:
+            self.statusbar.Hide()
+        else:
+            self.statusbar.Show()
+        self.Layout()
+
+    def OnToggleFullscreen(self, event):
+        if self.togglewindowfullscreen_menuitem.IsChecked() is False:
+            self.ShowFullScreen(False)
+        else:
+            self.ShowFullScreen(True,
+                                style=wx.FULLSCREEN_NOCAPTION | wx.FULLSCREEN_NOBORDER)
+
+    def OnMaximizeWindow(self, event):
+        self.Maximize()
+
+    def OnOnlineManual(self, event):
+        url = ("https://gimel-studio.readthedocs.io/en/latest/")
+        webbrowser.open(url)
+
+    def OnReportABug(self, event):
+        url = ("https://github.com/GimelStudio/GimelStudio/issues/new/choose")
+        webbrowser.open(url)
+
+    def OnVisitWebsite(self, event):
+        url = ("https://gimelstudio.github.io")
+        webbrowser.open(url)
