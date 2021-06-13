@@ -107,7 +107,7 @@ class StatusBar(wx.Panel, wx.StatusBar):
         if last_pos is not None:
             try:
                 del self.message_area_lbl
-            except:
+            except Exception:
                 pass
 
             self.message_area_lbl = wx.StaticText(self, label=self.info_message)

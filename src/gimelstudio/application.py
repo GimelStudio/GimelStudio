@@ -22,7 +22,7 @@ import wx.lib.agw.flatmenu as flatmenu
 
 from .config import AppData
 from .interface import (ImageViewportPanel, NodePropertiesPanel,
-                        NodeGraphPanel, StatusBar)
+                        NodeGraphPanel, StatusBar, PreferencesDialog)
 from .interface import artproviders
 from .datafiles.icons import (ICON_NODEPROPERTIES_PANEL,
                               ICON_NODEGRAPH_PANEL, ICON_GIMELSTUDIO_ICO)
@@ -415,7 +415,8 @@ class ApplicationFrame(wx.Frame):
             event.Skip()
 
     def OnPreferencesDialog(self, event):
-        pass
+        dlg = PreferencesDialog(self, title=_("User Preferences & Settings"))
+        dlg.Show()
 
     def OnToggleStatusbar(self, event):
         if self.showstatusbar_menuitem.IsChecked() is False:
