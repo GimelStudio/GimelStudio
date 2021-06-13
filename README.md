@@ -57,21 +57,15 @@ With a fully non-destructive workflow that uses both GPU and CPU processing whil
 **Visit our new home landing-page [here](https://gimelstudio.github.io) for detailed information on the project goals, etc**
 
 
-# Immediate Tasks before MVP
+# Status
 
-This is a short list of some immediate tasks we're working on:
+We are working towards an MVP which will showcase much of the core goals and features listed on the website.
 
-- [ ] Improve Node graph to include image thumbnails, shortcuts, etc (via GS Nodegraph)
-- [ ] Continue to implement and refine custom widgets and the nodegraph
-- [ ] Continue to fully transition to custom widgets (vs. native widgets)
-- [ ] Node Registry
-- [ ] Add Node menu/wheel
-- [ ] Preferences/Configuration dialog and backend
-- [ ] Pre-built Python wheels for OpenImageIO
+The initial UI is now mostly laid out according to the WIP UI mockup and the core nodegraph rendering is just functional (it "just works") at the moment. There is much more to do...and we could really use help to speed progress along. ;)
 
-Take a look at the [Github Issues](https://github.com/GimelStudio/GimelStudio/issues) for details on these and other immediate and future tasks to be done.
+Take a look at the [Github Issues](https://github.com/GimelStudio/GimelStudio/issues) for details on immediate and future tasks to be done. Issues labeled "Good first issue" will be the best for new contributors. We are willing to mentor any contributors as needed.
 
-Pull requests are always welcome! :)
+**Pull requests are always welcome! :)**
 
 
 # Running the code
