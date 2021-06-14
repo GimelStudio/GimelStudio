@@ -21,7 +21,7 @@ import gimelstudio.constants as appconst
 
 
 class AppData(object):
-    def __init__(self, app, cfgdir='~'):
+    def __init__(self):
         self.app_frozen = appconst.APP_FROZEN
         self.app_dir = appconst.APP_DIR
         self.app_name = appconst.APP_NAME
