@@ -20,7 +20,7 @@ import wx
 import wx.lib.agw.aui as aui
 import wx.lib.agw.flatmenu as flatmenu
 
-from .config import AppData
+from .config import AppConfiguration, AppData
 from .interface import (ImageViewportPanel, NodePropertiesPanel,
                         NodeGraphPanel, StatusBar, PreferencesDialog)
 from .interface import artproviders
@@ -41,7 +41,7 @@ class ApplicationFrame(wx.Frame):
     def __init__(self):
         wx.Frame.__init__(self, None, title="Gimel Studio", size=(1000, 800))
 
-        self.appdata = AppData(self)
+        self.appconfig = AppConfiguration(self)
         self.renderer = Renderer(self)
 
         # Set the program icon
@@ -51,10 +51,10 @@ class ApplicationFrame(wx.Frame):
         self.mainSizer = wx.BoxSizer(wx.VERTICAL)
 
         # Create the menubar
-        self._menubar = flatmenu.FlatMenuBar(self, wx.ID_ANY, 40, 6, options=0)
+        self.menubar = flatmenu.FlatMenuBar(self, wx.ID_ANY, 40, 6, options=0)
 
         # Set the dark theme
-        rm = self._menubar.GetRendererManager()
+        rm = self.menubar.GetRendererManager()
         theme = rm.AddRenderer(artproviders.UIMenuBarRenderer())
         rm.SetTheme(theme)
 
@@ -103,7 +103,7 @@ class ApplicationFrame(wx.Frame):
             subMenu=None
         )
 
-        self._menubar.AddSeparator()
+        self.menubar.AddSeparator()
 
         self.exportasimage_menuitem = flatmenu.FlatMenuItem(
             file_menu,
@@ -114,7 +114,7 @@ class ApplicationFrame(wx.Frame):
             subMenu=None
         )
 
-        self._menubar.AddSeparator()
+        self.menubar.AddSeparator()
 
         self.quit_menuitem = flatmenu.FlatMenuItem(
             file_menu,
@@ -259,12 +259,12 @@ class ApplicationFrame(wx.Frame):
         help_menu.AppendItem(self.about_menuitem)
 
         # Append menus to the menubar
-        self._menubar.Append(file_menu, _("File"))
-        self._menubar.Append(edit_menu, _("Edit"))
-        self._menubar.Append(view_menu, _("View"))
-        self._menubar.Append(render_menu, _("Render"))
-        self._menubar.Append(window_menu, _("Window"))
-        self._menubar.Append(help_menu, _("Help"))
+        self.menubar.Append(file_menu, _("File"))
+        self.menubar.Append(edit_menu, _("Edit"))
+        self.menubar.Append(view_menu, _("View"))
+        self.menubar.Append(render_menu, _("Render"))
+        self.menubar.Append(window_menu, _("Window"))
+        self.menubar.Append(help_menu, _("Help"))
 
         # Menu event bindings
         self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
@@ -297,7 +297,7 @@ class ApplicationFrame(wx.Frame):
                   self.visitwebsite_menuitem)
 
         # Add menubar to main sizer
-        self.mainSizer.Add(self._menubar, 0, wx.EXPAND)
+        self.mainSizer.Add(self.menubar, 0, wx.EXPAND)
 
         # Create the statusbar
         self.statusbar = StatusBar(self)
@@ -372,11 +372,11 @@ class ApplicationFrame(wx.Frame):
         # Maximize the window & tell the AUI window
         # manager to "commit" all the changes just made, etc
         self.Maximize()
-        self._menubar.PositionAUI(self._mgr)
+        self.menubar.PositionAUI(self._mgr)
         self._mgr.Update()
         self.statusbar.UpdateStatusBar()
         self.statusbar.Refresh()
-        self._menubar.Refresh()
+        self.menubar.Refresh()
 
     def Render(self):
         # FIXME
