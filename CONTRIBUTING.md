@@ -1,10 +1,10 @@
 # Contributing to Gimel Studio
 
-Thanks for taking the time to contribute. We're excited to have you! 
+Thanks for taking the time to contribute. We're excited to have you!
 
 The following is a set of guidelines for contributing to Gimel Studio, which are hosted in the [Github Organization](https://github.com/GimelStudio) on GitHub. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
 
-Read the following sections in order to know how to ask questions and how to work on something in an orderly manner. 
+Read the following sections in order to know how to ask questions and how to work on something in an orderly manner.
 
 Gimel Studio is an open source project and we love to receive contributions from our community — you! There are many ways to contribute, from writing tutorials or blog posts, improving the documentation, submitting UI translations, bug reports and feature requests or writing code which can be incorporated into Gimel Studio itself.
 
@@ -33,7 +33,7 @@ Gimel Studio is an open source project and we love to receive contributions from
 
 ### Technical
 
-Gimel Studio itself is written in pure Python so most code contributions will require at least a basic knowledge of Python 3+. 
+Gimel Studio itself is written in pure Python so most code contributions will require at least a basic knowledge of Python 3+.
 
 *Eventually, at least some nodes will also be using GLSL shaders or the like for on-GPU image-manipulation.*
 
@@ -62,7 +62,7 @@ Bugs are tracked as [GitHub issues](https://guides.github.com/features/issues/).
 
 ### Your First Code Contribution
 
-Unsure where to begin contributing to Atom? You can start by looking through these `good-first-issue` and `help-wanted` issues:
+Unsure where to begin contributing to Gimel Studio? You can start by looking through these `good-first-issue` and `help-wanted` issues:
 
 * [Good First issues](https://github.com/GimelStudio/GimelStudio/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) - issues which should only require a few lines of code and/or don't require an in-depth knowledge of the existing code.
 * [Help wanted issues](https://github.com/GimelStudio/GimelStudio/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) - issues which should be a bit more involved.
@@ -82,9 +82,9 @@ If you have any questions about contributing, feel free to ask on the official [
 * Limit the first line to 72 characters or less
 * Reference issues and pull requests liberally after the first line
 
-## Python Code 
+## Python Code
 
-Python code should largely follow PEP8 guidlines, except: 
+Python code should largely follow PEP8 guidlines, except:
 
 * The line length can be greater than the PEP8 character limit
 * Capitalization of function and method names are acceptable since this is the style used in wxPython (the GUI library).
