@@ -23,3 +23,6 @@ tests
 # Ignore other misc.
 .vscode
 src/gimelstudio/locale_old
+
+env
+.DS_Store
