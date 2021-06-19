@@ -1,4 +1,5 @@
 import os
+import sys
 def execS(inst,env='source env/bin/activate && '):
     terminalInstruction = env+inst
     os.system(terminalInstruction)
@@ -22,9 +23,13 @@ getFiles()
 checkPathandExecute('env','python3 -m venv --system-site-packages env')
 checkPathandExecute('/usr/local/Cellar/openimageio','brew install openimageio')
 def cleanFiles():
+    if getattr(sys, 'frozen', False):
+        application_path = os.path.dirname(sys.executable)
+    elif __file__:
+        application_path = os.path.dirname('')
     execS('rm -rf env','')
     execS('rm -rf build','')
-    execS('mv dist/GimelStudio.app GimelStudio.app','')
+    execS('mv dist/GimelStudio.app ' +application_path+'/GimelStudio.app','')
     execS('rm -rf dist','')
     execS('rm -rf *.spec','')
     execS('rm -rf assets','')
