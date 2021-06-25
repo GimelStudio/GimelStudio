@@ -1,5 +1,5 @@
 wxpython==4.1.1
 gsnodegraph==0.1.9
-gswidgetkit==0.1.1
+gswidgetkit==0.2.0
 numpy
 opencv-python
