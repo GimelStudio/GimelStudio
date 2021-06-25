@@ -22,8 +22,9 @@ import wx
 from wx.lib import buttons
 import wx.lib.agw.cubecolourdialog as CCD
 
-from gswidgetkit import (NumberField, EVT_NUMBERFIELD, 
-                         Button, EVT_BUTTON, TextCtrl)
+from gswidgetkit import (NumberField, EVT_NUMBERFIELD,
+                         Button, EVT_BUTTON, TextCtrl,
+                         DropDown, EVT_DROPDOWN)
 
 from gimelstudio.datafiles import ICON_ARROW_DOWN, ICON_ARROW_RIGHT
 
@@ -99,7 +100,7 @@ class Property(object):
         # From https://discuss.wxpython.org/t/how-do-you-get-the-
         # captionbar-from-a-foldpanelbar/24795
         fold_panel._captionBar.SetSize(fold_panel._captionBar.DoGetBestSize())
-        
+
         panel_bar.AddFoldPanelWindow(fold_panel, item, spacing=spacing)
 
 
@@ -135,11 +136,11 @@ class PositiveIntegerProp(Property):
         fold_panel = self.CreateFoldPanel(sizer)
         fold_panel.SetBackgroundColour(wx.Colour("#464646"))
 
-        self.numberfield = NumberField(fold_panel, 
-                                       default_value=self.GetValue(), 
+        self.numberfield = NumberField(fold_panel,
+                                       default_value=self.GetValue(),
                                        label=self.GetLabel(),
-                                       min_value=self.GetMinValue(), 
-                                       max_value=self.GetMaxValue(), 
+                                       min_value=self.GetMinValue(),
+                                       max_value=self.GetMaxValue(),
                                        suffix="px", show_p=False,
                                        size=(-1, 32))
 
@@ -168,19 +169,20 @@ class ChoiceProp(Property):
 
     def CreateUI(self, parent, sizer):
         fold_panel = self.CreateFoldPanel(sizer)
+        fold_panel.SetBackgroundColour(wx.Colour("#464646"))
 
-        self.combobox = wx.ComboBox(
+        self.dropdown = DropDown(
             fold_panel,
-            id=wx.ID_ANY,
-            value=self.GetValue(),
-            choices=self.GetChoices(),
-            style=wx.CB_READONLY
+            default=self.GetValue(),
+            items=self.GetChoices(),
+            size=(-1, 32)
         )
-        self.AddToFoldPanel(sizer, fold_panel, self.combobox, spacing=10)
-        self.combobox.Bind(wx.EVT_COMBOBOX, self.WidgetEvent)
+
+        self.AddToFoldPanel(sizer, fold_panel, self.dropdown, spacing=10)
+        self.dropdown.Bind(EVT_DROPDOWN, self.WidgetEvent)
 
     def WidgetEvent(self, event):
-        value = event.GetString()
+        value = event.value
         if not value:
             print("Value is null!")
         self.SetValue(value)
@@ -225,7 +227,7 @@ class OpenFileChooserProp(Property):
         vbox = wx.BoxSizer(wx.VERTICAL)
         hbox = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.textcontrol = TextCtrl(pnl, 
+        self.textcontrol = TextCtrl(pnl,
                             value=self.GetValue(), style=wx.BORDER_SIMPLE,
                             placeholder="", size=(-1, 32))
         hbox.Add(self.textcontrol, proportion=1, flag=wx.EXPAND | wx.BOTH)
