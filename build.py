@@ -10,10 +10,11 @@ def MAC():
         os.system(terminalInstruction)
 
     #Checks if a path exists, if not, it runs the given instruction in the given destPath
-    def CheckPathAndExecute(path,inst,destPath=''):
+    def CheckPathAndExecute(path,inst,destPath='',inst2= None):
         if not os.path.exists(path):
             executeTerminalInstruction(inst,destPath)
-    
+        elif os.path.exists(path) and inst2 != None:
+            executeTerminalInstruction(inst2,destPath)
     #Creates the Mac executable
     def installMac():
         #Install pyinstaller in virtual environtment
@@ -24,6 +25,9 @@ def MAC():
         inst+=' --hidden-import wx --windowed -i assets/GIMELSTUDIO_ICO.ico -n GimelStudio'
         inst+=' --noconfirm'
         executeTerminalInstruction(inst)
+        dest ="dist/nodescripts"
+        inst = "cp -r src/nodescripts "+dest
+        CheckPathAndExecute(dest,inst,inst2="rm -rf "+dest+" && "+inst)
     
     #Ask for continue
     def Askcontinue():
@@ -94,9 +98,6 @@ args = [
 
 if sys.platform == "linux" or sys.platform == "linux2":
     pass  # TODO
-elif sys.platform == "darwin":
-    args.append("--hidden-import")
-    args.append("wx")
 elif sys.platform == "win32":
     args.append("-i")
     args.append("assets/GIMELSTUDIO_ICO.ico")
@@ -111,8 +112,6 @@ subprocess.call(args)
 if sys.platform == "linux" or sys.platform == "linux2":
     subprocess.call(["mkdir", "./dist/GimelStudio/nodescripts"])
     shutil.copytree("./src/nodescripts", "./dist/GimelStudio/nodescripts")
-elif sys.platform == "darwin":
-    pass  # TODO
 elif sys.platform == "win32":
     shutil.copytree("src/nodescripts", "dist/GimelStudio/nodescripts")
 else:
