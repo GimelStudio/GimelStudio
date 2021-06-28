@@ -1,64 +1,82 @@
+# ----------------------------------------------------------------------------
+# Gimel Studio Copyright 2019-2021 by Noah Rahm and contributors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# ----------------------------------------------------------------------------
+
 import os
 import sys
 import shutil
 import subprocess
 
+
 def MAC():
-    #Executes a console instruction, it can activate an specific environment
-    def executeTerminalInstruction(inst,env='source env/bin/activate && '):
-        terminalInstruction = env+inst
+    # Executes a console instruction, it can activate an specific environment
+    def ExecuteTerminalInstruction(inst, env='source env/bin/activate && '):
+        terminalInstruction = env + inst
         os.system(terminalInstruction)
 
-    #Checks if a path exists, if not, it runs the given instruction in the given destPath
-    def CheckPathAndExecute(path,inst,destPath='',inst2= None):
+    # Checks if a path exists, if not, it runs the given instruction in the given destPath
+    def CheckPathAndExecute(path, inst, destPath='', inst2=None):
         if not os.path.exists(path):
-            executeTerminalInstruction(inst,destPath)
+            ExecuteTerminalInstruction(inst, destPath)
         elif os.path.exists(path) and inst2 != None:
-            executeTerminalInstruction(inst2,destPath)
-    #Creates the Mac executable
-    def installMac():
-        #Install pyinstaller in virtual environtment
-        executeTerminalInstruction("pip3 install pyinstaller")
-        inst='pyinstaller --onefile src/main.py'
+            ExecuteTerminalInstruction(inst2, destPath)
+            
+    # Creates the Mac executable
+    def InstallMac():
+        # Install pyinstaller in virtual environtment
+        ExecuteTerminalInstruction("pip3 install pyinstaller")
+        inst = 'pyinstaller --onefile src/main.py'
         for lib in open('requirements.txt'):
-            inst+=' --hidden-import {}'.format(lib.replace('\n',''))
-        inst+=' --hidden-import wx --windowed -i assets/GIMELSTUDIO_ICO.ico -n GimelStudio'
-        inst+=' --noconfirm'
-        executeTerminalInstruction(inst)
-        dest ="dist/nodescripts"
-        inst = "cp -r src/nodescripts "+dest
-        CheckPathAndExecute(dest,inst,inst2="rm -rf "+dest+" && "+inst)
+            inst += ' --hidden-import {}'.format(lib.replace('\n', ''))
+        inst += ' --hidden-import wx --windowed -i assets/GIMELSTUDIO_ICO.ico -n GimelStudio'
+        inst += ' --noconfirm'
+        ExecuteTerminalInstruction(inst)
+        dest = "dist/nodescripts"
+        inst = "cp -r src/nodescripts " + dest
+        CheckPathAndExecute(dest, inst, inst2="rm -rf " + dest + " && "+ inst)
     
-    #Ask for continue
-    def Askcontinue():
-        if input("Do you want to continue with installation y/n? ").lower()=="n":
+    # Ask whether to continue
+    def AskContinue():
+        if input("Do you want to continue with installation y/n?").lower() == "n":
             sys.exit()
     
     try:
         import OpenImageIO
     except:
-        if "Homebrew" in subprocess.run(["brew","-v"],capture_output=True).stdout.decode("utf-8"):
-            #Checks if brew is installed
-            CheckPathAndExecute('/usr/local/Cellar/openimageio','brew install openimageio')
+        if "Homebrew" in subprocess.run(["brew", "-v"], capture_output=True).stdout.decode("utf-8"):
+            # Checks if brew is installed
+            CheckPathAndExecute('/usr/local/Cellar/openimageio', 'brew install openimageio')
         else :
             print("Homebrew not installed, please install it and try again")
-            Askcontinue()
+            AskContinue()
     possible=True
     try:
         import OpenImageIO
     except:
         print('\033[91m',"Error loading OpenImageIO",'\033[0m')
         print("hint run:\n",'\033[93m',"brew doctor",'\033[0m')
-        Askcontinue()
-        possible=False
+        AskContinue()
+        possible = False
 
-    #If the virtual environment is not created, it creates it.
-    CheckPathAndExecute('env','python3 -m venv --system-site-packages env')
-    #Installs the libraries contained in requirements
-    executeTerminalInstruction('pip3 install -r requirements.txt')
+    # If the virtual environment is not created, it creates it.
+    CheckPathAndExecute('env', 'python3 -m venv --system-site-packages env')
+    # Installs the libraries contained in requirements
+    ExecuteTerminalInstruction('pip3 install -r requirements.txt')
     if possible:
-        if input("Do you want to create an executable y/n?").lower()=="y":
-            installMac()
+        if input("Do you want to create an executable y/n?").lower() == "y":
+            InstallMac()
             print("Executable created you can find it in dist/")
     else:
         print("Executable is not possible to be created since",'\033[91m',"import OpenImageIO",'\033[0m'," failed")
@@ -83,8 +101,6 @@ else:
 # Prompt to install openimageio
 if sys.platform == "win32":
     print("\n\npip install the openimageio wheel that matches your python version from https://www.lfd.uci.edu/~gohlke/pythonlibs/#openimageio\n\n")
-else:
-    print("openimageio not available")
 
 # Setup the correct arguments and options based on the platform
 args = [
