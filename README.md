@@ -15,7 +15,7 @@
 
 **The original (more stable) version of Gimel Studio is available [here](https://github.com/Correct-Syntax/Gimel-Studio).**
 
-This repository tracks the *next step* of Gimel Studio (the v0.6.x series) to become a truly usable and serious node-based, non-destructive image editor. It is currently in ``initial planning/development stage`` and things will probably change from what is currently here.
+This repository tracks the *next step* of Gimel Studio (the v0.6.x series) to become a truly usable and serious node-based, non-destructive image editor. It is currently in ``initial development stage`` and things will probably change from what is currently here.
 
 **We're especially seeking Python and/or GLSL developers, 3D artists, photographers and UI designers to help with the project.** However, even if you have none of these skills you're still welcome, of course, to give feedback and suggest ideas and improvements. :)
 
@@ -54,7 +54,7 @@ Custom nodes can be scripted with the built-in Python API for maximum flexibilit
 
 With a fully non-destructive workflow that uses both GPU and CPU processing while being seamlessly cross-platform on Windows, Linux and MacOs (for 64-bit systems), Gimel Studio aims to be a simple, yet powerful 2d graphics editing tool for beginners and pros alike.
 
-**Visit our new home landing-page [here](https://gimelstudio.github.io) for detailed information on the project goals, etc**
+**Visit our home landing-page [here](https://gimelstudio.github.io) for detailed information on the project goals, etc**
 
 
 # Status
@@ -86,7 +86,7 @@ Take a look at the [Github Issues](https://github.com/GimelStudio/GimelStudio/is
 
 Please note that the renderer, which relies on OIIO (OpenImageIO) will be **disabled if OIIO is not found**. The rest of the application will run, but the renderer will not work.
 
-For platforms other than Windows, OIIO will need to be [built from source](https://github.com/OpenImageIO/oiio/blob/master/INSTALL.md#building-from-source) since pre-built wheels are not yet available. See [this issue](https://github.com/GimelStudio/GimelStudio/issues/1).
+For linux, OIIO will need to be [built from source](https://github.com/OpenImageIO/oiio/blob/master/INSTALL.md#building-from-source) since pre-built wheels are not yet available. See [this issue](https://github.com/GimelStudio/GimelStudio/issues/1).
 
 ## MacOs
 
