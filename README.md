@@ -90,7 +90,8 @@ For platforms other than Windows, OIIO will need to be [built from source](https
 
 ## MacOs
 
-Building should be the same as for Linux, **but it has never been tested.** We're looking for a maintainer to handle MacOs-related fixes, etc since the current developers do not own a Mac. If you would like to do so feel free to say so in Discord or Gitter.
+1. Make sure you have Python 3.8+ installed on your system.
+2. Navigate to the root folder and in your terminal, run ```python3 build.py```. This will install all of the neccesary libraries and will give you the option to create a standalone executable or just run the code with Python.
 
 
 # Tech Stack
