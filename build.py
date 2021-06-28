@@ -32,7 +32,7 @@ def MAC():
             ExecuteTerminalInstruction(inst, destPath)
         elif os.path.exists(path) and inst2 != None:
             ExecuteTerminalInstruction(inst2, destPath)
-            
+
     # Creates the Mac executable
     def InstallMac():
         # Install pyinstaller in virtual environtment
@@ -46,25 +46,26 @@ def MAC():
         dest = "dist/nodescripts"
         inst = "cp -r src/nodescripts " + dest
         CheckPathAndExecute(dest, inst, inst2="rm -rf " + dest + " && "+ inst)
-    
+
     # Ask whether to continue
     def AskContinue():
         if input("Do you want to continue with installation y/n?").lower() == "n":
             sys.exit()
-    
+
     try:
         import OpenImageIO
-    except:
+    except ImportError:
         if "Homebrew" in subprocess.run(["brew", "-v"], capture_output=True).stdout.decode("utf-8"):
             # Checks if brew is installed
             CheckPathAndExecute('/usr/local/Cellar/openimageio', 'brew install openimageio')
         else :
             print("Homebrew not installed, please install it and try again")
             AskContinue()
-    possible=True
+    possible = True
+
     try:
         import OpenImageIO
-    except:
+    except ImportError:
         print('\033[91m',"Error loading OpenImageIO",'\033[0m')
         print("hint run:\n",'\033[93m',"brew doctor",'\033[0m')
         AskContinue()
@@ -85,6 +86,7 @@ def MAC():
     print("Once the virtual environment is activated you can execute any python program")
     sys.exit()
 
+# Check if this is 64-bit
 if not sys.maxsize > 2**32:
     raise NotImplementedError("Only 64-bit systems are supported!")
 
@@ -98,9 +100,13 @@ elif sys.platform == "win32":
 else:
     raise NotImplementedError("Only Windows, Linux and MacOs are supported!")
 
-# Prompt to install openimageio
+# Prompt to install openimageio on windows
 if sys.platform == "win32":
-    print("\n\npip install the openimageio wheel that matches your python version from https://www.lfd.uci.edu/~gohlke/pythonlibs/#openimageio\n\n")
+    try:
+        import OpenImageIO
+    except ImportError:
+        print("\n\nPlease pip install the openimageio wheel that matches your python version from https://www.lfd.uci.edu/~gohlke/pythonlibs/#openimageio\n\n")
+        sys.exit()
 
 # Setup the correct arguments and options based on the platform
 args = [
