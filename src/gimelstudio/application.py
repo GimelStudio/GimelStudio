@@ -20,7 +20,7 @@ import wx
 import wx.lib.agw.aui as aui
 import wx.lib.agw.flatmenu as flatmenu
 
-from .config import AppConfiguration, AppData
+from .config import AppConfiguration
 from .interface import (ImageViewportPanel, NodePropertiesPanel,
                         NodeGraphPanel, StatusBar, PreferencesDialog)
 from .interface import artproviders
