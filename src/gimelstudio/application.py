@@ -26,7 +26,7 @@ from .interface import (ImageViewportPanel, NodePropertiesPanel,
 from .interface import artproviders
 from .datafiles.icons import (ICON_NODEPROPERTIES_PANEL,
                               ICON_NODEGRAPH_PANEL, ICON_GIMELSTUDIO_ICO)
-from .corenodes import OutputNode, MixNode, ImageNode, BlurNode
+from .corenodes import OutputNode, MixNode, ImageNode, BlurNode, FlipNode
 
 from .core.renderer import Renderer
 
@@ -324,12 +324,15 @@ class ApplicationFrame(wx.Frame):
         self.imageviewport_pnl = ImageViewportPanel(self)
         self.prop_pnl = NodePropertiesPanel(self, size=(350, 500))
 
+        # Eventually this will be a part of the node registry
         registry = {
             'image_node': ImageNode,
             'mix_node': MixNode,
             'output_node': OutputNode,
-            'blur_node': BlurNode
+            'blur_node': BlurNode,
+            'flip_node': FlipNode
         }
+
         self.nodegraph_pnl = NodeGraphPanel(self, registry, size=(100, 100))
 
         # Add panes

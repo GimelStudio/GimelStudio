@@ -76,6 +76,7 @@ class NodeGraphPanel(wx.Panel):
         self.nodegraph.AddNode('blur_node', wx.Point(600, 200))
         self.nodegraph.AddNode('mix_node', wx.Point(100, 200))
         self.nodegraph.AddNode('output_node', wx.Point(300, 270))
+        self.nodegraph.AddNode('flip_node', wx.Point(400, 270))
 
         main_sizer.Add(topbar, flag=wx.EXPAND | wx.LEFT | wx.RIGHT)
         main_sizer.Add(self.nodegraph, 1, flag=wx.EXPAND | wx.BOTH)
