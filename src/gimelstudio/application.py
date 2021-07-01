@@ -14,6 +14,7 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
+import time
 import webbrowser
 
 import wx
@@ -382,18 +383,11 @@ class ApplicationFrame(wx.Frame):
         self.menubar.Refresh()
 
     def Render(self):
-        # FIXME
-        try:
-            import OpenImageIO as oiio
-            # import time
-            # start = time.time()
-            image = self.renderer.Render(self.NodeGraph._nodes)
-            # end = time.time()
-            # print(end - start)
-
-            self.imageviewport_pnl.UpdateViewerImage(image.Image("numpy"), 0)
-        except ImportError:
-            print("""OpenImageIO is required to render image! Disabling render!""")
+        start = time.time()
+        image = self.renderer.Render(self.NodeGraph._nodes)
+        end = time.time()
+        print("Render time: ", end - start)
+        self.imageviewport_pnl.UpdateViewerImage(image.Image("numpy"), 0)
 
     @property
     def NodeGraph(self):

@@ -27,6 +27,7 @@ class Node(NodeView):
         self._properties = {}
         self._parameters = {}
         self._cache = {}
+        self._cache_enabled = True
         self._edited_flag = False
 
         self.NodeInitProps()
@@ -46,6 +47,9 @@ class Node(NodeView):
     def IsOutputNode(self):
         return False
 
+    def IsNodeCacheEnabled(self):
+        return self._cache_enabled
+
     def AddProperty(self, prop):
         self._properties[prop.IdName] = prop
         return self._properties
@@ -62,6 +66,7 @@ class Node(NodeView):
     def EditParameter(self, idname, value):
         param = self._parameters[idname]
         param.SetBinding(value)
+        self.RemoveFromCache(idname)
         return param
 
     def SetEditedFlag(self, edited=True):
@@ -125,6 +130,14 @@ class Node(NodeView):
             if prop_obj.GetIsVisible() == True:
                 prop_obj.CreateUI(parent, sizer)
 
+    def ClearCache(self):
+        self._cache = {}
+
+    def RemoveFromCache(self, name):
+        cached = self.IsInCache(name)
+        if cached == True and self.IsNodeCacheEnabled() == True:
+            del self._cache[name]
+
     def IsInCache(self, name):
         try:
             self._cache[name]
@@ -135,16 +148,20 @@ class Node(NodeView):
     def EvalParameter(self, eval_info, name):
         cached = self.IsInCache(name)
 
-        # TODO: Implement cache 
-        # if self.GetEditedFlag() == True and cached == True:
-        #     value = self._cache[name]
-        #     # print("Used Cache")
-        # else:
-        #     value = eval_info.EvaluateParameter(name)
-        #     self._cache[name] = value
-        #     self.SetEditedFlag(False)
-        #     # print("Evaluated")
-        value = eval_info.EvaluateParameter(name)
+        # Basic node cache implementation
+        if self.IsNodeCacheEnabled() == True:
+            if self.GetEditedFlag() == True and cached == True:
+                value = self._cache[name]
+                self.SetEditedFlag(False)
+                print("Used Cache: ", self._label)
+            else:
+                value = eval_info.EvaluateParameter(name)
+                self._cache[name] = value
+                self.SetEditedFlag(False)
+                print("Evaluated: ", self._label)
+        else:
+            value = eval_info.EvaluateParameter(name)
+
         return value
 
     def EvalProperty(self, eval_info, name):
