@@ -14,19 +14,20 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
+import time
 import webbrowser
 
 import wx
 import wx.lib.agw.aui as aui
 import wx.lib.agw.flatmenu as flatmenu
 
-from .config import AppConfiguration, AppData
+from .config import AppConfiguration
 from .interface import (ImageViewportPanel, NodePropertiesPanel,
                         NodeGraphPanel, StatusBar, PreferencesDialog)
 from .interface import artproviders
 from .datafiles.icons import (ICON_NODEPROPERTIES_PANEL,
                               ICON_NODEGRAPH_PANEL, ICON_GIMELSTUDIO_ICO)
-from .corenodes import OutputNode, MixNode, ImageNode, BlurNode
+from .corenodes import OutputNode, MixNode, ImageNode, BlurNode, FlipNode
 
 from .core.renderer import Renderer
 
@@ -324,12 +325,15 @@ class ApplicationFrame(wx.Frame):
         self.imageviewport_pnl = ImageViewportPanel(self)
         self.prop_pnl = NodePropertiesPanel(self, size=(350, 500))
 
+        # Eventually this will be a part of the node registry
         registry = {
             'image_node': ImageNode,
             'mix_node': MixNode,
             'output_node': OutputNode,
-            'blur_node': BlurNode
+            'blur_node': BlurNode,
+            'flip_node': FlipNode
         }
+
         self.nodegraph_pnl = NodeGraphPanel(self, registry, size=(100, 100))
 
         # Add panes
@@ -379,18 +383,11 @@ class ApplicationFrame(wx.Frame):
         self.menubar.Refresh()
 
     def Render(self):
-        # FIXME
-        try:
-            import OpenImageIO as oiio
-            # import time
-            # start = time.time()
-            image = self.renderer.Render(self.NodeGraph._nodes)
-            # end = time.time()
-            # print(end - start)
-
-            self.imageviewport_pnl.UpdateViewerImage(image.Image("numpy"), 0)
-        except ImportError:
-            print("""OpenImageIO is required to render image! Disabling render!""")
+        start = time.time()
+        image = self.renderer.Render(self.NodeGraph._nodes)
+        end = time.time()
+        print("Render time: ", end - start)
+        self.imageviewport_pnl.UpdateViewerImage(image.Image("numpy"), 0)
 
     @property
     def NodeGraph(self):
