@@ -32,10 +32,17 @@ class AppData(object):
         self.app_version_full = appconst.APP_VERSION_FULL
 
 
-def AppConfiguration(AppData):
-    def __init__(self):
+class AppConfiguration(AppData):
+    def __init__(self, app):
         AppData.__init__(self)
+        self.app = app
         self.prefs = {}
+
+    def Config(self, key=None, value=None):
+        if value is not None and value is not None:
+            self.prefs[key] = value
+        else:
+            return self.prefs[key]
 
     def Load(self):
         path = os.path.expanduser("~/.gimelstudio/{}.config".format(self.app_version_full))

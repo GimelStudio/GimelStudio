@@ -21,6 +21,7 @@ import wx
 import wx.lib.agw.aui as aui
 import wx.lib.agw.flatmenu as flatmenu
 
+import gimelstudio.constants as appconst
 from .config import AppConfiguration
 from .interface import (ImageViewportPanel, NodePropertiesPanel,
                         NodeGraphPanel, StatusBar, PreferencesDialog)
@@ -40,9 +41,13 @@ class AUIManager(aui.AuiManager):
 
 class ApplicationFrame(wx.Frame):
     def __init__(self):
-        wx.Frame.__init__(self, None, title="Gimel Studio", size=(1000, 800))
+        wx.Frame.__init__(self, None, title=appconst.APP_NAME, size=(1000, 800))
 
+        # Application configuration
         self.appconfig = AppConfiguration(self)
+        self.appconfig.Load()
+
+        # Renderer
         self.renderer = Renderer(self)
 
         # Set the program icon
@@ -404,6 +409,9 @@ class ApplicationFrame(wx.Frame):
                                       wx.YES_NO | wx.YES_DEFAULT)
 
         if quitdialog.ShowModal() == wx.ID_YES:
+            # Save configuration settings before quit
+            self.appconfig.Save()
+            # Un-int the app and window mgr
             quitdialog.Destroy()
             self._mgr.UnInit()
             del self._mgr
