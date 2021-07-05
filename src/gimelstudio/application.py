@@ -402,6 +402,10 @@ class ApplicationFrame(wx.Frame):
     def ImageViewport(self):
         return self.imageviewport_pnl
 
+    @property
+    def AppConfig(self):
+        return self.appconfig
+
     def OnQuit(self, event):
         quitdialog = wx.MessageDialog(self,
                                       _("Do you really want to quit? You will lose any unsaved data."),
