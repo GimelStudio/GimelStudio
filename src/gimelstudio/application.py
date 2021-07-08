@@ -24,7 +24,8 @@ import wx.lib.agw.flatmenu as flatmenu
 import gimelstudio.constants as appconst
 from .config import AppConfiguration
 from .interface import (ImageViewportPanel, NodePropertiesPanel,
-                        NodeGraphPanel, StatusBar, PreferencesDialog)
+                        NodeGraphPanel, StatusBar, PreferencesDialog,
+                        ExportImageHandler)
 from .interface import artproviders
 from .datafiles.icons import (ICON_NODEPROPERTIES_PANEL,
                               ICON_NODEGRAPH_PANEL, ICON_GIMELSTUDIO_ICO)
@@ -274,6 +275,10 @@ class ApplicationFrame(wx.Frame):
 
         # Menu event bindings
         self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
+                  self.OnExportAsImage,
+                  self.exportasimage_menuitem)
+
+        self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
                   self.OnQuit,
                   self.quit_menuitem)
 
@@ -387,6 +392,14 @@ class ApplicationFrame(wx.Frame):
         self.statusbar.Refresh()
         self.menubar.Refresh()
 
+
+        # image = self.renderer.GetRender().Image("oiio")
+        # export_handler = ExportImageHandler(self, image)
+        # export_handler.RunExport()
+
+
+
+
     def Render(self):
         start = time.time()
         image = self.renderer.Render(self.NodeGraph._nodes)
@@ -405,6 +418,21 @@ class ApplicationFrame(wx.Frame):
     @property
     def AppConfig(self):
         return self.appconfig
+
+    def OnExportAsImage(self, event):
+        image = self.renderer.GetRender()
+
+        try:
+            export_handler = ExportImageHandler(self, image.Image("oiio"))
+            export_handler.RunExport()
+        except AttributeError:
+            dlg = wx.MessageDialog(
+                None,
+                "Please render an image before attempting to export!",
+                "No Image to export!",
+                style=wx.ICON_EXCLAMATION
+            )
+            dlg.ShowModal()
 
     def OnQuit(self, event):
         quitdialog = wx.MessageDialog(self,

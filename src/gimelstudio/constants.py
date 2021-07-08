@@ -36,3 +36,55 @@ APP_VERSION_FULL = "{0} {1}".format(APP_VERSION, APP_VERSION_TAG)
 APP_CORE_DEVELOPERS = [""]
 APP_CONTRIBUTORS = [""]
 APP_TRANSLATORS = [""]
+
+SUPPORTED_FT_OPEN_LIST = [
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".gif",
+    ".bmp",
+    ".exr",
+    ".webp",
+    ".tiff"
+]
+SUPPORTED_FT_OPEN_LIST = [
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".gif",
+    ".bmp",
+    ".exr",
+    ".webp",
+    ".tiff"
+]
+SUPPORTED_FT_OPEN_WILDCARD = \
+    "All files (*.*)|*.*|" \
+    "JPG file (*.jpg)|*.jpg|" \
+    "JPEG file (*.jpeg)|*.jpeg|" \
+    "PNG file (*.png)|*.png|" \
+    "BMP file (*.bmp)|*.bmp|" \
+    "GIF file (*.gif)|*.gif|" \
+    "EXR file (*.exr)|*.exr|" \
+    "WEBP file (*.webp)|*.webp|" \
+    "TIFF file (*.tiff)|*.tiff"
+
+SUPPORTED_FT_SAVE_LIST = [
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".gif",
+    ".bmp",
+    ".exr",
+    ".webp",
+    ".tiff"
+]
+SUPPORTED_FT_SAVE_WILDCARD = \
+    "JPG file (*.jpg)|*.jpg|" \
+    "JPEG file (*.jpeg)|*.jpeg|" \
+    "PNG file (*.png)|*.png|" \
+    "BMP file (*.bmp)|*.bmp|" \
+    "GIF file (*.gif)|*.gif|" \
+    "EXR file (*.exr)|*.exr|" \
+    "WEBP file (*.webp)|*.webp|" \
+    "TIFF file (*.tiff)|*.tiff|" \
+    "All files (*.*)|*.*"
