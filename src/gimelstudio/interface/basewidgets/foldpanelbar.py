@@ -852,8 +852,8 @@ class CaptionBar(wx.Window):
         txt_w, txt_h = dc.GetTextExtent(self._caption)
 
         if vertical:
-            dc.DrawText(self._caption, 
-                        10 + self._rightIndent + self._iconWidth, 
+            dc.DrawText(self._caption,
+                        10 + self._rightIndent + self._iconWidth,
                         FPB_EXTRA_Y//2)
         else:
             dc.DrawRotatedText(self._caption, FPB_EXTRA_Y//2,
@@ -922,7 +922,7 @@ class CaptionBar(wx.Window):
 
         elif event.Entering() and self._foldIcons:
             self.SetCursor(wx.Cursor(wx.CURSOR_ARROW))
-            
+
             pt = event.GetPosition()
             rect = self.GetRect()
 

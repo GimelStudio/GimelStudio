@@ -115,7 +115,7 @@ class MainApp(wx.App):
 
     def InitI18n(self):
         """ Setup locale for the app. """
-        
+
         # Setup the Locale
         self.locale = wx.Locale(getattr(wx, self.language))
         path = os.path.abspath("./gimelstudio/locale") + os.path.sep
@@ -129,7 +129,7 @@ class MainApp(wx.App):
             if platform.system() == "Linux":
                 try:
                     os.environ["LANGUAGE"] = "en"
-                    
+
                 except (ValueError, KeyError):
                     pass
 
@@ -137,7 +137,7 @@ class MainApp(wx.App):
             if platform.system() == "Linux":
                 try:
                     os.environ["LANGUAGE"] = "fr"
-        
+
                 except (ValueError, KeyError):
                     pass
 

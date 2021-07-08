@@ -49,7 +49,7 @@ class ZoomPanel(wx.Panel):
     def OnSize(self, event):
         size = self.GetClientSize()
 
-        # Make sure size is at least 1px to avoid 
+        # Make sure size is at least 1px to avoid
         # strange "invalid bitmap size" errors.
         if size[0] < 1:
             size = (10, 10)

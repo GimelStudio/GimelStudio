@@ -22,7 +22,11 @@ from gsnodegraph import (NodeGraph, EVT_GSNODEGRAPH_NODESELECT,
                          EVT_GSNODEGRAPH_NODECONNECT,
                          EVT_GSNODEGRAPH_NODEDISCONNECT,
                          EVT_GSNODEGRAPH_MOUSEZOOM)
-from gimelstudio.datafiles import *
+
+from gimelstudio.datafiles import (ICON_NODEGRAPH_PANEL, ICON_MORE_MENU_SMALL,
+                                   ICON_MOUSE_LMB_MOVEMENT, ICON_MOUSE_LMB,
+                                   ICON_KEY_CTRL, ICON_MOUSE_MMB_MOVEMENT,
+                                   ICON_MOUSE_RMB)
 from .utils import ComputeMenuPosAlignedLeft
 
 ID_MENU_UNDOCKPANEL = wx.NewIdRef()

@@ -23,15 +23,13 @@ import wx.lib.agw.flatmenu as flatmenu
 
 import gimelstudio.constants as appconst
 from .config import AppConfiguration
+from .interface import artproviders
+from .core.renderer import Renderer
+from .datafiles.icons import ICON_GIMELSTUDIO_ICO
 from .interface import (ImageViewportPanel, NodePropertiesPanel,
                         NodeGraphPanel, StatusBar, PreferencesDialog,
                         ExportImageHandler)
-from .interface import artproviders
-from .datafiles.icons import (ICON_NODEPROPERTIES_PANEL,
-                              ICON_NODEGRAPH_PANEL, ICON_GIMELSTUDIO_ICO)
 from .corenodes import OutputNode, MixNode, ImageNode, BlurNode, FlipNode
-
-from .core.renderer import Renderer
 
 
 class AUIManager(aui.AuiManager):
@@ -129,8 +127,7 @@ class ApplicationFrame(wx.Frame):
             label="{0}{1}".format(_("Quit"), "\tShift+Q"),
             helpString=_("Quit Gimel Studio"),
             kind=wx.ITEM_NORMAL,
-            subMenu=None,
-            normalBmp=ICON_NODEPROPERTIES_PANEL.GetBitmap()
+            subMenu=None
         )
 
         # Edit
@@ -391,13 +388,6 @@ class ApplicationFrame(wx.Frame):
         self.statusbar.UpdateStatusBar()
         self.statusbar.Refresh()
         self.menubar.Refresh()
-
-
-        # image = self.renderer.GetRender().Image("oiio")
-        # export_handler = ExportImageHandler(self, image)
-        # export_handler.RunExport()
-
-
 
 
     def Render(self):

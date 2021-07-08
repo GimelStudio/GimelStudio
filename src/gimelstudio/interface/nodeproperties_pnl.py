@@ -18,10 +18,13 @@ import wx
 import wx.html
 import wx.lib.agw.flatmenu as flatmenu
 
-import gimelstudio.interface.basewidgets.foldpanelbar as fpb
-from .utils import ComputeMenuPosAlignedLeft
 from gswidgetkit import EVT_BUTTON, Button
-from gimelstudio.datafiles import *
+
+from .utils import ComputeMenuPosAlignedLeft
+import gimelstudio.interface.basewidgets.foldpanelbar as fpb
+from gimelstudio.datafiles import (ICON_HELP, ICON_NODEPROPERTIES_PANEL,
+                                   ICON_MORE_MENU_SMALL, ICON_MOUSE_LMB,
+                                   ICON_MOUSE_MMB, ICON_MOUSE_RMB)
 
 ID_MENU_UNDOCKPANEL = wx.NewIdRef()
 ID_MENU_HIDEPANEL = wx.NewIdRef()
