@@ -15,6 +15,7 @@
 # ----------------------------------------------------------------------------
 
 import os
+import threading
 
 import wx
 import wx.stc as stc
@@ -173,6 +174,9 @@ class ExportOptionsDialog(wx.Dialog):
         self.comment_meta_txtctrl.Bind(stc.EVT_STC_MODIFIED, self.OnCommentMetaChange)
 
     def OnExport(self, event):
+        self.ExportImage()
+
+    def ExportImage(self):
         # Export the image with the export options
         img = self.Image
         if self.filetype in [".jpg", ".jpeg"]:
