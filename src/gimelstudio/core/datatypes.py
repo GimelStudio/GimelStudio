@@ -19,8 +19,7 @@ import numpy as np
 try:
     import OpenImageIO as oiio
 except ImportError:
-    print("""OpenImageIO is required! Get the python wheel for Windows at:
-     https://www.lfd.uci.edu/~gohlke/pythonlibs/#openimageio""")
+    print("OpenImageIO is required!")
 
 
 class RenderImage(object):
@@ -30,13 +29,13 @@ class RenderImage(object):
     def Image(self, data_type="numpy"):
         """ Returns the image in the requested datatype format.
 
-        This is optimized so that it does node convert the datatype until 
+        This is optimized so that it does node convert the datatype until
         Image() or OIIOImage() is called. This way, the datatype won't be
         converted for nothing e.g: if an oiio.ImageBuf type is needed for a
         line of nodes, no need to convert it to numpy array every time.
 
         :param data_type: the requested image datatype
-        :returns: ``numpy.ndarray`` or ``oiio.ImageBuf`` object 
+        :returns: ``numpy.ndarray`` or ``oiio.ImageBuf`` object
         """
         current_data_type = type(self._img)
         if data_type == "numpy":
@@ -45,14 +44,14 @@ class RenderImage(object):
             else:
                 self._img = self._img.get_pixels(oiio.INT16)
                 return self._img
-        
+
         elif data_type == "oiio":
             if current_data_type == oiio.ImageBuf:
                 return self._img
             else:
                 self._img = self.NumpyArrayToImageBuf()
                 return self._img
-        
+
         else:
             raise TypeError("Not a valid datatype!")
 

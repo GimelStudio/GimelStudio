@@ -19,15 +19,12 @@ import sys
 import glob
 
 import wx
-from wx.lib import buttons
-import wx.lib.agw.cubecolourdialog as CCD
 
 from gswidgetkit import (NumberField, EVT_NUMBERFIELD,
                          Button, EVT_BUTTON, TextCtrl,
                          DropDown, EVT_DROPDOWN)
 from gimelstudio import constants
 from gimelstudio.datafiles import ICON_ARROW_DOWN, ICON_ARROW_RIGHT
-
 
 
 # Enum-like constants for widgets
