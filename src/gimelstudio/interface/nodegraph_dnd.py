@@ -63,7 +63,7 @@ class NodeGraphDropTarget(wx.DropTarget):
             try:
                 filetype = os.path.splitext(filename)[1]
 
-                if filetype in constants.SUPPORTED_FT_SAVE_LIST:
+                if filetype.lower() in constants.SUPPORTED_FT_SAVE_LIST:
                     if os.path.exists(filename) is True:
                         # Create Image node with path
                         node = self._window.AddNode("image_node", pos=(0, 0),
