@@ -75,12 +75,12 @@ class NodeGraphPanel(wx.Panel):
         self.nodegraph = NodeGraph(self, self.registry, size=(-1, self.Size[0]-20))
 
         # here for testing
-        self.nodegraph.AddNode('image_node', wx.Point(100, 10))
-        self.nodegraph.AddNode('image_node', wx.Point(400, 100))
+        self.nodegraph.AddNode('image_node', wx.Point(100, 30))
+        self.nodegraph.AddNode('image_node', wx.Point(100, 200))
         self.nodegraph.AddNode('blur_node', wx.Point(600, 200))
-        self.nodegraph.AddNode('mix_node', wx.Point(100, 200))
-        self.nodegraph.AddNode('output_node', wx.Point(300, 270))
-        self.nodegraph.AddNode('flip_node', wx.Point(400, 270))
+        self.nodegraph.AddNode('mix_node', wx.Point(300, 200))
+        self.nodegraph.AddNode('output_node', wx.Point(900, 270))
+        self.nodegraph.AddNode('flip_node', wx.Point(500, 300))
 
         main_sizer.Add(topbar, flag=wx.EXPAND | wx.LEFT | wx.RIGHT)
         main_sizer.Add(self.nodegraph, 1, flag=wx.EXPAND | wx.BOTH)
