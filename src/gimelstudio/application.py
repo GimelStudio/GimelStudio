@@ -28,7 +28,7 @@ from .core.renderer import Renderer
 from .datafiles.icons import ICON_GIMELSTUDIO_ICO
 from .interface import (ImageViewportPanel, NodePropertiesPanel,
                         NodeGraphPanel, StatusBar, PreferencesDialog,
-                        ExportImageHandler)
+                        ExportImageHandler, NodeGraphDropTarget)
 from .corenodes import OutputNode, MixNode, ImageNode, BlurNode, FlipNode
 
 
@@ -342,6 +342,7 @@ class ApplicationFrame(wx.Frame):
         }
 
         self.nodegraph_pnl = NodeGraphPanel(self, registry, size=(100, 100))
+        self.nodegraph_pnl.SetDropTarget(NodeGraphDropTarget(self.nodegraph_pnl))
 
         # Add panes
         self._mgr.AddPane(

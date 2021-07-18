@@ -117,6 +117,12 @@ class NodeGraphPanel(wx.Panel):
     def ImageViewport(self):
         return self.parent.imageviewport_pnl
 
+    def AddNode(self, idname, pos, location):
+        return self.nodegraph.AddNode(idname, pos, location)
+
+    def UpdateNodegraph(self):
+        self.nodegraph.UpdateDrawing()
+
     def UpdateNodePropertiesPnl(self, event):
         self.PropertiesPanel.UpdatePanelContents(event.value)
 
