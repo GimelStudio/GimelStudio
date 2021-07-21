@@ -24,7 +24,7 @@ class OutputNode(api.Node):
         self._label = "Output"
         self._isoutput = True
         self._category = "OUTPUT"
-        
+
     def IsOutputNode(self):
         return True
 
@@ -51,4 +51,4 @@ class OutputNode(api.Node):
         pass
 
 
-#api.RegisterNode(OutputNode, "corenode_outputcomposite")
+api.RegisterNode(OutputNode, "corenode_outputcomposite")

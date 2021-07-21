@@ -82,9 +82,9 @@ class MixNode(api.Node):
             image = oiio.ImageBufAlgo.mul(image2, image1)
         elif blend_mode == 'Divide':
             image = oiio.ImageBufAlgo.div(image2, image1)
-        
+
         render_image.SetAsImage(image)
         return render_image
 
 
-#api.RegisterNode(MixNode, "corenode_mix")
+api.RegisterNode(MixNode, "corenode_mix")

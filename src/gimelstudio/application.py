@@ -21,15 +21,15 @@ import wx
 import wx.lib.agw.aui as aui
 import wx.lib.agw.flatmenu as flatmenu
 
+from .node_importer import *
 import gimelstudio.constants as appconst
 from .config import AppConfiguration
 from .interface import artproviders
-from .core.renderer import Renderer
+from .core import Renderer, NODE_REGISTRY
 from .datafiles.icons import ICON_GIMELSTUDIO_ICO
 from .interface import (ImageViewportPanel, NodePropertiesPanel,
                         NodeGraphPanel, StatusBar, PreferencesDialog,
                         ExportImageHandler, NodeGraphDropTarget)
-from .corenodes import OutputNode, MixNode, ImageNode, BlurNode, FlipNode
 
 
 class AUIManager(aui.AuiManager):
@@ -46,8 +46,9 @@ class ApplicationFrame(wx.Frame):
         self.appconfig = AppConfiguration(self)
         self.appconfig.Load()
 
-        # Renderer
+        # Renderer and node registry
         self.renderer = Renderer(self)
+        self.registry = NODE_REGISTRY
 
         # Set the program icon
         self.SetIcon(ICON_GIMELSTUDIO_ICO.GetIcon())
@@ -332,16 +333,8 @@ class ApplicationFrame(wx.Frame):
         self.imageviewport_pnl = ImageViewportPanel(self)
         self.prop_pnl = NodePropertiesPanel(self, size=(350, 500))
 
-        # Eventually this will be a part of the node registry
-        registry = {
-            'image_node': ImageNode,
-            'mix_node': MixNode,
-            'output_node': OutputNode,
-            'blur_node': BlurNode,
-            'flip_node': FlipNode
-        }
-
-        self.nodegraph_pnl = NodeGraphPanel(self, registry, size=(100, 100))
+        # Nodegraph
+        self.nodegraph_pnl = NodeGraphPanel(self, self.registry, size=(100, 100))
         self.nodegraph_pnl.SetDropTarget(NodeGraphDropTarget(self.nodegraph_pnl))
 
         # Add panes

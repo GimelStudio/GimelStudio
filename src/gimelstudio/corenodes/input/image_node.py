@@ -75,4 +75,4 @@ class ImageNode(api.Node):
         return render_image
 
 
-#api.RegisterNode(ImageNode, "corenode_image")
+api.RegisterNode(ImageNode, "corenode_image")

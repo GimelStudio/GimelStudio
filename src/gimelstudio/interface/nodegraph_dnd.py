@@ -66,7 +66,7 @@ class NodeGraphDropTarget(wx.DropTarget):
                 if filetype.lower() in constants.SUPPORTED_FT_SAVE_LIST:
                     if os.path.exists(filename) is True:
                         # Create Image node with path
-                        node = self._window.AddNode("image_node", pos=(0, 0),
+                        node = self._window.AddNode("corenode_image", pos=(0, 0),
                                                     location="CURSOR")
                         node.NodeEditProp(idname="File Path",
                                           value=filename, render=False)

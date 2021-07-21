@@ -97,4 +97,4 @@ class BlurNode(api.Node):
         return image
 
 
-#api.RegisterNode(BlurNode, "corenode_blur")
+api.RegisterNode(BlurNode, "corenode_blur")
