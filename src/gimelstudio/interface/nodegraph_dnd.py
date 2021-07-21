@@ -78,8 +78,8 @@ class NodeGraphDropTarget(wx.DropTarget):
                 else:
                     dlg = wx.MessageDialog(
                         None,
-                        "That file type isn't currently supported!",
-                        "Cannot Open File!",
+                        _("That file type isn't currently supported!"),
+                        _("Cannot Open File!"),
                         style=wx.ICON_EXCLAMATION
                     )
                     dlg.ShowModal()
@@ -93,8 +93,8 @@ class NodeGraphDropTarget(wx.DropTarget):
     def ShowError(self, error=""):
         dlg = wx.MessageDialog(
             None,
-            "Error \n {}!".format(str(error)),
-            "Error!",
+            "\n {}!".format(str(error)),
+            _("Error!"),
             style=wx.ICON_ERROR
         )
         dlg.ShowModal()

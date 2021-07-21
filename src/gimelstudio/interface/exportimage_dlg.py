@@ -241,7 +241,7 @@ class ExportImageHandler(object):
 
         dlg = wx.FileDialog(
             self.parent,
-            message="Export image as...",
+            message=_("Export image as..."),
             defaultDir=os.getcwd(),
             defaultFile="untitled.png",
             wildcard=wildcard,
@@ -260,8 +260,8 @@ class ExportImageHandler(object):
             if self.filetype not in constants.SUPPORTED_FT_SAVE_LIST:
                 dlg = wx.MessageDialog(
                     None,
-                    "That file type isn't currently supported!",
-                    "Cannot Save Image!",
+                    _("That file type isn't currently supported!"),
+                    _("Cannot Save Image!"),
                     style=wx.ICON_EXCLAMATION
                 )
                 dlg.ShowModal()
