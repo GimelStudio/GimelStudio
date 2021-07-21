@@ -18,14 +18,15 @@ import wx
 import wx.adv
 from wx.lib.newevent import NewCommandEvent
 import wx.lib.agw.flatmenu as flatmenu
-
 import numpy as np
 
 from gswidgetkit import Button, EVT_BUTTON, NumberField, EVT_NUMBERFIELD_CHANGE
 
 from .utils import ConvertImageToWx, ComputeMenuPosAlignedLeft
 from .basewidgets import ZoomPanel
-from gimelstudio.datafiles import *
+from gimelstudio.datafiles import (ICON_IMAGEVIEWPORT_PANEL, ICON_MORE_MENU_SMALL,
+                                   ICON_MOUSE_MMB, ICON_MOUSE_MMB_MOVEMENT,
+                                   ICON_BRUSH_CHECKERBOARD)
 
 imageviewport_mousezoom_cmd_event, EVT_IMAGEVIEWPORT_MOUSEZOOM = NewCommandEvent()
 

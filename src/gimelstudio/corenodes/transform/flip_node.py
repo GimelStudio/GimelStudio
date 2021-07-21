@@ -68,4 +68,4 @@ class FlipNode(api.Node):
         return image
 
 
-#api.RegisterNode(FlipNode, "corenode_flip")
+api.RegisterNode(FlipNode, "corenode_flip")

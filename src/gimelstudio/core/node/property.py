@@ -19,15 +19,12 @@ import sys
 import glob
 
 import wx
-from wx.lib import buttons
-import wx.lib.agw.cubecolourdialog as CCD
 
 from gswidgetkit import (NumberField, EVT_NUMBERFIELD,
                          Button, EVT_BUTTON, TextCtrl,
                          DropDown, EVT_DROPDOWN)
-
+from gimelstudio import constants
 from gimelstudio.datafiles import ICON_ARROW_DOWN, ICON_ARROW_RIGHT
-
 
 
 # Enum-like constants for widgets
@@ -256,8 +253,20 @@ class OpenFileChooserProp(Property):
 
         if dlg.ShowModal() == wx.ID_OK:
             paths = dlg.GetPaths()
-            self.SetValue(paths[0])
-            self.textcontrol.ChangeValue(self.GetValue())
+            filetype = os.path.splitext(paths[0])[1]
+
+            if filetype not in constants.SUPPORTED_FT_OPEN_LIST:
+                dlg = wx.MessageDialog(
+                    None,
+                    "That file type isn't currently supported!",
+                    "Cannot Open Image!",
+                    style=wx.ICON_EXCLAMATION
+                )
+                dlg.ShowModal()
+
+            else:
+                self.SetValue(paths[0])
+                self.textcontrol.ChangeValue(self.GetValue())
 
 
 class LabelProp(Property):

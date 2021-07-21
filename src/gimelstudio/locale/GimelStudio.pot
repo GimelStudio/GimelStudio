@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Gimel Studio\n"
-"POT-Creation-Date: 2021-06-15 11:56-0500\n"
+"POT-Creation-Date: 2021-07-05 13:36-0500\n"
 "PO-Revision-Date: 2021-05-10 18:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: Gimel Studio translation team\n"
@@ -13,175 +13,175 @@ msgstr ""
 "X-Poedit-Basepath: ../..\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: gimelstudio/application.py:73
+#: gimelstudio/application.py:74
 msgid "New Project"
 msgstr ""
 
-#: gimelstudio/application.py:74
+#: gimelstudio/application.py:75
 msgid "Create a new Gimel Studio project file"
 msgstr ""
 
-#: gimelstudio/application.py:82
+#: gimelstudio/application.py:83
 msgid "Open Project"
 msgstr ""
 
-#: gimelstudio/application.py:83
+#: gimelstudio/application.py:84
 msgid "Open and load a Gimel Studio project file"
 msgstr ""
 
-#: gimelstudio/application.py:91
+#: gimelstudio/application.py:92
 msgid "Save Project..."
 msgstr ""
 
-#: gimelstudio/application.py:92
+#: gimelstudio/application.py:93
 msgid "Save the current project file"
 msgstr ""
 
-#: gimelstudio/application.py:100
+#: gimelstudio/application.py:101
 msgid "Save Project As..."
 msgstr ""
 
-#: gimelstudio/application.py:101
+#: gimelstudio/application.py:102
 msgid "Save the current project as a Gimel Studio project"
 msgstr ""
 
-#: gimelstudio/application.py:111
+#: gimelstudio/application.py:112
 msgid "Export Image As..."
 msgstr ""
 
-#: gimelstudio/application.py:112
+#: gimelstudio/application.py:113
 msgid "Export rendered image to a file"
 msgstr ""
 
-#: gimelstudio/application.py:122
+#: gimelstudio/application.py:123
 msgid "Quit"
 msgstr ""
 
-#: gimelstudio/application.py:123
+#: gimelstudio/application.py:124
 msgid "Quit Gimel Studio"
 msgstr ""
 
-#: gimelstudio/application.py:133
+#: gimelstudio/application.py:134
 msgid "Copy Image to Clipboard"
 msgstr ""
 
-#: gimelstudio/application.py:134
+#: gimelstudio/application.py:135
 msgid "Copy the current rendered image to the system clipboard"
 msgstr ""
 
-#: gimelstudio/application.py:142
+#: gimelstudio/application.py:143
 msgid "User Preferences"
 msgstr ""
 
-#: gimelstudio/application.py:143
+#: gimelstudio/application.py:144
 msgid "Edit user preferences and settings for Gimel Studio"
 msgstr ""
 
-#: gimelstudio/application.py:152
+#: gimelstudio/application.py:153
 msgid "Toggle Statusbar"
 msgstr ""
 
-#: gimelstudio/application.py:153
+#: gimelstudio/application.py:154
 msgid "Toggle showing the statusbar"
 msgstr ""
 
-#: gimelstudio/application.py:162
+#: gimelstudio/application.py:163
 msgid "Auto Render"
 msgstr ""
 
-#: gimelstudio/application.py:163
+#: gimelstudio/application.py:164
 msgid "Toggle auto rendering after editing node properties, connections, etc"
 msgstr ""
 
-#: gimelstudio/application.py:171
+#: gimelstudio/application.py:172
 msgid "Render Image"
 msgstr ""
 
-#: gimelstudio/application.py:172
+#: gimelstudio/application.py:173
 msgid "Force an immediate, updated render of the current node graph"
 msgstr ""
 
-#: gimelstudio/application.py:181
+#: gimelstudio/application.py:182
 msgid "Toggle Window Fullscreen"
 msgstr ""
 
-#: gimelstudio/application.py:182
+#: gimelstudio/application.py:183
 msgid "Toggle the window to be fullscreen"
 msgstr ""
 
-#: gimelstudio/application.py:190
+#: gimelstudio/application.py:191
 msgid "Maximize Window"
 msgstr ""
 
-#: gimelstudio/application.py:191
+#: gimelstudio/application.py:192
 msgid "Maximize the window size"
 msgstr ""
 
-#: gimelstudio/application.py:200
+#: gimelstudio/application.py:201
 msgid "Online Manual"
 msgstr ""
 
-#: gimelstudio/application.py:201
+#: gimelstudio/application.py:202
 msgid "Open the online Gimel Studio manual in your browser"
 msgstr ""
 
-#: gimelstudio/application.py:209
+#: gimelstudio/application.py:210
 msgid "Visit Website"
 msgstr ""
 
-#: gimelstudio/application.py:210
+#: gimelstudio/application.py:211
 msgid "Open the offical Gimel Studio website in your browser"
 msgstr ""
 
-#: gimelstudio/application.py:218
+#: gimelstudio/application.py:219
 msgid "Report a Bug"
 msgstr ""
 
-#: gimelstudio/application.py:219
+#: gimelstudio/application.py:220
 msgid "Report a bug in Gimel Studio"
 msgstr ""
 
-#: gimelstudio/application.py:227
+#: gimelstudio/application.py:228
 msgid "About Gimel Studio"
 msgstr ""
 
-#: gimelstudio/application.py:228
+#: gimelstudio/application.py:229
 msgid "Information about Gimel Studio"
 msgstr ""
 
-#: gimelstudio/application.py:262
+#: gimelstudio/application.py:263
 msgid "File"
 msgstr ""
 
-#: gimelstudio/application.py:263
+#: gimelstudio/application.py:264
 msgid "Edit"
 msgstr ""
 
-#: gimelstudio/application.py:264
+#: gimelstudio/application.py:265
 msgid "View"
 msgstr ""
 
-#: gimelstudio/application.py:265
+#: gimelstudio/application.py:266
 msgid "Render"
 msgstr ""
 
-#: gimelstudio/application.py:266
+#: gimelstudio/application.py:267
 msgid "Window"
 msgstr ""
 
-#: gimelstudio/application.py:267
+#: gimelstudio/application.py:268
 msgid "Help"
 msgstr ""
 
-#: gimelstudio/application.py:405
+#: gimelstudio/application.py:402
 msgid "Do you really want to quit? You will lose any unsaved data."
 msgstr ""
 
-#: gimelstudio/application.py:406
+#: gimelstudio/application.py:403
 msgid "Quit Gimel Studio?"
 msgstr ""
 
-#: gimelstudio/application.py:418
+#: gimelstudio/application.py:415
 msgid "User Preferences & Settings"
 msgstr ""
 
@@ -203,38 +203,38 @@ msgid "Image Viewport Area"
 msgstr ""
 
 #: gimelstudio/interface/imageviewport_pnl.py:137
-#: gimelstudio/interface/nodegraph_pnl.py:166
+#: gimelstudio/interface/nodegraph_pnl.py:167
 #: gimelstudio/interface/nodeproperties_pnl.py:174
 msgid "Undock panel"
 msgstr ""
 
 #: gimelstudio/interface/imageviewport_pnl.py:142
-#: gimelstudio/interface/nodegraph_pnl.py:171
+#: gimelstudio/interface/nodegraph_pnl.py:172
 #: gimelstudio/interface/nodeproperties_pnl.py:179
 msgid "Hide panel"
 msgstr ""
 
-#: gimelstudio/interface/nodegraph_pnl.py:135
+#: gimelstudio/interface/nodegraph_pnl.py:136
 msgid "Box Select Nodes"
 msgstr ""
 
-#: gimelstudio/interface/nodegraph_pnl.py:137
+#: gimelstudio/interface/nodegraph_pnl.py:138
 msgid "Select Node"
 msgstr ""
 
-#: gimelstudio/interface/nodegraph_pnl.py:140
+#: gimelstudio/interface/nodegraph_pnl.py:141
 msgid "Connect Selected Node To Output"
 msgstr ""
 
-#: gimelstudio/interface/nodegraph_pnl.py:142
+#: gimelstudio/interface/nodegraph_pnl.py:143
 msgid "Pan Nodegraph"
 msgstr ""
 
-#: gimelstudio/interface/nodegraph_pnl.py:144
+#: gimelstudio/interface/nodegraph_pnl.py:145
 msgid "Node Context Menu"
 msgstr ""
 
-#: gimelstudio/interface/nodegraph_pnl.py:145
+#: gimelstudio/interface/nodegraph_pnl.py:146
 msgid "Nodegraph Area"
 msgstr ""
 

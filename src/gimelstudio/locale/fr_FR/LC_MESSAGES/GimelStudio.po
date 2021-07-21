@@ -1,188 +1,188 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Gimel Studio\n"
-"POT-Creation-Date: 2021-06-15 17:39+0200\n"
-"PO-Revision-Date: 2021-06-15 17:40+0200\n"
+"POT-Creation-Date: 2021-07-05 13:39-0500\n"
+"PO-Revision-Date: 2021-07-05 13:43-0500\n"
 "Last-Translator: Julieñ <jumaxotl@gmail.com>\n"
 "Language-Team: Gimel Studio translation team\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 2.4.2\n"
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: application.py:73
+#: application.py:74
 msgid "New Project"
 msgstr "Nouveau Projet"
 
-#: application.py:74
+#: application.py:75
 msgid "Create a new Gimel Studio project file"
 msgstr "Créer un nouveau projet Gimel Studio"
 
-#: application.py:82
+#: application.py:83
 msgid "Open Project"
 msgstr "Ouvrir un Projet"
 
-#: application.py:83
+#: application.py:84
 msgid "Open and load a Gimel Studio project file"
 msgstr "Ouvrir un fichier de  projet Gimel Studio"
 
-#: application.py:91
+#: application.py:92
 msgid "Save Project..."
 msgstr "Enregistrer le Projet..."
 
-#: application.py:92
+#: application.py:93
 msgid "Save the current project file"
 msgstr "Enregistrer le projet Gimel Studio en cours"
 
-#: application.py:100
+#: application.py:101
 msgid "Save Project As..."
 msgstr "Entrgistrer le Projet sous..."
 
-#: application.py:101
+#: application.py:102
 msgid "Save the current project as a Gimel Studio project"
 msgstr "Enregistrer le projet Gimel Studio en cours sous un nouveau nom"
 
-#: application.py:111
+#: application.py:112
 msgid "Export Image As..."
 msgstr "Exporter l'Image sous..."
 
-#: application.py:112
+#: application.py:113
 msgid "Export rendered image to a file"
 msgstr "Appliquer le rendu en cours et enregistrer le fichier image"
 
-#: application.py:122
+#: application.py:123
 msgid "Quit"
 msgstr "Quitter"
 
-#: application.py:123
+#: application.py:124
 msgid "Quit Gimel Studio"
 msgstr "Quitter Gimel Studio"
 
-#: application.py:133
+#: application.py:134
 msgid "Copy Image to Clipboard"
 msgstr "Copier l'Image dans le Presse-papier"
 
-#: application.py:134
+#: application.py:135
 msgid "Copy the current rendered image to the system clipboard"
 msgstr "Copier le rendu actuel de l'image dans le presse-papier du système"
 
-#: application.py:142
+#: application.py:143
 msgid "User Preferences"
 msgstr "Préférences Utilisateur"
 
-#: application.py:143
+#: application.py:144
 msgid "Edit user preferences and settings for Gimel Studio"
 msgstr "Éditer les préférences et réglages de Gimel Studio"
 
-#: application.py:152
+#: application.py:153
 msgid "Toggle Statusbar"
 msgstr "Barre d'État"
 
-#: application.py:153
+#: application.py:154
 msgid "Toggle showing the statusbar"
 msgstr "Basculer l'affichage de la aarre d'état"
 
-#: application.py:162
+#: application.py:163
 msgid "Auto Render"
 msgstr "Rendu Automatique"
 
-#: application.py:163
+#: application.py:164
 msgid "Toggle auto rendering after editing node properties, connections, etc"
 msgstr "Basculer le rendu automatique après édition des paramètres, connexions, etc"
 
-#: application.py:171
+#: application.py:172
 msgid "Render Image"
 msgstr "Rendu de l'Image"
 
-#: application.py:172
+#: application.py:173
 msgid "Force an immediate, updated render of the current node graph"
 msgstr "Forcer la mise à jour immédiate du rendu du graphe nodal en cours"
 
-#: application.py:181
+#: application.py:182
 msgid "Toggle Window Fullscreen"
 msgstr "Affichage Plein-écran"
 
-#: application.py:182
+#: application.py:183
 msgid "Toggle the window to be fullscreen"
 msgstr "Basculer l'affichage en mode plein-écran"
 
-#: application.py:190
+#: application.py:191
 msgid "Maximize Window"
 msgstr "Maximiser la fenêtre"
 
-#: application.py:191
+#: application.py:192
 msgid "Maximize the window size"
 msgstr "Maximiser la taille de la fenêtre"
 
-#: application.py:200
+#: application.py:201
 msgid "Online Manual"
 msgstr "Manuel en Ligne"
 
-#: application.py:201
+#: application.py:202
 msgid "Open the online Gimel Studio manual in your browser"
 msgstr "Ouvrir le manuel de Gimel Studio en ligne dans votre navigateur"
 
-#: application.py:209
+#: application.py:210
 msgid "Visit Website"
 msgstr "Voir le Site Web"
 
-#: application.py:210
+#: application.py:211
 msgid "Open the offical Gimel Studio website in your browser"
 msgstr "Ouvrir le site officiel de Gimel Studio dans votre navigateur"
 
-#: application.py:218
+#: application.py:219
 msgid "Report a Bug"
 msgstr "Rapporter une erreur"
 
-#: application.py:219
+#: application.py:220
 msgid "Report a bug in Gimel Studio"
 msgstr "Rapporter une erreur trouvée dans Gimel Studio"
 
-#: application.py:227
+#: application.py:228
 msgid "About Gimel Studio"
 msgstr "À Propos de Gimel Studio"
 
-#: application.py:228
+#: application.py:229
 msgid "Information about Gimel Studio"
 msgstr "Informations à propos de Gimel Studio"
 
-#: application.py:262
+#: application.py:263
 msgid "File"
 msgstr "Fichier"
 
-#: application.py:263
+#: application.py:264
 msgid "Edit"
 msgstr "Édition"
 
-#: application.py:264
+#: application.py:265
 msgid "View"
 msgstr "Vue"
 
-#: application.py:265
+#: application.py:266
 msgid "Render"
 msgstr "Rendu"
 
-#: application.py:266
+#: application.py:267
 msgid "Window"
 msgstr "Fenêtre"
 
-#: application.py:267
+#: application.py:268
 msgid "Help"
 msgstr "Aide"
 
-#: application.py:405
+#: application.py:402
 msgid "Do you really want to quit? You will lose any unsaved data."
 msgstr "Voulez-vous vraiment quitter ? Les données non sauvegardées seront perdues."
 
-#: application.py:406
+#: application.py:403
 msgid "Quit Gimel Studio?"
 msgstr "Quitter Gimel Studio ?"
 
-#: application.py:418
+#: application.py:415
 msgid "User Preferences & Settings"
 msgstr "Préférences Utilisateur & Réglages"
 
@@ -202,37 +202,37 @@ msgstr "Déplacer"
 msgid "Image Viewport Area"
 msgstr "Se déplacer dans la vue-image"
 
-#: interface/imageviewport_pnl.py:137 interface/nodegraph_pnl.py:166
+#: interface/imageviewport_pnl.py:137 interface/nodegraph_pnl.py:167
 #: interface/nodeproperties_pnl.py:174
 msgid "Undock panel"
 msgstr "Déconnecter le panneau"
 
-#: interface/imageviewport_pnl.py:142 interface/nodegraph_pnl.py:171
+#: interface/imageviewport_pnl.py:142 interface/nodegraph_pnl.py:172
 #: interface/nodeproperties_pnl.py:179
 msgid "Hide panel"
 msgstr "Cacher le panneau"
 
-#: interface/nodegraph_pnl.py:135
+#: interface/nodegraph_pnl.py:136
 msgid "Box Select Nodes"
 msgstr "Sélectionner plusieurs Nœuds"
 
-#: interface/nodegraph_pnl.py:137
+#: interface/nodegraph_pnl.py:138
 msgid "Select Node"
 msgstr "Sélectionner un Nœud"
 
-#: interface/nodegraph_pnl.py:140
+#: interface/nodegraph_pnl.py:141
 msgid "Connect Selected Node To Output"
 msgstr "Connecter le Nœud Sélectionné à la Sortie"
 
-#: interface/nodegraph_pnl.py:142
+#: interface/nodegraph_pnl.py:143
 msgid "Pan Nodegraph"
 msgstr "Déplacer le Graphe Nodal"
 
-#: interface/nodegraph_pnl.py:144
+#: interface/nodegraph_pnl.py:145
 msgid "Node Context Menu"
 msgstr "Menu Contextuel du Nœud"
 
-#: interface/nodegraph_pnl.py:145
+#: interface/nodegraph_pnl.py:146
 msgid "Nodegraph Area"
 msgstr "Zone du Graphe Nodal"
 

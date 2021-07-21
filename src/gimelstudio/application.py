@@ -21,15 +21,15 @@ import wx
 import wx.lib.agw.aui as aui
 import wx.lib.agw.flatmenu as flatmenu
 
+from .node_importer import *
+import gimelstudio.constants as appconst
 from .config import AppConfiguration
-from .interface import (ImageViewportPanel, NodePropertiesPanel,
-                        NodeGraphPanel, StatusBar, PreferencesDialog)
 from .interface import artproviders
-from .datafiles.icons import (ICON_NODEPROPERTIES_PANEL,
-                              ICON_NODEGRAPH_PANEL, ICON_GIMELSTUDIO_ICO)
-from .corenodes import OutputNode, MixNode, ImageNode, BlurNode, FlipNode
-
-from .core.renderer import Renderer
+from .core import Renderer, NODE_REGISTRY
+from .datafiles.icons import ICON_GIMELSTUDIO_ICO
+from .interface import (ImageViewportPanel, NodePropertiesPanel,
+                        NodeGraphPanel, StatusBar, PreferencesDialog,
+                        ExportImageHandler, NodeGraphDropTarget)
 
 
 class AUIManager(aui.AuiManager):
@@ -40,10 +40,15 @@ class AUIManager(aui.AuiManager):
 
 class ApplicationFrame(wx.Frame):
     def __init__(self):
-        wx.Frame.__init__(self, None, title="Gimel Studio", size=(1000, 800))
+        wx.Frame.__init__(self, None, title=appconst.APP_NAME, size=(1000, 800))
 
+        # Application configuration
         self.appconfig = AppConfiguration(self)
+        self.appconfig.Load()
+
+        # Renderer and node registry
         self.renderer = Renderer(self)
+        self.registry = NODE_REGISTRY
 
         # Set the program icon
         self.SetIcon(ICON_GIMELSTUDIO_ICO.GetIcon())
@@ -123,8 +128,7 @@ class ApplicationFrame(wx.Frame):
             label="{0}{1}".format(_("Quit"), "\tShift+Q"),
             helpString=_("Quit Gimel Studio"),
             kind=wx.ITEM_NORMAL,
-            subMenu=None,
-            normalBmp=ICON_NODEPROPERTIES_PANEL.GetBitmap()
+            subMenu=None
         )
 
         # Edit
@@ -269,6 +273,10 @@ class ApplicationFrame(wx.Frame):
 
         # Menu event bindings
         self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
+                  self.OnExportAsImage,
+                  self.exportasimage_menuitem)
+
+        self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
                   self.OnQuit,
                   self.quit_menuitem)
 
@@ -325,16 +333,9 @@ class ApplicationFrame(wx.Frame):
         self.imageviewport_pnl = ImageViewportPanel(self)
         self.prop_pnl = NodePropertiesPanel(self, size=(350, 500))
 
-        # Eventually this will be a part of the node registry
-        registry = {
-            'image_node': ImageNode,
-            'mix_node': MixNode,
-            'output_node': OutputNode,
-            'blur_node': BlurNode,
-            'flip_node': FlipNode
-        }
-
-        self.nodegraph_pnl = NodeGraphPanel(self, registry, size=(100, 100))
+        # Nodegraph
+        self.nodegraph_pnl = NodeGraphPanel(self, self.registry, size=(100, 100))
+        self.nodegraph_pnl.SetDropTarget(NodeGraphDropTarget(self.nodegraph_pnl))
 
         # Add panes
         self._mgr.AddPane(
@@ -382,6 +383,7 @@ class ApplicationFrame(wx.Frame):
         self.statusbar.Refresh()
         self.menubar.Refresh()
 
+
     def Render(self):
         start = time.time()
         image = self.renderer.Render(self.NodeGraph._nodes)
@@ -397,6 +399,25 @@ class ApplicationFrame(wx.Frame):
     def ImageViewport(self):
         return self.imageviewport_pnl
 
+    @property
+    def AppConfig(self):
+        return self.appconfig
+
+    def OnExportAsImage(self, event):
+        image = self.renderer.GetRender()
+
+        try:
+            export_handler = ExportImageHandler(self, image.Image("oiio"))
+            export_handler.RunExport()
+        except AttributeError:
+            dlg = wx.MessageDialog(
+                None,
+                "Please render an image before attempting to export!",
+                "No Image to export!",
+                style=wx.ICON_EXCLAMATION
+            )
+            dlg.ShowModal()
+
     def OnQuit(self, event):
         quitdialog = wx.MessageDialog(self,
                                       _("Do you really want to quit? You will lose any unsaved data."),
@@ -404,6 +425,9 @@ class ApplicationFrame(wx.Frame):
                                       wx.YES_NO | wx.YES_DEFAULT)
 
         if quitdialog.ShowModal() == wx.ID_YES:
+            # Save configuration settings before quit
+            self.appconfig.Save()
+            # Un-int the app and window mgr
             quitdialog.Destroy()
             self._mgr.UnInit()
             del self._mgr

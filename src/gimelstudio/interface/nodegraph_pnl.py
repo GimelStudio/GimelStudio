@@ -22,7 +22,11 @@ from gsnodegraph import (NodeGraph, EVT_GSNODEGRAPH_NODESELECT,
                          EVT_GSNODEGRAPH_NODECONNECT,
                          EVT_GSNODEGRAPH_NODEDISCONNECT,
                          EVT_GSNODEGRAPH_MOUSEZOOM)
-from gimelstudio.datafiles import *
+
+from gimelstudio.datafiles import (ICON_NODEGRAPH_PANEL, ICON_MORE_MENU_SMALL,
+                                   ICON_MOUSE_LMB_MOVEMENT, ICON_MOUSE_LMB,
+                                   ICON_KEY_CTRL, ICON_MOUSE_MMB_MOVEMENT,
+                                   ICON_MOUSE_RMB)
 from .utils import ComputeMenuPosAlignedLeft
 
 ID_MENU_UNDOCKPANEL = wx.NewIdRef()
@@ -71,12 +75,12 @@ class NodeGraphPanel(wx.Panel):
         self.nodegraph = NodeGraph(self, self.registry, size=(-1, self.Size[0]-20))
 
         # here for testing
-        self.nodegraph.AddNode('image_node', wx.Point(100, 10))
-        self.nodegraph.AddNode('image_node', wx.Point(400, 100))
-        self.nodegraph.AddNode('blur_node', wx.Point(600, 200))
-        self.nodegraph.AddNode('mix_node', wx.Point(100, 200))
-        self.nodegraph.AddNode('output_node', wx.Point(300, 270))
-        self.nodegraph.AddNode('flip_node', wx.Point(400, 270))
+        self.nodegraph.AddNode('corenode_image', wx.Point(100, 30))
+        self.nodegraph.AddNode('corenode_image', wx.Point(100, 200))
+        self.nodegraph.AddNode('corenode_blur', wx.Point(600, 200))
+        self.nodegraph.AddNode('corenode_mix', wx.Point(300, 200))
+        self.nodegraph.AddNode('corenode_outputcomposite', wx.Point(900, 270))
+        self.nodegraph.AddNode('corenode_flip', wx.Point(500, 300))
 
         main_sizer.Add(topbar, flag=wx.EXPAND | wx.LEFT | wx.RIGHT)
         main_sizer.Add(self.nodegraph, 1, flag=wx.EXPAND | wx.BOTH)
@@ -112,6 +116,12 @@ class NodeGraphPanel(wx.Panel):
     @property
     def ImageViewport(self):
         return self.parent.imageviewport_pnl
+
+    def AddNode(self, idname, pos, location):
+        return self.nodegraph.AddNode(idname, pos, location)
+
+    def UpdateNodegraph(self):
+        self.nodegraph.UpdateDrawing()
 
     def UpdateNodePropertiesPnl(self, event):
         self.PropertiesPanel.UpdatePanelContents(event.value)

@@ -16,7 +16,7 @@
 
 import os
 
-from gimelstudio import api
+from gimelstudio import api, constants
 from gimelstudio.core.eval_info import EvalInfo
 
 
@@ -43,15 +43,7 @@ class ImageNode(api.Node):
         return meta_info
 
     def NodeInitProps(self):
-        wildcard = "All files (*.*)|*.*|" \
-            "JPEG file (*.jpeg)|*.jpeg|" \
-            "JPG file (*.jpg)|*.jpg|" \
-            "PNG file (*.png)|*.png|" \
-            "BMP file (*.bmp)|*.bmp|" \
-            "WEBP file (*.webp)|*.webp|" \
-            "TGA file (*.tga)|*.tga|" \
-            "TIFF file (*.tiff)|*.tiff|" \
-            "EXR file (*.exr)|*.exr"
+        wildcard = constants.SUPPORTED_FT_OPEN_WILDCARD
 
         self.fp_prop = api.OpenFileChooserProp(
             idname="File Path",
@@ -68,7 +60,7 @@ class ImageNode(api.Node):
         path = self.EvalProperty(eval_info, 'File Path')
 
         render_image = api.RenderImage(size=(200, 200))
-        
+
         if path != "":
             if self._cached_path != path:
                 try:
@@ -83,4 +75,4 @@ class ImageNode(api.Node):
         return render_image
 
 
-#api.RegisterNode(ImageNode, "corenode_image")
+api.RegisterNode(ImageNode, "corenode_image")

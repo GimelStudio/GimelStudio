@@ -18,7 +18,7 @@ from .output_node import OutputNode
 
 
 class Renderer(object):
-    """ 
+    """
     The core renderer which evaluates the data of the node tree and
     outputs the final render image.
     """
@@ -42,7 +42,7 @@ class Renderer(object):
         :param nodes: dictionary of nodes of the Node Graph
         :returns: rendered image
         """
-  
+
         # Render the image
         output_node = self.GetOutputNode(nodes)
         rendered_image = self.RenderNodeGraph(output_node, nodes)
@@ -55,6 +55,7 @@ class Renderer(object):
             # TODO: don't hardcode this
             image = output_node._parameters["Image"].value
 
+        self.SetRender(image)
         return image
 
     def RenderNodeGraph(self, output_node, nodes):

@@ -45,9 +45,9 @@ import numpy as np
 def ConvertImageToWx(cv2_image):
     height, width = cv2_image.shape[:2]
 
-    info = np.iinfo(cv2_image.dtype) # Get the information of the incoming image type
-    data = cv2_image.astype(np.float64) / info.max # normalize the data to 0 - 1
-    data = 255 * data # Now scale by 255
+    info = np.iinfo(cv2_image.dtype)  # Get the information of the incoming image type
+    data = cv2_image.astype(np.float64) / info.max  # normalize the data to 0 - 1
+    data = 255 * data  # Now scale by 255
     cv2_image = data.astype(np.uint8)
 
     cv2_image_rgb = cv2.cvtColor(cv2_image, cv2.COLOR_RGB2RGBA)

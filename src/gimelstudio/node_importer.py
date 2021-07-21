@@ -14,15 +14,5 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-import wx
 
-
-def ComputeMenuPosAlignedLeft(menu, btn):
-    """ Given flatmenu and button objects, computes the positioning
-    of the dropdown menu.
-
-    :returns: wx.Point
-    """
-    y = btn.GetSize()[1] + btn.GetScreenPosition()[1] + 6
-    x = btn.GetScreenPosition()[0] - menu.GetMenuWidth() + btn.GetSize()[1]
-    return wx.Point(x, y)
+from .corenodes import OutputNode, MixNode, ImageNode, BlurNode, FlipNode
