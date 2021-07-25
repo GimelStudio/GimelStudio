@@ -8,9 +8,11 @@ build
 dist
 *.spec
 
-# Ignore test images 
+# Ignore test images
 src/*.jpg
 src/*.png
+src/*.jpeg
+src/*.exr
 
 # Ignore the local version of libs
 gsnodegraph
