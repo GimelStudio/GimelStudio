@@ -54,6 +54,7 @@ class NodeGraphDropTarget(wx.DropTarget):
     def OnTextDrop(self):
         try:
             self._window.AddNode(self._textDropData.GetText(), pos=(0, 0), location="CURSOR")
+            self._window.UpdateNodegraph()
         except Exception as error:
             self.ShowError(error)
         return wx.DragCopy
