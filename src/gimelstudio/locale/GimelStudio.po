@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Gimel Studio\n"
-"POT-Creation-Date: 2021-07-22 09:29+0200\n"
-"PO-Revision-Date: 2021-07-22 09:29+0200\n"
+"POT-Creation-Date: 2021-07-26 02:17+0200\n"
+"PO-Revision-Date: 2021-07-26 02:18+0200\n"
 "Last-Translator: Julieñ <jumaxotl@gmail.com>\n"
 "Language-Team: Gimel Studio translation team\n"
 "Language: fr\n"
@@ -16,290 +16,285 @@ msgstr ""
 
 #: src/gimelstudio/application.py:79
 msgid "New Project"
-msgstr "Nouveau Projet"
+msgstr ""
 
 #: src/gimelstudio/application.py:80
 msgid "Create a new Gimel Studio project file"
-msgstr "Créer un nouveau fichier de  projet Gimel Studio"
+msgstr ""
 
 #: src/gimelstudio/application.py:88
 msgid "Open Project"
-msgstr "Ouvrir"
+msgstr ""
 
 #: src/gimelstudio/application.py:89
 msgid "Open and load a Gimel Studio project file"
-msgstr "Ouvrir un fichier de  projet Gimel Studio"
+msgstr ""
 
 #: src/gimelstudio/application.py:97
 msgid "Save Project..."
-msgstr "Enregistrer..."
+msgstr ""
 
 #: src/gimelstudio/application.py:98
 msgid "Save the current project file"
-msgstr "Enregistrer le projet Gimel Studio en cours"
+msgstr ""
 
 #: src/gimelstudio/application.py:106
 msgid "Save Project As..."
-msgstr "Enregistrer sous..."
+msgstr ""
 
 #: src/gimelstudio/application.py:107
 msgid "Save the current project as a Gimel Studio project"
-msgstr "Enregistrer le projet Gimel Studio en cours sous un nouveau nom"
+msgstr ""
 
 #: src/gimelstudio/application.py:117
 msgid "Export Image As..."
-msgstr "Exporter l'image..."
+msgstr ""
 
 #: src/gimelstudio/application.py:118
 msgid "Export rendered image to a file"
-msgstr "Exporter le rendu en cours dans un fichier image"
+msgstr ""
 
 #: src/gimelstudio/application.py:128
 msgid "Quit"
-msgstr "Quitter"
+msgstr ""
 
 #: src/gimelstudio/application.py:129
 msgid "Quit Gimel Studio"
-msgstr "Quitter Gimel Studio"
+msgstr ""
 
 #: src/gimelstudio/application.py:138
 msgid "Copy Image to Clipboard"
-msgstr "Copier l'Image dans le Presse-Papier"
+msgstr ""
 
 #: src/gimelstudio/application.py:139
 msgid "Copy the current rendered image to the system clipboard"
-msgstr "Copier le rendu de l'image en cours dans le presse-papier système"
+msgstr ""
 
 #: src/gimelstudio/application.py:147
 msgid "User Preferences"
-msgstr "Préférences Utilisateur"
+msgstr ""
 
 #: src/gimelstudio/application.py:148
 msgid "Edit user preferences and settings for Gimel Studio"
-msgstr "Éditer les préférences utilisateur et les réglages de Gimel Studio"
+msgstr ""
 
 #: src/gimelstudio/application.py:157
 msgid "Toggle Statusbar"
-msgstr "Basculer la Barre de Statut"
+msgstr ""
 
 #: src/gimelstudio/application.py:158
 msgid "Toggle showing the statusbar"
-msgstr "Basculer l'affichage de la barre de statut"
+msgstr ""
 
 #: src/gimelstudio/application.py:167
 msgid "Auto Render"
-msgstr "Rendu Automatique"
+msgstr ""
 
 #: src/gimelstudio/application.py:168
 msgid "Toggle auto rendering after editing node properties, connections, etc"
 msgstr ""
-"Basculer le rendu automatique après édition des propriétés d'un nœud, d'une "
-"connexion, etc"
 
 #: src/gimelstudio/application.py:176
 msgid "Render Image"
-msgstr "Rendre l'Image"
+msgstr ""
 
 #: src/gimelstudio/application.py:177
 msgid "Force an immediate, updated render of the current node graph"
-msgstr "Forcer la mise à jour immédiate et le rendu du graphe nodal en cours"
+msgstr ""
 
 #: src/gimelstudio/application.py:186
 msgid "Toggle Window Fullscreen"
-msgstr "Affichage Plein Écran"
+msgstr ""
 
 #: src/gimelstudio/application.py:187
 msgid "Toggle the window to be fullscreen"
-msgstr "Basculer l'affichage en mode plein écran"
+msgstr ""
 
 #: src/gimelstudio/application.py:195
 msgid "Maximize Window"
-msgstr "Maximiser la Fenêtre"
+msgstr ""
 
 #: src/gimelstudio/application.py:196
 msgid "Maximize the window size"
-msgstr "Maximiser la taille de la fenêtre"
+msgstr ""
 
 #: src/gimelstudio/application.py:205
 msgid "Online Manual"
-msgstr "Manuel en Ligne"
+msgstr ""
 
 #: src/gimelstudio/application.py:206
 msgid "Open the online Gimel Studio manual in your browser"
 msgstr ""
-"Ouvrir le manuel de l'utilisateur de Gimel Studio dans votre navigateur"
 
 #: src/gimelstudio/application.py:214
 msgid "Visit Website"
-msgstr "Voir le Site Web"
+msgstr ""
 
 #: src/gimelstudio/application.py:215
 msgid "Open the offical Gimel Studio website in your browser"
-msgstr "Ouvrir le site officiel de Gimel Studio dans votre navigateur"
+msgstr ""
 
 #: src/gimelstudio/application.py:223
 msgid "Report a Bug"
-msgstr "Signaler une Erreur"
+msgstr ""
 
 #: src/gimelstudio/application.py:224
 msgid "Report a bug in Gimel Studio"
-msgstr "Signaler une erreur dans Gimel Studio"
+msgstr ""
 
 #: src/gimelstudio/application.py:232
 msgid "About Gimel Studio"
-msgstr "À propos de Gimel Studio"
+msgstr ""
 
 #: src/gimelstudio/application.py:233
 msgid "Information about Gimel Studio"
-msgstr "Informations à propos de Gimel Studio"
+msgstr ""
 
 #: src/gimelstudio/application.py:267
 msgid "File"
-msgstr "Fichier"
+msgstr ""
 
 #: src/gimelstudio/application.py:268
 msgid "Edit"
-msgstr "Éditer"
+msgstr ""
 
 #: src/gimelstudio/application.py:269
 msgid "View"
-msgstr "Vue"
+msgstr ""
 
 #: src/gimelstudio/application.py:270
 msgid "Render"
-msgstr "Rendre"
+msgstr ""
 
 #: src/gimelstudio/application.py:271
 msgid "Window"
-msgstr "Fenêtre"
+msgstr ""
 
 #: src/gimelstudio/application.py:272
 msgid "Help"
-msgstr "Aide"
+msgstr ""
 
 #: src/gimelstudio/application.py:423
 msgid "Do you really want to quit? You will lose any unsaved data."
 msgstr ""
-"Voulez-vous vraiment quitter ? Les modifications seront perdues si vous ne "
-"les enregistrez pas."
 
 #: src/gimelstudio/application.py:424
 msgid "Quit Gimel Studio?"
-msgstr "Quitter Gimel Studio ?"
+msgstr ""
 
 #: src/gimelstudio/application.py:439
 msgid "User Preferences & Settings"
-msgstr "Préférences Utilisateur & Réglages"
+msgstr ""
 
 #: src/gimelstudio/interface/exportimage_dlg.py:32
 msgid "Image Export Options"
-msgstr "Options d'Exportation d'Image"
+msgstr ""
 
 #: src/gimelstudio/interface/exportimage_dlg.py:71
 msgid "Compression Level"
-msgstr "Niveau de Compression"
+msgstr ""
 
 #: src/gimelstudio/interface/exportimage_dlg.py:80
 #: src/gimelstudio/interface/exportimage_dlg.py:131
 msgid "Export pixel datatype:"
-msgstr "Type de pixel :"
+msgstr ""
 
 #: src/gimelstudio/interface/exportimage_dlg.py:98
 #: src/gimelstudio/interface/exportimage_dlg.py:160
 msgid "Export"
-msgstr "Exporter"
+msgstr ""
 
 #: src/gimelstudio/interface/exportimage_dlg.py:99
 #: src/gimelstudio/interface/exportimage_dlg.py:161
 msgid "Cancel"
-msgstr "Annuler"
+msgstr ""
 
 #: src/gimelstudio/interface/exportimage_dlg.py:122
 msgid "Image Quality"
-msgstr "Qualité d'Image"
+msgstr ""
 
 #: src/gimelstudio/interface/exportimage_dlg.py:146
 msgid "Comment metadata:"
-msgstr "Métadonnées :"
+msgstr ""
 
 #: src/gimelstudio/interface/exportimage_dlg.py:244
 msgid "Export image as..."
-msgstr "Exporter l'image..."
+msgstr ""
 
 #: src/gimelstudio/interface/exportimage_dlg.py:263
 #: src/gimelstudio/interface/nodegraph_dnd.py:81
 msgid "That file type isn't currently supported!"
-msgstr "Ce type de fichier n'est pas supporté pour le moment !"
+msgstr ""
 
 #: src/gimelstudio/interface/exportimage_dlg.py:264
 msgid "Cannot Save Image!"
-msgstr "Impossible d'Enregistrer l'Image !"
+msgstr ""
 
 #: src/gimelstudio/interface/imageviewport_pnl.py:61
 #: src/gimelstudio/interface/nodegraph_pnl.py:61
 msgid "Zoom"
-msgstr "Zoom"
+msgstr ""
 
 #: src/gimelstudio/interface/imageviewport_pnl.py:114
 msgid "Zoom Viewport"
-msgstr "Zoomer dans l'Aperçu"
+msgstr ""
 
 #: src/gimelstudio/interface/imageviewport_pnl.py:116
 msgid "Pan Viewport"
-msgstr "Déplacer dans l'Aperçu"
+msgstr ""
 
 #: src/gimelstudio/interface/imageviewport_pnl.py:117
 msgid "Image Viewport Area"
-msgstr "Zone de l'Aperçu"
+msgstr ""
 
 #: src/gimelstudio/interface/imageviewport_pnl.py:138
 #: src/gimelstudio/interface/nodegraph_pnl.py:177
 #: src/gimelstudio/interface/nodeproperties_pnl.py:177
 msgid "Undock panel"
-msgstr "Dissocier le panneau"
+msgstr ""
 
 #: src/gimelstudio/interface/imageviewport_pnl.py:143
 #: src/gimelstudio/interface/nodegraph_pnl.py:182
 #: src/gimelstudio/interface/nodeproperties_pnl.py:182
 msgid "Hide panel"
-msgstr "Cacher le panneau"
+msgstr ""
 
 #: src/gimelstudio/interface/nodegraph_dnd.py:82
 msgid "Cannot Open File!"
-msgstr "Impossible d'Ouvrir l'Image !"
+msgstr ""
 
 #: src/gimelstudio/interface/nodegraph_dnd.py:97
 msgid "Error!"
-msgstr "Erreur !"
+msgstr ""
 
 #: src/gimelstudio/interface/nodegraph_pnl.py:146
 msgid "Box Select Nodes"
-msgstr "Sélection multiple de Nœuds"
+msgstr ""
 
 #: src/gimelstudio/interface/nodegraph_pnl.py:148
 msgid "Select Node"
-msgstr "Sélectionner un Nœud"
+msgstr ""
 
 #: src/gimelstudio/interface/nodegraph_pnl.py:151
 msgid "Connect Selected Node To Output"
-msgstr "Connecter le Nœud Sélectionné à la Sortie"
+msgstr ""
 
 #: src/gimelstudio/interface/nodegraph_pnl.py:153
 msgid "Pan Nodegraph"
-msgstr "Déplacer le Graphe Nodal"
+msgstr ""
 
 #: src/gimelstudio/interface/nodegraph_pnl.py:155
 msgid "Node Context Menu"
-msgstr "Menu Contextuel du Nœud"
+msgstr ""
 
 #: src/gimelstudio/interface/nodegraph_pnl.py:156
 msgid "Nodegraph Area"
-msgstr "Zone du Graphe Nodal"
+msgstr ""
 
 #: src/gimelstudio/interface/nodeproperties_pnl.py:156
 msgid "Node Properties Area"
-msgstr "Zone des Propriétés du Nœud"
+msgstr ""
 
 #: src/gimelstudio/interface/statusbar.py:129
 msgid "Menu: "
-msgstr "Menu : "
+msgstr ""
