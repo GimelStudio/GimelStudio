@@ -17,7 +17,7 @@
 
 This repository tracks the *next step* of Gimel Studio (the v0.6.x series) to become a truly usable and serious node-based, non-destructive image editor. It is currently in ``initial development stage`` and things will probably change from what is currently here.
 
-**We're especially seeking Python and/or GLSL developers, 3D artists, photographers and UI designers to help with the project.** However, even if you have none of these skills you're still welcome, of course, to give feedback and suggest ideas and improvements. :)
+**We're especially seeking Python and/or GLSL developers, 3D artists, photographers and UI designers to help with the project.** However, even if you have none of these skills you're still welcome, of course, to ask questions, give feedback and suggest ideas and improvements. :)
 
 
 # WIP Mockup
@@ -29,7 +29,7 @@ Here is a **WIP mockup** of the redesigned UI:
 
 # Discord & Gitter
 
-If you'd like to join development, help with the UI design or have questions, comments or ideas you can join the Gimel Studio [Discord](https://discord.gg/RqwbDrVDpK) or [Gitter](https://gitter.im/Gimel-Studio/community). These are places where you can chat with the developers and project contributors and get the latest updates on development.
+If you'd like to join development, help with the UI design, UI translations or have questions, comments and ideas you can join the Gimel Studio [Discord](https://discord.gg/RqwbDrVDpK) or [Gitter](https://gitter.im/Gimel-Studio/community). These are places where you can chat with the developers and project contributors and get the latest updates on development.
 
 
 # Vision
@@ -44,11 +44,12 @@ This includes:
 - CPU and GPU based processing
 - Highly improved node-graph and overall workflow for image editing
 - Greater emphasis on re-usabilty of nodegraph setups via templates, etc
-- User preferences and UI translations
+- User preferences for customizabilty
+- UI translations and localization
 - Gizmos for the viewport to allow for WYSIWYG-like interaction for transforms, etc (e.g: crop, rotate, etc)
 - Continued improvement and additions to the Python API for scripting custom nodes
 
-Nodes can be used to composite, create/add new effects and/or composite raster and vector graphics on-demand. Helpful gizmos in the interactive viewport can be used to do various editing tasks and speed up the workflow. Preset node graph templates can be created, used and re-used to save time setting up common node-setups.
+Nodes can be used to composite, create new effects and/or composite raster and vector graphics on-demand. Helpful gizmos in the interactive viewport can be used to do various editing tasks and speed up the workflow. Preset node graph templates can be created, used and re-used to save time setting up common node-setups.
 
 Custom nodes can be scripted with the built-in Python API for maximum flexibility. Integrations with other software like Blender are planned.
 
@@ -70,7 +71,7 @@ Take a look at the [Github Issues](https://github.com/GimelStudio/GimelStudio/is
 
 # Running the code
 
-*At this early stage of development, the code is very WIP and likely to change a lot. Many things are not implemented and/or not stable.*
+*Please note: At this stage of development, the code is WIP and likely to change a lot. Many things are not implemented and not stable.*
 
 ## Windows
 
@@ -84,9 +85,9 @@ Take a look at the [Github Issues](https://github.com/GimelStudio/GimelStudio/is
 2. If building wxPython fails, Download the wheel file for wxpython which matches your Python version and Linux OS version from https://extras.wxpython.org/wxPython4/extras/linux/ and install the wxpython package with ``pip3 install <pathtothewheelfilehere>``
 3. ``python src/main.py``
 
-Please note that the renderer, which relies on OIIO (OpenImageIO) will be **disabled if OIIO is not found**. The rest of the application will run, but the renderer will not work.
+Please note that the renderer, which relies on OIIO (OpenImageIO) will **not work if OIIO is not found**. The rest of the application will run, but the renderer will not work. This essentially means that we do not have Linux support yet (please check back later or help us to get it working for linux).
 
-For linux, OIIO will need to be [built from source](https://github.com/OpenImageIO/oiio/blob/master/INSTALL.md#building-from-source) since pre-built wheels are not yet available. See [this issue](https://github.com/GimelStudio/GimelStudio/issues/1).
+OIIO will need to be [built from source](https://github.com/OpenImageIO/oiio/blob/master/INSTALL.md#building-from-source) since pre-built wheels are not yet available. See [this issue](https://github.com/GimelStudio/GimelStudio/issues/1).
 
 ## MacOs
 
