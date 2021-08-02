@@ -247,7 +247,6 @@ class ExportImageHandler(object):
             wildcard=wildcard,
             style=wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT
         )
-        dlg.Center()
 
         # This sets the default filter that the user will initially see.
         # Otherwise, the first filter in the list will be used by default.
