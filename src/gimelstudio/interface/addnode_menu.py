@@ -156,7 +156,7 @@ class AddNodeMenu(wx.PopupTransientWindow):
 
         # Label
         main_sizer.AddSpacer(5)
-        header_lbl = wx.StaticText(self, wx.ID_ANY, "Add Node")
+        header_lbl = wx.StaticText(self, wx.ID_ANY, _("Add Node"))
         header_lbl.SetForegroundColour(wx.Colour("#fff"))
         header_lbl.SetFont(self.GetFont().MakeBold())
         main_sizer.Add(header_lbl, flag=wx.EXPAND | wx.ALL, border=5)
@@ -164,7 +164,7 @@ class AddNodeMenu(wx.PopupTransientWindow):
 
         # Search bar
         self.search_bar = TextCtrl(self, style=wx.BORDER_SIMPLE,
-                                   placeholder="Search nodes...", size=(-1, 26))
+                                   placeholder=_("Search nodes..."), size=(-1, 26))
         self.search_bar.SetFocus()
 
         main_sizer.Add(self.search_bar, flag=wx.EXPAND | wx.ALL, border=5)
