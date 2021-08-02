@@ -30,6 +30,8 @@ class Node(NodeView):
         self._cache_enabled = True
         self._edited_flag = False
 
+        self._label = ""
+
         self.NodeInitProps()
         self.NodeInitParams()
 
@@ -43,6 +45,9 @@ class Node(NodeView):
         self.SetEditedFlag(True)
         if render == True:
             self.nodegraph.parent.parent.Render()
+
+    def GetLabel(self):
+        return self._label
 
     def IsOutputNode(self):
         return False
