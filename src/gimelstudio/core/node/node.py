@@ -43,7 +43,7 @@ class Node(NodeView):
         """
         self.WidgetEventHook(idname, value)
         self.SetEditedFlag(True)
-        if render == True:
+        if render is True:
             self.nodegraph.parent.parent.Render()
 
     def GetLabel(self):

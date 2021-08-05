@@ -44,7 +44,7 @@ class ZoomPanel(wx.Panel):
         self.Bind(wx.EVT_SIZE, self.OnSize)
 
     def OnPaint(self, event):
-        wx.BufferedPaintDC(self, self._Buffer)
+        dc = wx.BufferedPaintDC(self, self._Buffer)
 
     def OnSize(self, event):
         size = self.GetClientSize()
