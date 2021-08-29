@@ -141,6 +141,14 @@ class MainApp(wx.App):
                 except (ValueError, KeyError):
                     pass
 
+        elif language == "LANGUAGE_GERMAN":
+            if platform.system() == "Linux":
+                try:
+                    os.environ["LANGUAGE"] = "de"
+
+                except (ValueError, KeyError):
+                    pass
+
 
 if __name__ == '__main__':
     # Create the app and startup
