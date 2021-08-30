@@ -77,7 +77,7 @@ If you have any questions about contributing, feel free to ask on the official [
 ### Git Commit Messages
 
 * Use the present tense ("add feature" not "added feature")
-* Use all lowercase except for referencing a file, method, function, class, etc in the code
+* Use sentence case except for referencing a file, method, function, class, etc in the code
 * Use the imperative mood ("move cursor to..." not "moves cursor to...")
 * Limit the first line to 72 characters or less
 * Reference issues and pull requests liberally after the first line
