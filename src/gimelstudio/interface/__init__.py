@@ -5,3 +5,4 @@ from .statusbar import StatusBar
 from .preferences_dlg import PreferencesDialog
 from .exportimage_dlg import ExportImageHandler
 from .nodegraph_dnd import NodeGraphDropTarget
+from .addnode_menu import AddNodeMenu
