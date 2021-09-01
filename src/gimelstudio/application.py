@@ -94,7 +94,7 @@ class ApplicationFrame(wx.Frame):
         self.saveprojectfile_menuitem = flatmenu.FlatMenuItem(
             file_menu,
             id=wx.ID_ANY,
-            label="{0}{1}".format(_("Save Project..."), "\tCtrl+S"),
+            label="{0}{1}".format(_("Save Project…"), "\tCtrl+S"),
             helpString=_("Save the current project file"),
             kind=wx.ITEM_NORMAL,
             subMenu=None
@@ -103,7 +103,7 @@ class ApplicationFrame(wx.Frame):
         self.saveprojectfileas_menuitem = flatmenu.FlatMenuItem(
             file_menu,
             id=wx.ID_ANY,
-            label="{0}{1}".format(_("Save Project As..."), "\tCtrl+Shift+S"),
+            label="{0}{1}".format(_("Save Project As…"), "\tCtrl+Shift+S"),
             helpString=_("Save the current project as a Gimel Studio project"),
             kind=wx.ITEM_NORMAL,
             subMenu=None
@@ -114,7 +114,7 @@ class ApplicationFrame(wx.Frame):
         self.exportasimage_menuitem = flatmenu.FlatMenuItem(
             file_menu,
             id=wx.ID_ANY,
-            label="{0}{1}".format(_("Export Image As..."), "\tShift+E"),
+            label="{0}{1}".format(_("Export Image As…"), "\tShift+E"),
             helpString=_("Export rendered image to a file"),
             kind=wx.ITEM_NORMAL,
             subMenu=None
@@ -144,8 +144,8 @@ class ApplicationFrame(wx.Frame):
         self.preferences_menuitem = flatmenu.FlatMenuItem(
             edit_menu,
             id=wx.ID_ANY,
-            label=_("User Preferences"),
-            helpString=_("Edit user preferences and settings for Gimel Studio"),
+            label=_("Preferences"),
+            helpString=_("Edit preferences for Gimel Studio"),
             kind=wx.ITEM_NORMAL,
             subMenu=None
         )
@@ -436,7 +436,7 @@ class ApplicationFrame(wx.Frame):
             event.Skip()
 
     def OnPreferencesDialog(self, event):
-        dlg = PreferencesDialog(self, title=_("User Preferences & Settings"))
+        dlg = PreferencesDialog(self, title=_("Preferences"))
         dlg.Show()
 
     def OnToggleStatusbar(self, event):

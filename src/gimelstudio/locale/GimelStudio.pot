@@ -30,7 +30,7 @@ msgid "Open and load a Gimel Studio project file"
 msgstr ""
 
 #: gimelstudio/application.py:97
-msgid "Save Project..."
+msgid "Save Project…"
 msgstr ""
 
 #: gimelstudio/application.py:98
@@ -38,7 +38,7 @@ msgid "Save the current project file"
 msgstr ""
 
 #: gimelstudio/application.py:106
-msgid "Save Project As..."
+msgid "Save Project As…"
 msgstr ""
 
 #: gimelstudio/application.py:107
@@ -46,7 +46,7 @@ msgid "Save the current project as a Gimel Studio project"
 msgstr ""
 
 #: gimelstudio/application.py:117
-msgid "Export Image As..."
+msgid "Export Image As…"
 msgstr ""
 
 #: gimelstudio/application.py:118
@@ -70,11 +70,11 @@ msgid "Copy the current rendered image to the system clipboard"
 msgstr ""
 
 #: gimelstudio/application.py:147
-msgid "User Preferences"
+msgid "Preferences…"
 msgstr ""
 
 #: gimelstudio/application.py:148
-msgid "Edit user preferences and settings for Gimel Studio"
+msgid "Edit preferences for Gimel Studio"
 msgstr ""
 
 #: gimelstudio/application.py:157
@@ -182,7 +182,7 @@ msgid "Quit Gimel Studio?"
 msgstr ""
 
 #: gimelstudio/application.py:439
-msgid "User Preferences & Settings"
+msgid "Preferences"
 msgstr ""
 
 #: gimelstudio/interface/addnode_menu.py:159
@@ -190,7 +190,7 @@ msgid "Add Node"
 msgstr ""
 
 #: gimelstudio/interface/addnode_menu.py:167
-msgid "Search nodes..."
+msgid "Search nodes…"
 msgstr ""
 
 #: gimelstudio/interface/exportimage_dlg.py:32
@@ -225,7 +225,7 @@ msgid "Comment metadata:"
 msgstr ""
 
 #: gimelstudio/interface/exportimage_dlg.py:244
-msgid "Export image as..."
+msgid "Export image as…"
 msgstr ""
 
 #: gimelstudio/interface/exportimage_dlg.py:262
