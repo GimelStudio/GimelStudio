@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gimel Studio\n"
 "POT-Creation-Date: 2021-08-27 16:48-0500\n"
-"PO-Revision-Date: 2021-08-29 17:12+0200\n"
+"PO-Revision-Date: 2021-09-01 14:50+0200\n"
 "Language-Team: Gimel Studio translation team\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +31,7 @@ msgid "Open and load a Gimel Studio project file"
 msgstr "Öffne und lade ein Gimel Studio-Projekt"
 
 #: gimelstudio/application.py:97
-msgid "Save Project..."
+msgid "Save Project…"
 msgstr "Projekt sichern …"
 
 #: gimelstudio/application.py:98
@@ -39,7 +39,7 @@ msgid "Save the current project file"
 msgstr "Sichere das aktive Projekt"
 
 #: gimelstudio/application.py:106
-msgid "Save Project As..."
+msgid "Save Project As…"
 msgstr "Projekt sichern unter …"
 
 #: gimelstudio/application.py:107
@@ -47,7 +47,7 @@ msgid "Save the current project as a Gimel Studio project"
 msgstr "Sichere das aktive Projekt als Gimel Studio-Projektdatei"
 
 #: gimelstudio/application.py:117
-msgid "Export Image As..."
+msgid "Export Image As…"
 msgstr "Bild exportieren als …"
 
 #: gimelstudio/application.py:118
@@ -71,11 +71,11 @@ msgid "Copy the current rendered image to the system clipboard"
 msgstr "Kopiere das gerenderte Bild in die Zwischenablage"
 
 #: gimelstudio/application.py:147
-msgid "User Preferences"
-msgstr "Einstellungen"
+msgid "Preferences…"
+msgstr "Einstellungen …"
 
 #: gimelstudio/application.py:148
-msgid "Edit user preferences and settings for Gimel Studio"
+msgid "Edit preferences for Gimel Studio"
 msgstr "Bearbeite die Einstellungen von Gimel Studio"
 
 #: gimelstudio/application.py:157
@@ -183,7 +183,7 @@ msgid "Quit Gimel Studio?"
 msgstr "Gimel Studio beenden?"
 
 #: gimelstudio/application.py:439
-msgid "User Preferences & Settings"
+msgid "Preferences"
 msgstr "Einstellungen"
 
 #: gimelstudio/interface/addnode_menu.py:159
@@ -191,7 +191,7 @@ msgid "Add Node"
 msgstr "Node hinzufügen"
 
 #: gimelstudio/interface/addnode_menu.py:167
-msgid "Search nodes..."
+msgid "Search nodes…"
 msgstr "Nodes suchen …"
 
 #: gimelstudio/interface/exportimage_dlg.py:32
@@ -226,7 +226,7 @@ msgid "Comment metadata:"
 msgstr "Kommentar:"
 
 #: gimelstudio/interface/exportimage_dlg.py:244
-msgid "Export image as..."
+msgid "Export image as…"
 msgstr "Bild exportieren als …"
 
 #: gimelstudio/interface/exportimage_dlg.py:262

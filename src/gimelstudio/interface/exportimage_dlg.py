@@ -241,7 +241,7 @@ class ExportImageHandler(object):
 
         dlg = wx.FileDialog(
             self.parent,
-            message=_("Export image as..."),
+            message=_("Export image as…"),
             defaultDir=os.getcwd(),
             defaultFile="untitled.png",
             wildcard=wildcard,
