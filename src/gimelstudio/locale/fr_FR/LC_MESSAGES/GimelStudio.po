@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gimel Studio\n"
 "POT-Creation-Date: 2021-07-25 19:32+0200\n"
-"PO-Revision-Date: 2021-09-01 14:52+0200\n"
+"PO-Revision-Date: 2021-09-04 13:02+0200\n"
 "Last-Translator: Johannes Jakob <hi@johjakob.com>\n"
 "Language-Team: Gimel Studio translation team\n"
 "Language: fr\n"
@@ -278,7 +278,7 @@ msgid "Connect Selected Node To Output"
 msgstr "Connecter le Nœud Sélectionné à la Sortie"
 
 #: interface/nodegraph_pnl.py:153
-msgid "Pan Nodegraph"
+msgid "Pan Node Graph"
 msgstr "Déplacer le Graphe Nodal"
 
 #: interface/nodegraph_pnl.py:155
@@ -286,7 +286,7 @@ msgid "Node Context Menu"
 msgstr "Menu Contextuel du Nœud"
 
 #: interface/nodegraph_pnl.py:156
-msgid "Nodegraph Area"
+msgid "Node Graph Area"
 msgstr "Zone du Graphe Nodal"
 
 #: interface/nodeproperties_pnl.py:156

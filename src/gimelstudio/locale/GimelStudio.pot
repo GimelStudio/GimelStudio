@@ -287,7 +287,7 @@ msgid "Connect Selected Node To Output"
 msgstr ""
 
 #: gimelstudio/interface/nodegraph_pnl.py:162
-msgid "Pan Nodegraph"
+msgid "Pan Node Graph"
 msgstr ""
 
 #: gimelstudio/interface/nodegraph_pnl.py:164
@@ -295,7 +295,7 @@ msgid "Node Context Menu"
 msgstr ""
 
 #: gimelstudio/interface/nodegraph_pnl.py:165
-msgid "Nodegraph Area"
+msgid "Node Graph Area"
 msgstr ""
 
 #: gimelstudio/interface/nodeproperties_pnl.py:156

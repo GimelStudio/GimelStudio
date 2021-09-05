@@ -159,10 +159,10 @@ class NodeGraphPanel(wx.Panel):
                                         keyicon=ICON_KEY_CTRL,
                                         text=_("Connect Selected Node To Output"))
         self.Statusbar.PushContextHints(5, mouseicon=ICON_MOUSE_MMB_MOVEMENT,
-                                        text=_("Pan Nodegraph"))
+                                        text=_("Pan Node Graph"))
         self.Statusbar.PushContextHints(6, mouseicon=ICON_MOUSE_RMB,
                                         text=_("Node Context Menu"))
-        self.Statusbar.PushMessage(_("Nodegraph Area"))
+        self.Statusbar.PushMessage(_("Node Graph Area"))
         self.Statusbar.UpdateStatusBar()
 
     def OnAddNodeMenu(self, event):
