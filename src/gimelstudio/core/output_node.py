@@ -19,8 +19,8 @@ from .eval_info import EvalInfo
 
 
 class OutputNode(object):
-    """ 
-    Represents the evaluation of the composite output node. 
+    """
+    Represents the evaluation of the composite output node.
     """
     def __init__(self):
         self.node = None

@@ -33,6 +33,9 @@ SPINBOX_WIDGET = "spinbox"
 
 
 class Property(object):
+    """
+    The base node property class.
+    """
     def __init__(self, idname, default, label, visible=True):
         self.idname = idname
         self.value = default
@@ -183,7 +186,6 @@ class ChoiceProp(Property):
         if not value:
             print("Value is null!")
         self.SetValue(value)
-
 
 
 class OpenFileChooserProp(Property):
