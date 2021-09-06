@@ -24,19 +24,15 @@ class ImageNode(api.Node):
     def __init__(self, nodegraph, _id):
         api.Node.__init__(self, nodegraph, _id)
 
-        self._cached_path = ""
-        self._cached_image = None
-
-        self._label = "Image"
-        self._category = "INPUT"
+        self.cached_path = ""
+        self.cached_image = None
 
     @property
     def NodeMeta(self):
         meta_info = {
             "label": "Image",
-            "author": "Correct Syntax",
+            "author": "Gimel Studio",
             "version": (3, 0, 5),
-            "supported_app_version": (0, 5, 0),
             "category": "INPUT",
             "description": "Loads an image from the specified file path."
         }
@@ -62,15 +58,15 @@ class ImageNode(api.Node):
         render_image = api.RenderImage(size=(200, 200))
 
         if path != "":
-            if self._cached_path != path:
+            if self.cached_path != path:
                 try:
                     render_image.SetAsOpenedImage(path)
-                    self._cached_path = path
-                    self._cached_image = render_image
+                    self.cached_path = path
+                    self.cached_image = render_image
                 except FileNotFoundError:
-                    print("FILE NOT FOUND")
+                    print("DEBUG: FILE NOT FOUND")
             else:
-                render_image = self._cached_image
+                render_image = self.cached_image
 
         return render_image
 

@@ -14,6 +14,7 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
+import wx
 from gsnodegraph import NodeBase as NodeView
 
 from gimelstudio.core import RenderImage
@@ -30,8 +31,6 @@ class Node(NodeView):
         self._cache_enabled = True
         self._edited_flag = False
 
-        self._label = ""
-
         self.NodeInitProps()
         self.NodeInitParams()
 
@@ -46,8 +45,32 @@ class Node(NodeView):
         if render is True:
             self.nodegraph.parent.parent.Render()
 
+    @property
+    def NodeMeta(self):
+        """ Override property for node meta information. """
+        meta_info = {
+            "label": "...",
+            "author": "N/A",
+            "version": (0, 0, 1),
+            "category": "DEFAULT",
+            "description": "...",
+        }
+        return meta_info
+
     def GetLabel(self):
-        return self._label
+        return self.NodeMeta["label"]
+
+    def GetAuthor(self):
+        return self.NodeMeta["author"]
+
+    def GetVersion(self):
+        return self.NodeMeta["version"]
+
+    def GetCategory(self):
+        return self.NodeMeta["category"]
+
+    def GetDescription(self):
+        return self.NodeMeta["description"]
 
     def IsOutputNode(self):
         return False
@@ -132,7 +155,7 @@ class Node(NodeView):
         """
         for prop in self._properties:
             prop_obj = self._properties[prop]
-            if prop_obj.GetIsVisible() == True:
+            if prop_obj.GetIsVisible() is True:
                 prop_obj.CreateUI(parent, sizer)
 
     def ClearCache(self):
@@ -140,7 +163,7 @@ class Node(NodeView):
 
     def RemoveFromCache(self, name):
         cached = self.IsInCache(name)
-        if cached == True and self.IsNodeCacheEnabled() == True:
+        if cached is True and self.IsNodeCacheEnabled() is True:
             del self._cache[name]
 
     def IsInCache(self, name):
@@ -154,8 +177,8 @@ class Node(NodeView):
         cached = self.IsInCache(name)
 
         # Basic node cache implementation
-        if self.IsNodeCacheEnabled() == True:
-            if self.GetEditedFlag() == True and cached == True:
+        if self.IsNodeCacheEnabled() is True:
+            if self.GetEditedFlag() is True and cached is True:
                 value = self._cache[name]
                 self.SetEditedFlag(False)
                 print("Used Cache: ", self._label)

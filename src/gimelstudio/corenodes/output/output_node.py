@@ -21,10 +21,6 @@ class OutputNode(api.Node):
     def __init__(self, nodegraph, _id):
         api.Node.__init__(self, nodegraph, _id)
 
-        self._label = "Output"
-        self._isoutput = True
-        self._category = "OUTPUT"
-
     def IsOutputNode(self):
         return True
 
@@ -32,9 +28,8 @@ class OutputNode(api.Node):
     def NodeMeta(self):
         meta_info = {
             "label": "Output",
-            "author": "Correct Syntax",
+            "author": "Gimel Studio",
             "version": (0, 1, 3),
-            "supported_app_version": (0, 5, 0),
             "category": "OUTPUT",
             "description": """The most important node of them all. :)
         This is registered here for the UI -the evaluation is handled elsewhere.
