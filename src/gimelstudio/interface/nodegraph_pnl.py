@@ -80,7 +80,7 @@ class NodeGraphPanel(wx.Panel):
         self.nodegraph.AddNode('corenode_image', wx.Point(100, 30))
         self.nodegraph.AddNode('corenode_image', wx.Point(100, 200))
         self.nodegraph.AddNode('corenode_blur', wx.Point(600, 200))
-        self.nodegraph.AddNode('corenode_mix', wx.Point(300, 200))
+        self.nodegraph.AddNode('corenode_opacity', wx.Point(300, 200))
         self.nodegraph.AddNode('corenode_outputcomposite', wx.Point(900, 270))
         self.nodegraph.AddNode('corenode_flip', wx.Point(500, 300))
 
@@ -117,6 +117,10 @@ class NodeGraphPanel(wx.Panel):
     @property
     def PropertiesPanel(self):
         return self.parent.prop_pnl
+
+    @property
+    def GLSLRenderer(self):
+        return self.parent.glsl_renderer
 
     @property
     def Statusbar(self):

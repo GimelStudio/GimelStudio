@@ -25,8 +25,9 @@ from .node_importer import *
 import gimelstudio.constants as appconst
 from .config import AppConfiguration
 from .interface import artproviders
-from .core import Renderer, NODE_REGISTRY
 from .datafiles.icons import ICON_GIMELSTUDIO_ICO
+from .core import (Renderer, GLSLRenderer,
+                   NODE_REGISTRY)
 from .interface import (ImageViewportPanel, NodePropertiesPanel,
                         NodeGraphPanel, StatusBar, PreferencesDialog,
                         ExportImageHandler, NodeGraphDropTarget)
@@ -46,8 +47,9 @@ class ApplicationFrame(wx.Frame):
         self.appconfig = AppConfiguration(self)
         self.appconfig.Load()
 
-        # Renderer and node registry
+        # Initilize renderers and node registry
         self.renderer = Renderer(self)
+        self.glsl_renderer = GLSLRenderer()  # Maybe move this to nodegraph or something
         self.registry = NODE_REGISTRY
 
         # Set the program icon

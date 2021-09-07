@@ -57,6 +57,11 @@ class Node(NodeView):
         }
         return meta_info
 
+    @property
+    def GLSLRenderer(self):
+        # FIXME: shouldn't be reaching in this far!
+        return self.nodegraph.parent.GLSLRenderer
+
     def GetLabel(self):
         return self.NodeMeta["label"]
 
@@ -212,6 +217,11 @@ class Node(NodeView):
         :prop value: updated value of the property
         """
         pass
+
+    def RenderGLSL(self, shader, props, image):
+        # glsl_shader = self.GLSLRenderer.LoadGLSLFile(path)
+        self.GLSLRenderer.Render(shader, props, image)
+        return self.GLSLRenderer.ReadNumpy()
 
     def RefreshNodeGraph(self):
         """ Force a refresh of the Node Graph panel. """
