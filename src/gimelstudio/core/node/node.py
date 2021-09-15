@@ -14,6 +14,7 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
+import os.path
 import wx
 from gsnodegraph import NodeBase as NodeView
 
@@ -218,8 +219,9 @@ class Node(NodeView):
         """
         pass
 
-    def RenderGLSL(self, shader, props, image):
-        # glsl_shader = self.GLSLRenderer.LoadGLSLFile(path)
+    def RenderGLSL(self, path, props, image):
+        shader_path = os.path.abspath(os.path.expanduser(os.path.expandvars(path)))
+        shader = self.GLSLRenderer.LoadGLSLFile(shader_path)
         self.GLSLRenderer.Render(shader, props, image)
         return self.GLSLRenderer.ReadNumpy()
 

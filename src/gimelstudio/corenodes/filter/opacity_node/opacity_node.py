@@ -29,7 +29,7 @@ class OpacityNode(api.Node):
             "author": "Gimel Studio",
             "version": (0, 0, 1),
             "category": "FILTER",
-            "description": "",
+            "description": "Adjust the transparency of an image.",
         }
         return meta_info
 
@@ -57,26 +57,11 @@ class OpacityNode(api.Node):
         # Make correction for slider range of 1-100
         opacity_value = (opacity_value * 0.01)
 
-        shader = """
-        #version 330
-
-        uniform sampler2D image;
-        out vec4 out_color;
-        uniform float opacityValue;
-
-        void main() {
-            vec4 color = texelFetch(image, ivec2(gl_FragCoord.xy), 0);
-            out_color = vec4(color.r, color.g, color.b, opacityValue);
-        }
-        """
-
         props = {
             "opacityValue": opacity_value
         }
-        result = self.RenderGLSL(
-            shader,  # "./GimelStudio/corenodes/filter/opacity_node/opacity.glsl",
-            props,
-            image1)
+        shader_src = "gimelstudio/corenodes/filter/opacity_node/opacity.glsl"
+        result = self.RenderGLSL(shader_src, props, image1)
 
         render_image.SetAsImage(result)
         return render_image

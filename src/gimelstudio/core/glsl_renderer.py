@@ -15,7 +15,6 @@
 # ----------------------------------------------------------------------------
 
 import copy
-import os.path
 import hashlib
 
 import numpy as np
@@ -27,8 +26,8 @@ class GLSLRenderer(object):
     def __init__(self):
         self.glContext = mg.create_standalone_context(require=330)
 
-        self.src_texture = self.glContext.texture((4000, 4000), 4)
-        self.dst_texture = self.glContext.texture((4000, 4000), 4)
+        self.src_texture = self.glContext.texture((4000, 4000), 4, dtype='f1')
+        self.dst_texture = self.glContext.texture((4000, 4000), 4, dtype='f1')
         self.src_fbo = self.glContext.framebuffer(self.src_texture)
         self.dst_fbo = self.glContext.framebuffer(self.dst_texture)
 
@@ -62,6 +61,7 @@ class GLSLRenderer(object):
 
         # FIXME: this effectively means we are no longer working with 16-bit
         image = image.Image('numpy').astype('uint8')
+        # image = cv2.normalize(image, dst=None, alpha=0, beta=65535, norm_type=cv2.NORM_MINMAX)
         # print(image.dtype)
         image = image.copy(order='C')
         self.viewport = (0, 0, *image.shape[1::-1])
@@ -117,7 +117,7 @@ class GLSLRenderer(object):
         vao.render(mode=mg.TRIANGLE_STRIP)
 
     def LoadGLSLFile(self, path):
-        with open(os.path.abspath(path), 'r') as fp:
+        with open(path, 'r') as fp:
             glsl_shader = str(fp.read())
         return glsl_shader
 
