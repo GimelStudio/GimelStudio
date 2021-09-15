@@ -26,5 +26,6 @@ uniform float opacityValue;
 
 void main() {
     vec4 color = texelFetch(image, ivec2(gl_FragCoord.xy), 0);
-    out_color = vec4(color.r, color.g, color.b, opacityValue);
+    if (color.a > 0) out_color = vec4(color.r, color.g, color.b, opacityValue);
+    else out_color = color;
 }
