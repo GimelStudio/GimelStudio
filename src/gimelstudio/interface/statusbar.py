@@ -16,13 +16,15 @@
 
 import wx
 
+import gimelstudio.constants as const
+
 
 class StatusBar(wx.Panel, wx.StatusBar):
     def __init__(self, parent, id=wx.ID_ANY, pos=wx.DefaultPosition, size=wx.DefaultSize,
                  style=wx.NO_BORDER | wx.TAB_TRAVERSAL):
         wx.Panel.__init__(self, parent, id, pos, size, style)
 
-        self.SetBackgroundColour("#424242")
+        self.SetBackgroundColour(const.AREA_BG_COLOR)
 
         self.info_message = ""
         self.context_hints = []
@@ -30,7 +32,6 @@ class StatusBar(wx.Panel, wx.StatusBar):
         self.main_sizer = wx.GridBagSizer(vgap=0, hgap=0)
 
         self.SetSizer(self.main_sizer)
-
 
     def PushContextHints(self, pos, mouseicon=None, keyicon=None, text="", clear=False):
         """ Updates the statusbar with the specified icons and text. """
@@ -48,7 +49,7 @@ class StatusBar(wx.Panel, wx.StatusBar):
         # When there is a mouse and keyboard shortcut
         # icon, we add a "+" between them for clarity.
         if mouseicon is not None and keyicon is not None:
-            context_hint["separator"] = " + "
+            context_hint["separator"] = "+"
         else:
             context_hint["separator"] = None
 

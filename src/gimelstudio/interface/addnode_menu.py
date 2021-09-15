@@ -1,10 +1,26 @@
-import copy
+# ----------------------------------------------------------------------------
+# Gimel Studio Copyright 2019-2021 by Noah Rahm and contributors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# ----------------------------------------------------------------------------
 
+import copy
 import wx
 import wx.adv
 import wx.stc
-
 from gswidgetkit import TextCtrl
+
+import gimelstudio.constants as const
 
 
 class NodesVListBox(wx.VListBox):
@@ -12,7 +28,7 @@ class NodesVListBox(wx.VListBox):
         self._parent = args[0]
         wx.VListBox.__init__(self, *args, **kw)
 
-        self.SetBackgroundColour(wx.Colour("#424242"))
+        self.SetBackgroundColour(const.AREA_TOPBAR_COLOR)
 
         self.Bind(wx.EVT_MOTION, self.OnStartDrag)
 
@@ -138,7 +154,7 @@ class AddNodeMenu(wx.PopupTransientWindow):
         self._nodeRegistry = node_registry
         self._nodeRegistryMapping = {}
 
-        self.SetBackgroundColour(wx.Colour("#464646"))
+        self.SetBackgroundColour(const.AREA_BG_COLOR)
 
         self._InitRegistryMapping()
         self._InitAddNodeMenuUI()
