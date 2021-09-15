@@ -171,12 +171,15 @@ class ImageViewport(ZoomPanel):
         x = (self.Size[0] - image.Width) / 2.0
         y = (self.Size[1] - image.Height) / 2.0
 
-        # Draw checkerboard background
+        # Draw checkerboard background using bitmap
         dc.SetPen(wx.TRANSPARENT_PEN)
         dc.SetBrush(wx.Brush(ICON_BRUSH_CHECKERBOARD.GetBitmap()))
-        dc.DrawRectangle(wx.Rect(x, y, image.Width, image.Height))
 
-        # Draw image
+        # For some odd reason, we have to shave off 2px here
+        # otherwise the background is too large for the image.
+        dc.DrawRectangle(wx.Rect(x, y, int(image.Width)-2, int(image.Height)-2))
+
+        # Draw the image
         dc.DrawBitmap(image, x, y, useMask=False)
 
     def OnDrawInterface(self, dc):
