@@ -15,16 +15,16 @@
 # ----------------------------------------------------------------------------
 
 import wx
-import wx.html
 import wx.lib.agw.flatmenu as flatmenu
-
 from gswidgetkit import EVT_BUTTON, Button
 
-from .utils import ComputeMenuPosAlignedLeft
+import gimelstudio.constants as const
 import gimelstudio.interface.basewidgets.foldpanelbar as fpb
 from gimelstudio.datafiles import (ICON_HELP, ICON_NODEPROPERTIES_PANEL,
                                    ICON_MORE_MENU_SMALL, ICON_MOUSE_LMB,
                                    ICON_MOUSE_MMB, ICON_MOUSE_RMB)
+
+from .utils import ComputeMenuPosAlignedLeft  # TODO: move to gswidgetkit utilities
 
 ID_MENU_UNDOCKPANEL = wx.NewIdRef()
 ID_MENU_HIDEPANEL = wx.NewIdRef()
@@ -37,7 +37,7 @@ class NodePropertiesPanel(wx.Panel):
 
         self.parent = parent
 
-        self.SetBackgroundColour(wx.Colour("#464646"))
+        self.SetBackgroundColour(const.AREA_BG_COLOR)
 
         self.BuildUI()
 
@@ -57,7 +57,7 @@ class NodePropertiesPanel(wx.Panel):
         main_sizer = wx.BoxSizer(wx.VERTICAL)
 
         topbar = wx.Panel(self)
-        topbar.SetBackgroundColour("#424242")
+        topbar.SetBackgroundColour(const.AREA_TOPBAR_COLOR)
 
         topbar_sizer = wx.GridBagSizer(vgap=1, hgap=1)
 
@@ -100,7 +100,7 @@ class NodePropertiesPanel(wx.Panel):
 
             # Node info
             nodeinfo_pnl = wx.Panel(self.main_panel, size=(-1, 50))
-            nodeinfo_pnl.SetBackgroundColour("#464646")
+            nodeinfo_pnl.SetBackgroundColour(const.AREA_BG_COLOR)
 
             nodeinfo_pnl_sizer = wx.GridBagSizer(vgap=1, hgap=1)
 
@@ -174,10 +174,12 @@ class NodePropertiesPanel(wx.Panel):
 
         undockpanel_menuitem = flatmenu.FlatMenuItem(self.area_dropdownmenu,
                                                      ID_MENU_UNDOCKPANEL,
-                                                     _("Undock panel"), "", wx.ITEM_NORMAL)
+                                                     _("Undock panel"), "",
+                                                     wx.ITEM_NORMAL)
         self.area_dropdownmenu.AppendItem(undockpanel_menuitem)
 
         hidepanel_menuitem = flatmenu.FlatMenuItem(self.area_dropdownmenu,
                                                    ID_MENU_HIDEPANEL,
-                                                   _("Hide panel"), "", wx.ITEM_NORMAL)
+                                                   _("Hide panel"), "",
+                                                   wx.ITEM_NORMAL)
         self.area_dropdownmenu.AppendItem(hidepanel_menuitem)

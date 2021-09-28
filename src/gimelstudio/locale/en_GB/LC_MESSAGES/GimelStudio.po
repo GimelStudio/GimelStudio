@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gimel Studio\n"
 "POT-Creation-Date: 2021-07-05 13:44-0500\n"
-"PO-Revision-Date: 2021-07-05 13:44-0500\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2021-09-04 13:02+0200\n"
+"Last-Translator: Johannes Jakob <hi@johjakob.com>\n"
 "Language-Team: Gimel Studio translation team\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.0\n"
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -31,7 +31,7 @@ msgid "Open and load a Gimel Studio project file"
 msgstr ""
 
 #: application.py:92
-msgid "Save Project..."
+msgid "Save Project…"
 msgstr ""
 
 #: application.py:93
@@ -39,7 +39,7 @@ msgid "Save the current project file"
 msgstr ""
 
 #: application.py:101
-msgid "Save Project As..."
+msgid "Save Project As…"
 msgstr ""
 
 #: application.py:102
@@ -47,7 +47,7 @@ msgid "Save the current project as a Gimel Studio project"
 msgstr ""
 
 #: application.py:112
-msgid "Export Image As..."
+msgid "Export Image As…"
 msgstr ""
 
 #: application.py:113
@@ -71,11 +71,11 @@ msgid "Copy the current rendered image to the system clipboard"
 msgstr ""
 
 #: application.py:143
-msgid "User Preferences"
+msgid "Preferences…"
 msgstr ""
 
 #: application.py:144
-msgid "Edit user preferences and settings for Gimel Studio"
+msgid "Edit preferences for Gimel Studio"
 msgstr ""
 
 #: application.py:153
@@ -183,7 +183,7 @@ msgid "Quit Gimel Studio?"
 msgstr ""
 
 #: application.py:415
-msgid "User Preferences & Settings"
+msgid "Preferences"
 msgstr ""
 
 #: interface/imageviewport_pnl.py:60 interface/nodegraph_pnl.py:57
@@ -225,7 +225,7 @@ msgid "Connect Selected Node To Output"
 msgstr ""
 
 #: interface/nodegraph_pnl.py:143
-msgid "Pan Nodegraph"
+msgid "Pan Node Graph"
 msgstr ""
 
 #: interface/nodegraph_pnl.py:145
@@ -233,7 +233,7 @@ msgid "Node Context Menu"
 msgstr ""
 
 #: interface/nodegraph_pnl.py:146
-msgid "Nodegraph Area"
+msgid "Node Graph Area"
 msgstr ""
 
 #: interface/nodeproperties_pnl.py:153

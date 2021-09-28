@@ -27,16 +27,12 @@ class MixNode(api.Node):
     def __init__(self, nodegraph, _id):
         api.Node.__init__(self, nodegraph, _id)
 
-        self._label = "Mix"
-        self._category = "BLEND"
-
     @property
     def NodeMeta(self):
         meta_info = {
             "label": "Mix",
-            "author": "Correct Syntax",
+            "author": "Gimel Studio",
             "version": (1, 8, 5),
-            "supported_app_version": (0, 5, 0),
             "category": "BLEND",
             "description": "Layers two images together using the specified blend type.",
         }

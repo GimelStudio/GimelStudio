@@ -25,9 +25,7 @@ class EvalInfo(object):
         self.node = node
 
     def EvaluateParameter(self, name):
-        """
-        Evaluates the value of a parameter.
-        """
+        """ Evaluates the value of a parameter. """
         param = self.node._parameters[name]
         if param.binding:
             # Evaluate the next node
@@ -36,8 +34,6 @@ class EvalInfo(object):
         return param.value
 
     def EvaluateProperty(self, name):
-        """
-        Evaluates the value of a property.
-        """
+        """ Evaluates the value of a property. """
         prop = self.node._properties[name]
         return prop.value

@@ -17,7 +17,7 @@
 import os
 import wx
 
-from gimelstudio import constants
+import gimelstudio.constants as const
 
 
 class NodeGraphDropTarget(wx.DropTarget):
@@ -53,7 +53,8 @@ class NodeGraphDropTarget(wx.DropTarget):
 
     def OnTextDrop(self):
         try:
-            self._window.AddNode(self._textDropData.GetText(), pos=(0, 0), location="CURSOR")
+            self._window.AddNode(self._textDropData.GetText(),
+                                 pos=(0, 0), location="CURSOR")
             self._window.UpdateNodegraph()
         except Exception as error:
             self.ShowError(error)
@@ -64,7 +65,7 @@ class NodeGraphDropTarget(wx.DropTarget):
             try:
                 filetype = os.path.splitext(filename)[1]
 
-                if filetype.lower() in constants.SUPPORTED_FT_SAVE_LIST:
+                if filetype.lower() in const.SUPPORTED_FT_SAVE_LIST:
                     if os.path.exists(filename) is True:
                         # Create Image node with path
                         node = self._window.AddNode("corenode_image", pos=(0, 0),
@@ -77,12 +78,9 @@ class NodeGraphDropTarget(wx.DropTarget):
                         self.ShowError()
 
                 else:
-                    dlg = wx.MessageDialog(
-                        None,
-                        _("That file type isn't currently supported!"),
-                        _("Cannot Open File!"),
-                        style=wx.ICON_EXCLAMATION
-                    )
+                    dlg = wx.MessageDialog(None,
+                                           _("That file type isn't currently supported!"),
+                                           _("Cannot Open File!"), style=wx.ICON_EXCLAMATION)
                     dlg.ShowModal()
                     return False
 
@@ -92,11 +90,7 @@ class NodeGraphDropTarget(wx.DropTarget):
         return wx.DragCopy
 
     def ShowError(self, error=""):
-        dlg = wx.MessageDialog(
-            None,
-            "\n {}!".format(str(error)),
-            _("Error!"),
-            style=wx.ICON_ERROR
-        )
+        dlg = wx.MessageDialog(None, "\n {}!".format(str(error)),
+                               _("Error!"), style=wx.ICON_ERROR)
         dlg.ShowModal()
         return False

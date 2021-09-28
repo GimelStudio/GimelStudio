@@ -15,14 +15,12 @@
 # ----------------------------------------------------------------------------
 
 import os
-import threading
-
 import wx
 import wx.stc as stc
-
-from gimelstudio import constants
 from gswidgetkit import (Button, EVT_BUTTON, NumberField, EVT_NUMBERFIELD,
                          TextCtrl, DropDown, EVT_DROPDOWN)
+
+import gimelstudio.constants as const
 
 
 class ExportOptionsDialog(wx.Dialog):
@@ -61,16 +59,16 @@ class ExportOptionsDialog(wx.Dialog):
 
     def InitPngUI(self):
         pnl = wx.Panel(self)
-        pnl.SetBackgroundColour(wx.Colour("#464646"))
+        pnl.SetBackgroundColour(const.AREA_BG_COLOR)
 
         vbox = wx.BoxSizer(wx.VERTICAL)
         inner_sizer = wx.BoxSizer(wx.VERTICAL)
 
         # Compression level
         self.png_compression_field = NumberField(pnl, default_value=self.png_compression,
-                                                label=_("Compression Level"),
-                                                min_value=0, max_value=9,
-                                                suffix="")
+                                                 label=_("Compression Level"),
+                                                 min_value=0, max_value=9,
+                                                 suffix="")
         inner_sizer.Add(self.png_compression_field, flag=wx.EXPAND | wx.ALL, border=6)
 
         # Spacing
@@ -100,8 +98,8 @@ class ExportOptionsDialog(wx.Dialog):
         buttons_sizer.Add(export_btn)
         buttons_sizer.Add(cancel_btn, flag=wx.LEFT, border=5)
 
-        vbox.Add(pnl, proportion=1, flag=wx.ALL|wx.EXPAND, border=5)
-        vbox.Add(buttons_sizer, flag=wx.ALIGN_RIGHT|wx.TOP|wx.BOTTOM|wx.RIGHT, border=10)
+        vbox.Add(pnl, proportion=1, flag=wx.ALL | wx.EXPAND, border=5)
+        vbox.Add(buttons_sizer, flag=wx.ALIGN_RIGHT | wx.TOP | wx.BOTTOM | wx.RIGHT, border=10)
 
         self.SetSizer(vbox)
 
@@ -112,7 +110,7 @@ class ExportOptionsDialog(wx.Dialog):
 
     def InitJpegUI(self):
         pnl = wx.Panel(self)
-        pnl.SetBackgroundColour(wx.Colour("#464646"))
+        pnl.SetBackgroundColour(const.AREA_BG_COLOR)
 
         vbox = wx.BoxSizer(wx.VERTICAL)
         inner_sizer = wx.BoxSizer(wx.VERTICAL)
@@ -162,8 +160,8 @@ class ExportOptionsDialog(wx.Dialog):
         buttons_sizer.Add(export_btn)
         buttons_sizer.Add(cancel_btn, flag=wx.LEFT, border=5)
 
-        vbox.Add(pnl, proportion=1, flag=wx.ALL|wx.EXPAND, border=5)
-        vbox.Add(buttons_sizer, flag=wx.ALIGN_RIGHT|wx.TOP|wx.BOTTOM|wx.RIGHT, border=10)
+        vbox.Add(pnl, proportion=1, flag=wx.ALL | wx.EXPAND, border=5)
+        vbox.Add(buttons_sizer, flag=wx.ALIGN_RIGHT | wx.TOP | wx.BOTTOM | wx.RIGHT, border=10)
 
         self.SetSizer(vbox)
 
@@ -237,17 +235,11 @@ class ExportImageHandler(object):
             self.ExportOptionsDialog()
 
     def SelectFilePathDialog(self):
-        wildcard = constants.SUPPORTED_FT_SAVE_WILDCARD
+        wildcard = const.SUPPORTED_FT_SAVE_WILDCARD
 
-        dlg = wx.FileDialog(
-            self.parent,
-            message=_("Export image as..."),
-            defaultDir=os.getcwd(),
-            defaultFile="untitled.png",
-            wildcard=wildcard,
-            style=wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT
-        )
-        dlg.Center()
+        dlg = wx.FileDialog(self.parent, message=_("Export image as…"),
+                            defaultDir=os.getcwd(), defaultFile="untitled.png",
+                            wildcard=wildcard, style=wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT)
 
         # This sets the default filter that the user will initially see.
         # Otherwise, the first filter in the list will be used by default.
@@ -257,13 +249,10 @@ class ExportImageHandler(object):
             self.filepath = dlg.GetPath()
             self.filetype = os.path.splitext(self.filepath)[1]
 
-            if self.filetype not in constants.SUPPORTED_FT_SAVE_LIST:
-                dlg = wx.MessageDialog(
-                    None,
-                    _("That file type isn't currently supported!"),
-                    _("Cannot Save Image!"),
-                    style=wx.ICON_EXCLAMATION
-                )
+            if self.filetype not in const.SUPPORTED_FT_SAVE_LIST:
+                dlg = wx.MessageDialog(None,
+                                       _("That file type isn't currently supported!"),
+                                       _("Cannot Save Image!"), style=wx.ICON_EXCLAMATION)
                 dlg.ShowModal()
 
         dlg.Destroy()

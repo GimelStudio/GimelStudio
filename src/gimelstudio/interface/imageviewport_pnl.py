@@ -16,17 +16,17 @@
 
 import wx
 import wx.adv
+import numpy as np
 from wx.lib.newevent import NewCommandEvent
 import wx.lib.agw.flatmenu as flatmenu
-import numpy as np
-
 from gswidgetkit import Button, EVT_BUTTON, NumberField, EVT_NUMBERFIELD_CHANGE
 
-from .utils import ConvertImageToWx, ComputeMenuPosAlignedLeft
-from .basewidgets import ZoomPanel
+import gimelstudio.constants as const
 from gimelstudio.datafiles import (ICON_IMAGEVIEWPORT_PANEL, ICON_MORE_MENU_SMALL,
                                    ICON_MOUSE_MMB, ICON_MOUSE_MMB_MOVEMENT,
                                    ICON_BRUSH_CHECKERBOARD)
+from .utils import ConvertImageToWx, ComputeMenuPosAlignedLeft
+from .basewidgets import ZoomPanel
 
 imageviewport_mousezoom_cmd_event, EVT_IMAGEVIEWPORT_MOUSEZOOM = NewCommandEvent()
 
@@ -41,7 +41,7 @@ class ImageViewportPanel(wx.Panel):
 
         self._parent = parent
 
-        self.SetBackgroundColour(wx.Colour("#464646"))
+        self.SetBackgroundColour(const.AREA_BG_COLOR)
 
         self.BuildUI()
 
@@ -49,7 +49,7 @@ class ImageViewportPanel(wx.Panel):
         main_sizer = wx.BoxSizer(wx.VERTICAL)
 
         topbar = wx.Panel(self)
-        topbar.SetBackgroundColour("#424242")
+        topbar.SetBackgroundColour(const.AREA_TOPBAR_COLOR)
 
         topbar_sizer = wx.GridBagSizer(vgap=1, hgap=1)
 
@@ -163,7 +163,7 @@ class ImageViewport(ZoomPanel):
         return self._viewportImage
 
     def OnDrawBackground(self, dc):
-        dc.SetBackground(wx.Brush('#464646'))
+        dc.SetBackground(wx.Brush(const.AREA_BG_COLOR))
         dc.Clear()
 
     def OnDrawScene(self, dc):
@@ -171,12 +171,15 @@ class ImageViewport(ZoomPanel):
         x = (self.Size[0] - image.Width) / 2.0
         y = (self.Size[1] - image.Height) / 2.0
 
-        # draw checkerboard bg
+        # Draw checkerboard background using bitmap
         dc.SetPen(wx.TRANSPARENT_PEN)
         dc.SetBrush(wx.Brush(ICON_BRUSH_CHECKERBOARD.GetBitmap()))
-        dc.DrawRectangle(wx.Rect(x, y, image.Width, image.Height))
 
-        # Draw image
+        # For some odd reason, we have to shave off 2px here
+        # otherwise the background is too large for the image.
+        dc.DrawRectangle(wx.Rect(x, y, int(image.Width)-2, int(image.Height)-2))
+
+        # Draw the image
         dc.DrawBitmap(image, x, y, useMask=False)
 
     def OnDrawInterface(self, dc):
@@ -221,9 +224,8 @@ class ImageViewport(ZoomPanel):
         self.UpdateDrawing()
 
     def SendMouseZoomEvent(self):
-        wx.PostEvent(self,
-                     imageviewport_mousezoom_cmd_event(id=self.GetId(),
-                     value=self._zoom))
+        wx.PostEvent(self, imageviewport_mousezoom_cmd_event(id=self.GetId(),
+                                                             value=self._zoom))
 
     def UpdateViewerImage(self, image, render_time):
         """ Update the Image Viewport. This refreshes everything

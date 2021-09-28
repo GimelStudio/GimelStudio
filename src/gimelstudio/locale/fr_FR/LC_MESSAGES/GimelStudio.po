@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gimel Studio\n"
 "POT-Creation-Date: 2021-07-25 19:32+0200\n"
-"PO-Revision-Date: 2021-07-25 19:32+0200\n"
-"Last-Translator: Julieñ <jumaxotl@gmail.com>\n"
+"PO-Revision-Date: 2021-09-04 13:02+0200\n"
+"Last-Translator: Johannes Jakob <hi@johjakob.com>\n"
 "Language-Team: Gimel Studio translation team\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -31,24 +31,24 @@ msgid "Open and load a Gimel Studio project file"
 msgstr "Ouvrir un fichier de  projet Gimel Studio"
 
 #: application.py:97
-msgid "Save Project..."
-msgstr "Enregistrer..."
+msgid "Save Project…"
+msgstr "Enregistrer…"
 
 #: application.py:98
 msgid "Save the current project file"
 msgstr "Enregistrer le projet Gimel Studio en cours"
 
 #: application.py:106
-msgid "Save Project As..."
-msgstr "Enregistrer sous..."
+msgid "Save Project As…"
+msgstr "Enregistrer sous…"
 
 #: application.py:107
 msgid "Save the current project as a Gimel Studio project"
 msgstr "Enregistrer le projet Gimel Studio en cours sous un nouveau nom"
 
 #: application.py:117
-msgid "Export Image As..."
-msgstr "Exporter l'image..."
+msgid "Export Image As…"
+msgstr "Exporter l'image…"
 
 #: application.py:118
 msgid "Export rendered image to a file"
@@ -71,12 +71,12 @@ msgid "Copy the current rendered image to the system clipboard"
 msgstr "Copier le rendu de l'image en cours dans le presse-papier système"
 
 #: application.py:147
-msgid "User Preferences"
-msgstr "Préférences Utilisateur"
+msgid "Preferences…"
+msgstr "Préférences…"
 
 #: application.py:148
-msgid "Edit user preferences and settings for Gimel Studio"
-msgstr "Éditer les préférences utilisateur et les réglages de Gimel Studio"
+msgid "Edit preferences for Gimel Studio"
+msgstr "Éditer les préférences de Gimel Studio"
 
 #: application.py:157
 msgid "Toggle Statusbar"
@@ -188,8 +188,8 @@ msgid "Quit Gimel Studio?"
 msgstr "Quitter Gimel Studio ?"
 
 #: application.py:439
-msgid "User Preferences & Settings"
-msgstr "Préférences Utilisateur & Réglages"
+msgid "Preferences"
+msgstr "Préférences"
 
 #: interface/exportimage_dlg.py:32
 msgid "Image Export Options"
@@ -220,8 +220,8 @@ msgid "Comment metadata:"
 msgstr "Métadonnées :"
 
 #: interface/exportimage_dlg.py:244
-msgid "Export image as..."
-msgstr "Exporter l'image..."
+msgid "Export image as…"
+msgstr "Exporter l'image…"
 
 #: interface/exportimage_dlg.py:263 interface/nodegraph_dnd.py:81
 msgid "That file type isn't currently supported!"
@@ -278,7 +278,7 @@ msgid "Connect Selected Node To Output"
 msgstr "Connecter le Nœud Sélectionné à la Sortie"
 
 #: interface/nodegraph_pnl.py:153
-msgid "Pan Nodegraph"
+msgid "Pan Node Graph"
 msgstr "Déplacer le Graphe Nodal"
 
 #: interface/nodegraph_pnl.py:155
@@ -286,7 +286,7 @@ msgid "Node Context Menu"
 msgstr "Menu Contextuel du Nœud"
 
 #: interface/nodegraph_pnl.py:156
-msgid "Nodegraph Area"
+msgid "Node Graph Area"
 msgstr "Zone du Graphe Nodal"
 
 #: interface/nodeproperties_pnl.py:156

@@ -23,16 +23,12 @@ class FlipNode(api.Node):
     def __init__(self, nodegraph, _id):
         api.Node.__init__(self, nodegraph, _id)
 
-        self._label = "Flip"
-        self._category = "DISTORT"  # for now
-
     @property
     def NodeMeta(self):
         meta_info = {
             "label": "Flip",
-            "author": "Correct Syntax",
+            "author": "Gimel Studio",
             "version": (0, 5, 0),
-            "supported_app_version": (0, 5, 0),
             "category": "TRANSFORM",
             "description": "",
         }

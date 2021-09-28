@@ -23,16 +23,12 @@ class BlurNode(api.Node):
     def __init__(self, nodegraph, _id):
         api.Node.__init__(self, nodegraph, _id)
 
-        self._label = "Blur"
-        self._category = "FILTER"
-
     @property
     def NodeMeta(self):
         meta_info = {
             "label": "Blur",
-            "author": "Correct Syntax",
+            "author": "Gimel Studio",
             "version": (2, 5, 0),
-            "supported_app_version": (0, 5, 0),
             "category": "FILTER",
             "description": "Blurs the given image using the specified blur type and kernel.",
         }
@@ -77,7 +73,6 @@ class BlurNode(api.Node):
         image1 = self.EvalParameter(eval_info, 'Image')
 
         image = api.RenderImage()
-
         img = image1.Image("numpy")
 
         if filter_type == "Box":
