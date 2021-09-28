@@ -1,0 +1,63 @@
+{
+    "app_version": "0.6.0",
+    "Settings": {
+        "General": {
+            "Experimental": true,
+            "Node cache enabled": true
+        },
+        "Interface": {
+            "Node wire curvature": 0,
+            "Show image thumbnails on nodes": false,
+            "Position the 'Add Node' menu based on the cursor location": true,
+            "Show the statusbar": true,
+            "Language": "English"
+        },
+        "Interface_options": {
+            "Node wire curvature": {
+                "Display Widget": "Number Field",
+                "Show Progress": true,
+                "Min Value": 0,
+                "Max Value": 100,
+                "Suffix": "%"
+            },
+            "Language": {
+                "Display Widget": "Drop Down",
+                "Items": [
+                    "English",
+                    "German",
+                    "French"
+                ]
+            }
+        },
+        "Add-ons": {},
+        "Nodes": {},
+        "Templates": {},
+        "System": {},
+        "File Paths": {
+            "Default Output Folder": "~/",
+            "Fonts Path": "~/"
+        },
+        "File Paths_options": {
+            "Default Output Folder": {
+                "Display Widget": "Line Ctrl",
+                "Placeholder": ""
+            },
+            "Fonts Path": {
+                "Display Widget": "Line Ctrl",
+                "Placeholder": ""
+            }
+        },
+        "Test": {
+            "Boolean": true,
+            "Float": 27,
+            "Integer": 75,
+            "String": "Hello World!"
+        },
+        "Test_options": {
+            "String": {
+                "Widget Type": "Text Ctrl",
+                "Placeholder": "This is a placeholder"
+            }
+        }
+    }
+}
