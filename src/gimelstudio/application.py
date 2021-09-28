@@ -23,7 +23,6 @@ import wx.lib.agw.flatmenu as flatmenu
 
 from .node_importer import *
 import gimelstudio.constants as appconst
-from .config import AppConfiguration
 from .interface import artproviders
 from .core import Renderer, NODE_REGISTRY
 from .datafiles.icons import ICON_GIMELSTUDIO_ICO
@@ -39,12 +38,11 @@ class AUIManager(aui.AuiManager):
 
 
 class ApplicationFrame(wx.Frame):
-    def __init__(self):
+    def __init__(self, app_config=None):
         wx.Frame.__init__(self, None, title=appconst.APP_NAME, size=(1000, 800))
 
         # Application configuration
-        self.appconfig = AppConfiguration(self)
-        self.appconfig.Load()
+        self.appconfig = app_config
 
         # Renderer and node registry
         self.renderer = Renderer(self)
@@ -94,7 +92,7 @@ class ApplicationFrame(wx.Frame):
         self.saveprojectfile_menuitem = flatmenu.FlatMenuItem(
             file_menu,
             id=wx.ID_ANY,
-            label="{0}{1}".format(_("Save Project..."), "\tCtrl+S"),
+            label="{0}{1}".format(_("Save Project…"), "\tCtrl+S"),
             helpString=_("Save the current project file"),
             kind=wx.ITEM_NORMAL,
             subMenu=None
@@ -103,7 +101,7 @@ class ApplicationFrame(wx.Frame):
         self.saveprojectfileas_menuitem = flatmenu.FlatMenuItem(
             file_menu,
             id=wx.ID_ANY,
-            label="{0}{1}".format(_("Save Project As..."), "\tCtrl+Shift+S"),
+            label="{0}{1}".format(_("Save Project As…"), "\tCtrl+Shift+S"),
             helpString=_("Save the current project as a Gimel Studio project"),
             kind=wx.ITEM_NORMAL,
             subMenu=None
@@ -114,7 +112,7 @@ class ApplicationFrame(wx.Frame):
         self.exportasimage_menuitem = flatmenu.FlatMenuItem(
             file_menu,
             id=wx.ID_ANY,
-            label="{0}{1}".format(_("Export Image As..."), "\tShift+E"),
+            label="{0}{1}".format(_("Export Image As…"), "\tShift+E"),
             helpString=_("Export rendered image to a file"),
             kind=wx.ITEM_NORMAL,
             subMenu=None
@@ -144,8 +142,8 @@ class ApplicationFrame(wx.Frame):
         self.preferences_menuitem = flatmenu.FlatMenuItem(
             edit_menu,
             id=wx.ID_ANY,
-            label=_("User Preferences"),
-            helpString=_("Edit user preferences and settings for Gimel Studio"),
+            label=_("Preferences"),
+            helpString=_("Edit preferences for Gimel Studio"),
             kind=wx.ITEM_NORMAL,
             subMenu=None
         )
@@ -333,7 +331,7 @@ class ApplicationFrame(wx.Frame):
         self.imageviewport_pnl = ImageViewportPanel(self)
         self.prop_pnl = NodePropertiesPanel(self, size=(350, 500))
 
-        # Nodegraph
+        # Node Graph
         self.nodegraph_pnl = NodeGraphPanel(self, self.registry, size=(100, 100))
         self.nodegraph_pnl.SetDropTarget(NodeGraphDropTarget(self.nodegraph_pnl))
 
@@ -436,7 +434,7 @@ class ApplicationFrame(wx.Frame):
             event.Skip()
 
     def OnPreferencesDialog(self, event):
-        dlg = PreferencesDialog(self, title=_("User Preferences & Settings"))
+        dlg = PreferencesDialog(self, title=_("Preferences"), app_config=self.appconfig, categories=["General", "Interface", "Add-ons", "Nodes", "Templates", "System", "File Paths"])
         dlg.Show()
 
     def OnToggleStatusbar(self, event):

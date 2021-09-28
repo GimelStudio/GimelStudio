@@ -38,11 +38,31 @@ class AppConfiguration(AppData):
         self.app = app
         self.prefs = {}
 
-    def Config(self, key=None, value=None):
-        if value is not None and value is not None:
-            self.prefs[key] = value
+    def Config(self, key: str = None, keys: tuple = None, value=None, default=None):
+        if key is not None:
+            keys = (key)
+
+        if value is not None:
+            d_key = None
+            for k in keys:
+                if keys.index(k) == 0:
+                    d_key = self.prefs[k]
+                elif keys.index(k) == len(keys) - 1:
+                    d_key[k] = value
+                else:
+                    d_key = d_key[k]
         else:
-            return self.prefs[key]
+            try:
+                d_key = None
+                for k in keys:
+                    if keys.index(k) == 0:
+                        d_key = self.prefs[k]
+                    elif keys.index(k) == len(keys) - 1:
+                        return d_key[k]
+                    else:
+                        d_key = d_key[k]
+            except KeyError:
+                return default
 
     def Load(self):
         path = os.path.expanduser("~/.gimelstudio/config.json")
@@ -60,8 +80,7 @@ class AppConfiguration(AppData):
 
         path = "~/.gimelstudio/config.json"
         try:
-            with open(
-                os.path.expanduser(path), "w") as file:
-                json.dump(self.prefs, file)
+            with open(os.path.expanduser(path), "w") as file:
+                json.dump(self.prefs, file, indent=4)
         except IOError:
             pass  # Not a big deal
