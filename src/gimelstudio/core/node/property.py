@@ -107,12 +107,13 @@ class Property(object):
 class PositiveIntegerProp(Property):
     """ Allows the user to select a positive integer. """
 
-    def __init__(self, idname, default=0, min_val=0,
+    def __init__(self, idname, default=0, lbl_suffix="", min_val=0,
                  max_val=10, widget="slider", label="", visible=True):
         Property.__init__(self, idname, default, label, visible)
         self.min_value = min_val
         self.max_value = max_val
         self.widget = widget
+        self.lbl_suffix = lbl_suffix
 
         self._RunErrorCheck()
 
@@ -141,7 +142,7 @@ class PositiveIntegerProp(Property):
                                        label=self.GetLabel(),
                                        min_value=self.GetMinValue(),
                                        max_value=self.GetMaxValue(),
-                                       suffix="px", show_p=False,
+                                       suffix=self.lbl_suffix, show_p=False,
                                        size=(-1, 32))
 
         self.AddToFoldPanel(sizer, fold_panel, self.numberfield, spacing=10)
