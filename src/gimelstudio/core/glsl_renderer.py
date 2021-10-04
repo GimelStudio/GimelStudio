@@ -27,6 +27,7 @@ class GLSLRenderer(object):
         self.glContext = mg.create_standalone_context(require=330)
 
         self.src_texture = self.glContext.texture((4000, 4000), 4, dtype='f1')
+        self.src_texture2 = self.glContext.texture((4000, 4000), 4, dtype='f1')
         self.dst_texture = self.glContext.texture((4000, 4000), 4, dtype='f1')
         self.src_fbo = self.glContext.framebuffer(self.src_texture)
         self.dst_fbo = self.glContext.framebuffer(self.dst_texture)
@@ -56,7 +57,7 @@ class GLSLRenderer(object):
         self.src_texture, self.dst_texture = self.dst_texture, self.src_texture
         self.src_fbo, self.dst_fbo = self.dst_fbo, self.src_fbo
 
-    def Write(self, image):
+    def Write(self, image, texture):
         # Do the writing to src_texture
 
         # FIXME: this effectively means we are no longer working with 16-bit
@@ -64,10 +65,10 @@ class GLSLRenderer(object):
         # image = cv2.normalize(image, dst=None, alpha=0, beta=65535, norm_type=cv2.NORM_MINMAX)
         # print(image.dtype)
         image = image.copy(order='C')
-        self.viewport = (0, 0, *image.shape[1::-1])
+        viewport = (0, 0, *image.shape[1::-1])
 
-        self.src_texture.write(image, viewport=self.viewport)
-        return self.viewport
+        texture.write(image, viewport=viewport)
+        return viewport
 
     def ReadNumpy(self):
         """ Returns a ``numpy.ndarray`` image. """
@@ -76,9 +77,10 @@ class GLSLRenderer(object):
         img = np.frombuffer(raw, dtype='uint8').reshape((self.viewport[3], self.viewport[2], 4))
         return img
 
-    def Render(self, frag_shader, props, image=None):
+    def Render(self, frag_shader, props, image=None, image2=None):
         if image is not None:
-            self.viewport = self.Write(image)
+            self.viewport = self.Write(image, self.src_texture)
+            self.viewport2 = self.Write(image2, self.src_texture2)
         hash_value = hashlib.md5(copy.copy(frag_shader).encode())
         vao = self._vaos.get(hash_value)
 
@@ -93,6 +95,9 @@ class GLSLRenderer(object):
                 """,
                 fragment_shader=frag_shader,
             )
+
+            program["image"] = 0
+            program["image2"] = 1
 
             vao = self.glContext.vertex_array(
                 program,
@@ -114,6 +119,7 @@ class GLSLRenderer(object):
         self.dst_fbo.clear()
         self.dst_fbo.viewport = self.viewport
         self.src_texture.use(0)
+        self.src_texture2.use(1)
         vao.render(mode=mg.TRIANGLE_STRIP)
 
     def LoadGLSLFile(self, path):

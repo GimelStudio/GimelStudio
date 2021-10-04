@@ -219,10 +219,10 @@ class Node(NodeView):
         """
         pass
 
-    def RenderGLSL(self, path, props, image):
+    def RenderGLSL(self, path, props, image, image2):
         shader_path = os.path.abspath(os.path.expanduser(os.path.expandvars(path)))
         shader = self.GLSLRenderer.LoadGLSLFile(shader_path)
-        self.GLSLRenderer.Render(shader, props, image)
+        self.GLSLRenderer.Render(shader, props, image, image2)
         return self.GLSLRenderer.ReadNumpy()
 
     def RefreshNodeGraph(self):
