@@ -49,7 +49,7 @@ class ApplicationFrame(wx.Frame):
 
         # Initilize renderers and node registry
         self.renderer = Renderer(self)
-        self.glsl_renderer = GLSLRenderer()  # Maybe move this to nodegraph or something
+        self.glsl_renderer = GLSLRenderer()  # TODO: Maybe move this to nodegraph or something
         self.registry = NODE_REGISTRY
 
         # Set the program icon
@@ -429,6 +429,8 @@ class ApplicationFrame(wx.Frame):
         if quitdialog.ShowModal() == wx.ID_YES:
             # Save configuration settings before quit
             self.appconfig.Save()
+            # Make sure to release data used by GPU render engine
+            self.glsl_renderer.Release()
             # Un-int the app and window mgr
             quitdialog.Destroy()
             self._mgr.UnInit()
