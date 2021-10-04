@@ -20,14 +20,14 @@
 
 #version 330
 
-uniform sampler2D image;
-uniform sampler2D image2;
-out vec4 out_color;
+uniform sampler2D input_img;
+uniform sampler2D input_img2;
 uniform float factor;
+out vec4 output_img;
 
 void main() {
-    vec4 color = texelFetch(image, ivec2(gl_FragCoord.xy), 0);
-    vec4 color2 = texelFetch(image2, ivec2(gl_FragCoord.xy), 0);
+    vec4 color1 = texelFetch(input_img, ivec2(gl_FragCoord.xy), 0);
+    vec4 color2 = texelFetch(input_img2, ivec2(gl_FragCoord.xy), 0);
 
-    out_color = mix(color, color2, factor);
+    output_img = mix(color1, color2, factor);
 }

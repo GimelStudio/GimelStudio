@@ -58,7 +58,7 @@ class OpacityNode(api.Node):
         opacity_value = (opacity_value * 0.01)
 
         props = {
-            "opacityValue": opacity_value
+            "opacity_value": opacity_value
         }
         shader_src = "gimelstudio/corenodes/filter/opacity_node/opacity.glsl"
         result = self.RenderGLSL(shader_src, props, image1)

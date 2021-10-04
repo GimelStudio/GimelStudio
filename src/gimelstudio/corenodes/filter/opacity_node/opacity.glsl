@@ -15,17 +15,17 @@
 //
 // FILE: opacity.glsl
 // AUTHOR(S): Noah Rahm
-// PURPOSE: Adjust the opacity of an RGBA image
+// PURPOSE: Adjust the opacity of an image
 // ----------------------------------------------------------------------------
 
 #version 330
 
-uniform sampler2D image;
-out vec4 out_color;
-uniform float opacityValue;
+uniform sampler2D input_img;
+uniform float opacity_value;
+out vec4 output_img;
 
 void main() {
-    vec4 color = texelFetch(image, ivec2(gl_FragCoord.xy), 0);
-    if (color.a > 0) out_color = vec4(color.r, color.g, color.b, opacityValue);
-    else out_color = color;
+    vec4 color = texelFetch(input_img, ivec2(gl_FragCoord.xy), 0);
+    if (color.a > 0) output_img = vec4(color.r, color.g, color.b, opacity_value);
+    else output_img = color;
 }

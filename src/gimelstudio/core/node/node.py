@@ -219,7 +219,7 @@ class Node(NodeView):
         """
         pass
 
-    def RenderGLSL(self, path, props, image, image2):
+    def RenderGLSL(self, path, props, image, image2=None):
         shader_path = os.path.abspath(os.path.expanduser(os.path.expandvars(path)))
         shader = self.GLSLRenderer.LoadGLSLFile(shader_path)
         self.GLSLRenderer.Render(shader, props, image, image2)
