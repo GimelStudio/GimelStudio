@@ -17,10 +17,11 @@
 import wx
 import wx.lib.agw.flatmenu as flatmenu
 from gswidgetkit import Button, EVT_BUTTON, NumberField, EVT_NUMBERFIELD_CHANGE
-from gsnodegraph import (NodeGraph, EVT_GSNODEGRAPH_NODESELECT,
+from gsnodegraph import (EVT_GSNODEGRAPH_NODESELECT,
                          EVT_GSNODEGRAPH_NODECONNECT,
                          EVT_GSNODEGRAPH_NODEDISCONNECT,
                          EVT_GSNODEGRAPH_MOUSEZOOM)
+from gsnodegraph import NodeGraph as NodeGraphBase
 
 import gimelstudio.constants as const
 from gimelstudio.datafiles import (ICON_NODEGRAPH_PANEL, ICON_MORE_MENU_SMALL,
@@ -33,6 +34,15 @@ from .addnode_menu import AddNodeMenu
 ID_MENU_UNDOCKPANEL = wx.NewIdRef()
 ID_MENU_HIDEPANEL = wx.NewIdRef()
 ID_ADDNODEMENU = wx.NewIdRef()
+
+
+class NodeGraph(NodeGraphBase):
+    def __init__(self, parent, registry, *args, **kwds):
+        NodeGraphBase.__init__(self, parent, registry, *args, **kwds)
+
+    @property
+    def GLSLRenderer(self):
+        return self.parent.GLSLRenderer
 
 
 class NodeGraphPanel(wx.Panel):
@@ -80,9 +90,10 @@ class NodeGraphPanel(wx.Panel):
         self.nodegraph.AddNode('corenode_image', wx.Point(100, 30))
         self.nodegraph.AddNode('corenode_image', wx.Point(100, 200))
         self.nodegraph.AddNode('corenode_blur', wx.Point(600, 200))
-        self.nodegraph.AddNode('corenode_mix', wx.Point(300, 200))
+        self.nodegraph.AddNode('corenode_opacity', wx.Point(300, 200))
         self.nodegraph.AddNode('corenode_outputcomposite', wx.Point(900, 270))
         self.nodegraph.AddNode('corenode_flip', wx.Point(500, 300))
+        self.nodegraph.AddNode('corenode_alpha_over', wx.Point(300, 350))
 
         main_sizer.Add(topbar, flag=wx.EXPAND | wx.LEFT | wx.RIGHT)
         main_sizer.Add(self.nodegraph, 1, flag=wx.EXPAND | wx.BOTH)
@@ -116,6 +127,10 @@ class NodeGraphPanel(wx.Panel):
     @property
     def PropertiesPanel(self):
         return self.parent.prop_pnl
+
+    @property
+    def GLSLRenderer(self):
+        return self.parent.glsl_renderer
 
     @property
     def Statusbar(self):

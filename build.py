@@ -111,11 +111,14 @@ if sys.platform == "win32":
 # Setup the correct arguments and options based on the platform
 args = [
     "pyinstaller",
+    "src/main.py",
     "-n", "GimelStudio",
     "--noconsole",
     "--noconfirm",
     "--hidden-import",
-    "pkg_resources.py2_warn"
+    "pkg_resources.py2_warn",
+    "--hidden-import",
+    "glcontext",
     ]
 
 if sys.platform == "linux" or sys.platform == "linux2":
@@ -126,7 +129,6 @@ elif sys.platform == "win32":
 else:
     raise NotImplementedError("Only Windows, Linux and MacOs are supported!")
 
-args.append("src/main.py")
 subprocess.call(args)
 
 # Create a new folder for custom node scripts then copy the

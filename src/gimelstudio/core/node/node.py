@@ -14,10 +14,9 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
+import os.path
 import wx
 from gsnodegraph import NodeBase as NodeView
-
-from gimelstudio.core import RenderImage
 
 
 class Node(NodeView):
@@ -56,6 +55,10 @@ class Node(NodeView):
             "description": "...",
         }
         return meta_info
+
+    @property
+    def GLSLRenderer(self):
+        return self.nodegraph.GLSLRenderer
 
     def GetLabel(self):
         return self.NodeMeta["label"]
@@ -212,6 +215,12 @@ class Node(NodeView):
         :prop value: updated value of the property
         """
         pass
+
+    def RenderGLSL(self, path, props, image, image2=None):
+        shader_path = os.path.abspath(os.path.expanduser(os.path.expandvars(path)))
+        shader = self.GLSLRenderer.LoadGLSLFile(shader_path)
+        self.GLSLRenderer.Render(shader, props, image, image2)
+        return self.GLSLRenderer.ReadNumpy()
 
     def RefreshNodeGraph(self):
         """ Force a refresh of the Node Graph panel. """

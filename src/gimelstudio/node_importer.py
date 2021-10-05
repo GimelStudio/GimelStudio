@@ -15,4 +15,5 @@
 # ----------------------------------------------------------------------------
 
 
-from .corenodes import OutputNode, MixNode, ImageNode, BlurNode, FlipNode
+from .corenodes import (OutputNode, MixNode, ImageNode,
+                        BlurNode, FlipNode, AlphaOverNode)
