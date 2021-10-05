@@ -18,10 +18,11 @@ import wx
 import wx.lib.agw.flatmenu as flatmenu
 
 from gswidgetkit import Button, EVT_BUTTON, NumberField, EVT_NUMBERFIELD_CHANGE
-from gsnodegraph import (NodeGraph, EVT_GSNODEGRAPH_NODESELECT,
+from gsnodegraph import (EVT_GSNODEGRAPH_NODESELECT,
                          EVT_GSNODEGRAPH_NODECONNECT,
                          EVT_GSNODEGRAPH_NODEDISCONNECT,
                          EVT_GSNODEGRAPH_MOUSEZOOM)
+from gsnodegraph import NodeGraph as NodeGraphBase
 
 from gimelstudio.datafiles import (ICON_NODEGRAPH_PANEL, ICON_MORE_MENU_SMALL,
                                    ICON_MOUSE_LMB_MOVEMENT, ICON_MOUSE_LMB,
@@ -33,6 +34,15 @@ from .addnode_menu import AddNodeMenu
 ID_MENU_UNDOCKPANEL = wx.NewIdRef()
 ID_MENU_HIDEPANEL = wx.NewIdRef()
 ID_ADDNODEMENU = wx.NewIdRef()
+
+
+class NodeGraph(NodeGraphBase):
+    def __init__(self, parent, registry, *args, **kwds):
+        NodeGraphBase.__init__(self, parent, registry, *args, **kwds)
+
+    @property
+    def GLSLRenderer(self):
+        return self.parent.GLSLRenderer
 
 
 class NodeGraphPanel(wx.Panel):

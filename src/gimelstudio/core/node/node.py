@@ -18,8 +18,6 @@ import os.path
 import wx
 from gsnodegraph import NodeBase as NodeView
 
-from gimelstudio.core import RenderImage
-
 
 class Node(NodeView):
     def __init__(self, nodegraph, _id):
@@ -60,8 +58,7 @@ class Node(NodeView):
 
     @property
     def GLSLRenderer(self):
-        # FIXME: shouldn't be reaching in this far!
-        return self.nodegraph.parent.GLSLRenderer
+        return self.nodegraph.GLSLRenderer
 
     def GetLabel(self):
         return self.NodeMeta["label"]

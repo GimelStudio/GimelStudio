@@ -1,4 +1,3 @@
-
 # ----------------------------------------------------------------------------
 # Gimel Studio Copyright 2019-2021 by Noah Rahm and contributors
 #

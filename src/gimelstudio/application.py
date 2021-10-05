@@ -49,7 +49,7 @@ class ApplicationFrame(wx.Frame):
 
         # Initilize renderers and node registry
         self.renderer = Renderer(self)
-        self.glsl_renderer = GLSLRenderer()  # TODO: Maybe move this to nodegraph or something
+        self.glsl_renderer = GLSLRenderer()
         self.registry = NODE_REGISTRY
 
         # Set the program icon
