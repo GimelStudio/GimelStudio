@@ -104,7 +104,7 @@ class NodePropertiesPanel(wx.Panel):
 
             nodeinfo_pnl_sizer = wx.GridBagSizer(vgap=1, hgap=1)
 
-            node_label = wx.StaticText(nodeinfo_pnl, label=selected_node._label)
+            node_label = wx.StaticText(nodeinfo_pnl, label=selected_node.GetLabel())
             node_label.SetForegroundColour("#fff")
             node_label.SetFont(self.area_label.GetFont().Bold())
 
