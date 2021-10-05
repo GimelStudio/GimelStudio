@@ -1,6 +1,6 @@
 wxpython==4.1.1
 gsnodegraph==0.2.7
-gswidgetkit==0.2.0
+gswidgetkit==0.2.2
 moderngl==5.6.4
 numpy
 opencv-python
