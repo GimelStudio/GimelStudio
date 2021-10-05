@@ -115,7 +115,8 @@ args = [
     "--noconsole",
     "--noconfirm",
     "--hidden-import",
-    "pkg_resources.py2_warn"
+    "pkg_resources.py2_warn",
+    "glcontext"
     ]
 
 if sys.platform == "linux" or sys.platform == "linux2":
