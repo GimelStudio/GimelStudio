@@ -251,7 +251,7 @@ FPB_EXTRA_Y = 6
 """ Extra vertical padding, in pixels. """
 
 # pixels of the bmp to be aligned from the right filled with space
-FPB_BMP_RIGHTSPACE = 4
+FPB_BMP_RIGHTSPACE = 2
 """ Pixels of the bmp to be aligned from the right filled with space. """
 
 # Now supported! Single fold forces
@@ -282,12 +282,12 @@ FPB_ALIGN_LEFT = 0
 FPB_ALIGN_WIDTH = 1
 """ The :class:`wx.Window` to be added will be aligned to fit the width of the FoldPanel when it is resized. Very handy for sizer items, buttons and text boxes. """
 
-FPB_DEFAULT_LEFTSPACING = 5
+FPB_DEFAULT_LEFTSPACING = 10
 FPB_DEFAULT_RIGHTSPACING = 10
 FPB_DEFAULT_SPACING = 8
 
-FPB_DEFAULT_LEFTLINESPACING = 2
-FPB_DEFAULT_RIGHTLINESPACING = 2
+FPB_DEFAULT_LEFTLINESPACING = 20
+FPB_DEFAULT_RIGHTLINESPACING = 20
 
 
 # ------------------------------------------------------------------------------ #
@@ -826,7 +826,7 @@ class CaptionBar(wx.Window):
         # the caption. This way a flickering arrow during resize is not visible
 
         self.FillCaptionBackground(dc)
-        dc.SetFont(self._style.GetCaptionFont())
+        dc.SetFont(self._style.GetCaptionFont().Bold())
         dc.SetTextForeground(self._style.GetCaptionColour())
 
         # draw small icon, either collapsed or expanded
@@ -1777,7 +1777,7 @@ class FoldPanelItem(wx.Panel):
         # make initial size for component, if collapsed, the
         # size is determined on the panel height and won't change
 
-        size = self._captionBar.GetSize()
+        size = self._captionBar.GetSize() + wx.Size(0, 6)
 
         self._PanelSize = (self.IsVertical() and [size.GetHeight()] or \
                            [size.GetWidth()])[0]
@@ -1876,7 +1876,7 @@ class FoldPanelItem(wx.Panel):
         ypos = (vertical and [pos] or [-1])[0]
 
         self.SetSize(xpos, ypos, -1, -1, wx.SIZE_USE_EXISTING)
-        self._itemPos = pos
+        self._itemPos = pos + 6  # Add 6px of padding to bottom of each item
 
         self.Thaw()
 

@@ -236,7 +236,7 @@ class OpenFileChooserProp(Property):
         hbox.Add(self.button, flag=wx.LEFT, border=5)
         self.button.Bind(EVT_BUTTON, self.WidgetEvent)
 
-        vbox.Add(hbox, flag=wx.EXPAND | wx.BOTH | wx.ALL, border=6)
+        vbox.Add(hbox, flag=wx.EXPAND | wx.BOTH)
 
         vbox.Fit(pnl)
         pnl.SetSizer(vbox)
