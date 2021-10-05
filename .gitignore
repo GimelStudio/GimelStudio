@@ -4,8 +4,8 @@ __pycache__
 *.pyc
 
 # Ignore pyinstaller build folders/files
-build
-dist
+build/*
+dist/*
 *.spec
 
 # Ignore test images
@@ -24,7 +24,5 @@ tests
 
 # Ignore other misc.
 .vscode
-src/gimelstudio/locale_old
-
 env
 .DS_Store
