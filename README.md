@@ -5,7 +5,7 @@
   <img href="https://lgtm.com/projects/g/GimelStudio/GimelStudio/" src="https://img.shields.io/lgtm/grade/python/g/GimelStudio/GimelStudio.svg?logo=lgtm&logoWidth=18" />
   <br/>
   Non-destructive, node-based 2D image graphics editor written in Python, focused on simplicity, speed, elegance, and usability<br/>
-  <a href="https://gimelstudio.github.io">Official Website</a> | <a href="https://discord.gg/RqwbDrVDpK">Join Our Discord Server</a> | <a href="https://gitter.im/Gimel-Studio/community">Gitter Community</a>
+  <a href="https://gimelstudio.github.io">Official Website</a> | <a href="https://discord.gg/RqwbDrVDpK">Join Our Discord Server</a> | <a href="https://gimelstudio.readthedocs.io/en/latest/">Official Manual</a>
 </p>
 
 !["Gimel Studio Banner"](/assets/banner/banner.jpg "Gimel Studio")
@@ -13,7 +13,7 @@
 
 # About the Next Generation of Gimel Studio
 
-**The previous version of Gimel Studio is still available [here](https://github.com/Correct-Syntax/Gimel-Studio).**
+**The previous (now archived) version of Gimel Studio is still available [here](https://github.com/Correct-Syntax/Gimel-Studio).**
 
 This repository tracks the **next step** of Gimel Studio (the v0.6.x series) to become a truly usable and serious node-based, non-destructive image editor. It is currently in ``initial development stage``, working towards a usable MVP application. Things will probably change a lot from what is currently here.
 
@@ -56,6 +56,8 @@ Here is a **WIP mockup** of the redesigned UI:
 # Discord chat
 
 If you’d like to join development, help with the UI design, UI translations, or have questions, comments, and ideas, you can join the Gimel Studio [Discord](https://discord.gg/RqwbDrVDpK). This is where you can chat with the developers, designers and project contributors and get the latest updates on development.
+
+If you prefer to keep to Github instead, feel free to start a discussion [here](https://github.com/GimelStudio/GimelStudio/discussions).
 
 
 # Status
