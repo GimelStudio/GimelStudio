@@ -461,7 +461,7 @@ class ApplicationFrame(wx.Frame):
         self.Maximize()
 
     def OnOnlineManual(self, event):
-        url = ("https://gimel-studio.readthedocs.io/en/latest/")
+        url = ("https://gimelstudio.readthedocs.io/en/latest/")
         webbrowser.open(url)
 
     def OnReportABug(self, event):
