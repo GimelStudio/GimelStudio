@@ -66,8 +66,8 @@ We are working towards an MVP which will showcase much of the core goals and fea
 
 The initial UI is now mostly laid out according to the WIP UI mockup and the core nodegraph rendering is just functional (it “just works”) at the moment. There is much more to do… and we could really use help to speed progress along. ;)
 
-!["Gimel Studio Status"](https://i.ibb.co/CQH8bWw/u-XQKKKXLYz.gif "Gimel Studio")
-*A sneak peek at the current status of the next generation of Gimel Studio as of 8/9/2021*
+!["Gimel Studio Status"](https://i.ibb.co/H7VZqmr/gimel-studio-wip-demo.gif "Gimel Studio")
+*The current status of the next generation of Gimel Studio as of 10/5/2021*
 
 
 Take a look at the [GitHub Issues](https://github.com/GimelStudio/GimelStudio/issues) for details on immediate and future tasks to be done. Issues labeled “Good first issue” will be the best for new contributors. A familiarity with Python helps, but we are willing to mentor any contributors as needed.
