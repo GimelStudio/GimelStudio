@@ -66,7 +66,7 @@ We are working towards an MVP which will showcase much of the core goals and fea
 
 The initial UI is now mostly laid out according to the WIP UI mockup and the core nodegraph rendering is just functional (it “just works”) at the moment. There is much more to do… and we could really use help to speed progress along. ;)
 
-!["Gimel Studio Status"]("https://i.ibb.co/H7VZqmr/gimel-studio-wip-demo.gif" "Gimel Studio")
+!["Gimel Studio Status"](https://i.ibb.co/H7VZqmr/gimel-studio-wip-demo.gif "Gimel Studio")
 *The current status of the next generation of Gimel Studio as of 10/5/2021*
 
 
