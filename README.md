@@ -69,7 +69,7 @@ The initial UI is now mostly laid out according to the WIP UI mockup and the cor
 ![gs-wip-demo](https://user-images.githubusercontent.com/60711001/136237852-e4a83033-e26c-4ea5-be16-f01cf2936cf7.gif)
 *The current status of the next generation of Gimel Studio as of 10/5/2021*
 
-Take a look at the [GitHub Issues](https://github.com/GimelStudio/GimelStudio/issues) for details on immediate anVd future tasks to be done. Issues labeled “Good first issue” will be the best for new contributors. A familiarity with Python helps, but we are willing to mentor any contributors as needed.
+Take a look at the [GitHub Issues](https://github.com/GimelStudio/GimelStudio/issues) for details on immediate and future tasks to be done. Issues labeled “Good first issue” will be the best for new contributors. A familiarity with Python helps, but we are willing to mentor any contributors as needed.
 
 **Pull requests are always welcome! :)**
 
