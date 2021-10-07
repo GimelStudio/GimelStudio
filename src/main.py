@@ -21,7 +21,7 @@ import platform
 import wx
 import wx.adv
 
-from gimelstudio import ApplicationFrame
+from gimelstudio import AppConfiguration, ApplicationFrame
 
 # Fix blurry text on Windows 10
 import ctypes
@@ -49,6 +49,9 @@ builtins.__dict__['_'] = wx.GetTranslation
 class MainApp(wx.App):
 
     def OnInit(self):
+        # Create a global instance of the app configuration class
+        self.app_config = AppConfiguration(self)
+        self.app_config.Load()
 
         # Work-around for Python stealing "_".
         sys.displayhook = _displayHook
@@ -65,7 +68,7 @@ class MainApp(wx.App):
         self.Setlang(self.language)
 
         # Show the application window
-        self.frame = ApplicationFrame()
+        self.frame = ApplicationFrame(app_config=self.app_config)
         self.SetTopWindow(self.frame)
         self.frame.Show(True)
 
