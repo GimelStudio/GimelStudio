@@ -1,5 +1,5 @@
 <!-- Add a description -->
-### Background information
+### Description
 
 <!-- List any related issues (if applicable) -->
 ### Related issue/s:
