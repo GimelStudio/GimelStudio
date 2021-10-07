@@ -69,6 +69,14 @@ class AppConfiguration(AppData):
         try:
             os.makedirs(
                 os.path.expanduser("~/.gimelstudio/"), exist_ok=True)
+            
+            if not os.path.exists(path):
+                with open("gimelstudio/datafiles/default_config.json") as f:
+                    default_config = f.read()
+                
+                with open(path, "w+") as f:
+                    f.write(default_config)
+                
             with open(path, "r") as file:
                 self.prefs = json.load(file)
         except IOError:
