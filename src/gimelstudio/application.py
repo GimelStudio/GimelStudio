@@ -23,7 +23,6 @@ import wx.lib.agw.flatmenu as flatmenu
 
 from .node_importer import *
 import gimelstudio.constants as appconst
-from .config import AppConfiguration
 from .interface import artproviders
 from .datafiles.icons import ICON_GIMELSTUDIO_ICO
 from .core import (Renderer, GLSLRenderer,
@@ -40,12 +39,11 @@ class AUIManager(aui.AuiManager):
 
 
 class ApplicationFrame(wx.Frame):
-    def __init__(self):
+    def __init__(self, app_config=None):
         wx.Frame.__init__(self, None, title=appconst.APP_NAME, size=(1000, 800))
 
         # Application configuration
-        self.appconfig = AppConfiguration(self)
-        self.appconfig.Load()
+        self.appconfig = app_config
 
         # Initilize renderers and node registry
         self.renderer = Renderer(self)
@@ -440,7 +438,7 @@ class ApplicationFrame(wx.Frame):
             event.Skip()
 
     def OnPreferencesDialog(self, event):
-        dlg = PreferencesDialog(self, title=_("Preferences"))
+        dlg = PreferencesDialog(self, title=_("Preferences"), app_config=self.appconfig, categories=["General", "Interface", "Add-ons", "Nodes", "Templates", "System", "File Paths"])
         dlg.Show()
 
     def OnToggleStatusbar(self, event):
