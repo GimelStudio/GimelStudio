@@ -438,7 +438,17 @@ class ApplicationFrame(wx.Frame):
             event.Skip()
 
     def OnPreferencesDialog(self, event):
-        dlg = PreferencesDialog(self, title=_("Preferences"), app_config=self.appconfig, categories=["General", "Interface", "Add-ons", "Nodes", "Templates", "System", "File Paths"])
+        categories = [
+                "General",
+                "Interface",
+                "Add-ons",
+                "Nodes",
+                "Templates",
+                "System",
+                "File Paths"
+                ]
+        dlg = PreferencesDialog(self, title=_("Gimel Studio Preferences"),
+                                app_config=self.appconfig, categories=categories)
         dlg.Show()
 
     def OnToggleStatusbar(self, event):
