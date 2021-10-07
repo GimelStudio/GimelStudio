@@ -82,13 +82,15 @@ Take a look at the [GitHub Issues](https://github.com/GimelStudio/GimelStudio/is
 
 1. ``pip install -r requirements.txt``
 2. Get the OIIO (OpenImageIO) pre-built python wheel (Windows only) [here](https://www.lfd.uci.edu/~gohlke/pythonlibs/#openimageio) and install it.
-3. ``python src/main.py``
+3. ``cd src``
+4. ``python main.py``
 
 ## Linux
 
 1. ``pip3 install -r requirements.txt``
 2. If building wxPython fails, Download the wheel file for wxpython which matches your Python version and Linux OS version from https://extras.wxpython.org/wxPython4/extras/linux/ and install the wxpython package with ``pip3 install <pathtothewheelfilehere>``
-3. ``python src/main.py``
+3. ``cd src``
+4. ``python3 main.py``
 
 Please note that the renderer, which relies on OIIO (OpenImageIO) will **not work if OIIO is not found**. The rest of the application will run, but the renderer will not work. This essentially means that we do not have Linux support yet (please check back later or help us to get it working for linux).
 
