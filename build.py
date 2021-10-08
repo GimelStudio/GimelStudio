@@ -21,7 +21,7 @@ import subprocess
 
 
 # Set to True during development and testing
-DEBUG = False
+DEBUG = True
 
 
 def MAC():
@@ -124,7 +124,7 @@ args = [
     "glcontext",
     ]
 
-if DEBUG is True:
+if DEBUG is False:
     args.append("--noconsole")
 
 if sys.platform == "linux" or sys.platform == "linux2":
