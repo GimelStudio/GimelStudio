@@ -20,6 +20,10 @@ import shutil
 import subprocess
 
 
+# Set to True during development and testing
+DEBUG = True
+
+
 def MAC():
     # Executes a console instruction, it can activate an specific environment
     def ExecuteTerminalInstruction(inst, env='source env/bin/activate && '):
@@ -113,13 +117,15 @@ args = [
     "pyinstaller",
     "src/main.py",
     "-n", "GimelStudio",
-    "--noconsole",
     "--noconfirm",
     "--hidden-import",
     "pkg_resources.py2_warn",
     "--hidden-import",
     "glcontext",
     ]
+
+if DEBUG is True:
+    args.append("--noconsole")
 
 if sys.platform == "linux" or sys.platform == "linux2":
     pass  # TODO

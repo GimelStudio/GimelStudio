@@ -22,7 +22,6 @@ def LoadPythonScripts(directory, module):
     paths = os.listdir(directory)
     for path in paths:
         name, ext = os.path.splitext(path)
-        print(name)
         if name in ["__init__.py", "__pycache__"]:
             continue
         node_module = __import__(module, fromlist=[name])
