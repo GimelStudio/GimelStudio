@@ -21,7 +21,7 @@ import subprocess
 
 
 # Set to True during development and testing
-DEBUG = True
+DEBUG = False
 
 
 def MAC():
