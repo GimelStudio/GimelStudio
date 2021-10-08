@@ -18,6 +18,8 @@ import os.path
 import wx
 from gsnodegraph import NodeBase as NodeView
 
+import gimelstudio.constants as const
+
 
 class Node(NodeView):
     def __init__(self, nodegraph, _id):
@@ -217,7 +219,8 @@ class Node(NodeView):
         pass
 
     def RenderGLSL(self, path, props, image, image2=None):
-        shader_path = os.path.abspath(os.path.expanduser(os.path.expandvars(path)))
+        file_path = os.path.expanduser(os.path.expandvars(path))
+        shader_path = os.path.join(const.APP_DIR, file_path)
         shader = self.GLSLRenderer.LoadGLSLFile(shader_path)
         self.GLSLRenderer.Render(shader, props, image, image2)
         return self.GLSLRenderer.ReadNumpy()

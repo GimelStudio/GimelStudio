@@ -14,6 +14,32 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
+import os
 
-from .corenodes import (OutputNode, MixNode, ImageNode,
-                        BlurNode, FlipNode, AlphaOverNode)
+
+def LoadPythonScripts(directory, module):
+    """ Loads python scripts from the given directory. """
+    paths = os.listdir(directory)
+    for path in paths:
+        name, ext = os.path.splitext(path)
+        print(name)
+        if name in ["__init__.py", "__pycache__"]:
+            continue
+        node_module = __import__(module, fromlist=[name])
+
+def LoadNodes(type, directory, module):
+    try:
+        LoadPythonScripts(directory, module)
+        print("[INFO] Registered {} node scripts".format(type))
+    except Exception as error:
+        print("[WARNING] Error registering {} nodes: \n".format(type), error)
+    finally:
+        pass
+
+
+# Load the output composite node
+from .core.output_node import OutputNode
+
+# Next, we load the core and custom nodes from the 'nodescripts' directory.
+LoadNodes("core", "nodescripts/corenodes", "nodescripts.corenodes")
+LoadNodes("custom", "nodescripts/customnodes", "nodescripts.customnodes")

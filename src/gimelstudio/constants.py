@@ -20,11 +20,7 @@ import sys
 
 # Application
 APP_FROZEN = getattr(sys, "frozen", False)
-
-if APP_FROZEN:
-    APP_DIR = os.path.dirname(os.path.abspath(sys.argv[0]))
-else:
-    APP_DIR = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), "..")
+APP_DIR = os.path.dirname(os.path.abspath(sys.argv[0]))
 
 APP_NAME = "Gimel Studio"
 APP_WEBSITE_URL = "https://gimelstudio.github.io"
