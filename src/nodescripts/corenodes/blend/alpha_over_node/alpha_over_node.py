@@ -18,53 +18,57 @@
 from gimelstudio import api
 
 
-class OpacityNode(api.Node):
+class AlphaOverNode(api.Node):
     def __init__(self, nodegraph, _id):
         api.Node.__init__(self, nodegraph, _id)
 
     @property
     def NodeMeta(self):
         meta_info = {
-            "label": "Opacity",
+            "label": "Alpha Over",
             "author": "Gimel Studio",
             "version": (0, 0, 1),
-            "category": "FILTER",
-            "description": "Adjust the transparency of an image.",
+            "category": "BLEND",
+            "description": "Alpha over two images together based on the factor.",
         }
         return meta_info
 
     def NodeInitProps(self):
         self.value = api.PositiveIntegerProp(
-            idname="Opacity Value",
-            default=25,
+            idname="Factor",
+            default=100,
             min_val=0,
             max_val=100,
             widget=api.SLIDER_WIDGET,
-            label="Opacity:",
+            label="Factor:"
         )
         self.NodeAddProp(self.value)
 
     def NodeInitParams(self):
-        image = api.RenderImageParam('Image')
-        self.NodeAddParam(image)
+        image1 = api.RenderImageParam('Image 1')
+        image2 = api.RenderImageParam('Image 2')
+
+        self.NodeAddParam(image1)
+        self.NodeAddParam(image2)
 
     def NodeEvaluation(self, eval_info):
-        image1 = self.EvalParameter(eval_info, 'Image')
-        opacity_value = self.EvalProperty(eval_info, 'Opacity Value')
+        image1 = self.EvalParameter(eval_info, 'Image 1')
+        image2 = self.EvalParameter(eval_info, 'Image 2')
+        factor = self.EvalProperty(eval_info, 'Factor')
 
         render_image = api.RenderImage()
 
         # Make correction for slider range of 1-100
-        opacity_value = (opacity_value * 0.01)
+        factor = (factor * 0.01)
 
         props = {
-            "opacity_value": opacity_value
+            "factor": factor
         }
-        shader_src = "gimelstudio/corenodes/filter/opacity_node/opacity.glsl"
-        result = self.RenderGLSL(shader_src, props, image1)
+        shader_src = "nodescripts/corenodes/blend/alpha_over_node/alpha_over.glsl"
+        result = self.RenderGLSL(shader_src, props, image1, image2)
 
         render_image.SetAsImage(result)
         return render_image
 
 
-api.RegisterNode(OpacityNode, "corenode_opacity")
+api.RegisterNode(AlphaOverNode, "corenode_alpha_over")

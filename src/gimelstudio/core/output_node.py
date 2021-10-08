@@ -14,30 +14,36 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-from .eval_info import EvalInfo
+from gimelstudio import api
 
 
-class OutputNode(object):
-    """
-    Represents the evaluation of the composite output node.
-    """
-    def __init__(self):
-        self.node = None
+class OutputNode(api.Node):
+    def __init__(self, nodegraph, _id):
+        api.Node.__init__(self, nodegraph, _id)
 
-    def SetNode(self, node):
-        """ Set the node object connected to the output node
-        this class represents.
+    def IsOutputNode(self):
+        return True
 
-        :param node: output node object
+    @property
+    def NodeMeta(self):
+        meta_info = {
+            "label": "Output",
+            "author": "Gimel Studio",
+            "version": (0, 1, 3),
+            "category": "OUTPUT",
+            "description": """The most important node of them all. :)
+        This is registered here for the UI -the evaluation is handled elsewhere.
+        This node should not be accessed by outside users.
         """
-        # TODO: don't hardcode this
-        self.node = node._parameters["Image"].binding
+        }
+        return meta_info
 
-    def RenderImage(self):
-        """ Render the image for this output node. If the output
-        node is not connected then the default image will be rendered.
-        """
-        if self.node is not None:
-            eval_info = EvalInfo(self.node)
-            image = eval_info.node.EvaluateNode(eval_info)
-            return image
+    def NodeInitParams(self):
+        p = api.RenderImageParam('Image')
+        self.NodeAddParam(p)
+
+    def NodeEvaluation(self, eval_info):
+        pass
+
+
+api.RegisterNode(OutputNode, "corenode_outputcomposite")

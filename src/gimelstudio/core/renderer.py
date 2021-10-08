@@ -14,7 +14,7 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-from .output_node import OutputNode
+from .output_eval import OutputNodeEval
 
 
 class Renderer(object):
@@ -65,7 +65,7 @@ class Renderer(object):
         :param nodes: dictionary of nodes of the Node Graph
         :returns: RenderImage object
         """
-        output_data = OutputNode()
+        output_data = OutputNodeEval()
         output_data.SetNode(output_node)
         return output_data.RenderImage()
 

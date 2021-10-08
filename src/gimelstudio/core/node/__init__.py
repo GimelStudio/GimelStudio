@@ -3,5 +3,5 @@ from .parameter import Parameter, RenderImageParam
 from .property import (Property, PositiveIntegerProp,
                        ChoiceProp,
                        OpenFileChooserProp,
-                       LabelProp, 
+                       LabelProp,
                        SLIDER_WIDGET, SPINBOX_WIDGET)
