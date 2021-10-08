@@ -60,7 +60,7 @@ class Example2Node(api.Node):
         props = {
             "opacity_value": opacity_value
         }
-        shader_src = "nodescripts/example2_node/example2.glsl"
+        shader_src = "nodescripts/customnodes/example2_node/example2.glsl"
         result = self.RenderGLSL(shader_src, props, image1)
 
         render_image.SetAsImage(result)
