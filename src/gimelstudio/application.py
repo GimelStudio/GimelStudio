@@ -72,6 +72,13 @@ class ApplicationFrame(wx.Frame):
         window_menu = flatmenu.FlatMenu()
         help_menu = flatmenu.FlatMenu()
 
+        # Separator
+        separator = flatmenu.FlatMenuItem(
+            file_menu,
+            id=wx.ID_SEPARATOR,
+            kind=wx.ITEM_SEPARATOR,
+        )
+
         # File
         self.newprojectfile_menuitem = flatmenu.FlatMenuItem(
             file_menu,
@@ -109,8 +116,6 @@ class ApplicationFrame(wx.Frame):
             subMenu=None
         )
 
-        self.menubar.AddSeparator()
-
         self.exportasimage_menuitem = flatmenu.FlatMenuItem(
             file_menu,
             id=wx.ID_ANY,
@@ -119,8 +124,6 @@ class ApplicationFrame(wx.Frame):
             kind=wx.ITEM_NORMAL,
             subMenu=None
         )
-
-        self.menubar.AddSeparator()
 
         self.quit_menuitem = flatmenu.FlatMenuItem(
             file_menu,
@@ -242,9 +245,11 @@ class ApplicationFrame(wx.Frame):
         # Append menu items to menus
         file_menu.AppendItem(self.newprojectfile_menuitem)
         file_menu.AppendItem(self.openprojectfile_menuitem)
+        file_menu.AppendItem(separator)
         file_menu.AppendItem(self.saveprojectfile_menuitem)
         file_menu.AppendItem(self.saveprojectfileas_menuitem)
         file_menu.AppendItem(self.exportasimage_menuitem)
+        file_menu.AppendItem(separator)
         file_menu.AppendItem(self.quit_menuitem)
 
         edit_menu.AppendItem(self.copytoclipboard_menuitem)
@@ -261,6 +266,7 @@ class ApplicationFrame(wx.Frame):
         help_menu.AppendItem(self.onlinemanual_menuitem)
         help_menu.AppendItem(self.visitwebsite_menuitem)
         help_menu.AppendItem(self.reportabug_menuitem)
+        help_menu.AppendItem(separator)
         help_menu.AppendItem(self.about_menuitem)
 
         # Append menus to the menubar

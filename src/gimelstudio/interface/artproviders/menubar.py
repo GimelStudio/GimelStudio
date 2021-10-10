@@ -52,6 +52,30 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
         self.buttonPressedFaceColour = wx.Colour("#5874C5")
         self.buttonPressedBorderColour = wx.Colour("#5874C5")
 
+
+
+    def DrawSeparator(self, dc, xCoord, yCoord, textX, sepWidth):
+        """
+        Draws a separator inside a :class:`FlatMenu`.
+
+        :param `dc`: an instance of :class:`wx.DC`;
+        :param integer `xCoord`: the current x position where to draw the separator;
+        :param integer `yCoord`: the current y position where to draw the separator;
+        :param integer `textX`: the menu item label x position;
+        :param integer `sepWidth`: the width of the separator, in pixels.
+        """
+
+        dcsaver = DCSaver(dc)
+        sepRect1 = wx.Rect(xCoord + textX, yCoord + 1, sepWidth/2, 1)
+        sepRect2 = wx.Rect(xCoord + textX + sepWidth/2, yCoord + 1, sepWidth/2-1, 1)
+
+        artMgr = ArtManager.Get()
+        backColour = wx.Colour("#3b3b3b")
+        lightColour = wx.Colour("#3d3d3d")
+
+        artMgr.PaintStraightGradientBox(dc, sepRect1, backColour, lightColour, False)
+        artMgr.PaintStraightGradientBox(dc, sepRect2, lightColour, backColour, False)
+
     def DrawMenuItem(self, item, dc, xCoord, yCoord, imageMarginX, markerMarginX, textX, rightMarginX, selected=False, backgroundImage=None):
         """
         Draws the menu item.
@@ -101,6 +125,7 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
         if item.IsSeparator():
             # Separator is a small grey line separating between menu items.
             sepWidth = xCoord + menuWidth - textX - 1
+            yCoord += 2
             self.DrawSeparator(dc, xCoord, yCoord, textX, sepWidth)
             return
 
@@ -491,7 +516,7 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
         :param `flatmenu`: the :class:`FlatMenu` instance we need to paint;
         :param `dc`: an instance of :class:`wx.DC`.
         """
-        
+
         menuRect = flatmenu.GetClientRect()
         menuBmp = wx.Bitmap(menuRect.width, menuRect.height)
 
