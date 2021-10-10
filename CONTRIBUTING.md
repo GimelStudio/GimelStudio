@@ -35,7 +35,7 @@ Gimel Studio is an open source project and we love to receive contributions from
 
 Gimel Studio itself is written in pure Python so most code contributions will require at least a basic knowledge of Python 3+.
 
-*Eventually, at least some nodes will also be using GLSL shaders or the like for on-GPU image-manipulation.*
+Some nodes are also using GLSL shaders for on-GPU image-manipulation, but knowledge of GLSL isn't required to contribute.
 
 ### Design Decisions
 
@@ -64,7 +64,7 @@ Bugs are tracked as [GitHub issues](https://guides.github.com/features/issues/).
 
 Unsure where to begin contributing to Gimel Studio? You can start by looking through these `good-first-issue` and `help-wanted` issues:
 
-* [Good First issues](https://github.com/GimelStudio/GimelStudio/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) - issues which should only require a few lines of code and/or don't require an in-depth knowledge of the existing code.
+* [Good First issues](https://github.com/GimelStudio/GimelStudio/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) - issues which should only require a small amount of code and/or don't require an in-depth knowledge of the existing code. Some of these can be quite challenging even though they don't require a lot of code though!
 * [Help wanted issues](https://github.com/GimelStudio/GimelStudio/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) - issues which should be a bit more involved.
 
 Both issue lists are sorted by total number of comments. While not perfect, number of comments is a reasonable proxy for impact a given change will have.
@@ -76,9 +76,9 @@ If you have any questions about contributing, feel free to ask on the official [
 
 ### Git Commit Messages
 
-* Use the present tense ("add feature" not "added feature")
+* Use the present tense ("Add feature" not "Added feature")
 * Use sentence case except for referencing a file, method, function, class, etc in the code
-* Use the imperative mood ("move cursor to..." not "moves cursor to...")
+* Use the imperative mood ("Move cursor to..." not "Moves cursor to...")
 * Limit the first line to 72 characters or less
 * Reference issues and pull requests liberally after the first line
 
