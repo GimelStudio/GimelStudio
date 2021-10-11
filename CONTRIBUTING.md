@@ -26,7 +26,7 @@ Gimel Studio is an open source project and we love to receive contributions from
 
 ## Asking For Help
 
-**Please, don't use the issue tracker for general support questions**. Check whether the [Github Discussions](https://github.com/GimelStudio/GimelStudio/discussions) or channels on the official [Discord](https://discord.gg/RqwbDrVDpK) or [Gitter](https://gitter.im/Gimel-Studio/community) can help with your issue. Discord is where most of the development chat happens (currently) and it's likely you will get your answer the quickest there.
+**Please, don't use the issue tracker for general support questions**. Check whether the [Github Discussions](https://github.com/GimelStudio/GimelStudio/discussions) or channels on the official [Discord](https://discord.gg/RqwbDrVDpK) can help with your issue. Discord is where most of the development chat happens (currently) and it's likely you will get your answer the quickest there.
 
 
 ## What Should I Know Before I Get Started?
@@ -39,7 +39,7 @@ Some nodes are also using GLSL shaders for on-GPU image-manipulation, but knowle
 
 ### Design Decisions
 
-When we make a significant decision in how we maintain the project and what we can or cannot support, we will often announce it in the Discord and/or Gitter. Feel free to ask questions and/or suggest ideas there!
+When we make a significant decision in how we maintain the project and what we can or cannot support, we will often announce it in our Discord channels. Feel free to ask questions and/or suggest ideas there!
 
 
 ## How Can I Contribute?
@@ -69,7 +69,7 @@ Unsure where to begin contributing to Gimel Studio? You can start by looking thr
 
 Both issue lists are sorted by total number of comments. While not perfect, number of comments is a reasonable proxy for impact a given change will have.
 
-If you have any questions about contributing, feel free to ask on the official [Discord](https://discord.gg/RqwbDrVDpK) or [Gitter](https://gitter.im/Gimel-Studio/community).
+If you have any questions about contributing, feel free to ask on the official [Discord](https://discord.gg/RqwbDrVDpK) or in a Github issue.
 
 
 ## Styleguides
