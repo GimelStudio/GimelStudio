@@ -259,7 +259,6 @@ class SidebarPanel(wx.Panel):
 
         self._categories = categories
 
-        # TODO: Add padding around the edges
         self.main_layout = wx.BoxSizer(wx.VERTICAL)
         self._buttons = []
 
@@ -274,7 +273,7 @@ class SidebarPanel(wx.Panel):
         self._buttons = value
 
     def BuildUI(self):
-        self.SetBackgroundColour(const.AREA_TOPBAR_COLOR)
+        self.SetBackgroundColour(const.AREA_BG_COLOR)
 
         self.main_layout.AddSpacer(16)
 
@@ -294,6 +293,8 @@ class PreferencesDialog(wx.Dialog):
         # TODO: Can we create our own title bar (instead of the default native one)?
         wx.Dialog.__init__(self, parent, title=title, size=[800, 600],
                            style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER)
+
+        self.SetBackgroundColour(const.AREA_BG_COLOR)
 
         self._app_config = app_config
         self._categories = categories
@@ -335,9 +336,12 @@ class PreferencesDialog(wx.Dialog):
             if category_page is not None:
                 self.book.AddPage(category_page, category)
 
-        self.main_layout.Add(self.sidebar_panel, flag=wx.GROW)
-        self.main_layout.Add(self.book, 3, wx.EXPAND)
+        self.main_layout.Add(self.sidebar_panel, flag=wx.GROW | wx.ALL, border=6)
+        self.main_layout.Add(self.book, 3, wx.EXPAND | wx.ALL, border=16)
         self.SetSizer(self.main_layout)
+
+        self.Layout()
+        self.Refresh()
 
     def OnCategoryButtonPressed(self, event, index):
         # TODO: The following should work (based on wxPython bindings)
