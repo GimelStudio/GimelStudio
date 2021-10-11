@@ -61,7 +61,8 @@ class MainApp(wx.App):
         self.SetAppName("GimelStudio")
 
         # Controls the current interface language
-        self.language = "LANGUAGE_ENGLISH"
+        self.language_prefix = "LANGUAGE_"
+        self.language = self.language_prefix + self.app_config.Config(keys=("Settings", "Interface", "Language")).upper()
 
         # Setup the Locale
         self.InitI18n()
