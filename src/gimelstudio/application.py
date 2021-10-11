@@ -157,7 +157,7 @@ class ApplicationFrame(wx.Frame):
         self.showstatusbar_menuitem = flatmenu.FlatMenuItem(
             edit_menu,
             id=wx.ID_ANY,
-            label=_("Toggle Statusbar"),
+            label=_("Show Statusbar"),
             helpString=_("Toggle showing the statusbar"),
             kind=wx.ITEM_CHECK,
             subMenu=None
@@ -186,7 +186,7 @@ class ApplicationFrame(wx.Frame):
         self.togglewindowfullscreen_menuitem = flatmenu.FlatMenuItem(
             window_menu,
             id=wx.ID_ANY,
-            label=_("Toggle Window Fullscreen"),
+            label=_("Window Fullscreen"),
             helpString=_("Toggle the window to be fullscreen"),
             kind=wx.ITEM_CHECK,
             subMenu=None

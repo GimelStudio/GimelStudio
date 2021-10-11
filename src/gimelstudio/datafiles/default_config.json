@@ -2,8 +2,8 @@
     "app_version": "0.6.0",
     "Settings": {
         "General": {
-            "Experimental": true,
-            "Node cache enabled": true
+            "Enable experimental features": true,
+            "Enable node cache (uses more memory)": true
         },
         "Interface": {
             "Node wire curvature": 0,
