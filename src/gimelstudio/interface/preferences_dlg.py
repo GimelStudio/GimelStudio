@@ -68,7 +68,7 @@ class PreferencesPage(wx.Panel):
         for setting_name in self._app_config.Config(("Settings", category_name)):
             setting_val = self._app_config.Config(keys=("Settings", category_name, setting_name))
             if type(setting_val) == bool:
-                new_widget = CheckBox(self, label=setting_name)
+                new_widget = CheckBox(self, label=_(setting_name))
                 new_widget.SetValue(setting_val)
                 new_widget.Bind(wx.EVT_CHECKBOX,
                                 lambda event, name=setting_name: self.OnWidgetChanged(event=event, setting_name=name))
@@ -90,14 +90,14 @@ class PreferencesPage(wx.Panel):
                                             name=setting_name: self.OnGSWidgetChanged(event=event,
                                                                                       setting_name=name))
                         else:
-                            new_widget = NumberField(self, default_value=setting_val, label=setting_name)
+                            new_widget = NumberField(self, default_value=setting_val, label=_(setting_name))
                             new_widget.Bind(EVT_NUMBERFIELD_CHANGE,
                                             lambda event,
                                             name=setting_name: self.OnGSWidgetChanged(event=event,
                                                                                       setting_name=name))
                     else:
                         new_widget = NumberField(self, default_value=setting_val,
-                                                 label=setting_name)
+                                                 label=_(setting_name))
                         new_widget.Bind(EVT_NUMBERFIELD_CHANGE,
                                         lambda event,
                                         name=setting_name: self.OnGSWidgetChanged(event=event,
@@ -111,7 +111,7 @@ class PreferencesPage(wx.Panel):
                     if setting_options:
                         if setting_options["Display Widget"] == "Drop Down":
                             new_widget = wx.BoxSizer(wx.HORIZONTAL)
-                            label = wx.StaticText(self, label=setting_name + ":")
+                            label = wx.StaticText(self, label=_(setting_name) + ":")
                             label.SetForegroundColour("#FFFFFF")
                             drop_down = DropDown(self, items=setting_options["Items"],
                                                  default=setting_val)
@@ -124,7 +124,7 @@ class PreferencesPage(wx.Panel):
                             new_widget.Add(drop_down, 1, wx.EXPAND)
                         elif setting_options["Display Widget"] == "Line Ctrl":
                             new_widget = wx.BoxSizer(wx.HORIZONTAL)
-                            label = wx.StaticText(self, label=setting_name + ":")
+                            label = wx.StaticText(self, label=_(setting_name) + ":")
                             label.SetForegroundColour("#FFFFFF")
                             text_ctrl = NativeTextCtrl(self, value=setting_val, style=wx.SIMPLE_BORDER)
                             text_ctrl.Bind(wx.EVT_TEXT,
@@ -136,7 +136,7 @@ class PreferencesPage(wx.Panel):
                             new_widget.Add(text_ctrl, 1, wx.EXPAND)
                         elif setting_options["Display Widget"] == "Text Ctrl":
                             new_widget = wx.BoxSizer(wx.HORIZONTAL)
-                            label = wx.StaticText(self, label=setting_name + ":")
+                            label = wx.StaticText(self, label=_(setting_name) + ":")
                             label.SetForegroundColour("#FFFFFF")
                             text_ctrl = TextCtrl(self, value=setting_val, placeholder=setting_options["Placeholder"],
                                                  style=wx.SIMPLE_BORDER)
@@ -149,7 +149,7 @@ class PreferencesPage(wx.Panel):
                             new_widget.Add(text_ctrl, 1, wx.EXPAND)
                         else:
                             new_widget = wx.BoxSizer(wx.HORIZONTAL)
-                            label = wx.StaticText(self, label=setting_name + ":")
+                            label = wx.StaticText(self, label=_(setting_name) + ":")
                             label.SetForegroundColour("#FFFFFF")
                             text_ctrl = NativeTextCtrl(self, value=setting_val, style=wx.SIMPLE_BORDER)
                             text_ctrl.Bind(wx.EVT_TEXT,
@@ -161,7 +161,7 @@ class PreferencesPage(wx.Panel):
                             new_widget.Add(text_ctrl, 1, wx.EXPAND)
                 else:
                     new_widget = wx.BoxSizer(wx.HORIZONTAL)
-                    label = wx.StaticText(self, label=setting_name + ":")
+                    label = wx.StaticText(self, label=_(setting_name) + ":")
                     label.SetForegroundColour("#FFFFFF")
                     text_ctrl = NativeTextCtrl(self, value=setting_val, style=wx.SIMPLE_BORDER)
                     text_ctrl.Bind(wx.EVT_TEXT,
