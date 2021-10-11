@@ -340,6 +340,9 @@ class PreferencesDialog(wx.Dialog):
         self.main_layout.Add(self.book, 3, wx.EXPAND | wx.ALL, border=16)
         self.SetSizer(self.main_layout)
 
+        # Highlight the "General" button by default
+        self.sidebar_panel.buttons[0].SetHighlighted(True)
+
         self.Layout()
         self.Refresh()
 
