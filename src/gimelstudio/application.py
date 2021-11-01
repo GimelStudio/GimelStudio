@@ -29,7 +29,8 @@ from .core import (Renderer, GLSLRenderer,
                    NODE_REGISTRY)
 from .interface import (ImageViewportPanel, NodePropertiesPanel,
                         NodeGraphPanel, StatusBar, PreferencesDialog,
-                        ExportImageHandler, NodeGraphDropTarget)
+                        ExportImageHandler, NodeGraphDropTarget,
+                        ShowNotImplementedDialog)
 
 
 class AUIManager(aui.AuiManager):
@@ -73,11 +74,8 @@ class ApplicationFrame(wx.Frame):
         help_menu = flatmenu.FlatMenu()
 
         # Separator
-        separator = flatmenu.FlatMenuItem(
-            file_menu,
-            id=wx.ID_SEPARATOR,
-            kind=wx.ITEM_SEPARATOR,
-        )
+        separator = flatmenu.FlatMenuItem(file_menu, id=wx.ID_SEPARATOR,
+                                          kind=wx.ITEM_SEPARATOR)
 
         # File
         self.newprojectfile_menuitem = flatmenu.FlatMenuItem(
@@ -158,7 +156,7 @@ class ApplicationFrame(wx.Frame):
             edit_menu,
             id=wx.ID_ANY,
             label=_("Show Statusbar"),
-            helpString=_("Toggle showing the statusbar"),
+            helpString=_("Show the statusbar"),
             kind=wx.ITEM_CHECK,
             subMenu=None
         )
@@ -168,7 +166,7 @@ class ApplicationFrame(wx.Frame):
             render_menu,
             id=wx.ID_ANY,
             label=_("Auto Render"),
-            helpString=_("Toggle auto rendering after editing node properties, connections, etc"),
+            helpString=_("Enable auto rendering after editing node properties, connections, etc"),
             kind=wx.ITEM_CHECK,
             subMenu=None
         )
@@ -187,7 +185,7 @@ class ApplicationFrame(wx.Frame):
             window_menu,
             id=wx.ID_ANY,
             label=_("Window Fullscreen"),
-            helpString=_("Toggle the window to be fullscreen"),
+            helpString=_("Set the window to be fullscreen"),
             kind=wx.ITEM_CHECK,
             subMenu=None
         )
@@ -279,13 +277,27 @@ class ApplicationFrame(wx.Frame):
 
         # Menu event bindings
         self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
+                  self.OnNewProjectFile,
+                  self.newprojectfile_menuitem)
+        self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
+                  self.OnOpenProjectFile,
+                  self.openprojectfile_menuitem)
+        self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
+                  self.OnSaveProjectFile,
+                  self.saveprojectfile_menuitem)
+        self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
+                  self.OnSaveProjectFileAs,
+                  self.saveprojectfileas_menuitem)
+        self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
                   self.OnExportAsImage,
                   self.exportasimage_menuitem)
-
         self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
                   self.OnQuit,
                   self.quit_menuitem)
 
+        self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
+                  self.OnCopyImageToClipboard,
+                  self.copytoclipboard_menuitem)
         self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
                   self.OnPreferencesDialog,
                   self.preferences_menuitem)
@@ -293,6 +305,13 @@ class ApplicationFrame(wx.Frame):
         self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
                   self.OnToggleStatusbar,
                   self.showstatusbar_menuitem)
+
+        self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
+                  self.OnToggleAutoRender,
+                  self.toggleautorender_menuitem)
+        self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
+                  self.OnRender,
+                  self.renderimage_menuitem)
 
         self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
                   self.OnToggleFullscreen,
@@ -389,12 +408,11 @@ class ApplicationFrame(wx.Frame):
         self.statusbar.Refresh()
         self.menubar.Refresh()
 
-
     def Render(self):
         start = time.time()
         image = self.renderer.Render(self.NodeGraph._nodes)
         end = time.time()
-        print("Render time: ", end - start)
+        print("Render time: ", end - start)  # FIXME: Temporary test code
         self.imageviewport_pnl.UpdateViewerImage(image.Image("numpy"), 0)
 
     @property
@@ -409,6 +427,18 @@ class ApplicationFrame(wx.Frame):
     def AppConfig(self):
         return self.appconfig
 
+    def OnNewProjectFile(self, event):
+        ShowNotImplementedDialog()
+
+    def OnOpenProjectFile(self, event):
+        ShowNotImplementedDialog()
+
+    def OnSaveProjectFile(self, event):
+        ShowNotImplementedDialog()
+
+    def OnSaveProjectFileAs(self, event):
+        ShowNotImplementedDialog()
+
     def OnExportAsImage(self, event):
         image = self.renderer.GetRender()
 
@@ -416,12 +446,9 @@ class ApplicationFrame(wx.Frame):
             export_handler = ExportImageHandler(self, image.Image("oiio"))
             export_handler.RunExport()
         except AttributeError:
-            dlg = wx.MessageDialog(
-                None,
-                "Please render an image before attempting to export!",
-                "No Image to export!",
-                style=wx.ICON_EXCLAMATION
-            )
+            dlg = wx.MessageDialog(None,
+                _("Please render an image before attempting to export!"),
+                _("No Image to Export!"), style=wx.ICON_EXCLAMATION)
             dlg.ShowModal()
 
     def OnQuit(self, event):
@@ -443,6 +470,9 @@ class ApplicationFrame(wx.Frame):
         else:
             event.Skip()
 
+    def OnCopyImageToClipboard(self, event):
+        ShowNotImplementedDialog()
+
     def OnPreferencesDialog(self, event):
         categories = [
                 "General",
@@ -463,6 +493,12 @@ class ApplicationFrame(wx.Frame):
         else:
             self.statusbar.Show()
         self.Layout()
+
+    def OnToggleAutoRender(self, event):
+        ShowNotImplementedDialog()
+
+    def OnRender(self, event):
+        self.Render()
 
     def OnToggleFullscreen(self, event):
         if self.togglewindowfullscreen_menuitem.IsChecked() is False:
