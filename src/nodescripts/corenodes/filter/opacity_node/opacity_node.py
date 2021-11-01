@@ -45,7 +45,7 @@ class OpacityNode(api.Node):
         self.NodeAddProp(self.value)
 
     def NodeInitParams(self):
-        image = api.RenderImageParam('Image')
+        image = api.RenderImageParam('Image', 'Image')
         self.NodeAddParam(image)
 
     def NodeEvaluation(self, eval_info):

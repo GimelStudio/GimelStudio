@@ -39,7 +39,7 @@ class OutputNode(api.Node):
         return meta_info
 
     def NodeInitParams(self):
-        p = api.RenderImageParam('Image')
+        p = api.RenderImageParam('Image', 'Image')
         self.NodeAddParam(p)
 
     def NodeEvaluation(self, eval_info):

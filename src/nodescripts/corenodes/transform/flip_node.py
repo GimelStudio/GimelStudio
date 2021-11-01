@@ -44,7 +44,7 @@ class FlipNode(api.Node):
         self.NodeAddProp(self.direction)
 
     def NodeInitParams(self):
-        image = api.RenderImageParam('Image')
+        image = api.RenderImageParam('Image', 'Image')
 
         self.NodeAddParam(image)
 

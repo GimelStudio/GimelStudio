@@ -18,10 +18,12 @@ from gimelstudio.core import RenderImage
 
 
 class Parameter(object):
-    def __init__(self, idname, default):
+    def __init__(self, idname, label, default):
         self.idname = idname
         self.default = default
+        self.label = label
         self.binding = None
+        self.datatype = None
 
     @property
     def IdName(self):
@@ -38,9 +40,23 @@ class Parameter(object):
 
 
 class RenderImageParam(Parameter):
-    def __init__(self, idname, default=RenderImage()):
-        Parameter.__init__(self, idname, default)
+    def __init__(self, idname, label, default=RenderImage()):
+        Parameter.__init__(self, idname, label, default)
         self.value = default
+        self.datatype = "RGBAIMAGE"
+
+    def GetValue(self):
+        return self.value
+
+    def SetValue(self, value):
+        self.value = value
+
+
+class IntegerParam(Parameter):
+    def __init__(self, idname, label, default=1):
+        Parameter.__init__(self, idname, label, default)
+        self.value = default
+        self.datatype = "VALUE"
 
     def GetValue(self):
         return self.value

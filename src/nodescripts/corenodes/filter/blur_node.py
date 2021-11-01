@@ -62,7 +62,7 @@ class BlurNode(api.Node):
         self.NodeAddProp(self.kernel_y)
 
     def NodeInitParams(self):
-        image = api.RenderImageParam('Image')
+        image = api.RenderImageParam('Image', 'Image')
 
         self.NodeAddParam(image)
 

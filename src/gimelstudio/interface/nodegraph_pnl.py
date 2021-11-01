@@ -91,9 +91,10 @@ class NodeGraphPanel(wx.Panel):
         self.nodegraph.AddNode('corenode_image', wx.Point(100, 200))
         self.nodegraph.AddNode('corenode_blur', wx.Point(600, 200))
         self.nodegraph.AddNode('corenode_opacity', wx.Point(300, 200))
-        self.nodegraph.AddNode('corenode_outputcomposite', wx.Point(900, 270))
+        self.nodegraph.AddNode('corenode_outputcomposite', wx.Point(950, 270))
         self.nodegraph.AddNode('corenode_flip', wx.Point(500, 300))
         self.nodegraph.AddNode('corenode_alpha_over', wx.Point(300, 350))
+        self.nodegraph.AddNode('node_integer', wx.Point(350, 110))
 
         main_sizer.Add(topbar, flag=wx.EXPAND | wx.LEFT | wx.RIGHT)
         main_sizer.Add(self.nodegraph, 1, flag=wx.EXPAND | wx.BOTH)

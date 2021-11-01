@@ -14,54 +14,42 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-import numpy as np
-
 from gimelstudio import api
 
 
-class Example1Node(api.Node):
+class IntegerNode(api.Node):
     def __init__(self, nodegraph, _id):
         api.Node.__init__(self, nodegraph, _id)
 
     @property
     def NodeMeta(self):
         meta_info = {
-            "label": "Example Node 1",
+            "label": "Integer",
             "author": "Gimel Studio",
             "version": (0, 5, 0),
-            "category": "TRANSFORM",
-            "description": "Show an example node.",
+            "category": "INPUT",
+            "description": "Input an integer.",
         }
         return meta_info
 
+    def NodeOutputDatatype(self):
+        return "VALUE"
+
     def NodeInitProps(self):
-        self.direction = api.ChoiceProp(
-            idname="Direction",
-            default="Vertically",
-            choices=["Vertically", "Horizontally"],
-            label="Filter Type:"
+        self.value = api.PositiveIntegerProp(
+            idname="Value",
+            default=100,
+            min_val=0,
+            max_val=100,
+            widget=api.SLIDER_WIDGET,
+            label="Value:"
         )
-        self.NodeAddProp(self.direction)
-
-    def NodeInitParams(self):
-        image = api.RenderImageParam('Image', 'Image')
-
-        self.NodeAddParam(image)
+        self.NodeAddProp(self.value)
 
     def NodeEvaluation(self, eval_info):
-        flip_direction = self.EvalProperty(eval_info, 'Direction')
-        image1 = self.EvalParameter(eval_info, 'Image')
+        value = self.EvalProperty(eval_info, 'Value')
 
-        image = api.RenderImage()
-        img = image1.Image("numpy")
-
-        if flip_direction == "Vertically":
-            output_img = np.flipud(img)
-        elif flip_direction == "Horizontally":
-            output_img = np.fliplr(img)
-
-        image.SetAsImage(output_img)
-        return image
+        return value
 
 
-api.RegisterNode(Example1Node, "node_example1")
+api.RegisterNode(IntegerNode, "node_integer")

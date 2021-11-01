@@ -1,5 +1,5 @@
 from .node import Node
-from .parameter import Parameter, RenderImageParam
+from .parameter import Parameter, RenderImageParam, IntegerParam
 from .property import (Property, PositiveIntegerProp,
                        ChoiceProp,
                        OpenFileChooserProp,

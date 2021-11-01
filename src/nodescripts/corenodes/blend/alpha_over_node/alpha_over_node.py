@@ -45,16 +45,25 @@ class AlphaOverNode(api.Node):
         self.NodeAddProp(self.value)
 
     def NodeInitParams(self):
-        image1 = api.RenderImageParam('Image 1')
-        image2 = api.RenderImageParam('Image 2')
+        image1 = api.RenderImageParam('Image 1', 'Image')
+        image2 = api.RenderImageParam('Image 2', 'Image')
+        integer = api.IntegerParam('Integer', 'Integer')
 
         self.NodeAddParam(image1)
         self.NodeAddParam(image2)
+        self.NodeAddParam(integer)
 
     def NodeEvaluation(self, eval_info):
         image1 = self.EvalParameter(eval_info, 'Image 1')
         image2 = self.EvalParameter(eval_info, 'Image 2')
-        factor = self.EvalProperty(eval_info, 'Factor')
+
+        # TODO: remove this as an integer input isn't needed here.
+        # This is done more as a proof-of-concept for now.
+        integer = self.EvalParameter(eval_info, 'Integer')
+        if integer > 1:
+            factor = integer
+        else:
+            factor = self.EvalProperty(eval_info, 'Factor')
 
         render_image = api.RenderImage()
 

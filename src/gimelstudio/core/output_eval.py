@@ -30,7 +30,8 @@ class OutputNodeEval(object):
 
         :param node: output node object
         """
-        # TODO: don't hardcode this
+        # The hardcoded "Image" here refers to the input
+        # socket on the Output node
         self.node = node._parameters["Image"].binding
 
     def RenderImage(self):

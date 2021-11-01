@@ -54,8 +54,8 @@ class MixNode(api.Node):
         self.NodeAddProp(p)
 
     def NodeInitParams(self):
-        p1 = api.RenderImageParam('Image')
-        p2 = api.RenderImageParam('Overlay')
+        p1 = api.RenderImageParam('Image', 'Image')
+        p2 = api.RenderImageParam('Overlay', 'Overlay')
 
         self.NodeAddParam(p1)
         self.NodeAddParam(p2)

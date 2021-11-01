@@ -1,4 +1,4 @@
-from gimelstudio.core.node import (Node, Parameter, RenderImageParam,
+from gimelstudio.core.node import (Node, Parameter, RenderImageParam, IntegerParam,
                                   Property, PositiveIntegerProp,
                                   ChoiceProp, OpenFileChooserProp,
                                   LabelProp, SLIDER_WIDGET, SPINBOX_WIDGET)
