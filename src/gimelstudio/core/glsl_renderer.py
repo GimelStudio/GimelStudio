@@ -28,9 +28,9 @@ class GLSLRenderer(object):
         self._vaos = {}
 
         self.gl_context = mg.create_standalone_context(require=330)
-        self.src_texture = self.gl_context.texture((4000, 4000), 4, dtype='f1')
-        self.src_texture2 = self.gl_context.texture((4000, 4000), 4, dtype='f1')
-        self.dst_texture = self.gl_context.texture((4000, 4000), 4, dtype='f1')
+        self.src_texture = self.gl_context.texture((6000, 6000), 4, dtype='f1')
+        self.src_texture2 = self.gl_context.texture((6000, 6000), 4, dtype='f1')
+        self.dst_texture = self.gl_context.texture((6000, 6000), 4, dtype='f1')
         self.src_fbo = self.gl_context.framebuffer(self.src_texture)
         self.dst_fbo = self.gl_context.framebuffer(self.dst_texture)
 
