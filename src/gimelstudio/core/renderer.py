@@ -23,11 +23,11 @@ class Renderer(object):
     outputs the final render image.
     """
     def __init__(self, parent):
-        self._parent = parent
+        self.parent = parent
         self._render = None
 
     def GetParent(self):
-        return self._parent
+        return self.parent
 
     def GetRender(self):
         return self._render

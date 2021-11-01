@@ -7,3 +7,4 @@ from .exportimage_dlg import ExportImageHandler
 from .nodegraph_dnd import NodeGraphDropTarget
 from .addnode_menu import AddNodeMenu
 from .message_dlgs import ShowNotImplementedDialog
+from .panel_base import PanelBase

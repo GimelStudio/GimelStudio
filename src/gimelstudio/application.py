@@ -152,6 +152,14 @@ class ApplicationFrame(wx.Frame):
         )
 
         # View
+        self.showimageviewport_menuitem = flatmenu.FlatMenuItem(
+            edit_menu,
+            id=wx.ID_ANY,
+            label=_("Show Image Viewport"),
+            helpString=_("Show the Image Viewport panel"),
+            kind=wx.ITEM_CHECK,
+            subMenu=None
+        )
         self.showstatusbar_menuitem = flatmenu.FlatMenuItem(
             edit_menu,
             id=wx.ID_ANY,
@@ -237,6 +245,7 @@ class ApplicationFrame(wx.Frame):
         )
 
         # Set defaults
+        self.showimageviewport_menuitem.Check(True)
         self.showstatusbar_menuitem.Check(True)
         self.toggleautorender_menuitem.Check(True)
 
@@ -251,8 +260,10 @@ class ApplicationFrame(wx.Frame):
         file_menu.AppendItem(self.quit_menuitem)
 
         edit_menu.AppendItem(self.copytoclipboard_menuitem)
+        edit_menu.AppendItem(separator)
         edit_menu.AppendItem(self.preferences_menuitem)
 
+        view_menu.AppendItem(self.showimageviewport_menuitem)
         view_menu.AppendItem(self.showstatusbar_menuitem)
 
         render_menu.AppendItem(self.toggleautorender_menuitem)
@@ -302,6 +313,9 @@ class ApplicationFrame(wx.Frame):
                   self.OnPreferencesDialog,
                   self.preferences_menuitem)
 
+        self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
+                  self.OnToggleImageViewport,
+                  self.showimageviewport_menuitem)
         self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
                   self.OnToggleStatusbar,
                   self.showstatusbar_menuitem)
@@ -354,50 +368,51 @@ class ApplicationFrame(wx.Frame):
         art.SetColour(aui.AUI_DOCKART_INACTIVE_CAPTION_TEXT_COLOUR, wx.Colour("#fff"))
         art.SetColour(aui.AUI_DOCKART_SASH_COLOUR, wx.Colour("#232323"))
 
-        # Panels
-        self.imageviewport_pnl = ImageViewportPanel(self)
-        self.prop_pnl = NodePropertiesPanel(self, size=(350, 500))
+        # Setup the main panels
+        self.imageviewport_pnl = ImageViewportPanel(self,
+                                                    idname="IMAGE_VIEWPORT",
+                                                    menu_item=self.showimageviewport_menuitem)
+        self._mgr.AddPane(self.imageviewport_pnl,
+                          aui.AuiPaneInfo()
+                          .Name("IMAGE_VIEWPORT")
+                          .CaptionVisible(False)
+                          .Top()
+                          .Row(0)
+                          .Maximize()
+                          .CloseButton(visible=False)
+                          .BestSize(500, 500))
 
-        # Node Graph
-        self.nodegraph_pnl = NodeGraphPanel(self, self.registry, size=(100, 100))
+        self.prop_pnl = NodePropertiesPanel(self,
+                                            idname="PROPERTIES_PNL",
+                                            menu_item=None,
+                                            size=(350, 500))
+        self._mgr.AddPane(self.prop_pnl,
+                          aui.AuiPaneInfo()
+                          .Name("PROPERTIES_PNL")
+                          .Top()
+                          .Position(1)
+                          .Row(0)
+                          .CaptionVisible(False)
+                          .CloseButton(visible=False)
+                          .BestSize(500, 500))
+
+        self.nodegraph_pnl = NodeGraphPanel(self,
+                                            idname="NODE_EDITOR",
+                                            menu_item=None,
+                                            registry=self.registry,
+                                            size=(100, 100))
         self.nodegraph_pnl.SetDropTarget(NodeGraphDropTarget(self.nodegraph_pnl))
+        self._mgr.AddPane(self.nodegraph_pnl,
+                          aui.AuiPaneInfo()
+                          .Name("NODE_EDITOR")
+                          .CaptionVisible(False)
+                          .Center()
+                          .CloseButton(visible=False)
+                          .BestSize(500, 500))
 
-        # Add panes
-        self._mgr.AddPane(
-            self.imageviewport_pnl,
-            aui.AuiPaneInfo()
-            .Name('imageviewport')
-            .CaptionVisible(False)
-            .Top()
-            .Row(0)
-            .Maximize()
-            .CloseButton(visible=False)
-            .BestSize(500, 500)
-            )
-        self._mgr.AddPane(
-            self.prop_pnl,
-            aui.AuiPaneInfo()
-            .Name('nodeproperties')
-            .Top()
-            .Position(1)
-            .Row(0)
-            .CaptionVisible(False)
-            .CloseButton(visible=False)
-            .BestSize(500, 500)
-            )
-        self._mgr.AddPane(
-            self.nodegraph_pnl,
-            aui.AuiPaneInfo()
-            .Name('nodegraph')
-            .CaptionVisible(False)
-            .Center()
-            .CloseButton(visible=False)
-            .BestSize(500, 500)
-            )
-
-        # This sorta feels like a hack to get the default proportions correct!
-        self._mgr.GetPane("nodeproperties").dock_proportion = 10
-        self._mgr.GetPane("imageviewport").dock_proportion = 25
+        # Hack to get the default proportions correct
+        self._mgr.GetPane("PROPERTIES_PNL").dock_proportion = 10
+        self._mgr.GetPane("IMAGE_VIEWPORT").dock_proportion = 25
 
         # Maximize the window & tell the AUI window
         # manager to "commit" all the changes just made, etc
@@ -466,6 +481,7 @@ class ApplicationFrame(wx.Frame):
             quitdialog.Destroy()
             self._mgr.UnInit()
             del self._mgr
+            # Finally close the window
             self.Destroy()
         else:
             event.Skip()
@@ -487,6 +503,12 @@ class ApplicationFrame(wx.Frame):
                                 app_config=self.appconfig, categories=categories)
         dlg.Show()
 
+    def OnToggleImageViewport(self, event):
+        if self.showimageviewport_menuitem.IsChecked() is False:
+            self.imageviewport_pnl.HidePanel()
+        else:
+            self.imageviewport_pnl.ShowPanel()
+
     def OnToggleStatusbar(self, event):
         if self.showstatusbar_menuitem.IsChecked() is False:
             self.statusbar.Hide()
@@ -501,11 +523,11 @@ class ApplicationFrame(wx.Frame):
         self.Render()
 
     def OnToggleFullscreen(self, event):
+        style = wx.FULLSCREEN_NOCAPTION | wx.FULLSCREEN_NOBORDER
         if self.togglewindowfullscreen_menuitem.IsChecked() is False:
             self.ShowFullScreen(False)
         else:
-            self.ShowFullScreen(True,
-                                style=wx.FULLSCREEN_NOCAPTION | wx.FULLSCREEN_NOBORDER)
+            self.ShowFullScreen(True, style=style)
 
     def OnMaximizeWindow(self, event):
         self.Maximize()

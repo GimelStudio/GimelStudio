@@ -25,7 +25,7 @@ import gimelstudio.constants as const
 
 class NodesVListBox(wx.VListBox):
     def __init__(self, *args, **kw):
-        self._parent = args[0]
+        self.parent = args[0]
         wx.VListBox.__init__(self, *args, **kw)
 
         self.SetBackgroundColour(const.AREA_TOPBAR_COLOR)
@@ -40,11 +40,11 @@ class NodesVListBox(wx.VListBox):
 
     @property
     def NodeRegistryMap(self):
-        return self._parent._nodeRegistryMapping
+        return self.parent._nodeRegistryMapping
 
     @property
     def NodeRegistry(self):
-        return self._parent._nodeRegistry
+        return self.parent._nodeRegistry
 
     def OnStartDrag(self, event):
         """ Start of drag n drop event handler. """
@@ -60,7 +60,7 @@ class NodesVListBox(wx.VListBox):
             # Reset the focus back to the search input so that
             # after a user dnd a node, they can search again straight-away.
             if result:
-                self._parent.search_bar.SetFocus()
+                self.parent.search_bar.SetFocus()
                 self.SetSelection(-1)
 
     # This method must be overridden.  When called it should draw the
@@ -122,7 +122,7 @@ class NodesVListBox(wx.VListBox):
     def UpdateForSearch(self, search_string):
         """ Updates the listbox based on the search string. """
         # Reset mapping var
-        self._parent._nodeRegistryMapping = {}
+        self.parent._nodeRegistryMapping = {}
 
         i = 0
         for item in self.NodeRegistry:
@@ -149,7 +149,7 @@ class AddNodeMenu(wx.PopupTransientWindow):
                  style=wx.BORDER_NONE | wx.PU_CONTAINS_CONTROLS):
         wx.PopupTransientWindow.__init__(self, parent, style)
 
-        self._parent = parent
+        self.parent = parent
         self._size = size
         self._nodeRegistry = node_registry
         self._nodeRegistryMapping = {}
@@ -202,7 +202,7 @@ class AddNodeMenu(wx.PopupTransientWindow):
     @property
     def NodeGraph(self):
         """ Get the Node Graph. """
-        return self._parent
+        return self.parent
 
     def OnDoSearch(self, event):
         """ Event handler for when something is typed into the search bar, etc. """

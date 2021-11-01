@@ -15,7 +15,6 @@
 # ----------------------------------------------------------------------------
 
 import wx
-import wx.lib.agw.flatmenu as flatmenu
 from gswidgetkit import EVT_BUTTON, Button
 
 import gimelstudio.constants as const
@@ -23,19 +22,12 @@ import gimelstudio.interface.basewidgets.foldpanelbar as fpb
 from gimelstudio.datafiles import (ICON_HELP, ICON_NODEPROPERTIES_PANEL,
                                    ICON_MORE_MENU_SMALL, ICON_MOUSE_LMB,
                                    ICON_MOUSE_MMB, ICON_MOUSE_RMB)
-
-from .utils import ComputeMenuPosAlignedLeft  # TODO: move to gswidgetkit utilities
-
-ID_MENU_UNDOCKPANEL = wx.NewIdRef()
-ID_MENU_HIDEPANEL = wx.NewIdRef()
+from .panel_base import PanelBase
 
 
-class NodePropertiesPanel(wx.Panel):
-    def __init__(self, parent, id=wx.ID_ANY, pos=wx.DefaultPosition, size=wx.DefaultSize,
-                 style=wx.NO_BORDER | wx.TAB_TRAVERSAL):
-        wx.Panel.__init__(self, parent, id, pos, size, style)
-
-        self.parent = parent
+class NodePropertiesPanel(PanelBase):
+    def __init__(self, parent, idname, menu_item, *args, **kwargs):
+        PanelBase.__init__(self, parent, idname, menu_item)
 
         self.SetBackgroundColour(const.AREA_BG_COLOR)
 
@@ -89,8 +81,6 @@ class NodePropertiesPanel(wx.Panel):
         self.SetSizer(main_sizer)
 
         self.menu_button.Bind(EVT_BUTTON, self.OnAreaMenuButton)
-        self.Bind(wx.EVT_MENU, self.OnMenuUndockPanel, id=ID_MENU_UNDOCKPANEL)
-        self.Bind(wx.EVT_MENU, self.OnMenuHidePanel, id=ID_MENU_HIDEPANEL)
         self.main_panel.Bind(wx.EVT_ENTER_WINDOW, self.OnAreaFocus)
 
     def UpdatePanelContents(self, selected_node):
@@ -155,31 +145,3 @@ class NodePropertiesPanel(wx.Panel):
         self.Statusbar.PushContextHints(4, mouseicon=ICON_MOUSE_RMB, text="")
         self.Statusbar.PushMessage(_("Node Properties Area"))
         self.Statusbar.UpdateStatusBar()
-
-    def OnAreaMenuButton(self, event):
-        self.CreateAreaMenu()
-        pos = ComputeMenuPosAlignedLeft(self.area_dropdownmenu, self.menu_button)
-        self.area_dropdownmenu.Popup(pos, self)
-
-    def OnMenuUndockPanel(self, event):
-        self.AUIManager.GetPane("nodeproperties").Float()
-        self.AUIManager.Update()
-
-    def OnMenuHidePanel(self, event):
-        self.AUIManager.GetPane("nodeproperties").Hide()
-        self.AUIManager.Update()
-
-    def CreateAreaMenu(self):
-        self.area_dropdownmenu = flatmenu.FlatMenu()
-
-        undockpanel_menuitem = flatmenu.FlatMenuItem(self.area_dropdownmenu,
-                                                     ID_MENU_UNDOCKPANEL,
-                                                     _("Undock panel"), "",
-                                                     wx.ITEM_NORMAL)
-        self.area_dropdownmenu.AppendItem(undockpanel_menuitem)
-
-        hidepanel_menuitem = flatmenu.FlatMenuItem(self.area_dropdownmenu,
-                                                   ID_MENU_HIDEPANEL,
-                                                   _("Hide panel"), "",
-                                                   wx.ITEM_NORMAL)
-        self.area_dropdownmenu.AppendItem(hidepanel_menuitem)
