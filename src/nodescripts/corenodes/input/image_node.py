@@ -17,7 +17,6 @@
 import os
 
 from gimelstudio import api, constants
-from gimelstudio.core.eval_info import EvalInfo
 
 
 class ImageNode(api.Node):
@@ -37,6 +36,17 @@ class ImageNode(api.Node):
             "description": "Loads an image from the specified file path."
         }
         return meta_info
+
+    def NodeWidgetEventHook(self, idname, value):
+        if idname == "File Path":
+            image = self.NodeEvalSelf()
+            self.NodeUpdateThumb(image)
+            self.RefreshNodeGraph()
+
+    def NodeDndEventHook(self):
+        image = self.NodeEvalSelf()
+        self.NodeUpdateThumb(image)
+        self.RefreshNodeGraph()
 
     def NodeInitProps(self):
         wildcard = constants.SUPPORTED_FT_OPEN_WILDCARD
@@ -68,6 +78,7 @@ class ImageNode(api.Node):
             else:
                 render_image = self.cached_image
 
+        self.NodeUpdateThumb(render_image)
         return render_image
 
 

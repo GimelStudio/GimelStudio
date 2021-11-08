@@ -77,6 +77,7 @@ class AlphaOverNode(api.Node):
         result = self.RenderGLSL(shader_src, props, image1, image2)
 
         render_image.SetAsImage(result)
+        self.NodeUpdateThumb(render_image)
         return render_image
 
 

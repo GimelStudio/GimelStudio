@@ -52,7 +52,7 @@ class FlipNode(api.Node):
         flip_direction = self.EvalProperty(eval_info, 'Direction')
         image1 = self.EvalParameter(eval_info, 'Image')
 
-        image = api.RenderImage()
+        render_image = api.RenderImage()
         img = image1.Image("numpy")
 
         if flip_direction == "Vertically":
@@ -60,8 +60,9 @@ class FlipNode(api.Node):
         elif flip_direction == "Horizontally":
             output_img = np.fliplr(img)
 
-        image.SetAsImage(output_img)
-        return image
+        render_image.SetAsImage(output_img)
+        self.NodeUpdateThumb(render_image)
+        return render_image
 
 
 api.RegisterNode(FlipNode, "corenode_flip")

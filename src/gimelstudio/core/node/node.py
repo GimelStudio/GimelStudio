@@ -19,6 +19,8 @@ import wx
 from gsnodegraph import NodeBase as NodeView
 
 import gimelstudio.constants as const
+from gimelstudio.utils import ResizeKeepAspectRatio, ConvertImageToWx
+from gimelstudio.core import EvalInfo
 
 
 class Node(NodeView):
@@ -41,10 +43,10 @@ class Node(NodeView):
 
         Please do not override.
         """
-        self.WidgetEventHook(idname, value)
+        self.NodeWidgetEventHook(idname, value)
         self.SetEditedFlag(True)
-        if render is True:
-            self.nodegraph.parent.parent.Render()
+        if render == True:
+            render = self.nodegraph.parent.parent.Render()
 
     @property
     def NodeMeta(self):
@@ -163,6 +165,32 @@ class Node(NodeView):
             if prop_obj.GetIsVisible() is True:
                 prop_obj.CreateUI(parent, sizer)
 
+    def NodeUpdateThumb(self, image):
+        if self.IsExpanded():
+            image = image.Image("numpy")
+            img = ResizeKeepAspectRatio(image, (120, image.shape[1]))
+            self.SetThumbnail(ConvertImageToWx(img))
+            self.nodegraph.UpdateDrawing()
+
+    def NodeEvalSelf(self):
+        return self.NodeEvaluation(EvalInfo(self))
+
+    def NodeEvaluation(self, eval_info):
+        return None
+
+    def NodeWidgetEventHook(self, idname, value):
+        """ Property widget callback event hook. This method is called after the property widget has returned the new value. It is useful for updating the node itself or other node properties as a result of a change in the value of the property.
+
+        **Keep in mind that this is only called after a property is edited by the user. If you are looking for more flexibility, you should look into creating your own Property.**
+
+        :prop idname: idname of the property which was updated and is calling this method
+        :prop value: updated value of the property
+        """
+        pass
+
+    def NodeDndEventHook(self):
+        pass
+
     def ClearCache(self):
         self._cache = {}
 
@@ -182,16 +210,16 @@ class Node(NodeView):
         cached = self.IsInCache(name)
 
         # Basic node cache implementation
-        if self.IsNodeCacheEnabled() is True:
-            if self.GetEditedFlag() is True and cached is True:
+        if self.IsNodeCacheEnabled() == True:
+            if self.GetEditedFlag() == True and cached == True:
                 value = self._cache[name]
                 self.SetEditedFlag(False)
-                print("Used Cache: ", self._label)
+                # print("Used Cache: ", self._label)
             else:
                 value = eval_info.EvaluateParameter(name)
                 self._cache[name] = value
                 self.SetEditedFlag(False)
-                print("Evaluated: ", self._label)
+                # print("Evaluated: ", self._label)
         else:
             value = eval_info.EvaluateParameter(name)
 
@@ -205,19 +233,6 @@ class Node(NodeView):
         """ Internal method. Please do not override. """
         return self.NodeEvaluation
 
-    def NodeEvaluation(self, eval_info):
-        return None
-
-    def WidgetEventHook(self, idname, value):
-        """ Property widget callback event hook. This method is called after the property widget has returned the new value. It is useful for updating the node itself or other node properties as a result of a change in the value of the property.
-
-        **Keep in mind that this is only called after a property is edited by the user. If you are looking for more flexibility, you should look into creating your own Property.**
-
-        :prop idname: idname of the property which was updated and is calling this method
-        :prop value: updated value of the property
-        """
-        pass
-
     def RenderGLSL(self, path, props, image, image2=None):
         file_path = os.path.expanduser(os.path.expandvars(path))
         shader_path = os.path.join(const.APP_DIR, file_path)
@@ -227,7 +242,7 @@ class Node(NodeView):
 
     def RefreshNodeGraph(self):
         """ Force a refresh of the Node Graph panel. """
-        self.nodegraph.RefreshGraph()
+        self.nodegraph.UpdateDrawing()
 
     def RefreshPropertyPanel(self):
         """ Force a refresh of the Node Properties panel. """

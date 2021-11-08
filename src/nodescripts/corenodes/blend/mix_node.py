@@ -80,6 +80,7 @@ class MixNode(api.Node):
             image = oiio.ImageBufAlgo.div(image2, image1)
 
         render_image.SetAsImage(image)
+        self.NodeUpdateThumb(render_image)
         return render_image
 
 

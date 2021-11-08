@@ -21,10 +21,10 @@ from wx.lib.newevent import NewCommandEvent
 from gswidgetkit import Button, EVT_BUTTON, NumberField, EVT_NUMBERFIELD_CHANGE
 
 import gimelstudio.constants as const
+from gimelstudio.utils import ConvertImageToWx
 from gimelstudio.datafiles import (ICON_IMAGEVIEWPORT_PANEL, ICON_MORE_MENU_SMALL,
                                    ICON_MOUSE_MMB, ICON_MOUSE_MMB_MOVEMENT,
                                    ICON_BRUSH_CHECKERBOARD)
-from .utils import ConvertImageToWx
 from .basewidgets import ZoomPanel
 from .panel_base import PanelBase
 

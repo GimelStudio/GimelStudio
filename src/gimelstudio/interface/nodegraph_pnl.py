@@ -16,7 +16,8 @@
 
 import wx
 import wx.lib.agw.flatmenu as flatmenu
-from gswidgetkit import Button, EVT_BUTTON, NumberField, EVT_NUMBERFIELD_CHANGE
+from gswidgetkit import (Button, EVT_BUTTON, NumberField, EVT_NUMBERFIELD_CHANGE,
+                        CheckBox)
 from gsnodegraph import (EVT_GSNODEGRAPH_NODESELECT,
                          EVT_GSNODEGRAPH_NODECONNECT,
                          EVT_GSNODEGRAPH_NODEDISCONNECT,
@@ -69,13 +70,18 @@ class NodeGraphPanel(PanelBase):
         self.zoom_field = NumberField(topbar, default_value=100, label=_("Zoom"),
                                       min_value=25, max_value=250, suffix="%",
                                       show_p=False)
+        # self.imageasbg_checkbox = CheckBox(topbar, label=_("Image as background"))
+        # self.imageasbg_checkbox.SetValue(True)
+        # self.imageasbg_checkbox.Bind(wx.EVT_CHECKBOX,)
+
         self.menu_button = Button(topbar, label="", flat=True,
                                   bmp=(ICON_MORE_MENU_SMALL.GetBitmap(), 'left'))
 
         topbar_sizer.Add(self.area_icon, (0, 0), flag=wx.LEFT | wx.TOP | wx.BOTTOM, border=8)
         topbar_sizer.Add(self.area_label, (0, 1), flag=wx.ALL, border=8)
-        topbar_sizer.Add(self.zoom_field, (0, 3), flag=wx.ALL, border=3)
-        topbar_sizer.Add(self.menu_button, (0, 4), flag=wx.ALL, border=3)
+        # topbar_sizer.Add(self.imageasbg_checkbox, (0, 3), flag=wx.ALL, border=8)
+        topbar_sizer.Add(self.zoom_field, (0, 4), flag=wx.ALL, border=3)
+        topbar_sizer.Add(self.menu_button, (0, 5), flag=wx.ALL, border=3)
         topbar_sizer.AddGrowableCol(2)
 
         topbar.SetSizer(topbar_sizer)

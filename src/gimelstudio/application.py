@@ -424,11 +424,13 @@ class ApplicationFrame(wx.Frame):
         self.menubar.Refresh()
 
     def Render(self):
-        start = time.time()
+        # start = time.time()
         image = self.renderer.Render(self.NodeGraph._nodes)
-        end = time.time()
-        print("Render time: ", end - start)  # FIXME: Temporary test code
-        self.imageviewport_pnl.UpdateViewerImage(image.Image("numpy"), 0)
+        # end = time.time()
+        # print("Render time: ", end - start)  # FIXME: Temporary test code
+        render = image.Image("numpy")
+        self.imageviewport_pnl.UpdateViewerImage(render, 0)
+        return render
 
     @property
     def NodeGraph(self):

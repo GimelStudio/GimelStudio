@@ -72,6 +72,8 @@ class NodeGraphDropTarget(wx.DropTarget):
                                                     location="CURSOR")
                         node.NodeEditProp(idname="File Path",
                                           value=filename, render=False)
+                        node.ToggleExpand()
+                        node.NodeDndEventHook()
                         self._window.UpdateNodegraph()
 
                     else:
