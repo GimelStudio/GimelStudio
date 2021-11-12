@@ -17,7 +17,7 @@
 import wx
 import wx.lib.agw.flatmenu as flatmenu
 from gswidgetkit import (Button, EVT_BUTTON, NumberField, EVT_NUMBERFIELD_CHANGE,
-                        CheckBox)
+                         CheckBox)
 from gsnodegraph import (EVT_GSNODEGRAPH_NODESELECT,
                          EVT_GSNODEGRAPH_NODECONNECT,
                          EVT_GSNODEGRAPH_NODEDISCONNECT,
@@ -88,7 +88,7 @@ class NodeGraphPanel(PanelBase):
 
         self.nodegraph = NodeGraph(self, self.registry, size=(-1, self.Size[0]-20))
 
-        # here for testing
+        # FIXME: Here for testing
         self.nodegraph.AddNode('corenode_image', wx.Point(100, 30))
         self.nodegraph.AddNode('corenode_image', wx.Point(100, 200))
         self.nodegraph.AddNode('corenode_blur', wx.Point(600, 200))
@@ -145,7 +145,7 @@ class NodeGraphPanel(PanelBase):
         return self.nodegraph.AddNode(idname, pos, location)
 
     def UpdateNodegraph(self):
-        self.nodegraph.UpdateDrawing()
+        self.nodegraph.UpdateNodeGraph()
 
     def UpdateNodePropertiesPnl(self, event):
         self.PropertiesPanel.UpdatePanelContents(event.value)

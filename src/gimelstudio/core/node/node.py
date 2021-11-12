@@ -168,9 +168,9 @@ class Node(NodeView):
     def NodeUpdateThumb(self, image):
         if self.IsExpanded():
             image = image.Image("numpy")
-            img = ResizeKeepAspectRatio(image, (120, image.shape[1]))
+            img = ResizeKeepAspectRatio(image, (134, image.shape[1]))
             self.SetThumbnail(ConvertImageToWx(img))
-            self.nodegraph.UpdateDrawing()
+            self.nodegraph.UpdateNodeGraph()
 
     def NodeEvalSelf(self):
         return self.NodeEvaluation(EvalInfo(self))
@@ -242,7 +242,7 @@ class Node(NodeView):
 
     def RefreshNodeGraph(self):
         """ Force a refresh of the Node Graph panel. """
-        self.nodegraph.UpdateDrawing()
+        self.nodegraph.UpdateNodeGraph()
 
     def RefreshPropertyPanel(self):
         """ Force a refresh of the Node Properties panel. """
