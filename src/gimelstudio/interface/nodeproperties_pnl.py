@@ -15,10 +15,11 @@
 # ----------------------------------------------------------------------------
 
 import wx
-from gswidgetkit import EVT_BUTTON, Button
+from gswidgetkit import (EVT_BUTTON, Button, Label)
 
-import gimelstudio.constants as const
 import gimelstudio.interface.basewidgets.foldpanelbar as fpb
+from gimelstudio.constants import (PROP_HEADER_COLOR, AREA_BG_COLOR, 
+                                   AREA_TOPBAR_COLOR)
 from gimelstudio.datafiles import (ICON_HELP, ICON_NODEPROPERTIES_PANEL,
                                    ICON_MORE_MENU_SMALL, ICON_MOUSE_LMB,
                                    ICON_MOUSE_MMB, ICON_MOUSE_RMB)
@@ -29,7 +30,7 @@ class NodePropertiesPanel(PanelBase):
     def __init__(self, parent, idname, menu_item, *args, **kwargs):
         PanelBase.__init__(self, parent, idname, menu_item)
 
-        self.SetBackgroundColour(const.AREA_BG_COLOR)
+        self.SetBackgroundColour(AREA_BG_COLOR)
 
         self.BuildUI()
 
@@ -49,15 +50,13 @@ class NodePropertiesPanel(PanelBase):
         main_sizer = wx.BoxSizer(wx.VERTICAL)
 
         topbar = wx.Panel(self)
-        topbar.SetBackgroundColour(const.AREA_TOPBAR_COLOR)
+        topbar.SetBackgroundColour(AREA_TOPBAR_COLOR)
 
         topbar_sizer = wx.GridBagSizer(vgap=1, hgap=1)
 
         self.area_icon = wx.StaticBitmap(topbar,
                                          bitmap=ICON_NODEPROPERTIES_PANEL.GetBitmap())
-        self.area_label = wx.StaticText(topbar, label="")
-        self.area_label.SetForegroundColour("#fff")
-        self.area_label.SetFont(self.area_label.GetFont().Bold())
+        self.area_label = Label(topbar, label="", color="#ccc", font_bold=True)
 
         self.menu_button = Button(topbar, label="", flat=True,
                                   bmp=(ICON_MORE_MENU_SMALL.GetBitmap(), 'left'))
@@ -90,13 +89,12 @@ class NodePropertiesPanel(PanelBase):
 
             # Node info
             nodeinfo_pnl = wx.Panel(self.main_panel, size=(-1, 50))
-            nodeinfo_pnl.SetBackgroundColour(const.AREA_BG_COLOR)
+            nodeinfo_pnl.SetBackgroundColour(AREA_BG_COLOR)
 
             nodeinfo_pnl_sizer = wx.GridBagSizer(vgap=1, hgap=1)
 
-            node_label = wx.StaticText(nodeinfo_pnl, label=selected_node.GetLabel())
-            node_label.SetForegroundColour("#fff")
-            node_label.SetFont(self.area_label.GetFont().Bold())
+            node_label = Label(nodeinfo_pnl, label=selected_node.GetLabel(), 
+                               color="#f1f1f1", font_bold=True)
 
             self.help_button = Button(nodeinfo_pnl, label="", flat=True,
                                       bmp=(ICON_HELP.GetBitmap(), 'left'))
@@ -117,14 +115,12 @@ class NodePropertiesPanel(PanelBase):
 
             style = fpb.CaptionBarStyle()
             style.SetCaptionFont(self.Parent.GetFont())
-            style.SetCaptionColour(wx.Colour("#fff"))
-            style.SetFirstColour(wx.Colour('#5c5c5c'))
-            style.SetSecondColour(wx.Colour('#5c5c5c'))
+            style.SetCaptionColour(wx.Colour("#f1f1f1"))
+            style.SetFirstColour(wx.Colour(PROP_HEADER_COLOR))
+            style.SetCaptionStyle(fpb.CAPTIONBAR_SINGLE)
             panel_bar.ApplyCaptionStyleAll(style)
 
-            self._mainsizer.Add(panel_bar, 1, wx.EXPAND | wx.ALL)
-
-            self._mainsizer.Layout()
+            self._mainsizer.Add(panel_bar, 1, wx.EXPAND | wx.LEFT | wx.RIGHT, border=6)
 
             # Also bind the focus handler to the main panel and panel_bar
             nodeinfo_pnl.Bind(wx.EVT_ENTER_WINDOW, self.OnAreaFocus)
@@ -135,8 +131,6 @@ class NodePropertiesPanel(PanelBase):
             self._mainsizer.Clear(delete_windows=True)
 
         self.AUIManager.Update()
-        self.Parent.Refresh()
-        self.Parent.Update()
 
     def OnAreaFocus(self, event):
         self.Statusbar.PushContextHints(2, mouseicon=ICON_MOUSE_LMB, text="",

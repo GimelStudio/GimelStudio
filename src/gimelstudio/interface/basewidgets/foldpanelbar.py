@@ -204,6 +204,8 @@ Version 0.6
 
 import wx
 
+from gimelstudio.constants import AREA_BG_COLOR
+    
 #----------------------------------------------------------------------
 # Collapsed And Expanded Bitmap Images
 # Created With img2py.py
@@ -655,6 +657,8 @@ class CaptionBar(wx.Window):
         self._oldSize = wx.Size(20,20)
 
         self._controlCreated = True
+        
+        self.SetBackgroundColour(AREA_BG_COLOR)
 
         self.Bind(wx.EVT_PAINT, self.OnPaint)
         self.Bind(wx.EVT_SIZE, self.OnSize)
@@ -917,35 +921,35 @@ class CaptionBar(wx.Window):
                 send_event = True
 
         elif event.LeftDClick():
-            self.SetCursor(wx.Cursor(wx.CURSOR_ARROW))
+            # self.SetCursor(wx.Cursor(wx.CURSOR_ARROW))
             send_event = True
 
-        elif event.Entering() and self._foldIcons:
-            self.SetCursor(wx.Cursor(wx.CURSOR_ARROW))
+        # elif event.Entering() and self._foldIcons:
+        #     self.SetCursor(wx.Cursor(wx.CURSOR_ARROW))
 
-            pt = event.GetPosition()
-            rect = self.GetRect()
+        #     pt = event.GetPosition()
+        #     rect = self.GetRect()
 
-            drw = 0
-            if vertical and pt.x > drw or not vertical and \
-               pt.y < (self._iconHeight + self._rightIndent):
-                self.SetCursor(wx.Cursor(wx.CURSOR_HAND))
-            else:
-                self.SetCursor(wx.Cursor(wx.CURSOR_ARROW))
+        #     drw = 0
+        #     if vertical and pt.x > drw or not vertical and \
+        #        pt.y < (self._iconHeight + self._rightIndent):
+        #         self.SetCursor(wx.Cursor(wx.CURSOR_HAND))
+        #     else:
+        #         self.SetCursor(wx.Cursor(wx.CURSOR_ARROW))
 
-        elif event.Leaving():
-            self.SetCursor(wx.Cursor(wx.CURSOR_ARROW))
+        # elif event.Leaving():
+        #     self.SetCursor(wx.Cursor(wx.CURSOR_ARROW))
 
-        elif event.Moving():
-            pt = event.GetPosition()
-            rect = self.GetRect()
+        # elif event.Moving():
+        #     pt = event.GetPosition()
+        #     rect = self.GetRect()
 
-            drw = 0
-            if vertical and pt.x > drw or not vertical and \
-               pt.y < (self._iconHeight + self._rightIndent):
-                self.SetCursor(wx.Cursor(wx.CURSOR_HAND))
-            else:
-                self.SetCursor(wx.Cursor(wx.CURSOR_ARROW))
+        #     drw = 0
+        #     if vertical and pt.x > drw or not vertical and \
+        #        pt.y < (self._iconHeight + self._rightIndent):
+        #         self.SetCursor(wx.Cursor(wx.CURSOR_HAND))
+        #     else:
+        #         self.SetCursor(wx.Cursor(wx.CURSOR_ARROW))
 
         # send the collapse, expand event to the parent
 
@@ -994,80 +998,80 @@ class CaptionBar(wx.Window):
         return wx.Size(x + FPB_EXTRA_X, y + FPB_EXTRA_Y)
 
 
-    def DrawVerticalGradient(self, dc, rect):
-        """
-        Gradient fill from colour 1 to colour 2 from top to bottom.
+    # def DrawVerticalGradient(self, dc, rect):
+    #     """
+    #     Gradient fill from colour 1 to colour 2 from top to bottom.
 
-        :param `dc`: an instance of :class:`wx.DC`;
-        :param `rect`: the :class:`CaptionBar` client rectangle.
-        """
+    #     :param `dc`: an instance of :class:`wx.DC`;
+    #     :param `rect`: the :class:`CaptionBar` client rectangle.
+    #     """
 
-        if  rect.height < 1 or rect.width < 1:
-            return
+    #     if  rect.height < 1 or rect.width < 1:
+    #         return
 
-        dc.SetPen(wx.TRANSPARENT_PEN)
+    #     dc.SetPen(wx.TRANSPARENT_PEN)
 
-        # calculate gradient coefficients
-        col2 = self._style.GetSecondColour()
-        col1 = self._style.GetFirstColour()
+    #     # calculate gradient coefficients
+    #     col2 = self._style.GetSecondColour()
+    #     col1 = self._style.GetFirstColour()
 
-        r1, g1, b1 = int(col1.Red()), int(col1.Green()), int(col1.Blue())
-        r2, g2, b2 = int(col2.Red()), int(col2.Green()), int(col2.Blue())
+    #     r1, g1, b1 = int(col1.Red()), int(col1.Green()), int(col1.Blue())
+    #     r2, g2, b2 = int(col2.Red()), int(col2.Green()), int(col2.Blue())
 
-        flrect = float(rect.height)
+    #     flrect = float(rect.height)
 
-        rstep = float((r2 - r1)) / flrect
-        gstep = float((g2 - g1)) / flrect
-        bstep = float((b2 - b1)) / flrect
+    #     rstep = float((r2 - r1)) / flrect
+    #     gstep = float((g2 - g1)) / flrect
+    #     bstep = float((b2 - b1)) / flrect
 
-        rf, gf, bf = 0, 0, 0
+    #     rf, gf, bf = 0, 0, 0
 
-        for y in range(rect.y, rect.y + rect.height):
-            currCol = (r1 + rf, g1 + gf, b1 + bf)
+    #     for y in range(rect.y, rect.y + rect.height):
+    #         currCol = (r1 + rf, g1 + gf, b1 + bf)
 
-            dc.SetBrush(wx.Brush(currCol, wx.BRUSHSTYLE_SOLID))
-            dc.DrawRectangle(rect.x, rect.y + (y - rect.y), rect.width, rect.height)
-            rf = rf + rstep
-            gf = gf + gstep
-            bf = bf + bstep
+    #         dc.SetBrush(wx.Brush(currCol, wx.BRUSHSTYLE_SOLID))
+    #         dc.DrawRoundedRectangle(rect.x, rect.y + (y - rect.y), rect.width, rect.height, 4)
+    #         rf = rf + rstep
+    #         gf = gf + gstep
+    #         bf = bf + bstep
 
 
-    def DrawHorizontalGradient(self, dc, rect):
-        """
-        Gradient fill from colour 1 to colour 2 from left to right.
+    # def DrawHorizontalGradient(self, dc, rect):
+    #     """
+    #     Gradient fill from colour 1 to colour 2 from left to right.
 
-        :param `dc`: an instance of :class:`wx.DC`;
-        :param `rect`: the :class:`CaptionBar` client rectangle.
-        """
+    #     :param `dc`: an instance of :class:`wx.DC`;
+    #     :param `rect`: the :class:`CaptionBar` client rectangle.
+    #     """
 
-        if rect.height < 1 or rect.width < 1:
-            return
+    #     if rect.height < 1 or rect.width < 1:
+    #         return
 
-        dc.SetPen(wx.TRANSPARENT_PEN)
+    #     dc.SetPen(wx.TRANSPARENT_PEN)
 
-        # calculate gradient coefficients
-        col2 = self._style.GetSecondColour()
-        col1 = self._style.GetFirstColour()
+    #     # calculate gradient coefficients
+    #     col2 = self._style.GetSecondColour()
+    #     col1 = self._style.GetFirstColour()
 
-        r1, g1, b1 = int(col1.Red()), int(col1.Green()), int(col1.Blue())
-        r2, g2, b2 = int(col2.Red()), int(col2.Green()), int(col2.Blue())
+    #     r1, g1, b1 = int(col1.Red()), int(col1.Green()), int(col1.Blue())
+    #     r2, g2, b2 = int(col2.Red()), int(col2.Green()), int(col2.Blue())
 
-        flrect = float(rect.width)
+    #     flrect = float(rect.width)
 
-        rstep = float((r2 - r1)) / flrect
-        gstep = float((g2 - g1)) / flrect
-        bstep = float((b2 - b1)) / flrect
+    #     rstep = float((r2 - r1)) / flrect
+    #     gstep = float((g2 - g1)) / flrect
+    #     bstep = float((b2 - b1)) / flrect
 
-        rf, gf, bf = 0, 0, 0
+    #     rf, gf, bf = 0, 0, 0
 
-        for x in range(rect.x, rect.x + rect.width):
-            currCol = (r1 + rf, g1 + gf, b1 + bf)
+    #     for x in range(rect.x, rect.x + rect.width):
+    #         currCol = (r1 + rf, g1 + gf, b1 + bf)
 
-            dc.SetBrush(wx.Brush(currCol, wx.BRUSHSTYLE_SOLID))
-            dc.DrawRectangle(rect.x + (x - rect.x), rect.y, 1, rect.height)
-            rf = rf + rstep
-            gf = gf + gstep
-            bf = bf + bstep
+    #         dc.SetBrush(wx.Brush(currCol, wx.BRUSHSTYLE_SOLID))
+    #         dc.DrawRectangle(rect.x + (x - rect.x), rect.y, 1, rect.height)
+    #         rf = rf + rstep
+    #         gf = gf + gstep
+    #         bf = bf + bstep
 
 
     def DrawSingleColour(self, dc, rect):
@@ -1085,40 +1089,43 @@ class CaptionBar(wx.Window):
 
         # draw simple rectangle
         dc.SetBrush(wx.Brush(self._style.GetFirstColour(), wx.BRUSHSTYLE_SOLID))
-        dc.DrawRectangle(rect.x, rect.y, rect.width, rect.height)
+        dc.DrawRoundedRectangle(rect.x, rect.y, rect.width, rect.height, 4)
+
+        if self.IsCollapsed() is not True:
+            dc.DrawRectangle(rect.x, rect.y+rect.height-2, rect.width, 4)
 
 
-    def DrawSingleRectangle(self, dc, rect):
-        """
-        Single rectangle for :class:`CaptionBar`.
+    # def DrawSingleRectangle(self, dc, rect):
+    #     """
+    #     Single rectangle for :class:`CaptionBar`.
 
-        :param `dc`: an instance of :class:`wx.DC`;
-        :param `rect`: the :class:`CaptionBar` client rectangle.
-        """
+    #     :param `dc`: an instance of :class:`wx.DC`;
+    #     :param `rect`: the :class:`CaptionBar` client rectangle.
+    #     """
 
-        if rect.height < 2 or rect.width < 1:
-            return
+    #     if rect.height < 2 or rect.width < 1:
+    #         return
 
-        # single frame, set up internal fill colour
+    #     # single frame, set up internal fill colour
 
-        if self._style.GetCaptionStyle() == CAPTIONBAR_RECTANGLE:
-            colour = self.GetParent().GetBackgroundColour()
-            br = wx.Brush(colour, wx.BRUSHSTYLE_SOLID)
-        else:
-            colour = self._style.GetFirstColour()
-            br = wx.Brush(colour, wx.BRUSHSTYLE_SOLID)
+    #     if self._style.GetCaptionStyle() == CAPTIONBAR_RECTANGLE:
+    #         colour = self.GetParent().GetBackgroundColour()
+    #         br = wx.Brush(colour, wx.BRUSHSTYLE_SOLID)
+    #     else:
+    #         colour = self._style.GetFirstColour()
+    #         br = wx.Brush(colour, wx.BRUSHSTYLE_SOLID)
 
-        # setup the pen frame
+    #     # setup the pen frame
 
-        pen = wx.Pen(self._style.GetSecondColour())
-        dc.SetPen(pen)
-        dc.SetBrush(br)
-        dc.DrawRectangle(rect.x, rect.y, rect.width, rect.height - 1)
+    #     pen = wx.Pen(self._style.GetSecondColour())
+    #     dc.SetPen(pen)
+    #     dc.SetBrush(br)
+    #     dc.DrawRoundedRectangle(rect.x, rect.y, rect.width, rect.height - 1, 4)
 
-        bgpen = wx.Pen(self.GetParent().GetBackgroundColour())
-        dc.SetPen(bgpen)
-        dc.DrawLine(rect.x, rect.y + rect.height - 1, rect.x + rect.width,
-                    rect.y + rect.height - 1)
+    #     bgpen = wx.Pen(self.GetParent().GetBackgroundColour())
+    #     dc.SetPen(bgpen)
+    #     dc.DrawLine(rect.x, rect.y + rect.height - 1, rect.x + rect.width,
+    #                 rect.y + rect.height - 1)
 
 
     def OnSize(self, event):
@@ -1482,7 +1489,7 @@ class FoldPanelBar(wx.Panel):
             for panels in self._panels:
 
                 if panels.IsExpanded():
-                    offset = offset + panels.Reposition(offset)
+                    offset = offset + panels.Reposition(offset) + 6  # 6px of padding
 
             # put all non collapsed panels at the bottom where there is space,
             # else put them right behind the expanded ones
@@ -1493,7 +1500,7 @@ class FoldPanelBar(wx.Panel):
 
             pos = self._panels[i].GetItemPos() + self._panels[i].GetPanelLength()
             for j in range(i+1, len(self._panels)):
-                pos = pos + self._panels[j].Reposition(pos)
+                pos = pos + self._panels[j].Reposition(pos) + 6  # 6px of padding
 
         self.Thaw()
 
