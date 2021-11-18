@@ -23,6 +23,7 @@ from gimelstudio.constants import (PROP_HEADER_COLOR, AREA_BG_COLOR,
 from gimelstudio.datafiles import (ICON_HELP, ICON_NODEPROPERTIES_PANEL,
                                    ICON_MORE_MENU_SMALL, ICON_MOUSE_LMB,
                                    ICON_MOUSE_MMB, ICON_MOUSE_RMB)
+from gimelstudio.core.node.property import ThumbProp
 from .panel_base import PanelBase
 
 
@@ -93,16 +94,15 @@ class NodePropertiesPanel(PanelBase):
 
             nodeinfo_pnl_sizer = wx.GridBagSizer(vgap=1, hgap=1)
 
-            node_label = Label(nodeinfo_pnl, label=selected_node.GetLabel(), 
-                               color="#f1f1f1", font_bold=True)
+            node_label = Label(nodeinfo_pnl, label=selected_node.GetLabel())
 
             self.help_button = Button(nodeinfo_pnl, label="", flat=True,
                                       bmp=(ICON_HELP.GetBitmap(), 'left'))
 
             nodeinfo_pnl_sizer.Add(node_label, (0, 1),
-                                   flag=wx.TOP | wx.BOTTOM, border=6)
+                                   flag=wx.TOP | wx.BOTTOM, border=10)
             nodeinfo_pnl_sizer.Add(self.help_button, (0, 4),
-                                   flag=wx.TOP | wx.BOTTOM | wx.RIGHT, border=6)
+                                   flag=wx.TOP | wx.BOTTOM | wx.RIGHT, border=10)
             nodeinfo_pnl_sizer.AddGrowableCol(2)
             nodeinfo_pnl.SetSizer(nodeinfo_pnl_sizer)
 
@@ -112,10 +112,11 @@ class NodePropertiesPanel(PanelBase):
             panel_bar = fpb.FoldPanelBar(self.main_panel, agwStyle=fpb.FPB_VERTICAL)
 
             selected_node.NodePanelUI(self.main_panel, panel_bar)
+            self.CreateThumbPanel(selected_node, self.main_panel, panel_bar)
 
             style = fpb.CaptionBarStyle()
             style.SetCaptionFont(self.Parent.GetFont())
-            style.SetCaptionColour(wx.Colour("#f1f1f1"))
+            style.SetCaptionColour(wx.Colour("#dfdfdf"))
             style.SetFirstColour(wx.Colour(PROP_HEADER_COLOR))
             style.SetCaptionStyle(fpb.CAPTIONBAR_SINGLE)
             panel_bar.ApplyCaptionStyleAll(style)
@@ -139,3 +140,9 @@ class NodePropertiesPanel(PanelBase):
         self.Statusbar.PushContextHints(4, mouseicon=ICON_MOUSE_RMB, text="")
         self.Statusbar.PushMessage(_("Node Properties Area"))
         self.Statusbar.UpdateStatusBar()
+
+    def CreateThumbPanel(self, node, panel, panel_bar):
+        # Create the default Thumbnail panel
+        prop = ThumbProp(idname="Thumbnail", default=None, label="Node Thumbnail",
+                         thumb_img=node._thumbnail)
+        prop.CreateUI(panel, panel_bar)

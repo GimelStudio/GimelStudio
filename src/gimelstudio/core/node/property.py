@@ -23,7 +23,7 @@ import wx
 from gswidgetkit import (NumberField, EVT_NUMBERFIELD,
                          Button, EVT_BUTTON, TextCtrl,
                          DropDown, EVT_DROPDOWN)
-from gimelstudio import constants
+from gimelstudio.constants import PROP_BG_COLOR, SUPPORTED_FT_OPEN_LIST
 from gimelstudio.datafiles import ICON_ARROW_DOWN, ICON_ARROW_RIGHT
 
 
@@ -34,7 +34,7 @@ SPINBOX_WIDGET = "spinbox"
 
 class Property(object):
     """
-    The base node property class.
+    The base node Property class.
     """
     def __init__(self, idname, default, label, visible=True):
         self.idname = idname
@@ -44,10 +44,13 @@ class Property(object):
         self.widget_eventhook = None
 
     def _RunErrorCheck(self):
+        """ 
+        Add optional error checking to your Property by overriding this method. 
+        """
         pass
 
     @property
-    def IdName(self):  # name
+    def IdName(self):
         return self.idname
 
     def GetIdname(self):
@@ -95,20 +98,44 @@ class Property(object):
             lbl = label
         return panel_bar.AddFoldPanel(lbl, foldIcons=images)
 
-    def AddToFoldPanel(self, panel_bar, fold_panel, item, spacing=10):
-
+    def AddToFoldPanel(self, panel_bar, fold_panel, item, spacing=15):
         # From https://discuss.wxpython.org/t/how-do-you-get-the-
         # captionbar-from-a-foldpanelbar/24795
         fold_panel._captionBar.SetSize(fold_panel._captionBar.DoGetBestSize())
-
         panel_bar.AddFoldPanelWindow(fold_panel, item, spacing=spacing)
+
+        # Add this here just for 12px of spacing at the bottom
+        item = wx.StaticText(fold_panel, size=(-1, 12))
+        panel_bar.AddFoldPanelWindow(fold_panel, item, spacing=0)
+
+
+class ThumbProp(Property):
+    """ 
+    Shows the current thumbnail image (used internally). 
+    """
+    def __init__(self, idname, default=None, label="", thumb_img=None, visible=True):
+        Property.__init__(self, idname, default, label, visible)
+        self.thumb_img = thumb_img
+
+    def GetThumbImage(self):
+        return self.thumb_img
+
+    def CreateUI(self, parent, sizer):
+        fold_panel = self.CreateFoldPanel(sizer)
+        fold_panel.SetBackgroundColour(wx.Colour(PROP_BG_COLOR))
+        fold_panel.Collapse()
+
+        self.img = wx.StaticBitmap(fold_panel, bitmap=self.GetThumbImage(), size=(200, 200))
+
+        self.AddToFoldPanel(sizer, fold_panel, self.img)
 
 
 class PositiveIntegerProp(Property):
-    """ Allows the user to select a positive integer. """
-
+    """ 
+    Allows the user to select a positive integer via a Number Field. 
+    """
     def __init__(self, idname, default=0, lbl_suffix="", min_val=0,
-                 max_val=10, widget="slider", label="", visible=True):
+                 max_val=10, widget=SLIDER_WIDGET, label="", visible=True):
         Property.__init__(self, idname, default, label, visible)
         self.min_value = min_val
         self.max_value = max_val
@@ -135,7 +162,7 @@ class PositiveIntegerProp(Property):
 
     def CreateUI(self, parent, sizer):
         fold_panel = self.CreateFoldPanel(sizer)
-        fold_panel.SetBackgroundColour(wx.Colour("#464646"))
+        fold_panel.SetBackgroundColour(wx.Colour(PROP_BG_COLOR))
 
         self.numberfield = NumberField(fold_panel,
                                        default_value=self.GetValue(),
@@ -145,7 +172,7 @@ class PositiveIntegerProp(Property):
                                        suffix=self.lbl_suffix, show_p=False,
                                        size=(-1, 32))
 
-        self.AddToFoldPanel(sizer, fold_panel, self.numberfield, spacing=10)
+        self.AddToFoldPanel(sizer, fold_panel, self.numberfield)
 
         self.numberfield.Bind(EVT_NUMBERFIELD, self.WidgetEvent)
 
@@ -154,13 +181,12 @@ class PositiveIntegerProp(Property):
 
 
 class ChoiceProp(Property):
-    """ Allows the user to select from a list of choices. """
-
+    """ 
+    Allows the user to select from a list of choices via a Drop-down widget. 
+    """
     def __init__(self, idname, default="", choices=[], label="", visible=True):
         Property.__init__(self, idname, default, label, visible)
         self.choices = choices
-
-        self._RunErrorCheck()
 
     def GetChoices(self):
         return self.choices
@@ -170,16 +196,12 @@ class ChoiceProp(Property):
 
     def CreateUI(self, parent, sizer):
         fold_panel = self.CreateFoldPanel(sizer)
-        fold_panel.SetBackgroundColour(wx.Colour("#464646"))
+        fold_panel.SetBackgroundColour(wx.Colour(PROP_BG_COLOR))
 
-        self.dropdown = DropDown(
-            fold_panel,
-            default=self.GetValue(),
-            items=self.GetChoices(),
-            size=(-1, 32)
-        )
+        self.dropdown = DropDown(fold_panel, default=self.GetValue(),
+                                 items=self.GetChoices(), size=(-1, 32))
 
-        self.AddToFoldPanel(sizer, fold_panel, self.dropdown, spacing=10)
+        self.AddToFoldPanel(sizer, fold_panel, self.dropdown)
         self.dropdown.Bind(EVT_DROPDOWN, self.WidgetEvent)
 
     def WidgetEvent(self, event):
@@ -194,7 +216,6 @@ class OpenFileChooserProp(Property):
 
     (e.g: use this to open an .PNG, .JPG, .JPEG image, etc.)
     """
-
     def __init__(self, idname, default="", dlg_msg="Choose file...",
                  wildcard="All files (*.*)|*.*", btn_lbl="Choose...",
                  label="", visible=True):
@@ -207,7 +228,7 @@ class OpenFileChooserProp(Property):
 
     def _RunErrorCheck(self):
         if type(self.value) != str:
-            raise TypeError("OpenFileChooserField value must be a string!")
+            raise TypeError("Value must be a string!")
 
     def GetDlgMessage(self):
         return self.dlg_msg
@@ -220,16 +241,15 @@ class OpenFileChooserProp(Property):
 
     def CreateUI(self, parent, sizer):
         fold_panel = self.CreateFoldPanel(sizer)
+        fold_panel.SetBackgroundColour(wx.Colour(PROP_BG_COLOR))
 
         pnl = wx.Panel(fold_panel)
-        pnl.SetBackgroundColour(wx.Colour("#464646"))
+        pnl.SetBackgroundColour(wx.Colour(PROP_BG_COLOR))
 
         vbox = wx.BoxSizer(wx.VERTICAL)
         hbox = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.textcontrol = TextCtrl(pnl,
-                            value=self.GetValue(), style=wx.BORDER_SIMPLE,
-                            placeholder="", size=(-1, 32))
+        self.textcontrol = TextCtrl(pnl, default=self.GetValue(), size=(-1, 32))
         hbox.Add(self.textcontrol, proportion=1, flag=wx.EXPAND | wx.BOTH)
 
         self.button = Button(pnl, label=self.GetBtnLabel(), size=(-1, 32))
@@ -241,105 +261,22 @@ class OpenFileChooserProp(Property):
         vbox.Fit(pnl)
         pnl.SetSizer(vbox)
 
-        self.AddToFoldPanel(sizer, fold_panel, pnl, spacing=10)
-
+        self.AddToFoldPanel(sizer, fold_panel, pnl)
 
     def WidgetEvent(self, event):
-        dlg = wx.FileDialog(
-            None,
-            message=self.GetDlgMessage(),
-            defaultDir=os.getcwd(),
-            defaultFile="",
-            wildcard=self.GetWildcard(),
-            style=wx.FD_OPEN | wx.FD_CHANGE_DIR | wx.FD_FILE_MUST_EXIST | wx.FD_PREVIEW
-        )
+        style = wx.FD_OPEN | wx.FD_CHANGE_DIR | wx.FD_FILE_MUST_EXIST | wx.FD_PREVIEW
+        dlg = wx.FileDialog(None, message=self.GetDlgMessage(), defaultDir=os.getcwd(),
+                            defaultFile="", wildcard=self.GetWildcard(), style=style)
 
         if dlg.ShowModal() == wx.ID_OK:
             paths = dlg.GetPaths()
             filetype = os.path.splitext(paths[0])[1]
 
-            if filetype not in constants.SUPPORTED_FT_OPEN_LIST:
-                dlg = wx.MessageDialog(
-                    None,
-                    "That file type isn't currently supported!",
-                    "Cannot Open Image!",
-                    style=wx.ICON_EXCLAMATION
-                )
+            if filetype not in SUPPORTED_FT_OPEN_LIST:
+                dlg = wx.MessageDialog(None, _("That file type isn't currently supported!"),
+                                       _("Cannot Open Image!"), style=wx.ICON_EXCLAMATION)
                 dlg.ShowModal()
 
             else:
                 self.SetValue(paths[0])
-                self.textcontrol.ChangeValue(self.GetValue())
-
-
-class LabelProp(Property):
-    """ Allows setting and resetting text on a label. """
-
-    def __init__(self, idname, default="", label="", visible=True):
-        Property.__init__(self, idname, default, label, visible)
-
-        self._RunErrorCheck()
-
-    def CreateUI(self, parent, sizer):
-        label = wx.StaticText(parent, label=self.GetLabel())
-        label.SetForegroundColour("#fff")
-        sizer.Add(label, flag=wx.LEFT | wx.TOP, border=5)
-
-        static_label = wx.StaticText(parent, label=self.GetValue())
-        static_label.SetForegroundColour("#fff")
-        sizer.Add(static_label, flag=wx.LEFT | wx.TOP, border=5)
-
-
-class StringProp(Property):
-    def __init__(self, idname, default="Text", dlg_msg="Edit text:",
-                 dlg_title="Edit Text", label="", visible=True):
-        Property.__init__(self, idname, default, label, visible)
-        self.dlg_msg = dlg_msg
-        self.dlg_title = dlg_title
-
-        self._RunErrorCheck()
-
-    def GetDlgMessage(self):
-        return self.dlg_msg
-
-    def GetDlgTitle(self):
-        return self.dlg_title
-
-    def CreateUI(self, parent, sizer):
-        label = wx.StaticText(parent, label=self.GetLabel())
-        label.SetForegroundColour("#fff")
-        sizer.Add(label, flag=wx.LEFT | wx.TOP, border=5)
-
-        vbox = wx.BoxSizer(wx.VERTICAL)
-        hbox = wx.BoxSizer(wx.HORIZONTAL)
-
-        self.textcontrol = wx.TextCtrl(
-            parent,
-            id=wx.ID_ANY,
-            value=self.GetValue(),
-            style=wx.TE_READONLY
-        )
-        hbox.Add(self.textcontrol, proportion=1)
-
-        self.button = wx.Button(
-            parent,
-            id=wx.ID_ANY,
-            label="Edit"
-        )
-        hbox.Add(self.button, flag=wx.LEFT, border=5)
-        self.button.Bind(
-            wx.EVT_BUTTON,
-            self.WidgetEvent
-        )
-
-        vbox.Add(hbox, flag=wx.EXPAND)
-        sizer.Add(vbox, flag=wx.ALL | wx.EXPAND, border=5)
-
-    def WidgetEvent(self, event):
-        dlg = wx.TextEntryDialog(None, self.GetDlgMessage(),
-                                 self.GetDlgTitle(), self.GetValue())
-
-        if dlg.ShowModal() == wx.ID_OK:
-            value = dlg.GetValue()
-            self.SetValue(value)
-            self.textcontrol.ChangeValue(self.GetValue())
+                self.textcontrol.SetValue(self.GetValue())
