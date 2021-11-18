@@ -32,7 +32,7 @@ class MixNode(api.Node):
         meta_info = {
             "label": "Mix",
             "author": "Gimel Studio",
-            "version": (1, 8, 5),
+            "version": (1, 8, 6),
             "category": "BLEND",
             "description": "Layers two images together using the specified blend type.",
         }
@@ -40,43 +40,43 @@ class MixNode(api.Node):
 
     def NodeInitProps(self):
         p = api.ChoiceProp(
-            idname="Blend Mode",
+            idname="blend_mode",
             default="Multiply",
-            label="Blend Mode:",
+            label="Blend Mode",
             choices=[
-                    'Add',
-                    'Subtract',
-                    'Multiply',
-                    'Divide',
+                    "Add",
+                    "Subtract",
+                    "Multiply",
+                    "Divide",
             ]
         )
 
         self.NodeAddProp(p)
 
     def NodeInitParams(self):
-        p1 = api.RenderImageParam('Image', 'Image')
-        p2 = api.RenderImageParam('Overlay', 'Overlay')
+        p1 = api.RenderImageParam("image", "Image")
+        p2 = api.RenderImageParam("overlay", "Overlay")
 
         self.NodeAddParam(p1)
         self.NodeAddParam(p2)
 
     def NodeEvaluation(self, eval_info):
-        image = self.EvalParameter(eval_info, 'Image')
-        overlay = self.EvalParameter(eval_info, 'Overlay')
-        blend_mode = self.EvalProperty(eval_info, 'Blend Mode')
+        image = self.EvalParameter(eval_info, "image")
+        overlay = self.EvalParameter(eval_info, "overlay")
+        blend_mode = self.EvalProperty(eval_info, "blend_mode")
 
         render_image = api.RenderImage()
 
         image1 = image.Image("oiio")
         image2 = overlay.Image("oiio")
 
-        if blend_mode == 'Add':
+        if blend_mode == "Add":
             image = oiio.ImageBufAlgo.add(image2, image1)
-        elif blend_mode == 'Subtract':
+        elif blend_mode == "Subtract":
             image = oiio.ImageBufAlgo.sub(image2, image1)
-        elif blend_mode == 'Multiply':
+        elif blend_mode == "Multiply":
             image = oiio.ImageBufAlgo.mul(image2, image1)
-        elif blend_mode == 'Divide':
+        elif blend_mode == "Divide":
             image = oiio.ImageBufAlgo.div(image2, image1)
 
         render_image.SetAsImage(image)

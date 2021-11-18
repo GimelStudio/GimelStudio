@@ -30,27 +30,27 @@ class FlipNode(api.Node):
             "author": "Gimel Studio",
             "version": (0, 5, 0),
             "category": "TRANSFORM",
-            "description": "",
+            "description": "Flips the orientation of the image.",
         }
         return meta_info
 
     def NodeInitProps(self):
         self.direction = api.ChoiceProp(
-            idname="Direction",
+            idname="direction",
             default="Vertically",
             choices=["Vertically", "Horizontally"],
-            label="Filter Type:"
+            label="Orientation"
         )
         self.NodeAddProp(self.direction)
 
     def NodeInitParams(self):
-        image = api.RenderImageParam('Image', 'Image')
+        image = api.RenderImageParam("image", "Image")
 
         self.NodeAddParam(image)
 
     def NodeEvaluation(self, eval_info):
-        flip_direction = self.EvalProperty(eval_info, 'Direction')
-        image1 = self.EvalParameter(eval_info, 'Image')
+        flip_direction = self.EvalProperty(eval_info, "direction")
+        image1 = self.EvalParameter(eval_info, "image")
 
         render_image = api.RenderImage()
         img = image1.Image("numpy")

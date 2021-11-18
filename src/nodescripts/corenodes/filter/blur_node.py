@@ -36,41 +36,41 @@ class BlurNode(api.Node):
 
     def NodeInitProps(self):
         self.filter_type = api.ChoiceProp(
-            idname="Filter Type",
+            idname="filter_type",
             default="Box",
             choices=["Box", "Gaussian"],
-            label="Filter Type:"
+            label="Filter Type"
         )
         self.kernel_x = api.PositiveIntegerProp(
-            idname="Kernel X",
+            idname="kernel_x",
             default=5,
             min_val=1,
             max_val=500,
             widget=api.SLIDER_WIDGET,
-            label="Kernel X:",
+            label="Kernel X",
         )
         self.kernel_y = api.PositiveIntegerProp(
-            idname="Kernel Y",
+            idname="kernel_y",
             default=5,
             min_val=1,
             max_val=500,
             widget=api.SLIDER_WIDGET,
-            label="Kernel Y:",
+            label="Kernel Y",
         )
         self.NodeAddProp(self.filter_type)
         self.NodeAddProp(self.kernel_x)
         self.NodeAddProp(self.kernel_y)
 
     def NodeInitParams(self):
-        image = api.RenderImageParam('Image', 'Image')
+        image = api.RenderImageParam("image", "Image")
 
         self.NodeAddParam(image)
 
     def NodeEvaluation(self, eval_info):
-        kernel_x = self.EvalProperty(eval_info, 'Kernel X')
-        kernel_y = self.EvalProperty(eval_info, 'Kernel Y')
-        filter_type = self.EvalProperty(eval_info, 'Filter Type')
-        image1 = self.EvalParameter(eval_info, 'Image')
+        kernel_x = self.EvalProperty(eval_info, "kernel_x")
+        kernel_y = self.EvalProperty(eval_info, "kernel_y")
+        filter_type = self.EvalProperty(eval_info, "filter_type")
+        image1 = self.EvalParameter(eval_info, "image")
 
         render_image = api.RenderImage()
         img = image1.Image("numpy")
@@ -78,15 +78,12 @@ class BlurNode(api.Node):
         if filter_type == "Box":
             output_img = cv2.boxFilter(img, -1, (kernel_x, kernel_y))
         elif filter_type == "Gaussian":
-
             # Both values must be odd
             if (kernel_x % 2) == 0 and (kernel_y % 2) == 0:
                 kernel_y += 1
                 kernel_x += 1
 
-            output_img = cv2.GaussianBlur(
-                img, (0, 0), sigmaX=kernel_x, sigmaY=kernel_y
-            )
+            output_img = cv2.GaussianBlur(img, (0, 0), sigmaX=kernel_x, sigmaY=kernel_y)
 
         render_image.SetAsImage(output_img)
         self.NodeUpdateThumb(render_image)

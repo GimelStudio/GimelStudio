@@ -38,7 +38,7 @@ class ImageNode(api.Node):
         return meta_info
 
     def NodeWidgetEventHook(self, idname, value):
-        if idname == "File Path":
+        if idname == "file_path":
             image = self.NodeEvalSelf()
             self.NodeUpdateThumb(image)
             self.RefreshNodeGraph()
@@ -52,18 +52,18 @@ class ImageNode(api.Node):
         wildcard = constants.SUPPORTED_FT_OPEN_WILDCARD
 
         self.fp_prop = api.OpenFileChooserProp(
-            idname="File Path",
+            idname="file_path",
             default="",
             dlg_msg="Choose image...",
             wildcard=wildcard,
             btn_lbl="Choose...",
-            label="Image path:"
+            label="Image Path"
         )
 
         self.NodeAddProp(self.fp_prop)
 
     def NodeEvaluation(self, eval_info):
-        path = self.EvalProperty(eval_info, 'File Path')
+        path = self.EvalProperty(eval_info, "file_path")
 
         render_image = api.RenderImage(size=(200, 200))
 

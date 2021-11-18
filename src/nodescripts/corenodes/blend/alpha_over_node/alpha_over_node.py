@@ -35,35 +35,35 @@ class AlphaOverNode(api.Node):
 
     def NodeInitProps(self):
         self.value = api.PositiveIntegerProp(
-            idname="Factor",
+            idname="factor",
             default=100,
             min_val=0,
             max_val=100,
             widget=api.SLIDER_WIDGET,
-            label="Factor:"
+            label="Factor"
         )
         self.NodeAddProp(self.value)
 
     def NodeInitParams(self):
-        image1 = api.RenderImageParam('Image 1', 'Image')
-        image2 = api.RenderImageParam('Image 2', 'Image')
-        integer = api.IntegerParam('Integer', 'Integer')
+        image1 = api.RenderImageParam("image 1", "Image")
+        image2 = api.RenderImageParam('image 2', "Image")
+        integer = api.IntegerParam("integer", "Factor")
 
         self.NodeAddParam(image1)
         self.NodeAddParam(image2)
         self.NodeAddParam(integer)
 
     def NodeEvaluation(self, eval_info):
-        image1 = self.EvalParameter(eval_info, 'Image 1')
-        image2 = self.EvalParameter(eval_info, 'Image 2')
+        image1 = self.EvalParameter(eval_info, "image 1")
+        image2 = self.EvalParameter(eval_info, "image 2")
 
         # TODO: remove this as an integer input isn't needed here.
         # This is done more as a proof-of-concept for now.
-        integer = self.EvalParameter(eval_info, 'Integer')
+        integer = self.EvalParameter(eval_info, "integer")
         if integer > 1:
             factor = integer
         else:
-            factor = self.EvalProperty(eval_info, 'Factor')
+            factor = self.EvalProperty(eval_info, "factor")
 
         render_image = api.RenderImage()
 

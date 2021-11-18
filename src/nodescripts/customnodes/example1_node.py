@@ -36,21 +36,21 @@ class Example1Node(api.Node):
 
     def NodeInitProps(self):
         self.direction = api.ChoiceProp(
-            idname="Direction",
+            idname="direction",
             default="Vertically",
             choices=["Vertically", "Horizontally"],
-            label="Filter Type:"
+            label="Flip Direction"
         )
         self.NodeAddProp(self.direction)
 
     def NodeInitParams(self):
-        image = api.RenderImageParam('Image', 'Image')
+        image = api.RenderImageParam("image", "Image")
 
         self.NodeAddParam(image)
 
     def NodeEvaluation(self, eval_info):
-        flip_direction = self.EvalProperty(eval_info, 'Direction')
-        image1 = self.EvalParameter(eval_info, 'Image')
+        flip_direction = self.EvalProperty(eval_info, "direction")
+        image1 = self.EvalParameter(eval_info, "image")
 
         image = api.RenderImage()
         img = image1.Image("numpy")

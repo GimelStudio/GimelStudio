@@ -35,22 +35,22 @@ class Example2Node(api.Node):
 
     def NodeInitProps(self):
         self.value = api.PositiveIntegerProp(
-            idname="Opacity Value",
+            idname="opacity_value",
             default=25,
             min_val=0,
             max_val=100,
             widget=api.SLIDER_WIDGET,
-            label="Opacity:",
+            label="Opacity",
         )
         self.NodeAddProp(self.value)
 
     def NodeInitParams(self):
-        image = api.RenderImageParam('Image', 'Image')
+        image = api.RenderImageParam("image", "Image")
         self.NodeAddParam(image)
 
     def NodeEvaluation(self, eval_info):
-        image1 = self.EvalParameter(eval_info, 'Image')
-        opacity_value = self.EvalProperty(eval_info, 'Opacity Value')
+        image1 = self.EvalParameter(eval_info, "image")
+        opacity_value = self.EvalProperty(eval_info, "opacity_value")
 
         render_image = api.RenderImage()
 

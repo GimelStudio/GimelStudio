@@ -37,17 +37,17 @@ class IntegerNode(api.Node):
 
     def NodeInitProps(self):
         self.value = api.PositiveIntegerProp(
-            idname="Value",
+            idname="value",
             default=100,
             min_val=0,
             max_val=100,
             widget=api.SLIDER_WIDGET,
-            label="Value:"
+            label="Integer Value"
         )
         self.NodeAddProp(self.value)
 
     def NodeEvaluation(self, eval_info):
-        value = self.EvalProperty(eval_info, 'Value')
+        value = self.EvalProperty(eval_info, "Value")
 
         return value
 
