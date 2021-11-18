@@ -70,7 +70,7 @@ class NodeGraphDropTarget(wx.DropTarget):
                         # Create Image node with path
                         node = self._window.AddNode("corenode_image", pos=(0, 0),
                                                     location="CURSOR")
-                        node.NodeEditProp(idname="File Path",
+                        node.NodeEditProp(idname="file_path",
                                           value=filename, render=False)
                         node.ToggleExpand()
                         node.NodeDndEventHook()
