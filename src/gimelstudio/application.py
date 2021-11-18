@@ -21,8 +21,7 @@ import wx
 import wx.lib.agw.aui as aui
 import wx.lib.agw.flatmenu as flatmenu
 
-from .node_importer import *
-import gimelstudio.constants as appconst
+from gimelstudio.constants import (APP_NAME, AREA_TOPBAR_COLOR, DARK_COLOR)
 from .interface import artproviders
 from .datafiles.icons import ICON_GIMELSTUDIO_ICO
 from .core import (Renderer, GLSLRenderer,
@@ -31,6 +30,7 @@ from .interface import (ImageViewportPanel, NodePropertiesPanel,
                         NodeGraphPanel, StatusBar, PreferencesDialog,
                         ExportImageHandler, NodeGraphDropTarget,
                         ShowNotImplementedDialog)
+from .node_importer import *
 
 
 class AUIManager(aui.AuiManager):
@@ -41,7 +41,7 @@ class AUIManager(aui.AuiManager):
 
 class ApplicationFrame(wx.Frame):
     def __init__(self, app_config=None):
-        wx.Frame.__init__(self, None, title=appconst.APP_NAME, size=(1000, 800))
+        wx.Frame.__init__(self, None, title=APP_NAME, size=(1000, 800))
 
         # Application configuration
         self.appconfig = app_config
@@ -363,12 +363,27 @@ class ApplicationFrame(wx.Frame):
         art.SetMetric(aui.AUI_DOCKART_SASH_SIZE, 6)
         art.SetMetric(aui.AUI_DOCKART_PANE_BORDER_SIZE, 0)
         art.SetMetric(aui.AUI_DOCKART_GRADIENT_TYPE, aui.AUI_GRADIENT_NONE)
-        art.SetColour(aui.AUI_DOCKART_INACTIVE_CAPTION_COLOUR, wx.Colour("#424242"))
-        art.SetColour(aui.AUI_DOCKART_ACTIVE_CAPTION_COLOUR, wx.Colour("#4D4D4D"))
+        art.SetColour(aui.AUI_DOCKART_INACTIVE_CAPTION_COLOUR, wx.Colour(AREA_TOPBAR_COLOR))
+        art.SetColour(aui.AUI_DOCKART_ACTIVE_CAPTION_COLOUR, wx.Colour(AREA_TOPBAR_COLOR))
         art.SetColour(aui.AUI_DOCKART_INACTIVE_CAPTION_TEXT_COLOUR, wx.Colour("#fff"))
-        art.SetColour(aui.AUI_DOCKART_SASH_COLOUR, wx.Colour("#232323"))
+        art.SetColour(aui.AUI_DOCKART_SASH_COLOUR, wx.Colour(DARK_COLOR))
 
         # Setup the main panels
+        self.prop_pnl = NodePropertiesPanel(self,
+                                            idname="PROPERTIES_PNL",
+                                            menu_item=None,
+                                            size=(360, 500))
+        self._mgr.AddPane(self.prop_pnl,
+                          aui.AuiPaneInfo()
+                          .Name("PROPERTIES_PNL")
+                          .Right()
+                          #.Position(1)
+                          #.Row(1)
+                          #.Center()
+                          .CaptionVisible(False)
+                          .CloseButton(visible=False)
+                          .BestSize(360, 500))
+
         self.imageviewport_pnl = ImageViewportPanel(self,
                                                     idname="IMAGE_VIEWPORT",
                                                     menu_item=self.showimageviewport_menuitem)
@@ -376,23 +391,10 @@ class ApplicationFrame(wx.Frame):
                           aui.AuiPaneInfo()
                           .Name("IMAGE_VIEWPORT")
                           .CaptionVisible(False)
-                          .Top()
+                          .Left()
                           .Row(0)
-                          .Maximize()
-                          .CloseButton(visible=False)
-                          .BestSize(500, 500))
-
-        self.prop_pnl = NodePropertiesPanel(self,
-                                            idname="PROPERTIES_PNL",
-                                            menu_item=None,
-                                            size=(350, 500))
-        self._mgr.AddPane(self.prop_pnl,
-                          aui.AuiPaneInfo()
-                          .Name("PROPERTIES_PNL")
-                          .Top()
                           .Position(1)
-                          .Row(0)
-                          .CaptionVisible(False)
+                          .Maximize()
                           .CloseButton(visible=False)
                           .BestSize(500, 500))
 
@@ -406,13 +408,16 @@ class ApplicationFrame(wx.Frame):
                           aui.AuiPaneInfo()
                           .Name("NODE_EDITOR")
                           .CaptionVisible(False)
+                          .Row(0)
                           .Center()
+                          #.Left()
                           .CloseButton(visible=False)
                           .BestSize(500, 500))
 
         # Hack to get the default proportions correct
-        self._mgr.GetPane("PROPERTIES_PNL").dock_proportion = 10
+        self._mgr.GetPane("PROPERTIES_PNL").dock_proportion = 5
         self._mgr.GetPane("IMAGE_VIEWPORT").dock_proportion = 25
+        self._mgr.GetPane("NODE_EDITOR").dock_proportion = 60
 
         # Maximize the window & tell the AUI window
         # manager to "commit" all the changes just made, etc

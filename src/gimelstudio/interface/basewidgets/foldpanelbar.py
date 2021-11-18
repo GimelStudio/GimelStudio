@@ -249,7 +249,7 @@ CAPTIONBAR_FILLED_RECTANGLE   = 5
 
 FPB_EXTRA_X = 10
 """ Extra horizontal padding, in pixels. """
-FPB_EXTRA_Y = 6
+FPB_EXTRA_Y = 8
 """ Extra vertical padding, in pixels. """
 
 # pixels of the bmp to be aligned from the right filled with space
@@ -830,7 +830,7 @@ class CaptionBar(wx.Window):
         # the caption. This way a flickering arrow during resize is not visible
 
         self.FillCaptionBackground(dc)
-        dc.SetFont(self._style.GetCaptionFont().Bold())
+        dc.SetFont(self._style.GetCaptionFont())
         dc.SetTextForeground(self._style.GetCaptionColour())
 
         # draw small icon, either collapsed or expanded

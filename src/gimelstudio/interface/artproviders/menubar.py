@@ -21,6 +21,8 @@ import wx.lib.agw.flatmenu as flatmenu
 from wx.lib.agw.artmanager import ArtManager, RendererBase, DCSaver
 from wx.lib.agw.fmresources import ControlFocus, ControlPressed
 
+from gimelstudio.constants import ACCENT_COLOR, DARK_COLOR
+
 
 def switchRGBtoBGR(colour):
     return wx.Colour(colour.Blue(), colour.Green(), colour.Red())
@@ -32,26 +34,25 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
 
         self.highlightCheckAndRadio = True
 
-        self.menuFaceColour = wx.Colour("#252525")
-        self.menuBarFaceColour = wx.Colour("#252525")
+        self.menuFaceColour = wx.Colour(DARK_COLOR)
+        self.menuBarFaceColour = wx.Colour(DARK_COLOR)
 
-        self.menuBarFocusFaceColour = wx.Colour("#5874C5")
-        self.menuBarFocusBorderColour = wx.Colour("#5874C5")
-        self.menuBarPressedFaceColour = wx.Colour("#5874C5")
-        self.menuBarPressedBorderColour = wx.Colour("#5874C5")
+        self.menuBarFocusFaceColour = wx.Colour(ACCENT_COLOR)
+        self.menuBarFocusBorderColour = wx.Colour(ACCENT_COLOR)
+        self.menuBarPressedFaceColour = wx.Colour(ACCENT_COLOR)
+        self.menuBarPressedBorderColour = wx.Colour(ACCENT_COLOR)
 
-        self.menuFocusFaceColour = wx.Colour("#5874C5")
-        self.menuFocusBorderColour = wx.Colour("#5874C5")
-        self.menuPressedFaceColour = wx.Colour("#5874C5")
-        self.menuPressedBorderColour = wx.Colour("#5874C5")
+        self.menuFocusFaceColour = wx.Colour(ACCENT_COLOR)
+        self.menuFocusBorderColour = wx.Colour(ACCENT_COLOR)
+        self.menuPressedFaceColour = wx.Colour(ACCENT_COLOR)
+        self.menuPressedBorderColour = wx.Colour(ACCENT_COLOR)
 
-        self.buttonFaceColour = wx.Colour("#5874C5")
-        self.buttonBorderColour = wx.Colour("#5874C5")
-        self.buttonFocusFaceColour = wx.Colour("#5874C5")
-        self.buttonFocusBorderColour = wx.Colour("#5874C5")
-        self.buttonPressedFaceColour = wx.Colour("#5874C5")
-        self.buttonPressedBorderColour = wx.Colour("#5874C5")
-
+        self.buttonFaceColour = wx.Colour(ACCENT_COLOR)
+        self.buttonBorderColour = wx.Colour(ACCENT_COLOR)
+        self.buttonFocusFaceColour = wx.Colour(ACCENT_COLOR)
+        self.buttonFocusBorderColour = wx.Colour(ACCENT_COLOR)
+        self.buttonPressedFaceColour = wx.Colour(ACCENT_COLOR)
+        self.buttonPressedBorderColour = wx.Colour(ACCENT_COLOR)
 
 
     def DrawSeparator(self, dc, xCoord, yCoord, textX, sepWidth):

@@ -15,16 +15,15 @@
 # ----------------------------------------------------------------------------
 
 import wx
-import wx.adv
 import numpy as np
 from wx.lib.newevent import NewCommandEvent
-from gswidgetkit import Button, EVT_BUTTON, NumberField, EVT_NUMBERFIELD_CHANGE
+from gswidgetkit import (Button, EVT_BUTTON, NumberField, EVT_NUMBERFIELD_CHANGE)
 
-import gimelstudio.constants as const
-from gimelstudio.utils import ConvertImageToWx
+from gimelstudio.constants import (AREA_BG_COLOR, AREA_TOPBAR_COLOR, PROP_BG_COLOR)
 from gimelstudio.datafiles import (ICON_IMAGEVIEWPORT_PANEL, ICON_MORE_MENU_SMALL,
                                    ICON_MOUSE_MMB, ICON_MOUSE_MMB_MOVEMENT,
                                    ICON_BRUSH_CHECKERBOARD)
+from gimelstudio.utils import ConvertImageToWx
 from .basewidgets import ZoomPanel
 from .panel_base import PanelBase
 
@@ -35,7 +34,7 @@ class ImageViewportPanel(PanelBase):
     def __init__(self, parent, idname, menu_item):
         PanelBase.__init__(self, parent, idname, menu_item)
 
-        self.SetBackgroundColour(const.AREA_BG_COLOR)
+        self.SetBackgroundColour(AREA_BG_COLOR)
 
         self.BuildUI()
 
@@ -43,7 +42,7 @@ class ImageViewportPanel(PanelBase):
         main_sizer = wx.BoxSizer(wx.VERTICAL)
 
         topbar = wx.Panel(self)
-        topbar.SetBackgroundColour(const.AREA_TOPBAR_COLOR)
+        topbar.SetBackgroundColour(AREA_TOPBAR_COLOR)
 
         topbar_sizer = wx.GridBagSizer(vgap=1, hgap=1)
 
@@ -129,7 +128,7 @@ class ImageViewport(ZoomPanel):
         return self._viewportImage
 
     def OnDrawBackground(self, dc):
-        dc.SetBackground(wx.Brush(const.AREA_BG_COLOR))
+        dc.SetBackground(wx.Brush(PROP_BG_COLOR))
         dc.Clear()
 
     def OnDrawScene(self, dc):
