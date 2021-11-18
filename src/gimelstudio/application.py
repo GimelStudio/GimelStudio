@@ -343,6 +343,9 @@ class ApplicationFrame(wx.Frame):
         self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
                   self.OnVisitWebsite,
                   self.visitwebsite_menuitem)
+        self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
+                  self.OnAboutDialog,
+                  self.about_menuitem)
 
         # Add menubar to main sizer
         self.mainSizer.Add(self.menubar, 0, wx.EXPAND)
@@ -550,3 +553,6 @@ class ApplicationFrame(wx.Frame):
     def OnVisitWebsite(self, event):
         url = ("https://gimelstudio.github.io")
         webbrowser.open(url)
+
+    def OnAboutDialog(self, event):
+        ShowNotImplementedDialog()

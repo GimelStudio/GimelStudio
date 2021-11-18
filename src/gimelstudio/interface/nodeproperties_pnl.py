@@ -24,6 +24,7 @@ from gimelstudio.datafiles import (ICON_HELP, ICON_NODEPROPERTIES_PANEL,
                                    ICON_MORE_MENU_SMALL, ICON_MOUSE_LMB,
                                    ICON_MOUSE_MMB, ICON_MOUSE_RMB)
 from gimelstudio.core.node.property import ThumbProp
+from .message_dlgs import ShowNotImplementedDialog
 from .panel_base import PanelBase
 
 
@@ -123,6 +124,8 @@ class NodePropertiesPanel(PanelBase):
 
             self._mainsizer.Add(panel_bar, 1, wx.EXPAND | wx.LEFT | wx.RIGHT, border=6)
 
+            self.help_button.Bind(EVT_BUTTON, self.OnHelpButton)
+
             # Also bind the focus handler to the main panel and panel_bar
             nodeinfo_pnl.Bind(wx.EVT_ENTER_WINDOW, self.OnAreaFocus)
             panel_bar.Bind(wx.EVT_ENTER_WINDOW, self.OnAreaFocus)
@@ -140,6 +143,9 @@ class NodePropertiesPanel(PanelBase):
         self.Statusbar.PushContextHints(4, mouseicon=ICON_MOUSE_RMB, text="")
         self.Statusbar.PushMessage(_("Node Properties Area"))
         self.Statusbar.UpdateStatusBar()
+
+    def OnHelpButton(self, event):
+        ShowNotImplementedDialog()
 
     def CreateThumbPanel(self, node, panel, panel_bar):
         # Create the default Thumbnail panel
