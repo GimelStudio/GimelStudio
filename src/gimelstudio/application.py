@@ -379,10 +379,7 @@ class ApplicationFrame(wx.Frame):
         self._mgr.AddPane(self.prop_pnl,
                           aui.AuiPaneInfo()
                           .Name("PROPERTIES_PNL")
-                          .Right()
-                          #.Position(1)
-                          #.Row(1)
-                          #.Center()
+                          .Right().Layer(2)
                           .CaptionVisible(False)
                           .CloseButton(visible=False)
                           .BestSize(360, 500))
@@ -394,12 +391,10 @@ class ApplicationFrame(wx.Frame):
                           aui.AuiPaneInfo()
                           .Name("IMAGE_VIEWPORT")
                           .CaptionVisible(False)
-                          .Left()
-                          .Row(0)
-                          .Position(1)
-                          .Maximize()
+                          .Bottom()
+                          .MinSize((-1, 340))
                           .CloseButton(visible=False)
-                          .BestSize(500, 500))
+                          .BestSize((500, 1700)))
 
         self.nodegraph_pnl = NodeGraphPanel(self,
                                             idname="NODE_EDITOR",
@@ -411,16 +406,12 @@ class ApplicationFrame(wx.Frame):
                           aui.AuiPaneInfo()
                           .Name("NODE_EDITOR")
                           .CaptionVisible(False)
-                          .Row(0)
-                          .Center()
-                          #.Left()
+                          .CenterPane()
                           .CloseButton(visible=False)
-                          .BestSize(500, 500))
+                          .BestSize(500, 300))
 
-        # Hack to get the default proportions correct
+        # Get the default proportions correct
         self._mgr.GetPane("PROPERTIES_PNL").dock_proportion = 5
-        self._mgr.GetPane("IMAGE_VIEWPORT").dock_proportion = 25
-        self._mgr.GetPane("NODE_EDITOR").dock_proportion = 60
 
         # Maximize the window & tell the AUI window
         # manager to "commit" all the changes just made, etc
