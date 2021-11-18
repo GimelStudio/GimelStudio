@@ -1,15 +1,17 @@
 from wx.lib.embeddedimage import PyEmbeddedImage
 #--------------------
 ICON_ARROW_DOWN = PyEmbeddedImage(
-    b'iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAOElEQVRIiWNgGAWjYBQMY/D/'
-    b'///+/8SDflpaQp7hRFpCmeEELKGO4Tgsoa7haJbQxvBRMAqGMQAArJyiGXdCm44AAAAASUVO'
-    b'RK5CYII=')
+    b'iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAHJJ'
+    b'REFUSIntkEENg1AQBYc6+Q7AQaUgBSdIQAJIwMG0DuqgHNqE088C6anZOe5udl4eJEny56iT'
+    b'2gY3vTrU9rfA8QTmmkTtgRF4RGGjhO/vs3D+E4k6qq+oPoDmjIRPHQvQAfdSyno1dFWirkeS'
+    b'J0myswFVsUqvSX87GAAAAABJRU5ErkJggg==')
 
 #----------------------------------------------------------------------
 ICON_ARROW_RIGHT = PyEmbeddedImage(
-    b'iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAASUlEQVRIie3NuREAIAwDQZdM'
-    b'J5QsEmb4DJFEpCvgNsK5bwEoagBSBCMNgjU+gjMukgBc5AJUJcCbJwB3vgH8+QRo5h3QzZ17'
-    b'1gDJRaFfFkEleQAAAABJRU5ErkJggg==')
+    b'iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAHxJ'
+    b'REFUSIntk0sNgDAQRAeCACS0DioFHCAFKUjACRIeDsBBuXAigbA05dR3np3ZT1YqFH4DaIFg'
+    b'rasNWidpAQZryGuAAYhfJrGGbLlDpj9D3JPOcuQrUVKVUH8PMAJ7lhWdR85qHoEuh3k4zU2P'
+    b'1hi0q6Teez/bWisUUjkApRFYRcDHLkcAAAAASUVORK5CYII=')
 
 #----------------------------------------------------------------------
 ICON_BRUSH_CHECKERBOARD = PyEmbeddedImage(
@@ -107,12 +109,15 @@ ICON_GIMELSTUDIO_ICO = PyEmbeddedImage(
 
 #----------------------------------------------------------------------
 ICON_HELP = PyEmbeddedImage(
-    b'iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAA80lEQVRIid2UXRGEMAyEkVAJ'
-    b'SEACEpBQCUjAARKQgAQkVAISKuG7B3o3hUv6A2/sTGf6kOxu0yRN83oAPTADDvDhOGABhifE'
-    b'HbCShwPaWnIbnNZgLCUfK4nLRYA24XznqPsS7hq6lMCmJM2AucQumhGNfEg4NyGmJ+qcxEus'
-    b'JKA6AibOf2NDzqzkrJKAU4IlDBlTXhLYC4g3jhY2GVOiQEnff4kNenkAuFWiitj/TkKv5x2I'
-    b'n6y16Q9RbA7yEiTz9EIBx2UoY4G2wF0KHuhF8kjkybKbkuQPRHzIkUujiHSUTbcjtUELhCzn'
-    b'Fe3DfSOa6vfiAwEo0JjF3wSZAAAAAElFTkSuQmCC')
+    b'iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAYJJ'
+    b'REFUSIntldtZwkAQhX/8LAArYKcDSogVSAdiBaYDQgdQgXZArMB0AB1MqMBYAT7sRDbLLqDP'
+    b'zFtmz54zO7fAzS7Y6BJAVR3wBMwCdwc0wIeItP8SUNUxsABKYA/URgwwNsEJsAKWItKleJIC'
+    b'Rv4JPACliNQZ3ByogC/gMSVyIhCQj4AiF1mEb4BDSuQ+caeyyKc9OEhXYZgaWItIJyKdqhbA'
+    b'Dp/OKiS7i6JxwCs+LWEkNcda7I1k0x8atgIWxpF9bqmqbeQrVPVg+e59c/MVEbZV1TL7Anxn'
+    b'xAUdA98i8h74muCMyD8QTdVgUCTroF8iq8ebfe6iu+01AllT1SnHDnu5NGQpgY7TZ4fWF3qW'
+    b'IXdEGYhr0ODXQs6qM+Tg09OEjligBlzYMYnzTerA7kyImmQgYJGt8f2cS1Vu+hf4ndReA86O'
+    b'fgafXS1xivqpLOzCVlWfz5DPgW2OPPmCKLIKvzpahuvaWRAOWAKrP63rSMjhJ7zg2ML9D6e+'
+    b'ZhZudtZ+AOGFtUl0bXYfAAAAAElFTkSuQmCC')
 
 #----------------------------------------------------------------------
 ICON_IMAGEVIEWPORT_PANEL = PyEmbeddedImage(
@@ -133,9 +138,9 @@ ICON_KEY_CTRL = PyEmbeddedImage(
 
 #----------------------------------------------------------------------
 ICON_MORE_MENU_SMALL = PyEmbeddedImage(
-    b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAZ0lEQVQ4jdWSMQ3AMAwEA8EQ'
-    b'CqEQDCEQAqEQyiBQC+G6uEqVKdJ7aE/yenrbX8qvAAw4ga6KKoOmiLaQXIBLqR6hLEkDcHmt'
-    b'zGP7S1QzUjXAJFEaKUmAPcqI1KXpa4ciMqDHfOTYq9xPRoSQrhVVwAAAAABJRU5ErkJggg==')
+    b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAABHNCSVQICAgIfAhkiAAAADtJ'
+    b'REFUOI1jYKAXuH//vsH9+/cNCKljJGQIAwPDeSjXUFFR8QIutUykuY8CQKzXhiAYjbWhCEZj'
+    b'jXoAACAJMKZoI+K7AAAAAElFTkSuQmCC')
 
 #----------------------------------------------------------------------
 ICON_MOUSE_LMB = PyEmbeddedImage(
