@@ -22,6 +22,7 @@ import wx.lib.agw.aui as aui
 import wx.lib.agw.flatmenu as flatmenu
 
 from gimelstudio.constants import (APP_NAME, AREA_TOPBAR_COLOR, DARK_COLOR)
+from gimelstudio.utils import ConvertImageToWx
 from .interface import artproviders
 from .datafiles.icons import ICON_GIMELSTUDIO_ICO
 from .core import (Renderer, GLSLRenderer,
@@ -488,7 +489,19 @@ class ApplicationFrame(wx.Frame):
             event.Skip()
 
     def OnCopyImageToClipboard(self, event):
-        ShowNotImplementedDialog()
+        if wx.TheClipboard.Open():
+            try:
+                image = self.renderer.GetRender()
+                image = image.Image("numpy")
+                image = ConvertImageToWx(image)
+                image = wx.BitmapDataObject(image)
+                wx.TheClipboard.SetData(image)
+                wx.TheClipboard.Close()
+            except AttributeError:
+                dlg = wx.MessageDialog(None,
+                    _("Please render an image before attempting to copy it!"),
+                    _("No Image to copy!"), style=wx.ICON_EXCLAMATION)
+                dlg.ShowModal()
 
     def OnPreferencesDialog(self, event):
         categories = [
