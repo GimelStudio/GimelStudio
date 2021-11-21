@@ -55,7 +55,6 @@ class NoiseImageNode(api.Node):
             default=1,
             min_val=0,
             max_val=100,
-            widget=api.SLIDER_WIDGET,
             label="Noise Seed"
         )
 

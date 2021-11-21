@@ -55,7 +55,6 @@ class CheckeredImageNode(api.Node):
             default=44,
             min_val=0,
             max_val=100,
-            widget=api.SLIDER_WIDGET,
             label="Checker Size"
         )
 

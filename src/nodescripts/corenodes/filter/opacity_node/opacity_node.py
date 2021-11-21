@@ -36,11 +36,11 @@ class OpacityNode(api.Node):
     def NodeInitProps(self):
         self.value = api.PositiveIntegerProp(
             idname="opacity_value",
-            default=25,
+            default=50,
             min_val=0,
             max_val=100,
-            widget=api.SLIDER_WIDGET,
-            label="Opacity",
+            show_p=True,
+            label="Opacity"
         )
         self.NodeAddProp(self.value)
 

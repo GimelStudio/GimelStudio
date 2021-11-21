@@ -39,8 +39,8 @@ class Example2Node(api.Node):
             default=25,
             min_val=0,
             max_val=100,
-            widget=api.SLIDER_WIDGET,
-            label="Opacity",
+            show_p=True,
+            label="Opacity"
         )
         self.NodeAddProp(self.value)
 

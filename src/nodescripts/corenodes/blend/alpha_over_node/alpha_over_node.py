@@ -39,7 +39,6 @@ class AlphaOverNode(api.Node):
             default=100,
             min_val=0,
             max_val=100,
-            widget=api.SLIDER_WIDGET,
             label="Factor"
         )
         self.NodeAddProp(self.value)

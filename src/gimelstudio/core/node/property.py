@@ -105,7 +105,7 @@ class Property(object):
         panel_bar.AddFoldPanelWindow(fold_panel, item, spacing=spacing)
 
         # Add this here just for 12px of spacing at the bottom
-        item = wx.StaticText(fold_panel, size=(-1, 12))
+        item = wx.StaticText(fold_panel, size=(-1, 14))
         panel_bar.AddFoldPanelWindow(fold_panel, item, spacing=0)
 
 
@@ -135,12 +135,12 @@ class PositiveIntegerProp(Property):
     Allows the user to select a positive integer via a Number Field. 
     """
     def __init__(self, idname, default=0, lbl_suffix="", min_val=0,
-                 max_val=10, widget=SLIDER_WIDGET, label="", visible=True):
+                 max_val=10, show_p=False, label="", visible=True):
         Property.__init__(self, idname, default, label, visible)
         self.min_value = min_val
         self.max_value = max_val
-        self.widget = widget
         self.lbl_suffix = lbl_suffix
+        self.show_p = show_p
 
         self._RunErrorCheck()
 
@@ -160,6 +160,9 @@ class PositiveIntegerProp(Property):
     def GetMaxValue(self):
         return self.max_value
 
+    def GetP(self):
+        return self.show_p
+
     def CreateUI(self, parent, sizer):
         fold_panel = self.CreateFoldPanel(sizer)
         fold_panel.SetBackgroundColour(wx.Colour(PROP_BG_COLOR))
@@ -169,7 +172,7 @@ class PositiveIntegerProp(Property):
                                        label=self.GetLabel(),
                                        min_value=self.GetMinValue(),
                                        max_value=self.GetMaxValue(),
-                                       suffix=self.lbl_suffix, show_p=False,
+                                       suffix=self.lbl_suffix, show_p=self.GetP(),
                                        size=(-1, 32))
 
         self.AddToFoldPanel(sizer, fold_panel, self.numberfield)

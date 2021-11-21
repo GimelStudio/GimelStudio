@@ -46,7 +46,6 @@ class BlurNode(api.Node):
             default=5,
             min_val=1,
             max_val=500,
-            widget=api.SLIDER_WIDGET,
             label="Kernel X",
         )
         self.kernel_y = api.PositiveIntegerProp(
@@ -54,7 +53,6 @@ class BlurNode(api.Node):
             default=5,
             min_val=1,
             max_val=500,
-            widget=api.SLIDER_WIDGET,
             label="Kernel Y",
         )
         self.NodeAddProp(self.filter_type)
