@@ -3,7 +3,18 @@
     "Settings": {
         "General": {
             "Enable experimental features": true,
-            "Enable node cache (uses more memory)": true
+            "Enable node cache (uses more memory)": true,
+            "GLSL texture max size": "6k texture"
+        },
+        "General_options": {
+            "GLSL texture max size": {
+                "Display Widget": "Drop Down",
+                "Items": [
+                    "4k texture",
+                    "5k texture",
+                    "6k texture"
+                ]
+            }
         },
         "Interface": {
             "Node wire curvature": 0,
