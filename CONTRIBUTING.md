@@ -33,9 +33,9 @@ Gimel Studio is an open source project and we love to receive contributions from
 
 ### Technical
 
-Gimel Studio itself is written in pure Python so most code contributions will require at least a basic knowledge of Python 3+.
+Gimel Studio itself is written in pure Python so most code contributions will require at least a basic knowledge of Python 3.8+.
 
-Some nodes are also using GLSL shaders for on-GPU image-manipulation, but knowledge of GLSL isn't required to contribute.
+Some nodes are also using GLSL shaders for on-GPU image-manipulation, but knowledge of GLSL isn't required to contribute for most issues.
 
 ### Design Decisions
 
