@@ -128,7 +128,7 @@ class ImageViewport(ZoomPanel):
         return self._viewportImage
 
     def OnDrawBackground(self, dc):
-        dc.SetBackground(wx.Brush(PROP_BG_COLOR))
+        dc.SetBackground(wx.Brush(AREA_BG_COLOR))
         dc.Clear()
 
     def OnDrawScene(self, dc):
