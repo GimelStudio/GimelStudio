@@ -18,8 +18,8 @@ import wx
 from gswidgetkit import (EVT_BUTTON, Button, Label)
 
 import gimelstudio.interface.basewidgets.foldpanelbar as fpb
-from gimelstudio.constants import (PROP_HEADER_COLOR, AREA_BG_COLOR, 
-                                   AREA_TOPBAR_COLOR)
+from gimelstudio.constants import (PROP_BG_COLOR, AREA_BG_COLOR, 
+                                   AREA_TOPBAR_COLOR, TEXT_COLOR)
 from gimelstudio.datafiles import (ICON_HELP, ICON_NODEPROPERTIES_PANEL,
                                    ICON_MORE_MENU_SMALL, ICON_MOUSE_LMB,
                                    ICON_MOUSE_MMB, ICON_MOUSE_RMB)
@@ -117,8 +117,8 @@ class NodePropertiesPanel(PanelBase):
 
             style = fpb.CaptionBarStyle()
             style.SetCaptionFont(self.Parent.GetFont())
-            style.SetCaptionColour(wx.Colour("#dfdfdf"))
-            style.SetFirstColour(wx.Colour(PROP_HEADER_COLOR))
+            style.SetCaptionColour(wx.Colour(TEXT_COLOR))
+            style.SetFirstColour(wx.Colour(PROP_BG_COLOR))
             style.SetCaptionStyle(fpb.CAPTIONBAR_SINGLE)
             panel_bar.ApplyCaptionStyleAll(style)
 
