@@ -20,7 +20,8 @@ import wx.lib.newevent
 from typing import List
 from gswidgetkit import (CheckBox, DropDown, EVT_DROPDOWN,
                          NumberField, EVT_NUMBERFIELD_CHANGE,
-                         NativeTextCtrl, TextCtrl, Button, EVT_BUTTON)
+                         NativeTextCtrl, TextCtrl, Button, EVT_BUTTON,
+                         Label)
 
 import gimelstudio.constants as const
 import gimelstudio.interface.basewidgets.foldpanelbar as fpb
@@ -111,8 +112,7 @@ class PreferencesPage(wx.Panel):
                     if setting_options:
                         if setting_options["Display Widget"] == "Drop Down":
                             new_widget = wx.BoxSizer(wx.HORIZONTAL)
-                            label = wx.StaticText(self, label=_(setting_name) + ":")
-                            label.SetForegroundColour("#FFFFFF")
+                            label = Label(self, label=_(setting_name) + ":")
                             drop_down = DropDown(self, items=setting_options["Items"],
                                                  default=setting_val)
                             drop_down.Bind(EVT_DROPDOWN,
@@ -124,8 +124,7 @@ class PreferencesPage(wx.Panel):
                             new_widget.Add(drop_down, 1, wx.EXPAND)
                         elif setting_options["Display Widget"] == "Line Ctrl":
                             new_widget = wx.BoxSizer(wx.HORIZONTAL)
-                            label = wx.StaticText(self, label=_(setting_name) + ":")
-                            label.SetForegroundColour("#FFFFFF")
+                            label = Label(self, label=_(setting_name) + ":")
                             text_ctrl = NativeTextCtrl(self, value=setting_val, style=wx.SIMPLE_BORDER)
                             text_ctrl.Bind(wx.EVT_TEXT,
                                            lambda event,
@@ -136,8 +135,7 @@ class PreferencesPage(wx.Panel):
                             new_widget.Add(text_ctrl, 1, wx.EXPAND)
                         elif setting_options["Display Widget"] == "Text Ctrl":
                             new_widget = wx.BoxSizer(wx.HORIZONTAL)
-                            label = wx.StaticText(self, label=_(setting_name) + ":")
-                            label.SetForegroundColour("#FFFFFF")
+                            label = Label(self, label=_(setting_name) + ":")
                             text_ctrl = TextCtrl(self, value=setting_val, placeholder=setting_options["Placeholder"],
                                                  style=wx.SIMPLE_BORDER)
                             text_ctrl.Bind(wx.stc.EVT_STC_CHANGE,
@@ -149,8 +147,7 @@ class PreferencesPage(wx.Panel):
                             new_widget.Add(text_ctrl, 1, wx.EXPAND)
                         else:
                             new_widget = wx.BoxSizer(wx.HORIZONTAL)
-                            label = wx.StaticText(self, label=_(setting_name) + ":")
-                            label.SetForegroundColour("#FFFFFF")
+                            label = Label(self, label=_(setting_name) + ":")
                             text_ctrl = NativeTextCtrl(self, value=setting_val, style=wx.SIMPLE_BORDER)
                             text_ctrl.Bind(wx.EVT_TEXT,
                                            lambda event,
@@ -161,8 +158,7 @@ class PreferencesPage(wx.Panel):
                             new_widget.Add(text_ctrl, 1, wx.EXPAND)
                 else:
                     new_widget = wx.BoxSizer(wx.HORIZONTAL)
-                    label = wx.StaticText(self, label=_(setting_name) + ":")
-                    label.SetForegroundColour("#FFFFFF")
+                    label = Label(self, label=_(setting_name) + ":")
                     text_ctrl = NativeTextCtrl(self, value=setting_val, style=wx.SIMPLE_BORDER)
                     text_ctrl.Bind(wx.EVT_TEXT,
                                    lambda event,
@@ -206,8 +202,7 @@ class AddOnsPage(wx.Panel):
 
         main_layout = wx.BoxSizer(wx.VERTICAL)
 
-        title_text = wx.StaticText(self, label="Add-ons")
-        title_text.SetForegroundColour("#FFFFFF")
+        title_text = Label(self, label=_("Add-ons"))
         main_layout.Add(title_text, 1, wx.EXPAND)
 
         self.SetSizer(main_layout)
@@ -226,8 +221,7 @@ class TemplatesPage(wx.Panel):
 
         main_layout = wx.BoxSizer(wx.VERTICAL)
 
-        title_text = wx.StaticText(self, label="Templates")
-        title_text.SetForegroundColour("#FFFFFF")
+        title_text = Label(self, label=_("Templates"))
         main_layout.Add(title_text, 1, wx.EXPAND)
 
         self.SetSizer(main_layout)
@@ -246,8 +240,7 @@ class NodesPage(wx.Panel):
 
         main_layout = wx.BoxSizer(wx.VERTICAL)
 
-        title_text = wx.StaticText(self, label="Nodes")
-        title_text.SetForegroundColour("#FFFFFF")
+        title_text = Label(self, label=_("Nodes"))
         main_layout.Add(title_text, 1, wx.EXPAND)
 
         self.SetSizer(main_layout)
