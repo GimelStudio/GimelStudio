@@ -15,6 +15,7 @@
 # ----------------------------------------------------------------------------
 
 from .output_eval import OutputNodeEval
+from .datatypes import RenderImage
 
 
 class Renderer(object):
@@ -48,12 +49,11 @@ class Renderer(object):
         rendered_image = self.RenderNodeGraph(output_node, nodes)
 
         # Get rendered image, otherwise use
-        # the default transparent image.
-        if rendered_image is not None:
+        # a default transparent image.
+        if rendered_image != None:
             image = rendered_image
         else:
-            # TODO: don't hardcode this
-            image = output_node._parameters["Image"].value
+            image = RenderImage()
 
         # TODO: Only if node thumbnails are enabled
         output_node.NodeUpdateThumb(image)
