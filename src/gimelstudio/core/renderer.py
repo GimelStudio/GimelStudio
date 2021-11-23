@@ -55,6 +55,9 @@ class Renderer(object):
             # TODO: don't hardcode this
             image = output_node._parameters["Image"].value
 
+        # TODO: Only if node thumbnails are enabled
+        output_node.NodeUpdateThumb(image)
+
         self.SetRender(image)
         return image
 
