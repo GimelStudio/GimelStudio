@@ -51,7 +51,7 @@ class PreferencesPage(wx.Panel):
         self._category_name = value
 
     def BuildUI(self):
-        self.SetBackgroundColour(const.AREA_BG_COLOR)
+        self.SetBackgroundColour(const.PROP_BG_COLOR)
         self.LoadWidgets(self._category_name)
         self.SetSizer(self.main_layout)
 
@@ -198,7 +198,7 @@ class AddOnsPage(wx.Panel):
         self.BuildUI()
 
     def BuildUI(self):
-        self.SetBackgroundColour(const.AREA_BG_COLOR)
+        self.SetBackgroundColour(const.PROP_BG_COLOR)
 
         main_layout = wx.BoxSizer(wx.VERTICAL)
 
@@ -217,7 +217,7 @@ class TemplatesPage(wx.Panel):
         self.BuildUI()
 
     def BuildUI(self):
-        self.SetBackgroundColour(const.AREA_BG_COLOR)
+        self.SetBackgroundColour(const.PROP_BG_COLOR)
 
         main_layout = wx.BoxSizer(wx.VERTICAL)
 
@@ -236,11 +236,30 @@ class NodesPage(wx.Panel):
         self.BuildUI()
 
     def BuildUI(self):
-        self.SetBackgroundColour(const.AREA_BG_COLOR)
+        self.SetBackgroundColour(const.PROP_BG_COLOR)
 
         main_layout = wx.BoxSizer(wx.VERTICAL)
 
         title_text = Label(self, label=_("Nodes"))
+        main_layout.Add(title_text, 1, wx.EXPAND)
+
+        self.SetSizer(main_layout)
+
+
+class SystemPage(wx.Panel):
+    def __init__(self, parent):
+        wx.Panel.__init__(self, parent)
+
+        self.parent = parent
+
+        self.BuildUI()
+
+    def BuildUI(self):
+        self.SetBackgroundColour(const.PROP_BG_COLOR)
+
+        main_layout = wx.BoxSizer(wx.VERTICAL)
+
+        title_text = Label(self, label=_("System"))
         main_layout.Add(title_text, 1, wx.EXPAND)
 
         self.SetSizer(main_layout)
@@ -266,7 +285,7 @@ class SidebarPanel(wx.Panel):
         self._buttons = value
 
     def BuildUI(self):
-        self.SetBackgroundColour(const.AREA_BG_COLOR)
+        self.SetBackgroundColour(const.PROP_BG_COLOR)
 
         self.main_layout.AddSpacer(16)
 
@@ -285,9 +304,9 @@ class PreferencesDialog(wx.Dialog):
     def __init__(self, parent, title: str, app_config: AppConfiguration, categories: list):
         # TODO: Can we create our own title bar (instead of the default native one)?
         wx.Dialog.__init__(self, parent, title=title, size=[800, 600],
-                           style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER)
+                           style=wx.DEFAULT_DIALOG_STYLE)
 
-        self.SetBackgroundColour(const.AREA_BG_COLOR)
+        self.SetBackgroundColour(const.PROP_BG_COLOR)
 
         self._app_config = app_config
         self._categories = categories
@@ -316,13 +335,15 @@ class PreferencesDialog(wx.Dialog):
         # Category pages
         for category in self._categories:
             # TODO: Finish the special pages like "Add-ons", "Nodes" and "Templates"
-            category_page: List[PreferencesPage, AddOnsPage, NodesPage, TemplatesPage] = None
+            category_page: List[PreferencesPage, AddOnsPage, NodesPage, TemplatesPage, SystemPage] = None
             if category == "Add-ons":
                 category_page = AddOnsPage(self.book)
             elif category == "Nodes":
                 category_page = NodesPage(self.book)
             elif category == "Templates":
                 category_page = TemplatesPage(self.book)
+            elif category == "System":
+                category_page = SystemPage(self.book)
             else:
                 category_page = PreferencesPage(self.book, category, self._app_config)
 
