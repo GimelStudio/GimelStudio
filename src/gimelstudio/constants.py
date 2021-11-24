@@ -19,16 +19,18 @@ import sys
 
 
 # Application
-APP_FROZEN = getattr(sys, "frozen", False)
+APP_FROZEN = getattr(sys, "frozen", True)
 APP_DIR = os.path.dirname(os.path.abspath(sys.argv[0]))
+
+APP_VERSION = "0.6.0"
+APP_VERSION_TAG = "alpha pre-release 1"
+APP_VERSION_FULL = "{0} {1}".format(APP_VERSION, APP_VERSION_TAG)
 
 APP_NAME = "Gimel Studio"
 APP_WEBSITE_URL = "https://gimelstudio.github.io"
 APP_DESCRIPTION = "Non-destructive, node-based 2D image graphics editor focused on simplicity, speed, elegance and usability"
 
-APP_VERSION = "0.6.0"
-APP_VERSION_TAG = "alpha1"
-APP_VERSION_FULL = "{0} {1}".format(APP_VERSION, APP_VERSION_TAG)
+APP_FULL_TITLE = "{0} v{1}".format(APP_NAME, APP_VERSION_FULL)
 
 APP_CREDITS = [""]
 

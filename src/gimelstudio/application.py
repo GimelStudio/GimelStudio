@@ -21,7 +21,7 @@ import wx
 import wx.lib.agw.aui as aui
 import wx.lib.agw.flatmenu as flatmenu
 
-from gimelstudio.constants import (APP_NAME, AREA_TOPBAR_COLOR, DARK_COLOR)
+from gimelstudio.constants import (APP_FULL_TITLE, AREA_TOPBAR_COLOR, DARK_COLOR)
 from gimelstudio.utils import ConvertImageToWx
 from .interface import artproviders
 from .datafiles.icons import ICON_GIMELSTUDIO_ICO
@@ -42,7 +42,7 @@ class AUIManager(aui.AuiManager):
 
 class ApplicationFrame(wx.Frame):
     def __init__(self, app_config=None):
-        wx.Frame.__init__(self, None, title=APP_NAME, size=(1000, 800))
+        wx.Frame.__init__(self, None, title=APP_FULL_TITLE, size=(1000, 800))
 
         # Application configuration
         self.appconfig = app_config
