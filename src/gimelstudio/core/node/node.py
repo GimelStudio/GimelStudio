@@ -46,7 +46,7 @@ class Node(NodeView):
         self.NodeWidgetEventHook(idname, value)
         self.SetEditedFlag(True)
         if render == True:
-            render = self.nodegraph.parent.parent.Render()
+            self.nodegraph.parent.parent.Render()
 
     @property
     def NodeMeta(self):

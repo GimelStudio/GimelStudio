@@ -136,8 +136,7 @@ class PreferencesPage(wx.Panel):
                         elif setting_options["Display Widget"] == "Text Ctrl":
                             new_widget = wx.BoxSizer(wx.HORIZONTAL)
                             label = Label(self, label=_(setting_name) + ":")
-                            text_ctrl = TextCtrl(self, value=setting_val, placeholder=setting_options["Placeholder"],
-                                                 style=wx.SIMPLE_BORDER)
+                            text_ctrl = TextCtrl(self, default=setting_val)
                             text_ctrl.Bind(wx.stc.EVT_STC_CHANGE,
                                            lambda event,
                                            name=setting_name: self.OnWidgetChanged(event=event,

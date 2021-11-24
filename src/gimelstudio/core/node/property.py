@@ -15,14 +15,11 @@
 # ----------------------------------------------------------------------------
 
 import os
-import sys
-import glob
-
 import wx
-
 from gswidgetkit import (NumberField, EVT_NUMBERFIELD,
                          Button, EVT_BUTTON, TextCtrl,
                          DropDown, EVT_DROPDOWN)
+
 from gimelstudio.constants import PROP_BG_COLOR, SUPPORTED_FT_OPEN_LIST
 from gimelstudio.datafiles import ICON_ARROW_DOWN, ICON_ARROW_RIGHT
 
@@ -358,4 +355,3 @@ class XYZProp(Property):
 
     def WidgetEventZ(self, event):
         self.SetValue((self.value[0], self.value[1], event.value))
-        
