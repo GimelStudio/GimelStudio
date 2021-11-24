@@ -4,7 +4,7 @@
   <img href="https://github.com/GimelStudio/GimelStudio/blob/master/LICENSE" src="https://img.shields.io/badge/License-Apache2.0-green.svg" />
   <img href="https://lgtm.com/projects/g/GimelStudio/GimelStudio/" src="https://img.shields.io/lgtm/grade/python/g/GimelStudio/GimelStudio.svg?logo=lgtm&logoWidth=18" />
   <br/>
-  Non-destructive, node-based 2D image graphics editor written in Python, focused on simplicity, speed, elegance, and usability<br/>
+  Non-destructive, node-based 2D image graphics editor, focused on simplicity, speed, elegance, and usability<br/>
   <a href="https://gimelstudio.github.io">Official Website</a> | <a href="https://discord.gg/RqwbDrVDpK">Join Our Discord Server</a> | <a href="https://gimelstudio.readthedocs.io/en/latest/">Official Manual</a>
 </p>
 
@@ -26,31 +26,24 @@ The main goal is to expand on and greatly improve upon the concepts from the [pr
 
 This includes:
 
-- Re-designed UI (highly inspired by the Blender 2.8x UI and parts of Sketch)
+- Re-designed UI (inspired by Blender and Sketch)
 - Improved file-type support (.tiff, .exr files, etc)
 - 16-bit workflow support
 - CPU and GPU based processing
 - Highly improved node-graph and overall workflow for image editing
 - Greater emphasis on re-usabilty of node graph setups via templates, etc
 - User preferences for customizabilty
-- UI translations and localization
+- UI translations
 - Gizmos for the viewport to allow for WYSIWYG-like interaction for transforms, etc. (e.g. crop, rotate, etc)
 - Continued improvement and additions to the Python API for scripting custom nodes
 
-Nodes can be used to composite, create new effects and/or composite raster and vector graphics on-demand. Helpful gizmos in the interactive viewport can be used to do various editing tasks and speed up the workflow. Preset node graph templates can be created, used and re-used to save time setting up common node-setups.
+Nodes can be used to composite, edit and create new effects and/or composite raster and vector graphics on-demand and visually with node thumbnails showing each step of the process (where applicable). Helpful gizmos in the interactive viewport can be used to do various editing tasks and speed up the workflow. Preset node graph templates can be created, used and re-used to save time setting up common node-setups.
 
 Custom nodes can be scripted with the built-in Python API for maximum flexibility. Integrations with other software like Blender are planned.
 
 With a fully non-destructive workflow that uses both GPU and CPU processing while being seamlessly cross-platform on Windows, Linux and macOS (for 64-bit systems), Gimel Studio aims to be a simple, yet powerful 2D graphics editing tool for anyone with an image to edit.
 
 **Visit our home page [here](https://gimelstudio.github.io) for an overview of the project goals, etc**
-
-
-# WIP Mockup
-
-Here is a **WIP mockup** of the redesigned UI:
-
-!["Gimel Studio mockup"](https://i.ibb.co/QNNY2vX/gimel-studio-wip-ui.png "Gimel Studio")
 
 
 # Discord chat
@@ -64,7 +57,7 @@ If you prefer to keep to Github instead, feel free to start a discussion [here](
 
 We are working towards an MVP which will showcase much of the core goals and features listed on the website.
 
-The initial UI is now mostly laid out according to the WIP UI mockup and the core nodegraph rendering is just functional (it “just works”) at the moment. There is much more to do… and we could really use help to speed progress along. ;)
+The initial UI is now mostly laid out according to the WIP UI mockup, the core nodegraph rendering is functional (it “just works” at the moment) and there are some other nice additions and features. There is much more to do… and we could really use help to speed progress along. ;)
 
 ![gs-wip-demo](https://user-images.githubusercontent.com/60711001/136237852-e4a83033-e26c-4ea5-be16-f01cf2936cf7.gif)
 *The current status of the next generation of Gimel Studio as of 10/5/2021*
@@ -118,8 +111,6 @@ We also use GLSL in addition to Python for image-editing, as applicable, via [Mo
 
 [wxPython](https://wxpython.org) – Is used as the **primary GUI front-end** as it’s a powerful, native, cross-platform GUI toolkit based on wxWidgets.
 
-A greatly improved node graph for Gimel Studio is currently in development via the [GS Nodegraph](https://github.com/GimelStudio/gsnodegraph) library.
-
-Modern, styleable widgets for Gimel Studio are currently in development via the [GS WidgetKit](https://github.com/GimelStudio/gswidgetkit) library.
+Modern, styleable widgets for Gimel Studio are currently in development via [gswidgetKit](https://github.com/GimelStudio/gswidgetkit) and a powerful node graph widget via [gsnodegraph](https://github.com/GimelStudio/gsnodegraph).
 
 The API Scripting Language is Python (with the option to use a GLSL shader).
