@@ -15,13 +15,13 @@
 # ----------------------------------------------------------------------------
 
 import wx
-import wx.lib.agw.flatmenu as flatmenu
-from gswidgetkit import (Button, EVT_BUTTON, NumberField, EVT_NUMBERFIELD_CHANGE,
-                         CheckBox)
+
+from gswidgetkit import (Button, EVT_BUTTON, NumberField, EVT_NUMBERFIELD_CHANGE)
 from gsnodegraph import (EVT_GSNODEGRAPH_NODESELECT,
                          EVT_GSNODEGRAPH_NODECONNECT,
                          EVT_GSNODEGRAPH_NODEDISCONNECT,
-                         EVT_GSNODEGRAPH_MOUSEZOOM)
+                         EVT_GSNODEGRAPH_MOUSEZOOM,
+                         EVT_GSNODEGRAPH_ADDNODEBTN)
 from gsnodegraph import NodeGraph as NodeGraphBase
 
 import gimelstudio.constants as const
@@ -109,6 +109,7 @@ class NodeGraphPanel(PanelBase):
         self.nodegraph.Bind(EVT_GSNODEGRAPH_NODECONNECT, self.NodeConnectEvent)
         self.nodegraph.Bind(EVT_GSNODEGRAPH_NODEDISCONNECT, self.NodeDisconnectEvent)
         self.nodegraph.Bind(EVT_GSNODEGRAPH_MOUSEZOOM, self.ZoomNodeGraph)
+        self.nodegraph.Bind(EVT_GSNODEGRAPH_ADDNODEBTN, self.OnAddNodeMenuButton)
         self.nodegraph.Bind(wx.EVT_ENTER_WINDOW, self.OnAreaFocus)
         self.zoom_field.Bind(EVT_NUMBERFIELD_CHANGE, self.ChangeZoom)
         self.menu_button.Bind(EVT_BUTTON, self.OnAreaMenuButton)
@@ -160,12 +161,23 @@ class NodeGraphPanel(PanelBase):
 
     def ChangeZoom(self, event):
         level = event.value / 100.0
+        print(level, " <---> ", event.value)
+        # if event.value > 60 and event.value < 310:
         self.nodegraph.SetZoomLevel(level)
 
     def ZoomNodeGraph(self, event):
         self.zoom_field.SetValue(event.value)
         self.zoom_field.UpdateDrawing()
         self.zoom_field.Refresh()
+
+    def PopupAddNodeMenu(self, pos):
+        self.addnodemenu = AddNodeMenu(self, self.registry,
+                                       size=wx.Size(250, self.Size[1] - 50))
+        self.addnodemenu.Position(pos, (2, 2))
+        self.addnodemenu.SetSize(250, 400)
+        if self.addnodemenu.IsShown() is not True:
+            self.addnodemenu.Show()
+
 
     def OnAreaFocus(self, event):
         self.Statusbar.PushContextHints(2, mouseicon=ICON_MOUSE_LMB_MOVEMENT,
@@ -183,14 +195,10 @@ class NodeGraphPanel(PanelBase):
         self.Statusbar.UpdateStatusBar()
 
     def OnAddNodeMenu(self, event):
-        """ Event handler to bring up the Add Node menu. """
-        self.addnodemenu = AddNodeMenu(self, self.registry,
-                                       size=wx.Size(250, self.Size[1] - 50))
         pos = wx.GetMousePosition()
-        self.addnodemenu.Position((pos[0]-125, pos[1]-100), (2, 2))
-        self.addnodemenu.SetSize(250, 400)
-        if self.addnodemenu.IsShown() is not True:
-            self.addnodemenu.Show()
-
-    def OnLoseFocus(self, event):
-        self.Dismiss()
+        pos = (pos[0]-125, pos[1]-100)
+        self.PopupAddNodeMenu(pos)
+        
+    def OnAddNodeMenuButton(self, event):
+        pos = (8, self.nodegraph.GetRect()[3]-310)
+        self.PopupAddNodeMenu(pos)

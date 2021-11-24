@@ -65,8 +65,8 @@ class NoiseImageNode(api.Node):
 
         render_image = api.RenderImage()
 
-        buf = oiio.ImageBuf(oiio.ImageSpec(1200, 1200, 3, oiio.UINT16))
-        oiio.ImageBufAlgo.noise (buf, "gaussian", 0.025, 0.025, mono=True, seed=noise_seed)
+        buf = oiio.ImageBuf(oiio.ImageSpec(1200, 1200, 4, oiio.UINT16))
+        oiio.ImageBufAlgo.noise (buf, "gaussian", 0.5, 0.5, mono=True, seed=noise_seed)
 
         render_image.SetAsImage(buf)
         self.NodeUpdateThumb(render_image)
