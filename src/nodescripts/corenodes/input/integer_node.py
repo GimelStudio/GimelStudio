@@ -46,7 +46,7 @@ class IntegerNode(api.Node):
         self.NodeAddProp(self.value)
 
     def NodeEvaluation(self, eval_info):
-        value = self.EvalProperty(eval_info, "Value")
+        value = self.EvalProperty(eval_info, "value")
 
         return value
 
