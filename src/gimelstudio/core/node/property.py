@@ -283,3 +283,79 @@ class OpenFileChooserProp(Property):
             else:
                 self.SetValue(paths[0])
                 self.textcontrol.SetValue(self.GetValue())
+
+
+class XYZProp(Property):
+    """ 
+    Allows the user to select an (x, y, z) value via Number Fields.
+    """
+    def __init__(self, idname, default=(0, 0, 0), labels=("X", "Y", "Z"),
+                 min_vals=(0, 0, 0), max_vals=(10, 10, 10), lbl_suffix="",
+                 show_p=False, enable_z=False, label="", visible=True):
+        Property.__init__(self, idname, default, label, visible)
+        self.min_values = min_vals
+        self.max_values = max_vals
+        self.lbl_suffix = lbl_suffix
+        self.labels = labels
+        self.show_p = show_p
+        self.enable_z = enable_z
+
+    def CreateUI(self, parent, sizer):
+        fold_panel = self.CreateFoldPanel(sizer)
+        fold_panel.SetBackgroundColour(wx.Colour(PROP_BG_COLOR))
+
+        pnl = wx.Panel(fold_panel)
+        pnl.SetBackgroundColour(wx.Colour(PROP_BG_COLOR))
+
+        vbox = wx.BoxSizer(wx.VERTICAL)
+
+        self.numberfield_x = NumberField(pnl,
+                                         default_value=self.value[0],
+                                         label=self.labels[0],
+                                         min_value=self.min_values[0],
+                                         max_value=self.max_values[0],
+                                         suffix=self.lbl_suffix, 
+                                         show_p=self.show_p,
+                                         size=(-1, 32))
+        vbox.Add(self.numberfield_x, flag=wx.EXPAND | wx.BOTH | wx.ALL, border=1)
+
+        self.numberfield_y = NumberField(pnl,
+                                         default_value=self.value[1],
+                                         label=self.labels[1],
+                                         min_value=self.min_values[1],
+                                         max_value=self.max_values[1],
+                                         suffix=self.lbl_suffix, 
+                                         show_p=self.show_p,
+                                         size=(-1, 32))
+        vbox.Add(self.numberfield_y, flag=wx.EXPAND | wx.BOTH | wx.ALL, border=1)
+
+        if self.enable_z:
+            self.numberfield_z = NumberField(pnl,
+                                             default_value=self.value[2],
+                                             label=self.labels[2],
+                                             min_value=self.min_values[2],
+                                             max_value=self.max_values[2],
+                                             suffix=self.lbl_suffix, 
+                                             show_p=self.show_p,
+                                             size=(-1, 32))
+            vbox.Add(self.numberfield_z, flag=wx.EXPAND | wx.BOTH | wx.ALL, border=1)
+
+        vbox.Fit(pnl)
+        pnl.SetSizer(vbox)
+
+        self.AddToFoldPanel(sizer, fold_panel, pnl)
+
+        self.numberfield_x.Bind(EVT_NUMBERFIELD, self.WidgetEventX)
+        self.numberfield_y.Bind(EVT_NUMBERFIELD, self.WidgetEventY)
+        if self.enable_z:
+            self.numberfield_z.Bind(EVT_NUMBERFIELD, self.WidgetEventZ)
+
+    def WidgetEventX(self, event):
+        self.SetValue((event.value, self.value[1], self.value[2]))
+
+    def WidgetEventY(self, event):
+        self.SetValue((self.value[0], event.value, self.value[2]))
+
+    def WidgetEventZ(self, event):
+        self.SetValue((self.value[0], self.value[1], event.value))
+        
