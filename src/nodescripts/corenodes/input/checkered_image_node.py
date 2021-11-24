@@ -32,7 +32,7 @@ class CheckeredImageNode(api.Node):
         meta_info = {
             "label": "Checkered",
             "author": "Gimel Studio",
-            "version": (0, 1, 0),
+            "version": (0, 2, 0),
             "category": "INPUT",
             "description": "Creates a checkered image."
         }
@@ -77,9 +77,9 @@ class CheckeredImageNode(api.Node):
 
         render_image = api.RenderImage()
 
-        buf = oiio.ImageBuf(oiio.ImageSpec(1200, 1200, 3, oiio.UINT16))
+        buf = oiio.ImageBuf(oiio.ImageSpec(1200, 1200, 4, oiio.UINT16))
         oiio.ImageBufAlgo.checker(buf, checker_size, checker_size, 1, 
-                                  color1=(0.1,0.1,0.1), color2=(0.4,0.4,0.4),
+                                  color1=(0.1,0.1,0.1,255.0), color2=(0.4,0.4,0.4,255.0),
                                   xoffset=offset[0], yoffset=offset[1], 
                                   zoffset=offset[2])
 
