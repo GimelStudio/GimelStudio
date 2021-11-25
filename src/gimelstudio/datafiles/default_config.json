@@ -1,5 +1,5 @@
 {
-    "app_version": "0.6.0",
+    "app_version": "0.6.0 alpha pre-release 1",
     "Settings": {
         "General": {
             "Enable experimental features": true,

@@ -65,7 +65,7 @@ class AppConfiguration(AppData):
                 return default
 
     def Load(self):
-        path = os.path.expanduser("~/.gimelstudio/config.json")
+        path = os.path.expanduser("~/.gimelstudio/pr1-config.json")
         try:
             os.makedirs(os.path.expanduser("~/.gimelstudio/"),
                         exist_ok=True)
@@ -84,9 +84,9 @@ class AppConfiguration(AppData):
 
     def Save(self):
         # Add app version to file
-        self.prefs['app_version'] = self.app_version
+        self.prefs['app_version'] = self.app_version_full
 
-        path = "~/.gimelstudio/config.json"
+        path = "~/.gimelstudio/pr1-config.json"
         try:
             with open(os.path.expanduser(path), "w") as file:
                 json.dump(self.prefs, file, indent=4)
