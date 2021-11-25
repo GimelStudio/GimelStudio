@@ -23,6 +23,7 @@ import wx.adv
 
 from gimelstudio import AppConfiguration, ApplicationFrame
 from gimelstudio.interface import StartupSplashScreen
+from gimelstudio.constants import APP_FROZEN
 
 # Fix blurry text on Windows 10
 import ctypes
@@ -75,8 +76,9 @@ class MainApp(wx.App):
         self.frame.Show(True)
 
         # Show the startup splash screen
-        splash = StartupSplashScreen()
-        splash.Show()
+        if APP_FROZEN is True:
+            splash = StartupSplashScreen()
+            splash.Show()
 
         return True
 

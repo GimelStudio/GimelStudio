@@ -19,7 +19,7 @@ import sys
 
 
 # Application
-APP_FROZEN = getattr(sys, "frozen", True)
+APP_FROZEN = getattr(sys, "frozen", False)
 APP_DIR = os.path.dirname(os.path.abspath(sys.argv[0]))
 
 APP_VERSION = "0.6.0"
