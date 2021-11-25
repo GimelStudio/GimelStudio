@@ -22,6 +22,7 @@ import wx
 import wx.adv
 
 from gimelstudio import AppConfiguration, ApplicationFrame
+from gimelstudio.interface import StartupSplashScreen
 
 # Fix blurry text on Windows 10
 import ctypes
@@ -73,6 +74,10 @@ class MainApp(wx.App):
         self.SetTopWindow(self.frame)
         self.frame.Show(True)
 
+        # Show the startup splash screen
+        splash = StartupSplashScreen()
+        splash.Show()
+
         return True
 
     def InitI18n(self):
@@ -92,8 +97,8 @@ class MainApp(wx.App):
         if platform.system() == "Linux":
             try:
                 os.environ["LANGUAGE"] = supported_langs[language]
-            except (ValueError, KeyError):
-                pass
+            except (ValueError, KeyError) as error:
+                print(error)
 
 
 if __name__ == '__main__':
