@@ -16,6 +16,7 @@
 
 import os
 import json
+import os.path
 
 import gimelstudio.constants as appconst
 
@@ -30,6 +31,7 @@ class AppData(object):
         self.app_version = appconst.APP_VERSION
         self.app_version_tag = appconst.APP_VERSION_TAG
         self.app_version_full = appconst.APP_VERSION_FULL
+        self.app_config_file = appconst.APP_CONFIG_FILE
 
 
 class AppConfiguration(AppData):
@@ -65,19 +67,18 @@ class AppConfiguration(AppData):
                 return default
 
     def Load(self):
-        path = os.path.expanduser("~/.gimelstudio/pr1-config.json")
         try:
             os.makedirs(os.path.expanduser("~/.gimelstudio/"),
                         exist_ok=True)
 
-            if not os.path.exists(path):
+            if not os.path.exists(self.app_config_file):
                 with open("gimelstudio/datafiles/default_config.json") as f:
                     default_config = f.read()
 
-                with open(path, "w+") as f:
+                with open(self.app_config_file, "w+") as f:
                     f.write(default_config)
 
-            with open(path, "r") as file:
+            with open(self.app_config_file, "r") as file:
                 self.prefs = json.load(file)
         except IOError:
             pass  # Just use default
@@ -86,9 +87,8 @@ class AppConfiguration(AppData):
         # Add app version to file
         self.prefs['app_version'] = self.app_version_full
 
-        path = "~/.gimelstudio/pr1-config.json"
         try:
-            with open(os.path.expanduser(path), "w") as file:
+            with open(self.app_config_file, "w") as file:
                 json.dump(self.prefs, file, indent=4)
         except IOError:
             pass  # Not a big deal
