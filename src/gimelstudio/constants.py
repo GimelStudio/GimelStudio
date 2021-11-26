@@ -16,6 +16,7 @@
 
 import os
 import sys
+import os.path
 
 
 # Application
@@ -33,6 +34,8 @@ APP_DESCRIPTION = "Non-destructive, node-based 2D image graphics editor focused 
 APP_FULL_TITLE = "{0} v{1}".format(APP_NAME, APP_VERSION_FULL)
 
 APP_CREDITS = [""]
+
+APP_CONFIG_FILE = os.path.expanduser("~/.gimelstudio/pr1-config.json")
 
 # File system
 SUPPORTED_FT_OPEN_LIST = [
