@@ -355,3 +355,23 @@ class XYZProp(Property):
 
     def WidgetEventZ(self, event):
         self.SetValue((self.value[0], self.value[1], event.value))
+
+
+class ActionProp(Property):
+    """
+    Allows the user to click a button to perform an action
+    """
+    def __init__(self, idname, default="", label="", flat=False, action=None, visible=True):
+        Property.__init__(self, idname, default, label, visible)
+        self.label = label
+        self.flat = flat
+        self.action = action
+
+    def CreateUI(self, parent, sizer):
+        fold_panel = self.CreateFoldPanel(sizer)
+        fold_panel.SetBackgroundColour(wx.Colour(PROP_BG_COLOR))
+
+        self.button = Button(fold_panel, label=_(self.label), flat=self.flat, size=(-1, 30))
+        self.AddToFoldPanel(sizer, fold_panel, self.button)
+        self.button.Bind(EVT_BUTTON, self.action)
+
