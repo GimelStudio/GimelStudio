@@ -15,9 +15,9 @@
 # ----------------------------------------------------------------------------
 
 import wx
+import gswidgetkit.foldpanelbar as fpb
 from gswidgetkit import (EVT_BUTTON, Button, Label)
 
-import gimelstudio.interface.basewidgets.foldpanelbar as fpb
 from gimelstudio.constants import (PROP_BG_COLOR, AREA_BG_COLOR, 
                                    AREA_TOPBAR_COLOR, TEXT_COLOR)
 from gimelstudio.datafiles import (ICON_HELP, ICON_NODEPROPERTIES_PANEL,

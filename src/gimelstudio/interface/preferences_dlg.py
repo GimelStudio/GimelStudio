@@ -24,9 +24,7 @@ from gswidgetkit import (CheckBox, DropDown, EVT_DROPDOWN,
                          Label)
 
 import gimelstudio.constants as const
-import gimelstudio.interface.basewidgets.foldpanelbar as fpb
 from gimelstudio.config import AppConfiguration
-from gimelstudio.datafiles import ICON_ARROW_DOWN, ICON_ARROW_RIGHT
 
 
 class PreferencesPage(wx.Panel):
