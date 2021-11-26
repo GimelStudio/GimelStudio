@@ -47,8 +47,8 @@ def MAC():
         inst += ' --hidden-import wx --windowed -i assets/GIMELSTUDIO_ICO.ico -n GimelStudio'
         inst += ' --noconfirm'
         ExecuteTerminalInstruction(inst)
-        dest = "dist/nodescripts"
-        inst = "cp -r src/nodescripts " + dest
+        dest = "dist/nodes"
+        inst = "cp -r src/nodes " + dest
         CheckPathAndExecute(dest, inst, inst2="rm -rf " + dest + " && "+ inst)
 
     # Ask whether to continue
@@ -138,11 +138,11 @@ else:
 subprocess.call(args)
 
 # Create a new folder for custom node scripts then copy the
-# nodescripts directory contents into the created folder.
+# nodes directory contents into the created folder.
 if sys.platform == "linux" or sys.platform == "linux2":
-    subprocess.call(["mkdir", "./dist/GimelStudio/nodescripts"])
-    shutil.copytree("./src/nodescripts", "./dist/GimelStudio/nodescripts")
+    subprocess.call(["mkdir", "./dist/GimelStudio/nodes"])
+    shutil.copytree("./src/nodes", "./dist/GimelStudio/nodes")
 elif sys.platform == "win32":
-    shutil.copytree("src/nodescripts", "dist/GimelStudio/nodescripts")
+    shutil.copytree("src/nodes", "dist/GimelStudio/nodes")
 else:
     raise NotImplementedError("Only Windows, Linux and MacOs are supported!")

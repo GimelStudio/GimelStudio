@@ -29,7 +29,7 @@ def LoadPythonScripts(directory, module):
 def LoadNodes(type, directory, module):
     try:
         LoadPythonScripts(directory, module)
-        print("[INFO] Registered {} node scripts".format(type))
+        print("[INFO] Registered {} nodes".format(type))
     except Exception as error:
         print("[WARNING] Error registering {} nodes: \n".format(type), error)
     finally:
@@ -39,6 +39,6 @@ def LoadNodes(type, directory, module):
 # Load the output composite node
 from .core.output_node import OutputNode
 
-# Next, we load the core and custom nodes from the 'nodescripts' directory.
-LoadNodes("core", "nodescripts/corenodes", "nodescripts.corenodes")
-LoadNodes("custom", "nodescripts/customnodes", "nodescripts.customnodes")
+# Next, we load the core and custom nodes from the 'nodes' directory.
+LoadNodes("core", "nodes/corenodes", "nodes.corenodes")
+LoadNodes("custom", "nodes/customnodes", "nodes.customnodes")

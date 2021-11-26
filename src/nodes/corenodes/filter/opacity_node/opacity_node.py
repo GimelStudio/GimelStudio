@@ -18,66 +18,54 @@
 from gimelstudio import api
 
 
-class AlphaOverNode(api.Node):
+class OpacityNode(api.Node):
     def __init__(self, nodegraph, _id):
         api.Node.__init__(self, nodegraph, _id)
 
     @property
     def NodeMeta(self):
         meta_info = {
-            "label": "Alpha Over",
+            "label": "Opacity",
             "author": "Gimel Studio",
             "version": (0, 0, 1),
-            "category": "BLEND",
-            "description": "Alpha over two images together based on the factor.",
+            "category": "FILTER",
+            "description": "Adjust the transparency of an image.",
         }
         return meta_info
 
     def NodeInitProps(self):
         self.value = api.PositiveIntegerProp(
-            idname="factor",
-            default=100,
+            idname="opacity_value",
+            default=50,
             min_val=0,
             max_val=100,
-            label="Factor"
+            show_p=True,
+            label="Opacity"
         )
         self.NodeAddProp(self.value)
 
     def NodeInitParams(self):
-        image1 = api.RenderImageParam("image 1", "Image")
-        image2 = api.RenderImageParam('image 2', "Image")
-        integer = api.IntegerParam("integer", "Factor")
-
-        self.NodeAddParam(image1)
-        self.NodeAddParam(image2)
-        self.NodeAddParam(integer)
+        image = api.RenderImageParam("image", "Image")
+        self.NodeAddParam(image)
 
     def NodeEvaluation(self, eval_info):
-        image1 = self.EvalParameter(eval_info, "image 1")
-        image2 = self.EvalParameter(eval_info, "image 2")
-
-        # TODO: remove this as an integer input isn't needed here.
-        # This is done more as a proof-of-concept for now.
-        integer = self.EvalParameter(eval_info, "integer")
-        if integer > 1:
-            factor = integer
-        else:
-            factor = self.EvalProperty(eval_info, "factor")
+        image1 = self.EvalParameter(eval_info, "image")
+        opacity_value = self.EvalProperty(eval_info, "opacity_value")
 
         render_image = api.RenderImage()
 
         # Make correction for slider range of 1-100
-        factor = (factor * 0.01)
+        opacity_value = (opacity_value * 0.01)
 
         props = {
-            "factor": factor
+            "opacity_value": opacity_value
         }
-        shader_src = "nodescripts/corenodes/blend/alpha_over_node/alpha_over.glsl"
-        result = self.RenderGLSL(shader_src, props, image1, image2)
+        shader_src = "nodes/corenodes/filter/opacity_node/opacity.glsl"
+        result = self.RenderGLSL(shader_src, props, image1)
 
         render_image.SetAsImage(result)
         self.NodeUpdateThumb(render_image)
         return render_image
 
 
-api.RegisterNode(AlphaOverNode, "corenode_alpha_over")
+api.RegisterNode(OpacityNode, "corenode_opacity")
