@@ -43,7 +43,7 @@ class OutputNode(api.Node):
     def NodeInitProps(self):
         self.export_button = api.ActionProp(
             idname="export",
-            label="Export",
+            label="Export Image",
             action=self.OnExportButtonPressed
         )
         self.NodeAddProp(self.export_button)
