@@ -361,14 +361,18 @@ class ActionProp(Property):
     """
     Allows the user to click a button to perform an action
     """
-    def __init__(self, idname, default="", label="", flat=False, action=None, visible=True):
+    def __init__(self, idname, default="", fpb_label="", label="", flat=False, action=None, visible=True):
         Property.__init__(self, idname, default, label, visible)
         self.label = label
+        if fpb_label != "":
+            self.fpb_label = fpb_label
+        else:
+            self.fpb_label = label
         self.flat = flat
         self.action = action
 
     def CreateUI(self, parent, sizer):
-        fold_panel = self.CreateFoldPanel(sizer)
+        fold_panel = self.CreateFoldPanel(sizer, self.fpb_label)
         fold_panel.SetBackgroundColour(wx.Colour(PROP_BG_COLOR))
 
         self.button = Button(fold_panel, label=_(self.label), flat=self.flat, size=(-1, 30))
