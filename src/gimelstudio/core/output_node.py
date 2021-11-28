@@ -14,7 +14,9 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
+import wx
 from gimelstudio import api
+from gimelstudio.interface import ExportImageHandler
 
 
 class OutputNode(api.Node):
@@ -38,12 +40,34 @@ class OutputNode(api.Node):
         }
         return meta_info
 
+    def NodeInitProps(self):
+        self.export_button = api.ActionProp(
+            idname="export",
+            fpb_label="Export",
+            label="Export Image",
+            action=self.OnExportButtonPressed
+        )
+        self.NodeAddProp(self.export_button)
+
     def NodeInitParams(self):
         p = api.RenderImageParam('Image', 'Image')
         self.NodeAddParam(p)
 
     def NodeEvaluation(self, eval_info):
         pass
+
+    def OnExportButtonPressed(self, event):
+        # TODO: This is messy. Need to find a cleaner solution to accessing the renderer
+        app_frame = self.nodegraph.parent.parent
+        image = app_frame.renderer.GetRender()
+        try:
+            export_handler = ExportImageHandler(app_frame, image.Image("oiio"))
+            export_handler.RunExport()
+        except AttributeError:
+            dlg = wx.MessageDialog(None,
+               _("Please render an image before attempting to export!"),
+               _("No Image to Export!"), style=wx.ICON_EXCLAMATION)
+            dlg.ShowModal()
 
 
 api.RegisterNode(OutputNode, "corenode_outputcomposite")
