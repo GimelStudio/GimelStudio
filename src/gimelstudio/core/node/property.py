@@ -16,17 +16,13 @@
 
 import os
 import wx
+import gswidgetkit.foldpanelbar as fpbar
 from gswidgetkit import (NumberField, EVT_NUMBERFIELD,
                          Button, EVT_BUTTON, TextCtrl,
                          DropDown, EVT_DROPDOWN)
 
 from gimelstudio.constants import PROP_BG_COLOR, SUPPORTED_FT_OPEN_LIST
 from gimelstudio.datafiles import ICON_ARROW_DOWN, ICON_ARROW_RIGHT
-
-
-# Enum-like constants for widgets
-SLIDER_WIDGET = "slider"
-SPINBOX_WIDGET = "spinbox"
 
 
 class Property(object):
@@ -38,6 +34,7 @@ class Property(object):
         self.value = default
         self.label = label
         self.visible = visible
+        self.expanded = True
         self.widget_eventhook = None
 
     def _RunErrorCheck(self):
@@ -93,7 +90,17 @@ class Property(object):
             lbl = self.GetLabel()
         else:
             lbl = label
-        return panel_bar.AddFoldPanel(lbl, foldIcons=images)
+
+        self.fpb = panel_bar.AddFoldPanel(lbl, foldIcons=images)
+        self.fpb.SetBackgroundColour(wx.Colour(PROP_BG_COLOR))
+        self.fpb.Bind(fpbar.EVT_CAPTIONBAR, self.OnToggleFoldPanelExpand)
+
+        if self.expanded == True:
+            self.fpb.Expand()
+        else:
+            self.fpb.Collapse()
+        
+        return self.fpb
 
     def AddToFoldPanel(self, panel_bar, fold_panel, item, spacing=15):
         # From https://discuss.wxpython.org/t/how-do-you-get-the-
@@ -105,6 +112,15 @@ class Property(object):
         item = wx.StaticText(fold_panel, size=(-1, 14))
         panel_bar.AddFoldPanelWindow(fold_panel, item, spacing=0)
 
+    def OnToggleFoldPanelExpand(self, event):
+        # Because the event gives us the last state, we flip the values 
+        # to be the opposite of what it gives us.
+        if event.GetFoldStatus():
+            self.expanded = False
+        else:
+            self.expanded = True
+        event.Skip()
+
 
 class ThumbProp(Property):
     """ 
@@ -113,14 +129,13 @@ class ThumbProp(Property):
     def __init__(self, idname, default=None, label="", thumb_img=None, visible=True):
         Property.__init__(self, idname, default, label, visible)
         self.thumb_img = thumb_img
+        self.expanded = False
 
     def GetThumbImage(self):
         return self.thumb_img
 
     def CreateUI(self, parent, sizer):
         fold_panel = self.CreateFoldPanel(sizer)
-        fold_panel.SetBackgroundColour(wx.Colour(PROP_BG_COLOR))
-        fold_panel.Collapse()
 
         self.img = wx.StaticBitmap(fold_panel, bitmap=self.GetThumbImage(), size=(200, 200))
 
@@ -162,7 +177,6 @@ class PositiveIntegerProp(Property):
 
     def CreateUI(self, parent, sizer):
         fold_panel = self.CreateFoldPanel(sizer)
-        fold_panel.SetBackgroundColour(wx.Colour(PROP_BG_COLOR))
 
         self.numberfield = NumberField(fold_panel,
                                        default_value=self.GetValue(),
@@ -196,7 +210,6 @@ class ChoiceProp(Property):
 
     def CreateUI(self, parent, sizer):
         fold_panel = self.CreateFoldPanel(sizer)
-        fold_panel.SetBackgroundColour(wx.Colour(PROP_BG_COLOR))
 
         self.dropdown = DropDown(fold_panel, default=self.GetValue(),
                                  items=self.GetChoices(), size=(-1, 32))
@@ -241,7 +254,6 @@ class OpenFileChooserProp(Property):
 
     def CreateUI(self, parent, sizer):
         fold_panel = self.CreateFoldPanel(sizer)
-        fold_panel.SetBackgroundColour(wx.Colour(PROP_BG_COLOR))
 
         pnl = wx.Panel(fold_panel)
         pnl.SetBackgroundColour(wx.Colour(PROP_BG_COLOR))
@@ -299,7 +311,6 @@ class XYZProp(Property):
 
     def CreateUI(self, parent, sizer):
         fold_panel = self.CreateFoldPanel(sizer)
-        fold_panel.SetBackgroundColour(wx.Colour(PROP_BG_COLOR))
 
         pnl = wx.Panel(fold_panel)
         pnl.SetBackgroundColour(wx.Colour(PROP_BG_COLOR))
@@ -373,7 +384,6 @@ class ActionProp(Property):
 
     def CreateUI(self, parent, sizer):
         fold_panel = self.CreateFoldPanel(sizer, self.label)
-        fold_panel.SetBackgroundColour(wx.Colour(PROP_BG_COLOR))
 
         self.button = Button(fold_panel, label=_(self.btn_label), flat=self.flat, size=(-1, 30))
         self.AddToFoldPanel(sizer, fold_panel, self.button)

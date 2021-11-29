@@ -32,6 +32,8 @@ class NodePropertiesPanel(PanelBase):
     def __init__(self, parent, idname, menu_item, *args, **kwargs):
         PanelBase.__init__(self, parent, idname, menu_item)
 
+        self.thumb_pnl_expanded = False
+
         self.SetBackgroundColour(AREA_BG_COLOR)
 
         self.BuildUI()
@@ -152,3 +154,4 @@ class NodePropertiesPanel(PanelBase):
         prop = ThumbProp(idname="Thumbnail", default=None, label="Node Thumbnail",
                          thumb_img=node._thumbnail)
         prop.CreateUI(panel, panel_bar)
+        
