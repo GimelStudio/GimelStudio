@@ -20,7 +20,7 @@ from wx.lib.newevent import NewCommandEvent
 from gswidgetkit import (Button, EVT_BUTTON, NumberField, ZoomPanel,
                          EVT_NUMBERFIELD_CHANGE)
 
-from gimelstudio.constants import (AREA_BG_COLOR, AREA_TOPBAR_COLOR, PROP_BG_COLOR)
+from gimelstudio.constants import (AREA_BG_COLOR, AREA_TOPBAR_COLOR)
 from gimelstudio.datafiles import (ICON_IMAGEVIEWPORT_PANEL, ICON_MORE_MENU_SMALL,
                                    ICON_MOUSE_MMB, ICON_MOUSE_MMB_MOVEMENT,
                                    ICON_BRUSH_CHECKERBOARD)

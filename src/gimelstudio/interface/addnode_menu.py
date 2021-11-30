@@ -14,11 +14,9 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-import copy
 import wx
 import wx.adv
 import wx.stc
-from gswidgetkit import TextCtrl
 
 import gimelstudio.constants as const
 

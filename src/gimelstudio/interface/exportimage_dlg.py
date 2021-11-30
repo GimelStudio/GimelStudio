@@ -16,9 +16,8 @@
 
 import os
 import wx
-import wx.stc as stc
 from gswidgetkit import (Button, EVT_BUTTON, NumberField, EVT_NUMBERFIELD,
-                         TextCtrl, Label, DropDown, EVT_DROPDOWN)
+                         Label, DropDown, EVT_DROPDOWN)
 
 import gimelstudio.constants as const
 
