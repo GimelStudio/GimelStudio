@@ -45,6 +45,16 @@ class Node(NodeView):
         """
         self.NodeWidgetEventHook(idname, value)
         self.SetEditedFlag(True)
+
+        # All nodes except input and output can be muted.
+        # Nodes with multiple inputs should pass input of first one.
+        # Is checked when property changes, shouldn't be here.
+        if self.IsMuted():
+            self.SetPropMute(True)
+            return  # Return input image, how ? self.nodegraph.parent.parent.Render() is I guess output of current node.
+        else:
+            self.SetPropMute(False)
+
         if render == True:
             self.nodegraph.parent.parent.Render()
 
@@ -84,6 +94,10 @@ class Node(NodeView):
 
     def IsNodeCacheEnabled(self):
         return self._cache_enabled
+
+    def SetPropMute(self, is_muted):
+        for prop in self._properties:   # Could be done differently maybe ?
+            self._properties[prop].SetMute(is_muted)
 
     def AddProperty(self, prop):
         self._properties[prop.IdName] = prop

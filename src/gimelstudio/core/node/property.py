@@ -29,13 +29,14 @@ class Property(object):
     """
     The base node Property class.
     """
-    def __init__(self, idname, default, label, visible=True):
+    def __init__(self, idname, default, label, visible=True, mute=True):
         self.idname = idname
         self.value = default
         self.label = label
         self.visible = visible
         self.expanded = True
         self.widget_eventhook = None
+        self.mute = mute     # Idk if this is really need when I can call IsMuted() on node.
 
     def _RunErrorCheck(self):
         """ 
@@ -74,6 +75,12 @@ class Property(object):
 
     def SetIsVisible(self, is_visible):
         self.visible = is_visible
+
+    def GetMute(self):
+        return self.mute
+
+    def SetMute(self, is_mute):
+        self.mute = is_mute
 
     def SetWidgetEventHook(self, event_hook):
         self.widget_eventhook = event_hook
