@@ -14,8 +14,6 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-import os
-
 from gimelstudio import api, constants
 
 

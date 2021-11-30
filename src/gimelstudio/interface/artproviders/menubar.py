@@ -18,7 +18,7 @@
 
 import wx
 import wx.lib.agw.flatmenu as flatmenu
-from wx.lib.agw.artmanager import ArtManager, RendererBase, DCSaver
+from wx.lib.agw.artmanager import ArtManager, DCSaver
 from wx.lib.agw.fmresources import ControlFocus, ControlPressed
 
 from gimelstudio.constants import ACCENT_COLOR, DARK_COLOR
