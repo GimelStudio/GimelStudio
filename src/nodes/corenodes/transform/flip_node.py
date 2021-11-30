@@ -30,7 +30,7 @@ class FlipNode(api.Node):
     @property
     def NodeMeta(self):
         meta_info = {
-            "label": "Flip",
+            "fpb_label": "Flip",
             "author": "Gimel Studio",
             "version": (0, 5, 0),
             "category": "TRANSFORM",
@@ -43,7 +43,7 @@ class FlipNode(api.Node):
             idname="direction",
             default="Vertically",
             choices=["Vertically", "Horizontally", "Diagonally"],
-            label="Orientation"
+            fpb_label="Orientation"
         )
         self.NodeAddProp(self.direction)
 

@@ -27,7 +27,7 @@ class ImageNode(api.Node):
     @property
     def NodeMeta(self):
         meta_info = {
-            "label": "Image",
+            "fpb_label": "Image",
             "author": "Gimel Studio",
             "version": (3, 0, 5),
             "category": "INPUT",
@@ -55,7 +55,7 @@ class ImageNode(api.Node):
             dlg_msg="Choose image...",
             wildcard=wildcard,
             btn_lbl="Choose...",
-            label="Image Path"
+            fpb_label="Image Path"
         )
 
         self.NodeAddProp(self.fp_prop)

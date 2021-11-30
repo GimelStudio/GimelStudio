@@ -26,7 +26,7 @@ class BlurNode(api.Node):
     @property
     def NodeMeta(self):
         meta_info = {
-            "label": "Blur",
+            "fpb_label": "Blur",
             "author": "Gimel Studio",
             "version": (2, 5, 0),
             "category": "FILTER",
@@ -39,21 +39,21 @@ class BlurNode(api.Node):
             idname="filter_type",
             default="Box",
             choices=["Box", "Gaussian"],
-            label="Filter Type"
+            fpb_label="Filter Type"
         )
         self.kernel_x = api.PositiveIntegerProp(
             idname="kernel_x",
             default=5,
             min_val=1,
             max_val=500,
-            label="Kernel X",
+            fpb_label="Kernel X",
         )
         self.kernel_y = api.PositiveIntegerProp(
             idname="kernel_y",
             default=5,
             min_val=1,
             max_val=500,
-            label="Kernel Y",
+            fpb_label="Kernel Y",
         )
         self.NodeAddProp(self.filter_type)
         self.NodeAddProp(self.kernel_x)

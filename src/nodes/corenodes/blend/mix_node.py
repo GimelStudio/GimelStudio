@@ -30,7 +30,7 @@ class MixNode(api.Node):
     @property
     def NodeMeta(self):
         meta_info = {
-            "label": "Mix",
+            "fpb_label": "Mix",
             "author": "Gimel Studio",
             "version": (1, 8, 6),
             "category": "BLEND",
@@ -42,7 +42,7 @@ class MixNode(api.Node):
         p = api.ChoiceProp(
             idname="blend_mode",
             default="Multiply",
-            label="Blend Mode",
+            fpb_label="Blend Mode",
             choices=[
                     "Add",
                     "Subtract",
