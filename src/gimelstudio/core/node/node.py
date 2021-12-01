@@ -18,7 +18,6 @@ import os.path
 import wx
 from gsnodegraph import NodeBase as NodeView
 
-
 import gimelstudio.constants as const
 from gimelstudio.utils import ResizeKeepAspectRatio, ConvertImageToWx
 from gimelstudio.core import EvalInfo
@@ -46,7 +45,6 @@ class Node(NodeView):
         """
         self.NodeWidgetEventHook(idname, value)
         self.SetEditedFlag(True)
-
         if render == True:
             self.nodegraph.parent.parent.Render()
 
@@ -87,10 +85,6 @@ class Node(NodeView):
     def IsNodeCacheEnabled(self):
         return self._cache_enabled
 
-    # def SetPropMute(self, is_muted):
-    #     for prop in self._properties:   # Could be done differently maybe ?
-    #         self._properties[prop].SetMute(is_muted)
-
     def AddProperty(self, prop):
         self._properties[prop.IdName] = prop
         return self._properties
@@ -103,10 +97,6 @@ class Node(NodeView):
         prop = self._properties[idname]
         prop.SetValue(value, render)
         return prop
-
-    def SetMuteParameter(self, mute):
-        for parameter in self._parameters:
-            self._parameters[parameter].SetMute(mute)
 
     def EditParameter(self, idname, value):
         param = self._parameters[idname]
