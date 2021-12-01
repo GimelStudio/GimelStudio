@@ -64,6 +64,15 @@ class BlurNode(api.Node):
 
         self.NodeAddParam(image)
 
+    def MutedNodeEvaluation(self, eval_info):
+        image1 = self.EvalParameter(eval_info, "image")
+        render_image = api.RenderImage()
+        img = image1.Image("numpy")
+        render_image.SetAsImage(img)
+        self.NodeUpdateThumb(render_image)
+        return render_image
+
+
     def NodeEvaluation(self, eval_info):
         kernel_x = self.EvalProperty(eval_info, "kernel_x")
         kernel_y = self.EvalProperty(eval_info, "kernel_y")

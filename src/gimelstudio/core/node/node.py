@@ -18,6 +18,7 @@ import os.path
 import wx
 from gsnodegraph import NodeBase as NodeView
 
+
 import gimelstudio.constants as const
 from gimelstudio.utils import ResizeKeepAspectRatio, ConvertImageToWx
 from gimelstudio.core import EvalInfo
@@ -45,15 +46,6 @@ class Node(NodeView):
         """
         self.NodeWidgetEventHook(idname, value)
         self.SetEditedFlag(True)
-
-        # All nodes except input and output can be muted.
-        # Nodes with multiple inputs should pass input of first one.
-        # Is checked when property changes, shouldn't be here.
-        if self.IsMuted():
-            self.SetPropMute(True)
-            return  # Return input image, how ? self.nodegraph.parent.parent.Render() is I guess output of current node.
-        else:
-            self.SetPropMute(False)
 
         if render == True:
             self.nodegraph.parent.parent.Render()
@@ -95,9 +87,9 @@ class Node(NodeView):
     def IsNodeCacheEnabled(self):
         return self._cache_enabled
 
-    def SetPropMute(self, is_muted):
-        for prop in self._properties:   # Could be done differently maybe ?
-            self._properties[prop].SetMute(is_muted)
+    # def SetPropMute(self, is_muted):
+    #     for prop in self._properties:   # Could be done differently maybe ?
+    #         self._properties[prop].SetMute(is_muted)
 
     def AddProperty(self, prop):
         self._properties[prop.IdName] = prop
@@ -111,6 +103,10 @@ class Node(NodeView):
         prop = self._properties[idname]
         prop.SetValue(value, render)
         return prop
+
+    def SetMuteParameter(self, mute):
+        for parameter in self._parameters:
+            self._parameters[parameter].SetMute(mute)
 
     def EditParameter(self, idname, value):
         param = self._parameters[idname]
@@ -245,6 +241,8 @@ class Node(NodeView):
     @property
     def EvaluateNode(self):
         """ Internal method. Please do not override. """
+        if self.IsMuted():
+            return self.MutedNodeEvaluation
         return self.NodeEvaluation
 
     def RenderGLSL(self, path, props, image, image2=None):
