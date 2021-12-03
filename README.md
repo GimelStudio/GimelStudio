@@ -8,7 +8,7 @@
   <a href="https://gimelstudio.github.io">Official Website</a> | <a href="https://discord.gg/RqwbDrVDpK">Join Our Discord Server</a> | <a href="https://gimelstudio.readthedocs.io/en/latest/">Official Manual</a>
 </p>
 
-!["Gimel Studio Banner"](/assets/banner/banner.png "Gimel Studio")
+!["Gimel Studio Banner"](/assets/banner/banner.jpeg "Gimel Studio")
 
 
 # About the Next Generation of Gimel Studio
