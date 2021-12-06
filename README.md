@@ -8,7 +8,7 @@
   <a href="https://gimelstudio.github.io">Official Website</a> | <a href="https://discord.gg/RqwbDrVDpK">Join Our Discord Server</a> | <a href="https://gimelstudio.readthedocs.io/en/latest/">Official Manual</a>
 </p>
 
-!["Gimel Studio Banner"](/assets/banner/banner.jpg "Gimel Studio")
+!["Gimel Studio Banner"](/assets/banner/banner.jpeg "Gimel Studio")
 
 
 # About the Next Generation of Gimel Studio
@@ -55,12 +55,12 @@ If you prefer to keep to Github instead, feel free to start a discussion [here](
 
 # Status
 
-We are working towards an MVP which will showcase much of the core goals and features listed on the website.
+We are working towards an MVP which will showcase much of the core goals and features listed on the website. There are [pre-releases](https://github.com/GimelStudio/GimelStudio/releases) available for those wanting to test the current functionality.
 
 The initial UI is now mostly laid out according to the WIP UI mockup, the core nodegraph rendering is functional (it “just works” at the moment) and there are some other nice additions and features. There is much more to do… and we could really use help to speed progress along. ;)
 
 ![gs-wip-demo](https://user-images.githubusercontent.com/60711001/143295882-28277739-34ad-49c1-857e-3f31db0ff7d6.gif)
-*The current status of the next generation of Gimel Studio as of 11/24/2021*
+*The status of the next generation of Gimel Studio as of 11/24/2021*
 
 Take a look at the [GitHub Issues](https://github.com/GimelStudio/GimelStudio/issues) for details on immediate and future tasks to be done. Issues labeled “Good first issue” will be the best for new contributors. A familiarity with Python helps, but we are willing to mentor any contributors as needed.
 
@@ -73,26 +73,21 @@ Take a look at the [GitHub Issues](https://github.com/GimelStudio/GimelStudio/is
 
 ## Windows
 
-1. ``pip install -r requirements.txt``
-2. Get the OIIO (OpenImageIO) pre-built python wheel (Windows only) [here](https://www.lfd.uci.edu/~gohlke/pythonlibs/#openimageio) and install it.
-3. ``cd src``
-4. ``python main.py``
+1. Make sure you have Python 3.8 or 3.9 installed on your system.
+2. Run ``pip install -r requirements.txt``
+3. Get the OIIO (OpenImageIO) pre-built python wheel (Windows only) [here](https://www.lfd.uci.edu/~gohlke/pythonlibs/#openimageio) and install it with ``pip install <the_path_to_the_whl_here>``.
+4. Run ``cd src`` then ``python main.py`` to navigate to the src directory and run Gimel Studio.
+5. To build an executable, make sure you are in the root directory and run ``python build.py``. The executable will be generated in the ``dist`` folder.
 
 ## Linux
 
-1. ``pip3 install -r requirements.txt``
-2. If building wxPython fails, Download the wheel file for wxpython which matches your Python version and Linux OS version from https://extras.wxpython.org/wxPython4/extras/linux/ and install the wxpython package with ``pip3 install <pathtothewheelfilehere>``
-3. ``cd src``
-4. ``python3 main.py``
-
-Please note that the renderer, which relies on OIIO (OpenImageIO) will **not work if OIIO is not found**. The rest of the application will run, but the renderer will not work. This essentially means that we do not have Linux support yet (please check back later or help us to get it working for linux).
-
-OIIO will need to be [built from source](https://github.com/OpenImageIO/oiio/blob/master/INSTALL.md#building-from-source) since pre-built wheels are not yet available. See [this issue](https://github.com/GimelStudio/GimelStudio/issues/1).
+1. Make sure you have Python 3.9 installed on your system.
+2. Navigate to the root folder and in your terminal, run ``python3 build.py``. This will begin a process to install all of the neccesary libraries and will give you the option to create a standalone executable or just run the code with Python.
 
 ## macOS
 
-1. Make sure you have Python 3.8+ installed on your system.
-2. Navigate to the root folder and in your terminal, run ```python3 build.py```. This will install all of the neccesary libraries and will give you the option to create a standalone executable or just run the code with Python.
+1. Make sure you have Python 3.8 or 3.9 installed on your system.
+2. Navigate to the root folder and in your terminal, run ``python3 build.py``. This will install all of the neccesary libraries and will give you the option to create a standalone executable or just run the code with Python.
 
 
 # Tech we're using
