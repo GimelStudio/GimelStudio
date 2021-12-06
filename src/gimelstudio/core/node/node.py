@@ -20,7 +20,7 @@ from gsnodegraph import NodeBase as NodeView
 
 import gimelstudio.constants as const
 from gimelstudio.utils import ResizeKeepAspectRatio, ConvertImageToWx
-from gimelstudio.core import EvalInfo
+from gimelstudio.core import EvalInfo, RenderImage
 
 
 class Node(NodeView):
@@ -231,7 +231,19 @@ class Node(NodeView):
     @property
     def EvaluateNode(self):
         """ Internal method. Please do not override. """
+        if self.IsMuted():
+            return self.MutedNodeEvaluation
         return self.NodeEvaluation
+
+    def EvalMutedNode(self, eval_info):
+        try:
+            image = self.EvalParameter(eval_info, "image").Image("numpy")
+        except:
+            image = self.EvalParameter(eval_info, "image 1").Image("numpy")
+        render_image = RenderImage()
+        render_image.SetAsImage(image)
+        self.NodeUpdateThumb(render_image)
+        return render_image
 
     def RenderGLSL(self, path, props, image, image2=None):
         file_path = os.path.expanduser(os.path.expandvars(path))

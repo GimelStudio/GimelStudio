@@ -56,6 +56,9 @@ class RotateNode(api.Node):
 
         self.NodeAddParam(image)
 
+    def MutedNodeEvaluation(self, eval_info):
+        return self.EvalMutedNode(eval_info)
+
     def NodeEvaluation(self, eval_info):
         rotation = self.EvalProperty(eval_info, "rotation")
         image1 = self.EvalParameter(eval_info, "image")
