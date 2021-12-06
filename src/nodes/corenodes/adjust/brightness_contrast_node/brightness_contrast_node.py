@@ -57,6 +57,9 @@ class BrightnessContrastNode(api.Node):
         image = api.RenderImageParam("image", "Image")
         self.NodeAddParam(image)
 
+    def MutedNodeEvaluation(self, eval_info):
+        return self.EvalMutedNode(eval_info)
+
     def NodeEvaluation(self, eval_info):
         image1 = self.EvalParameter(eval_info, "image")
         brightness_value = self.EvalProperty(eval_info, "brightness_value")

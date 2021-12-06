@@ -60,6 +60,9 @@ class MixNode(api.Node):
         self.NodeAddParam(p1)
         self.NodeAddParam(p2)
 
+    def MutedNodeEvaluation(self, eval_info):
+        return self.EvalMutedNode(eval_info)
+
     def NodeEvaluation(self, eval_info):
         image = self.EvalParameter(eval_info, "image")
         overlay = self.EvalParameter(eval_info, "overlay")

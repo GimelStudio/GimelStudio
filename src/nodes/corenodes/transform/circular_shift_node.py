@@ -56,6 +56,9 @@ class CircularShiftNode(api.Node):
 
         self.NodeAddParam(image)
 
+    def MutedNodeEvaluation(self, eval_info):
+        return self.EvalMutedNode(eval_info)
+
     def NodeEvaluation(self, eval_info):
         shifting = self.EvalProperty(eval_info, "shift")
         image1 = self.EvalParameter(eval_info, "image")

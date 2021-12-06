@@ -52,6 +52,9 @@ class AlphaOverNode(api.Node):
         self.NodeAddParam(image2)
         self.NodeAddParam(integer)
 
+    def MutedNodeEvaluation(self, eval_info):
+        return self.EvalMutedNode(eval_info)
+
     def NodeEvaluation(self, eval_info):
         image1 = self.EvalParameter(eval_info, "image 1")
         image2 = self.EvalParameter(eval_info, "image 2")

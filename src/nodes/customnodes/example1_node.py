@@ -48,6 +48,9 @@ class Example1Node(api.Node):
 
         self.NodeAddParam(image)
 
+    def MutedNodeEvaluation(self, eval_info):
+        return self.EvalMutedNode(eval_info)
+
     def NodeEvaluation(self, eval_info):
         flip_direction = self.EvalProperty(eval_info, "direction")
         image1 = self.EvalParameter(eval_info, "image")
