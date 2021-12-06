@@ -250,7 +250,6 @@ def LINUX():
             inst = f'{source}'
             inst += f' {pyBin}'
             inst += f' $(which pyinstaller)'
-            # inst += f' --additional-hooks-dir {sitePackages}/site-packages'
             inst += ' --hidden-import glcontext'
             inst += ' --hidden-import distutils'
             inst += ' --hidden-import openimageio'
