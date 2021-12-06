@@ -27,7 +27,7 @@ class ImageNode(api.Node):
     @property
     def NodeMeta(self):
         meta_info = {
-            "fpb_label": "Image",
+            "label": "Image",
             "author": "Gimel Studio",
             "version": (3, 0, 5),
             "category": "INPUT",

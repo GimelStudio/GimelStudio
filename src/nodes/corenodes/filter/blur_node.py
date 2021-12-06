@@ -26,7 +26,7 @@ class BlurNode(api.Node):
     @property
     def NodeMeta(self):
         meta_info = {
-            "fpb_label": "Blur",
+            "label": "Blur",
             "author": "Gimel Studio",
             "version": (2, 5, 0),
             "category": "FILTER",

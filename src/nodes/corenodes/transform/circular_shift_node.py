@@ -30,7 +30,7 @@ class CircularShiftNode(api.Node):
     @property
     def NodeMeta(self):
         meta_info = {
-            "fpb_label": "Circular Shift",
+            "label": "Circular Shift",
             "author": "Gimel Studio",
             "version": (0, 5, 0),
             "category": "TRANSFORM",

@@ -25,7 +25,7 @@ class AlphaOverNode(api.Node):
     @property
     def NodeMeta(self):
         meta_info = {
-            "fpb_label": "Alpha Over",
+            "label": "Alpha Over",
             "author": "Gimel Studio",
             "version": (0, 0, 1),
             "category": "BLEND",

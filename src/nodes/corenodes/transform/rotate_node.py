@@ -31,7 +31,7 @@ class RotateNode(api.Node):
     @property
     def NodeMeta(self):
         meta_info = {
-            "fpb_label": "Rotate",
+            "label": "Rotate",
             "author": "Gimel Studio",
             "version": (0, 5, 0),
             "category": "TRANSFORM",

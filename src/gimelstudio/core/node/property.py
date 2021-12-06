@@ -66,8 +66,8 @@ class Property(object):
     def GetLabel(self):
         return self.fpb_label
 
-    def SetLabel(self, fpb_label):
-        self.fpb_label = fpb_label
+    def SetLabel(self, label):
+        self.fpb_label = label
 
     def GetIsVisible(self):
         return self.visible
@@ -81,7 +81,7 @@ class Property(object):
     def WidgetEventHook(self, idname, value, render):
         self.widget_eventhook(idname, value, render)
 
-    def CreateFoldPanel(self, panel_bar, fpb_label=None):
+    def CreateFoldPanel(self, panel_bar, label=None):
         images = wx.ImageList(24, 24)
         images.Add(ICON_ARROW_DOWN.GetBitmap())
         images.Add(ICON_ARROW_RIGHT.GetBitmap())
@@ -264,7 +264,7 @@ class OpenFileChooserProp(Property):
         self.textcontrol = TextCtrl(pnl, default=self.GetValue(), size=(-1, 32))
         hbox.Add(self.textcontrol, proportion=1, flag=wx.EXPAND | wx.BOTH)
 
-        self.button = Button(pnl, fpb_label=self.GetBtnLabel(), size=(-1, 32))
+        self.button = Button(pnl, label=self.GetBtnLabel(), size=(-1, 32))
         hbox.Add(self.button, flag=wx.LEFT, border=5)
         self.button.Bind(EVT_BUTTON, self.WidgetEvent)
 
@@ -385,7 +385,7 @@ class ActionProp(Property):
     def CreateUI(self, parent, sizer):
         fold_panel = self.CreateFoldPanel(sizer, self.fpb_label)
 
-        self.button = Button(fold_panel, fpb_label=_(self.btn_label), flat=self.flat, size=(-1, 30))
+        self.button = Button(fold_panel, label=_(self.btn_label), flat=self.flat, size=(-1, 30))
         self.AddToFoldPanel(sizer, fold_panel, self.button)
         self.button.Bind(EVT_BUTTON, self.action)
 

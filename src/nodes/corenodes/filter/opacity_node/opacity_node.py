@@ -25,7 +25,7 @@ class OpacityNode(api.Node):
     @property
     def NodeMeta(self):
         meta_info = {
-            "fpb_label": "Opacity",
+            "label": "Opacity",
             "author": "Gimel Studio",
             "version": (0, 0, 1),
             "category": "FILTER",

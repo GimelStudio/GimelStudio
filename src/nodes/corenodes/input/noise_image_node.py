@@ -30,7 +30,7 @@ class NoiseImageNode(api.Node):
     @property
     def NodeMeta(self):
         meta_info = {
-            "fpb_label": "Noise",
+            "label": "Noise",
             "author": "Gimel Studio",
             "version": (0, 0, 5),
             "category": "INPUT",

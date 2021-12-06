@@ -30,7 +30,7 @@ class MixNode(api.Node):
     @property
     def NodeMeta(self):
         meta_info = {
-            "fpb_label": "Mix",
+            "label": "Mix",
             "author": "Gimel Studio",
             "version": (1, 8, 6),
             "category": "BLEND",

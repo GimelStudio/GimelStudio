@@ -26,7 +26,7 @@ class Example1Node(api.Node):
     @property
     def NodeMeta(self):
         meta_info = {
-            "fpb_label": "Example Node 1",
+            "label": "Example Node 1",
             "author": "Gimel Studio",
             "version": (0, 5, 0),
             "category": "TRANSFORM",
