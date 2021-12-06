@@ -180,7 +180,7 @@ class PositiveIntegerProp(Property):
 
         self.numberfield = NumberField(fold_panel,
                                        default_value=self.GetValue(),
-                                       fpb_label=self.GetLabel(),
+                                       label=self.GetLabel(),
                                        min_value=self.GetMinValue(),
                                        max_value=self.GetMaxValue(),
                                        suffix=self.lbl_suffix, show_p=self.GetP(),
@@ -319,7 +319,7 @@ class XYZProp(Property):
 
         self.numberfield_x = NumberField(pnl,
                                          default_value=self.value[0],
-                                         fpb_label=self.fpb_labels[0],
+                                         label=self.fpb_labels[0],
                                          min_value=self.min_values[0],
                                          max_value=self.max_values[0],
                                          suffix=self.lbl_suffix, 
@@ -329,7 +329,7 @@ class XYZProp(Property):
 
         self.numberfield_y = NumberField(pnl,
                                          default_value=self.value[1],
-                                         fpb_label=self.fpb_labels[1],
+                                         label=self.fpb_labels[1],
                                          min_value=self.min_values[1],
                                          max_value=self.max_values[1],
                                          suffix=self.lbl_suffix, 
@@ -340,7 +340,7 @@ class XYZProp(Property):
         if self.enable_z:
             self.numberfield_z = NumberField(pnl,
                                              default_value=self.value[2],
-                                             fpb_label=self.fpb_labels[2],
+                                             label=self.fpb_labels[2],
                                              min_value=self.min_values[2],
                                              max_value=self.max_values[2],
                                              suffix=self.lbl_suffix, 

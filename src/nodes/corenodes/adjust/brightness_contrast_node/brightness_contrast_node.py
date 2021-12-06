@@ -40,7 +40,7 @@ class BrightnessContrastNode(api.Node):
             min_val=0,
             max_val=200,
             show_p=True,
-            label="Brightness"
+            fpb_label="Brightness"
         )
         self.contrast = api.PositiveIntegerProp(
             idname="contrast_value",
@@ -48,7 +48,7 @@ class BrightnessContrastNode(api.Node):
             min_val=0,
             max_val=200,
             show_p=True,
-            label="Contrast"
+            fpb_label="Contrast"
         )
         self.NodeAddProp(self.brightness)
         self.NodeAddProp(self.contrast)

@@ -151,7 +151,7 @@ class NodePropertiesPanel(PanelBase):
 
     def CreateThumbPanel(self, node, panel, panel_bar):
         # Create the default Thumbnail panel
-        prop = ThumbProp(idname="Thumbnail", default=None, label="Node Thumbnail",
+        prop = ThumbProp(idname="Thumbnail", default=None, fpb_label="Node Thumbnail",
                          thumb_img=node._thumbnail)
         prop.CreateUI(panel, panel_bar)
         

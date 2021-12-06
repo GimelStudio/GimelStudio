@@ -55,17 +55,17 @@ class CheckeredImageNode(api.Node):
             default=46,
             min_val=0,
             max_val=100,
-            label="Checker Size"
+            fpb_label="Checker Size"
         )
         self.offset = api.XYZProp(
             idname="offset", 
             default=(0, 0, 0), 
-            labels=("X", "Y", "Z"),
+            fpb_labels=("X", "Y", "Z"),
             min_vals=(0, 0, 0), 
             max_vals=(200, 200, 200),
             show_p=False, 
             enable_z=True,
-            label="Offset"
+            fpb_label="Offset"
         )
 
         self.NodeAddProp(self.checker_size)
