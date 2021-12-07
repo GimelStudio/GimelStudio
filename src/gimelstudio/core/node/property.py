@@ -81,7 +81,7 @@ class Property(object):
     def WidgetEventHook(self, idname, value, render):
         self.widget_eventhook(idname, value, render)
 
-    def CreateFoldPanel(self, panel_bar, label=None):
+    def CreateFoldPanel(self, panel_bar, fpb_label=None):
         images = wx.ImageList(24, 24)
         images.Add(ICON_ARROW_DOWN.GetBitmap())
         images.Add(ICON_ARROW_RIGHT.GetBitmap())
