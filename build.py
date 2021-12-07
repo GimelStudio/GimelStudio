@@ -127,10 +127,10 @@ def LINUX():
         terminalInstruction = prefix + inst
         _exec = f'/bin/bash -c \'{terminalInstruction}\''
         if env is not None:
-            proc_result = subprocess.check_output(_exec, shell=True, env=env)
+            procResult = subprocess.check_output(_exec, shell=True, env=env)
         else:
-            proc_result = subprocess.check_output(_exec, shell=True)
-        return proc_result.decode("utf-8").strip()
+            procResult = subprocess.check_output(_exec, shell=True)
+        return procResult.decode("utf-8").strip()
 
     # -- Checks if a path exists, if not, it runs ----
     # -- the given instruction in the given destPath -
@@ -166,8 +166,8 @@ def LINUX():
                         print(installText)
 
                         # -- Install Homebrew ------------
-                        homebrew_install = '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
-                        subprocess.run(homebrew_install, shell=True)
+                        homebrewInstall = '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+                        subprocess.run(homebrewInstall, shell=True)
                         print('Brew install complete. Installing needed dependencies')
                         return True
                     else:
@@ -177,7 +177,7 @@ def LINUX():
 
     # -- Setup Environment ---------------------------
     def VirtualEnvSetup():
-        venv_path = f'{py39} -m venv env --system-site-packages'
+        venvPath = f'{py39} -m venv env --system-site-packages'
         getIOPath = 'brew list openimageio | xargs -n1 | grep site-packages'
 
         # -- Check if venv is installed --------------
@@ -187,27 +187,27 @@ def LINUX():
 
         # -- Create virtual build environment --------
         sys.path.append('/usr/lib/python3/dist-packages')
-        oiio_path = ExecuteTerminalInstruction(getIOPath, f'{shellEnv} && ')
+        oiioPath = ExecuteTerminalInstruction(getIOPath, f'{shellEnv} && ')
 
         # --  Locate OpenImageIO path ----------------
-        if 'OpenImageIO.cpython' in oiio_path:
-            oiio_package = os.path.dirname(oiio_path)
-            sys.path.append(oiio_package)
+        if 'OpenImageIO.cpython' in oiioPath:
+            oiioPackage = os.path.dirname(oiioPath)
+            sys.path.append(oiioPackage)
 
             # -- Confirm we have the right version ---
-            py_version = os.path.basename(os.path.dirname(oiio_package))
-            if "3.9" not in py_version:
+            oiioPyVer = os.path.basename(os.path.dirname(oiioPackage))
+            if "3.9" not in oiioPyVer:
                 print("Could not detect OpenImageIO's Python version.")
                 sys.exit()
 
-            packages = os.path.join(envPath, py_version)
+            packages = os.path.join(envPath, oiioPyVer)
             if not os.path.exists(packages):
-                subprocess.run(venv_path, shell=True)
+                subprocess.run(venvPath, shell=True)
             else: 
-                subprocess.run(f'{venv_path} --clear', shell=True)
+                subprocess.run(f'{venvPath} --clear', shell=True)
 
             # -- Enable locating of OpenImageIO ------
-            subprocess.check_call(f'echo "{oiio_package}" > {packages}/site-packages/openimageio.pth', shell=True)
+            subprocess.check_call(f'echo "{oiioPackage}" > {packages}/site-packages/openimageio.pth', shell=True)
 
             # -- Enable env and install requirements -
             ExecuteTerminalInstruction(f'python3 -m pip install -r requirements.txt', source)
@@ -274,12 +274,12 @@ def LINUX():
             sys.exit()
 
     # -- Selected program exit -----------------------
-    def noThreeDotNine():
+    def NoThreeDotNine():
         print("Please run the build process again once you are using Python 3.9.x")
         sys.exit()
 
     # -- Obtain the current python version -----------
-    def getPythonVersion():
+    def GetPythonVersion():
         ver = sys.version_info[:2]
         return f'{ver[0]}.{ver[1]}'
 
@@ -296,16 +296,16 @@ def LINUX():
     # /////////////////////////////////////////////////////////////// 
     # -- Initiate Requirement Verification --------------------------
     # ///////////////////////////////////////////////////////////////
-    py_version = getPythonVersion()
-    has_brew = False
+    pyVersion = GetPythonVersion()
+    hasBrew = False
 
     # -- Check for appropriate Python version --------
-    if "3.9" not in py_version:
-        print(f'OpenImageIO requires python version 3.9.x. Your current version is: {py_version}')
+    if "3.9" not in pyVersion:
+        print(f'OpenImageIO requires python version 3.9.x. Your current version is: {pyVersion}')
         pyenvResult = ExecuteTerminalInstruction(pyenvCheck)
 
         if "false" in pyenvResult:
-            noThreeDotNine()
+            NoThreeDotNine()
         else:
             envLatest = ExecuteTerminalInstruction(pyenvVerCheck)
             latestRelease = ExecuteTerminalInstruction(pyenvRelease)
@@ -317,9 +317,9 @@ def LINUX():
                 sys.exit()           
 
     # -- Check for Homebrew dependencies -------------
-    has_brew = BrewInstallCheck()
+    hasBrew = BrewInstallCheck()
 
-    if has_brew:
+    if hasBrew:
         tmpEnv = InstallDeps(tmpEnv)
         sitePackages = VirtualEnvSetup()
 
