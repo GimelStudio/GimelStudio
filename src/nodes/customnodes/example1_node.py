@@ -39,7 +39,7 @@ class Example1Node(api.Node):
             idname="direction",
             default="Vertically",
             choices=["Vertically", "Horizontally"],
-            label="Flip Direction"
+            fpb_label="Flip Direction"
         )
         self.NodeAddProp(self.direction)
 

@@ -42,12 +42,12 @@ class CircularShiftNode(api.Node):
         self.shift = api.XYZProp(
             idname="shift", 
             default=(0, 0, 0), 
-            labels=("X", "Y", "Z"),
+            fpb_labels=("X", "Y", "Z"),
             min_vals=(0, 0, 0), 
             max_vals=(800, 800, 800),
             show_p=False, 
             enable_z=True,
-            label="Shift"
+            fpb_label="Shift"
         )
         self.NodeAddProp(self.shift)
 

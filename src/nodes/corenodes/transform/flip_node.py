@@ -43,7 +43,7 @@ class FlipNode(api.Node):
             idname="direction",
             default="Vertically",
             choices=["Vertically", "Horizontally", "Diagonally"],
-            label="Orientation"
+            fpb_label="Orientation"
         )
         self.NodeAddProp(self.direction)
 

@@ -55,7 +55,7 @@ class ImageNode(api.Node):
             dlg_msg="Choose image...",
             wildcard=wildcard,
             btn_lbl="Choose...",
-            label="Image Path"
+            fpb_label="Image Path"
         )
 
         self.NodeAddProp(self.fp_prop)

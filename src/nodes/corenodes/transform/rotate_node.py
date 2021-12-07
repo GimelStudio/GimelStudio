@@ -46,7 +46,7 @@ class RotateNode(api.Node):
             min_val=0,
             max_val=360,
             lbl_suffix="°",
-            label="Rotation"
+            fpb_label="Rotation"
         )
 
         self.NodeAddProp(self.rotation)

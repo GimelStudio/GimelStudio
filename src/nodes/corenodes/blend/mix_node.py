@@ -42,7 +42,7 @@ class MixNode(api.Node):
         p = api.ChoiceProp(
             idname="blend_mode",
             default="Multiply",
-            label="Blend Mode",
+            fpb_label="Blend Mode",
             choices=[
                     "Add",
                     "Subtract",

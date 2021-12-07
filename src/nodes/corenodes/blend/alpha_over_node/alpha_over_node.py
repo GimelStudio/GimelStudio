@@ -39,7 +39,7 @@ class AlphaOverNode(api.Node):
             default=100,
             min_val=0,
             max_val=100,
-            label="Factor"
+            fpb_label="Factor"
         )
         self.NodeAddProp(self.value)
 

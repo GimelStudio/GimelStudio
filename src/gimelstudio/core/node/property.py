@@ -29,10 +29,10 @@ class Property(object):
     """
     The base node Property class.
     """
-    def __init__(self, idname, default, label, visible=True):
+    def __init__(self, idname, default, fpb_label, visible=True):
         self.idname = idname
         self.value = default
-        self.label = label
+        self.fpb_label = fpb_label
         self.visible = visible
         self.expanded = True
         self.widget_eventhook = None
@@ -64,10 +64,10 @@ class Property(object):
         self.WidgetEventHook(self.idname, self.value, render)
 
     def GetLabel(self):
-        return self.label
+        return self.fpb_label
 
     def SetLabel(self, label):
-        self.label = label
+        self.fpb_label = label
 
     def GetIsVisible(self):
         return self.visible
@@ -81,15 +81,15 @@ class Property(object):
     def WidgetEventHook(self, idname, value, render):
         self.widget_eventhook(idname, value, render)
 
-    def CreateFoldPanel(self, panel_bar, label=None):
+    def CreateFoldPanel(self, panel_bar, fpb_label=None):
         images = wx.ImageList(24, 24)
         images.Add(ICON_ARROW_DOWN.GetBitmap())
         images.Add(ICON_ARROW_RIGHT.GetBitmap())
 
-        if label is None:
+        if fpb_label is None:
             lbl = self.GetLabel()
         else:
-            lbl = label
+            lbl = fpb_label
 
         self.fpb = panel_bar.AddFoldPanel(lbl, foldIcons=images)
         self.fpb.SetBackgroundColour(wx.Colour(PROP_BG_COLOR))
@@ -126,8 +126,8 @@ class ThumbProp(Property):
     """ 
     Shows the current thumbnail image (used internally). 
     """
-    def __init__(self, idname, default=None, label="", thumb_img=None, visible=True):
-        Property.__init__(self, idname, default, label, visible)
+    def __init__(self, idname, default=None, fpb_label="", thumb_img=None, visible=True):
+        Property.__init__(self, idname, default, fpb_label, visible)
         self.thumb_img = thumb_img
         self.expanded = False
 
@@ -147,8 +147,8 @@ class PositiveIntegerProp(Property):
     Allows the user to select a positive integer via a Number Field. 
     """
     def __init__(self, idname, default=0, lbl_suffix="", min_val=0,
-                 max_val=10, show_p=False, label="", visible=True):
-        Property.__init__(self, idname, default, label, visible)
+                 max_val=10, show_p=False, fpb_label="", visible=True):
+        Property.__init__(self, idname, default, fpb_label, visible)
         self.min_value = min_val
         self.max_value = max_val
         self.lbl_suffix = lbl_suffix
@@ -198,8 +198,8 @@ class ChoiceProp(Property):
     """ 
     Allows the user to select from a list of choices via a Drop-down widget. 
     """
-    def __init__(self, idname, default="", choices=[], label="", visible=True):
-        Property.__init__(self, idname, default, label, visible)
+    def __init__(self, idname, default="", choices=[], fpb_label="", visible=True):
+        Property.__init__(self, idname, default, fpb_label, visible)
         self.choices = choices
 
     def GetChoices(self):
@@ -231,8 +231,8 @@ class OpenFileChooserProp(Property):
     """
     def __init__(self, idname, default="", dlg_msg="Choose file...",
                  wildcard="All files (*.*)|*.*", btn_lbl="Choose...",
-                 label="", visible=True):
-        Property.__init__(self, idname, default, label, visible)
+                 fpb_label="", visible=True):
+        Property.__init__(self, idname, default, fpb_label, visible)
         self.dlg_msg = dlg_msg
         self.wildcard = wildcard
         self.btn_lbl = btn_lbl
@@ -298,14 +298,14 @@ class XYZProp(Property):
     """ 
     Allows the user to select an (x, y, z) value via Number Fields.
     """
-    def __init__(self, idname, default=(0, 0, 0), labels=("X", "Y", "Z"),
+    def __init__(self, idname, default=(0, 0, 0), fpb_labels=("X", "Y", "Z"),
                  min_vals=(0, 0, 0), max_vals=(10, 10, 10), lbl_suffix="",
-                 show_p=False, enable_z=False, label="", visible=True):
-        Property.__init__(self, idname, default, label, visible)
+                 show_p=False, enable_z=False, fpb_label="", visible=True):
+        Property.__init__(self, idname, default, fpb_label, visible)
         self.min_values = min_vals
         self.max_values = max_vals
         self.lbl_suffix = lbl_suffix
-        self.labels = labels
+        self.fpb_labels = fpb_labels
         self.show_p = show_p
         self.enable_z = enable_z
 
@@ -319,7 +319,7 @@ class XYZProp(Property):
 
         self.numberfield_x = NumberField(pnl,
                                          default_value=self.value[0],
-                                         label=self.labels[0],
+                                         label=self.fpb_labels[0],
                                          min_value=self.min_values[0],
                                          max_value=self.max_values[0],
                                          suffix=self.lbl_suffix, 
@@ -329,7 +329,7 @@ class XYZProp(Property):
 
         self.numberfield_y = NumberField(pnl,
                                          default_value=self.value[1],
-                                         label=self.labels[1],
+                                         label=self.fpb_labels[1],
                                          min_value=self.min_values[1],
                                          max_value=self.max_values[1],
                                          suffix=self.lbl_suffix, 
@@ -340,7 +340,7 @@ class XYZProp(Property):
         if self.enable_z:
             self.numberfield_z = NumberField(pnl,
                                              default_value=self.value[2],
-                                             label=self.labels[2],
+                                             label=self.fpb_labels[2],
                                              min_value=self.min_values[2],
                                              max_value=self.max_values[2],
                                              suffix=self.lbl_suffix, 
@@ -372,18 +372,18 @@ class ActionProp(Property):
     """
     Allows the user to click a button to perform an action
     """
-    def __init__(self, idname, default="", label="", btn_label="", flat=False, action=None, visible=True):
+    def __init__(self, idname, default="", fpb_label="", btn_label="", flat=False, action=None, visible=True):
         Property.__init__(self, idname, default, btn_label, visible)
         self.btn_label = btn_label
-        if label != "":
-            self.label = label
+        if fpb_label != "":
+            self.fpb_label = fpb_label
         else:
-            self.label = btn_label
+            self.fpb_label = btn_label
         self.flat = flat
         self.action = action
 
     def CreateUI(self, parent, sizer):
-        fold_panel = self.CreateFoldPanel(sizer, self.label)
+        fold_panel = self.CreateFoldPanel(sizer, self.fpb_label)
 
         self.button = Button(fold_panel, label=_(self.btn_label), flat=self.flat, size=(-1, 30))
         self.AddToFoldPanel(sizer, fold_panel, self.button)
