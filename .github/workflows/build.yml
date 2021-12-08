@@ -1,0 +1,72 @@
+name: Build Gimel Studio
+
+# Controls when the action will run
+on:
+  push:
+    tags: 'v*'
+
+  workflow_dispatch:
+
+
+jobs:
+
+  linux:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: "3.9"
+    - run: sudo apt-get install libsdl2-2.0-0
+    - run: python -m pip install --upgrade pip setuptools wheel
+
+    # Run the build.py script
+    - name: Run the build.py script
+      run: python3 build.py
+
+    # Prepare the release
+    - name: Prepare release
+      uses: papeloto/action-zip@v1
+      with:
+        files: ./dist/GimelStudio/
+        dest: GimelStudio-Linux64.zip
+
+    # Actually make the release
+    - name: Uploading release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: ./GimelStudio-Linux64.zip
+        asset_name: GimelStudio-Linux64.zip
+        tag: ${{ github.ref }}
+
+
+  macos:
+    runs-on: macos-10.15
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: "3.9"
+    - run: python -m pip install --upgrade pip setuptools wheel
+
+    # Run the build.py script
+    - name: Run the build.py script
+      run: python3 build.py
+
+    # Prepare the release
+    - name: Prepare release
+      uses: papeloto/action-zip@v1
+      with:
+        files: ./dist/GimelStudio/
+        dest: GimelStudio-MacOs64.zip
+
+    # Actually make the release
+    - name: Uploading release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: ./GimelStudio-MacOs64.zip
+        asset_name: GimelStudio-MacOs64.zip
+        tag: ${{ github.ref }}
+        
