@@ -383,7 +383,10 @@ args = [
     "pkg_resources.py2_warn",
     "--hidden-import",
     "glcontext",
+    "--add-data"
 ]
+
+args.append("src/gimelstudio/datafiles/default_config.json" + os.pathsep + "gimelstudio/datafiles")
 
 # if DEBUG is False:
 #     args.append("--noconsole")
