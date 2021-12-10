@@ -1,4 +1,4 @@
-gsnodegraph==0.3.4
+gsnodegraph==0.4.0
 gswidgetkit==0.2.4
 moderngl==5.6.4
 numpy==1.20.3
