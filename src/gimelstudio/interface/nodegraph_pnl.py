@@ -93,8 +93,6 @@ class NodeGraphPanel(PanelBase):
             self.nodegraph.AddNode('corenode_blur', wx.Point(600, 200))
             self.nodegraph.AddNode('corenode_opacity', wx.Point(310, 200))
             self.nodegraph.AddNode('corenode_flip', wx.Point(500, 300))
-            self.nodegraph.AddNode('corenode_alpha_over', wx.Point(300, 350))
-            self.nodegraph.AddNode('node_integer', wx.Point(350, 110))
 
         # Add default image and output node
         self.nodegraph.AddNode('corenode_image', wx.Point(100, 250))
