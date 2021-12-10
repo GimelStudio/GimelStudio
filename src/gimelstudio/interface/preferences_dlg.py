@@ -300,7 +300,7 @@ class SidebarPanel(wx.Panel):
 class PreferencesDialog(wx.Dialog):
     def __init__(self, parent, title: str, app_config: AppConfiguration, categories: list):
         # TODO: Can we create our own title bar (instead of the default native one)?
-        wx.Dialog.__init__(self, parent, title=title, size=[800, 600],
+        wx.Dialog.__init__(self, parent, title=title, size=(800, 600),
                            style=wx.DEFAULT_DIALOG_STYLE)
 
         self.SetBackgroundColour(const.PROP_BG_COLOR)

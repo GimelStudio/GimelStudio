@@ -29,7 +29,7 @@ from .core import (Renderer, GLSLRenderer,
 from .interface import (ImageViewportPanel, NodePropertiesPanel,
                         NodeGraphPanel, StatusBar, PreferencesDialog,
                         ExportImageHandler, NodeGraphDropTarget,
-                        ShowNotImplementedDialog)
+                        AboutDialog, ShowNotImplementedDialog)
 from .node_importer import *
 
 
@@ -558,4 +558,5 @@ class ApplicationFrame(wx.Frame):
         webbrowser.open(url)
 
     def OnAboutDialog(self, event):
-        ShowNotImplementedDialog()
+        dlg =  AboutDialog(self, title=_("About Gimel Studio"))
+        dlg.Show()
