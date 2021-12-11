@@ -59,9 +59,6 @@ class PreferencesPage(wx.Panel):
         # TODO: Make the names in the ``config.json`` file more consistent (in other words, create guide to follow)
         # TODO: Should we add a switch widget (an alternative to a checkbox)?
 
-        # TODO: This crashes Gimel Studio (wx.Sizer assertion error)
-        # self.main_layout.AddSpacer(8)
-
         grid_num = start_grid_num
         new_widget = None
         for setting_name in self._app_config.Config(("Settings", category_name)):
