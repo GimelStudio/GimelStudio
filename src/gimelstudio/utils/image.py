@@ -20,29 +20,6 @@ import math
 import numpy as np
 
 
-# def _ConvertImageToWx(image):
-#     """ Converts the given ``numpy.ndarray`` object into a
-#     ``wx.Bitmap`` with RGBA.
-#     :param image: ``numpy.ndarray`` to convert
-#     :returns: ``wx.Bitmap``
-#     """
-#     height, width = image.shape[:2]
-
-#     image = copy.deepcopy(image)
-
-#     if image.shape[2] == 3:
-#         image_rgba = cv2.cvtColor(image, cv2.COLOR_RGB2RGBA)
-#     else:
-#         image_rgba = image
-
-#     # info = np.iinfo(image.dtype) # Get the information of the incoming image type
-#     # data = image.astype(np.float64) / 200#info.max # normalize the data to 0 - 1
-#     # data = 255 * data # Now scale by 255
-#     image = image_rgba.astype(np.uint8)
-
-#     return wx.Bitmap.FromBufferRGBA(width, height, image)
-
-
 def ConvertImageToWx(cv2_image):
     height, width = cv2_image.shape[:2]
 

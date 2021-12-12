@@ -25,16 +25,16 @@ class Renderer(object):
     """
     def __init__(self, parent):
         self.parent = parent
-        self._render = None
+        self.render = None
 
     def GetParent(self):
         return self.parent
 
     def GetRender(self):
-        return self._render
+        return self.render
 
     def SetRender(self, render):
-        self._render = render
+        self.render = render
 
     def Render(self, nodes):
         """ Render method for evaluating the Node Graph
@@ -78,7 +78,7 @@ class Renderer(object):
         :param nodes: dictionary of nodes of the Node Graph
         :returns: node object of output node
         """
-        for nodeid in nodes:
-            if nodes[nodeid].IsOutputNode() is True:
-                output_node = nodes[nodeid]
+        for node_id in nodes:
+            if nodes[node_id].IsOutputNode() is True:
+                output_node = nodes[node_id]
         return output_node

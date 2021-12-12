@@ -27,12 +27,12 @@ class Node(NodeView):
     def __init__(self, nodegraph, _id):
         NodeView.__init__(self, nodegraph, _id)
         self.nodegraph = nodegraph
-        self._id = _id
-        self._properties = {}
-        self._parameters = {}
-        self._cache = {}
-        self._cache_enabled = True
-        self._edited_flag = False
+        self.id = _id
+        self.properties = {}
+        self.parameters = {}
+        self.cache = {}
+        self.cache_enabled = True
+        self.edited_flag = False
 
         self.NodeInitProps()
         self.NodeInitParams()
@@ -83,32 +83,32 @@ class Node(NodeView):
         return False
 
     def IsNodeCacheEnabled(self):
-        return self._cache_enabled
+        return self.cache_enabled
 
     def AddProperty(self, prop):
-        self._properties[prop.IdName] = prop
-        return self._properties
+        self.properties[prop.IdName] = prop
+        return self.properties
 
     def AddParameter(self, param):
-        self._parameters[param.IdName] = param
-        return self._parameters
+        self.parameters[param.IdName] = param
+        return self.parameters
 
     def EditProperty(self, idname, value, render=True):
-        prop = self._properties[idname]
+        prop = self.properties[idname]
         prop.SetValue(value, render)
         return prop
 
     def EditParameter(self, idname, value):
-        param = self._parameters[idname]
+        param = self.parameters[idname]
         param.SetBinding(value)
         self.RemoveFromCache(idname)
         return param
 
     def SetEditedFlag(self, edited=True):
-        self._edited_flag = edited
+        self.edited_flag = edited
 
     def GetEditedFlag(self):
-        return self._edited_flag
+        return self.edited_flag
 
     def NodeInitProps(self):
         """ Define node properties for the node. These will translate into widgets for editing the property in the Node Properties Panel if the Property is not hidden with ``visible=False``.
@@ -160,8 +160,8 @@ class Node(NodeView):
     def NodePanelUI(self, parent, sizer):
         """ Create the Node property widgets for the Node Property Panel. Please do not override unless you know what you're doing.
         """
-        for prop in self._properties:
-            prop_obj = self._properties[prop]
+        for prop in self.properties:
+            prop_obj = self.properties[prop]
             if prop_obj.GetIsVisible() is True:
                 prop_obj.CreateUI(parent, sizer)
 
@@ -192,16 +192,16 @@ class Node(NodeView):
         pass
 
     def ClearCache(self):
-        self._cache = {}
+        self.cache = {}
 
     def RemoveFromCache(self, name):
         cached = self.IsInCache(name)
         if cached is True and self.IsNodeCacheEnabled() is True:
-            del self._cache[name]
+            del self.cache[name]
 
     def IsInCache(self, name):
         try:
-            self._cache[name]
+            self.cache[name]
             return True
         except KeyError:
             return False
@@ -212,12 +212,12 @@ class Node(NodeView):
         # Basic node cache implementation
         if self.IsNodeCacheEnabled() == True:
             if self.GetEditedFlag() == True and cached == True:
-                value = self._cache[name]
+                value = self.cache[name]
                 self.SetEditedFlag(False)
                 # print("Used Cache: ", self._label)
             else:
                 value = eval_info.EvaluateParameter(name)
-                self._cache[name] = value
+                self.cache[name] = value
                 self.SetEditedFlag(False)
                 # print("Evaluated: ", self._label)
         else:
@@ -239,7 +239,7 @@ class Node(NodeView):
         try:
             image = self.EvalParameter(eval_info, "image").Image("numpy")
         except:
-            image = self.EvalParameter(eval_info, "image 1").Image("numpy")
+            image = self.EvalParameter(eval_info, "image_1").Image("numpy")
         render_image = RenderImage()
         render_image.SetAsImage(image)
         self.NodeUpdateThumb(render_image)

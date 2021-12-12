@@ -32,7 +32,7 @@ class OutputNodeEval(object):
         """
         # The hardcoded "Image" here refers to the input
         # socket on the Output node
-        self.node = node._parameters["Image"].binding
+        self.node = node.parameters["Image"].binding
 
     def RenderImage(self):
         """ Render the image for this output node. If the output

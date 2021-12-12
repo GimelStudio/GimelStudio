@@ -44,8 +44,8 @@ class AlphaOverNode(api.Node):
         self.NodeAddProp(self.value)
 
     def NodeInitParams(self):
-        image1 = api.RenderImageParam("image 1", "Image")
-        image2 = api.RenderImageParam('image 2', "Image")
+        image1 = api.RenderImageParam("image_1", "Image")
+        image2 = api.RenderImageParam('image_2', "Image")
         integer = api.IntegerParam("integer", "Factor")
 
         self.NodeAddParam(image1)
@@ -56,8 +56,8 @@ class AlphaOverNode(api.Node):
         return self.EvalMutedNode(eval_info)
 
     def NodeEvaluation(self, eval_info):
-        image1 = self.EvalParameter(eval_info, "image 1")
-        image2 = self.EvalParameter(eval_info, "image 2")
+        image1 = self.EvalParameter(eval_info, "image_1")
+        image2 = self.EvalParameter(eval_info, "image_2")
 
         # TODO: remove this as an integer input isn't needed here.
         # This is done more as a proof-of-concept for now.

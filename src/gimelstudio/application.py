@@ -424,7 +424,7 @@ class ApplicationFrame(wx.Frame):
 
     def Render(self):
         # start = time.time()
-        image = self.renderer.Render(self.NodeGraph._nodes)
+        image = self.renderer.Render(self.NodeGraph.GetNodes())
         # end = time.time()
         # print("Render time: ", end - start)  # FIXME: Temporary test code
         render = image.Image("numpy")
