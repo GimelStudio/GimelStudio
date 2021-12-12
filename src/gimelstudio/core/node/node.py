@@ -33,6 +33,7 @@ class Node(NodeView):
         self.cache = {}
         self.cache_enabled = True
         self.edited_flag = False
+        self.shader_cache = None
 
         self.NodeInitProps()
         self.NodeInitParams()
@@ -246,10 +247,11 @@ class Node(NodeView):
         return render_image
 
     def RenderGLSL(self, path, props, image, image2=None):
-        file_path = os.path.expanduser(os.path.expandvars(path))
-        shader_path = os.path.join(const.APP_DIR, file_path)
-        shader = self.GLSLRenderer.LoadGLSLFile(shader_path)
-        self.GLSLRenderer.Render(shader, props, image, image2)
+        if self.shader_cache == None:
+            file_path = os.path.expanduser(os.path.expandvars(path))
+            shader_path = os.path.join(const.APP_DIR, file_path)
+            self.shader_cache = self.GLSLRenderer.LoadGLSLFile(shader_path)
+        self.GLSLRenderer.Render(self.shader_cache, props, image, image2)
         return self.GLSLRenderer.ReadNumpy()
 
     def RefreshNodeGraph(self):
