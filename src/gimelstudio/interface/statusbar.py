@@ -136,6 +136,6 @@ class StatusBar(wx.Panel, wx.StatusBar):
 
     def UpdateStatusBar(self):
         """ Update the statusbar. """
-        self.UpdateContextHints()
+        # self.UpdateContextHints()
         self.Layout()
         self.Refresh()

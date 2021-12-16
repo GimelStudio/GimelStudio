@@ -246,7 +246,7 @@ class ApplicationFrame(wx.Frame):
 
         # Set defaults
         self.showimageviewport_menuitem.Check(True)
-        self.showstatusbar_menuitem.Check(True)
+        self.showstatusbar_menuitem.Check(False)
         self.toggleautorender_menuitem.Check(True)
 
         # Append menu items to menus
@@ -353,6 +353,7 @@ class ApplicationFrame(wx.Frame):
         # Create the statusbar
         self.statusbar = StatusBar(self)
         self.SetStatusBar(self.statusbar)
+        self.statusbar.Hide()
 
         # Window manager
         self._mgr = AUIManager(self)
@@ -423,10 +424,7 @@ class ApplicationFrame(wx.Frame):
         self.menubar.Refresh()
 
     def Render(self):
-        # start = time.time()
         image = self.renderer.Render(self.NodeGraph.GetNodes())
-        # end = time.time()
-        # print("Render time: ", end - start)  # FIXME: Temporary test code
         render = image.Image("numpy")
         self.imageviewport_pnl.UpdateViewerImage(render, 0)
         return render
