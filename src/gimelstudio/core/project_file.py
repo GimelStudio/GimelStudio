@@ -22,7 +22,7 @@ from gsnodegraph.constants import SOCKET_INPUT, SOCKET_OUTPUT
 
 class ProjectFileIO(object):
     def __init__(self, app_config):
-        self.file_path = "project.gimel"
+        self.file_path = ""
         self.contents = {}
         self.app_config = app_config
 
@@ -36,6 +36,9 @@ class ProjectFileIO(object):
         self.contents["app_version_full"] = self.app_config.app_version_full
         self.contents["node_graph"] = {}
         self.contents["node_graph"]["nodes"] = {}
+
+    def GetFilePath(self):
+        return self.file_path
 
     def SaveNodesData(self, nodes):
         nodes_data = {}
@@ -143,6 +146,7 @@ class ProjectFileIO(object):
         with open(file_path, "r") as file:
             file_contents = json.load(file)
             self.contents = file_contents
+        self.file_path = file_path
 
     def SaveFile(self):
         self.WriteFile(self.file_path, self.contents)

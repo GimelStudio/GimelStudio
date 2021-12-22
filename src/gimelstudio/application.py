@@ -46,6 +46,7 @@ class ApplicationFrame(wx.Frame):
         # Application configuration project file IO
         self.appconfig = app_config
 
+        # Project file IO
         self.projectfileio = ProjectFileIO(app_config)
 
         # Initilize renderers and node registry
@@ -429,6 +430,7 @@ class ApplicationFrame(wx.Frame):
         image = self.renderer.Render(self.NodeGraph.GetNodes())
         render = image.Image("numpy")
         self.imageviewport_pnl.UpdateViewerImage(render, 0)
+        self.SetAppTitle(False)
         return render
 
     @property
@@ -443,6 +445,16 @@ class ApplicationFrame(wx.Frame):
     def AppConfig(self):
         return self.appconfig
 
+    def SetAppTitle(self, is_saved):
+        file_path = self.projectfileio.GetFilePath()
+        if file_path != "":
+            file_path = "({})".format(file_path)
+        if is_saved is not True:
+            suffix = "*"
+        else:
+            suffix = ""
+        self.SetTitle("{0}{1} {2}".format(APP_FULL_TITLE, suffix, file_path))
+
     def OnNewProjectFile(self, event):
         ShowNotImplementedDialog()
 
@@ -454,12 +466,13 @@ class ApplicationFrame(wx.Frame):
             file_path = dlg.GetPath()
             self.projectfileio.OpenFile(file_path)
             self.projectfileio.CreateNodesFromData(self.NodeGraph)
-
+            self.SetAppTitle(True)
         dlg.Destroy()
 
     def OnSaveProjectFile(self, event):
         self.projectfileio.SaveNodesData(self.NodeGraph.GetNodes())
         self.projectfileio.SaveFile()
+        self.SetAppTitle(True)
 
     def OnSaveProjectFileAs(self, event):
         dlg = wx.FileDialog(self, message=_("Save project file as…"),
@@ -471,7 +484,7 @@ class ApplicationFrame(wx.Frame):
             file_path = dlg.GetPath()
             self.projectfileio.SaveNodesData(self.NodeGraph.GetNodes())
             self.projectfileio.SaveFileAs(file_path)
-
+            self.SetAppTitle(True)
         dlg.Destroy()
 
     def OnExportAsImage(self, event):
