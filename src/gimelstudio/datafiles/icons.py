@@ -32,6 +32,22 @@ ICON_BRUSH_CHECKERBOARD = PyEmbeddedImage(
     b'RK5CYII=')
 
 #----------------------------------------------------------------------
+ICON_CREDITS = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAxElEQVQ4jcWSYQ3DIBCFK6ES'
+    b'KqESkIAEJFQCDiYBCUhAQiVMQiV8+7FHwrojW1jSveTScBzfXe51mq4QMAMeCMAyClmBg1et'
+    b'I6DMu+4joPM0AIyAdoOzf/NwAYrCKVodWrxTk2waAMT2kXIzsCkW5UpTlz6BinIeuAEJCAYo'
+    b'WqDaPfO03nKt6C6p8dzbk9M3GJCqOpnvTVOQK+rYU1bNztnFZoK6m9KjGDVbC9p+AMUWFDtF'
+    b'/wM5waojQWcrzjXO/AVG9QCjYINBJLHSsAAAAABJRU5ErkJggg==')
+
+#----------------------------------------------------------------------
+ICON_DISCORD = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAArElEQVQ4jb3SYQ2DMBCGYSRU'
+    b'QiUgoRKQUAmTUAdIqIRKQMIkTEIlvPvRW9ZsHe3Bti+5BOj1gQOm6dsBDOCAMFj+ExTQJ7Sg'
+    b'7QC0/Q3KQKKMu0qlxs260PvspccCXgPZ5hd59uYR6CrnBojyFFZGs7IWR6BYQYnyb5kXaNVA'
+    b'th5RMKeBkEZXXcvADVhkbegdafJbyHe3lcRdSLAFuHTKAfMupIlg6TQkmHkc3wHvpMsjjkqv'
+    b'ZgAAAABJRU5ErkJggg==')
+
+#----------------------------------------------------------------------
 ICON_GIMELSTUDIO_ICO = PyEmbeddedImage(
     b'iVBORw0KGgoAAAANSUhEUgAAAMwAAADTCAYAAADNovy8AAAABHNCSVQICAgIfAhkiAAAEMlJ'
     b'REFUeJzt3WtsXGV+BvDHnvFlPE5mkjmVY7BjShzbFQsJS0sTg7rdwO4XqMqHLlJidpMWqaK7'
@@ -116,6 +132,14 @@ ICON_GIMELSTUDIO_ICO = PyEmbeddedImage(
     b'/I2A+CZQUu9mZUTeIEaA0nd9pf6Xf/7iHwwAwP8DFzuSvecuYgcAAAAASUVORK5CYII=')
 
 #----------------------------------------------------------------------
+ICON_GITHUB = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAyUlEQVQ4jbWSURGDMBBEkYCE'
+    b'SIiESkACEiIBB0hBQiUgIRIi4fWjl5ktzUHaafcrwx7vbi8Zhn8LGIEITMAMxG8AK1Boa+mB'
+    b'BODuAFQ7EM4mqZDNARTxsgdKtVjAs+3pZudgXnZjitnu9Fq71xGPRvxkmTZdVfSMqQOkjZMa'
+    b'U9PwQe16W2bV1gFamgnshlTNqawuSV3h+J6sS5axCzCLn/S2TKvXbef54KL9GA6+KgOjl11h'
+    b'6wkov0W6WGaUb6PFXbogFw3aUX6pB9ecBYH2DZ7hAAAAAElFTkSuQmCC')
+
+#----------------------------------------------------------------------
 ICON_HELP = PyEmbeddedImage(
     b'iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAYJJ'
     b'REFUSIntldtZwkAQhX/8LAArYKcDSogVSAdiBaYDQgdQgXZArMB0AB1MqMBYAT7sRDbLLqDP'
@@ -143,6 +167,14 @@ ICON_KEY_CTRL = PyEmbeddedImage(
     b'M9u7tpMwMtuppArIZoICmaSBpFJSDbxIegg+BwjAqeqCVk2ajr1EUvkXsBMqqc/wWnthqbB9'
     b'Gp6i3yof2M7bjMWuTgHc+BoowrRu1ZXARPIm6Qqw1NUgQhlQ/U56DVzYPg6dPyKBm8AOcAfj'
     b'f/8Q2Ae2ge9I6CPwLOk88txcM+oH9MB2WhAJ2rEAAAAASUVORK5CYII=')
+
+#----------------------------------------------------------------------
+ICON_LICENSE = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAw0lEQVQ4jb2TUQ2EMBAFkXAS'
+    b'TgISKqESkFAJdYAEJFQCEpCABCQMH+wmzWYLvfvgJaTQTKfsFobhrQATMPXCH28OCMAG7EB4'
+    b'XAckrsxAlPHAj2VSLRqBpYIPYJWyNrmPDlOA6JWYBVqquRVY7xivJ7vu5olajBXFqgfoSRmR'
+    b'y1hRkbp11+KIXMaWpc0LMgJ8VXTHeMdvkypRk+kR5Q5RtuWNsrBwNTM4PXKZrmC+o58iu2lJ'
+    b'+qvoc34UNET2mv96u9dzAhNBTnlz9JGyAAAAAElFTkSuQmCC')
 
 #----------------------------------------------------------------------
 ICON_MORE_MENU_SMALL = PyEmbeddedImage(
@@ -222,4 +254,20 @@ ICON_NODEPROPERTIES_PANEL = PyEmbeddedImage(
     b'7LcSC4oKE6DohRU41OTGxukb2GuqTgN4AMIs5AnUM8q7i0nTGFnVTmaFHeYseUAoKJn1FfRF'
     b'atG0e/9FrR5eh6wvby7nZiBXM0PVNZCMv0jp7LeSUXRBozhVXHXpwLJGNdchr9497uWRc7X0'
     b'6QAAAABJRU5ErkJggg==')
+
+#----------------------------------------------------------------------
+ICON_WEBSITE = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAA7klEQVQ4jbWTaw2EMBCETwIS'
+    b'kIAEJCABCUjAARJOwklAAhKQUAnf/WBKhqX3IrlNGmC6nc7uDrfbvwOogNq+mysEE5CAEaiE'
+    b'92wxfUPSALMOJJEOwKD9VXuLqy0pySRkNTqUgiqA9RXRyDFqoLPvXsQe9xLRGpJyWbtC5SXD'
+    b'Uqk3Hovwh2EPYXPIbWN/WluNXbDjwuqQWztR3CwRFckjkTcVNJFQxlwoF6CLfTo1kc2YOabC'
+    b'UBIyrBP5IVRCHH8cytnlbA3329zN2eUHQ57UBBssobyeo8vR8/NPDNytnEqrk7L5pZI3hK2/'
+    b'/0xwJZ6C/ofelhqaSQAAAABJRU5ErkJggg==')
+
+#----------------------------------------------------------------------
+ICON_YOUTUBE = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAnklEQVQ4jd2TUQ2AMAwFkYAE'
+    b'JCABCUhAwiTMARKQgAQkIAEJk3B8sIUyKBQ+eUmTJXu7re1aFP8XUAMemGMEEYj1AozAAFQ5'
+    b'pIyH3yrkoOYDJKmRoE4xTeypaXIS5BSTj/v9DcibQaIZwxPIG0CVBaS+iK2jPXqtDqBWMY1s'
+    b'/+ZOnQVkUZt/yKebrxSA8mpEUipaPdKYzNFbn2btf1oBA3S7FtXC3tEAAAAASUVORK5CYII=')
 
