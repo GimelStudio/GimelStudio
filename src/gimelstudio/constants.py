@@ -24,18 +24,19 @@ APP_FROZEN = getattr(sys, "frozen", False)
 APP_DIR = os.path.dirname(os.path.abspath(sys.argv[0]))
 
 APP_VERSION = "0.6.0"
-APP_VERSION_TAG = "alpha pre-release 2"
-APP_VERSION_FULL = "{0} {1}".format(APP_VERSION, APP_VERSION_TAG)
+APP_VERSION_TAG = " pre-alpha 2"
+APP_VERSION_FULL = "{0}{1}".format(APP_VERSION, APP_VERSION_TAG)
 
 APP_NAME = "Gimel Studio"
 APP_WEBSITE_URL = "https://gimelstudio.github.io"
 APP_DESCRIPTION = "Non-destructive, node-based 2D image graphics editor focused on simplicity, speed, elegance and usability"
+APP_COPYRIGHT = "© 2019–2022 Noah Rahm and contributors"
 
 APP_FULL_TITLE = "{0} v{1}".format(APP_NAME, APP_VERSION_FULL)
 
 APP_CREDITS = [""]
 
-APP_CONFIG_FILE = os.path.expanduser("~/.gimelstudio/pr1-config.json")
+APP_CONFIG_FILE = os.path.expanduser("~/.gimelstudio/pre-a2-config.json")
 
 # File system
 SUPPORTED_FT_OPEN_LIST = [
