@@ -53,7 +53,7 @@ class NodeGraphDropTarget(wx.DropTarget):
 
     def OnTextDrop(self):
         try:
-            self._window.AddNode(self._textDropData.GetText(),
+            self._window.AddNode(self._textDropData.GetText(), nodeid=None, 
                                  pos=(0, 0), location="CURSOR")
             self._window.UpdateNodegraph()
         except Exception as error:
@@ -64,12 +64,12 @@ class NodeGraphDropTarget(wx.DropTarget):
         for filename in self._fileDropData.GetFilenames():
             try:
                 filetype = os.path.splitext(filename)[1]
-
+                
                 if filetype.lower() in const.SUPPORTED_FT_SAVE_LIST:
                     if os.path.exists(filename) is True:
                         # Create Image node with path
                         node = self._window.AddNode("corenode_image", pos=(0, 0),
-                                                    location="CURSOR")
+                                                    nodeid=None, location="CURSOR")
                         node.NodeEditProp(idname="file_path",
                                           value=filename, render=False)
                         node.ToggleExpand()

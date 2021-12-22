@@ -20,11 +20,11 @@ import wx
 import wx.lib.agw.aui as aui
 import wx.lib.agw.flatmenu as flatmenu
 
-from gimelstudio.constants import (APP_FULL_TITLE, AREA_TOPBAR_COLOR, DARK_COLOR)
+from gimelstudio.constants import (APP_FULL_TITLE, AREA_TOPBAR_COLOR, DARK_COLOR, PROJECT_FILE_WILDCARD)
 from gimelstudio.utils import ConvertImageToWx
 from .interface import artproviders
 from .datafiles.icons import ICON_GIMELSTUDIO_ICO
-from .core import (Renderer, GLSLRenderer,
+from .core import (Renderer, GLSLRenderer, ProjectFileIO,
                    NODE_REGISTRY)
 from .interface import (ImageViewportPanel, NodePropertiesPanel,
                         NodeGraphPanel, StatusBar, PreferencesDialog,
@@ -43,8 +43,10 @@ class ApplicationFrame(wx.Frame):
     def __init__(self, app_config=None):
         wx.Frame.__init__(self, None, title=APP_FULL_TITLE, size=(1000, 800))
 
-        # Application configuration
+        # Application configuration project file IO
         self.appconfig = app_config
+
+        self.projectfileio = ProjectFileIO(app_config)
 
         # Initilize renderers and node registry
         self.renderer = Renderer(self)
@@ -55,7 +57,7 @@ class ApplicationFrame(wx.Frame):
         self.SetIcon(ICON_GIMELSTUDIO_ICO.GetIcon())
 
         # Create main sizer
-        self.mainSizer = wx.BoxSizer(wx.VERTICAL)
+        self.main_sizer = wx.BoxSizer(wx.VERTICAL)
 
         # Create the menubar
         self.menubar = flatmenu.FlatMenuBar(self, wx.ID_ANY, 40, 6, options=0)
@@ -348,7 +350,7 @@ class ApplicationFrame(wx.Frame):
                   self.about_menuitem)
 
         # Add menubar to main sizer
-        self.mainSizer.Add(self.menubar, 0, wx.EXPAND)
+        self.main_sizer.Add(self.menubar, 0, wx.EXPAND)
 
         # Create the statusbar
         self.statusbar = StatusBar(self)
@@ -445,13 +447,32 @@ class ApplicationFrame(wx.Frame):
         ShowNotImplementedDialog()
 
     def OnOpenProjectFile(self, event):
-        ShowNotImplementedDialog()
+        dlg = wx.FileDialog(self, message=_("Open project file…"),
+                            wildcard=PROJECT_FILE_WILDCARD, style=wx.FD_OPEN)
+
+        if dlg.ShowModal() == wx.ID_OK:
+            file_path = dlg.GetPath()
+            self.projectfileio.OpenFile(file_path)
+            self.projectfileio.CreateNodesFromData(self.NodeGraph)
+
+        dlg.Destroy()
 
     def OnSaveProjectFile(self, event):
-        ShowNotImplementedDialog()
+        self.projectfileio.SaveNodesData(self.NodeGraph.GetNodes())
+        self.projectfileio.SaveFile()
 
     def OnSaveProjectFileAs(self, event):
-        ShowNotImplementedDialog()
+        dlg = wx.FileDialog(self, message=_("Save project file as…"),
+                            defaultFile="untitled.gimel",
+                            wildcard=PROJECT_FILE_WILDCARD, 
+                            style=wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT)
+
+        if dlg.ShowModal() == wx.ID_OK:
+            file_path = dlg.GetPath()
+            self.projectfileio.SaveNodesData(self.NodeGraph.GetNodes())
+            self.projectfileio.SaveFileAs(file_path)
+
+        dlg.Destroy()
 
     def OnExportAsImage(self, event):
         image = self.renderer.GetRender()
