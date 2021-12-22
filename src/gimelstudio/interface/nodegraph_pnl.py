@@ -15,6 +15,7 @@
 # ----------------------------------------------------------------------------
 
 import wx
+import uuid
 
 from gswidgetkit import (Button, EVT_BUTTON, NumberField, EVT_NUMBERFIELD_CHANGE)
 from gsnodegraph import (EVT_GSNODEGRAPH_NODESELECT,
@@ -90,13 +91,13 @@ class NodeGraphPanel(PanelBase):
 
         # Here for testing
         if const.APP_FROZEN is False:
-            self.nodegraph.AddNode('corenode_blur', wx.Point(600, 200))
-            self.nodegraph.AddNode('corenode_opacity', wx.Point(310, 200))
-            self.nodegraph.AddNode('corenode_flip', wx.Point(500, 300))
+            self.nodegraph.AddNode('corenode_blur', pos=wx.Point(600, 200))
+            self.nodegraph.AddNode('corenode_opacity', pos=wx.Point(310, 200))
+            self.nodegraph.AddNode('corenode_flip', pos=wx.Point(500, 300))
 
         # Add default image and output node
-        self.nodegraph.AddNode('corenode_image', wx.Point(100, 250))
-        self.nodegraph.AddNode('corenode_outputcomposite', wx.Point(950, 250))
+        self.nodegraph.AddNode('corenode_image', pos=wx.Point(100, 250))
+        self.nodegraph.AddNode('corenode_outputcomposite', pos=wx.Point(950, 250))
 
         main_sizer.Add(topbar, flag=wx.EXPAND | wx.LEFT | wx.RIGHT)
         main_sizer.Add(self.nodegraph, 1, flag=wx.EXPAND | wx.BOTH)
@@ -142,8 +143,8 @@ class NodeGraphPanel(PanelBase):
     def ImageViewport(self):
         return self.parent.imageviewport_pnl
 
-    def AddNode(self, idname, pos, location):
-        return self.nodegraph.AddNode(idname, pos, location)
+    def AddNode(self, idname, nodeid, pos, location):
+        return self.nodegraph.AddNode(idname, nodeid, pos, location)
 
     def UpdateNodegraph(self):
         self.nodegraph.UpdateNodeGraph()
