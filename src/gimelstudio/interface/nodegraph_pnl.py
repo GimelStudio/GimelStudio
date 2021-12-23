@@ -70,7 +70,7 @@ class NodeGraphPanel(PanelBase):
 
         self.zoom_field = NumberField(topbar, default_value=100, label=_("Zoom"),
                                       min_value=25, max_value=250, suffix="%",
-                                      show_p=False)
+                                      show_p=False, disable_precise=True)
         # self.imageasbg_checkbox = CheckBox(topbar, label=_("Image as background"))
         # self.imageasbg_checkbox.SetValue(True)
         # self.imageasbg_checkbox.Bind(wx.EVT_CHECKBOX,)

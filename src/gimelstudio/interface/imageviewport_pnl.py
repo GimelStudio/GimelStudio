@@ -53,7 +53,7 @@ class ImageViewportPanel(PanelBase):
 
         self.zoom_field = NumberField(topbar, default_value=100, label=_("Zoom"),
                                       min_value=25, max_value=250, suffix="%",
-                                      show_p=False)
+                                      show_p=False, disable_precise=True)
         self.menu_button = Button(topbar, label="", flat=True,
                                   bmp=(ICON_MORE_MENU_SMALL.GetBitmap(), 'left'))
 
