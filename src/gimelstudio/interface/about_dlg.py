@@ -23,17 +23,20 @@ import gimelstudio.constants as const
 from gimelstudio.datafiles import ICON_GIMELSTUDIO_ICO, ICON_LICENSE
 from gimelstudio.datafiles.icons import (ICON_CREDITS, ICON_DISCORD, ICON_GITHUB, 
                                          ICON_WEBSITE, ICON_YOUTUBE)
+ 
 
-
-class AboutDialog(wx.Dialog):
-    def __init__(self, parent, title):
-        wx.Dialog.__init__(self, parent, title=title, size=(500, 600))
+class AboutDialog(wx.Frame):
+    def __init__(self, parent):
+        wx.Frame.__init__(self, None, -1, style=wx.FRAME_SHAPED | wx.BORDER_SIMPLE)
+    
         self.SetBackgroundColour(const.DARK_COLOR)
 
         self.parent = parent
 
         self.BuildUI()
         self.Center()
+
+        self.Bind(wx.EVT_KILL_FOCUS, self.OnCloseDialog)
 
     def BuildUI(self):
         panel = wx.Panel(self)
@@ -60,43 +63,45 @@ class AboutDialog(wx.Dialog):
 
         sizer = wx.GridBagSizer(1, 1)
 
-        logo_bmp = wx.Image.ConvertToBitmap(ICON_GIMELSTUDIO_ICO.GetImage().Scale(85, 85))
+        logo_bmp = wx.Image.ConvertToBitmap(ICON_GIMELSTUDIO_ICO.GetImage().Scale(70, 70))
         icon = wx.StaticBitmap(panel, bitmap=logo_bmp)
-        sizer.Add(icon, pos=(0, 1), flag=wx.TOP|wx.LEFT|wx.ALIGN_LEFT, border=10)
+        sizer.Add(icon, pos=(1, 1), flag=wx.TOP|wx.LEFT|wx.ALIGN_LEFT, border=10)
 
-        sizer.Add(info_panel, pos=(0, 2), flag=wx.TOP|wx.RIGHT|wx.LEFT|wx.BOTTOM, border=10)
+        sizer.Add(info_panel, pos=(1, 2), flag=wx.TOP|wx.RIGHT|wx.LEFT|wx.BOTTOM, border=10)
 
         # Add buttons
         website_btn = Button(panel, label="Official website",
                              bmp=(ICON_WEBSITE.GetBitmap(), 'left'))
-        sizer.Add(website_btn, pos=(3, 2), span=(1, 3), flag=wx.TOP|wx.RIGHT|wx.EXPAND, border=8)
+        sizer.Add(website_btn, pos=(3, 2), span=(1, 2), flag=wx.TOP|wx.RIGHT|wx.EXPAND, border=8)
 
         github_btn = Button(panel, label="Github repo",
                              bmp=(ICON_GITHUB.GetBitmap(), 'left'))
-        sizer.Add(github_btn, pos=(4, 2), span=(1, 3), flag=wx.TOP|wx.RIGHT|wx.EXPAND, border=8)
+        sizer.Add(github_btn, pos=(4, 2), span=(1, 2), flag=wx.TOP|wx.RIGHT|wx.EXPAND, border=8)
 
         license_btn = Button(panel, label="Apache-2.0 License",
                              bmp=(ICON_LICENSE.GetBitmap(), 'left'))
-        sizer.Add(license_btn, pos=(5, 2), span=(1, 3), flag=wx.TOP|wx.RIGHT|wx.EXPAND, border=8)
+        sizer.Add(license_btn, pos=(5, 2), span=(1, 2), flag=wx.TOP|wx.RIGHT|wx.EXPAND, border=8)
 
         credits_btn = Button(panel, label="Contributors",
                              bmp=(ICON_CREDITS.GetBitmap(), 'left'))
-        sizer.Add(credits_btn, pos=(6, 2), span=(1, 3), flag=wx.TOP|wx.RIGHT|wx.EXPAND, border=8)
+        sizer.Add(credits_btn, pos=(6, 2), span=(1, 2), flag=wx.TOP|wx.RIGHT|wx.EXPAND, border=8)
 
         discord_btn = Button(panel, label="Discord chat",
                              bmp=(ICON_DISCORD.GetBitmap(), 'left'))
-        sizer.Add(discord_btn, pos=(8, 2), span=(1, 3), flag=wx.TOP|wx.RIGHT|wx.EXPAND, border=8)
+        sizer.Add(discord_btn, pos=(8, 2), span=(1, 2), flag=wx.TOP|wx.RIGHT|wx.EXPAND, border=8)
 
         youtube_btn = Button(panel, label="Youtube channel",
                              bmp=(ICON_YOUTUBE.GetBitmap(), 'left'))
-        sizer.Add(youtube_btn, pos=(9, 2), span=(1, 3), flag=wx.TOP|wx.RIGHT|wx.EXPAND, border=8)
+        sizer.Add(youtube_btn, pos=(9, 2), span=(1, 2), flag=wx.TOP|wx.RIGHT|wx.EXPAND, border=8)
 
         # Add spacing
-        sizer.Add((10, 10), pos=(10, 0))
+        sizer.Add((20, 20), pos=(10, 0))
         sizer.Add((10, 10), pos=(10, 5))
+        sizer.Add((40, 30), pos=(10, 6))
 
         panel.SetSizer(sizer)
         sizer.Fit(self)
+        self.SetFocus()
 
         # Bindings
         website_btn.Bind(EVT_BUTTON, self.OnWebsiteButton)
@@ -105,6 +110,20 @@ class AboutDialog(wx.Dialog):
         credits_btn.Bind(EVT_BUTTON, self.OnCreditsButton)
         discord_btn.Bind(EVT_BUTTON, self.OnDiscordButton)
         youtube_btn.Bind(EVT_BUTTON, self.OnYoutubeButton)
+
+    def OnCloseDialog(self, event):
+        # Only close the dialog if the mouse is clicked outside of the window
+        mouse = wx.GetMousePosition()
+        pos = self.GetScreenPosition()
+        size = self.GetSize()
+        mouse_rect = wx.Rect(mouse[0], mouse[1], mouse[0]+1, mouse[1]+1)
+        window_rect = wx.Rect(pos[0], pos[1], size[0], size[1])
+
+        if mouse_rect.Intersects(window_rect) is True:
+            self.SetFocus()
+            self.Bind(wx.EVT_KILL_FOCUS, self.OnCloseDialog)
+        else:
+            self.Destroy()
 
     def OnWebsiteButton(self, event):
         webbrowser.open(const.APP_WEBSITE_URL)

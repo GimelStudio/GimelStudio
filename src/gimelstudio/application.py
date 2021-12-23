@@ -590,5 +590,5 @@ class ApplicationFrame(wx.Frame):
         webbrowser.open(url)
 
     def OnAboutDialog(self, event):
-        dlg =  AboutDialog(self, title=_("About Gimel Studio"))
+        dlg = AboutDialog(self)
         dlg.Show()
