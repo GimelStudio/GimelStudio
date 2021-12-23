@@ -14,9 +14,10 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
+import webbrowser
 import wx
 
-from gswidgetkit import Label, Button
+from gswidgetkit import Label, Button, EVT_BUTTON
 
 import gimelstudio.constants as const 
 from gimelstudio.datafiles import ICON_GIMELSTUDIO_ICO, ICON_LICENSE
@@ -96,4 +97,32 @@ class AboutDialog(wx.Dialog):
 
         panel.SetSizer(sizer)
         sizer.Fit(self)
- 
+
+        # Bindings
+        website_btn.Bind(EVT_BUTTON, self.OnWebsiteButton)
+        github_btn.Bind(EVT_BUTTON, self.OnGithubButton)
+        license_btn.Bind(EVT_BUTTON, self.OnLicenseButton)
+        credits_btn.Bind(EVT_BUTTON, self.OnCreditsButton)
+        discord_btn.Bind(EVT_BUTTON, self.OnDiscordButton)
+        youtube_btn.Bind(EVT_BUTTON, self.OnYoutubeButton)
+
+    def OnWebsiteButton(self, event):
+        webbrowser.open(const.APP_WEBSITE_URL)
+
+    def OnGithubButton(self, event):
+        webbrowser.open(const.APP_GITHUB_URL)
+
+    def OnLicenseButton(self, event):
+        webbrowser.open(const.APP_LICENSE_URL)
+
+    def OnCreditsButton(self, event):
+        webbrowser.open(const.APP_CREDITS_URL)
+
+    def OnDiscordButton(self, event):
+        # Remove the dashes from the url
+        original_url = const.APP_DISCORD_URL
+        new_url = original_url.replace("-", "")
+        webbrowser.open(new_url)
+
+    def OnYoutubeButton(self, event):
+        webbrowser.open(const.APP_YOUTUBE_URL)
