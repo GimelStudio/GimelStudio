@@ -28,13 +28,17 @@ APP_VERSION_TAG = " pre-alpha 2"
 APP_VERSION_FULL = "{0}{1}".format(APP_VERSION, APP_VERSION_TAG)
 
 APP_NAME = "Gimel Studio"
-APP_WEBSITE_URL = "https://gimelstudio.github.io"
 APP_DESCRIPTION = "Non-destructive, node-based 2D image graphics editor focused on simplicity, speed, elegance and usability"
 APP_COPYRIGHT = "© 2019–2022 Noah Rahm and contributors"
 
-APP_FULL_TITLE = "{0} v{1}".format(APP_NAME, APP_VERSION_FULL)
+APP_WEBSITE_URL = "https://gimelstudio.github.io"
+APP_LICENSE_URL = "https://github.com/GimelStudio/GimelStudio/blob/master/LICENSE"
+APP_GITHUB_URL = "https://github.com/GimelStudio/GimelStudio"
+APP_CREDITS_URL = "https://github.com/GimelStudio/GimelStudio/graphs/contributors"
+APP_DISCORD_URL = "https://discord.gg/Rqw-bDr-VDpK"  # Remove dashes when using this
+APP_YOUTUBE_URL = "https://www.youtube.com/channel/UCP9CNtBPMPRwOR4jUiMMkhQ"
 
-APP_CREDITS = [""]
+APP_FULL_TITLE = "{0} v{1}".format(APP_NAME, APP_VERSION_FULL)
 
 APP_CONFIG_FILE = os.path.expanduser("~/.gimelstudio/pre-a2-config.json")
 
@@ -85,9 +89,9 @@ PROJECT_FILE_WILDCARD = "GIMEL file (*.gimel)|*.gimel"
 
 # Colors
 AREA_BG_COLOR = "#242528"
-AREA_TOPBAR_COLOR = "#3f4146"#"#2f3135"
+AREA_TOPBAR_COLOR = "#3f4146"
 
-PROP_HEADER_COLOR = "#3f4146"#"#36383c"
+PROP_HEADER_COLOR = "#3f4146"
 PROP_BG_COLOR = "#36383c"
 
 ACCENT_COLOR = "#5173b5"
