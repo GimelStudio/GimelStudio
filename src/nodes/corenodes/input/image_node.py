@@ -14,6 +14,7 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
+import os.path
 from gimelstudio import api, constants
 
 
@@ -38,7 +39,22 @@ class ImageNode(api.Node):
     def NodeWidgetEventHook(self, idname, value):
         if idname == "file_path":
             image = self.NodeEvalSelf()
+            buf = image.Image("oiio")
+
+            # Set image info
+            spec = buf.spec()
+            file_bytes = os.path.getsize(value)
+            if file_bytes < (1024*1024):
+                prefix = "MB"
+                size = file_bytes / (1024*1024)
+            else:
+                prefix = "kB" 
+                size = file_bytes / 1024
+            info = "{0}x{1}px  |  {2}{3}".format(spec.width, spec.height, round(size, 3), prefix)
+            self.img_info.SetValue(info)
+
             self.NodeUpdateThumb(image)
+            self.RefreshPropertyPanel()
             self.RefreshNodeGraph()
 
     def NodeDndEventHook(self):
@@ -57,8 +73,14 @@ class ImageNode(api.Node):
             btn_lbl="Choose...",
             fpb_label="Image Path"
         )
+        self.img_info = api.LabelProp(
+            idname="label",
+            default="-",
+            fpb_label="Image Info"
+        )
 
         self.NodeAddProp(self.fp_prop)
+        self.NodeAddProp(self.img_info)
 
     def NodeEvaluation(self, eval_info):
         path = self.EvalProperty(eval_info, "file_path")

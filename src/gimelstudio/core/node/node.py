@@ -260,4 +260,4 @@ class Node(NodeView):
 
     def RefreshPropertyPanel(self):
         """ Force a refresh of the Node Properties panel. """
-        wx.CallAfter(self.nodegraph.parent.prop_pnl.UpdatePanelContents, self)
+        wx.CallAfter(self.nodegraph.parent.PropertiesPanel.UpdatePanelContents, self)
