@@ -19,6 +19,9 @@ gsnodegraph
 gswidgetkit
 tests
 
+# Ignore test Gimel Studio project files
+*gimel
+
 # Ignore .sketch files
 *.sketch
 
