@@ -116,7 +116,7 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
             pen = wx.Pen(penColour)
             dc.SetPen(pen)
             dc.SetBrush(backBrush)
-            dc.DrawRectangle(rect)
+            dc.DrawRoundedRectangle(rect, 3)
 
         # Draw the left margin gradient
         if self.drawLeftMargin:
@@ -263,6 +263,46 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
             rr = wx.Rect(xx, rect.y + 1, rect.height - 2, rect.height - 2)
             dc.DrawBitmap(rightArrowBmp, rr.x + 4, rr.y + (rr.height - 16) / 2, True)
 
+    def DrawButton(self, dc, rect, state, colour=None):
+        """
+        Draws a button.
+
+        :param `dc`: an instance of :class:`wx.DC`;
+        :param `rect`: an instance of :class:`wx.Rect`, representing the button client rectangle;
+        :param integer `state`: the button state;
+        :param `colour`: if not ``None``, an instance of :class:`wx.Colour` to be used to draw
+         the :class:`FlatMenuItem` background.
+        """
+
+        # switch according to the status
+        if state == ControlFocus:
+            if colour is None:
+                penColour   = self.buttonFocusBorderColour
+                brushColour = self.buttonFocusFaceColour
+            else:
+                penColour   = colour
+                brushColour = ArtManager.Get().LightColour(colour, 75)
+
+        elif state == ControlPressed:
+            if colour is None:
+                penColour   = self.buttonPressedBorderColour
+                brushColour = self.buttonPressedFaceColour
+            else:
+                penColour   = colour
+                brushColour = ArtManager.Get().LightColour(colour, 60)
+        else:
+            if colour is None:
+                penColour   = self.buttonBorderColour
+                brushColour = self.buttonFaceColour
+            else:
+                penColour   = colour
+                brushColour = ArtManager.Get().LightColour(colour, 75)
+
+        dcsaver = DCSaver(dc)
+        dc.SetPen(wx.Pen(penColour))
+        dc.SetBrush(wx.Brush(brushColour))
+        dc.DrawRoundedRectangle(rect, 2)
+
     def DrawMenuBar(self, menubar, dc):
         """
         Draws everything for :class:`FlatMenuBar`.
@@ -366,7 +406,7 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
                     # Fill the bitmap with the masking colour
                     memDc.SetPen(wx.Pen(wx.Colour(255, 0, 0)))
                     memDc.SetBrush(wx.Brush(wx.Colour(255, 0, 0)))
-                    memDc.DrawRectangle(0, 0, rect.width, rect.height)
+                    memDc.DrawRoundedRectangle(0, 0, rect.width, rect.height, 3)
                     memDc.SetFont(fnt)
 
                 if location == wx.NOT_FOUND or location >= len(fixedText):
