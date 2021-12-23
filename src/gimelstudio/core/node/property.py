@@ -21,7 +21,8 @@ from gswidgetkit import (NumberField, EVT_NUMBERFIELD,
                          Button, EVT_BUTTON, TextCtrl,
                          Label, DropDown, EVT_DROPDOWN)
 
-from gimelstudio.constants import DARK_COLOR, PROP_BG_COLOR, SUPPORTED_FT_OPEN_LIST
+from gimelstudio.constants import (AREA_BG_COLOR, PROP_BG_COLOR, 
+                                   SUPPORTED_FT_OPEN_LIST)
 from gimelstudio.datafiles import ICON_ARROW_DOWN, ICON_ARROW_RIGHT
 
 
@@ -400,13 +401,13 @@ class LabelProp(Property):
 
     def CreateUI(self, parent, sizer):
         fold_panel = self.CreateFoldPanel(sizer, self.fpb_label)
-
+ 
         pnl = wx.Panel(fold_panel)
-        pnl.SetBackgroundColour(wx.Colour(DARK_COLOR))
+        pnl.SetBackgroundColour(wx.Colour(AREA_BG_COLOR))
 
         vbox = wx.BoxSizer(wx.VERTICAL)
 
-        value_label = Label(pnl, label=_(self.GetValue()), bg_color=DARK_COLOR)
+        value_label = Label(pnl, label=_(self.GetValue()), bg_color=AREA_BG_COLOR)
         vbox.Add(value_label, flag=wx.EXPAND | wx.BOTH | wx.ALL, border=10)
 
         vbox.Fit(pnl)

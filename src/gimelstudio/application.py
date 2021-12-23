@@ -17,16 +17,17 @@
 import webbrowser
 
 import wx
-from wx.core import ICON_INFORMATION
 import wx.lib.agw.aui as aui
 import wx.lib.agw.flatmenu as flatmenu
 
-from gimelstudio.constants import (APP_FULL_TITLE, AREA_TOPBAR_COLOR, DARK_COLOR, PROJECT_FILE_WILDCARD)
+from gimelstudio.constants import (APP_FULL_TITLE, AREA_TOPBAR_COLOR, DARK_COLOR, 
+                                   PROJECT_FILE_WILDCARD)
 from gimelstudio.utils import ConvertImageToWx
 from .interface import artproviders
-from .datafiles.icons import ICON_BUG, ICON_CAMERA, ICON_CLOSE, ICON_COPY, ICON_DOCS, ICON_EXPORT, ICON_FOLDER, ICON_GIMELSTUDIO_ICO, ICON_IMAGEVIEWPORT_PANEL, ICON_INFO, ICON_NEW_FILE, ICON_SAVE, ICON_SETTINGS, ICON_WEBSITE
-from .core import (Renderer, GLSLRenderer, ProjectFileIO,
-                   NODE_REGISTRY)
+from .datafiles.icons import (ICON_BUG, ICON_CAMERA, ICON_CLOSE, ICON_COPY, ICON_DOCS, 
+                              ICON_EXPORT, ICON_FOLDER, ICON_GIMELSTUDIO_ICO, ICON_SAVE, 
+                              ICON_INFO, ICON_NEW_FILE, ICON_SETTINGS, ICON_WEBSITE)
+from .core import (Renderer, GLSLRenderer, ProjectFileIO, NODE_REGISTRY)
 from .interface import (ImageViewportPanel, NodePropertiesPanel,
                         NodeGraphPanel, StatusBar, PreferencesDialog,
                         ExportImageHandler, NodeGraphDropTarget,
@@ -62,7 +63,7 @@ class ApplicationFrame(wx.Frame):
         self.main_sizer = wx.BoxSizer(wx.VERTICAL)
 
         # Create the menubar
-        self.menubar = flatmenu.FlatMenuBar(self, wx.ID_ANY, 40, 6, options=0)
+        self.menubar = flatmenu.FlatMenuBar(self, wx.ID_ANY, 40, 7, options=0)
 
         # Set the dark theme
         rm = self.menubar.GetRendererManager()
