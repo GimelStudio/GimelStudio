@@ -32,12 +32,41 @@ ICON_BRUSH_CHECKERBOARD = PyEmbeddedImage(
     b'RK5CYII=')
 
 #----------------------------------------------------------------------
+ICON_BUG = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAA00lEQVQ4jb2TURGDMBBEkRAJ'
+    b'SIgEJCAhEpCAg0qphEiIBCQg4fWDvWmAy5Qyne7M/ZDL7t7m6Lp/AAjACCSgv0sSgZU94h2i'
+    b'J2csd4gmYD7WlYsBSF8IDW5uUsTJxYP1+A41DkD2xlJl9UxAaBFFNTVH1Dr4Lwj0mtkcDR+y'
+    b'MUf7nKp8OBKxLWNyiAxzTWSOzPZYnWUgX3J0sL7WKg6RufeDrtRWVTwSse2anacWiSmVullE'
+    b'RSKLvi/qfXhEwXZDVTijWCbqvfYT816JiW3H2rn8Ci+iG/2TagrjLQAAAABJRU5ErkJggg==')
+
+#----------------------------------------------------------------------
+ICON_CAMERA = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAsElEQVQ4jcWRYQ3DIBCFKwEJ'
+    b'k4AEJEwCEiqhDiphEiahEpAwCUj49mNHc7u1GUey7CUXwkE+7j2m6RcCFlNpFGS1eAEBiEDy'
+    b'lgXNB9P0arbZMDDRu/0GOrGdgAJU4A5kk+l3kLJcgVVWGswDesg0QfUKULtBvH5xf131s/Rj'
+    b'LyjIxZvpt4+5eKxtkksWcJb95s0oSE5aBYgukDq/yp1kgj8GiRVPfYDiAKRVOnPyXz0BN+1g'
+    b'XVvraHsAAAAASUVORK5CYII=')
+
+#----------------------------------------------------------------------
+ICON_CLOSE = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAZklEQVQ4je3SsQ3AIAxEUUZg'
+    b'hIyWETyCN/DIP0UonMgQTFquxPCErCtlJx2gAjKYn0CdgYQ7mpn1MHs/cIhNIRG2jATYOtIg'
+    b'cZD+RSzaWRpxZzms9STcicO6PfOXvwqpwDH1q51HLhS7u3k19+rTAAAAAElFTkSuQmCC')
+
+#----------------------------------------------------------------------
+ICON_COPY = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAWUlEQVQ4jWNgoCX4//+/wf//'
+    b'/xuIwAqEDFr/nziwn5BB+wkpwqkGzTv3oRibdxIIGUSSd/AZRJJ3Rg0aYgZhJAVyDbqPlDgD'
+    b'KPYaKc7GBQgaRGzRgekdagIANOjbomZ0Q/kAAAAASUVORK5CYII=')
+
+#----------------------------------------------------------------------
 ICON_CREDITS = PyEmbeddedImage(
-    b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAxElEQVQ4jcWSYQ3DIBCFK6ES'
-    b'KqESkIAEJFQCDiYBCUhAQiVMQiV8+7FHwrojW1jSveTScBzfXe51mq4QMAMeCMAyClmBg1et'
-    b'I6DMu+4joPM0AIyAdoOzf/NwAYrCKVodWrxTk2waAMT2kXIzsCkW5UpTlz6BinIeuAEJCAYo'
-    b'WqDaPfO03nKt6C6p8dzbk9M3GJCqOpnvTVOQK+rYU1bNztnFZoK6m9KjGDVbC9p+AMUWFDtF'
-    b'/wM5waojQWcrzjXO/AVG9QCjYINBJLHSsAAAAABJRU5ErkJggg==')
+    b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAA3klEQVQ4jc2SUQ3EIAyGJwEJ'
+    b'SJgEJEwCEiZhDiYBCUhAwiRMAhK+e/m568iWLLvkck36wE/7tbQMwy8McMAERMA/hYxA5Wjj'
+    b'E1AWaAQCsAP7E1AFkjkngCegTTBvOtruJHqgyIPcWtXgg4rk0wUAi4J3oEpzwCz30opA2Kf3'
+    b'oFa5SJuAVfOJBtTiljNQq561qWwS2jcouksq7K5Ak/mAqBun+1ValE9XkGySk7pwXdyuuAbd'
+    b'elA01Vzb3knBt25yZhsww+ez3QHpzGHgbWN/BQpWaJs5AR10NRD6uK/sBaPCCedrJxPlAAAA'
+    b'AElFTkSuQmCC')
 
 #----------------------------------------------------------------------
 ICON_DISCORD = PyEmbeddedImage(
@@ -46,6 +75,27 @@ ICON_DISCORD = PyEmbeddedImage(
     b'7QC0/Q3KQKKMu0qlxs260PvspccCXgPZ5hd59uYR6CrnBojyFFZGs7IWR6BYQYnyb5kXaNVA'
     b'th5RMKeBkEZXXcvADVhkbegdafJbyHe3lcRdSLAFuHTKAfMupIlg6TQkmHkc3wHvpMsjjkqv'
     b'ZgAAAABJRU5ErkJggg==')
+
+#----------------------------------------------------------------------
+ICON_DOCS = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAbUlEQVQ4jWNgoDb4//+/wP//'
+    b'/x3+///fQAJOwGZQw3/SwX5sBu3HKoHbB9jV08wgGB8dD5xBVPPaqEE4Dfr/////99RI2f//'
+    b'///f/5/CvDb/////74n1Gj4/G5DgJdxegxqm8P///wKKvEYpAACtfe4kojN8wwAAAABJRU5E'
+    b'rkJggg==')
+
+#----------------------------------------------------------------------
+ICON_EXPORT = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAfUlEQVQ4jb3UQQ3DMAxG4UIY'
+    b'lEIohEEIhEIwg0IqlEIYhG+XHqYdEqfp9iSfLD39tqNM0y/AgkjWsyZ66aAmgkgkj5YosAyL'
+    b'smQSzShDIqznsuOSCA9sH8c4sH9VNEVnoyXaeke77fwz1mFRlv89yDt31EVNVOS/kdJKfok3'
+    b'1A2SUCq0OmMAAAAASUVORK5CYII=')
+
+#----------------------------------------------------------------------
+ICON_FOLDER = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAmUlEQVQ4jc2TYQ2AIBCFjWAE'
+    b'IxiBCEYgghFsYgQjEMEIRjDC559jQzgGOOd82/tzN77HHaPrfivAAk7x2gpy5OUAE/sJKKdN'
+    b'A41aaskxpH8LZB+M5TWHoEmKtuE2PtyGICNF/SX0xxnlzBQWh4ReBqXhsuz7vGWQH22IGwBL'
+    b'A2jOgU4avgOwAGiNXWCu0gdw5BJqId7Vq/heF1NFGsxOHHEUAAAAAElFTkSuQmCC')
 
 #----------------------------------------------------------------------
 ICON_GIMELSTUDIO_ICO = PyEmbeddedImage(
@@ -159,6 +209,15 @@ ICON_IMAGEVIEWPORT_PANEL = PyEmbeddedImage(
     b'uUDeTztwelv/yQyApInJjM1FvwAAAABJRU5ErkJggg==')
 
 #----------------------------------------------------------------------
+ICON_INFO = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAA3ElEQVQ4jbWTUQ2EMBBEkVAJ'
+    b'SKiESqgEJCABB5WABCRUAhKQgIR3Hwy5XNn2DpLbpAmZ3b7ObmnX/TsAB3ggAgPgnwASsGPH'
+    b'9AukB7I2LHLjpUdgVm4F+paTLCexcZhXzVYrGHVaLPRUtgOEapvABsyGnoBk6DOAZffiphWa'
+    b'GR+3qevFGqDVmnSnPaNFt0AZyA3Q0Ba/g86BxzKxA8sN0CSQKxNJiWDoqdCCDr7c5lmwqiCY'
+    b'BW/IpuVqRb1gyEnQ/Jy+zzdYfyKV/svYBbOdNICR4+mMHD/tPcCTeAGZoLvmRUXpKAAAAABJ'
+    b'RU5ErkJggg==')
+
+#----------------------------------------------------------------------
 ICON_KEY_CTRL = PyEmbeddedImage(
     b'iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAABHNCSVQICAgIfAhkiAAAASRJ'
     b'REFUOI3tk7FKxEAYhL8RtY6dZSxEEIS0gqClpZWNTWpB8A0sfIFw2HsgCHbX2Cq+QRAEywiC'
@@ -240,6 +299,13 @@ ICON_MOUSE_RMB_MOVEMENT = PyEmbeddedImage(
     b'tBj6BZFQ3OkN9voTAAAAAElFTkSuQmCC')
 
 #----------------------------------------------------------------------
+ICON_NEW_FILE = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAaklEQVQ4jdXUsQ2AMAxE0YzA'
+    b'KIzCSGyUETwKI2SETwMSRYLPkSk4yUUc6UXXpJTsACuwC7N4UEXL8YoBBpjzmLlYEBpjExBA'
+    b'laHo/jvoPgPtqtG9j0JtGkqrlg6N8j8omi6kfiPP2dQGck7FkdiwJkUwZQAAAABJRU5ErkJg'
+    b'gg==')
+
+#----------------------------------------------------------------------
 ICON_NODEGRAPH_PANEL = PyEmbeddedImage(
     b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAqklEQVQ4jdWSUQ2EMBBEkYAE'
     b'JJyESjgJSEDCOaiESqgEJFTCSUDC42dJ5jYNx/J1N0nTpGRfdoYZhr8UMAIvYLVTgTkKeAAF'
@@ -256,13 +322,28 @@ ICON_NODEPROPERTIES_PANEL = PyEmbeddedImage(
     b'6QAAAABJRU5ErkJggg==')
 
 #----------------------------------------------------------------------
+ICON_SAVE = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAc0lEQVQ4jdWT3Q2AIAyEHZUR'
+    b'HIENHMFROoojMMLnCxiiXkNf/LnkciU0XwqEafqsgATYoFcPZEDpUslaeiDr6lvV/bkur5NF'
+    b'QOd+D7So+wmBRvQcCMj6wQ7lCCgLx0DOkX4KAthqmnDrKQoU+bTNSU3+vna5oSnX2bWtHQAA'
+    b'AABJRU5ErkJggg==')
+
+#----------------------------------------------------------------------
+ICON_SETTINGS = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAqklEQVQ4jc3TYQ2EMAyGYSQg'
+    b'AQmTgAQkIAEJOEAKUiZlEt77cR9Zs9saxv2hyULSjifdKMPw+gBWYAcmZ8/o1e2mCKRG7QCS'
+    b'1i8GbMUL2JzyCznOVieHOpmAuYSEnwaavSNdkcwzqH4hGzDeuZ9dmy0a1OXqAg00lFg3Yrr7'
+    b'D9MsJR3nGWYQgKhcH1Yi9uvcxvgOWxXpwshTW0UqWKT1v+ly/WHLWB15TXwAnZePNx+QuFgA'
+    b'AAAASUVORK5CYII=')
+
+#----------------------------------------------------------------------
 ICON_WEBSITE = PyEmbeddedImage(
-    b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAA7klEQVQ4jbWTaw2EMBCETwIS'
-    b'kIAEJCABCUjAARJOwklAAhKQUAnf/WBKhqX3IrlNGmC6nc7uDrfbvwOogNq+mysEE5CAEaiE'
-    b'92wxfUPSALMOJJEOwKD9VXuLqy0pySRkNTqUgiqA9RXRyDFqoLPvXsQe9xLRGpJyWbtC5SXD'
-    b'Uqk3Hovwh2EPYXPIbWN/WluNXbDjwuqQWztR3CwRFckjkTcVNJFQxlwoF6CLfTo1kc2YOabC'
-    b'UBIyrBP5IVRCHH8cytnlbA3329zN2eUHQ57UBBssobyeo8vR8/NPDNytnEqrk7L5pZI3hK2/'
-    b'/0xwJZ6C/ofelhqaSQAAAABJRU5ErkJggg==')
+    b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAA9ElEQVQ4jbWTUQ2EMBBEkYAE'
+    b'JFTCSagEJCABB0hAAhIqAQmVUAnvfqbcZq8QjuQ2aci0y6MzpV337wJ6IAARGIHwBLAAhXbN'
+    b'dyADkARJQDYDYNVzB4arnVRIlC2AWdbQh4J68hloUvPL6UEfOWxprm1T21+N3oDd6B3YjF4B'
+    b'PKTaiA5sX1yAYnTUO8GCaga7ckrSxegaeHI9U9eg+6Z8AzT6EzuCPrG2Yk6qFUddKC7s5DJJ'
+    b'QDJ6Fqj3oMWGZ3Q9/gIsZjeH/iqFXdRY7U6Yf0xrWaM/Aw2Cwee+Fc1lM3d+RRyw+vdVBGvv'
+    b'5AIYjbXwM+BJvQHYgG2dyEStkQAAAABJRU5ErkJggg==')
 
 #----------------------------------------------------------------------
 ICON_YOUTUBE = PyEmbeddedImage(

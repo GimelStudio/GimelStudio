@@ -17,13 +17,14 @@
 import webbrowser
 
 import wx
+from wx.core import ICON_INFORMATION
 import wx.lib.agw.aui as aui
 import wx.lib.agw.flatmenu as flatmenu
 
 from gimelstudio.constants import (APP_FULL_TITLE, AREA_TOPBAR_COLOR, DARK_COLOR, PROJECT_FILE_WILDCARD)
 from gimelstudio.utils import ConvertImageToWx
 from .interface import artproviders
-from .datafiles.icons import ICON_GIMELSTUDIO_ICO
+from .datafiles.icons import ICON_BUG, ICON_CAMERA, ICON_CLOSE, ICON_COPY, ICON_DOCS, ICON_EXPORT, ICON_FOLDER, ICON_GIMELSTUDIO_ICO, ICON_IMAGEVIEWPORT_PANEL, ICON_INFO, ICON_NEW_FILE, ICON_SAVE, ICON_SETTINGS, ICON_WEBSITE
 from .core import (Renderer, GLSLRenderer, ProjectFileIO,
                    NODE_REGISTRY)
 from .interface import (ImageViewportPanel, NodePropertiesPanel,
@@ -87,7 +88,8 @@ class ApplicationFrame(wx.Frame):
             label="{0}{1}".format(_("New Project"), "\tCtrl+N"),
             helpString=_("Create a new Gimel Studio project file"),
             kind=wx.ITEM_NORMAL,
-            subMenu=None
+            subMenu=None,
+            normalBmp=ICON_NEW_FILE.GetBitmap()
         )
 
         self.openprojectfile_menuitem = flatmenu.FlatMenuItem(
@@ -96,7 +98,8 @@ class ApplicationFrame(wx.Frame):
             label="{0}{1}".format(_("Open Project"), "\tCtrl+O"),
             helpString=_("Open and load a Gimel Studio project file"),
             kind=wx.ITEM_NORMAL,
-            subMenu=None
+            subMenu=None,
+            normalBmp=ICON_FOLDER.GetBitmap()
         )
 
         self.saveprojectfile_menuitem = flatmenu.FlatMenuItem(
@@ -105,7 +108,8 @@ class ApplicationFrame(wx.Frame):
             label="{0}{1}".format(_("Save Project…"), "\tCtrl+S"),
             helpString=_("Save the current project file"),
             kind=wx.ITEM_NORMAL,
-            subMenu=None
+            subMenu=None,
+            normalBmp=ICON_SAVE.GetBitmap()
         )
 
         self.saveprojectfileas_menuitem = flatmenu.FlatMenuItem(
@@ -114,7 +118,8 @@ class ApplicationFrame(wx.Frame):
             label="{0}{1}".format(_("Save Project As…"), "\tCtrl+Shift+S"),
             helpString=_("Save the current project as a Gimel Studio project"),
             kind=wx.ITEM_NORMAL,
-            subMenu=None
+            subMenu=None,
+            normalBmp=ICON_SAVE.GetBitmap()
         )
 
         self.exportasimage_menuitem = flatmenu.FlatMenuItem(
@@ -123,7 +128,8 @@ class ApplicationFrame(wx.Frame):
             label="{0}{1}".format(_("Export Image As…"), "\tShift+E"),
             helpString=_("Export rendered image to a file"),
             kind=wx.ITEM_NORMAL,
-            subMenu=None
+            subMenu=None,
+            normalBmp=ICON_EXPORT.GetBitmap()
         )
 
         self.quit_menuitem = flatmenu.FlatMenuItem(
@@ -132,7 +138,8 @@ class ApplicationFrame(wx.Frame):
             label="{0}{1}".format(_("Quit"), "\tShift+Q"),
             helpString=_("Quit Gimel Studio"),
             kind=wx.ITEM_NORMAL,
-            subMenu=None
+            subMenu=None,
+            normalBmp=ICON_CLOSE.GetBitmap()
         )
 
         # Edit
@@ -142,7 +149,8 @@ class ApplicationFrame(wx.Frame):
             label=_("Copy Image to Clipboard"),
             helpString=_("Copy the current rendered image to the system clipboard"),
             kind=wx.ITEM_NORMAL,
-            subMenu=None
+            subMenu=None,
+            normalBmp=ICON_COPY.GetBitmap()
         )
 
         self.preferences_menuitem = flatmenu.FlatMenuItem(
@@ -151,7 +159,8 @@ class ApplicationFrame(wx.Frame):
             label=_("Preferences"),
             helpString=_("Edit preferences for Gimel Studio"),
             kind=wx.ITEM_NORMAL,
-            subMenu=None
+            subMenu=None,
+            normalBmp=ICON_SETTINGS.GetBitmap()
         )
 
         # View
@@ -176,7 +185,7 @@ class ApplicationFrame(wx.Frame):
         self.toggleautorender_menuitem = flatmenu.FlatMenuItem(
             render_menu,
             id=wx.ID_ANY,
-            label=_("Auto Render"),
+            label=_("Auto Render Image"),
             helpString=_("Enable auto rendering after editing node properties, connections, etc"),
             kind=wx.ITEM_CHECK,
             subMenu=None
@@ -188,7 +197,8 @@ class ApplicationFrame(wx.Frame):
             label="{0}{1}".format(_("Render Image"), "\tF12"),
             helpString=_("Force an immediate, updated render of the current node graph"),
             kind=wx.ITEM_NORMAL,
-            subMenu=None
+            subMenu=None,
+            normalBmp=ICON_CAMERA.GetBitmap()
         )
 
         # Window
@@ -217,7 +227,8 @@ class ApplicationFrame(wx.Frame):
             label=_("Online Manual"),
             helpString=_("Open the online Gimel Studio manual in your browser"),
             kind=wx.ITEM_NORMAL,
-            subMenu=None
+            subMenu=None,
+            normalBmp=ICON_DOCS.GetBitmap()
         )
 
         self.visitwebsite_menuitem = flatmenu.FlatMenuItem(
@@ -226,7 +237,8 @@ class ApplicationFrame(wx.Frame):
             label=_("Visit Website"),
             helpString=_("Open the offical Gimel Studio website in your browser"),
             kind=wx.ITEM_NORMAL,
-            subMenu=None
+            subMenu=None,
+            normalBmp=ICON_WEBSITE.GetBitmap()
         )
 
         self.reportabug_menuitem = flatmenu.FlatMenuItem(
@@ -235,7 +247,8 @@ class ApplicationFrame(wx.Frame):
             label=_("Report a Bug"),
             helpString=_("Report a bug in Gimel Studio"),
             kind=wx.ITEM_NORMAL,
-            subMenu=None
+            subMenu=None,
+            normalBmp=ICON_BUG.GetBitmap()
         )
 
         self.about_menuitem = flatmenu.FlatMenuItem(
@@ -244,7 +257,8 @@ class ApplicationFrame(wx.Frame):
             label=_("About Gimel Studio"),
             helpString=_("Information about Gimel Studio"),
             kind=wx.ITEM_NORMAL,
-            subMenu=None
+            subMenu=None,
+            normalBmp=ICON_INFO.GetBitmap()
         )
 
         # Set defaults
@@ -270,6 +284,7 @@ class ApplicationFrame(wx.Frame):
         view_menu.AppendItem(self.showstatusbar_menuitem)
 
         render_menu.AppendItem(self.toggleautorender_menuitem)
+        render_menu.AppendItem(separator)
         render_menu.AppendItem(self.renderimage_menuitem)
 
         window_menu.AppendItem(self.togglewindowfullscreen_menuitem)
