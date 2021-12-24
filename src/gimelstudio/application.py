@@ -305,6 +305,7 @@ class ApplicationFrame(wx.Frame):
         self.menubar.Append(window_menu, _("Window"))
         self.menubar.Append(help_menu, _("Help"))
         
+        # Adds vertical spacing to the menubar popups
         for item in self.menubar._items:
             item.GetMenu()._marginHeight = self.menubar._margin + 18
             item.GetMenu().ResizeMenu()
