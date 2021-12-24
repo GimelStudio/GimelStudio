@@ -610,7 +610,7 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
                               flatmenu._textX, flatmenu._rightMarginPosX,
                               nCount == flatmenu._selectedItem,
                               backgroundImage=backgroundImage)
-            posy += item.GetHeight()
+            posy += item.GetHeight() + self.itemPadding
             item.Show()
 
             if visibleItems >= switch:
