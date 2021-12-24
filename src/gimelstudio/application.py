@@ -67,7 +67,7 @@ class ApplicationFrame(wx.Frame):
 
         # Set the dark theme
         rm = self.menubar.GetRendererManager()
-        theme = rm.AddRenderer(artproviders.UIMenuBarRenderer(self.menubar._margin))
+        theme = rm.AddRenderer(artproviders.UIMenuBarRenderer())
         rm.SetTheme(theme)
 
         # Init menus
