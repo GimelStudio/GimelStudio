@@ -29,7 +29,7 @@ def switchRGBtoBGR(colour):
 
 
 class UIMenuBarRenderer(flatmenu.FMRenderer):
-    def __init__(self):
+    def __init__(self, itemPadding):
         flatmenu.FMRenderer.__init__(self)
 
         self.highlightCheckAndRadio = True
@@ -54,7 +54,7 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
         self.buttonPressedFaceColour = wx.Colour(ACCENT_COLOR)
         self.buttonPressedBorderColour = wx.Colour(ACCENT_COLOR)
         
-        self.itemPadding = 16
+        self.itemPadding = itemPadding
 
 
     def DrawSeparator(self, dc, xCoord, yCoord, textX, sepWidth):
