@@ -304,6 +304,10 @@ class ApplicationFrame(wx.Frame):
         self.menubar.Append(render_menu, _("Render"))
         self.menubar.Append(window_menu, _("Window"))
         self.menubar.Append(help_menu, _("Help"))
+        
+        for item in self.menubar._items:
+            item.GetMenu()._marginHeight = self.menubar._margin + 18
+            item.GetMenu().ResizeMenu()
 
         # Menu event bindings
         self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,

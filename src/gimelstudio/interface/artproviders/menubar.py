@@ -29,7 +29,7 @@ def switchRGBtoBGR(colour):
 
 
 class UIMenuBarRenderer(flatmenu.FMRenderer):
-    def __init__(self, itemPadding):
+    def __init__(self):
         flatmenu.FMRenderer.__init__(self)
 
         self.highlightCheckAndRadio = True
@@ -53,9 +53,6 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
         self.buttonFocusBorderColour = wx.Colour(ACCENT_COLOR)
         self.buttonPressedFaceColour = wx.Colour(ACCENT_COLOR)
         self.buttonPressedBorderColour = wx.Colour(ACCENT_COLOR)
-        
-        self.itemPadding = itemPadding
-
 
     def DrawSeparator(self, dc, xCoord, yCoord, textX, sepWidth):
         """
@@ -99,7 +96,7 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
         """
 
         borderXSize = item._parentMenu.GetBorderXWidth()
-        itemHeight = item._parentMenu.GetItemHeight() + self.itemPadding
+        itemHeight = item._parentMenu.GetItemHeight()
         menuWidth = item._parentMenu.GetMenuWidth()
 
         # Define the item actual rectangle area
@@ -221,7 +218,7 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
                 w3, dummy = dc.GetTextExtent(text3)
 
                 posx = xCoord + textX + borderXSize
-                posy = (itemHeight - h) / 2 + yCoord + self.itemPadding
+                posy = (itemHeight - h) / 2 + yCoord
 
                 # Draw first part
                 dc.DrawText(text1, posx, posy)
@@ -599,7 +596,7 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
         # If we have to scroll and are not using the scroll bar buttons we need to draw
         # the scroll up menu item at the top.
         if not self.scrollBarButtons and flatmenu._showScrollButtons:
-            posy += flatmenu.GetItemHeight() + self.itemPadding
+            posy += flatmenu.GetItemHeight()
 
         for nCount in range(flatmenu._first, nItems):
 
@@ -610,7 +607,7 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
                               flatmenu._textX, flatmenu._rightMarginPosX,
                               nCount == flatmenu._selectedItem,
                               backgroundImage=backgroundImage)
-            posy += item.GetHeight() + self.itemPadding
+            posy += item.GetHeight()
             item.Show()
 
             if visibleItems >= switch:
@@ -622,7 +619,7 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
             # make sure we draw only visible items
             pp = flatmenu.ClientToScreen(wx.Point(0, posy))
 
-            menuBottom = (self.scrollBarButtons and [pp.y] or [pp.y + flatmenu.GetItemHeight() + self.itemPadding * 2])[0]
+            menuBottom = (self.scrollBarButtons and [pp.y] or [pp.y + flatmenu.GetItemHeight() * 2])[0]
 
             if menuBottom > screenHeight:
                 break
@@ -633,4 +630,4 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
             if flatmenu._downButton:
                 flatmenu._downButton.Draw(mem_dc)
 
-        dc.Blit(0, 0, menuBmp.GetWidth(), menuBmp.GetHeight() + self.itemPadding, mem_dc, 0, 0)
+        dc.Blit(0, 0, menuBmp.GetWidth(), menuBmp.GetHeight(), mem_dc, 0, 0)
