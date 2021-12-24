@@ -54,7 +54,6 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
         self.buttonPressedFaceColour = wx.Colour(ACCENT_COLOR)
         self.buttonPressedBorderColour = wx.Colour(ACCENT_COLOR)
 
-
     def DrawSeparator(self, dc, xCoord, yCoord, textX, sepWidth):
         """
         Draws a separator inside a :class:`FlatMenu`.
@@ -620,7 +619,7 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
             # make sure we draw only visible items
             pp = flatmenu.ClientToScreen(wx.Point(0, posy))
 
-            menuBottom = (self.scrollBarButtons and [pp.y] or [pp.y + flatmenu.GetItemHeight()*2])[0]
+            menuBottom = (self.scrollBarButtons and [pp.y] or [pp.y + flatmenu.GetItemHeight() * 2])[0]
 
             if menuBottom > screenHeight:
                 break
