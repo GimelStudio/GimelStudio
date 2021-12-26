@@ -98,3 +98,5 @@ ACCENT_COLOR = "#5173b5"
 DARK_COLOR = "#1b1c1e"
 
 TEXT_COLOR = "#dfdfdf"
+
+ADD_NODE_MENU_BG = "#121314"

@@ -26,11 +26,14 @@ class NodesVListBox(wx.VListBox):
         self.parent = args[0]
         wx.VListBox.__init__(self, *args, **kw)
 
-        self.SetBackgroundColour(const.PROP_BG_COLOR)
+        self.SetBackgroundColour(const.ADD_NODE_MENU_BG)
 
         self.Bind(wx.EVT_MOTION, self.OnStartDrag)
 
-    def _GetItemText(self, item):
+    def GetItemText(self, item):
+        return self.GetNodeObject(item).GetLabel()
+
+    def GetItemColor(self, item):
         return self.GetNodeObject(item).GetLabel()
 
     def GetNodeObject(self, node_type):
@@ -78,7 +81,7 @@ class NodesVListBox(wx.VListBox):
             dc.SetFont(self.GetFont())
         dc.SetTextForeground(color)
         dc.SetBrush(wx.Brush(color, wx.SOLID))
-        dc.DrawLabel(text=self._GetItemText(n), rect=rect,
+        dc.DrawLabel(text=self.GetItemText(n), rect=rect,
                      alignment=wx.ALIGN_LEFT | wx.ALIGN_CENTER_VERTICAL)
 
         # Monkey-patch some padding for the right side
@@ -87,7 +90,7 @@ class NodesVListBox(wx.VListBox):
     def OnMeasureItem(self, n):
         """ Returns the height required to draw the n'th item. """
         height = 0
-        for line in self._GetItemText(n).split('\n'):
+        for line in self.GetItemText(n).split('\n'):
             w, h = self.GetTextExtent(line)
             height += h
         return height + 20
@@ -97,15 +100,11 @@ class NodesVListBox(wx.VListBox):
         if self.GetSelection() == n:
             color = wx.Colour(const.ACCENT_COLOR)
         else:
-            # Create striped effect
-            if n % 2 == 0:
-                color = wx.Colour(const.PROP_BG_COLOR)
-            else:
-                color = wx.Colour(const.PROP_BG_COLOR)
+            color = wx.Colour(const.ADD_NODE_MENU_BG)
 
         dc.SetPen(wx.TRANSPARENT_PEN)
         dc.SetBrush(wx.Brush(color, wx.SOLID))
-        dc.DrawRectangle(rect)
+        dc.DrawRoundedRectangle(rect, 4)
 
     def SearchNodeRegistry(self, node_label, search_string):
         """ Returns whether or not the search string is in
@@ -152,19 +151,19 @@ class AddNodeMenu(wx.PopupTransientWindow):
         self._nodeRegistry = node_registry
         self._nodeRegistryMapping = {}
 
-        self.SetBackgroundColour(const.PROP_BG_COLOR)
+        self.SetBackgroundColour(const.ADD_NODE_MENU_BG)
 
-        self._InitRegistryMapping()
-        self._InitAddNodeMenuUI()
+        self.InitRegistryMapping()
+        self.InitAddNodeMenuUI()
 
-    def _InitRegistryMapping(self):
+    def InitRegistryMapping(self):
         i = 0
         for item in self._nodeRegistry:
             if item != "corenode_outputcomposite":
                 self._nodeRegistryMapping[i] = item
                 i += 1
 
-    def _InitAddNodeMenuUI(self):
+    def InitAddNodeMenuUI(self):
         # Sizer
         main_sizer = wx.BoxSizer(wx.VERTICAL)
 
