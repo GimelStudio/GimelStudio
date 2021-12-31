@@ -84,11 +84,9 @@ class AddTextNode(api.Node):
         img = image1.Image("oiio")
 
         spec = img.spec()
-
-        txt = oiio.ImageBuf(oiio.ImageSpec (spec.width, spec.height, 4, oiio.INT16))
+        txt = oiio.ImageBuf(oiio.ImageSpec(spec.width, spec.height, 4, oiio.INT16))
         oiio.ImageBufAlgo.render_text (txt, position[0], position[1], "Gimel Studio",
                                        font_size, font, (1,0,0,1))
-
         dst = oiio.ImageBufAlgo.over(txt, img)
 
         render_image.SetAsImage(dst)
