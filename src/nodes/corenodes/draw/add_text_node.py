@@ -62,9 +62,23 @@ class AddTextNode(api.Node):
             show_p=False, 
             fpb_label="Position"
         )
+        self.align_x = api.ChoiceProp(
+            idname="align_x",
+            default="Left",
+            choices=["Left", "Right", "Center"],
+            fpb_label="Align X"
+        )
+        self.align_y = api.ChoiceProp(
+            idname="align_y",
+            default="Baseline",
+            choices=["Baseline", "Top", "Bottom", "Center"],
+            fpb_label="Align Y"
+        )
         self.NodeAddProp(self.font)
         self.NodeAddProp(self.font_size)
         self.NodeAddProp(self.position)
+        self.NodeAddProp(self.align_x)
+        self.NodeAddProp(self.align_y)
 
     def NodeInitParams(self):
         image = api.RenderImageParam("image", "Image")
@@ -78,6 +92,8 @@ class AddTextNode(api.Node):
         font = self.EvalProperty(eval_info, "font")
         font_size = self.EvalProperty(eval_info, "font_size")
         position = self.EvalProperty(eval_info, "position")
+        align_x = self.EvalProperty(eval_info, "align_x")
+        align_y = self.EvalProperty(eval_info, "align_y")
         image1 = self.EvalParameter(eval_info, "image")
 
         render_image = api.RenderImage()
@@ -86,7 +102,8 @@ class AddTextNode(api.Node):
         spec = img.spec()
         txt = oiio.ImageBuf(oiio.ImageSpec(spec.width, spec.height, 4, oiio.INT16))
         oiio.ImageBufAlgo.render_text (txt, position[0], position[1], "Gimel Studio",
-                                       font_size, font, (1,0,0,1))
+                                       font_size, font, (255,255,255,1), alignx=align_x.lower(), 
+                                       aligny=align_y.lower())
         dst = oiio.ImageBufAlgo.over(txt, img)
 
         render_image.SetAsImage(dst)
