@@ -39,19 +39,20 @@ class ImageNode(api.Node):
     def NodeWidgetEventHook(self, idname, value):
         if idname == "file_path":
             image = self.NodeEvalSelf()
-            buf = image.Image("oiio")
-
+            
             # Set image info
-            spec = buf.spec()
-            file_bytes = os.path.getsize(value)
-            if file_bytes < (1024*1024):
-                prefix = "MB"
-                size = file_bytes / (1024*1024)
-            else:
-                prefix = "kB" 
-                size = file_bytes / 1024
-            info = "{0}x{1}px  |  {2}{3}".format(spec.width, spec.height, round(size, 3), prefix)
-            self.img_info.SetValue(info)
+            if value != "":
+                buf = image.Image("oiio")
+                spec = buf.spec()
+                file_bytes = os.path.getsize(value)
+                if file_bytes < (1024*1024):
+                    prefix = "MB"
+                    size = file_bytes / (1024*1024)
+                else:
+                    prefix = "kB" 
+                    size = file_bytes / 1024
+                info = "{0}x{1}px  |  {2}{3}".format(spec.width, spec.height, round(size, 3), prefix)
+                self.img_info.SetValue(info)
 
             self.NodeUpdateThumb(image)
             self.RefreshPropertyPanel()
