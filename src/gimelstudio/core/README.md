@@ -14,12 +14,6 @@ The node evaluation is basically functions calling other functions in sequence.
 
 Each node is defined by a unique id generated upon creation.
 
-Nodes are imported and exported in the format:
-
-"nodes": {
-  "1595rr944444ee": {"type": "Image", "selected": "True", 'parameters': [{'name': 'Image', 'bind': 'fff318ddr51gg'}], 'properties': [{'name': 'Saturation', 'value': 1}, {'name': 'Brightness', 'value': 0}, {'name': 'Gamma', 'value': 1}, {'name': 'Threshold', 'value': 127}]}
-}
-
 
 **Id Pool**
 
