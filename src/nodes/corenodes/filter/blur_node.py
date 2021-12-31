@@ -43,10 +43,10 @@ class BlurNode(api.Node):
         )
         self.kernel = api.XYZProp(
             idname="kernel", 
-            default=(5, 5, 5), 
+            default=(5, 5, 0), 
             fpb_labels=("Kernel X", "Kernel Y"),
-            min_vals=(0, 0, 0), 
-            max_vals=(600, 600, 600),
+            min_vals=(1, 1, 0), 
+            max_vals=(600, 600, 0),
             show_p=False, 
             fpb_label="Blur Kernel"
         )
