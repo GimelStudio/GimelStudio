@@ -16,6 +16,7 @@
 
 import os
 import wx
+from wx import stc
 import gswidgetkit.foldpanelbar as fpbar
 from gswidgetkit import (NumberField, EVT_NUMBERFIELD,
                          Button, EVT_BUTTON, TextCtrl,
@@ -414,3 +415,22 @@ class LabelProp(Property):
         pnl.SetSizer(vbox)
 
         self.AddToFoldPanel(sizer, fold_panel, pnl)
+
+
+class TextProp(Property):
+    """ 
+    Allows the user to type text. 
+    """
+    def __init__(self, idname, default="", fpb_label="", visible=True):
+        Property.__init__(self, idname, default, fpb_label, visible)
+
+    def CreateUI(self, parent, sizer):
+        fold_panel = self.CreateFoldPanel(sizer)
+
+        self.textcontrol = TextCtrl(fold_panel, default=self.GetValue(), size=(-1, 32))
+
+        self.AddToFoldPanel(sizer, fold_panel, self.textcontrol)
+        self.textcontrol.textctrl.Bind(stc.EVT_STC_MODIFIED, self.WidgetEvent)
+
+    def WidgetEvent(self, event):
+        self.SetValue(self.textcontrol.textctrl.GetValue())

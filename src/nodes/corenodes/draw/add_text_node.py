@@ -53,6 +53,11 @@ class AddTextNode(api.Node):
             lbl_suffix="px",
             fpb_label="Font Size"
         )
+        self.text = api.TextProp(
+            idname="text",
+            default="Gimel Studio",
+            fpb_label="Text"
+        )
         self.position = api.XYZProp(
             idname="position", 
             default=(25, 25, 0), 
@@ -76,6 +81,7 @@ class AddTextNode(api.Node):
         )
         self.NodeAddProp(self.font)
         self.NodeAddProp(self.font_size)
+        self.NodeAddProp(self.text)
         self.NodeAddProp(self.position)
         self.NodeAddProp(self.align_x)
         self.NodeAddProp(self.align_y)
@@ -91,6 +97,7 @@ class AddTextNode(api.Node):
     def NodeEvaluation(self, eval_info):
         font = self.EvalProperty(eval_info, "font")
         font_size = self.EvalProperty(eval_info, "font_size")
+        text = self.EvalProperty(eval_info, "text")
         position = self.EvalProperty(eval_info, "position")
         align_x = self.EvalProperty(eval_info, "align_x")
         align_y = self.EvalProperty(eval_info, "align_y")
@@ -101,7 +108,7 @@ class AddTextNode(api.Node):
 
         spec = img.spec()
         txt = oiio.ImageBuf(oiio.ImageSpec(spec.width, spec.height, 4, oiio.INT16))
-        oiio.ImageBufAlgo.render_text (txt, position[0], position[1], "Gimel Studio",
+        oiio.ImageBufAlgo.render_text (txt, position[0], position[1], text,
                                        font_size, font, (255,255,255,1), alignx=align_x.lower(), 
                                        aligny=align_y.lower())
         dst = oiio.ImageBufAlgo.over(txt, img)
