@@ -61,7 +61,7 @@ class AddTextNode(api.Node):
         self.position = api.XYZProp(
             idname="position", 
             default=(25, 25, 0), 
-            fpb_labels=("X", "Y"),
+            labels=("X", "Y"),
             min_vals=(0, 0, 0), 
             max_vals=(4000, 4000, 0),
             show_p=False, 

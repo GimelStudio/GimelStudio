@@ -300,14 +300,14 @@ class XYZProp(Property):
     """ 
     Allows the user to select an (x, y, z) value via Number Fields.
     """
-    def __init__(self, idname, default=(0, 0, 0), fpb_labels=("X", "Y", "Z"),
+    def __init__(self, idname, default=(0, 0, 0), labels=("X", "Y", "Z"),
                  min_vals=(0, 0, 0), max_vals=(10, 10, 10), lbl_suffix="",
                  show_p=False, enable_z=False, fpb_label="", visible=True):
         Property.__init__(self, idname, default, fpb_label, visible)
         self.min_values = min_vals
         self.max_values = max_vals
         self.lbl_suffix = lbl_suffix
-        self.fpb_labels = fpb_labels
+        self.labels = labels
         self.show_p = show_p
         self.enable_z = enable_z
 
@@ -321,7 +321,7 @@ class XYZProp(Property):
 
         self.numberfield_x = NumberField(pnl,
                                          default_value=self.value[0],
-                                         label=self.fpb_labels[0],
+                                         label=self.labels[0],
                                          min_value=self.min_values[0],
                                          max_value=self.max_values[0],
                                          suffix=self.lbl_suffix, 
@@ -331,7 +331,7 @@ class XYZProp(Property):
 
         self.numberfield_y = NumberField(pnl,
                                          default_value=self.value[1],
-                                         label=self.fpb_labels[1],
+                                         label=self.labels[1],
                                          min_value=self.min_values[1],
                                          max_value=self.max_values[1],
                                          suffix=self.lbl_suffix, 
@@ -342,7 +342,7 @@ class XYZProp(Property):
         if self.enable_z:
             self.numberfield_z = NumberField(pnl,
                                              default_value=self.value[2],
-                                             label=self.fpb_labels[2],
+                                             label=self.labels[2],
                                              min_value=self.min_values[2],
                                              max_value=self.max_values[2],
                                              suffix=self.lbl_suffix, 
@@ -374,7 +374,8 @@ class ActionProp(Property):
     """
     Allows the user to click a button to perform an action
     """
-    def __init__(self, idname, default="", fpb_label="", btn_label="", flat=False, action=None, visible=True):
+    def __init__(self, idname, default="", fpb_label="", btn_label="", flat=False, 
+                 action=None, visible=True):
         Property.__init__(self, idname, default, btn_label, visible)
         self.btn_label = btn_label
         if fpb_label != "":

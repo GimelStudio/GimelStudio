@@ -42,7 +42,7 @@ class FitNode(api.Node):
         self.fit_size = api.XYZProp(
             idname="fit_size", 
             default=(100, 100, 0), 
-            fpb_labels=("X", "Y", "Z"),
+            labels=("X", "Y", "Z"),
             min_vals=(0, 0, 0), 
             max_vals=(8000, 8000, 0),
             show_p=False, 
