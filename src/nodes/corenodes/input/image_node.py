@@ -77,7 +77,8 @@ class ImageNode(api.Node):
         self.img_info = api.LabelProp(
             idname="label",
             default="-",
-            fpb_label="Image Info"
+            fpb_label="Image Info",
+            expanded=False
         )
 
         self.NodeAddProp(self.fp_prop)
