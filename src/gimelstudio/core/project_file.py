@@ -114,6 +114,7 @@ class ProjectFileIO(object):
             node_objs = nodegraph.GetNodes()
             param_data = node_data["parameters"]
             node = node_objs[node_id]
+            node.is_init = True
 
             for socket in node.GetSockets():
                 if socket.direction == SOCKET_INPUT:
