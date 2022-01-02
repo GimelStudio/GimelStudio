@@ -31,12 +31,12 @@ class Property(object):
     """
     The base node Property class.
     """
-    def __init__(self, idname, default, fpb_label, visible=True):
+    def __init__(self, idname, default, fpb_label, expanded=True, visible=True):
         self.idname = idname
         self.value = default
         self.fpb_label = fpb_label
         self.visible = visible
-        self.expanded = True
+        self.expanded = expanded
         self.widget_eventhook = None
 
     def _RunErrorCheck(self):
@@ -128,10 +128,10 @@ class ThumbProp(Property):
     """ 
     Shows the current thumbnail image (used internally). 
     """
-    def __init__(self, idname, default=None, fpb_label="", thumb_img=None, visible=True):
-        Property.__init__(self, idname, default, fpb_label, visible)
+    def __init__(self, idname, default=None, fpb_label="", thumb_img=None, 
+                 expanded=False, visible=True):
+        Property.__init__(self, idname, default, fpb_label, expanded, visible)
         self.thumb_img = thumb_img
-        self.expanded = False
 
     def GetThumbImage(self):
         return self.thumb_img
@@ -148,9 +148,9 @@ class PositiveIntegerProp(Property):
     """ 
     Allows the user to select a positive integer via a Number Field. 
     """
-    def __init__(self, idname, default=0, lbl_suffix="", min_val=0,
-                 max_val=10, show_p=False, fpb_label="", visible=True):
-        Property.__init__(self, idname, default, fpb_label, visible)
+    def __init__(self, idname, default=0, lbl_suffix="", min_val=0, max_val=10, 
+                 show_p=False, fpb_label="", expanded=True, visible=True):
+        Property.__init__(self, idname, default, fpb_label, expanded, visible)
         self.min_value = min_val
         self.max_value = max_val
         self.lbl_suffix = lbl_suffix
@@ -200,8 +200,9 @@ class ChoiceProp(Property):
     """ 
     Allows the user to select from a list of choices via a Drop-down widget. 
     """
-    def __init__(self, idname, default="", choices=[], fpb_label="", visible=True):
-        Property.__init__(self, idname, default, fpb_label, visible)
+    def __init__(self, idname, default="", choices=[], fpb_label="", 
+                 expanded=True, visible=True):
+        Property.__init__(self, idname, default, fpb_label, expanded, visible)
         self.choices = choices
 
     def GetChoices(self):
@@ -233,8 +234,8 @@ class OpenFileChooserProp(Property):
     """
     def __init__(self, idname, default="", dlg_msg="Choose file...",
                  wildcard="All files (*.*)|*.*", btn_lbl="Choose...",
-                 fpb_label="", visible=True):
-        Property.__init__(self, idname, default, fpb_label, visible)
+                 fpb_label="", expanded=True, visible=True):
+        Property.__init__(self, idname, default, fpb_label, expanded, visible)
         self.dlg_msg = dlg_msg
         self.wildcard = wildcard
         self.btn_lbl = btn_lbl
@@ -301,9 +302,9 @@ class XYZProp(Property):
     Allows the user to select an (x, y, z) value via Number Fields.
     """
     def __init__(self, idname, default=(0, 0, 0), labels=("X", "Y", "Z"),
-                 min_vals=(0, 0, 0), max_vals=(10, 10, 10), lbl_suffix="",
-                 show_p=False, enable_z=False, fpb_label="", visible=True):
-        Property.__init__(self, idname, default, fpb_label, visible)
+                 min_vals=(0, 0, 0), max_vals=(10, 10, 10), lbl_suffix="", show_p=False, 
+                 enable_z=False, fpb_label="", expanded=True, visible=True):
+        Property.__init__(self, idname, default, fpb_label, expanded, visible)
         self.min_values = min_vals
         self.max_values = max_vals
         self.lbl_suffix = lbl_suffix
@@ -375,8 +376,8 @@ class ActionProp(Property):
     Allows the user to click a button to perform an action
     """
     def __init__(self, idname, default="", fpb_label="", btn_label="", flat=False, 
-                 action=None, visible=True):
-        Property.__init__(self, idname, default, btn_label, visible)
+                 action=None, expanded=True, visible=True):
+        Property.__init__(self, idname, default, btn_label, expanded, visible)
         self.btn_label = btn_label
         if fpb_label != "":
             self.fpb_label = fpb_label
@@ -397,8 +398,8 @@ class LabelProp(Property):
     """
     Shows some text.
     """
-    def __init__(self, idname, default="", fpb_label="", visible=True):
-        Property.__init__(self, idname, default, fpb_label, visible)
+    def __init__(self, idname, default="", fpb_label="", expanded=True, visible=True):
+        Property.__init__(self, idname, default, fpb_label, expanded, visible)
         self.fpb_label = fpb_label
 
     def CreateUI(self, parent, sizer):
@@ -422,8 +423,8 @@ class TextProp(Property):
     """ 
     Allows the user to type text. 
     """
-    def __init__(self, idname, default="", fpb_label="", visible=True):
-        Property.__init__(self, idname, default, fpb_label, visible)
+    def __init__(self, idname, default="", fpb_label="", expanded=True, visible=True):
+        Property.__init__(self, idname, default, fpb_label, expanded, visible)
 
     def CreateUI(self, parent, sizer):
         fold_panel = self.CreateFoldPanel(sizer)
