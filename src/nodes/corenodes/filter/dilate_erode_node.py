@@ -14,12 +14,6 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-try:
-    import OpenImageIO as oiio
-except ImportError:
-    print("""OpenImageIO is required! Get the python wheel for Windows at:
-     https://www.lfd.uci.edu/~gohlke/pythonlibs/#openimageio""")
-
 import cv2
 
 from gimelstudio import api
