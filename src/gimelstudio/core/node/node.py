@@ -34,7 +34,6 @@ class Node(NodeView):
         self.cache_enabled = True
         self.edited_flag = False
         self.shader_cache = None
-        self.is_init = False
 
         self.NodeInitProps()
         self.NodeInitParams()
@@ -45,9 +44,9 @@ class Node(NodeView):
 
         Please do not override.
         """
-        self.NodeWidgetEventHook(idname, value)
         self.SetEditedFlag(True)
-        if render is True and self.is_init is True:
+        if render == True:
+            self.NodeWidgetEventHook(idname, value)
             self.nodegraph.parent.parent.Render()
 
     @property

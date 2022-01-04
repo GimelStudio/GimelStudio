@@ -160,7 +160,7 @@ class NodeGraphPanel(PanelBase):
 
     def ChangeZoom(self, event):
         level = event.value / 100.0
-        print(level, " <---> ", event.value)
+        # print(level, " <---> ", event.value)
         # if event.value > 60 and event.value < 310:
         self.nodegraph.SetZoomLevel(level)
 
