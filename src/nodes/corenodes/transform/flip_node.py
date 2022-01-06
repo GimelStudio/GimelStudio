@@ -14,12 +14,7 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-try:
-    import OpenImageIO as oiio
-except ImportError:
-    print("""OpenImageIO is required! Get the python wheel for Windows at:
-     https://www.lfd.uci.edu/~gohlke/pythonlibs/#openimageio""")
-
+import numpy as np
 from gimelstudio import api
 
 
@@ -60,14 +55,14 @@ class FlipNode(api.Node):
         image1 = self.EvalParameter(eval_info, "image")
 
         render_image = api.RenderImage()
-        img = image1.Image("oiio")
+        img = image1.Image("numpy")
 
         if flip_direction == "Vertically":
-            output_img = oiio.ImageBufAlgo.flip(img)
+            output_img = np.flipud(img)
         elif flip_direction == "Horizontally":
-            output_img = oiio.ImageBufAlgo.flop(img)
+            output_img = np.fliplr(img)
         elif flip_direction == "Diagonally":
-            output_img = oiio.ImageBufAlgo.transpose(img)
+            output_img = np.flipud(np.fliplr(img))
 
         render_image.SetAsImage(output_img)
         self.NodeUpdateThumb(render_image)
