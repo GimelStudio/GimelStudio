@@ -118,7 +118,7 @@ class ImageViewport(ZoomPanel):
         self._renderTime = 0.00
         self._rendering = False
 
-        img = np.zeros((200, 200, 4), dtype=np.uint16)
+        img = np.zeros((200, 200, 4), dtype=np.float16)
 
         self._viewportImage = ConvertImageToWx(img)
 

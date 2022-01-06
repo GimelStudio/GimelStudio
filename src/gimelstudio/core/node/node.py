@@ -31,7 +31,7 @@ class Node(NodeView):
         self.properties = {}
         self.parameters = {}
         self.cache = {}
-        self.cache_enabled = True
+        self.cache_enabled = False # Disable cache for now
         self.edited_flag = False
         self.shader_cache = None
 

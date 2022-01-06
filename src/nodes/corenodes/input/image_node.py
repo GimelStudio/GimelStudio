@@ -41,21 +41,21 @@ class ImageNode(api.Node):
             image = self.NodeEvalSelf()
             
             # Set image info
-            if value != "":
-                buf = image.Image("oiio")
-                spec = buf.spec()
-                file_bytes = os.path.getsize(value)
-                if file_bytes < (1024*1024):
-                    prefix = "MB"
-                    size = file_bytes / (1024*1024)
-                else:
-                    prefix = "kB" 
-                    size = file_bytes / 1024
-                info = "{0}x{1}px  |  {2}{3}".format(spec.width, spec.height, round(size, 3), prefix)
-                self.img_info.SetValue(info)
+            # if value != "":
+            #     buf = image.Image("oiio")
+            #     spec = buf.spec()
+            #     file_bytes = os.path.getsize(value)
+            #     if file_bytes < (1024*1024):
+            #         prefix = "MB"
+            #         size = file_bytes / (1024*1024)
+            #     else:
+            #         prefix = "kB" 
+            #         size = file_bytes / 1024
+            #     info = "{0}x{1}px  |  {2}{3}".format(spec.width, spec.height, round(size, 3), prefix)
+            #     self.img_info.SetValue(info)
 
-            self.NodeUpdateThumb(image)
-            self.RefreshPropertyPanel()
+            # self.NodeUpdateThumb(image)
+            # self.RefreshPropertyPanel()
             self.RefreshNodeGraph()
 
     def NodeDndEventHook(self):
@@ -89,16 +89,18 @@ class ImageNode(api.Node):
 
         render_image = api.RenderImage(size=(200, 200))
 
+        # 
+        #     if self.cached_path != path:
+        #         try:
+        #             render_image.SetAsOpenedImage(path)
+        #             self.cached_path = path
+        #             self.cached_image = render_image
+        #         except FileNotFoundError:
+        #             print("DEBUG: FILE NOT FOUND")
+        #     else:
+        #         render_image = self.cached_image
         if path != "":
-            if self.cached_path != path:
-                try:
-                    render_image.SetAsOpenedImage(path)
-                    self.cached_path = path
-                    self.cached_image = render_image
-                except FileNotFoundError:
-                    print("DEBUG: FILE NOT FOUND")
-            else:
-                render_image = self.cached_image
+            render_image.SetAsOpenedImage(path)
 
         self.NodeUpdateThumb(render_image)
         return render_image

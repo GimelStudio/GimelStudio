@@ -24,9 +24,10 @@ except ImportError:
 
 class RenderImage(object):
     def __init__(self, size=(20, 20)):
-        self.img = np.zeros((size[0], size[1], 4), dtype=np.uint16)
+        self.img = np.zeros((size[0], size[1], 4), dtype=np.float16)
 
     def Image(self, data_type="numpy"):
+        print(data_type, " <<< converting to type")
         """ Returns the image in the requested datatype format.
 
         This is optimized so that it does node convert the datatype until
@@ -42,7 +43,7 @@ class RenderImage(object):
             if current_data_type == np.ndarray:
                 return self.img
             else:
-                self.img = self.img.get_pixels(oiio.INT16)
+                self.img = self.img.get_pixels("half")
                 return self.img
 
         elif data_type == "oiio":
@@ -60,9 +61,11 @@ class RenderImage(object):
         :returns: ``oiio.ImageBuf`` object
         """
         height, width = self.img.shape[:2]
-        spec = oiio.ImageSpec(width, height, 4, "uint16")
+        spec = oiio.ImageSpec(width, height, 4, "half")
         buf = oiio.ImageBuf(spec)
         buf.set_pixels(oiio.ROI(), self.img)
+        if buf.has_error:
+            print("Error in NumpyArrayToImageBuf:", buf.geterror())
         return buf
 
     def SetAsOpenedImage(self, path):
@@ -74,7 +77,7 @@ class RenderImage(object):
             img_input = oiio.ImageInput.open(path)
             if img_input is None:
                 print("IO ERROR: ", oiio.geterror())
-            image = img_input.read_image(format="uint16")
+            image = img_input.read_image(format="float16")
 
             # Enforce RGBA
             if image.shape[2] == 3:

@@ -72,7 +72,8 @@ class GLSLRenderer(object):
         """ Returns a ``numpy.ndarray`` image. """
         raw = self.dst_fbo.read(components=4, dtype='f1', viewport=self.viewport)
         img = np.frombuffer(raw, dtype='uint8').reshape((self.viewport[3], self.viewport[2], 4))
-        return img
+        image = img.astype("uint8")  # FIXME
+        return image
 
     def WriteViewports(self, image, image2):
         if image2 is not None:
