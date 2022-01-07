@@ -34,6 +34,7 @@ class Node(NodeView):
         self.cache_enabled = False # Disable cache for now
         self.edited_flag = False
         self.shader_cache = None
+        self.shader_cache_enabled = False
 
         self.NodeInitProps()
         self.NodeInitParams()
@@ -247,12 +248,19 @@ class Node(NodeView):
         return render_image
 
     def RenderGLSL(self, path, props, image, image2=None):
-        if self.shader_cache == None:
-            file_path = os.path.expanduser(os.path.expandvars(path))
-            shader_path = os.path.join(const.APP_DIR, file_path)
-            self.shader_cache = self.GLSLRenderer.LoadGLSLFile(shader_path)
-        self.GLSLRenderer.Render(self.shader_cache, props, image, image2)
+        if self.shader_cache_enabled == True:
+            if self.shader_cache == None:
+                self.shader_cache = self.LoadGLSL(path)
+            shader = self.shader_cache
+        else:
+            shader = self.LoadGLSL(path)
+        self.GLSLRenderer.Render(shader, props, image, image2)
         return self.GLSLRenderer.ReadNumpy()
+
+    def LoadGLSL(self, path):
+        file_path = os.path.expanduser(os.path.expandvars(path))
+        shader_path = os.path.join(const.APP_DIR, file_path)
+        return self.GLSLRenderer.LoadGLSLFile(shader_path)
 
     def RefreshNodeGraph(self):
         """ Force a refresh of the Node Graph panel. """
