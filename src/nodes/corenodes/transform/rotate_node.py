@@ -14,13 +14,7 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-import math
-try:
-    import OpenImageIO as oiio
-except ImportError:
-    print("""OpenImageIO is required! Get the python wheel for Windows at:
-     https://www.lfd.uci.edu/~gohlke/pythonlibs/#openimageio""")
-
+import numpy as np
 from gimelstudio import api
 
 
@@ -40,33 +34,32 @@ class RotateNode(api.Node):
         return meta_info
 
     def NodeInitProps(self):
-        self.rotation = api.PositiveIntegerProp(
+        rotation = api.ChoiceProp(
             idname="rotation",
-            default=90,
-            min_val=0,
-            max_val=360,
-            lbl_suffix="°",
-            fpb_label="Rotation"
+            default="90°",
+            fpb_label="Rotation",
+            choices=["90°", "180°", "270°"]
         )
-
-        self.NodeAddProp(self.rotation)
+        self.NodeAddProp(rotation)
 
     def NodeInitParams(self):
         image = api.RenderImageParam("image", "Image")
 
         self.NodeAddParam(image)
 
-    def MutedNodeEvaluation(self, eval_info):
-        return self.EvalMutedNode(eval_info)
-
     def NodeEvaluation(self, eval_info):
         rotation = self.EvalProperty(eval_info, "rotation")
         image1 = self.EvalParameter(eval_info, "image")
 
         render_image = api.RenderImage()
-        img = image1.Image("oiio")
+        img = image1.Image("numpy")
 
-        output_img = oiio.ImageBufAlgo.rotate(img, math.radians(rotation))
+        if rotation == "90°":
+            output_img = np.rot90(img, 1)
+        elif rotation == "180°":
+            output_img = np.rot90(img, 2)
+        elif rotation == "270°":
+            output_img = np.rot90(img, 3)
 
         render_image.SetAsImage(output_img)
         self.NodeUpdateThumb(render_image)
