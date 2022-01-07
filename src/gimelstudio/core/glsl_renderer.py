@@ -28,16 +28,16 @@ class GLSLRenderer(object):
         self._vaos = {}
 
         self.gl_context = mg.create_standalone_context(require=330)
-        self.src_texture = self.gl_context.texture((6000, 6000), 4, dtype='f1')
-        self.src_texture2 = self.gl_context.texture((6000, 6000), 4, dtype='f1')
-        self.dst_texture = self.gl_context.texture((6000, 6000), 4, dtype='f1')
+        self.src_texture = self.gl_context.texture((6000, 6000), 4, dtype="f1")
+        self.src_texture2 = self.gl_context.texture((6000, 6000), 4, dtype="f1")
+        self.dst_texture = self.gl_context.texture((6000, 6000), 4, dtype="f1")
         self.src_fbo = self.gl_context.framebuffer(self.src_texture)
         self.dst_fbo = self.gl_context.framebuffer(self.dst_texture)
 
         # Fullscreen quad in NDC
         self.vertices = self.gl_context.buffer(
             array(
-                'f',
+                "f",
                 [
                     # Triangle strip creating a fullscreen quad (x, y)
                     -1,  1,  # upper left
@@ -58,21 +58,20 @@ class GLSLRenderer(object):
 
     def Write(self, image, texture):
         """ Do the writing to src_texture """
-
         # FIXME: This effectively means we are no longer working with 16-bit
-        image = image.Image('numpy').astype('uint8')
+        image = image.Image("numpy").astype("uint8")
         # image = cv2.normalize(image, dst=None, alpha=0, beta=65535, norm_type=cv2.NORM_MINMAX)
         # print(image.dtype)
-        image = image.copy(order='C')
+        image = image.copy(order="C")
         viewport = (0, 0, *image.shape[1::-1])
         texture.write(image, viewport=viewport)
         return viewport
 
     def ReadNumpy(self):
         """ Returns a ``numpy.ndarray`` image. """
-        raw = self.dst_fbo.read(components=4, dtype='f1', viewport=self.viewport)
-        img = np.frombuffer(raw, dtype='uint8').reshape((self.viewport[3], self.viewport[2], 4))
-        image = img.astype("uint8")  # FIXME
+        raw = self.dst_fbo.read(components=4, dtype="f1", viewport=self.viewport)
+        img = np.frombuffer(raw, dtype="uint8").reshape((self.viewport[3], self.viewport[2], 4))
+        image = img.astype("float16")
         return image
 
     def WriteViewports(self, image, image2):
@@ -106,7 +105,7 @@ class GLSLRenderer(object):
                 program["input_img2"] = 1
 
             vao = self.gl_context.vertex_array(program,
-                                               [(self.vertices, '2f', 'in_position')])
+                                               [(self.vertices, "2f", "in_position")])
 
             self._programs[hash_value] = program
             self._vaos[hash_value] = vao
