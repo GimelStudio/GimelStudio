@@ -18,7 +18,7 @@
 	.NOTES
 	======================================================
 	 Project:      GimelStudio
-     Last Edit:    01/05/2022
+     Last Edit:    01/07/2022
      Created by:   instance.id (https://github.com/instance-id)
      Platform:     Windows/Linux?
 	 Filename:     build.ps1
@@ -64,7 +64,7 @@ function InstallConda() {
     $paths = @("", "condabin", "Scripts", "Library\bin", "envs\${tmpEnv}", "envs\${tmpEnv}\Lib", "envs\${tmpEnv}\Scripts", "envs\${tmpEnv}\Library\bin")
     if ($pyinstaller) { [void]$libraries.Add("pyinstaller") }
 
-    $env:PATH = $env:PYTHONPATH = $($($paths | foreach { ";${condaPath}\$_".Trim() }) -join ('')) + ";C:\Windows\System32\" <# ¯\_(ツ)_/¯ #>
+    $env:PATH = $env:PYTHONPATH = $($($paths | foreach { ";${condaPath}\$_".Trim() }) -join ('')) + ";C:\Windows\System32\"
     if ($debug) { echo $env:PATH }
 
     if (!(test-path -path $condaPath)) {
@@ -196,6 +196,7 @@ function BuildNuitka() {
     [void]$args.Add("--include-package-data=*.pyd")
     [void]$args.Add("--include-data-dir=src/nodes=nodes")
     [void]$args.Add("--include-plugin-directory=src/nodes")
+    # -- Was giving build errors but want to revisit this during GitHub action build    
     # [void]$installArgs.Add("--windows-icon-from-ico=assets/GIMELSTUDIO_ICO.ico")
     [void]$args.Add("$(NuitkaAddData)")
     [void]$args.Add("src/main.py")
@@ -269,12 +270,25 @@ try {
 
     [switch]$debug = $doDebug
 
+    $introText = @"
+GimelStudio build process initiation for missing dependencies
+=============================================================
+
+This script will download and locally install the required dependencies for the build process within the .conda and .tools directories.
+No permanent modifications are made to the system. These folders can be removed after the build process is complete.
+
+Dependencies include, but are not limited to:
+  - MiniConda3
+  - Python3.9.x
+  - Nuitka (or PyInstaller)
+  - OpenImageIO
+  - The contents of the requirements.txt file and their dependencies
+"@
+    
     # --| Main Setup Start ------------------------------------
     # --|------------------------------------------------------
     if ($interactive) {
-        echo "GimelStudio build process initiation for missing dependencies"
-        echo "=============================================================\n\n"
-        echo 'This script will download and install the required dependencies for the build process'
+        echo $introText
         $continue = read-host 'Do you want to continue? (Y/N)'
     }
     else { $continue = 'y' }
