@@ -31,10 +31,10 @@ class Node(NodeView):
         self.properties = {}
         self.parameters = {}
         self.cache = {}
-        self.cache_enabled = False # Disable cache for now
+        self.cache_enabled = True
         self.edited_flag = False
         self.shader_cache = None
-        self.shader_cache_enabled = False
+        self.shader_cache_enabled = True
 
         self.NodeInitProps()
         self.NodeInitParams()
