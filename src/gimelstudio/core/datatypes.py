@@ -24,10 +24,9 @@ except ImportError:
 
 class RenderImage(object):
     def __init__(self, size=(20, 20)):
-        self.img = np.zeros((size[0], size[1], 4), dtype=np.float16)
+        self.img = np.zeros((size[0], size[1], 4), dtype=np.float32)
 
     def Image(self, data_type="numpy"):
-        print(data_type, " <<< converting to type")
         """ Returns the image in the requested datatype format.
 
         This is optimized so that it does node convert the datatype until
@@ -43,15 +42,16 @@ class RenderImage(object):
             if current_data_type == np.ndarray:
                 return self.img
             else:
-                self.img = self.img.get_pixels("half")
+                self.img = self.img.get_pixels("float")
                 return self.img
 
         elif data_type == "oiio":
-            if current_data_type == oiio.ImageBuf:
-                return self.img
-            else:
-                self.img = self.NumpyArrayToImageBuf()
-                return self.img
+            print("Converting to oiio is disabled")
+            # if current_data_type == oiio.ImageBuf:
+            #     return self.img
+            # else:
+            #     self.img = self.NumpyArrayToImageBuf()
+            #     return self.img
 
         else:
             raise TypeError("Not a valid datatype!")
@@ -61,7 +61,7 @@ class RenderImage(object):
         :returns: ``oiio.ImageBuf`` object
         """
         height, width = self.img.shape[:2]
-        spec = oiio.ImageSpec(width, height, 4, "half")
+        spec = oiio.ImageSpec(width, height, 4, "float")
         buf = oiio.ImageBuf(spec)
         buf.set_pixels(oiio.ROI(), self.img)
         if buf.has_error:
@@ -77,7 +77,7 @@ class RenderImage(object):
             img_input = oiio.ImageInput.open(path)
             if img_input is None:
                 print("IO ERROR: ", oiio.geterror())
-            image = img_input.read_image(format="float16")
+            image = img_input.read_image(format="float32")
 
             # Enforce RGBA
             if image.shape[2] == 3:

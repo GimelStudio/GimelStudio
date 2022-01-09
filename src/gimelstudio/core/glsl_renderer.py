@@ -71,7 +71,7 @@ class GLSLRenderer(object):
         """ Returns a ``numpy.ndarray`` image. """
         raw = self.dst_fbo.read(components=4, dtype="f1", viewport=self.viewport)
         img = np.frombuffer(raw, dtype="uint8").reshape((self.viewport[3], self.viewport[2], 4))
-        image = img.astype("float16")
+        image = img.astype("float32")
         return image
 
     def WriteViewports(self, image, image2):
