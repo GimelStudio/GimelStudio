@@ -77,7 +77,7 @@ class CheckeredImageNode(api.Node):
 
         render_image = api.RenderImage()
 
-        buf = oiio.ImageBuf(oiio.ImageSpec(1200, 1200, 4, oiio.UINT16))
+        buf = oiio.ImageBuf(oiio.ImageSpec(1200, 1200, 4, oiio.FLOAT))
         oiio.ImageBufAlgo.checker(buf, checker_size, checker_size, 1, 
                                   color1=(0.1,0.1,0.1,255.0), color2=(0.4,0.4,0.4,255.0),
                                   xoffset=offset[0], yoffset=offset[1], 
