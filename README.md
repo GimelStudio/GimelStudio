@@ -53,8 +53,8 @@ We are working towards an MVP release which will showcase much of the core goals
 
 **There are [alpha pre-releases](https://github.com/GimelStudio/GimelStudio/releases) available for those wanting to test the current functionality.**
 
-![gs-wip-demo](https://user-images.githubusercontent.com/60711001/143295882-28277739-34ad-49c1-857e-3f31db0ff7d6.gif)
-*The status of the next generation of Gimel Studio as of 11/24/2021*
+![gs-wip-demo](https://user-images.githubusercontent.com/60711001/148820733-358faad6-ee80-4d27-b9c2-2503c6b0abf8.gif)
+*The status of the next generation of Gimel Studio as of 1/10/2022*
 
 
 # Contributing
