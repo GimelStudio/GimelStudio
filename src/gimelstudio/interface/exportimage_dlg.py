@@ -16,6 +16,12 @@
 
 import os
 import wx
+try:
+    import OpenImageIO as oiio
+except ImportError:
+    print("""OpenImageIO is required! Get the python wheel for Windows at:
+     https://www.lfd.uci.edu/~gohlke/pythonlibs/#openimageio""")
+
 from gswidgetkit import (Button, EVT_BUTTON, NumberField, EVT_NUMBERFIELD,
                          Label, DropDown, EVT_DROPDOWN)
 
@@ -169,7 +175,14 @@ class ExportOptionsDialog(wx.Dialog):
 
     def ExportImage(self):
         # Export the image with the export options
-        img = self.Image
+        image = self.Image
+
+        xres = image.shape[1]
+        yres = image.shape[0]
+        spec = oiio.ImageSpec(xres, yres, 4, "float")
+        img = oiio.ImageBuf(spec)
+        img.set_pixels(oiio.ROI(), image)
+
         if self.filetype in [".jpg", ".jpeg"]:
             img.specmod().attribute("quality", self.jpeg_quality)
             img.specmod().attribute("ImageDescription", self.comment_meta)

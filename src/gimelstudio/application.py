@@ -512,7 +512,7 @@ class ApplicationFrame(wx.Frame):
         image = self.renderer.GetRender()
 
         try:
-            export_handler = ExportImageHandler(self, image.Image("oiio"))
+            export_handler = ExportImageHandler(self, image.Image("numpy"))
             export_handler.RunExport()
         except AttributeError:
             dlg = wx.MessageDialog(None,

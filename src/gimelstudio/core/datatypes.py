@@ -60,7 +60,8 @@ class RenderImage(object):
         """ Converts a np.ndarray to an OIIO ImageBuf image.
         :returns: ``oiio.ImageBuf`` object
         """
-        height, width = self.img.shape[:2]
+        height = self.img.shape[1]
+        width = self.img.shape[0]
         spec = oiio.ImageSpec(width, height, 4, "float")
         buf = oiio.ImageBuf(spec)
         buf.set_pixels(oiio.ROI(), self.img)
