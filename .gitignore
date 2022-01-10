@@ -3,7 +3,10 @@
 __pycache__
 *.pyc
 
-# Ignore pyinstaller build folders/files
+# Ignore build folders/files
+.conda
+.tools
+.vscode
 build/*
 dist/*
 *.spec
