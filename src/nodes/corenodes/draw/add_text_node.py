@@ -39,13 +39,13 @@ class AddTextNode(api.Node):
         return meta_info
 
     def NodeInitProps(self):
-        self.font = api.ChoiceProp(
+        font = api.ChoiceProp(
             idname="font",
             default="Arial",
             choices=["Arial", "Calibri"],
             fpb_label="Font"
         )
-        self.font_size = api.PositiveIntegerProp(
+        font_size = api.PositiveIntegerProp(
             idname="font_size",
             default=100,
             min_val=1,
@@ -53,12 +53,12 @@ class AddTextNode(api.Node):
             lbl_suffix="px",
             fpb_label="Font Size"
         )
-        self.text = api.TextProp(
+        text = api.TextProp(
             idname="text",
             default="Gimel Studio",
             fpb_label="Text"
         )
-        self.position = api.XYZProp(
+        position = api.XYZProp(
             idname="position", 
             default=(25, 25, 0), 
             labels=("X", "Y"),
@@ -67,24 +67,24 @@ class AddTextNode(api.Node):
             show_p=False, 
             fpb_label="Position"
         )
-        self.align_x = api.ChoiceProp(
+        align_x = api.ChoiceProp(
             idname="align_x",
             default="Left",
             choices=["Left", "Right", "Center"],
             fpb_label="Align X"
         )
-        self.align_y = api.ChoiceProp(
+        align_y = api.ChoiceProp(
             idname="align_y",
             default="Baseline",
             choices=["Baseline", "Top", "Bottom", "Center"],
             fpb_label="Align Y"
         )
-        self.NodeAddProp(self.font)
-        self.NodeAddProp(self.font_size)
-        self.NodeAddProp(self.text)
-        self.NodeAddProp(self.position)
-        self.NodeAddProp(self.align_x)
-        self.NodeAddProp(self.align_y)
+        self.NodeAddProp(font)
+        self.NodeAddProp(font_size)
+        self.NodeAddProp(text)
+        self.NodeAddProp(position)
+        self.NodeAddProp(align_x)
+        self.NodeAddProp(align_y)
 
     def NodeInitParams(self):
         image = api.RenderImageParam("image", "Image")

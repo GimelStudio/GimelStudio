@@ -34,13 +34,13 @@ class FlipNode(api.Node):
         return meta_info
 
     def NodeInitProps(self):
-        self.direction = api.ChoiceProp(
+        flip_direction = api.ChoiceProp(
             idname="direction",
             default="Vertically",
             choices=["Vertically", "Horizontally", "Diagonally"],
             fpb_label="Orientation"
         )
-        self.NodeAddProp(self.direction)
+        self.NodeAddProp(flip_direction)
 
     def NodeInitParams(self):
         image = api.RenderImageParam("image", "Image")

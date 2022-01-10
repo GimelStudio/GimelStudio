@@ -15,7 +15,6 @@
 # ----------------------------------------------------------------------------
 
 import cv2
-
 from gimelstudio import api
 
 
@@ -35,13 +34,13 @@ class BlurNode(api.Node):
         return meta_info
 
     def NodeInitProps(self):
-        self.filter_type = api.ChoiceProp(
+        filter_type = api.ChoiceProp(
             idname="filter_type",
             default="Box",
             choices=["Box", "Gaussian"],
             fpb_label="Filter Type"
         )
-        self.kernel = api.XYZProp(
+        kernel = api.XYZProp(
             idname="kernel", 
             default=(5, 5, 0), 
             labels=("Kernel X", "Kernel Y"),
@@ -50,8 +49,8 @@ class BlurNode(api.Node):
             show_p=False, 
             fpb_label="Blur Kernel"
         )
-        self.NodeAddProp(self.filter_type)
-        self.NodeAddProp(self.kernel)
+        self.NodeAddProp(filter_type)
+        self.NodeAddProp(kernel)
 
     def NodeInitParams(self):
         image = api.RenderImageParam("image", "Image")

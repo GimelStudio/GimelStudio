@@ -39,7 +39,7 @@ class CircularShiftNode(api.Node):
         return meta_info
 
     def NodeInitProps(self):
-        self.shift = api.XYZProp(
+        shift = api.XYZProp(
             idname="shift", 
             default=(0, 0, 0), 
             labels=("X", "Y", "Z"),
@@ -49,7 +49,7 @@ class CircularShiftNode(api.Node):
             enable_z=True,
             fpb_label="Shift"
         )
-        self.NodeAddProp(self.shift)
+        self.NodeAddProp(shift)
 
     def NodeInitParams(self):
         image = api.RenderImageParam("image", "Image")

@@ -39,7 +39,7 @@ class FitNode(api.Node):
         return meta_info
 
     def NodeInitProps(self):
-        self.fit_size = api.XYZProp(
+        fit_size = api.XYZProp(
             idname="fit_size", 
             default=(100, 100, 0), 
             labels=("X", "Y", "Z"),
@@ -49,7 +49,7 @@ class FitNode(api.Node):
             enable_z=False,
             fpb_label="Fit Size"
         )
-        self.NodeAddProp(self.fit_size)
+        self.NodeAddProp(fit_size)
 
     def NodeInitParams(self):
         image = api.RenderImageParam("image", "Image")

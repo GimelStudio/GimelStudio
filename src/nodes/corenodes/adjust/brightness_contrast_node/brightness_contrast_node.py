@@ -14,7 +14,6 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-
 from gimelstudio import api
 
 
@@ -27,14 +26,14 @@ class BrightnessContrastNode(api.Node):
         meta_info = {
             "label": "Brightness/Contrast",
             "author": "Gimel Studio",
-            "version": (0, 0, 1),
+            "version": (0, 5, 0),
             "category": "COLOR",
             "description": "Adjust the brightness/contrast of an image.",
         }
         return meta_info
 
     def NodeInitProps(self):
-        self.brightness = api.PositiveIntegerProp(
+        brightness_value = api.PositiveIntegerProp(
             idname="brightness_value",
             default=0,
             min_val=0,
@@ -42,7 +41,7 @@ class BrightnessContrastNode(api.Node):
             show_p=True,
             fpb_label="Brightness"
         )
-        self.contrast = api.PositiveIntegerProp(
+        contrast_value = api.PositiveIntegerProp(
             idname="contrast_value",
             default=100,
             min_val=0,
@@ -50,8 +49,8 @@ class BrightnessContrastNode(api.Node):
             show_p=True,
             fpb_label="Contrast"
         )
-        self.NodeAddProp(self.brightness)
-        self.NodeAddProp(self.contrast)
+        self.NodeAddProp(brightness_value)
+        self.NodeAddProp(contrast_value)
 
     def NodeInitParams(self):
         image = api.RenderImageParam("image", "Image")

@@ -50,14 +50,14 @@ class CheckeredImageNode(api.Node):
         self.RefreshNodeGraph()
 
     def NodeInitProps(self):
-        self.checker_size = api.PositiveIntegerProp(
+        checker_size = api.PositiveIntegerProp(
             idname="checker_size",
             default=46,
             min_val=0,
             max_val=100,
             fpb_label="Checker Size"
         )
-        self.offset = api.XYZProp(
+        offset = api.XYZProp(
             idname="offset", 
             default=(0, 0, 0), 
             labels=("X", "Y", "Z"),
@@ -68,8 +68,8 @@ class CheckeredImageNode(api.Node):
             fpb_label="Offset"
         )
 
-        self.NodeAddProp(self.checker_size)
-        self.NodeAddProp(self.offset)
+        self.NodeAddProp(checker_size)
+        self.NodeAddProp(offset)
 
     def NodeEvaluation(self, eval_info):
         checker_size = self.EvalProperty(eval_info, "checker_size")

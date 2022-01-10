@@ -50,7 +50,7 @@ class NoiseImageNode(api.Node):
         self.RefreshNodeGraph()
 
     def NodeInitProps(self):
-        self.noise_seed = api.PositiveIntegerProp(
+        noise_seed = api.PositiveIntegerProp(
             idname="noise_seed",
             default=1,
             min_val=0,
@@ -58,7 +58,7 @@ class NoiseImageNode(api.Node):
             fpb_label="Noise Seed"
         )
 
-        self.NodeAddProp(self.noise_seed)
+        self.NodeAddProp(noise_seed)
 
     def NodeEvaluation(self, eval_info):
         noise_seed = self.EvalProperty(eval_info, "noise_seed")

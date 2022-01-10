@@ -14,7 +14,6 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-
 from gimelstudio import api
 
 
@@ -27,14 +26,14 @@ class OpacityNode(api.Node):
         meta_info = {
             "label": "Opacity",
             "author": "Gimel Studio",
-            "version": (0, 0, 1),
+            "version": (0, 5, 0),
             "category": "FILTER",
             "description": "Adjust the transparency of an image.",
         }
         return meta_info
 
     def NodeInitProps(self):
-        self.value = api.PositiveIntegerProp(
+        opacity_value = api.PositiveIntegerProp(
             idname="opacity_value",
             default=50,
             min_val=0,
@@ -42,7 +41,7 @@ class OpacityNode(api.Node):
             show_p=True,
             fpb_label="Opacity"
         )
-        self.NodeAddProp(self.value)
+        self.NodeAddProp(opacity_value)
 
     def NodeInitParams(self):
         image = api.RenderImageParam("image", "Image")

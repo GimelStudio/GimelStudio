@@ -64,13 +64,11 @@ class ImageNode(api.Node):
         self.RefreshNodeGraph()
 
     def NodeInitProps(self):
-        wildcard = constants.SUPPORTED_FT_OPEN_WILDCARD
-
-        self.fp_prop = api.OpenFileChooserProp(
+        file_path = api.OpenFileChooserProp(
             idname="file_path",
             default="",
             dlg_msg="Choose image...",
-            wildcard=wildcard,
+            wildcard=constants.SUPPORTED_FT_OPEN_WILDCARD,
             btn_lbl="Choose...",
             fpb_label="Image Path"
         )
@@ -81,7 +79,7 @@ class ImageNode(api.Node):
             expanded=False
         )
 
-        self.NodeAddProp(self.fp_prop)
+        self.NodeAddProp(file_path)
         self.NodeAddProp(self.img_info)
 
     def NodeEvaluation(self, eval_info):
@@ -89,18 +87,15 @@ class ImageNode(api.Node):
 
         render_image = api.RenderImage(size=(200, 200))
 
-        # 
-        #     if self.cached_path != path:
-        #         try:
-        #             render_image.SetAsOpenedImage(path)
-        #             self.cached_path = path
-        #             self.cached_image = render_image
-        #         except FileNotFoundError:
-        #             print("DEBUG: FILE NOT FOUND")
-        #     else:
-        #         render_image = self.cached_image
-        if path != "":
-            render_image.SetAsOpenedImage(path)
+        if self.cached_path != path:
+            try:
+                render_image.SetAsOpenedImage(path)
+                self.cached_path = path
+                self.cached_image = render_image
+            except FileNotFoundError:
+                print("ERROR: FILE NOT FOUND")
+        else:
+            render_image = self.cached_image
 
         self.NodeUpdateThumb(render_image)
         return render_image

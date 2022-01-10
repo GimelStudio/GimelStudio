@@ -36,14 +36,14 @@ class IntegerNode(api.Node):
         return "VALUE"
 
     def NodeInitProps(self):
-        self.value = api.PositiveIntegerProp(
+        value = api.PositiveIntegerProp(
             idname="value",
             default=100,
             min_val=0,
             max_val=100,
             fpb_label="Integer Value"
         )
-        self.NodeAddProp(self.value)
+        self.NodeAddProp(value)
 
     def NodeEvaluation(self, eval_info):
         value = self.EvalProperty(eval_info, "value")

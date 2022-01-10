@@ -14,7 +14,6 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-
 from gimelstudio import api
 
 
@@ -27,21 +26,21 @@ class AlphaOverNode(api.Node):
         meta_info = {
             "label": "Alpha Over",
             "author": "Gimel Studio",
-            "version": (0, 0, 1),
+            "version": (0, 4, 0),
             "category": "BLEND",
             "description": "Alpha over two images together based on the factor.",
         }
         return meta_info
 
     def NodeInitProps(self):
-        self.value = api.PositiveIntegerProp(
+        factor = api.PositiveIntegerProp(
             idname="factor",
             default=100,
             min_val=0,
             max_val=100,
             fpb_label="Factor"
         )
-        self.NodeAddProp(self.value)
+        self.NodeAddProp(factor)
 
     def NodeInitParams(self):
         image1 = api.RenderImageParam("image_1", "Image")

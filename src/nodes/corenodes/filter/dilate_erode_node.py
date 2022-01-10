@@ -34,6 +34,16 @@ class DilateErodeNode(api.Node):
         }
         return meta_info
 
+    def NodeWidgetEventHook(self, idname, value):
+        if idname == "operation" and (value == "Dilate" or value == "Erode"):
+            self.iterations.SetIsVisible(True)
+            self.RefreshPropertyPanel()
+        elif idname != "operation":
+            pass
+        else:
+            self.iterations.SetIsVisible(False)
+            self.RefreshPropertyPanel()
+
     def NodeInitProps(self):
         operation = api.ChoiceProp(
             idname="operation",
@@ -69,16 +79,6 @@ class DilateErodeNode(api.Node):
         self.NodeAddProp(kernel_shape)
         self.NodeAddProp(kernel_size)
         self.NodeAddProp(self.iterations)
-
-    def NodeWidgetEventHook(self, idname, value):
-        if idname == "operation" and (value == "Dilate" or value == "Erode"):
-            self.iterations.SetIsVisible(True)
-            self.RefreshPropertyPanel()
-        elif idname != "operation":
-            pass
-        else:
-            self.iterations.SetIsVisible(False)
-            self.RefreshPropertyPanel()
 
     def NodeInitParams(self):
         image = api.RenderImageParam("image", "Image")

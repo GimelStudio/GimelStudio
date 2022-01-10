@@ -14,7 +14,6 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-
 from gimelstudio import api
 
 
@@ -34,7 +33,7 @@ class Example2Node(api.Node):
         return meta_info
 
     def NodeInitProps(self):
-        self.value = api.PositiveIntegerProp(
+        opacity_value = api.PositiveIntegerProp(
             idname="opacity_value",
             default=25,
             min_val=0,
@@ -42,7 +41,7 @@ class Example2Node(api.Node):
             show_p=True,
             fpb_label="Opacity"
         )
-        self.NodeAddProp(self.value)
+        self.NodeAddProp(opacity_value)
 
     def NodeInitParams(self):
         image = api.RenderImageParam("image", "Image")

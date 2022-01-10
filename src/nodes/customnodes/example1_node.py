@@ -15,7 +15,6 @@
 # ----------------------------------------------------------------------------
 
 import numpy as np
-
 from gimelstudio import api
 
 
@@ -35,13 +34,13 @@ class Example1Node(api.Node):
         return meta_info
 
     def NodeInitProps(self):
-        self.direction = api.ChoiceProp(
+        flip_direction = api.ChoiceProp(
             idname="direction",
             default="Vertically",
             choices=["Vertically", "Horizontally"],
             fpb_label="Flip Direction"
         )
-        self.NodeAddProp(self.direction)
+        self.NodeAddProp(flip_direction)
 
     def NodeInitParams(self):
         image = api.RenderImageParam("image", "Image")
