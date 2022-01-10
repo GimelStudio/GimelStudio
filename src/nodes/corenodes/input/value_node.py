@@ -17,18 +17,18 @@
 from gimelstudio import api
 
 
-class IntegerNode(api.Node):
+class ValueNode(api.Node):
     def __init__(self, nodegraph, _id):
         api.Node.__init__(self, nodegraph, _id)
 
     @property
     def NodeMeta(self):
         meta_info = {
-            "label": "Integer",
+            "label": "Value",
             "author": "Gimel Studio",
             "version": (0, 5, 0),
             "category": "INPUT",
-            "description": "Input an integer.",
+            "description": "Input an integer or float.",
         }
         return meta_info
 
@@ -51,4 +51,4 @@ class IntegerNode(api.Node):
         return value
 
 
-api.RegisterNode(IntegerNode, "node_integer")
+api.RegisterNode(ValueNode, "node_value")
