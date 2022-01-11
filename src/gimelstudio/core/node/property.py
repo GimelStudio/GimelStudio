@@ -285,7 +285,7 @@ class OpenFileChooserProp(Property):
 
         if dlg.ShowModal() == wx.ID_OK:
             paths = dlg.GetPaths()
-            filetype = os.path.splitext(paths[0])[1]
+            filetype = os.path.splitext(paths[0])[1].lower()
 
             if filetype not in SUPPORTED_FT_OPEN_LIST:
                 dlg = wx.MessageDialog(None, _("That file type isn't currently supported!"),
