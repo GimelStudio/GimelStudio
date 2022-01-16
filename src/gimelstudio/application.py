@@ -380,11 +380,11 @@ class ApplicationFrame(wx.Frame):
         self.statusbar.Hide()
 
         # Window manager
-        self._mgr = AUIManager(self)
-        self._mgr.SetArtProvider(artproviders.UIDockArt())
-        art = self._mgr.GetArtProvider()
+        self.mgr = AUIManager(self)
+        self.mgr.SetArtProvider(artproviders.UIDockArt())
+        art = self.mgr.GetArtProvider()
         extra_flags = aui.AUI_MGR_LIVE_RESIZE | aui.AUI_MGR_ALLOW_ACTIVE_PANE
-        self._mgr.SetAGWFlags(self._mgr.GetAGWFlags() ^ extra_flags)
+        self.mgr.SetAGWFlags(self.mgr.GetAGWFlags() ^ extra_flags)
 
         art.SetMetric(aui.AUI_DOCKART_CAPTION_SIZE, 29)
         art.SetMetric(aui.AUI_DOCKART_GRIPPER_SIZE, 3)
@@ -401,7 +401,7 @@ class ApplicationFrame(wx.Frame):
                                             idname="PROPERTIES_PNL",
                                             menu_item=None,
                                             size=(360, 500))
-        self._mgr.AddPane(self.prop_pnl,
+        self.mgr.AddPane(self.prop_pnl,
                           aui.AuiPaneInfo()
                           .Name("PROPERTIES_PNL")
                           .Right().Layer(2)
@@ -412,7 +412,7 @@ class ApplicationFrame(wx.Frame):
         self.imageviewport_pnl = ImageViewportPanel(self,
                                                     idname="IMAGE_VIEWPORT",
                                                     menu_item=self.showimageviewport_menuitem)
-        self._mgr.AddPane(self.imageviewport_pnl,
+        self.mgr.AddPane(self.imageviewport_pnl,
                           aui.AuiPaneInfo()
                           .Name("IMAGE_VIEWPORT")
                           .CaptionVisible(False)
@@ -421,13 +421,9 @@ class ApplicationFrame(wx.Frame):
                           .CloseButton(visible=False)
                           .BestSize((500, 1700)))
 
-        self.nodegraph_pnl = NodeGraphPanel(self,
-                                            idname="NODE_EDITOR",
-                                            menu_item=None,
-                                            registry=self.registry,
-                                            size=(100, 100))
+        self.nodegraph_pnl = NodeGraphPanel(self, registry=self.registry, size=(100, 100))
         self.nodegraph_pnl.SetDropTarget(NodeGraphDropTarget(self.nodegraph_pnl))
-        self._mgr.AddPane(self.nodegraph_pnl,
+        self.mgr.AddPane(self.nodegraph_pnl,
                           aui.AuiPaneInfo()
                           .Name("NODE_EDITOR")
                           .CaptionVisible(False)
@@ -436,13 +432,13 @@ class ApplicationFrame(wx.Frame):
                           .BestSize(500, 300))
 
         # Get the default proportions correct
-        self._mgr.GetPane("PROPERTIES_PNL").dock_proportion = 5
+        self.mgr.GetPane("PROPERTIES_PNL").dock_proportion = 5
 
         # Maximize the window & tell the AUI window
         # manager to "commit" all the changes just made, etc
         self.Maximize()
-        self.menubar.PositionAUI(self._mgr)
-        self._mgr.Update()
+        self.menubar.PositionAUI(self.mgr)
+        self.mgr.Update()
         self.statusbar.UpdateStatusBar()
         self.statusbar.Refresh()
         self.menubar.Refresh()
@@ -533,8 +529,8 @@ class ApplicationFrame(wx.Frame):
             self.glsl_renderer.Release()
             # Un-int the app and window mgr
             quitdialog.Destroy()
-            self._mgr.UnInit()
-            del self._mgr
+            self.mgr.UnInit()
+            del self.mgr
             # Finally close the window
             self.Destroy()
         else:

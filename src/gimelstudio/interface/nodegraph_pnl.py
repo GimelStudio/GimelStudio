@@ -15,9 +15,8 @@
 # ----------------------------------------------------------------------------
 
 import wx
-import uuid
 
-from gswidgetkit import (Button, EVT_BUTTON, NumberField, EVT_NUMBERFIELD_CHANGE)
+from gswidgetkit import (Label, NumberField, EVT_NUMBERFIELD_CHANGE)
 from gsnodegraph import (EVT_GSNODEGRAPH_NODESELECT,
                          EVT_GSNODEGRAPH_NODECONNECT,
                          EVT_GSNODEGRAPH_NODEDISCONNECT,
@@ -31,7 +30,6 @@ from gimelstudio.datafiles import (ICON_NODEGRAPH_PANEL, ICON_MORE_MENU_SMALL,
                                    ICON_KEY_CTRL, ICON_MOUSE_MMB_MOVEMENT,
                                    ICON_MOUSE_RMB)
 from .addnode_menu import AddNodeMenu
-from .panel_base import PanelBase
 
 ID_ADDNODEMENU = wx.NewIdRef()
 
@@ -45,11 +43,13 @@ class NodeGraph(NodeGraphBase):
         return self.parent.GLSLRenderer
 
 
-class NodeGraphPanel(PanelBase):
-    def __init__(self, parent, idname, menu_item, *args, **kwargs):
-        PanelBase.__init__(self, parent, idname, menu_item)
+class NodeGraphPanel(wx.Panel):
+    def __init__(self, parent, *args, **kwargs):
+        wx.Panel.__init__(self, parent, id=wx.ID_ANY, pos=wx.DefaultPosition,
+                          size=wx.DefaultSize, style=wx.NO_BORDER | wx.TAB_TRAVERSAL)
 
         self.registry = kwargs["registry"]
+        self.parent = parent
 
         self.SetBackgroundColour(const.AREA_BG_COLOR)
 
@@ -64,25 +64,16 @@ class NodeGraphPanel(PanelBase):
         topbar_sizer = wx.GridBagSizer(vgap=1, hgap=1)
 
         self.area_icon = wx.StaticBitmap(topbar, bitmap=ICON_NODEGRAPH_PANEL.GetBitmap())
-        self.area_label = wx.StaticText(topbar, label="")
-        self.area_label.SetForegroundColour("#fff")
-        self.area_label.SetFont(self.area_label.GetFont().Bold())
+        self.area_label = Label(topbar, label="", font_bold=False)
 
         self.zoom_field = NumberField(topbar, default_value=100, label=_("Zoom"),
                                       min_value=25, max_value=250, suffix="%",
                                       show_p=False, disable_precise=True)
-        # self.imageasbg_checkbox = CheckBox(topbar, label=_("Image as background"))
-        # self.imageasbg_checkbox.SetValue(True)
-        # self.imageasbg_checkbox.Bind(wx.EVT_CHECKBOX,)
-
-        self.menu_button = Button(topbar, label="", flat=True,
-                                  bmp=(ICON_MORE_MENU_SMALL.GetBitmap(), 'left'))
 
         topbar_sizer.Add(self.area_icon, (0, 0), flag=wx.LEFT | wx.TOP | wx.BOTTOM, border=8)
         topbar_sizer.Add(self.area_label, (0, 1), flag=wx.ALL, border=8)
-        # topbar_sizer.Add(self.imageasbg_checkbox, (0, 3), flag=wx.ALL, border=8)
         topbar_sizer.Add(self.zoom_field, (0, 4), flag=wx.ALL, border=3)
-        topbar_sizer.Add(self.menu_button, (0, 5), flag=wx.ALL, border=3)
+        topbar_sizer.Add((10, 10), (0, 5), flag=wx.ALL, border=3)
         topbar_sizer.AddGrowableCol(2)
 
         topbar.SetSizer(topbar_sizer)
@@ -111,7 +102,6 @@ class NodeGraphPanel(PanelBase):
         self.nodegraph.Bind(EVT_GSNODEGRAPH_ADDNODEBTN, self.OnAddNodeMenuButton)
         self.nodegraph.Bind(wx.EVT_ENTER_WINDOW, self.OnAreaFocus)
         self.zoom_field.Bind(EVT_NUMBERFIELD_CHANGE, self.ChangeZoom)
-        self.menu_button.Bind(EVT_BUTTON, self.OnAreaMenuButton)
         self.parent.Bind(wx.EVT_MENU, self.OnAddNodeMenu, id=ID_ADDNODEMENU)
 
         # Keyboard shortcut bindings

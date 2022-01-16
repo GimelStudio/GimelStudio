@@ -44,7 +44,7 @@ class NodePropertiesPanel(PanelBase):
 
     @property
     def AUIManager(self):
-        return self.parent._mgr
+        return self.parent.mgr
 
     @property
     def Statusbar(self):
