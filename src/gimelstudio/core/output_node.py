@@ -50,7 +50,7 @@ class OutputNode(api.Node):
         self.NodeAddProp(self.export_button)
 
     def NodeInitParams(self):
-        p = api.RenderImageParam('Image', 'Image')
+        p = api.RenderImageParam('image', 'Image')
         self.NodeAddParam(p)
 
     def NodeEvaluation(self, eval_info):

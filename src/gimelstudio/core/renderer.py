@@ -14,18 +14,19 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-from .output_eval import OutputNodeEval
+from .eval_info import EvalInfo
 from .datatypes import RenderImage
 
 
 class Renderer(object):
     """
-    The core renderer which evaluates the data of the node tree and
+    The core renderer which evaluates the nodes in the node tree and
     outputs the final render image.
     """
     def __init__(self, parent):
         self.parent = parent
         self.render = None
+        self.output_node = None
 
     def GetParent(self):
         return self.parent
@@ -36,49 +37,35 @@ class Renderer(object):
     def SetRender(self, render):
         self.render = render
 
-    def Render(self, nodes):
+    def SetOutputNode(self, node):
+        self.output_node = node
+
+    def Render(self):
         """ Render method for evaluating the Node Graph
         to render an image.
 
-        :param nodes: dictionary of nodes of the Node Graph
-        :returns: rendered image
+        :returns: RenderImage object
         """
-
         # Render the image
-        output_node = self.GetOutputNode(nodes)
-        rendered_image = self.RenderNodeGraph(output_node, nodes)
-
-        # Get rendered image, otherwise use
-        # a default transparent image.
-        if rendered_image != None:
-            image = rendered_image
-        else:
-            image = RenderImage()
+        image = self.RenderNodeGraph(self.output_node)
+        self.SetRender(image)
 
         # TODO: Only if node thumbnails are enabled
-        output_node.NodeUpdateThumb(image)
-
-        self.SetRender(image)
+        self.output_node.NodeUpdateThumb(image)
         return image
 
-    def RenderNodeGraph(self, output_node, nodes):
+    def RenderNodeGraph(self, output_node):
         """ Render the image, starting from the output node.
 
         :param output_node: the output node object
-        :param nodes: dictionary of nodes of the Node Graph
         :returns: RenderImage object
         """
-        output_data = OutputNodeEval()
-        output_data.SetNode(output_node)
-        return output_data.RenderImage()
-
-    def GetOutputNode(self, nodes):
-        """ Get the output composite node.
-
-        :param nodes: dictionary of nodes of the Node Graph
-        :returns: node object of output node
-        """
-        for node_id in nodes:
-            if nodes[node_id].IsOutputNode() is True:
-                output_node = nodes[node_id]
-        return output_node
+        # Get the node connected to the output node and evaluate from there.
+        node = output_node.parameters["image"].binding
+        if node is not None:
+            eval_info = EvalInfo(node)
+            image = eval_info.node.EvaluateNode(eval_info)
+            return image
+        else:
+            # If there is no connection, then return a default transparent image.
+            return RenderImage()

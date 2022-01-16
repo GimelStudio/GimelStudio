@@ -46,7 +46,7 @@ class RenderImage(object):
                 return self.img
 
         elif data_type == "oiio":
-            print("Converting to oiio is disabled")
+            print("[WARNING] Converting to oiio is disabled!")
             # if current_data_type == oiio.ImageBuf:
             #     return self.img
             # else:
@@ -77,16 +77,20 @@ class RenderImage(object):
             # Open the image as an array
             img_input = oiio.ImageInput.open(path)
             if img_input is None:
-                print("IO ERROR: ", oiio.geterror())
+                print("[IO ERROR] ", oiio.geterror())
             image = img_input.read_image(format="float32")
+
+            # Check image size to warn about glsl texture max limit
+            if image.shape[0] > 6000 or image.shape[1] > 6000:
+                print("[WARNING] GLSL texture size is set for images less than 6000x6000px")
 
             # Enforce RGBA
             if image.shape[2] == 3:
                 self.img = cv2.cvtColor(image, cv2.COLOR_RGB2RGBA)
             else:
                 self.img = image
-        except FileNotFoundError:
-            print("IO ERROR: COULD NOT OPEN IMAGE!")
+        except FileNotFoundError as error:
+            print("[IO ERROR] Could not open image! ", error)
 
     def SetAsImage(self, image):
         """ Sets the render image.

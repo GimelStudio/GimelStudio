@@ -443,8 +443,11 @@ class ApplicationFrame(wx.Frame):
         self.statusbar.Refresh()
         self.menubar.Refresh()
 
+        # Set the output node for the renderer
+        self.renderer.SetOutputNode(self.NodeGraph.GetOutputNode())
+
     def Render(self):
-        image = self.renderer.Render(self.NodeGraph.GetNodes())
+        image = self.renderer.Render()
         render = image.Image("numpy")
         self.imageviewport_pnl.UpdateViewerImage(render, 0)
         self.SetAppTitle(False)
