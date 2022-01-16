@@ -282,7 +282,7 @@ class ApplicationFrame(wx.Frame):
         edit_menu.AppendItem(self.preferences_menuitem)
 
         view_menu.AppendItem(self.showimageviewport_menuitem)
-        view_menu.AppendItem(self.showstatusbar_menuitem)
+        # view_menu.AppendItem(self.showstatusbar_menuitem)
 
         render_menu.AppendItem(self.toggleautorender_menuitem)
         render_menu.AppendItem(separator)

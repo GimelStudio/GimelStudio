@@ -25,9 +25,8 @@ from gsnodegraph import (EVT_GSNODEGRAPH_NODESELECT,
 from gsnodegraph import NodeGraph as NodeGraphBase
 
 import gimelstudio.constants as const
-from gimelstudio.datafiles import (ICON_NODEGRAPH_PANEL, ICON_MORE_MENU_SMALL,
-                                   ICON_MOUSE_LMB_MOVEMENT, ICON_MOUSE_LMB,
-                                   ICON_KEY_CTRL, ICON_MOUSE_MMB_MOVEMENT,
+from gimelstudio.datafiles import (ICON_NODEGRAPH_PANEL, ICON_MOUSE_LMB_MOVEMENT, 
+                                   ICON_MOUSE_LMB, ICON_KEY_CTRL, ICON_MOUSE_MMB_MOVEMENT,
                                    ICON_MOUSE_RMB)
 from .addnode_menu import AddNodeMenu
 
