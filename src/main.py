@@ -50,6 +50,11 @@ builtins.__dict__['_'] = wx.GetTranslation
 
 class MainApp(wx.App):
 
+    def InitLocale(self):
+        if sys.platform.startswith('win') and sys.version_info > (3,8):
+            import locale
+            locale.setlocale(locale.LC_ALL, 'C')
+
     def OnInit(self):
         # Create a global instance of the app configuration class
         self.app_config = AppConfiguration(self)
