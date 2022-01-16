@@ -1,0 +1,1 @@
+Place custom node Python (.py) scripts you want Gimel Studio to register and load in this directory. If you need more than one file or have a glsl file included you can make a folder and place the files inside, along with an __init__.py file to make it a package. See the examples in this folder for details.
