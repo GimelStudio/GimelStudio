@@ -20,7 +20,8 @@ from wx import stc
 import gswidgetkit.foldpanelbar as fpbar
 from gswidgetkit import (NumberField, EVT_NUMBERFIELD,
                          Button, EVT_BUTTON, TextCtrl,
-                         Label, DropDown, EVT_DROPDOWN)
+                         Label, DropDown, EVT_DROPDOWN, 
+                         ColorPickerButton)
 
 from gimelstudio.constants import (AREA_BG_COLOR, PROP_BG_COLOR, 
                                    SUPPORTED_FT_OPEN_LIST)
@@ -142,6 +143,29 @@ class ThumbProp(Property):
         self.img = wx.StaticBitmap(fold_panel, bitmap=self.GetThumbImage(), size=(200, 200))
 
         self.AddToFoldPanel(sizer, fold_panel, self.img)
+
+
+class ColorProp(Property):
+    """ 
+    Allows the user to select a color.
+    """
+    def __init__(self, idname, default=(255, 255, 255), visible=True):
+        Property.__init__(self, idname, default, fpb_label, expanded, visible)
+    
+    def CreateUI(self, parent, sizer):
+        fold_panel = self.CreateFoldPanel(sizer)
+        fold_panel.SetBackgroundColour(wx.Colour("#464646"))
+
+        self.colorPicker = ColorPickerButton(fold_panel,
+                                        default_value=self.default,
+                                        label=self.GetLabel())
+
+        self.AddToFoldPanel(sizer, fold_panel, self.colorpicker, spacing=10)
+        
+        self.colorPicker.Bind(EVT_NUMBERFIELD, self.WidgetEvent)
+    
+    def WidgetEvent(self, event):
+        self.setValue(event.value)
 
 
 class PositiveIntegerProp(Property):
