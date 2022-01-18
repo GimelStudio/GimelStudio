@@ -57,8 +57,8 @@ class MixNode(api.Node):
         self.NodeAddProp(opacity)
 
     def NodeInitParams(self):
-        p1 = api.RenderImageParam("image", "Image")
-        p2 = api.RenderImageParam("overlay", "Overlay")
+        p1 = api.RenderImageParam("image1", "Image")
+        p2 = api.RenderImageParam("image2", "Image")
 
         self.NodeAddParam(p1)
         self.NodeAddParam(p2)
@@ -67,8 +67,8 @@ class MixNode(api.Node):
         return self.EvalMutedNode(eval_info)
 
     def NodeEvaluation(self, eval_info):
-        image1 = self.EvalParameter(eval_info, "image")
-        image2 = self.EvalParameter(eval_info, "overlay")
+        image1 = self.EvalParameter(eval_info, "image1")
+        image2 = self.EvalParameter(eval_info, "image2")
         blend_mode = self.EvalProperty(eval_info, "blend_mode")
         opacity = self.EvalProperty(eval_info, "opacity")
 
