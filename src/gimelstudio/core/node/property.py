@@ -21,7 +21,7 @@ import gswidgetkit.foldpanelbar as fpbar
 from gswidgetkit import (NumberField, EVT_NUMBERFIELD,
                          Button, EVT_BUTTON, TextCtrl,
                          Label, DropDown, EVT_DROPDOWN, 
-                         ColorPickerButton)
+                         ColorPickerButton, EVT_COLORPICKER_BUTTON)
 
 from gimelstudio.constants import (AREA_BG_COLOR, PROP_BG_COLOR, 
                                    SUPPORTED_FT_OPEN_LIST)
@@ -149,20 +149,19 @@ class ColorProp(Property):
     """ 
     Allows the user to select a color.
     """
-    def __init__(self, idname, default=(255, 255, 255), visible=True):
-        Property.__init__(self, idname, default, fpb_label, expanded, visible)
+    def __init__(self, idname, default=(255, 255, 255, 255), visible=True, fpb_label="", expanded=True):
+        Property.__init__(self, idname, default, fpb_label, expanded, visible, fpb_label, expanded)
     
     def CreateUI(self, parent, sizer):
         fold_panel = self.CreateFoldPanel(sizer)
-        fold_panel.SetBackgroundColour(wx.Colour("#464646"))
 
-        self.colorPicker = ColorPickerButton(fold_panel,
-                                        default_value=self.default,
+        color_picker = ColorPickerButton(fold_panel,
+                                        default_value=self.GetValue(),
                                         label=self.GetLabel())
 
-        self.AddToFoldPanel(sizer, fold_panel, self.colorpicker, spacing=10)
+        self.AddToFoldPanel(sizer, fold_panel, color_picker, spacing=10)
         
-        self.colorPicker.Bind(EVT_NUMBERFIELD, self.WidgetEvent)
+        color_picker.Bind(EVT_COLORPICKER_BUTTON, self.WidgetEvent)
     
     def WidgetEvent(self, event):
         self.setValue(event.value)
