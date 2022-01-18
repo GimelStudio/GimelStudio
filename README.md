@@ -13,7 +13,7 @@
 
 # About the Next Generation of Gimel Studio
 
-This repository tracks the next step of Gimel Studio to become a truly usable and serious node-based, non-destructive image editor. It is currently in ``initial development stage``, working towards a usable MVP application. Things will probably change a lot from what is currently here.
+This repository tracks the next step of Gimel Studio to become a truly usable and serious node-based, non-destructive image editor. It is currently in ``initial development`` stage, working towards a usable MVP application. Things will probably change a lot from what is currently here.
 
 **We’re especially seeking Python, C++, and GLSL developers, 3D artists, photographers and UI designers to help with the project.** However, even if you have none of these skills you’re still welcome, of course, to ask questions, give feedback, and suggest ideas and improvements.
 
@@ -87,4 +87,3 @@ Please see the [CONTRIBUTING.md](CONTRIBUTING.md) for some details on contributi
 
 1. Make sure you have Python 3.8 or 3.9 installed on your system.
 2. Navigate to the root folder and in your terminal, run ``python3 build.py``. This will install all of the neccesary libraries and will give you the option to create a standalone executable or just run the code with Python.
-
