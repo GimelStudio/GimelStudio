@@ -158,7 +158,7 @@ class ColorProp(Property):
 
         color_picker = ColorPickerButton(fold_panel,
                                         default_value=self.GetValue(),
-                                        label=self.label(),
+                                        label=self.label,
                                         size=(-1, 32))
 
         self.AddToFoldPanel(sizer, fold_panel, color_picker, spacing=10)
