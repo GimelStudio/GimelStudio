@@ -150,7 +150,7 @@ class ColorProp(Property):
     Allows the user to select a color.
     """
     def __init__(self, idname, default=(255, 255, 255, 255), visible=True, fpb_label="", expanded=True):
-        Property.__init__(self, idname, default, fpb_label, expanded, visible, fpb_label, expanded)
+        Property.__init__(self, idname, default, fpb_label, expanded, visible)
     
     def CreateUI(self, parent, sizer):
         fold_panel = self.CreateFoldPanel(sizer)
