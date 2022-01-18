@@ -162,6 +162,7 @@ class ColorProp(Property):
         self.AddToFoldPanel(sizer, fold_panel, color_picker, spacing=10)
         
         color_picker.Bind(EVT_COLORPICKER_BUTTON, self.WidgetEvent)
+
     
     def WidgetEvent(self, event):
         self.setValue(event.value)
