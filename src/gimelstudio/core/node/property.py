@@ -149,7 +149,8 @@ class ColorProp(Property):
     """ 
     Allows the user to select a color.
     """
-    def __init__(self, idname, default=(255, 255, 255, 255), label="", visible=True, fpb_label="", expanded=True):
+    def __init__(self, idname, default=(255, 255, 255, 255), label="", fpb_label="", 
+                 expanded=True, visible=True):
         Property.__init__(self, idname, default, fpb_label, expanded, visible)
         self.label = label
 
@@ -157,17 +158,16 @@ class ColorProp(Property):
         fold_panel = self.CreateFoldPanel(sizer)
 
         color_picker = ColorPickerButton(fold_panel,
-                                        default_value=self.GetValue(),
-                                        label=self.label,
-                                        size=(-1, 32))
+                                         default=self.GetValue(),
+                                         label=self.label,
+                                         size=(-1, 32))
 
         self.AddToFoldPanel(sizer, fold_panel, color_picker, spacing=10)
         
         color_picker.Bind(EVT_COLORPICKER_BUTTON, self.WidgetEvent)
 
-    
     def WidgetEvent(self, event):
-        self.setValue(event.value)
+        self.SetValue(event.value)
 
 
 class PositiveIntegerProp(Property):
