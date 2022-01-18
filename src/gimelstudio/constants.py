@@ -24,7 +24,7 @@ APP_FROZEN = getattr(sys, "frozen", False)
 APP_DIR = os.path.dirname(os.path.abspath(sys.argv[0]))
 
 APP_VERSION = "0.6.0"
-APP_VERSION_TAG = " pre-alpha 2"
+APP_VERSION_TAG = " pre-alpha 3"
 APP_VERSION_FULL = "{0}{1}".format(APP_VERSION, APP_VERSION_TAG)
 
 APP_NAME = "Gimel Studio"
@@ -40,7 +40,7 @@ APP_YOUTUBE_URL = "https://www.youtube.com/channel/UCP9CNtBPMPRwOR4jUiMMkhQ"
 
 APP_FULL_TITLE = "{0} v{1}".format(APP_NAME, APP_VERSION_FULL)
 
-APP_CONFIG_FILE = os.path.expanduser("~/.gimelstudio/pre-a2-config.json")
+APP_CONFIG_FILE = os.path.expanduser("~/.gimelstudio/pre-a3-config.json")
 
 # File system
 SUPPORTED_FT_OPEN_LIST = [
