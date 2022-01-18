@@ -34,11 +34,9 @@ class ColorImageNode(api.Node):
         return meta_info
 
     def NodeWidgetEventHook(self, idname, value):
-        if idname == "color":
-            image = self.NodeEvalSelf()
-            self.NodeUpdateThumb(image)
-            self.RefreshPropertyPanel()
-            self.RefreshNodeGraph()
+        image = self.NodeEvalSelf()
+        self.NodeUpdateThumb(image)
+        self.RefreshNodeGraph()
 
     def NodeInitProps(self):
         image_size = api.XYZProp(
@@ -50,19 +48,24 @@ class ColorImageNode(api.Node):
             show_p=False, 
             fpb_label="Image Size"
         )
-        # color = api.ColorProp(...)
+        color = api.ColorProp(
+            idname="color",
+            default=(255, 255, 255, 255),
+            label="",
+            fpb_label="Background Color"
+        )
         self.NodeAddProp(image_size)
-        #self.NodeAddProp(color)
+        self.NodeAddProp(color)
 
     def NodeEvaluation(self, eval_info):
         image_size = self.EvalProperty(eval_info, "image_size")
+        color = self.EvalProperty(eval_info, "color")
 
         render_image = api.RenderImage()
 
-        img = np.zeros((image_size[0], image_size[1], 4), dtype=np.float32) + (255, 255, 255, 255)
+        img = np.zeros((image_size[0], image_size[1], 4), dtype=np.float32) + color
 
         render_image.SetAsImage(img)
-        self.NodeUpdateThumb(render_image)
         return render_image
 
 
