@@ -48,12 +48,14 @@ class Renderer(object):
         """
         # Render the image
         image = self.RenderNodeGraph(self.output_node)
+        print(image, "<<<IMGE")
+        image = image["image"]
         self.SetRender(image)
 
         # TODO: Only if node thumbnails are enabled
         self.output_node.NodeUpdateThumb(image)
         return image
-
+ 
     def RenderNodeGraph(self, output_node):
         """ Render the image, starting from the output node.
 
@@ -61,7 +63,8 @@ class Renderer(object):
         :returns: RenderImage object
         """
         # Get the node connected to the output node and evaluate from there.
-        node = output_node.parameters["image"].binding
+        print(output_node.properties)
+        node = output_node.properties["image"].binding[0]
         if node is not None:
             eval_info = EvalInfo(node)
             image = eval_info.node.EvaluateNode(eval_info)

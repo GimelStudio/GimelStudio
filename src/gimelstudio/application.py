@@ -448,6 +448,7 @@ class ApplicationFrame(wx.Frame):
 
     def Render(self):
         image = self.renderer.Render()
+        print("final: ", image)
         render = image.Image("numpy")
         self.imageviewport_pnl.UpdateViewerImage(render, 0)
         self.SetAppTitle(False)

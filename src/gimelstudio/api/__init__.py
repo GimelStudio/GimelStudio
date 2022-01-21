@@ -3,3 +3,4 @@ from gimelstudio.core.node import (Node, Parameter, RenderImageParam, IntegerPar
                                   ChoiceProp, OpenFileChooserProp, ActionProp, TextProp,
                                   ColorProp)
 from gimelstudio.core import RenderImage, RegisterNode
+from .api import Output

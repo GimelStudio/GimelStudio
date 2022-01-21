@@ -22,7 +22,7 @@ from gsnodegraph import (EVT_GSNODEGRAPH_NODESELECT,
                          EVT_GSNODEGRAPH_NODEDISCONNECT,
                          EVT_GSNODEGRAPH_MOUSEZOOM,
                          EVT_GSNODEGRAPH_ADDNODEBTN)
-from gsnodegraph import NodeGraph as NodeGraphBase
+from gsnodegraph import NodeGraphBase
 
 import gimelstudio.constants as const
 from gimelstudio.datafiles import (ICON_NODEGRAPH_PANEL, ICON_MOUSE_LMB_MOVEMENT, 
@@ -34,8 +34,8 @@ ID_ADDNODEMENU = wx.NewIdRef()
 
 
 class NodeGraph(NodeGraphBase):
-    def __init__(self, parent, registry, *args, **kwds):
-        NodeGraphBase.__init__(self, parent, registry, *args, **kwds)
+    def __init__(self, parent, registry, config, *args, **kwds):
+        NodeGraphBase.__init__(self, parent, registry, config, *args, **kwds)
 
     @property
     def GLSLRenderer(self):
@@ -77,13 +77,37 @@ class NodeGraphPanel(wx.Panel):
 
         topbar.SetSizer(topbar_sizer)
 
-        self.nodegraph = NodeGraph(self, self.registry, size=(-1, self.Size[0]-20))
+        # Setup the config with datatypes and node categories
+        config = {
+            "image_datatype": "IMAGE",
+            "node_datatypes": {
+                "IMAGE": "#C6C62D",  # Yellow
+                "INTEGER": "#A0A0A0",  # Grey
+                "FLOAT": "#A0A0A0",  # Grey
+                "VALUE": "#A0A0A0",  # Depreciated!
+            },
+            "node_categories": {
+                "INPUT": "#E64555",  # Burgendy
+                "DRAW": "#AF4467",  # Pink
+                "MASK": "#084D4D",  # Blue-green
+                "CONVERT": "#564B7C",  # Purple
+                "FILTER": "#558333",  # Green
+                "BLEND": "#498DB8",  # Light blue
+                "COLOR": "#C2AF3A",  # Yellow
+                "TRANSFORM": "#6B8B8B", # Blue-grey
+                "OUTPUT": "#B33641"  # Red
+            }
+        }
+
+        self.nodegraph = NodeGraph(self, registry=self.registry, 
+                                   config=config,
+                                   size=(-1, self.Size[0]-20))
 
         # Here for testing
-        if const.APP_FROZEN is False:
-            self.nodegraph.AddNode('corenode_blur', pos=wx.Point(600, 200))
-            self.nodegraph.AddNode('corenode_opacity', pos=wx.Point(310, 200))
-            self.nodegraph.AddNode('corenode_flip', pos=wx.Point(500, 300))
+        # if const.APP_FROZEN is False:
+        #     self.nodegraph.AddNode('corenode_blur', pos=wx.Point(600, 200))
+        #     self.nodegraph.AddNode('corenode_opacity', pos=wx.Point(310, 200))
+        #     self.nodegraph.AddNode('corenode_flip', pos=wx.Point(500, 300))
 
         # Add default image and output node
         self.nodegraph.AddNode('corenode_image', pos=wx.Point(100, 250))

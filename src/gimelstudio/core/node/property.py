@@ -34,6 +34,11 @@ class Property(object):
     """
     def __init__(self, idname, default, fpb_label, expanded=True, visible=True):
         self.idname = idname
+
+        self.label = fpb_label
+        self.datatype = "IMAGE"
+        self.binding = None
+
         self.value = default
         self.fpb_label = fpb_label
         self.visible = visible

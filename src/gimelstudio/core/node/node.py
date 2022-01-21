@@ -24,12 +24,14 @@ from gimelstudio.core import EvalInfo, RenderImage
 
 
 class Node(NodeView):
-    def __init__(self, nodegraph, _id):
-        NodeView.__init__(self, nodegraph, _id)
+    def __init__(self, nodegraph, id):
+        NodeView.__init__(self, nodegraph, id)
         self.nodegraph = nodegraph
-        self.id = _id
+        self.id = id
         self.properties = {}
         self.parameters = {}
+        self.outputs = {}
+
         self.cache = {}
         self.cache_enabled = True
         self.edited_flag = False
@@ -37,7 +39,8 @@ class Node(NodeView):
         self.shader_cache_enabled = True
 
         self.NodeInitProps()
-        self.NodeInitParams()
+        #self.NodeInitParams()
+        self.NodeInitOutputs()
 
     def _WidgetEventHook(self, idname, value, render):
         """ Internal dispatcher method for the Property widget
@@ -88,23 +91,31 @@ class Node(NodeView):
         return self.cache_enabled
 
     def AddProperty(self, prop):
-        self.properties[prop.IdName] = prop
+        self.properties[prop.idname] = prop
         return self.properties
 
-    def AddParameter(self, param):
-        self.parameters[param.IdName] = param
-        return self.parameters
+    # def AddParameter(self, param):
+    #     self.parameters[param.IdName] = param
+    #     return self.parameters
 
     def EditProperty(self, idname, value, render=True):
         prop = self.properties[idname]
         prop.SetValue(value, render)
         return prop
 
-    def EditParameter(self, idname, value):
-        param = self.parameters[idname]
-        param.SetBinding(value)
-        self.RemoveFromCache(idname)
-        return param
+    # def EditParameter(self, idname, value):
+    #     #param = self.properties[idname]
+    #     #param.binding = value
+    #     param = self.parameters[idname]
+    #     param.SetBinding(value)
+    #     #self.RemoveFromCache(idname)
+    #     return param
+
+    def EditConnection(self, name, binding, socket):
+        print("Make connection: ", binding, socket)
+        if binding is not None:
+            binding = (binding, socket)
+        self.properties[name].binding = binding
 
     def SetEditedFlag(self, edited=True):
         self.edited_flag = edited
@@ -130,6 +141,9 @@ class Node(NodeView):
         >>> p = api.RenderImageParam('Image')
         >>> self.NodeAddParam(p)
         """
+        pass
+
+    def NodeInitOutputs(self):
         pass
 
     def NodeAddProp(self, prop):

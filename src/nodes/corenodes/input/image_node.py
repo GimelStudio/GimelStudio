@@ -18,6 +18,7 @@ import os.path
 from gimelstudio import api, constants
 
 
+
 class ImageNode(api.Node):
     def __init__(self, nodegraph, _id):
         api.Node.__init__(self, nodegraph, _id)
@@ -37,30 +38,30 @@ class ImageNode(api.Node):
         return meta_info
 
     def NodeWidgetEventHook(self, idname, value):
-        if idname == "file_path":
-            image = self.NodeEvalSelf()
+        # if idname == "file_path":
+        #     image = self.NodeEvalSelf()
             
-            # Set image info
-            if value != "":
-                img = image.Image("numpy")
-                file_bytes = os.path.getsize(value)
-                if file_bytes < (1024*1024):
-                    prefix = "MB"
-                    size = file_bytes / (1024*1024)
-                else:
-                    prefix = "kB" 
-                    size = file_bytes / 1024
-                info = "{0}x{1}px  |  {2}{3}".format(img.shape[1], img.shape[0], 
-                                                     round(size, 3), prefix)
-                self.img_info.SetValue(info)
+        #     # Set image info
+        #     if value != "":
+        #         img = image.Image("numpy")
+        #         file_bytes = os.path.getsize(value)
+        #         if file_bytes < (1024*1024):
+        #             prefix = "MB"
+        #             size = file_bytes / (1024*1024)
+        #         else:
+        #             prefix = "kB" 
+        #             size = file_bytes / 1024
+        #         info = "{0}x{1}px  |  {2}{3}".format(img.shape[1], img.shape[0], 
+        #                                              round(size, 3), prefix)
+        #         self.img_info.SetValue(info)
 
-            self.NodeUpdateThumb(image)
-            self.RefreshPropertyPanel()
-            self.RefreshNodeGraph()
+        #     self.NodeUpdateThumb(image)
+        #     self.RefreshPropertyPanel()
+        self.RefreshNodeGraph()
 
     def NodeDndEventHook(self):
-        image = self.NodeEvalSelf()
-        self.NodeUpdateThumb(image)
+        # image = self.NodeEvalSelf()
+        # self.NodeUpdateThumb(image)
         self.RefreshNodeGraph()
 
     def NodeInitProps(self):
@@ -70,7 +71,7 @@ class ImageNode(api.Node):
             dlg_msg="Choose image...",
             wildcard=constants.SUPPORTED_FT_OPEN_WILDCARD,
             btn_lbl="Choose...",
-            fpb_label="Image Path"
+            fpb_label="Image Path",
         )
         self.img_info = api.LabelProp(
             idname="label",
@@ -81,6 +82,12 @@ class ImageNode(api.Node):
 
         self.NodeAddProp(file_path)
         self.NodeAddProp(self.img_info)
+
+    def NodeInitOutputs(self):
+        self.outputs = {
+            "image": api.Output(idname="image", datatype="IMAGE", label="Image"),
+            "size": api.Output(idname="size", datatype="INTEGER", label="Alpha")
+        }
 
     def NodeEvaluation(self, eval_info):
         path = self.EvalProperty(eval_info, "file_path")
@@ -98,7 +105,10 @@ class ImageNode(api.Node):
             render_image = self.cached_image
 
         self.NodeUpdateThumb(render_image)
-        return render_image
+        return {
+            "image": render_image,
+            "alpha": render_image
+        }
 
 
 api.RegisterNode(ImageNode, "corenode_image")
