@@ -84,6 +84,9 @@ class NodeGraphPanel(wx.Panel):
                 "IMAGE": "#C6C62D",  # Yellow
                 "INTEGER": "#A0A0A0",  # Grey
                 "FLOAT": "#A0A0A0",  # Grey
+                "STRING": "#2DBCC6", # Blue
+                "COLOR": "#D98B3D", # Orange
+                "VECTOR": "#6E3DD9", # Purple
                 "VALUE": "#A0A0A0",  # Depreciated!
             },
             "node_categories": {
@@ -111,6 +114,8 @@ class NodeGraphPanel(wx.Panel):
 
         # Add default image and output node
         self.nodegraph.AddNode('corenode_image', pos=wx.Point(100, 250))
+        self.nodegraph.AddNode('corenode_blur', pos=wx.Point(310, 200))
+        self.nodegraph.AddNode('corenode_vector', pos=wx.Point(600, 300))
         self.nodegraph.AddNode('corenode_outputcomposite', pos=wx.Point(950, 250))
 
         main_sizer.Add(topbar, flag=wx.EXPAND | wx.LEFT | wx.RIGHT)

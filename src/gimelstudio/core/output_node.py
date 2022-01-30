@@ -19,18 +19,6 @@ from gimelstudio import api
 from gimelstudio.interface import ExportImageHandler
 
 
-
-class ImageProp(api.Property):
-    """ Example property. """
-    def __init__(self, idname, default=api.RenderImage(), fpb_label="", expanded=True, visible=True):
-        api.Property.__init__(self, idname, default, fpb_label, expanded, visible)
-        self.value = default
-        self.datatype = "IMAGE"
-        self.label = "Image"
-
-
-
-
 class OutputNode(api.Node):
     def __init__(self, nodegraph, _id):
         api.Node.__init__(self, nodegraph, _id)
@@ -53,17 +41,17 @@ class OutputNode(api.Node):
         return meta_info
 
     def NodeInitProps(self):
-        self.export_button = api.ActionProp(
-            idname="export",
-            fpb_label="Export",
-            btn_label="Export Image",
-            action=self.OnExportButtonPressed,
-            visible=False
-        )
-        image = ImageProp(
+        # self.export_button = api.ActionProp(
+        #     idname="export",
+        #     fpb_label="Export",
+        #     btn_label="Export Image",
+        #     action=self.OnExportButtonPressed,
+        #     visible=False
+        # )
+        image = api.ImageProp(
             idname="image",
         )
-        self.NodeAddProp(self.export_button)
+        #self.NodeAddProp(self.export_button)
         self.NodeAddProp(image)
 
     def NodeEvaluation(self, eval_info):

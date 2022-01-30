@@ -18,10 +18,9 @@ import os.path
 from gimelstudio import api, constants
 
 
-
 class ImageNode(api.Node):
-    def __init__(self, nodegraph, _id):
-        api.Node.__init__(self, nodegraph, _id)
+    def __init__(self, nodegraph, id):
+        api.Node.__init__(self, nodegraph, id)
 
         self.cached_path = ""
         self.cached_image = None
@@ -65,7 +64,8 @@ class ImageNode(api.Node):
         self.RefreshNodeGraph()
 
     def NodeInitProps(self):
-        file_path = api.OpenFileChooserProp(
+        #pass
+        file_path = api.FileProp(
             idname="file_path",
             default="",
             dlg_msg="Choose image...",
@@ -73,20 +73,20 @@ class ImageNode(api.Node):
             btn_lbl="Choose...",
             fpb_label="Image Path",
         )
-        self.img_info = api.LabelProp(
-            idname="label",
-            default="-",
-            fpb_label="Image Info",
-            expanded=False
-        )
+        # self.img_info = api.LabelProp(
+        #     idname="label",
+        #     default="-",
+        #     fpb_label="Image Info",
+        #     expanded=False
+        # )
 
         self.NodeAddProp(file_path)
-        self.NodeAddProp(self.img_info)
+        # self.NodeAddProp(self.img_info)
 
     def NodeInitOutputs(self):
         self.outputs = {
             "image": api.Output(idname="image", datatype="IMAGE", label="Image"),
-            "size": api.Output(idname="size", datatype="INTEGER", label="Alpha")
+            "alpha": api.Output(idname="alpha", datatype="IMAGE", label="Alpha")
         }
 
     def NodeEvaluation(self, eval_info):
@@ -107,7 +107,7 @@ class ImageNode(api.Node):
         self.NodeUpdateThumb(render_image)
         return {
             "image": render_image,
-            "alpha": render_image
+            "alpha": api.RenderImage(size=(200, 200)) # FIXME
         }
 
 

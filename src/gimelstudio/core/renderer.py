@@ -48,7 +48,6 @@ class Renderer(object):
         """
         # Render the image
         image = self.RenderNodeGraph(self.output_node)
-        print(image, "<<<IMGE")
         image = image["image"]
         self.SetRender(image)
 
@@ -63,7 +62,7 @@ class Renderer(object):
         :returns: RenderImage object
         """
         # Get the node connected to the output node and evaluate from there.
-        print(output_node.properties)
+        # print(output_node.properties["image"], "\n")
         node = output_node.properties["image"].binding[0]
         if node is not None:
             eval_info = EvalInfo(node)

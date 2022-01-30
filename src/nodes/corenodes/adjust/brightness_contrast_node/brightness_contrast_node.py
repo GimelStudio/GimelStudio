@@ -18,8 +18,8 @@ from gimelstudio import api
 
 
 class BrightnessContrastNode(api.Node):
-    def __init__(self, nodegraph, _id):
-        api.Node.__init__(self, nodegraph, _id)
+    def __init__(self, nodegraph, id):
+        api.Node.__init__(self, nodegraph, id)
 
     @property
     def NodeMeta(self):
@@ -33,7 +33,10 @@ class BrightnessContrastNode(api.Node):
         return meta_info
 
     def NodeInitProps(self):
-        brightness_value = api.PositiveIntegerProp(
+        image = api.ImageProp(
+            idname="in_image",
+        )
+        brightness_value = api.IntegerProp(
             idname="brightness_value",
             default=0,
             min_val=0,
@@ -41,7 +44,7 @@ class BrightnessContrastNode(api.Node):
             show_p=True,
             fpb_label="Brightness"
         )
-        contrast_value = api.PositiveIntegerProp(
+        contrast_value = api.IntegerProp(
             idname="contrast_value",
             default=100,
             min_val=0,
@@ -49,18 +52,20 @@ class BrightnessContrastNode(api.Node):
             show_p=True,
             fpb_label="Contrast"
         )
+        self.NodeAddProp(image)
         self.NodeAddProp(brightness_value)
         self.NodeAddProp(contrast_value)
 
-    def NodeInitParams(self):
-        image = api.RenderImageParam("image", "Image")
-        self.NodeAddParam(image)
+    def NodeInitOutputs(self):
+        self.outputs = {
+            "image": api.Output(idname="image", datatype="IMAGE", label="Image"),
+        }
 
     def MutedNodeEvaluation(self, eval_info):
         return self.EvalMutedNode(eval_info)
 
     def NodeEvaluation(self, eval_info):
-        image1 = self.EvalParameter(eval_info, "image")
+        image1 = self.EvalProperty(eval_info, "in_image")
         brightness_value = self.EvalProperty(eval_info, "brightness_value")
         contrast_value = self.EvalProperty(eval_info, "contrast_value")
 
@@ -79,7 +84,8 @@ class BrightnessContrastNode(api.Node):
 
         render_image.SetAsImage(result)
         self.NodeUpdateThumb(render_image)
-        return render_image
-
+        return {
+            "image": render_image
+        }
 
 api.RegisterNode(BrightnessContrastNode, "corenode_brightnesscontrast")

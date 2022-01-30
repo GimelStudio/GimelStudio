@@ -14,62 +14,45 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-import numpy as np
 from gimelstudio import api
 
 
-class Example1Node(api.Node):
+class IntegerNode(api.Node):
     def __init__(self, nodegraph, id):
         api.Node.__init__(self, nodegraph, id)
 
     @property
     def NodeMeta(self):
         meta_info = {
-            "label": "Example Node 1",
+            "label": "Value",
             "author": "Gimel Studio",
             "version": (0, 5, 0),
-            "category": "TRANSFORM",
-            "description": "Show an example node.",
+            "category": "INPUT",
+            "description": "Input an integer or float.",
         }
         return meta_info
 
     def NodeInitProps(self):
-        image = api.ImageProp(
-            idname="in_image",
+        integer = api.IntegerProp(
+            idname="sel_integer",
+            default=100,
+            min_val=0,
+            max_val=100,
+            fpb_label="Integer Value"
         )
-        flip_direction = api.ChoiceProp(
-            idname="direction",
-            default="Vertically",
-            choices=["Vertically", "Horizontally"],
-            fpb_label="Flip Direction"
-        )
-        self.NodeAddProp(image)
-        self.NodeAddProp(flip_direction)
+        self.NodeAddProp(integer)
 
     def NodeInitOutputs(self):
         self.outputs = {
-            "image": api.Output(idname="image", datatype="IMAGE", label="Image"),
+            "integer": api.Output(idname="integer", datatype="INTEGER", label="Integer"),
         }
-
-    def MutedNodeEvaluation(self, eval_info):
-        return self.EvalMutedNode(eval_info)
 
     def NodeEvaluation(self, eval_info):
-        flip_direction = self.EvalProperty(eval_info, "direction")
-        image1 = self.EvalProperty(eval_info, "in_image")
+        integer = self.EvalProperty(eval_info, "sel_integer")
 
-        image = api.RenderImage()
-        img = image1.Image("numpy")
-
-        if flip_direction == "Vertically":
-            output_img = np.flipud(img)
-        elif flip_direction == "Horizontally":
-            output_img = np.fliplr(img)
-
-        image.SetAsImage(output_img)
         return {
-            "image": image
+            "integer": integer
         }
 
 
-api.RegisterNode(Example1Node, "node_example1")
+api.RegisterNode(IntegerNode, "node_integer")

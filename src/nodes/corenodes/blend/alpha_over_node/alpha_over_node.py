@@ -18,8 +18,8 @@ from gimelstudio import api
 
 
 class AlphaOverNode(api.Node):
-    def __init__(self, nodegraph, _id):
-        api.Node.__init__(self, nodegraph, _id)
+    def __init__(self, nodegraph, id):
+        api.Node.__init__(self, nodegraph, id)
 
     @property
     def NodeMeta(self):
@@ -33,28 +33,34 @@ class AlphaOverNode(api.Node):
         return meta_info
 
     def NodeInitProps(self):
-        factor = api.PositiveIntegerProp(
+        image1 = api.ImageProp(
+            idname="image_1",
+        )
+        image2 = api.ImageProp(
+            idname="image_2",
+        )
+        factor = api.IntegerProp(
             idname="factor",
             default=100,
             min_val=0,
             max_val=100,
             fpb_label="Factor"
         )
+        self.NodeAddProp(image1)
+        self.NodeAddProp(image2)
         self.NodeAddProp(factor)
 
-    def NodeInitParams(self):
-        image1 = api.RenderImageParam("image_1", "Image")
-        image2 = api.RenderImageParam('image_2', "Image")
-
-        self.NodeAddParam(image1)
-        self.NodeAddParam(image2)
+    def NodeInitOutputs(self):
+        self.outputs = {
+            "image": api.Output(idname="image", datatype="IMAGE", label="Image"),
+        }
 
     def MutedNodeEvaluation(self, eval_info):
         return self.EvalMutedNode(eval_info)
 
     def NodeEvaluation(self, eval_info):
-        image1 = self.EvalParameter(eval_info, "image_1")
-        image2 = self.EvalParameter(eval_info, "image_2")
+        image1 = self.EvalProperty(eval_info, "image_1")
+        image2 = self.EvalProperty(eval_info, "image_2")
         factor = self.EvalProperty(eval_info, "factor")
 
         render_image = api.RenderImage()
@@ -70,7 +76,9 @@ class AlphaOverNode(api.Node):
 
         render_image.SetAsImage(result)
         self.NodeUpdateThumb(render_image)
-        return render_image
+        return {
+            "image": render_image
+        }
 
 
 api.RegisterNode(AlphaOverNode, "corenode_alpha_over")

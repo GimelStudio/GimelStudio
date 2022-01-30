@@ -17,38 +17,48 @@
 from gimelstudio import api
 
 
-class ValueNode(api.Node):
-    def __init__(self, nodegraph, _id):
-        api.Node.__init__(self, nodegraph, _id)
+class ColorNode(api.Node):
+    def __init__(self, nodegraph, id):
+        api.Node.__init__(self, nodegraph, id)
 
     @property
     def NodeMeta(self):
         meta_info = {
-            "label": "Value",
+            "label": "Color",
             "author": "Gimel Studio",
-            "version": (0, 5, 0),
+            "version": (0, 0, 5),
             "category": "INPUT",
-            "description": "Input an integer or float.",
+            "description": "Inputs a color."
         }
         return meta_info
 
-    def NodeOutputDatatype(self):
-        return "VALUE"
+    def NodeWidgetEventHook(self, idname, value):
+        image = self.NodeEvalSelf()
+        self.NodeUpdateThumb(image)
+        self.RefreshNodeGraph()
 
     def NodeInitProps(self):
-        value = api.PositiveIntegerProp(
-            idname="value",
-            default=100,
-            min_val=0,
-            max_val=100,
-            fpb_label="Integer Value"
+        color = api.ColorProp(
+            idname="sel_color",
+            default=(255, 255, 255, 255),
+            label="",
+            fpb_label="Color"
         )
-        self.NodeAddProp(value)
+        self.NodeAddProp(color)
+
+    def NodeInitOutputs(self):
+        self.outputs = {
+            "color": api.Output(idname="color", datatype="COLOR", label="Color"),
+        }
 
     def NodeEvaluation(self, eval_info):
-        value = self.EvalProperty(eval_info, "value")
+        color = self.EvalProperty(eval_info, "sel_color")
 
-        return value
+        return {
+            "color": color
+        }
+
+api.RegisterNode(ColorNode, "corenode_color")
 
 
-api.RegisterNode(ValueNode, "node_value")
+

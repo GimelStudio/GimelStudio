@@ -19,8 +19,8 @@ from gimelstudio import api
 
 
 class FlipNode(api.Node):
-    def __init__(self, nodegraph, _id):
-        api.Node.__init__(self, nodegraph, _id)
+    def __init__(self, nodegraph, id):
+        api.Node.__init__(self, nodegraph, id)
 
     @property
     def NodeMeta(self):
@@ -34,25 +34,29 @@ class FlipNode(api.Node):
         return meta_info
 
     def NodeInitProps(self):
+        image = api.ImageProp(
+            idname="in_image",
+        )
         flip_direction = api.ChoiceProp(
             idname="direction",
             default="Vertically",
             choices=["Vertically", "Horizontally", "Diagonally"],
             fpb_label="Orientation"
         )
+        self.NodeAddProp(image)
         self.NodeAddProp(flip_direction)
 
-    def NodeInitParams(self):
-        image = api.RenderImageParam("image", "Image")
-
-        self.NodeAddParam(image)
+    def NodeInitOutputs(self):
+        self.outputs = {
+            "image": api.Output(idname="image", datatype="IMAGE", label="Image"),
+        }
 
     def MutedNodeEvaluation(self, eval_info):
         return self.EvalMutedNode(eval_info)
 
     def NodeEvaluation(self, eval_info):
         flip_direction = self.EvalProperty(eval_info, "direction")
-        image1 = self.EvalParameter(eval_info, "image")
+        image1 = self.EvalProperty(eval_info, "in_image")
 
         render_image = api.RenderImage()
         img = image1.Image("numpy")
@@ -66,7 +70,9 @@ class FlipNode(api.Node):
 
         render_image.SetAsImage(output_img)
         self.NodeUpdateThumb(render_image)
-        return render_image
+        return {
+            "image": render_image
+        }
 
 
 api.RegisterNode(FlipNode, "corenode_flip")

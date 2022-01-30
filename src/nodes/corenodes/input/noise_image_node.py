@@ -24,8 +24,8 @@ from gimelstudio import api
 
 
 class NoiseImageNode(api.Node):
-    def __init__(self, nodegraph, _id):
-        api.Node.__init__(self, nodegraph, _id)
+    def __init__(self, nodegraph, id):
+        api.Node.__init__(self, nodegraph, id)
 
     @property
     def NodeMeta(self):

@@ -19,8 +19,8 @@ from gimelstudio import api
 
 
 class BlurNode(api.Node):
-    def __init__(self, nodegraph, _id):
-        api.Node.__init__(self, nodegraph, _id)
+    def __init__(self, nodegraph, id):
+        api.Node.__init__(self, nodegraph, id)
 
     @property
     def NodeMeta(self):
@@ -34,13 +34,16 @@ class BlurNode(api.Node):
         return meta_info
 
     def NodeInitProps(self):
+        image = api.ImageProp(
+            idname="in_image",
+        )
         filter_type = api.ChoiceProp(
             idname="filter_type",
             default="Box",
             choices=["Box", "Gaussian"],
             fpb_label="Filter Type"
         )
-        kernel = api.XYZProp(
+        kernel = api.VectorProp(
             idname="kernel", 
             default=(5, 5, 0), 
             labels=("Kernel X", "Kernel Y"),
@@ -49,13 +52,14 @@ class BlurNode(api.Node):
             show_p=False, 
             fpb_label="Blur Kernel"
         )
+        self.NodeAddProp(image)
         self.NodeAddProp(filter_type)
         self.NodeAddProp(kernel)
 
-    def NodeInitParams(self):
-        image = api.RenderImageParam("image", "Image")
-
-        self.NodeAddParam(image)
+    def NodeInitOutputs(self):
+        self.outputs = {
+            "image": api.Output(idname="image", datatype="IMAGE", label="Image"),
+        }
 
     def MutedNodeEvaluation(self, eval_info):
         return self.EvalMutedNode(eval_info)
@@ -63,7 +67,7 @@ class BlurNode(api.Node):
     def NodeEvaluation(self, eval_info):
         kernel = self.EvalProperty(eval_info, "kernel")
         filter_type = self.EvalProperty(eval_info, "filter_type")
-        image1 = self.EvalParameter(eval_info, "image")
+        image1 = self.EvalProperty(eval_info, "in_image")
 
         render_image = api.RenderImage()
         img = image1.Image("numpy")
@@ -72,15 +76,16 @@ class BlurNode(api.Node):
             output_img = cv2.boxFilter(img, -1, (kernel[0], kernel[1]))
         elif filter_type == "Gaussian":
             # Both values must be odd
-            if (kernel[0] % 2) == 0 and (kernel[1] % 2) == 0:
-                kernel[1] += 1
-                kernel[0] += 1
-
+            # if (kernel[0] % 2) == 0 and (kernel[1] % 2) == 0:
+            #     kernel[1] += 1
+            #     kernel[0] += 1
             output_img = cv2.GaussianBlur(img, (0, 0), sigmaX=kernel[0], sigmaY=kernel[1])
 
         render_image.SetAsImage(output_img)
         self.NodeUpdateThumb(render_image)
-        return render_image
+        return {
+            "image": render_image
+        }
 
 
 api.RegisterNode(BlurNode, "corenode_blur")

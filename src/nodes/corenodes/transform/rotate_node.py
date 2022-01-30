@@ -19,8 +19,8 @@ from gimelstudio import api
 
 
 class RotateNode(api.Node):
-    def __init__(self, nodegraph, _id):
-        api.Node.__init__(self, nodegraph, _id)
+    def __init__(self, nodegraph, id):
+        api.Node.__init__(self, nodegraph, id)
 
     @property
     def NodeMeta(self):
@@ -34,22 +34,26 @@ class RotateNode(api.Node):
         return meta_info
 
     def NodeInitProps(self):
+        image = api.ImageProp(
+            idname="in_image",
+        )
         rotation = api.ChoiceProp(
             idname="rotation",
             default="90°",
             fpb_label="Rotation",
             choices=["90°", "180°", "270°"]
         )
+        self.NodeAddProp(image)
         self.NodeAddProp(rotation)
 
-    def NodeInitParams(self):
-        image = api.RenderImageParam("image", "Image")
-
-        self.NodeAddParam(image)
+    def NodeInitOutputs(self):
+        self.outputs = {
+            "image": api.Output(idname="image", datatype="IMAGE", label="Image"),
+        }
 
     def NodeEvaluation(self, eval_info):
         rotation = self.EvalProperty(eval_info, "rotation")
-        image1 = self.EvalParameter(eval_info, "image")
+        image1 = self.EvalProperty(eval_info, "in_image")
 
         render_image = api.RenderImage()
         img = image1.Image("numpy")
@@ -63,7 +67,9 @@ class RotateNode(api.Node):
 
         render_image.SetAsImage(output_img)
         self.NodeUpdateThumb(render_image)
-        return render_image
+        return {
+            "image": render_image
+        }
 
 
 api.RegisterNode(RotateNode, "corenode_rotate")

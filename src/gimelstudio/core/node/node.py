@@ -112,7 +112,7 @@ class Node(NodeView):
     #     return param
 
     def EditConnection(self, name, binding, socket):
-        print("Make connection: ", binding, socket)
+        print("[DEBUG] Make connection: ", binding, socket)
         if binding is not None:
             binding = (binding, socket)
         self.properties[name].binding = binding

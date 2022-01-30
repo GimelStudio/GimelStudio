@@ -24,8 +24,8 @@ from gimelstudio import api
 
 
 class AddTextNode(api.Node):
-    def __init__(self, nodegraph, _id):
-        api.Node.__init__(self, nodegraph, _id)
+    def __init__(self, nodegraph, id):
+        api.Node.__init__(self, nodegraph, id)
 
     @property
     def NodeMeta(self):
@@ -45,7 +45,7 @@ class AddTextNode(api.Node):
             choices=["Arial", "Calibri"],
             fpb_label="Font"
         )
-        font_size = api.PositiveIntegerProp(
+        font_size = api.IntegerProp(
             idname="font_size",
             default=100,
             min_val=1,
@@ -53,12 +53,12 @@ class AddTextNode(api.Node):
             lbl_suffix="px",
             fpb_label="Font Size"
         )
-        text = api.TextProp(
+        text = api.StringProp(
             idname="text",
             default="Gimel Studio",
             fpb_label="Text"
         )
-        position = api.XYZProp(
+        position = api.VectorProp(
             idname="position", 
             default=(25, 25, 0), 
             labels=("X", "Y"),

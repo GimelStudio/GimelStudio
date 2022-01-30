@@ -14,62 +14,43 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-import numpy as np
 from gimelstudio import api
 
 
-class Example1Node(api.Node):
+class StringNode(api.Node):
     def __init__(self, nodegraph, id):
         api.Node.__init__(self, nodegraph, id)
 
     @property
     def NodeMeta(self):
         meta_info = {
-            "label": "Example Node 1",
+            "label": "String",
             "author": "Gimel Studio",
             "version": (0, 5, 0),
-            "category": "TRANSFORM",
-            "description": "Show an example node.",
+            "category": "INPUT",
+            "description": "Input a string.",
         }
         return meta_info
 
     def NodeInitProps(self):
-        image = api.ImageProp(
-            idname="in_image",
+        string = api.StringProp(
+            idname="sel_string",
+            default="",
+            fpb_label="String"
         )
-        flip_direction = api.ChoiceProp(
-            idname="direction",
-            default="Vertically",
-            choices=["Vertically", "Horizontally"],
-            fpb_label="Flip Direction"
-        )
-        self.NodeAddProp(image)
-        self.NodeAddProp(flip_direction)
+        self.NodeAddProp(string)
 
     def NodeInitOutputs(self):
         self.outputs = {
-            "image": api.Output(idname="image", datatype="IMAGE", label="Image"),
+            "string": api.Output(idname="string", datatype="STRING", label="String"),
         }
-
-    def MutedNodeEvaluation(self, eval_info):
-        return self.EvalMutedNode(eval_info)
 
     def NodeEvaluation(self, eval_info):
-        flip_direction = self.EvalProperty(eval_info, "direction")
-        image1 = self.EvalProperty(eval_info, "in_image")
+        string = self.EvalProperty(eval_info, "sel_string")
 
-        image = api.RenderImage()
-        img = image1.Image("numpy")
-
-        if flip_direction == "Vertically":
-            output_img = np.flipud(img)
-        elif flip_direction == "Horizontally":
-            output_img = np.fliplr(img)
-
-        image.SetAsImage(output_img)
         return {
-            "image": image
+            "string": string
         }
 
 
-api.RegisterNode(Example1Node, "node_example1")
+api.RegisterNode(StringNode, "node_string")

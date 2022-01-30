@@ -18,18 +18,18 @@ import numpy as np
 from gimelstudio import api
 
 
-class ColorImageNode(api.Node):
+class VectorNode(api.Node):
     def __init__(self, nodegraph, id):
         api.Node.__init__(self, nodegraph, id)
 
     @property
     def NodeMeta(self):
         meta_info = {
-            "label": "Color Image",
+            "label": "Vector",
             "author": "Gimel Studio",
             "version": (0, 0, 5),
             "category": "INPUT",
-            "description": "Creates a color image."
+            "description": "Inputs a vector."
         }
         return meta_info
 
@@ -39,43 +39,28 @@ class ColorImageNode(api.Node):
         self.RefreshNodeGraph()
 
     def NodeInitProps(self):
-        image_size = api.VectorProp(
-            idname="image_size", 
-            default=(125, 125, 0), 
-            labels=("Width", "Height"),
-            min_vals=(0, 0, 0), 
-            max_vals=(4000, 4000, 0),
+        vector = api.VectorProp(
+            idname="sel_vector", 
+            default=(5, 5, 5), 
+            labels=("X", "Y", "Z"),
+            min_vals=(1, 1, 1), 
+            max_vals=(600, 600, 600),
             show_p=False, 
-            fpb_label="Image Size"
+            enable_z=True,
+            fpb_label="Vector"
         )
-        color = api.ColorProp(
-            idname="color",
-            default=(255, 255, 255, 255),
-            label="",
-            fpb_label="Background Color"
-        )
-        self.NodeAddProp(image_size)
-        self.NodeAddProp(color)
+        self.NodeAddProp(vector)
 
     def NodeInitOutputs(self):
         self.outputs = {
-            "image": api.Output(idname="image", datatype="IMAGE", label="Image"),
+            "vector": api.Output(idname="vector", datatype="VECTOR", label="Vector"),
         }
 
     def NodeEvaluation(self, eval_info):
-        image_size = self.EvalProperty(eval_info, "image_size")
-        color = self.EvalProperty(eval_info, "color")
+        vector = self.EvalProperty(eval_info, "sel_vector")
 
-        render_image = api.RenderImage()
-
-        img = np.zeros((image_size[0], image_size[1], 4), dtype=np.float32) + color
-
-        render_image.SetAsImage(img)
         return {
-            "image": render_image
+            "vector": vector
         }
 
-api.RegisterNode(ColorImageNode, "corenode_colorimage")
-
-
-
+api.RegisterNode(VectorNode, "corenode_vector")

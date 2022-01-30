@@ -18,8 +18,8 @@ from gimelstudio import api
 
 
 class Example2Node(api.Node):
-    def __init__(self, nodegraph, _id):
-        api.Node.__init__(self, nodegraph, _id)
+    def __init__(self, nodegraph, id):
+        api.Node.__init__(self, nodegraph, id)
 
     @property
     def NodeMeta(self):
@@ -33,7 +33,10 @@ class Example2Node(api.Node):
         return meta_info
 
     def NodeInitProps(self):
-        opacity_value = api.PositiveIntegerProp(
+        image = api.ImageProp(
+            idname="in_image",
+        )
+        opacity_value = api.IntegerProp(
             idname="opacity_value",
             default=25,
             min_val=0,
@@ -41,17 +44,19 @@ class Example2Node(api.Node):
             show_p=True,
             fpb_label="Opacity"
         )
+        self.NodeAddProp(image)
         self.NodeAddProp(opacity_value)
 
-    def NodeInitParams(self):
-        image = api.RenderImageParam("image", "Image")
-        self.NodeAddParam(image)
+    def NodeInitOutputs(self):
+        self.outputs = {
+            "image": api.Output(idname="image", datatype="IMAGE", label="Image"),
+        }
 
     def MutedNodeEvaluation(self, eval_info):
         return self.EvalMutedNode(eval_info)
 
     def NodeEvaluation(self, eval_info):
-        image1 = self.EvalParameter(eval_info, "image")
+        image1 = self.EvalProperty(eval_info, "in_image")
         opacity_value = self.EvalProperty(eval_info, "opacity_value")
 
         render_image = api.RenderImage()
@@ -66,7 +71,9 @@ class Example2Node(api.Node):
         result = self.RenderGLSL(shader_src, props, image1)
 
         render_image.SetAsImage(result)
-        return render_image
+        return {
+            "image": render_image
+        }
 
 
 api.RegisterNode(Example2Node, "node_example2")

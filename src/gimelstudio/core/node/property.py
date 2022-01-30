@@ -14,6 +14,8 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
+from gimelstudio.core import RenderImage
+
 import os
 import wx
 from wx import stc
@@ -28,32 +30,24 @@ from gimelstudio.constants import (AREA_BG_COLOR, PROP_BG_COLOR,
 from gimelstudio.datafiles import ICON_ARROW_DOWN, ICON_ARROW_RIGHT
 
 
+
 class Property(object):
-    """
-    The base node Property class.
-    """
     def __init__(self, idname, default, fpb_label, expanded=True, visible=True):
+        # If binding (object, idname of the connected node's output socket) 
+        # is None then use value.
         self.idname = idname
+        self.value = default # the property value
+        self.binding = None # (object, idname of the connected node's output socket) 
+
+        self.fpb_label = fpb_label
+
+        self.exposed = False # exposed as a node socket
+        self.expanded = expanded # foldpanelbar is expanded
+        self.visible = visible # visible in the properties panel
 
         self.label = fpb_label
-        self.datatype = "IMAGE"
-        self.binding = None
 
-        self.value = default
-        self.fpb_label = fpb_label
-        self.visible = visible
-        self.expanded = expanded
         self.widget_eventhook = None
-
-    def _RunErrorCheck(self):
-        """ 
-        Add optional error checking to your Property by overriding this method. 
-        """
-        pass
-
-    @property
-    def IdName(self):
-        return self.idname
 
     def GetIdname(self):
         return self.idname
@@ -68,7 +62,6 @@ class Property(object):
         Use ``self.EditProperty`` for other cases, instead.
         """
         self.value = value
-        self._RunErrorCheck()
         self.WidgetEventHook(self.idname, self.value, render)
 
     def GetLabel(self):
@@ -130,101 +123,16 @@ class Property(object):
         event.Skip()
 
 
-class ThumbProp(Property):
-    """ 
-    Shows the current thumbnail image (used internally). 
-    """
-    def __init__(self, idname, default=None, fpb_label="", thumb_img=None, 
-                 expanded=False, visible=True):
+class ImageProp(Property):
+    """ Represents an RGBA Image. """
+    def __init__(self, idname, default=RenderImage(), fpb_label="", expanded=True, visible=True):
         Property.__init__(self, idname, default, fpb_label, expanded, visible)
-        self.thumb_img = thumb_img
-
-    def GetThumbImage(self):
-        return self.thumb_img
+        self.value = default
+        self.datatype = "IMAGE"
+        self.label = "Image"
 
     def CreateUI(self, parent, sizer):
-        fold_panel = self.CreateFoldPanel(sizer)
-
-        self.img = wx.StaticBitmap(fold_panel, bitmap=self.GetThumbImage(), size=(200, 200))
-
-        self.AddToFoldPanel(sizer, fold_panel, self.img)
-
-
-class ColorProp(Property):
-    """ 
-    Allows the user to select a color.
-    """
-    def __init__(self, idname, default=(255, 255, 255, 255), label="", fpb_label="", 
-                 expanded=True, visible=True):
-        Property.__init__(self, idname, default, fpb_label, expanded, visible)
-        self.label = label
-
-    def CreateUI(self, parent, sizer):
-        fold_panel = self.CreateFoldPanel(sizer)
-
-        color_picker = ColorPickerButton(fold_panel,
-                                         default=self.GetValue(),
-                                         label=self.label,
-                                         size=(-1, 32))
-
-        self.AddToFoldPanel(sizer, fold_panel, color_picker, spacing=10)
-        
-        color_picker.Bind(EVT_COLORPICKER_BUTTON, self.WidgetEvent)
-
-    def WidgetEvent(self, event):
-        self.SetValue(event.value)
-
-
-class PositiveIntegerProp(Property):
-    """ 
-    Allows the user to select a positive integer via a Number Field. 
-    """
-    def __init__(self, idname, default=0, lbl_suffix="", min_val=0, max_val=10, 
-                 show_p=False, fpb_label="", expanded=True, visible=True):
-        Property.__init__(self, idname, default, fpb_label, expanded, visible)
-        self.min_value = min_val
-        self.max_value = max_val
-        self.lbl_suffix = lbl_suffix
-        self.show_p = show_p
-
-        self._RunErrorCheck()
-
-    def _RunErrorCheck(self):
-        if self.value > self.max_value:
-            raise TypeError(
-                "PositiveIntegerField value must be set to an integer less than 'max_val'"
-            )
-        if self.value < self.min_value:
-            raise TypeError(
-                "PositiveIntegerField value must be set to an integer greater than 'min_val'"
-            )
-
-    def GetMinValue(self):
-        return self.min_value
-
-    def GetMaxValue(self):
-        return self.max_value
-
-    def GetP(self):
-        return self.show_p
-
-    def CreateUI(self, parent, sizer):
-        fold_panel = self.CreateFoldPanel(sizer)
-
-        self.numberfield = NumberField(fold_panel,
-                                       default_value=self.GetValue(),
-                                       label=self.GetLabel(),
-                                       min_value=self.GetMinValue(),
-                                       max_value=self.GetMaxValue(),
-                                       suffix=self.lbl_suffix, show_p=self.GetP(),
-                                       size=(-1, 32))
-
-        self.AddToFoldPanel(sizer, fold_panel, self.numberfield)
-
-        self.numberfield.Bind(EVT_NUMBERFIELD, self.WidgetEvent)
-
-    def WidgetEvent(self, event):
-        self.SetValue(event.value)
+        pass
 
 
 class ChoiceProp(Property):
@@ -235,6 +143,9 @@ class ChoiceProp(Property):
                  expanded=True, visible=True):
         Property.__init__(self, idname, default, fpb_label, expanded, visible)
         self.choices = choices
+
+        self.datatype = "INTEGER"
+        self.label = fpb_label
 
     def GetChoices(self):
         return self.choices
@@ -258,7 +169,35 @@ class ChoiceProp(Property):
         self.SetValue(value)
 
 
-class OpenFileChooserProp(Property):
+class ColorProp(Property):
+    """ 
+    Allows the user to select a color.
+    """
+    def __init__(self, idname, default=(255, 255, 255, 255), label="", fpb_label="", 
+                 expanded=True, visible=True):
+        Property.__init__(self, idname, default, fpb_label, expanded, visible)
+        self.label = label
+
+        self.datatype = "COLOR"
+        self.label = "Color"
+
+    def CreateUI(self, parent, sizer):
+        fold_panel = self.CreateFoldPanel(sizer)
+
+        color_picker = ColorPickerButton(fold_panel,
+                                         default=self.GetValue(),
+                                         label=self.label,
+                                         size=(-1, 32))
+
+        self.AddToFoldPanel(sizer, fold_panel, color_picker, spacing=10)
+        
+        color_picker.Bind(EVT_COLORPICKER_BUTTON, self.WidgetEvent)
+
+    def WidgetEvent(self, event):
+        self.SetValue(event.value)
+
+
+class FileProp(Property):
     """ Allows the user to select a file to open.
 
     (e.g: use this to open an .PNG, .JPG, .JPEG image, etc.)
@@ -270,6 +209,9 @@ class OpenFileChooserProp(Property):
         self.dlg_msg = dlg_msg
         self.wildcard = wildcard
         self.btn_lbl = btn_lbl
+
+        self.datatype = "STRING"
+        self.label = fpb_label
 
         self._RunErrorCheck()
 
@@ -328,7 +270,29 @@ class OpenFileChooserProp(Property):
                 self.textcontrol.SetValue(self.GetValue())
 
 
-class XYZProp(Property):
+class StringProp(Property):
+    """ 
+    Allows the user to type text. 
+    """
+    def __init__(self, idname, default="", fpb_label="", expanded=True, visible=True):
+        Property.__init__(self, idname, default, fpb_label, expanded, visible)
+
+        self.datatype = "STRING"
+        self.label = fpb_label
+
+    def CreateUI(self, parent, sizer):
+        fold_panel = self.CreateFoldPanel(sizer)
+
+        self.textcontrol = TextCtrl(fold_panel, default=self.GetValue(), size=(-1, 32))
+
+        self.AddToFoldPanel(sizer, fold_panel, self.textcontrol)
+        self.textcontrol.textctrl.Bind(stc.EVT_STC_MODIFIED, self.WidgetEvent)
+
+    def WidgetEvent(self, event):
+        self.SetValue(self.textcontrol.textctrl.GetValue())
+
+
+class VectorProp(Property):
     """ 
     Allows the user to select an (x, y, z) value via Number Fields.
     """
@@ -342,6 +306,9 @@ class XYZProp(Property):
         self.labels = labels
         self.show_p = show_p
         self.enable_z = enable_z
+
+        self.datatype = "VECTOR"
+        self.label = fpb_label
 
     def CreateUI(self, parent, sizer):
         fold_panel = self.CreateFoldPanel(sizer)
@@ -402,60 +369,70 @@ class XYZProp(Property):
         self.SetValue((self.value[0], self.value[1], event.value))
 
 
-class ActionProp(Property):
+class IntegerProp(Property):
+    """ 
+    Allows the user to select a positive integer via a Number Field. 
     """
-    Allows the user to click a button to perform an action
-    """
-    def __init__(self, idname, default="", fpb_label="", btn_label="", flat=False, 
-                 action=None, expanded=True, visible=True):
-        Property.__init__(self, idname, default, btn_label, expanded, visible)
-        self.btn_label = btn_label
-        if fpb_label != "":
-            self.fpb_label = fpb_label
-        else:
-            self.fpb_label = btn_label
-        self.flat = flat
-        self.action = action
-
-    def CreateUI(self, parent, sizer):
-        fold_panel = self.CreateFoldPanel(sizer, self.fpb_label)
-
-        self.button = Button(fold_panel, label=_(self.btn_label), flat=self.flat, size=(-1, 30))
-        self.AddToFoldPanel(sizer, fold_panel, self.button)
-        self.button.Bind(EVT_BUTTON, self.action)
-
-
-class LabelProp(Property):
-    """
-    Shows some text.
-    """
-    def __init__(self, idname, default="", fpb_label="", expanded=True, visible=True):
+    def __init__(self, idname, default=0, lbl_suffix="", min_val=0, max_val=10, 
+                 show_p=False, fpb_label="", expanded=True, visible=True):
         Property.__init__(self, idname, default, fpb_label, expanded, visible)
-        self.fpb_label = fpb_label
+        self.min_value = min_val
+        self.max_value = max_val
+        self.lbl_suffix = lbl_suffix
+        self.show_p = show_p
+
+        self.datatype = "INTEGER"
+        self.label = fpb_label
+
+        self._RunErrorCheck()
+
+    def _RunErrorCheck(self):
+        if self.value > self.max_value:
+            raise TypeError(
+                "PositiveIntegerField value must be set to an integer less than 'max_val'"
+            )
+        if self.value < self.min_value:
+            raise TypeError(
+                "PositiveIntegerField value must be set to an integer greater than 'min_val'"
+            )
+
+    def GetMinValue(self):
+        return self.min_value
+
+    def GetMaxValue(self):
+        return self.max_value
+
+    def GetP(self):
+        return self.show_p
 
     def CreateUI(self, parent, sizer):
-        fold_panel = self.CreateFoldPanel(sizer, self.fpb_label)
- 
-        pnl = wx.Panel(fold_panel)
-        pnl.SetBackgroundColour(wx.Colour(AREA_BG_COLOR))
+        fold_panel = self.CreateFoldPanel(sizer)
 
-        vbox = wx.BoxSizer(wx.VERTICAL)
+        self.numberfield = NumberField(fold_panel,
+                                       default_value=self.GetValue(),
+                                       label=self.GetLabel(),
+                                       min_value=self.GetMinValue(),
+                                       max_value=self.GetMaxValue(),
+                                       suffix=self.lbl_suffix, show_p=self.GetP(),
+                                       size=(-1, 32))
 
-        value_label = Label(pnl, label=_(self.GetValue()), bg_color=AREA_BG_COLOR)
-        vbox.Add(value_label, flag=wx.EXPAND | wx.BOTH | wx.ALL, border=10)
+        self.AddToFoldPanel(sizer, fold_panel, self.numberfield)
 
-        vbox.Fit(pnl)
-        pnl.SetSizer(vbox)
+        self.numberfield.Bind(EVT_NUMBERFIELD, self.WidgetEvent)
 
-        self.AddToFoldPanel(sizer, fold_panel, pnl)
+    def WidgetEvent(self, event):
+        self.SetValue(event.value)
 
 
-class TextProp(Property):
+class StringProp(Property):
     """ 
     Allows the user to type text. 
     """
     def __init__(self, idname, default="", fpb_label="", expanded=True, visible=True):
         Property.__init__(self, idname, default, fpb_label, expanded, visible)
+
+        self.datatype = "STRING"
+        self.label = fpb_label
 
     def CreateUI(self, parent, sizer):
         fold_panel = self.CreateFoldPanel(sizer)
