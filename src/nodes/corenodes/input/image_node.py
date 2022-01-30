@@ -92,7 +92,7 @@ class ImageNode(api.Node):
     def NodeEvaluation(self, eval_info):
         path = self.EvalProperty(eval_info, "file_path")
 
-        render_image = api.RenderImage(size=(200, 200))
+        render_image = api.Image(size=(200, 200))
 
         if self.cached_path != path:
             try:
@@ -107,7 +107,7 @@ class ImageNode(api.Node):
         self.NodeUpdateThumb(render_image)
         return {
             "image": render_image,
-            "alpha": api.RenderImage(size=(200, 200)) # FIXME
+            "alpha": api.Image(size=(200, 200)) # FIXME
         }
 
 

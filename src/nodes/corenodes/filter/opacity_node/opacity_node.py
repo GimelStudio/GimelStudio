@@ -59,7 +59,7 @@ class OpacityNode(api.Node):
         image1 = self.EvalProperty(eval_info, "in_image")
         opacity_value = self.EvalProperty(eval_info, "opacity_value")
 
-        render_image = api.RenderImage()
+        render_image = api.Image()
 
         # Make correction for slider range of 1-100
         opacity_value = (opacity_value * 0.01)

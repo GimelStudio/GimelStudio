@@ -78,7 +78,7 @@ class MixNode(api.Node):
         blend_mode = self.EvalProperty(eval_info, "blend_mode")
         opacity = self.EvalProperty(eval_info, "opacity")
 
-        render_image = api.RenderImage()
+        render_image = api.Image()
 
         # Set a float value to represent each mode
         if blend_mode == "Normal":

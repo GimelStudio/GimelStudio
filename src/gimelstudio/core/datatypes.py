@@ -22,7 +22,7 @@ except ImportError:
     print("OpenImageIO is required!")
 
 
-class RenderImage(object):
+class Image(object):
     def __init__(self, size=(20, 20)):
         self.img = np.zeros((size[0], size[1], 4), dtype=np.float32)
 

@@ -87,7 +87,7 @@ class AddTextNode(api.Node):
         self.NodeAddProp(align_y)
 
     def NodeInitParams(self):
-        image = api.RenderImageParam("image", "Image")
+        image = api.ImageParam("image", "Image")
 
         self.NodeAddParam(image)
 
@@ -103,7 +103,7 @@ class AddTextNode(api.Node):
         align_y = self.EvalProperty(eval_info, "align_y")
         image1 = self.EvalParameter(eval_info, "image")
 
-        render_image = api.RenderImage()
+        render_image = api.Image()
         img = image1.Image("oiio")
 
         spec = img.spec()

@@ -122,7 +122,7 @@ class DilateErodeNode(api.Node):
         elif operation == "Black Hat":
             output_image = cv2.morphologyEx(image, cv2.MORPH_BLACKHAT, kernel_image)
 
-        render_image = api.RenderImage()
+        render_image = api.Image()
         render_image.SetAsImage(output_image)
         self.NodeUpdateThumb(render_image)
         return {

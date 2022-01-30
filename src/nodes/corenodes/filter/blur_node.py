@@ -69,7 +69,7 @@ class BlurNode(api.Node):
         filter_type = self.EvalProperty(eval_info, "filter_type")
         image1 = self.EvalProperty(eval_info, "in_image")
 
-        render_image = api.RenderImage()
+        render_image = api.Image()
         img = image1.Image("numpy")
 
         if filter_type == "Box":

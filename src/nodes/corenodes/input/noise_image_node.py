@@ -63,7 +63,7 @@ class NoiseImageNode(api.Node):
     def NodeEvaluation(self, eval_info):
         noise_seed = self.EvalProperty(eval_info, "noise_seed")
 
-        render_image = api.RenderImage()
+        render_image = api.Image()
 
         buf = oiio.ImageBuf(oiio.ImageSpec(1200, 1200, 4, oiio.FLOAT))
         oiio.ImageBufAlgo.noise (buf, "gaussian", 0.5, 0.5, mono=True, seed=noise_seed)

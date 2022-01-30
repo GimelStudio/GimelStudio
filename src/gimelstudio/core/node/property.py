@@ -14,7 +14,7 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-from gimelstudio.core import RenderImage
+from gimelstudio.core import Image
 
 import os
 import wx
@@ -125,7 +125,7 @@ class Property(object):
 
 class ImageProp(Property):
     """ Represents an RGBA Image. """
-    def __init__(self, idname, default=RenderImage(), fpb_label="", expanded=True, visible=True):
+    def __init__(self, idname, default=Image(), fpb_label="", expanded=True, visible=True):
         Property.__init__(self, idname, default, fpb_label, expanded, visible)
         self.value = default
         self.datatype = "IMAGE"

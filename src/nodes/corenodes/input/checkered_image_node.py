@@ -75,7 +75,7 @@ class CheckeredImageNode(api.Node):
         checker_size = self.EvalProperty(eval_info, "checker_size")
         offset = self.EvalProperty(eval_info, "offset")
 
-        render_image = api.RenderImage()
+        render_image = api.Image()
 
         buf = oiio.ImageBuf(oiio.ImageSpec(1200, 1200, 4, oiio.FLOAT))
         oiio.ImageBufAlgo.checker(buf, checker_size, checker_size, 1, 

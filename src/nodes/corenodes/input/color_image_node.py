@@ -66,7 +66,7 @@ class ColorImageNode(api.Node):
         image_size = self.EvalProperty(eval_info, "image_size")
         color = self.EvalProperty(eval_info, "color")
 
-        render_image = api.RenderImage()
+        render_image = api.Image()
 
         img = np.zeros((image_size[0], image_size[1], 4), dtype=np.float32) + color
 

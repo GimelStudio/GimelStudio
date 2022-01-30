@@ -20,7 +20,7 @@ from gsnodegraph import NodeBase as NodeView
 
 import gimelstudio.constants as const
 from gimelstudio.utils import ResizeKeepAspectRatio, ConvertImageToWx
-from gimelstudio.core import EvalInfo, RenderImage
+from gimelstudio.core import EvalInfo, Image
 
 
 class Node(NodeView):
@@ -136,9 +136,9 @@ class Node(NodeView):
     def NodeInitParams(self):
         """ Define node parameters for the node. These will translate into node sockets on the node itself.
 
-        Subclasses of the ``Parameter`` object such as ``RenderImageParam`` are to be added with the ``NodeAddParam`` method.
+        Subclasses of the ``Parameter`` object such as ``ImageParam`` are to be added with the ``NodeAddParam`` method.
 
-        >>> p = api.RenderImageParam('Image')
+        >>> p = api.ImageParam('Image')
         >>> self.NodeAddParam(p)
         """
         pass
@@ -256,7 +256,7 @@ class Node(NodeView):
             image = self.EvalParameter(eval_info, "image").Image("numpy")
         except:
             image = self.EvalParameter(eval_info, "image_1").Image("numpy")
-        render_image = RenderImage()
+        render_image = Image()
         render_image.SetAsImage(image)
         self.NodeUpdateThumb(render_image)
         return render_image

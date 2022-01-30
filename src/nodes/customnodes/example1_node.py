@@ -58,7 +58,7 @@ class Example1Node(api.Node):
         flip_direction = self.EvalProperty(eval_info, "direction")
         image1 = self.EvalProperty(eval_info, "in_image")
 
-        image = api.RenderImage()
+        image = api.Image()
         img = image1.Image("numpy")
 
         if flip_direction == "Vertically":

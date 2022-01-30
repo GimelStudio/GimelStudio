@@ -1,4 +1,4 @@
-from .datatypes import RenderImage
+from .datatypes import Image
 from .eval_info import EvalInfo
 from .renderer import Renderer
 from .glsl_renderer import GLSLRenderer

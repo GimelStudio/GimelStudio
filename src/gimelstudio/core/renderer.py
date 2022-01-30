@@ -15,7 +15,7 @@
 # ----------------------------------------------------------------------------
 
 from .eval_info import EvalInfo
-from .datatypes import RenderImage
+from .datatypes import Image
 
 
 class Renderer(object):
@@ -44,7 +44,7 @@ class Renderer(object):
         """ Render method for evaluating the Node Graph
         to render an image.
 
-        :returns: RenderImage object
+        :returns: Image object
         """
         # Render the image
         image = self.RenderNodeGraph(self.output_node)
@@ -59,7 +59,7 @@ class Renderer(object):
         """ Render the image, starting from the output node.
 
         :param output_node: the output node object
-        :returns: RenderImage object
+        :returns: Image object
         """
         # Get the node connected to the output node and evaluate from there.
         # print(output_node.properties["image"], "\n")
@@ -70,4 +70,4 @@ class Renderer(object):
             return image
         else:
             # If there is no connection, then return a default transparent image.
-            return RenderImage()
+            return Image()

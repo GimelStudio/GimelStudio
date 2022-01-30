@@ -63,7 +63,7 @@ class AlphaOverNode(api.Node):
         image2 = self.EvalProperty(eval_info, "image_2")
         factor = self.EvalProperty(eval_info, "factor")
 
-        render_image = api.RenderImage()
+        render_image = api.Image()
 
         # Make correction for slider range of 1-100
         factor = (factor * 0.01)

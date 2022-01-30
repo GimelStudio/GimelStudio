@@ -69,7 +69,7 @@ class BrightnessContrastNode(api.Node):
         brightness_value = self.EvalProperty(eval_info, "brightness_value")
         contrast_value = self.EvalProperty(eval_info, "contrast_value")
 
-        render_image = api.RenderImage()
+        render_image = api.Image()
 
         # Make correction for slider range of 1-100
         brightness_value = (brightness_value * 0.01)
