@@ -53,4 +53,4 @@ class StringNode(api.Node):
         }
 
 
-api.RegisterNode(StringNode, "node_string")
+api.RegisterNode(StringNode, "corenode_string")

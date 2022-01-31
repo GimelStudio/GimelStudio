@@ -37,24 +37,24 @@ class Image(object):
         :param data_type: the requested image datatype
         :returns: ``numpy.ndarray`` or ``oiio.ImageBuf`` object
         """
-        current_data_type = type(self.img)
-        if data_type == "numpy":
-            if current_data_type == np.ndarray:
-                return self.img
-            else:
-                self.img = self.img.get_pixels("float")
-                return self.img
+        # current_data_type = type(self.img)
+        # if data_type == "numpy":
+        #     if current_data_type == np.ndarray:
+        return self.img
+            # else:
+            #     self.img = self.img.get_pixels("float")
+            #     return self.img
 
-        elif data_type == "oiio":
-            print("[WARNING] Converting to oiio is disabled!")
+        # elif data_type == "oiio":
+        #     print("[WARNING] Converting to oiio is disabled!")
             # if current_data_type == oiio.ImageBuf:
             #     return self.img
             # else:
             #     self.img = self.NumpyArrayToImageBuf()
             #     return self.img
 
-        else:
-            raise TypeError("Not a valid datatype!")
+        # else:
+        #     raise TypeError("Not a valid datatype!")
 
     def NumpyArrayToImageBuf(self):
         """ Converts a np.ndarray to an OIIO ImageBuf image.
