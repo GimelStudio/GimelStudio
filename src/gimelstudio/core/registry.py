@@ -17,7 +17,7 @@
 from gimelstudio.utils import NodeExistsError, NodeNotFoundError
 
 # The node registry is simply a python dictionary holding all of the available
-# nodes in this application session. To be registered means that is is usable in
+# nodes in this application session. To be registered means that is is use-able in
 # the application (i.e can be used in the nodegraph).
 NODE_REGISTRY = {}
 
