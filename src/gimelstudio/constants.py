@@ -23,8 +23,8 @@ import os.path
 APP_FROZEN = getattr(sys, "frozen", False)
 APP_DIR = os.path.dirname(os.path.abspath(sys.argv[0]))
 
-APP_VERSION = "0.6.0"
-APP_VERSION_TAG = " pre-alpha 3"
+APP_VERSION = "0.6.1"
+APP_VERSION_TAG = " pre-alpha 1"
 APP_VERSION_FULL = "{0}{1}".format(APP_VERSION, APP_VERSION_TAG)
 
 APP_NAME = "Gimel Studio"
