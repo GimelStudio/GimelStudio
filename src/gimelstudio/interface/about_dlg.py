@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------
-# Gimel Studio Copyright 2019-2022 by Noah Rahm and contributors
+# Gimel Studio Copyright 2019-2022 by the Gimel Studio project contributors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
