@@ -41,10 +41,10 @@ class VectorNode(api.Node):
     def NodeInitProps(self):
         vector = api.VectorProp(
             idname="sel_vector", 
-            default=(5, 5, 5), 
+            default=(1, 1, 1), 
             labels=("X", "Y", "Z"),
             min_vals=(1, 1, 1), 
-            max_vals=(600, 600, 600),
+            max_vals=(800, 800, 800),
             show_p=False, 
             enable_z=True,
             fpb_label="Vector",

@@ -101,9 +101,10 @@ class ImageNode(api.Node):
                 self.cached_path = path
                 self.cached_image = render_image
             except FileNotFoundError:
-                print("ERROR: FILE NOT FOUND")
+                print("[ERROR] FILE NOT FOUND")
         else:
-            render_image = self.cached_image
+            if self.cached_image != None:
+                render_image = self.cached_image
 
         self.NodeUpdateThumb(render_image)
         return {

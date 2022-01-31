@@ -35,9 +35,9 @@ class IntegerNode(api.Node):
     def NodeInitProps(self):
         integer = api.IntegerProp(
             idname="sel_integer",
-            default=100,
+            default=1,
             min_val=0,
-            max_val=100,
+            max_val=800,
             fpb_label="Integer",
             can_be_exposed=False
         )
