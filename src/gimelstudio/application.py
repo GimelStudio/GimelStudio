@@ -448,7 +448,7 @@ class ApplicationFrame(wx.Frame):
 
     def Render(self):
         image = self.renderer.Render()
-        render = image.Image("numpy")
+        render = image.GetImage()
         self.imageviewport_pnl.UpdateViewerImage(render, 0)
         self.SetAppTitle(False)
         return render
@@ -511,7 +511,7 @@ class ApplicationFrame(wx.Frame):
         image = self.renderer.GetRender()
 
         try:
-            export_handler = ExportImageHandler(self, image.Image("numpy"))
+            export_handler = ExportImageHandler(self, image.GetImage())
             export_handler.RunExport()
         except AttributeError:
             dlg = wx.MessageDialog(None,
@@ -543,7 +543,7 @@ class ApplicationFrame(wx.Frame):
         if wx.TheClipboard.Open():
             try:
                 image = self.renderer.GetRender()
-                image = image.Image("numpy")
+                image = image.GetImage()
                 image = ConvertImageToWx(image)
                 image = wx.BitmapDataObject(image)
                 wx.TheClipboard.SetData(image)

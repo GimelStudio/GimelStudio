@@ -26,49 +26,17 @@ class Image(object):
     def __init__(self, size=(20, 20)):
         self.img = np.zeros((size[0], size[1], 4), dtype=np.float32)
 
-    # FIXME
-    def Image(self, data_type="numpy"):
-        """ Returns the image in the requested datatype format.
-
-        This is optimized so that it does node convert the datatype until
-        Image() or OIIOImage() is called. This way, the datatype won't be
-        converted for nothing e.g: if an oiio.ImageBuf type is needed for a
-        line of nodes, no need to convert it to numpy array every time.
-
-        :param data_type: the requested image datatype
-        :returns: ``numpy.ndarray`` or ``oiio.ImageBuf`` object
+    def GetImage(self):
+        """ Returns the image
+        :returns: ``numpy.ndarray``
         """
-        # current_data_type = type(self.img)
-        # if data_type == "numpy":
-        #     if current_data_type == np.ndarray:
         return self.img
-            # else:
-            #     self.img = self.img.get_pixels("float")
-            #     return self.img
 
-        # elif data_type == "oiio":
-        #     print("[WARNING] Converting to oiio is disabled!")
-            # if current_data_type == oiio.ImageBuf:
-            #     return self.img
-            # else:
-            #     self.img = self.NumpyArrayToImageBuf()
-            #     return self.img
-
-        # else:
-        #     raise TypeError("Not a valid datatype!")
-
-    def NumpyArrayToImageBuf(self):
-        """ Converts a np.ndarray to an OIIO ImageBuf image.
-        :returns: ``oiio.ImageBuf`` object
+    def SetAsImage(self, image):
+        """ Sets the render image.
+        :param image: ``numpy.ndarray``
         """
-        height = self.img.shape[1]
-        width = self.img.shape[0]
-        spec = oiio.ImageSpec(width, height, 4, "float")
-        buf = oiio.ImageBuf(spec)
-        buf.set_pixels(oiio.ROI(), self.img)
-        if buf.has_error:
-            print("Error in NumpyArrayToImageBuf:", buf.geterror())
-        return buf
+        self.img = image
 
     def SetAsOpenedImage(self, path):
         """ Sets the image and opens it.
@@ -92,9 +60,3 @@ class Image(object):
                 self.img = image
         except FileNotFoundError as error:
             print("[IO ERROR] Could not open image! ", error)
-
-    def SetAsImage(self, image):
-        """ Sets the render image.
-        :param image: ``numpy.ndarray`` or ``oiio.ImageBuf`` object
-        """
-        self.img = image

@@ -59,7 +59,7 @@ class GLSLRenderer(object):
     def Write(self, image, texture):
         """ Do the writing to src_texture """
         # FIXME: This effectively means we are no longer working with 16-bit
-        image = image.Image("numpy").astype("uint8")
+        image = image.GetImage().astype("uint8")
         # image = cv2.normalize(image, dst=None, alpha=0, beta=65535, norm_type=cv2.NORM_MINMAX)
         # print(image.dtype)
         image = image.copy(order="C")

@@ -59,7 +59,7 @@ class FlipNode(api.Node):
         image1 = self.EvalProperty(eval_info, "in_image")
 
         render_image = api.Image()
-        img = image1.Image("numpy")
+        img = image1.GetImage()
 
         if flip_direction == "Vertically":
             output_img = np.flipud(img)

@@ -70,7 +70,7 @@ class BlurNode(api.Node):
         image1 = self.EvalProperty(eval_info, "in_image")
 
         render_image = api.Image()
-        img = image1.Image("numpy")
+        img = image1.GetImage()
 
         if filter_type == "Box":
             output_img = cv2.boxFilter(img, -1, (kernel[0], kernel[1]))

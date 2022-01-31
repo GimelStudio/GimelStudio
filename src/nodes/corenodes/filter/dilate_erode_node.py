@@ -98,7 +98,7 @@ class DilateErodeNode(api.Node):
         kernel_size = self.EvalProperty(eval_info, "kernel_size")
         iterations = self.EvalProperty(eval_info, "iterations")
 
-        image = input_image.Image("numpy")
+        image = input_image.GetImage()
 
         if kernel_shape == "Rectangle":
             kshape = cv2.MORPH_RECT

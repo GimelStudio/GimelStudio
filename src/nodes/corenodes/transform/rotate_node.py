@@ -56,7 +56,7 @@ class RotateNode(api.Node):
         image1 = self.EvalProperty(eval_info, "in_image")
 
         render_image = api.Image()
-        img = image1.Image("numpy")
+        img = image1.GetImage()
 
         if rotation == "90°":
             output_img = np.rot90(img, 1)

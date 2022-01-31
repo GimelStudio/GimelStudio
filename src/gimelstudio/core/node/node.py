@@ -159,7 +159,7 @@ class Node(NodeView):
 
     def NodeUpdateThumb(self, image):
         if self.IsExpanded():
-            image = image.Image("numpy")
+            image = image.GetImage()
             img = ResizeKeepAspectRatio(image, (134, image.shape[1]))
             self.SetThumbnail(ConvertImageToWx(img))
             self.nodegraph.UpdateNodeGraph()
@@ -226,9 +226,9 @@ class Node(NodeView):
 
     def EvalMutedNode(self, eval_info):
         try:
-            image = self.EvalParameter(eval_info, "image").Image("numpy")
+            image = self.EvalParameter(eval_info, "image").GetImage()
         except:
-            image = self.EvalParameter(eval_info, "image_1").Image("numpy")
+            image = self.EvalParameter(eval_info, "image_1").GetImage()
         render_image = Image()
         render_image.SetAsImage(image)
         self.NodeUpdateThumb(render_image)

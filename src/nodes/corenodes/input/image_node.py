@@ -42,7 +42,7 @@ class ImageNode(api.Node):
             
         #     # Set image info
         #     if value != "":
-        #         img = image.Image("numpy")
+        #         img = image.GetImage()
         #         file_bytes = os.path.getsize(value)
         #         if file_bytes < (1024*1024):
         #             prefix = "MB"

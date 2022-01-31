@@ -62,7 +62,7 @@ class OutputNode(api.Node):
         app_frame = self.nodegraph.parent.parent
         image = app_frame.renderer.GetRender()
         try:
-            export_handler = ExportImageHandler(app_frame, image.Image("numpy"))
+            export_handler = ExportImageHandler(app_frame, image.GetImage())
             export_handler.RunExport()
         except AttributeError:
             dlg = wx.MessageDialog(None,
