@@ -29,7 +29,7 @@ class Node(NodeView):
         self.nodegraph = nodegraph
         self.id = id
         self.properties = {}
-        self.parameters = {}
+        #self.parameters = {}
         self.outputs = {}
 
         self.cache = {}
@@ -133,15 +133,15 @@ class Node(NodeView):
         """
         pass
 
-    def NodeInitParams(self):
-        """ Define node parameters for the node. These will translate into node sockets on the node itself.
+    # def NodeInitParams(self):
+    #     """ Define node parameters for the node. These will translate into node sockets on the node itself.
 
-        Subclasses of the ``Parameter`` object such as ``ImageParam`` are to be added with the ``NodeAddParam`` method.
+    #     Subclasses of the ``Parameter`` object such as ``ImageParam`` are to be added with the ``NodeAddParam`` method.
 
-        >>> p = api.ImageParam('Image')
-        >>> self.NodeAddParam(p)
-        """
-        pass
+    #     >>> p = api.ImageParam('Image')
+    #     >>> self.NodeAddParam(p)
+    #     """
+    #     pass
 
     def NodeInitOutputs(self):
         pass
@@ -155,13 +155,13 @@ class Node(NodeView):
         prop.SetWidgetEventHook(self._WidgetEventHook)
         return self.AddProperty(prop)
 
-    def NodeAddParam(self, param):
-        """ Add a parameter to this node.
+    # def NodeAddParam(self, param):
+    #     """ Add a parameter to this node.
 
-        :param prop: instance of ``Parameter`` parameter class
-        :returns: dictionary of the current parameter
-        """
-        return self.AddParameter(param)
+    #     :param prop: instance of ``Parameter`` parameter class
+    #     :returns: dictionary of the current parameter
+    #     """
+    #     return self.AddParameter(param)
 
     def NodeEditProp(self, idname, value, render=True):
         """ Edit a property of this node.
@@ -222,24 +222,24 @@ class Node(NodeView):
         except KeyError:
             return False
 
-    def EvalParameter(self, eval_info, name):
-        cached = self.IsInCache(name)
+    # def EvalParameter(self, eval_info, name):
+    #     cached = self.IsInCache(name)
 
-        # Basic node cache implementation
-        if self.IsNodeCacheEnabled() == True:
-            if self.GetEditedFlag() == True and cached == True:
-                value = self.cache[name]
-                self.SetEditedFlag(False)
-                # print("Used Cache: ", self._label)
-            else:
-                value = eval_info.EvaluateParameter(name)
-                self.cache[name] = value
-                self.SetEditedFlag(False)
-                # print("Evaluated: ", self._label)
-        else:
-            value = eval_info.EvaluateParameter(name)
+    #     # Basic node cache implementation
+    #     if self.IsNodeCacheEnabled() == True:
+    #         if self.GetEditedFlag() == True and cached == True:
+    #             value = self.cache[name]
+    #             self.SetEditedFlag(False)
+    #             # print("Used Cache: ", self._label)
+    #         else:
+    #             value = eval_info.EvaluateParameter(name)
+    #             self.cache[name] = value
+    #             self.SetEditedFlag(False)
+    #             # print("Evaluated: ", self._label)
+    #     else:
+    #         value = eval_info.EvaluateParameter(name)
 
-        return value
+    #     return value
 
     def EvalProperty(self, eval_info, name):
         return eval_info.EvaluateProperty(name)
