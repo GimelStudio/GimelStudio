@@ -409,18 +409,6 @@ class ApplicationFrame(wx.Frame):
                           .CloseButton(visible=False)
                           .BestSize(360, 500))
 
-        self.imageviewport_pnl = ImageViewportPanel(self,
-                                                    idname="IMAGE_VIEWPORT",
-                                                    menu_item=self.showimageviewport_menuitem)
-        self.mgr.AddPane(self.imageviewport_pnl,
-                          aui.AuiPaneInfo()
-                          .Name("IMAGE_VIEWPORT")
-                          .CaptionVisible(False)
-                          .Bottom()
-                          .MinSize((-1, 340))
-                          .CloseButton(visible=False)
-                          .BestSize((500, 1700)))
-
         self.nodegraph_pnl = NodeGraphPanel(self, registry=self.registry, size=(100, 100))
         self.nodegraph_pnl.SetDropTarget(NodeGraphDropTarget(self.nodegraph_pnl))
         self.mgr.AddPane(self.nodegraph_pnl,
@@ -430,6 +418,18 @@ class ApplicationFrame(wx.Frame):
                           .CenterPane()
                           .CloseButton(visible=False)
                           .BestSize(500, 300))
+
+        self.imageviewport_pnl = ImageViewportPanel(self,
+                                                    idname="IMAGE_VIEWPORT",
+                                                    menu_item=self.showimageviewport_menuitem)
+        self.mgr.AddPane(self.imageviewport_pnl,
+                          aui.AuiPaneInfo()
+                          .Name("IMAGE_VIEWPORT")
+                          .CaptionVisible(False)
+                          .Top()
+                          .MinSize((-1, 400))
+                          .CloseButton(visible=False)
+                          .BestSize((500, 1700)))
 
         # Get the default proportions correct
         self.mgr.GetPane("PROPERTIES_PNL").dock_proportion = 5
