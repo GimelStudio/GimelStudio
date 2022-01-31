@@ -38,7 +38,8 @@ class IntegerNode(api.Node):
             default=100,
             min_val=0,
             max_val=100,
-            fpb_label="Integer"
+            fpb_label="Integer",
+            can_be_exposed=False
         )
         self.NodeAddProp(integer)
 

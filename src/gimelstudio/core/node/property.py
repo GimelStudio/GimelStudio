@@ -159,7 +159,7 @@ class ChoiceProp(Property):
     Allows the user to select from a list of choices via a Drop-down widget. 
     """
     def __init__(self, idname, default="", choices=[], fpb_label="", 
-                 exposed=True, can_be_exposed=True, expanded=True, visible=True):
+                 exposed=False, can_be_exposed=False, expanded=True, visible=True):
         Property.__init__(self, idname, default, fpb_label, exposed, 
                           can_be_exposed, expanded, visible)
         self.choices = choices

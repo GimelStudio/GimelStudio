@@ -47,7 +47,8 @@ class VectorNode(api.Node):
             max_vals=(600, 600, 600),
             show_p=False, 
             enable_z=True,
-            fpb_label="Vector"
+            fpb_label="Vector",
+            can_be_exposed=False
         )
         self.NodeAddProp(vector)
 

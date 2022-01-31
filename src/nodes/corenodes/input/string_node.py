@@ -36,7 +36,8 @@ class StringNode(api.Node):
         string = api.StringProp(
             idname="sel_string",
             default="",
-            fpb_label="String"
+            fpb_label="String",
+            can_be_exposed=False
         )
         self.NodeAddProp(string)
 

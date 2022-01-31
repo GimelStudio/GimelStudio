@@ -42,7 +42,8 @@ class ColorNode(api.Node):
             idname="sel_color",
             default=(255, 255, 255, 255),
             label="",
-            fpb_label="Color"
+            fpb_label="Color",
+            can_be_exposed=False
         )
         self.NodeAddProp(color)
 

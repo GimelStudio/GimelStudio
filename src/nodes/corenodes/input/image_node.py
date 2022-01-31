@@ -72,6 +72,7 @@ class ImageNode(api.Node):
             wildcard=constants.SUPPORTED_FT_OPEN_WILDCARD,
             btn_lbl="Choose...",
             fpb_label="Image Path",
+            can_be_exposed=False
         )
         # self.img_info = api.LabelProp(
         #     idname="label",
