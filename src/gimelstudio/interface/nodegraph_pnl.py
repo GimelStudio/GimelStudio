@@ -107,15 +107,13 @@ class NodeGraphPanel(wx.Panel):
                                    size=(-1, self.Size[0]-20))
 
         # Here for testing
-        # if const.APP_FROZEN is False:
-        #     self.nodegraph.AddNode('corenode_blur', pos=wx.Point(600, 200))
-        #     self.nodegraph.AddNode('corenode_opacity', pos=wx.Point(310, 200))
-        #     self.nodegraph.AddNode('corenode_flip', pos=wx.Point(500, 300))
+        if const.APP_FROZEN is False:
+            self.nodegraph.AddNode('corenode_blur', pos=wx.Point(600, 200))
+            self.nodegraph.AddNode('corenode_opacity', pos=wx.Point(310, 200))
+            self.nodegraph.AddNode('corenode_flip', pos=wx.Point(500, 300))
 
         # Add default image and output node
         self.nodegraph.AddNode('corenode_image', pos=wx.Point(100, 250))
-        self.nodegraph.AddNode('corenode_blur', pos=wx.Point(310, 200))
-        self.nodegraph.AddNode('corenode_vector', pos=wx.Point(600, 300))
         self.nodegraph.AddNode('corenode_outputcomposite', pos=wx.Point(950, 250))
 
         main_sizer.Add(topbar, flag=wx.EXPAND | wx.LEFT | wx.RIGHT)

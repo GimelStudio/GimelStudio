@@ -36,17 +36,32 @@ class Property(object):
         # If binding (object, idname of the connected node's output socket) 
         # is None then use value.
         self.idname = idname
-        self.value = default # the property value
-        self.binding = None # (object, idname of the connected node's output socket) 
 
+        # This property's current value, which is used if binding is None
+        self.value = default
+
+        # The connected node to evaluate and get the value from, in the format:
+        # (object, idname of the connected node's output socket) 
+        self.binding = None
+
+        # Labels for the foldpanelbar and node socket
         self.fpb_label = fpb_label
-
-        self.exposed = False # exposed as a node socket
-        self.expanded = expanded # foldpanelbar is expanded
-        self.visible = visible # visible in the properties panel
-
         self.label = fpb_label
 
+        # Whether this property is exposed as a node socket
+        self.exposed = False 
+
+        # Whether the foldpanelbar is expanded
+        self.expanded = expanded 
+
+        # Whether this property is visible in the properties panel
+        self.visible = visible 
+        
+        # Whether this property can every be exposed on a node. This makes 
+        # sense for input nodes, e.g: Vector that don't need any inputs ever.
+        self.can_be_exposed = False 
+
+        # Variable to hold the eventhook method
         self.widget_eventhook = None
 
     def GetIdname(self):
@@ -422,25 +437,3 @@ class IntegerProp(Property):
 
     def WidgetEvent(self, event):
         self.SetValue(event.value)
-
-
-class StringProp(Property):
-    """ 
-    Allows the user to type text. 
-    """
-    def __init__(self, idname, default="", fpb_label="", expanded=True, visible=True):
-        Property.__init__(self, idname, default, fpb_label, expanded, visible)
-
-        self.datatype = "STRING"
-        self.label = fpb_label
-
-    def CreateUI(self, parent, sizer):
-        fold_panel = self.CreateFoldPanel(sizer)
-
-        self.textcontrol = TextCtrl(fold_panel, default=self.GetValue(), size=(-1, 32))
-
-        self.AddToFoldPanel(sizer, fold_panel, self.textcontrol)
-        self.textcontrol.textctrl.Bind(stc.EVT_STC_MODIFIED, self.WidgetEvent)
-
-    def WidgetEvent(self, event):
-        self.SetValue(self.textcontrol.textctrl.GetValue())

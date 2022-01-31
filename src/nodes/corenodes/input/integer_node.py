@@ -24,11 +24,11 @@ class IntegerNode(api.Node):
     @property
     def NodeMeta(self):
         meta_info = {
-            "label": "Value",
+            "label": "Integer",
             "author": "Gimel Studio",
             "version": (0, 5, 0),
             "category": "INPUT",
-            "description": "Input an integer or float.",
+            "description": "Input an integer.",
         }
         return meta_info
 
@@ -38,7 +38,7 @@ class IntegerNode(api.Node):
             default=100,
             min_val=0,
             max_val=100,
-            fpb_label="Integer Value"
+            fpb_label="Integer"
         )
         self.NodeAddProp(integer)
 
