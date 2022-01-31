@@ -37,8 +37,8 @@ class ImageNode(api.Node):
         return meta_info
 
     def NodeWidgetEventHook(self, idname, value):
-        # if idname == "file_path":
-        #     image = self.NodeEvalSelf()
+        if idname == "file_path":
+            image = self.NodeEvalSelf()
             
         #     # Set image info
         #     if value != "":
@@ -53,18 +53,16 @@ class ImageNode(api.Node):
         #         info = "{0}x{1}px  |  {2}{3}".format(img.shape[1], img.shape[0], 
         #                                              round(size, 3), prefix)
         #         self.img_info.SetValue(info)
-
-        #     self.NodeUpdateThumb(image)
-        #     self.RefreshPropertyPanel()
+            self.NodeUpdateThumb(image["image"])
+            self.RefreshPropertyPanel()
         self.RefreshNodeGraph()
 
     def NodeDndEventHook(self):
-        # image = self.NodeEvalSelf()
-        # self.NodeUpdateThumb(image)
+        image = self.NodeEvalSelf()
+        self.NodeUpdateThumb(image["image"])
         self.RefreshNodeGraph()
 
     def NodeInitProps(self):
-        #pass
         file_path = api.FileProp(
             idname="file_path",
             default="",
@@ -87,7 +85,6 @@ class ImageNode(api.Node):
     def NodeInitOutputs(self):
         self.outputs = {
             "image": api.Output(idname="image", datatype="IMAGE", label="Image"),
-            "alpha": api.Output(idname="alpha", datatype="IMAGE", label="Alpha")
         }
 
     def NodeEvaluation(self, eval_info):
@@ -108,8 +105,7 @@ class ImageNode(api.Node):
 
         self.NodeUpdateThumb(render_image)
         return {
-            "image": render_image,
-            "alpha": api.Image(size=(200, 200)) # FIXME
+            "image": render_image
         }
 
 
