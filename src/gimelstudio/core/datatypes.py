@@ -26,6 +26,7 @@ class Image(object):
     def __init__(self, size=(20, 20)):
         self.img = np.zeros((size[0], size[1], 4), dtype=np.float32)
 
+    # FIXME
     def Image(self, data_type="numpy"):
         """ Returns the image in the requested datatype format.
 

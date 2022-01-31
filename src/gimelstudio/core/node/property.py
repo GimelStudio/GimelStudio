@@ -32,9 +32,9 @@ from gimelstudio.datafiles import ICON_ARROW_DOWN, ICON_ARROW_RIGHT
 
 
 class Property(object):
-    def __init__(self, idname, default, fpb_label, expanded=True, visible=True):
-        # If binding (object, idname of the connected node's output socket) 
-        # is None then use value.
+    def __init__(self, idname, default, fpb_label, exposed=True, 
+                 can_be_exposed=True, expanded=True, visible=False):
+        # Property identifier 
         self.idname = idname
 
         # This property's current value, which is used if binding is None
@@ -42,24 +42,26 @@ class Property(object):
 
         # The connected node to evaluate and get the value from, in the format:
         # (object, idname of the connected node's output socket) 
+        # If binding is None, then  self.value is used.
         self.binding = None
 
         # Labels for the foldpanelbar and node socket
         self.fpb_label = fpb_label
         self.label = fpb_label
 
-        # Whether this property is exposed as a node socket
-        self.exposed = False 
+        # Whether this property is exposed as a node socket. If it is, the property
+        # widget will be replaced with a label stating the node connection.
+        self.exposed = exposed 
+
+        # Whether this property can be exposed as a node socket. This makes 
+        # sense for input nodes, e.g: Vector that don't need any inputs ever.
+        self.can_be_exposed = can_be_exposed 
 
         # Whether the foldpanelbar is expanded
         self.expanded = expanded 
 
-        # Whether this property is visible in the properties panel
+        # Whether this property is visible at all in the properties panel
         self.visible = visible 
-        
-        # Whether this property can every be exposed on a node. This makes 
-        # sense for input nodes, e.g: Vector that don't need any inputs ever.
-        self.can_be_exposed = False 
 
         # Variable to hold the eventhook method
         self.widget_eventhook = None
@@ -140,8 +142,10 @@ class Property(object):
 
 class ImageProp(Property):
     """ Represents an RGBA Image. """
-    def __init__(self, idname, default=Image(), fpb_label="", expanded=True, visible=True):
-        Property.__init__(self, idname, default, fpb_label, expanded, visible)
+    def __init__(self, idname, default=Image(), fpb_label="", exposed=True, 
+                 can_be_exposed=True, expanded=True, visible=True):
+        Property.__init__(self, idname, default, fpb_label, exposed, 
+                          can_be_exposed, expanded, visible)
         self.value = default
         self.datatype = "IMAGE"
         self.label = "Image"
@@ -155,8 +159,9 @@ class ChoiceProp(Property):
     Allows the user to select from a list of choices via a Drop-down widget. 
     """
     def __init__(self, idname, default="", choices=[], fpb_label="", 
-                 expanded=True, visible=True):
-        Property.__init__(self, idname, default, fpb_label, expanded, visible)
+                 exposed=True, can_be_exposed=True, expanded=True, visible=True):
+        Property.__init__(self, idname, default, fpb_label, exposed, 
+                          can_be_exposed, expanded, visible)
         self.choices = choices
 
         self.datatype = "INTEGER"
@@ -189,8 +194,9 @@ class ColorProp(Property):
     Allows the user to select a color.
     """
     def __init__(self, idname, default=(255, 255, 255, 255), label="", fpb_label="", 
-                 expanded=True, visible=True):
-        Property.__init__(self, idname, default, fpb_label, expanded, visible)
+                 exposed=True, can_be_exposed=True, expanded=True, visible=True):
+        Property.__init__(self, idname, default, fpb_label, exposed, 
+                          can_be_exposed, expanded, visible)
         self.label = label
 
         self.datatype = "COLOR"
@@ -219,8 +225,10 @@ class FileProp(Property):
     """
     def __init__(self, idname, default="", dlg_msg="Choose file...",
                  wildcard="All files (*.*)|*.*", btn_lbl="Choose...",
-                 fpb_label="", expanded=True, visible=True):
-        Property.__init__(self, idname, default, fpb_label, expanded, visible)
+                 fpb_label="", exposed=True, can_be_exposed=True, 
+                 expanded=True, visible=True):
+        Property.__init__(self, idname, default, fpb_label, exposed, 
+                          can_be_exposed, expanded, visible)
         self.dlg_msg = dlg_msg
         self.wildcard = wildcard
         self.btn_lbl = btn_lbl
@@ -289,8 +297,10 @@ class StringProp(Property):
     """ 
     Allows the user to type text. 
     """
-    def __init__(self, idname, default="", fpb_label="", expanded=True, visible=True):
-        Property.__init__(self, idname, default, fpb_label, expanded, visible)
+    def __init__(self, idname, default="", fpb_label="", exposed=True, 
+                 can_be_exposed=True,expanded=True, visible=True):
+        Property.__init__(self, idname, default, fpb_label, exposed, 
+                          can_be_exposed, expanded, visible)
 
         self.datatype = "STRING"
         self.label = fpb_label
@@ -313,8 +323,10 @@ class VectorProp(Property):
     """
     def __init__(self, idname, default=(0, 0, 0), labels=("X", "Y", "Z"),
                  min_vals=(0, 0, 0), max_vals=(10, 10, 10), lbl_suffix="", show_p=False, 
-                 enable_z=False, fpb_label="", expanded=True, visible=True):
-        Property.__init__(self, idname, default, fpb_label, expanded, visible)
+                 enable_z=False, fpb_label="", exposed=True, can_be_exposed=True,
+                 expanded=True, visible=True):
+        Property.__init__(self, idname, default, fpb_label, exposed, 
+                          can_be_exposed, expanded, visible)
         self.min_values = min_vals
         self.max_values = max_vals
         self.lbl_suffix = lbl_suffix
@@ -389,8 +401,10 @@ class IntegerProp(Property):
     Allows the user to select a positive integer via a Number Field. 
     """
     def __init__(self, idname, default=0, lbl_suffix="", min_val=0, max_val=10, 
-                 show_p=False, fpb_label="", expanded=True, visible=True):
-        Property.__init__(self, idname, default, fpb_label, expanded, visible)
+                 show_p=False, fpb_label="", exposed=True, can_be_exposed=True,
+                 expanded=True, visible=True):
+        Property.__init__(self, idname, default, fpb_label, exposed, 
+                          can_be_exposed, expanded, visible)
         self.min_value = min_val
         self.max_value = max_val
         self.lbl_suffix = lbl_suffix

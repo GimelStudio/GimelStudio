@@ -106,7 +106,7 @@ class NodeGraphPanel(wx.Panel):
                                    config=config,
                                    size=(-1, self.Size[0]-20))
 
-        # Here for testing
+        # Here for testing during development
         if const.APP_FROZEN is False:
             self.nodegraph.AddNode('corenode_blur', pos=wx.Point(600, 200))
             self.nodegraph.AddNode('corenode_opacity', pos=wx.Point(310, 200))
