@@ -14,62 +14,44 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-import numpy as np
 from gimelstudio import api
 
 
-class RotateNode(api.Node):
+class StringNode(api.Node):
     def __init__(self, nodegraph, id):
         api.Node.__init__(self, nodegraph, id)
 
     @property
     def NodeMeta(self):
         meta_info = {
-            "label": "Rotate",
+            "label": "String",
             "author": "Gimel Studio",
             "version": (0, 5, 0),
-            "category": "TRANSFORM",
-            "description": "Rotates an image.",
+            "category": "INPUT",
+            "description": "Input a string.",
         }
         return meta_info
 
     def NodeInitProps(self):
-        image = api.ImageProp(
-            idname="in_image",
+        string = api.StringProp(
+            idname="sel_string",
+            default="",
+            fpb_label="String",
+            can_be_exposed=False
         )
-        rotation = api.ChoiceProp(
-            idname="rotation",
-            default="90°",
-            fpb_label="Rotation",
-            choices=["90°", "180°", "270°"]
-        )
-        self.NodeAddProp(image)
-        self.NodeAddProp(rotation)
+        self.NodeAddProp(string)
 
     def NodeInitOutputs(self):
         self.outputs = {
-            "image": api.Output(idname="image", datatype="IMAGE", label="Image"),
+            "string": api.Output(idname="string", datatype="STRING", label="String"),
         }
 
     def NodeEvaluation(self, eval_info):
-        rotation = self.EvalProperty(eval_info, "rotation")
-        image1 = self.EvalProperty(eval_info, "in_image")
+        string = self.EvalProperty(eval_info, "sel_string")
 
-        render_image = api.Image()
-        img = image1.Image("numpy")
-
-        if rotation == "90°":
-            output_img = np.rot90(img, 1)
-        elif rotation == "180°":
-            output_img = np.rot90(img, 2)
-        elif rotation == "270°":
-            output_img = np.rot90(img, 3)
-
-        render_image.SetAsImage(output_img)
-        self.NodeUpdateThumb(render_image)
         return {
-            "image": render_image
+            "string": string
         }
 
 
-api.RegisterNode(RotateNode, "corenode_rotate")
+api.RegisterNode(StringNode, "corenode_string")

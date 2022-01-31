@@ -22,10 +22,11 @@ except ImportError:
     print("OpenImageIO is required!")
 
 
-class RenderImage(object):
+class Image(object):
     def __init__(self, size=(20, 20)):
         self.img = np.zeros((size[0], size[1], 4), dtype=np.float32)
 
+    # FIXME
     def Image(self, data_type="numpy"):
         """ Returns the image in the requested datatype format.
 
@@ -37,24 +38,24 @@ class RenderImage(object):
         :param data_type: the requested image datatype
         :returns: ``numpy.ndarray`` or ``oiio.ImageBuf`` object
         """
-        current_data_type = type(self.img)
-        if data_type == "numpy":
-            if current_data_type == np.ndarray:
-                return self.img
-            else:
-                self.img = self.img.get_pixels("float")
-                return self.img
+        # current_data_type = type(self.img)
+        # if data_type == "numpy":
+        #     if current_data_type == np.ndarray:
+        return self.img
+            # else:
+            #     self.img = self.img.get_pixels("float")
+            #     return self.img
 
-        elif data_type == "oiio":
-            print("[WARNING] Converting to oiio is disabled!")
+        # elif data_type == "oiio":
+        #     print("[WARNING] Converting to oiio is disabled!")
             # if current_data_type == oiio.ImageBuf:
             #     return self.img
             # else:
             #     self.img = self.NumpyArrayToImageBuf()
             #     return self.img
 
-        else:
-            raise TypeError("Not a valid datatype!")
+        # else:
+        #     raise TypeError("Not a valid datatype!")
 
     def NumpyArrayToImageBuf(self):
         """ Converts a np.ndarray to an OIIO ImageBuf image.

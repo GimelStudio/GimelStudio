@@ -14,63 +14,52 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-try:
-    import OpenImageIO as oiio
-except ImportError:
-    print("""OpenImageIO is required! Get the python wheel for Windows at:
-     https://www.lfd.uci.edu/~gohlke/pythonlibs/#openimageio""")
-
 from gimelstudio import api
 
 
-class NoiseImageNode(api.Node):
+class ColorNode(api.Node):
     def __init__(self, nodegraph, id):
         api.Node.__init__(self, nodegraph, id)
 
     @property
     def NodeMeta(self):
         meta_info = {
-            "label": "Noise",
+            "label": "Color",
             "author": "Gimel Studio",
             "version": (0, 0, 5),
             "category": "INPUT",
-            "description": "Creates a noise image."
+            "description": "Inputs a color."
         }
         return meta_info
 
     def NodeWidgetEventHook(self, idname, value):
-        if idname == "noise_seed":
-            image = self.NodeEvalSelf()
-            self.NodeUpdateThumb(image)
-            self.RefreshNodeGraph()
-
-    def NodeDndEventHook(self):
         image = self.NodeEvalSelf()
         self.NodeUpdateThumb(image)
         self.RefreshNodeGraph()
 
     def NodeInitProps(self):
-        noise_seed = api.PositiveIntegerProp(
-            idname="noise_seed",
-            default=1,
-            min_val=0,
-            max_val=100,
-            fpb_label="Noise Seed"
+        color = api.ColorProp(
+            idname="sel_color",
+            default=(255, 255, 255, 255),
+            label="",
+            fpb_label="Color",
+            can_be_exposed=False
         )
+        self.NodeAddProp(color)
 
-        self.NodeAddProp(noise_seed)
+    def NodeInitOutputs(self):
+        self.outputs = {
+            "color": api.Output(idname="color", datatype="COLOR", label="Color"),
+        }
 
     def NodeEvaluation(self, eval_info):
-        noise_seed = self.EvalProperty(eval_info, "noise_seed")
+        color = self.EvalProperty(eval_info, "sel_color")
 
-        render_image = api.Image()
+        return {
+            "color": color
+        }
 
-        buf = oiio.ImageBuf(oiio.ImageSpec(1200, 1200, 4, oiio.FLOAT))
-        oiio.ImageBufAlgo.noise (buf, "gaussian", 0.5, 0.5, mono=True, seed=noise_seed)
-
-        render_image.SetAsImage(buf)
-        self.NodeUpdateThumb(render_image)
-        return render_image
+api.RegisterNode(ColorNode, "corenode_color")
 
 
-api.RegisterNode(NoiseImageNode, "corenode_noiseimage")
+

@@ -24,16 +24,25 @@ class EvalInfo(object):
             raise TypeError
         self.node = node
 
-    def EvaluateParameter(self, name):
-        """ Evaluates the value of a parameter. """
-        param = self.node.parameters[name]
-        if param.binding:
-            # Evaluate the next node
-            info = EvalInfo(param.binding)
-            return param.binding.EvaluateNode(info)
-        return param.value
+    # def EvaluateParameter(self, name):
+    #     """ Evaluates the value of a parameter. """
+    #     param = self.node.parameters[name]
+    #     if param.binding:
+    #         # Evaluate the next node
+    #         info = EvalInfo(param.binding)
+    #         return param.binding.EvaluateNode(info)
+    #     return param.value
+
+    # def EvaluateProperty(self, name):
+    #     """ Evaluates the value of a property. """
+    #     prop = self.node.properties[name]
+    #     return prop.value
 
     def EvaluateProperty(self, name):
-        """ Evaluates the value of a property. """
         prop = self.node.properties[name]
+        if prop.binding:
+            # Evaluate the next node
+            binding = prop.binding
+            info = EvalInfo(binding[0])
+            return binding[0].EvaluateNode(info)[binding[1]]
         return prop.value

@@ -18,8 +18,8 @@ from gimelstudio import api
 
 
 class MixNode(api.Node):
-    def __init__(self, nodegraph, _id):
-        api.Node.__init__(self, nodegraph, _id)
+    def __init__(self, nodegraph, id):
+        api.Node.__init__(self, nodegraph, id)
 
     @property
     def NodeMeta(self):
@@ -33,6 +33,12 @@ class MixNode(api.Node):
         return meta_info
 
     def NodeInitProps(self):
+        image_1 = api.ImageProp(
+            idname="image_1",
+        )
+        image_2 = api.ImageProp(
+            idname="image_2",
+        )
         blend_mode = api.ChoiceProp(
             idname="blend_mode",
             default="Multiply",
@@ -44,7 +50,7 @@ class MixNode(api.Node):
                 "Divide", "Reflect", "Glow", "Average", "Exclusion"
                 ]
         )
-        opacity = api.PositiveIntegerProp(
+        opacity = api.IntegerProp(
             "opacity",
             default=100,
             lbl_suffix="%",
@@ -53,26 +59,26 @@ class MixNode(api.Node):
             fpb_label="Opacity"
         )
 
+        self.NodeAddProp(image_1)
+        self.NodeAddProp(image_2)
         self.NodeAddProp(blend_mode)
         self.NodeAddProp(opacity)
 
-    def NodeInitParams(self):
-        p1 = api.RenderImageParam("image1", "Image")
-        p2 = api.RenderImageParam("image2", "Image")
-
-        self.NodeAddParam(p1)
-        self.NodeAddParam(p2)
+    def NodeInitOutputs(self):
+        self.outputs = {
+            "image": api.Output(idname="image", datatype="IMAGE", label="Image"),
+        }
 
     def MutedNodeEvaluation(self, eval_info):
         return self.EvalMutedNode(eval_info)
 
     def NodeEvaluation(self, eval_info):
-        image1 = self.EvalParameter(eval_info, "image1")
-        image2 = self.EvalParameter(eval_info, "image2")
+        image1 = self.EvalProperty(eval_info, "image_1")
+        image2 = self.EvalProperty(eval_info, "image_2")
         blend_mode = self.EvalProperty(eval_info, "blend_mode")
         opacity = self.EvalProperty(eval_info, "opacity")
 
-        render_image = api.RenderImage()
+        render_image = api.Image()
 
         # Set a float value to represent each mode
         if blend_mode == "Normal":
@@ -122,7 +128,9 @@ class MixNode(api.Node):
 
         render_image.SetAsImage(result)
         self.NodeUpdateThumb(render_image)
-        return render_image
+        return {
+            "image": render_image
+        }
 
 
 api.RegisterNode(MixNode, "corenode_mix")

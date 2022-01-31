@@ -17,38 +17,43 @@
 from gimelstudio import api
 
 
-class ValueNode(api.Node):
-    def __init__(self, nodegraph, _id):
-        api.Node.__init__(self, nodegraph, _id)
+class IntegerNode(api.Node):
+    def __init__(self, nodegraph, id):
+        api.Node.__init__(self, nodegraph, id)
 
     @property
     def NodeMeta(self):
         meta_info = {
-            "label": "Value",
+            "label": "Integer",
             "author": "Gimel Studio",
             "version": (0, 5, 0),
             "category": "INPUT",
-            "description": "Input an integer or float.",
+            "description": "Input an integer.",
         }
         return meta_info
 
-    def NodeOutputDatatype(self):
-        return "VALUE"
-
     def NodeInitProps(self):
-        value = api.PositiveIntegerProp(
-            idname="value",
-            default=100,
+        integer = api.IntegerProp(
+            idname="sel_integer",
+            default=1,
             min_val=0,
-            max_val=100,
-            fpb_label="Integer Value"
+            max_val=800,
+            fpb_label="Integer",
+            can_be_exposed=False
         )
-        self.NodeAddProp(value)
+        self.NodeAddProp(integer)
+
+    def NodeInitOutputs(self):
+        self.outputs = {
+            "integer": api.Output(idname="integer", datatype="INTEGER", label="Integer"),
+        }
 
     def NodeEvaluation(self, eval_info):
-        value = self.EvalProperty(eval_info, "value")
+        integer = self.EvalProperty(eval_info, "sel_integer")
 
-        return value
+        return {
+            "integer": integer
+        }
 
 
-api.RegisterNode(ValueNode, "node_value")
+api.RegisterNode(IntegerNode, "node_integer")

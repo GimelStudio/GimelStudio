@@ -19,8 +19,8 @@ from gimelstudio import api
 
 
 class ColorImageNode(api.Node):
-    def __init__(self, nodegraph, _id):
-        api.Node.__init__(self, nodegraph, _id)
+    def __init__(self, nodegraph, id):
+        api.Node.__init__(self, nodegraph, id)
 
     @property
     def NodeMeta(self):
@@ -39,7 +39,7 @@ class ColorImageNode(api.Node):
         self.RefreshNodeGraph()
 
     def NodeInitProps(self):
-        image_size = api.XYZProp(
+        image_size = api.VectorProp(
             idname="image_size", 
             default=(125, 125, 0), 
             labels=("Width", "Height"),
@@ -57,17 +57,23 @@ class ColorImageNode(api.Node):
         self.NodeAddProp(image_size)
         self.NodeAddProp(color)
 
+    def NodeInitOutputs(self):
+        self.outputs = {
+            "image": api.Output(idname="image", datatype="IMAGE", label="Image"),
+        }
+
     def NodeEvaluation(self, eval_info):
         image_size = self.EvalProperty(eval_info, "image_size")
         color = self.EvalProperty(eval_info, "color")
 
-        render_image = api.RenderImage()
+        render_image = api.Image()
 
         img = np.zeros((image_size[0], image_size[1], 4), dtype=np.float32) + color
 
         render_image.SetAsImage(img)
-        return render_image
-
+        return {
+            "image": render_image
+        }
 
 api.RegisterNode(ColorImageNode, "corenode_colorimage")
 

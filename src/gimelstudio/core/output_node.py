@@ -41,17 +41,18 @@ class OutputNode(api.Node):
         return meta_info
 
     def NodeInitProps(self):
-        self.export_button = api.ActionProp(
-            idname="export",
-            fpb_label="Export",
-            btn_label="Export Image",
-            action=self.OnExportButtonPressed
+        # self.export_button = api.ActionProp(
+        #     idname="export",
+        #     fpb_label="Export",
+        #     btn_label="Export Image",
+        #     action=self.OnExportButtonPressed,
+        #     visible=False
+        # )
+        image = api.ImageProp(
+            idname="image",
         )
-        self.NodeAddProp(self.export_button)
-
-    def NodeInitParams(self):
-        p = api.RenderImageParam('image', 'Image')
-        self.NodeAddParam(p)
+        #self.NodeAddProp(self.export_button)
+        self.NodeAddProp(image)
 
     def NodeEvaluation(self, eval_info):
         pass

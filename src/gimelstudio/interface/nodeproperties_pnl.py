@@ -23,7 +23,7 @@ from gimelstudio.constants import (PROP_BG_COLOR, AREA_BG_COLOR,
 from gimelstudio.datafiles import (ICON_HELP, ICON_NODEPROPERTIES_PANEL,
                                    ICON_MORE_MENU_SMALL, ICON_MOUSE_LMB,
                                    ICON_MOUSE_MMB, ICON_MOUSE_RMB)
-from gimelstudio.core.node.property import ThumbProp
+#from gimelstudio.core.node.property import ThumbProp
 from .message_dlgs import ShowNotImplementedDialog
 from .panel_base import PanelBase
 
@@ -150,8 +150,9 @@ class NodePropertiesPanel(PanelBase):
         ShowNotImplementedDialog()
 
     def CreateThumbPanel(self, node, panel, panel_bar):
+        pass
         # Create the default Thumbnail panel
-        prop = ThumbProp(idname="Thumbnail", default=None, fpb_label="Node Thumbnail",
-                         thumb_img=node.thumbnail)
-        prop.CreateUI(panel, panel_bar)
+        # prop = ThumbProp(idname="Thumbnail", default=None, fpb_label="Node Thumbnail",
+        #                  thumb_img=node.thumbnail)
+        # prop.CreateUI(panel, panel_bar)
         

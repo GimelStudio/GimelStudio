@@ -24,8 +24,8 @@ from gimelstudio import api
 
 
 class CheckeredImageNode(api.Node):
-    def __init__(self, nodegraph, _id):
-        api.Node.__init__(self, nodegraph, _id)
+    def __init__(self, nodegraph, id):
+        api.Node.__init__(self, nodegraph, id)
 
     @property
     def NodeMeta(self):
@@ -75,7 +75,7 @@ class CheckeredImageNode(api.Node):
         checker_size = self.EvalProperty(eval_info, "checker_size")
         offset = self.EvalProperty(eval_info, "offset")
 
-        render_image = api.RenderImage()
+        render_image = api.Image()
 
         buf = oiio.ImageBuf(oiio.ImageSpec(1200, 1200, 4, oiio.FLOAT))
         oiio.ImageBufAlgo.checker(buf, checker_size, checker_size, 1, 

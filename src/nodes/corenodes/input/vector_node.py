@@ -14,63 +14,54 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-try:
-    import OpenImageIO as oiio
-except ImportError:
-    print("""OpenImageIO is required! Get the python wheel for Windows at:
-     https://www.lfd.uci.edu/~gohlke/pythonlibs/#openimageio""")
-
+import numpy as np
 from gimelstudio import api
 
 
-class NoiseImageNode(api.Node):
+class VectorNode(api.Node):
     def __init__(self, nodegraph, id):
         api.Node.__init__(self, nodegraph, id)
 
     @property
     def NodeMeta(self):
         meta_info = {
-            "label": "Noise",
+            "label": "Vector",
             "author": "Gimel Studio",
             "version": (0, 0, 5),
             "category": "INPUT",
-            "description": "Creates a noise image."
+            "description": "Inputs a vector."
         }
         return meta_info
 
     def NodeWidgetEventHook(self, idname, value):
-        if idname == "noise_seed":
-            image = self.NodeEvalSelf()
-            self.NodeUpdateThumb(image)
-            self.RefreshNodeGraph()
-
-    def NodeDndEventHook(self):
         image = self.NodeEvalSelf()
         self.NodeUpdateThumb(image)
         self.RefreshNodeGraph()
 
     def NodeInitProps(self):
-        noise_seed = api.PositiveIntegerProp(
-            idname="noise_seed",
-            default=1,
-            min_val=0,
-            max_val=100,
-            fpb_label="Noise Seed"
+        vector = api.VectorProp(
+            idname="sel_vector", 
+            default=(1, 1, 1), 
+            labels=("X", "Y", "Z"),
+            min_vals=(1, 1, 1), 
+            max_vals=(800, 800, 800),
+            show_p=False, 
+            enable_z=True,
+            fpb_label="Vector",
+            can_be_exposed=False
         )
+        self.NodeAddProp(vector)
 
-        self.NodeAddProp(noise_seed)
+    def NodeInitOutputs(self):
+        self.outputs = {
+            "vector": api.Output(idname="vector", datatype="VECTOR", label="Vector"),
+        }
 
     def NodeEvaluation(self, eval_info):
-        noise_seed = self.EvalProperty(eval_info, "noise_seed")
+        vector = self.EvalProperty(eval_info, "sel_vector")
 
-        render_image = api.Image()
+        return {
+            "vector": vector
+        }
 
-        buf = oiio.ImageBuf(oiio.ImageSpec(1200, 1200, 4, oiio.FLOAT))
-        oiio.ImageBufAlgo.noise (buf, "gaussian", 0.5, 0.5, mono=True, seed=noise_seed)
-
-        render_image.SetAsImage(buf)
-        self.NodeUpdateThumb(render_image)
-        return render_image
-
-
-api.RegisterNode(NoiseImageNode, "corenode_noiseimage")
+api.RegisterNode(VectorNode, "corenode_vector")

@@ -15,7 +15,7 @@
 # ----------------------------------------------------------------------------
 
 from .eval_info import EvalInfo
-from .datatypes import RenderImage
+from .datatypes import Image
 
 
 class Renderer(object):
@@ -27,6 +27,9 @@ class Renderer(object):
         self.parent = parent
         self.render = None
         self.output_node = None
+        self.default_image = {
+            "image": Image()
+        }
 
     def GetParent(self):
         return self.parent
@@ -44,28 +47,32 @@ class Renderer(object):
         """ Render method for evaluating the Node Graph
         to render an image.
 
-        :returns: RenderImage object
+        :returns: Image object
         """
         # Render the image
         image = self.RenderNodeGraph(self.output_node)
+        image = image["image"]
         self.SetRender(image)
 
         # TODO: Only if node thumbnails are enabled
-        self.output_node.NodeUpdateThumb(image)
+        # self.output_node.NodeUpdateThumb(image)
         return image
-
+ 
     def RenderNodeGraph(self, output_node):
         """ Render the image, starting from the output node.
 
         :param output_node: the output node object
-        :returns: RenderImage object
+        :returns: Image object
         """
         # Get the node connected to the output node and evaluate from there.
-        node = output_node.parameters["image"].binding
-        if node is not None:
-            eval_info = EvalInfo(node)
-            image = eval_info.node.EvaluateNode(eval_info)
-            return image
+        # If there is no connection, then return a default transparent image.
+        node_binding = output_node.properties["image"].binding
+        if node_binding is not None:
+            node = node_binding[0]
+            if node is not None:
+                eval_info = EvalInfo(node)
+                return eval_info.node.EvaluateNode(eval_info)
+            else:
+                return self.default_image 
         else:
-            # If there is no connection, then return a default transparent image.
-            return RenderImage()
+            return self.default_image 
