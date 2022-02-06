@@ -14,7 +14,6 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Nothing here yet...
 
 class Output(object):
     def __init__(self, idname, datatype, label, visible=True):

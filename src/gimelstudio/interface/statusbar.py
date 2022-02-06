@@ -18,6 +18,7 @@ import wx
 
 import gimelstudio.constants as const
 
+# UNUSED: the statusbar is disabled
 
 class StatusBar(wx.Panel, wx.StatusBar):
     def __init__(self, parent, id=wx.ID_ANY, pos=wx.DefaultPosition, size=wx.DefaultSize,
