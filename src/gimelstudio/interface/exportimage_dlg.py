@@ -38,10 +38,8 @@ class ExportOptionsDialog(wx.Dialog):
 
         self.jpeg_quality = 90
         self.png_compression = 6
-        self.pixel_datatype = "uint8"
-        self.comment_meta = ""
 
-        self.SetSize((400, 300))
+        self.SetSize((340, 200))
         self.SetTitle("{} {}".format(self.filetype.upper(), self.title))
         self.SetBackgroundColour(wx.Colour(const.PROP_BG_COLOR))
         self.Center()
@@ -79,20 +77,6 @@ class ExportOptionsDialog(wx.Dialog):
         # Spacing
         inner_sizer.Add((0, 0), flag=wx.EXPAND | wx.ALL, border=6)
 
-        # Pixel datatype
-        px_datatype_lbl = Label(pnl, label=_("Export pixel datatype:"))
-
-        self.px_datatype_dropdown = DropDown(pnl, items=["uint8", "uint16", "float"],
-                                             default=self.pixel_datatype)
-
-        hbox1 = wx.BoxSizer(wx.HORIZONTAL)
-        hbox1.Add(px_datatype_lbl, flag=wx.EXPAND | wx.LEFT | wx.TOP | wx.RIGHT, border=6)
-        hbox1.Add(self.px_datatype_dropdown, flag=wx.EXPAND | wx.LEFT | wx.RIGHT, border=6)
-        inner_sizer.Add(hbox1)
-
-        # Spacing
-        inner_sizer.Add((0, 0), flag=wx.EXPAND | wx.ALL, border=6)
-
         pnl.SetSizer(inner_sizer)
 
         # Dialog buttons
@@ -110,7 +94,6 @@ class ExportOptionsDialog(wx.Dialog):
         export_btn.Bind(EVT_BUTTON, self.OnExport)
         cancel_btn.Bind(EVT_BUTTON, self.OnCancel)
         self.png_compression_field.Bind(EVT_NUMBERFIELD, self.OnPngCompressionChange)
-        self.px_datatype_dropdown.Bind(EVT_DROPDOWN, self.OnPixelDatatypeChange)
 
     def InitJpegUI(self):
         pnl = wx.Panel(self)
@@ -129,27 +112,6 @@ class ExportOptionsDialog(wx.Dialog):
         # Spacing
         inner_sizer.Add((0, 0), flag=wx.EXPAND | wx.ALL, border=6)
 
-        # Pixel datatype
-        px_datatype_lbl = Label(pnl, label=_("Export pixel datatype:"))
-
-        self.px_datatype_dropdown = DropDown(pnl, items=["uint8", "uint16", "float"],
-                                             default=self.pixel_datatype)
-
-        hbox1 = wx.BoxSizer(wx.HORIZONTAL)
-        hbox1.Add(px_datatype_lbl, flag=wx.EXPAND | wx.LEFT | wx.TOP | wx.RIGHT, border=6)
-        hbox1.Add(self.px_datatype_dropdown, flag=wx.EXPAND | wx.LEFT | wx.RIGHT, border=6)
-        inner_sizer.Add(hbox1)
-
-        # Spacing
-        inner_sizer.Add((0, 0), flag=wx.EXPAND | wx.ALL, border=6)
-
-        # Comment metadata
-        # comment_meta_lbl = Label(pnl, label=_("Comment metadata:"), font_bold=True)
-        # inner_sizer.Add(comment_meta_lbl, flag=wx.EXPAND | wx.TOP | wx.LEFT | wx.RIGHT, border=6)
-
-        # self.comment_meta_txtctrl = TextCtrl(pnl, default=self.comment_meta, size=(-1, 50))
-        # inner_sizer.Add(self.comment_meta_txtctrl, flag=wx.EXPAND | wx.ALL, border=6)
-
         pnl.SetSizer(inner_sizer)
 
         # Dialog buttons
@@ -167,8 +129,6 @@ class ExportOptionsDialog(wx.Dialog):
         export_btn.Bind(EVT_BUTTON, self.OnExport)
         cancel_btn.Bind(EVT_BUTTON, self.OnCancel)
         self.img_quality_field.Bind(EVT_NUMBERFIELD, self.OnJPEGQualityChange)
-        self.px_datatype_dropdown.Bind(EVT_DROPDOWN, self.OnPixelDatatypeChange)
-        #self.comment_meta_txtctrl.Bind(stc.EVT_STC_MODIFIED, self.OnCommentMetaChange)
 
     def OnExport(self, event):
         self.ExportImage()
@@ -185,14 +145,13 @@ class ExportOptionsDialog(wx.Dialog):
 
         if self.filetype in [".jpg", ".jpeg"]:
             img.specmod().attribute("quality", self.jpeg_quality)
-            img.specmod().attribute("ImageDescription", self.comment_meta)
 
         elif self.filetype in [".png"]:
             img.specmod().attribute("png:compressionLevel", self.png_compression)
 
         img.specmod().attribute("Software", "Gimel Studio")
 
-        img.write(self.filepath, self.pixel_datatype)
+        img.write(self.filepath, "float")
 
         if img.has_error:
             print("Error writing image: ", img.geterror())
@@ -205,12 +164,6 @@ class ExportOptionsDialog(wx.Dialog):
 
     def OnJPEGQualityChange(self, event):
         self.jpeg_quality = event.value
-
-    def OnPixelDatatypeChange(self, event):
-        self.pixel_datatype = event.value
-
-    def OnCommentMetaChange(self, event):
-        self.comment_meta = self.comment_meta_txtctrl.GetText()
 
     def OnPngCompressionChange(self, event):
         self.png_compression = event.value
