@@ -140,6 +140,30 @@ class Property(object):
         event.Skip()
 
 
+class ActionProp(Property):
+    """ Allows the user to click a button to perform an action. """
+    def __init__(self, idname, default="", btn_label="", action=None, fpb_label="", 
+                 exposed=True, can_be_exposed=True, expanded=True, visible=True):
+        Property.__init__(self, idname, default, fpb_label, exposed, 
+                          can_be_exposed, expanded, visible)
+        self.value = default
+        self.datatype = "STRING"
+        self.label = ""
+        self.btn_label = btn_label
+        if fpb_label != "":
+            self.fpb_label = fpb_label
+        else:
+            self.fpb_label = btn_label
+        self.action = action
+
+    def CreateUI(self, parent, sizer):
+        fold_panel = self.CreateFoldPanel(sizer, self.fpb_label)
+
+        self.button = Button(fold_panel, label=_(self.btn_label), size=(-1, 30))
+        self.AddToFoldPanel(sizer, fold_panel, self.button)
+        self.button.Bind(EVT_BUTTON, self.action)
+
+
 class ImageProp(Property):
     """ Represents an RGBA Image. """
     def __init__(self, idname, default=Image(), fpb_label="", exposed=True, 

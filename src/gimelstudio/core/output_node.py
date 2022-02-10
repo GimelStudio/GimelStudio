@@ -41,17 +41,17 @@ class OutputNode(api.Node):
         return meta_info
 
     def NodeInitProps(self):
-        # self.export_button = api.ActionProp(
-        #     idname="export",
-        #     fpb_label="Export",
-        #     btn_label="Export Image",
-        #     action=self.OnExportButtonPressed,
-        #     visible=False
-        # )
+        export_button = api.ActionProp(
+            idname="export",
+            fpb_label="Export",
+            btn_label="Export Image",
+            action=self.OnExportButtonPressed,
+            can_be_exposed=False
+        )
         image = api.ImageProp(
             idname="image",
         )
-        #self.NodeAddProp(self.export_button)
+        self.NodeAddProp(export_button)
         self.NodeAddProp(image)
 
     def NodeEvaluation(self, eval_info):
