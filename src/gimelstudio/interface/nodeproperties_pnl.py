@@ -144,7 +144,8 @@ class NodePropertiesPanel(PanelBase):
             self.props_panel.Clear(delete_windows=True)
 
         # Update everything then allow refreshing
-        self.AUIManager.Update()
+        self.Layout()
+        self.Refresh()
         self.Thaw()
 
     def CreateThumbPanel(self, node, panel, panel_bar):
