@@ -34,6 +34,12 @@ class NodePropertiesPanel(PanelBase):
 
         self.thumb_pnl_expanded = False
 
+        self.caption_style = fpb.CaptionBarStyle()
+        self.caption_style.SetCaptionFont(self.parent.GetFont())
+        self.caption_style.SetCaptionColour(wx.Colour(TEXT_COLOR))
+        self.caption_style.SetFirstColour(wx.Colour(PROP_BG_COLOR))
+        self.caption_style.SetCaptionStyle(fpb.CAPTIONBAR_SINGLE)
+
         self.SetBackgroundColour(AREA_BG_COLOR)
 
         self.BuildUI()
@@ -84,10 +90,11 @@ class NodePropertiesPanel(PanelBase):
         self.SetSizer(main_sizer)
 
         self.menu_button.Bind(EVT_BUTTON, self.OnAreaMenuButton)
-        self.main_panel.Bind(wx.EVT_ENTER_WINDOW, self.OnAreaFocus)
 
     def UpdatePanelContents(self, selected_node):
+        # Destroy the current panels and freeze to prevent flicker
         self.main_panel.DestroyChildren()
+        self.Freeze()
 
         if selected_node is not None:
 
@@ -117,34 +124,19 @@ class NodePropertiesPanel(PanelBase):
             selected_node.NodePanelUI(self.main_panel, panel_bar)
             self.CreateThumbPanel(selected_node, self.main_panel, panel_bar)
 
-            style = fpb.CaptionBarStyle()
-            style.SetCaptionFont(self.Parent.GetFont())
-            style.SetCaptionColour(wx.Colour(TEXT_COLOR))
-            style.SetFirstColour(wx.Colour(PROP_BG_COLOR))
-            style.SetCaptionStyle(fpb.CAPTIONBAR_SINGLE)
-            panel_bar.ApplyCaptionStyleAll(style)
+            panel_bar.ApplyCaptionStyleAll(self.caption_style)
 
             self._mainsizer.Add(panel_bar, 1, wx.EXPAND | wx.LEFT | wx.RIGHT, border=6)
 
             self.help_button.Bind(EVT_BUTTON, self.OnHelpButton)
 
-            # Also bind the focus handler to the main panel and panel_bar
-            nodeinfo_pnl.Bind(wx.EVT_ENTER_WINDOW, self.OnAreaFocus)
-            panel_bar.Bind(wx.EVT_ENTER_WINDOW, self.OnAreaFocus)
-
         else:
             # Delete the window if the node is not selected
             self._mainsizer.Clear(delete_windows=True)
 
+        # Update everything then allow refreshing
         self.AUIManager.Update()
-
-    def OnAreaFocus(self, event):
-        self.Statusbar.PushContextHints(2, mouseicon=ICON_MOUSE_LMB, text="",
-                                        clear=True)
-        self.Statusbar.PushContextHints(3, mouseicon=ICON_MOUSE_MMB, text="")
-        self.Statusbar.PushContextHints(4, mouseicon=ICON_MOUSE_RMB, text="")
-        self.Statusbar.PushMessage(_("Node Properties Area"))
-        self.Statusbar.UpdateStatusBar()
+        self.Thaw()
 
     def OnHelpButton(self, event):
         ShowNotImplementedDialog()
