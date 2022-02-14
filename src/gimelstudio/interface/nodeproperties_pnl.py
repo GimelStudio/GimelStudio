@@ -141,7 +141,7 @@ class NodePropertiesPanel(PanelBase):
             self.props_panel_sizer.Fit(self.props_panel)
         else:
             # Delete the window if the node is not selected
-            self.props_panel.Clear(delete_windows=True)
+            self.props_panel_sizer.Clear(delete_windows=True)
 
         # Update everything then allow refreshing
         self.Layout()

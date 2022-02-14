@@ -154,15 +154,15 @@ class ApplicationFrame(wx.Frame):
             normalBmp=ICON_COPY.GetBitmap()
         )
 
-        self.preferences_menuitem = flatmenu.FlatMenuItem(
-            edit_menu,
-            id=wx.ID_ANY,
-            label=_("Preferences"),
-            helpString=_("Edit preferences for Gimel Studio"),
-            kind=wx.ITEM_NORMAL,
-            subMenu=None,
-            normalBmp=ICON_SETTINGS.GetBitmap()
-        )
+        # self.preferences_menuitem = flatmenu.FlatMenuItem(
+        #     edit_menu,
+        #     id=wx.ID_ANY,
+        #     label=_("Preferences"),
+        #     helpString=_("Edit preferences for Gimel Studio"),
+        #     kind=wx.ITEM_NORMAL,
+        #     subMenu=None,
+        #     normalBmp=ICON_SETTINGS.GetBitmap()
+        # )
 
         # View
         self.showimageviewport_menuitem = flatmenu.FlatMenuItem(
@@ -278,8 +278,8 @@ class ApplicationFrame(wx.Frame):
         file_menu.AppendItem(self.quit_menuitem)
 
         edit_menu.AppendItem(self.copytoclipboard_menuitem)
-        edit_menu.AppendItem(separator)
-        edit_menu.AppendItem(self.preferences_menuitem)
+        #edit_menu.AppendItem(separator)
+        #edit_menu.AppendItem(self.preferences_menuitem)
 
         view_menu.AppendItem(self.showimageviewport_menuitem)
         # view_menu.AppendItem(self.showstatusbar_menuitem)
@@ -333,9 +333,9 @@ class ApplicationFrame(wx.Frame):
         self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
                   self.OnCopyImageToClipboard,
                   self.copytoclipboard_menuitem)
-        self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
-                  self.OnPreferencesDialog,
-                  self.preferences_menuitem)
+        # self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
+        #           self.OnPreferencesDialog,
+        #           self.preferences_menuitem)
 
         self.Bind(flatmenu.EVT_FLAT_MENU_SELECTED,
                   self.OnToggleImageViewport,
