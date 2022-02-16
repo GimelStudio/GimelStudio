@@ -3,4 +3,5 @@ gswidgetkit==0.2.9
 moderngl==5.6.4
 numpy==1.22.0
 opencv-python==4.5.3.56
+skia-python==87.4
 wxpython==4.1.1
