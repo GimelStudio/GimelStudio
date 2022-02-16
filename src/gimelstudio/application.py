@@ -449,7 +449,7 @@ class ApplicationFrame(wx.Frame):
     def Render(self):
         image = self.renderer.Render()
         render = image.GetImage()
-        self.imageviewport_pnl.UpdateViewerImage(render, 0)
+        self.imageviewport_pnl.UpdateViewerImage(render)
         self.SetAppTitle(False)
         return render
 
