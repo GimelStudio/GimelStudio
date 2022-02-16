@@ -23,6 +23,7 @@ from gsnodegraph import (EVT_GSNODEGRAPH_NODESELECT,
                          EVT_GSNODEGRAPH_MOUSEZOOM,
                          EVT_GSNODEGRAPH_ADDNODEBTN)
 from gsnodegraph import NodeGraphBase
+from gsnodegraph.constants import SOCKET_OUTPUT
 
 import gimelstudio.constants as const
 from gimelstudio.datafiles import (ICON_NODEGRAPH_PANEL, ICON_MOUSE_LMB_MOVEMENT, 
@@ -106,15 +107,24 @@ class NodeGraphPanel(wx.Panel):
                                    config=config,
                                    size=(-1, self.Size[0]-20))
 
-        # Here for testing during development
-        if const.APP_FROZEN is False:
-            self.nodegraph.AddNode('corenode_blur', pos=wx.Point(600, 200))
-            self.nodegraph.AddNode('corenode_opacity', pos=wx.Point(310, 200))
-            self.nodegraph.AddNode('corenode_flip', pos=wx.Point(500, 300))
-
         # Add default image and output node
-        self.nodegraph.AddNode('corenode_image', pos=wx.Point(100, 250))
-        self.nodegraph.AddNode('corenode_outputcomposite', pos=wx.Point(950, 250))
+        image_node = self.nodegraph.AddNode('corenode_image', pos=wx.Point(150, 150))
+        image_node.ToggleExpand()
+        output_node = self.nodegraph.AddNode('corenode_outputcomposite', pos=wx.Point(1200, 250))
+
+        # For testing during development
+        if const.APP_FROZEN is False:
+            self.nodegraph.AddNode('corenode_blur', pos=wx.Point(400, 200))
+            self.nodegraph.AddNode('corenode_opacity', pos=wx.Point(650, 200))
+            self.nodegraph.AddNode('corenode_flip', pos=wx.Point(900, 200))
+
+        # Connect the nodes by default
+        for socket in image_node.GetSockets():
+            # We're assuming there is only one output
+            if socket.direction == SOCKET_OUTPUT:
+                src_socket = socket
+        dst_socket = output_node.GetSockets()[0]
+        self.nodegraph.ConnectNodes(src_socket, dst_socket)
 
         main_sizer.Add(topbar, flag=wx.EXPAND | wx.LEFT | wx.RIGHT)
         main_sizer.Add(self.nodegraph, 1, flag=wx.EXPAND | wx.BOTH)
@@ -126,7 +136,6 @@ class NodeGraphPanel(wx.Panel):
         self.nodegraph.Bind(EVT_GSNODEGRAPH_NODEDISCONNECT, self.NodeDisconnectEvent)
         self.nodegraph.Bind(EVT_GSNODEGRAPH_MOUSEZOOM, self.ZoomNodeGraph)
         self.nodegraph.Bind(EVT_GSNODEGRAPH_ADDNODEBTN, self.OnAddNodeMenuButton)
-        self.nodegraph.Bind(wx.EVT_ENTER_WINDOW, self.OnAreaFocus)
         self.zoom_field.Bind(EVT_NUMBERFIELD_CHANGE, self.ChangeZoom)
         self.parent.Bind(wx.EVT_MENU, self.OnAddNodeMenu, id=ID_ADDNODEMENU)
 
@@ -150,10 +159,6 @@ class NodeGraphPanel(wx.Panel):
     @property
     def GLSLRenderer(self):
         return self.parent.glsl_renderer
-
-    @property
-    def Statusbar(self):
-        return self.parent.statusbar
 
     @property
     def ImageViewport(self):
@@ -192,22 +197,6 @@ class NodeGraphPanel(wx.Panel):
         self.addnodemenu.SetSize(250, 400)
         if self.addnodemenu.IsShown() is not True:
             self.addnodemenu.Show()
-
-
-    def OnAreaFocus(self, event):
-        self.Statusbar.PushContextHints(2, mouseicon=ICON_MOUSE_LMB_MOVEMENT,
-                                        text=_("Box Select Nodes"), clear=True)
-        self.Statusbar.PushContextHints(3, mouseicon=ICON_MOUSE_LMB,
-                                        text=_("Select Node"))
-        self.Statusbar.PushContextHints(4, mouseicon=ICON_MOUSE_LMB,
-                                        keyicon=ICON_KEY_CTRL,
-                                        text=_("Connect Selected Node To Output"))
-        self.Statusbar.PushContextHints(5, mouseicon=ICON_MOUSE_MMB_MOVEMENT,
-                                        text=_("Pan Node Graph"))
-        self.Statusbar.PushContextHints(6, mouseicon=ICON_MOUSE_RMB,
-                                        text=_("Node Context Menu"))
-        self.Statusbar.PushMessage(_("Node Graph Area"))
-        self.Statusbar.UpdateStatusBar()
 
     def OnAddNodeMenu(self, event):
         pos = wx.GetMousePosition()

@@ -85,7 +85,7 @@ SUPPORTED_FT_SAVE_WILDCARD = \
     "TIFF file (*.tiff)|*.tiff|" \
     "All files (*.*)|*.*"
 
-PROJECT_FILE_WILDCARD = "GIMEL file (*.gimel)|*.gimel"
+PROJECT_FILE_WILDCARD = "GIMEL project file (*.gimel)|*.gimel"
 
 # Colors
 AREA_BG_COLOR = "#1E2429"
