@@ -15,8 +15,8 @@ ICON_ARROW_RIGHT = PyEmbeddedImage(
 
 #----------------------------------------------------------------------
 ICON_BRUSH_CHECKERBOARD = PyEmbeddedImage(
-    b'iVBORw0KGgoAAAANSUhEUgAAAGQAAABkAQMAAABKLAcXAAAABlBMVEU/QkUnLjW+BDL7AAAA'
-    b'KElEQVQ4y2P4f4D/D4xgGGAeg/0H5v8wYmB5o+EyGi6j4TIaLrTiAQDr6oSnZbt/HwAAAABJ'
+    b'iVBORw0KGgoAAAANSUhEUgAAAGQAAABkAQMAAABKLAcXAAAABlBMVEVfYWQnLjUoH6AuAAAA'
+    b'KElEQVQ4y2NgsP/A/B9GDDDv/wH+PzCCYWB5o+EyGi6j4TIaLrTiAQDYaoSnfkBkDwAAAABJ'
     b'RU5ErkJggg==')
 
 #----------------------------------------------------------------------
