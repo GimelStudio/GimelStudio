@@ -137,7 +137,7 @@ class NodeGraphPanel(wx.Panel):
 
     @property
     def AUIManager(self):
-        return self.parent._mgr
+        return self.parent.mgr
 
     @property
     def NodeGraph(self):
