@@ -34,10 +34,10 @@ class MixNode(api.Node):
 
     def NodeInitProps(self):
         image_1 = api.ImageProp(
-            idname="image_1",
+            idname="in_image",
         )
         image_2 = api.ImageProp(
-            idname="image_2",
+            idname="in_image_2",
         )
         blend_mode = api.ChoiceProp(
             idname="blend_mode",
@@ -73,8 +73,8 @@ class MixNode(api.Node):
         return self.EvalMutedNode(eval_info)
 
     def NodeEvaluation(self, eval_info):
-        image1 = self.EvalProperty(eval_info, "image_1")
-        image2 = self.EvalProperty(eval_info, "image_2")
+        image1 = self.EvalProperty(eval_info, "in_image")
+        image2 = self.EvalProperty(eval_info, "in_image_2")
         blend_mode = self.EvalProperty(eval_info, "blend_mode")
         opacity = self.EvalProperty(eval_info, "opacity")
 
