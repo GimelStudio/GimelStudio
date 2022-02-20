@@ -16,6 +16,7 @@
 
 import os
 import wx
+import cv2
 try:
     import OpenImageIO as oiio
 except ImportError:
@@ -137,24 +138,27 @@ class ExportOptionsDialog(wx.Dialog):
         # Export the image with the export options
         image = self.Image
 
-        xres = image.shape[1]
-        yres = image.shape[0]
-        spec = oiio.ImageSpec(xres, yres, 4, "float")
-        img = oiio.ImageBuf(spec)
-        img.set_pixels(oiio.ROI(), image)
+        # xres = image.shape[1]
+        # yres = image.shape[0]
+        # spec = oiio.ImageSpec(xres, yres, 4, "float")
+        # img = oiio.ImageBuf(spec)
+        # img.set_pixels(oiio.ROI(), image)
 
-        if self.filetype in [".jpg", ".jpeg"]:
-            img.specmod().attribute("quality", self.jpeg_quality)
+        # if self.filetype in [".jpg", ".jpeg"]:
+        #     img.specmod().attribute("quality", self.jpeg_quality)
 
-        elif self.filetype in [".png"]:
-            img.specmod().attribute("png:compressionLevel", self.png_compression)
+        # elif self.filetype in [".png"]:
+        #     img.specmod().attribute("png:compressionLevel", self.png_compression)
 
-        img.specmod().attribute("Software", "Gimel Studio")
+        # img.specmod().attribute("Software", "Gimel Studio")
 
-        img.write(self.filepath, "float")
+        # img.write(self.filepath, "float")
 
-        if img.has_error:
-            print("Error writing image: ", img.geterror())
+        # if img.has_error:
+        #     print("Error writing image: ", img.geterror())
+
+        img = cv2.cvtColor(image, cv2.COLOR_BGRA2RGBA)
+        cv2.imwrite(self.filepath, img)
 
         # Destroy the dialog
         self.Destroy()

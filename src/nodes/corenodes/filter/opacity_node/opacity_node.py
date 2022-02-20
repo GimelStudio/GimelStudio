@@ -62,7 +62,7 @@ class OpacityNode(api.Node):
         render_image = api.Image()
 
         # Make correction for slider range of 1-100
-        opacity_value = (opacity_value * 0.01)
+        opacity_value = (opacity_value * 0.01) * 255.0
 
         props = {
             "opacity_value": opacity_value

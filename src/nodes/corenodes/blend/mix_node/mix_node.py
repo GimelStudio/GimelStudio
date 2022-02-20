@@ -117,7 +117,7 @@ class MixNode(api.Node):
             blend_mode = 17.0
 
         # Make correction for slider range of 1-100
-        opacity_value = (opacity * 0.01)
+        opacity_value = 255.0 #(opacity * 0.01) #* 255.0
 
         props = {
             "blend_mode": blend_mode,

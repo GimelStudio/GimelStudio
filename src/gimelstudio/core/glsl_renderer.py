@@ -28,9 +28,9 @@ class GLSLRenderer(object):
         self._vaos = {}
 
         self.gl_context = mg.create_standalone_context(require=330)
-        self.src_texture = self.gl_context.texture((6000, 6000), 4, dtype="f1")
-        self.src_texture2 = self.gl_context.texture((6000, 6000), 4, dtype="f1")
-        self.dst_texture = self.gl_context.texture((6000, 6000), 4, dtype="f1")
+        self.src_texture = self.gl_context.texture((6000, 6000), 4, dtype="f4")
+        self.src_texture2 = self.gl_context.texture((6000, 6000), 4, dtype="f4")
+        self.dst_texture = self.gl_context.texture((6000, 6000), 4, dtype="f4")
         self.src_fbo = self.gl_context.framebuffer(self.src_texture)
         self.dst_fbo = self.gl_context.framebuffer(self.dst_texture)
 
@@ -58,10 +58,7 @@ class GLSLRenderer(object):
 
     def Write(self, image, texture):
         """ Do the writing to src_texture """
-        # FIXME: This effectively means we are no longer working with 16-bit
-        image = image.GetImage().astype("uint8")
-        # image = cv2.normalize(image, dst=None, alpha=0, beta=65535, norm_type=cv2.NORM_MINMAX)
-        # print(image.dtype)
+        image = image.GetImage()
         image = image.copy(order="C")
         viewport = (0, 0, *image.shape[1::-1])
         texture.write(image, viewport=viewport)
@@ -69,9 +66,9 @@ class GLSLRenderer(object):
 
     def ReadNumpy(self):
         """ Returns a ``numpy.ndarray`` image. """
-        raw = self.dst_fbo.read(components=4, dtype="f1", viewport=self.viewport)
-        img = np.frombuffer(raw, dtype="uint8").reshape((self.viewport[3], self.viewport[2], 4))
-        image = img.astype("float32")
+        raw = self.dst_fbo.read(components=4, dtype="f4", viewport=self.viewport)
+        img = np.frombuffer(raw, dtype="float32").reshape((self.viewport[3], self.viewport[2], 4))
+        image = img
         return image
 
     def WriteViewports(self, image, image2):

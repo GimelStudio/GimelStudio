@@ -44,10 +44,13 @@ class Image(object):
         """
         try:
             # Open the image as an array
-            img_input = oiio.ImageInput.open(path)
-            if img_input is None:
-                print("[IO ERROR] ", oiio.geterror())
-            image = img_input.read_image(format="float32")
+            # img_input = oiio.ImageInput.open(path)
+            # if img_input is None:
+            #     print("[IO ERROR] ", oiio.geterror())
+            # image = img_input.read_image(format="float32")
+
+            img_input = cv2.imread(path)
+            image = cv2.cvtColor(img_input, cv2.COLOR_BGRA2RGBA).astype("float32")
 
             # Check image size to warn about glsl texture max limit
             if image.shape[0] > 6000 or image.shape[1] > 6000:
