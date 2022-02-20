@@ -131,7 +131,8 @@ class ImageViewport(glcanvas.GLCanvas):
     def __init__(self, parent):
         glcanvas.GLCanvas.__init__(self, parent, -1)
 
-        self.size = (1920, 1080)
+        self.size = (self.Size[0], self.Size[1])
+        self.canvas_size = (1200, 1200)
         self.init = False
         self.ctx = None
         self.glcanvas = glcanvas.GLContext(self)
@@ -166,14 +167,17 @@ class ImageViewport(glcanvas.GLCanvas):
         self.Refresh(False)
 
     def DoSetViewport(self):
+        self.size = self.GetClientSize()
         self.SetCurrent(self.glcanvas)
+        # if not self.ctx is None:
+        #     self.SetContextViewport(0, 0,  self.size.width, self.size.height)
 
     def InitGL(self):
         self.ctx = moderngl.create_context()
         context = skia.GrDirectContext.MakeGL()
         backend_render_target = skia.GrBackendRenderTarget(
-            self.size[0],
-            self.size[1],
+            self.canvas_size[0],
+            self.canvas_size[1],
             0,  # sampleCnt
             0,  # stencilBits
             skia.GrGLFramebufferInfo(0, GL_RGBA8))
@@ -191,7 +195,7 @@ class ImageViewport(glcanvas.GLCanvas):
         self.OnDraw()
 
     def OnDraw(self):
-        #self.SetContextViewport(0, 0, 500, self.Size.height)
+        self.SetContextViewport(0, 0, self.canvas_size[0], self.canvas_size[1])
         self.DrawContext()
         self.SwapBuffers()
 
