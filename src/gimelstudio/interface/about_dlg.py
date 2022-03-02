@@ -59,6 +59,10 @@ class AboutDialog(wx.Frame):
         app_desc_lbl.SetFont(app_desc_lbl.GetFont().Smaller())
         info_sizer.Add(app_desc_lbl, 0, flag=wx.LEFT|wx.TOP, border=8)
 
+        app_c_lbl = Label(info_panel, label="All glory and praise to Yahweh, our Heavenly Father")
+        app_c_lbl.SetFont(app_c_lbl.GetFont().Smaller())
+        info_sizer.Add(app_c_lbl, 0, flag=wx.LEFT, border=8)
+
         info_panel.SetSizer(info_sizer)
 
         sizer = wx.GridBagSizer(1, 1)
