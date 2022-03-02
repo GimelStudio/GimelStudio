@@ -74,7 +74,7 @@ Please see the [CONTRIBUTING.md](CONTRIBUTING.md) for some details on contributi
 
 1. Make sure you have Python 3.8 or 3.9 installed on your system.
 2. Run ``pip install -r requirements.txt``
-3. Get the OIIO (OpenImageIO) pre-built python wheel (Windows only) [here](https://www.lfd.uci.edu/~gohlke/pythonlibs/#openimageio) and install it with ``pip install <the_path_to_the_whl_here>``.
+3. You can get an older release of OIIO (OpenImageIO) [here](https://www.lfd.uci.edu/~gohlke/pythonlibs/#openimageio) and install it with ``pip install <the_path_to_the_whl_here>``. Or, to use the latest version of OIIO, follow the build instructions [here](https://github.com/Correct-Syntax/py-oiio#windows-build-steps).
 4. Run ``cd src`` then ``python main.py`` to navigate to the src directory and run Gimel Studio.
 5. To build an executable, make sure you are in the root directory and run ``python build.py``. The executable will be generated in the ``dist`` folder.
 
