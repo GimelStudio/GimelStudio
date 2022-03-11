@@ -5,7 +5,7 @@
   <img href="https://lgtm.com/projects/g/GimelStudio/GimelStudio/" src="https://img.shields.io/lgtm/grade/python/g/GimelStudio/GimelStudio.svg?logo=lgtm&logoWidth=18" />
   <br/>
   Non-destructive, node-based 2D image graphics editor, focused on simplicity, speed, elegance, and usability<br/>
-  <a href="https://gimelstudio.github.io">Official Website</a> | <a href="https://discord.gg/RqwbDrVDpK">Join Our Discord Server</a> | <a href="https://gimelstudio.readthedocs.io/en/latest/">Official Manual</a>
+  <a href="https://gimelstudio.github.io">Official Website</a> | <a href="https://gimelstudio.readthedocs.io/en/latest/">Official Manual</a>
 </p>
 
 !["Gimel Studio Banner"](/assets/banner/banner.jpeg "Gimel Studio")
@@ -16,11 +16,6 @@
 This repository tracks the next step of Gimel Studio to become a truly usable and serious node-based, non-destructive image/vector editor. It is currently in ``initial development`` stage, working towards a usable MVP application. Things will probably change a lot from what is currently here.
 
 **We’re especially seeking Python, C++, and GLSL developers, 3D artists, photographers and UI designers to help with the project.** However, even if you have none of these skills you’re still welcome, of course, to ask questions, give feedback, and suggest ideas and improvements.
-
-
-# Discord chat
-
-If you’d like to help out or have questions, comments, and ideas, you can join the Gimel Studio [Discord](https://discord.gg/RqwbDrVDpK). This is where you can chat with the project contributors and get the latest updates on development.
 
 
 # Project Vision
@@ -48,8 +43,6 @@ With a fully non-destructive workflow that uses both GPU and CPU processing whil
 
 
 # Current Status
-
-We are working towards an MVP release which will showcase much of the core goals and features listed on the website.
 
 **There are [alpha pre-releases](https://github.com/GimelStudio/GimelStudio/releases) available for those wanting to test the current functionality.**
 
