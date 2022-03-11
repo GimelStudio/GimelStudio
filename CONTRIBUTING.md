@@ -30,7 +30,7 @@ Gimel Studio is an open source project and we love to receive contributions from
 
 ## Asking For Help
 
-**Please don't use the issue tracker for general support questions**. Check whether the [Github Discussions](https://github.com/GimelStudio/GimelStudio/discussions) or channels on the official [Discord](https://discord.gg/RqwbDrVDpK) can help with your issue. Discord is where most of the development chat happens and it's likely you will get your answer the quickest there.
+**Please don't use the issue tracker for general support questions**. Check whether the [Github Discussions](https://github.com/GimelStudio/GimelStudio/discussions) can help with your issue.
 
 
 ## What Should I Know Before I Get Started?
