@@ -21,7 +21,7 @@ from gswidgetkit import Label, Button, EVT_BUTTON
 
 import gimelstudio.constants as const 
 from gimelstudio.datafiles import ICON_GIMELSTUDIO_ICO, ICON_LICENSE
-from gimelstudio.datafiles.icons import (ICON_CREDITS, ICON_DISCORD, ICON_GITHUB, 
+from gimelstudio.datafiles.icons import (ICON_CREDITS, ICON_GITHUB, 
                                          ICON_WEBSITE, ICON_YOUTUBE)
  
 
@@ -90,13 +90,9 @@ class AboutDialog(wx.Frame):
                              bmp=(ICON_CREDITS.GetBitmap(), 'left'))
         sizer.Add(credits_btn, pos=(6, 2), span=(1, 2), flag=wx.TOP|wx.RIGHT|wx.EXPAND, border=8)
 
-        discord_btn = Button(panel, label="Discord chat",
-                             bmp=(ICON_DISCORD.GetBitmap(), 'left'))
-        sizer.Add(discord_btn, pos=(8, 2), span=(1, 2), flag=wx.TOP|wx.RIGHT|wx.EXPAND, border=8)
-
         youtube_btn = Button(panel, label="Youtube channel",
                              bmp=(ICON_YOUTUBE.GetBitmap(), 'left'))
-        sizer.Add(youtube_btn, pos=(9, 2), span=(1, 2), flag=wx.TOP|wx.RIGHT|wx.EXPAND, border=8)
+        sizer.Add(youtube_btn, pos=(8, 2), span=(1, 2), flag=wx.TOP|wx.RIGHT|wx.EXPAND, border=8)
 
         # Add spacing
         sizer.Add((20, 20), pos=(10, 0))
@@ -112,7 +108,6 @@ class AboutDialog(wx.Frame):
         github_btn.Bind(EVT_BUTTON, self.OnGithubButton)
         license_btn.Bind(EVT_BUTTON, self.OnLicenseButton)
         credits_btn.Bind(EVT_BUTTON, self.OnCreditsButton)
-        discord_btn.Bind(EVT_BUTTON, self.OnDiscordButton)
         youtube_btn.Bind(EVT_BUTTON, self.OnYoutubeButton)
 
     def OnCloseDialog(self, event):
@@ -140,12 +135,6 @@ class AboutDialog(wx.Frame):
 
     def OnCreditsButton(self, event):
         webbrowser.open(const.APP_CREDITS_URL)
-
-    def OnDiscordButton(self, event):
-        # Remove the dashes from the url
-        original_url = const.APP_DISCORD_URL
-        new_url = original_url.replace("-", "")
-        webbrowser.open(new_url)
 
     def OnYoutubeButton(self, event):
         webbrowser.open(const.APP_YOUTUBE_URL)
