@@ -4,7 +4,7 @@
   <img href="https://github.com/GimelStudio/GimelStudio/blob/master/LICENSE" src="https://img.shields.io/badge/License-Apache2.0-green.svg" />
   <img href="https://lgtm.com/projects/g/GimelStudio/GimelStudio/" src="https://img.shields.io/lgtm/grade/python/g/GimelStudio/GimelStudio.svg?logo=lgtm&logoWidth=18" />
   <br/>
-  Non-destructive, node-based 2D image graphics editor, focused on simplicity, speed, elegance, and usability<br/>
+  Non-destructive, node-based 2D graphics editor, focused on simplicity, speed, elegance, and usability<br/>
   <a href="https://gimelstudio.github.io">Official Website</a> | <a href="https://gimelstudio.readthedocs.io/en/latest/">Official Manual</a>
 </p>
 
@@ -15,7 +15,7 @@
 
 This repository tracks the next step of Gimel Studio to become a truly usable and serious node-based, non-destructive image/vector editor. It is currently in ``initial development`` stage, working towards a usable MVP application. Things will probably change a lot from what is currently here.
 
-**We’re especially seeking Python, C++, and GLSL developers, 3D artists, photographers and UI designers to help with the project.** However, even if you have none of these skills you’re still welcome, of course, to ask questions, give feedback, and suggest ideas and improvements.
+You’re welcome, to ask questions, give feedback, and suggest ideas and improvements.
 
 
 # Project Vision
@@ -37,9 +37,9 @@ This includes:
 
 Nodes can be used to composite, edit and create new effects and/or composite raster and vector graphics on-demand and visually with node thumbnails showing each step of the process (where applicable). Helpful gizmos in the interactive viewport can be used to do various editing tasks and speed up the workflow. Preset node graph templates can be created, used and re-used to save time setting up common node-setups.
 
-Custom nodes can be scripted with the built-in Python API for maximum flexibility. Integrations with other software like Blender are planned.
+Custom nodes can be scripted with the built-in Python API for maximum flexibility. Integrations with other software are planned.
 
-With a fully non-destructive workflow that uses both GPU and CPU processing while being seamlessly cross-platform on Windows, Linux and macOS (for 64-bit systems), Gimel Studio aims to be a simple, yet powerful 2D graphics editing tool for anyone with an image to edit.
+With a fully non-destructive workflow that uses both GPU and CPU processing (via GLSL + OpenGL) while being seamlessly cross-platform on Windows, Linux and macOS (for 64-bit systems), Gimel Studio aims to be a simple, yet powerful 2D graphics editing tool for anyone with an image to edit.
 
 
 # Current Status
