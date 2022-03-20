@@ -11,11 +11,11 @@
 !["Gimel Studio Banner"](/assets/banner/banner.jpeg "Gimel Studio")
 
 
-# About the Next Generation of Gimel Studio
+# About Gimel Studio
 
 This repository tracks the next step of Gimel Studio to become a truly usable and serious node-based, non-destructive image/vector editor. It is currently in ``initial development`` stage, working towards a usable MVP application. Things will probably change a lot from what is currently here.
 
-You’re welcome, to ask questions, give feedback, and suggest ideas and improvements.
+You’re welcome to ask questions, give feedback, and suggest ideas and improvements.
 
 
 # Project Vision
@@ -62,6 +62,8 @@ Please see the [CONTRIBUTING.md](CONTRIBUTING.md) for some details on contributi
 # Running the code
 
 *Please note: At this stage of development, the code is highly WIP and likely to change a lot. Many things are not implemented and not stable. Please don't expect too much at this point...*
+
+**Python 3.10 support is not available quite yet as we are waiting for upstream packages to update**
 
 ## Windows
 
