@@ -17,6 +17,8 @@ This repository tracks the next step of Gimel Studio to become a truly usable an
 
 You’re welcome to ask questions, give feedback, and suggest ideas and improvements.
 
+**Join our Zulip chat organization [here](https://gimelstudio.zulipchat.com/join/sif32f3gjpnikveonzgc7zhw/)**
+
 
 # Project Vision
 
