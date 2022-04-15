@@ -5,7 +5,7 @@
   <img href="https://lgtm.com/projects/g/GimelStudio/GimelStudio/" src="https://img.shields.io/lgtm/grade/python/g/GimelStudio/GimelStudio.svg?logo=lgtm&logoWidth=18" />
   <br/>
   Non-destructive, node-based 2D graphics editor, focused on simplicity, speed, elegance, and usability<br/>
-  <a href="https://gimelstudio.github.io">Official Website</a> | <a href="https://gimelstudio.readthedocs.io/en/latest/">Official Manual</a>
+  <a href="https://gimelstudio.github.io">Official Website</a> | <a href="https://gimelstudio.zulipchat.com/join/sif32f3gjpnikveonzgc7zhw/">Community Chat</a> | <a href="https://gimelstudio.readthedocs.io/en/latest/">Official Manual</a>
 </p>
 
 !["Gimel Studio Banner"](/assets/banner/banner.jpeg "Gimel Studio")
@@ -36,6 +36,7 @@ This includes:
 - UI translations
 - Gizmos for the viewport to allow for WYSIWYG-like interaction for transforms, etc. (e.g. crop, rotate, etc)
 - Continued improvement and additions to the Python API for scripting custom nodes
+- And more...
 
 Nodes can be used to composite, edit and create new effects and/or composite raster and vector graphics on-demand and visually with node thumbnails showing each step of the process (where applicable). Helpful gizmos in the interactive viewport can be used to do various editing tasks and speed up the workflow. Preset node graph templates can be created, used and re-used to save time setting up common node-setups.
 
