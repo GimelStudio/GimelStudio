@@ -90,6 +90,7 @@ class NodeGraphPanel(wx.Panel):
                 "VECTOR": "#6E3DD9", # Purple
                 "VALUE": "#A0A0A0",  # Depreciated!
             },
+            "input_nodes_categories": ["INPUT"],
             "node_categories": {
                 "INPUT": "#E64555",  # Burgendy
                 "DRAW": "#AF4467",  # Pink
