@@ -375,9 +375,9 @@ class ApplicationFrame(wx.Frame):
         self.main_sizer.Add(self.menubar, 0, wx.EXPAND)
 
         # Create the statusbar
-        self.statusbar = StatusBar(self)
-        self.SetStatusBar(self.statusbar)
-        self.statusbar.Hide()
+        # self.statusbar = StatusBar(self)
+        # self.SetStatusBar(self.statusbar)
+        # self.statusbar.Hide()
 
         # Window manager
         self.mgr = AUIManager(self)
@@ -439,8 +439,8 @@ class ApplicationFrame(wx.Frame):
         self.Maximize()
         self.menubar.PositionAUI(self.mgr)
         self.mgr.Update()
-        self.statusbar.UpdateStatusBar()
-        self.statusbar.Refresh()
+        # self.statusbar.UpdateStatusBar()
+        # self.statusbar.Refresh()
         self.menubar.Refresh()
 
         # Set the output node for the renderer
@@ -575,10 +575,10 @@ class ApplicationFrame(wx.Frame):
             self.imageviewport_pnl.ShowPanel()
 
     def OnToggleStatusbar(self, event):
-        if self.showstatusbar_menuitem.IsChecked() is False:
-            self.statusbar.Hide()
-        else:
-            self.statusbar.Show()
+        # if self.showstatusbar_menuitem.IsChecked() is False:
+        #     self.statusbar.Hide()
+        # else:
+        #     self.statusbar.Show()
         self.Layout()
 
     def OnToggleAutoRender(self, event):
