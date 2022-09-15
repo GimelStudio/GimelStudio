@@ -8,16 +8,16 @@
   <a href="https://gimelstudio.github.io">Official Website</a> | <a href="https://gimelstudio.zulipchat.com/join/sif32f3gjpnikveonzgc7zhw/">Community Chat</a> | <a href="https://gimelstudio.readthedocs.io/en/latest/">Official Manual</a>
 </p>
 
-!["Gimel Studio Banner"](/assets/banner/banner.jpeg "Gimel Studio")
+!["Gimel Studio Banner"](/assets/banner/gimel-studio-06-pre-3.png "Gimel Studio")
 
 
 # About Gimel Studio
 
-This repository tracks the next step of Gimel Studio to become a truly usable and serious node-based, non-destructive image/vector editor. It is currently in ``initial development`` stage, working towards a usable MVP application. Things will probably change a lot from what is currently here.
+This repository tracks the next step of Gimel Studio to become a truly usable and serious non-destructive graphics editor. It is currently in ``initial planning/development`` stage, working towards a usable MVP application. Things will probably change **a lot** from what is currently here.
 
-You’re welcome to ask questions, give feedback, and suggest ideas and improvements.
+You’re always welcome to help out, ask questions, give feedback, and suggest ideas/improvements.
 
-**Join our Zulip chat organization [here](https://gimelstudio.zulipchat.com/join/sif32f3gjpnikveonzgc7zhw/)**
+**Join us in our Zulip chat organization [here](https://gimelstudio.zulipchat.com/join/sif32f3gjpnikveonzgc7zhw/) to give your feedback and stay in the loop!**
 
 
 # Project Vision
@@ -47,7 +47,11 @@ With a fully non-destructive workflow that uses both GPU and CPU processing (via
 
 # Current Status
 
-**There are [alpha pre-releases](https://github.com/GimelStudio/GimelStudio/releases) available for those wanting to test the current functionality.**
+**6/6/22 update:** We're in the process of planning for another step to hopefully propel the project forward with a clearer goals and organization.
+
+**Join us in our Zulip chat organization [here](https://gimelstudio.zulipchat.com/join/sif32f3gjpnikveonzgc7zhw/) to give your feedback and stay in the loop!**
+
+There are [alpha pre-releases](https://github.com/GimelStudio/GimelStudio/releases) available for those wanting to test the current functionality.
 
 ![gs-wip-demo](https://user-images.githubusercontent.com/60711001/148820733-358faad6-ee80-4d27-b9c2-2503c6b0abf8.gif)
 *The status of the next generation of Gimel Studio as of 1/10/2022*
