@@ -1,0 +1,9 @@
+module AGLauncher.UiComponents
+AGDialog 0.1 AGDialog.qml
+AGDialogBackground 0.1 AGDialogBackground.qml
+AGGridView 0.1 AGGridView.qml
+AGLabel 0.1 AGLabel.qml
+AGListView 0.1 AGListView.qml
+AGPopup 0.1 AGPopup.qml
+AGPopupBackground 0.1 AGPopupBackground.qml
+AGScrollBar 0.1 AGScrollBar.qml

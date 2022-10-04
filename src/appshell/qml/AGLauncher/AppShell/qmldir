@@ -1,0 +1,2 @@
+module AGLauncher.AppShell
+AboutDialog 0.1 AboutDialog.qml
