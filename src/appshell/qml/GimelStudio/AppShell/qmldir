@@ -1,2 +1,2 @@
 module GimelStudio.AppShell
-AboutDialog 0.7 AboutDialog.qml
+AboutDialog 1.0 AboutDialog.qml

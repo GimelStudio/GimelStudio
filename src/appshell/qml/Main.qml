@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 
-import GimelStudio.Dev 0.7
+import GimelStudio.Dev 1.0
 
 ApplicationWindow {
     id: root
