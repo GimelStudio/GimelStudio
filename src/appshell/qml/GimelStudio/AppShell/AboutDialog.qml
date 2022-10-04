@@ -20,7 +20,7 @@ GSDialog {
                 horizontalAlignment: Text.AlignHCenter
                 font.bold: true
                 font.family: "Inter"
-                text: qsTr("GS Launcher")
+                text: qsTr("Gimel Studio")
             }
 
             Label {
@@ -28,7 +28,7 @@ GSDialog {
                 Layout.maximumWidth: root.width - (anchors.margins * 2)
                 horizontalAlignment: Text.AlignHCenter
                 font.family: "Inter"
-                text: qsTr("A minimalistic app and game launcher targetting arcade machine controls.")
+                text: qsTr("A fully non-destructive image editor using a vector editor workflow.")
             }
 
             Label {
@@ -37,7 +37,7 @@ GSDialog {
                 horizontalAlignment: Text.AlignHCenter
                 wrapMode: Text.WordWrap
                 font.family: "Inter"
-                text: qsTr("GS Launcher is released under the GNU General Public License version 3.")
+                text: qsTr("Gimel Studio is released under the GNU General Public License version 3.")
             }
         }
     }
