@@ -8,11 +8,6 @@ import GimelStudio.UiComponents 1.0
 Item {
     id: root
 
-    Rectangle {
-        id: backgroundRect
-        color: UiTheme.backgroundPrimaryColor
-    }
-
     GSFlickable {
         anchors.fill: parent
         contentWidth: mainLayout.width
