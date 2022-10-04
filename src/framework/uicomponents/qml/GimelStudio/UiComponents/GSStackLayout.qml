@@ -6,10 +6,10 @@ import GimelStudio.Ui 1.0
 StackLayout {
     id: root
 
-    property var pageNames: []
+    property var itemNames: []
 
-    function switchPage(pageName) {
-        // TODO: Add a check to see if the page exists in the pageNames array
-        root.currentIndex = root.pageNames.indexOf(pageName)
+    function switchPage(itemName) {
+        // TODO: Add a check to see if itemName exists in the itemNames array
+        root.currentIndex = root.itemNames.indexOf(itemName)
     }
 }

@@ -24,7 +24,7 @@ ApplicationWindow {
         id: stackLayout
         anchors.fill: parent
 
-        pageNames: ["Dev"]
+        itemNames: ["Dev"]
 
         DevPage {
             id: devPage
