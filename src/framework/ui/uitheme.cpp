@@ -44,18 +44,48 @@ void UiTheme::setAccentColor(QColor accentColor)
     emit themeChanged();
 }
 
-QColor UiTheme::backgroundColor() const
+QColor UiTheme::backgroundPrimaryColor() const
 {
-    return m_backgroundColor;
+    return m_backgroundPrimaryColor;
 }
 
-void UiTheme::setBackgroundColor(QColor backgroundColor)
+void UiTheme::setBackgroundPrimaryColor(QColor backgroundPrimaryColor)
 {
-    if (m_backgroundColor == backgroundColor) {
+    if (m_backgroundPrimaryColor == backgroundPrimaryColor) {
         return;
     }
 
-    m_backgroundColor = backgroundColor;
+    m_backgroundPrimaryColor = backgroundPrimaryColor;
+    emit themeChanged();
+}
+
+QColor UiTheme::backgroundSecondaryColor() const
+{
+    return m_backgroundSecondaryColor;
+}
+
+void UiTheme::setBackgroundSecondaryColor(QColor backgroundSecondaryColor)
+{
+    if (m_backgroundSecondaryColor == backgroundSecondaryColor) {
+        return;
+    }
+
+    m_backgroundSecondaryColor = backgroundSecondaryColor;
+    emit themeChanged();
+}
+
+QColor UiTheme::buttonColor() const
+{
+    return m_buttonColor;
+}
+
+void UiTheme::setButtonColor(QColor buttonColor)
+{
+    if (m_buttonColor == buttonColor) {
+        return;
+    }
+
+    m_buttonColor = buttonColor;
     emit themeChanged();
 }
 
@@ -71,6 +101,21 @@ void UiTheme::setComponentColor(QColor componentColor)
     }
 
     m_componentColor = componentColor;
+    emit themeChanged();
+}
+
+QColor UiTheme::focusColor() const
+{
+    return m_focusColor;
+}
+
+void UiTheme::setFocusColor(QColor focusColor)
+{
+    if (m_focusColor == focusColor) {
+        return;
+    }
+
+    m_focusColor = focusColor;
     emit themeChanged();
 }
 
@@ -116,5 +161,35 @@ void UiTheme::setLinkColor(QColor linkColor)
     }
 
     m_linkColor = linkColor;
+    emit themeChanged();
+}
+
+QColor UiTheme::popupBackgroundColor() const
+{
+    return m_popupBackgroundColor;
+}
+
+void UiTheme::setPopupBackgroundColor(QColor popupBackgroundColor)
+{
+    if (m_popupBackgroundColor == popupBackgroundColor) {
+        return;
+    }
+
+    m_popupBackgroundColor = popupBackgroundColor;
+    emit themeChanged();
+}
+
+QColor UiTheme::strokeColor() const
+{
+    return m_strokeColor;
+}
+
+void UiTheme::setStrokeColor(QColor strokeColor)
+{
+    if (m_strokeColor == strokeColor) {
+        return;
+    }
+
+    m_strokeColor = strokeColor;
     emit themeChanged();
 }
