@@ -1,9 +1,9 @@
 module GimelStudio.UiComponents
-AGDialog 0.1 AGDialog.qml
-AGDialogBackground 0.1 AGDialogBackground.qml
-AGGridView 0.1 AGGridView.qml
-AGLabel 0.1 AGLabel.qml
-AGListView 0.1 AGListView.qml
-AGPopup 0.1 AGPopup.qml
-AGPopupBackground 0.1 AGPopupBackground.qml
-AGScrollBar 0.1 AGScrollBar.qml
+AGDialog 0.7 AGDialog.qml
+AGDialogBackground 0.7 AGDialogBackground.qml
+AGGridView 0.7 AGGridView.qml
+AGLabel 0.7 AGLabel.qml
+AGListView 0.7 AGListView.qml
+AGPopup 0.7 AGPopup.qml
+AGPopupBackground 0.7 AGPopupBackground.qml
+AGScrollBar 0.7 AGScrollBar.qml
