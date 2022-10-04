@@ -12,4 +12,22 @@ Item {
         id: backgroundRect
         color: UiTheme.backgroundPrimaryColor
     }
+
+    GSFlickable {
+        anchors.fill: parent
+        contentWidth: mainLayout.width
+        contentHeight: mainLayout.height 
+
+        ColumnLayout {
+            id: mainLayout
+
+            Repeater {
+                model: 100
+
+                Label {
+                    text: qsTr("Label")
+                }
+            }
+        }
+    }
 }
