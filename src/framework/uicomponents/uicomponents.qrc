@@ -1,13 +1,14 @@
 <RCC>
     <qresource prefix="/">
-        <file>qml/GimelStudio/UiComponents/AGDialog.qml</file>
-        <file>qml/GimelStudio/UiComponents/AGDialogBackground.qml</file>
-        <file>qml/GimelStudio/UiComponents/AGGridView.qml</file>
-        <file>qml/GimelStudio/UiComponents/AGLabel.qml</file>
-        <file>qml/GimelStudio/UiComponents/AGListView.qml</file>
-        <file>qml/GimelStudio/UiComponents/AGPopup.qml</file>
-        <file>qml/GimelStudio/UiComponents/AGPopupBackground.qml</file>
-        <file>qml/GimelStudio/UiComponents/AGScrollBar.qml</file>
+        <file>qml/GimelStudio/UiComponents/GSDialog.qml</file>
+        <file>qml/GimelStudio/UiComponents/GSDialogBackground.qml</file>
+        <file>qml/GimelStudio/UiComponents/GSFlickable.qml</file>
+        <file>qml/GimelStudio/UiComponents/GSGridView.qml</file>
+        <file>qml/GimelStudio/UiComponents/GSLabel.qml</file>
+        <file>qml/GimelStudio/UiComponents/GSListView.qml</file>
+        <file>qml/GimelStudio/UiComponents/GSPopup.qml</file>
+        <file>qml/GimelStudio/UiComponents/GSPopupBackground.qml</file>
+        <file>qml/GimelStudio/UiComponents/GSScrollBar.qml</file>
         <file>qml/GimelStudio/UiComponents/qmldir</file>
     </qresource>
 </RCC>
