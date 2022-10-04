@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/GimelStudio/Dev/qmldir</file>
+    </qresource>
+</RCC>

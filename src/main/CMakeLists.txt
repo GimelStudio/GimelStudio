@@ -6,6 +6,7 @@ target_link_libraries(gimelstudio PRIVATE
     ${QT_LIBRARIES}
     actions
     appshell
+    dev
     interactive
     ui
     uicomponents
