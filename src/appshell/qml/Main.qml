@@ -1,8 +1,10 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
 
 import GimelStudio.Dev 1.0
+import GimelStudio.Ui 1.0
 import GimelStudio.UiComponents 1.0
 
 ApplicationWindow {
@@ -18,8 +20,14 @@ ApplicationWindow {
         color: UiTheme.backgroundPrimaryColor
     }
 
-    DevPage {
-        id: devPage
+    GSStackLayout {
+        id: stackLayout
         anchors.fill: parent
+
+        pageNames: ["Dev"]
+
+        DevPage {
+            id: devPage
+        }
     }
 }
