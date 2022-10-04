@@ -1,4 +1,4 @@
-module AGLauncher.UiComponents
+module GimelStudio.UiComponents
 AGDialog 0.1 AGDialog.qml
 AGDialogBackground 0.1 AGDialogBackground.qml
 AGGridView 0.1 AGGridView.qml
