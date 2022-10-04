@@ -1,1 +1,2 @@
-module GimelStudio.Dev 0.7
+module GimelStudio.Dev
+DevPage 0.7 DevPage.qml
