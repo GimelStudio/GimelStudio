@@ -13,24 +13,36 @@ Item {
         contentWidth: mainLayout.width
         contentHeight: mainLayout.height 
 
-        ColumnLayout {
+        Column {
             id: mainLayout
             spacing: 32
 
             width: root.width
-            height: root.height
 
             GSLabel {
                 text: qsTr("Label")
             }
 
-            GSButton {
-                text: qsTr("Button")
-            }
+            Column {
+                spacing: 8
+                GSButton {
+                    text: qsTr("Button")
+                }
 
-            GSButton {
-                iconPos: GSButton.IconPos.Top
-                text: qsTr("Button")
+                GSButton {
+                    iconPos: GSButton.IconPos.Right
+                    text: qsTr("Button")
+                }
+
+                GSButton {
+                    iconPos: GSButton.IconPos.Top
+                    text: qsTr("Button")
+                }
+
+                GSButton {
+                    iconPos: GSButton.IconPos.Bottom
+                    text: qsTr("Button")
+                }
             }
         }
     }

@@ -17,9 +17,13 @@ Item {
 
     enum IconPos {
         Top,
+        Bottom,
         Left,
         Right
     }
+
+    property int defaultSizeX: 102
+    property int defaultSizeY: 30
 
     property int paddingX: 32
     property int paddingY: 6
@@ -27,6 +31,9 @@ Item {
     property int spacingY: 8
 
     property int iconPos: GSButton.IconPos.Left
+    property bool isHorizontal: root.iconPos === GSButton.IconPos.Left || root.iconPos === GSButton.IconPos.Right
+    property bool isVertical: root.iconPos === GSButton.IconPos.Top || root.iconPos === GSButton.IconPos.Bottom
+
     property bool showIcon: false
     property bool showText: true
 
@@ -34,9 +41,35 @@ Item {
 
     Rectangle {
         id: background
+
         anchors.fill: parent
-        radius: 4
         color: UiTheme.buttonColor
+        opacity: 1
+        radius: 4
+
+        states: [
+            State {
+                name: "HOVERED"
+                when: mouseArea.containsMouse && !mouseArea.pressed
+
+                // TODO: May want to chagne the color as well
+                PropertyChanges {
+                    target: background
+                    opacity: 0.8
+                }
+            },
+
+            State {
+                name: "PRESSED"
+                when: mouseArea.pressed
+
+                // TODO: May want to chagne the color as well
+                PropertyChanges {
+                    target: background
+                    opacity: 0.5
+                }
+            }
+        ]
     }
 
     Loader {
@@ -44,9 +77,9 @@ Item {
         anchors.centerIn: parent
 
         sourceComponent: {
-            if (root.iconPos === GSButton.IconPos.Left || root.iconPos === GSButton.IconPos.Right) {
+            if (root.isHorizontal) {
                 return rowContentComponent
-            } else if (root.iconPos === GSButton.IconPos.Top) {
+            } else if (root.isVertical) {
                 return columnContentComponent
             } else {
                 return rowContentComponent
@@ -86,6 +119,7 @@ Item {
             spacing: root.spacingY
 
             Loader {
+                active: root.iconPos === GSButton.IconPos.Top
                 anchors.horizontalCenter: parent.horizontalCenter
                 sourceComponent: iconComponent
             }
@@ -93,6 +127,12 @@ Item {
             Loader {
                 anchors.horizontalCenter: parent.horizontalCenter
                 sourceComponent: labelComponent
+            }
+
+            Loader {
+                active: root.iconPos === GSButton.IconPos.Bottom
+                anchors.horizontalCenter: parent.horizontalCenter
+                sourceComponent: iconComponent
             }
         }
     }
@@ -112,6 +152,28 @@ Item {
             text: root.text
         }
     }
+
+    states: [
+        State {
+            name: "HORIZONTAL"
+            when: root.isHorizontal
+
+            PropertyChanges {
+                target: root
+                implicitHeight: root.defaultSizeY
+            } 
+        },
+
+        State {
+            name: "VERTICAL"
+            when: root.isVertical
+
+            PropertyChanges {
+                target: root
+                implicitWidth: root.defaultSizeX
+            }
+        }
+    ]
 
     MouseArea {
         id: mouseArea
