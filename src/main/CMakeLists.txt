@@ -1,4 +1,9 @@
-add_executable(gimelstudio
+add_executable(gimelstudio)
+
+qt5_add_resources(RCC ${CMAKE_SOURCE_DIR}/share/share.qrc)
+
+target_sources(gimelstudio PRIVATE
+    ${RCC}
     ${CMAKE_CURRENT_LIST_DIR}/main.cpp
 )
 
