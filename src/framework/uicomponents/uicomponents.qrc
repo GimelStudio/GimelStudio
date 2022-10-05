@@ -1,9 +1,11 @@
 <RCC>
     <qresource prefix="/">
+        <file>qml/GimelStudio/UiComponents/GSButton.qml</file>
         <file>qml/GimelStudio/UiComponents/GSDialog.qml</file>
         <file>qml/GimelStudio/UiComponents/GSDialogBackground.qml</file>
         <file>qml/GimelStudio/UiComponents/GSFlickable.qml</file>
         <file>qml/GimelStudio/UiComponents/GSGridView.qml</file>
+        <file>qml/GimelStudio/UiComponents/GSIconLabel.qml</file>
         <file>qml/GimelStudio/UiComponents/GSLabel.qml</file>
         <file>qml/GimelStudio/UiComponents/GSListView.qml</file>
         <file>qml/GimelStudio/UiComponents/GSPopup.qml</file>

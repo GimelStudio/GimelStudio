@@ -15,9 +15,22 @@ Item {
 
         ColumnLayout {
             id: mainLayout
+            spacing: 32
+
+            width: root.width
+            height: root.height
 
             GSLabel {
                 text: qsTr("Label")
+            }
+
+            GSButton {
+                text: qsTr("Button")
+            }
+
+            GSButton {
+                iconPos: GSButton.IconPos.Top
+                text: qsTr("Button")
             }
         }
     }

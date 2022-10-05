@@ -1,8 +1,10 @@
 module GimelStudio.UiComponents
+GSButton 1.0 GSButton.qml
 GSDialog 1.0 GSDialog.qml
 GSDialogBackground 1.0 GSDialogBackground.qml
 GSFlickable 1.0 GSFlickable.qml
 GSGridView 1.0 GSGridView.qml
+GSIconLabel 1.0 GSIconLabel.qml
 GSLabel 1.0 GSLabel.qml
 GSListView 1.0 GSListView.qml
 GSPopup 1.0 GSPopup.qml
