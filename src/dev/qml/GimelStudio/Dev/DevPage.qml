@@ -20,7 +20,15 @@ Item {
             width: root.width
 
             GSLabel {
+                text: qsTr("Labels (GSLabel)")
+            }
+
+            GSLabel {
                 text: qsTr("Label")
+            }
+
+            GSLabel {
+                text: qsTr("Buttons (GSButton)")
             }
 
             Column {
