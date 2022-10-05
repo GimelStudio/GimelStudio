@@ -16,12 +16,8 @@ Item {
         ColumnLayout {
             id: mainLayout
 
-            Repeater {
-                model: 100
-
-                Label {
-                    text: qsTr("Label")
-                }
+            GSLabel {
+                text: qsTr("Label")
             }
         }
     }

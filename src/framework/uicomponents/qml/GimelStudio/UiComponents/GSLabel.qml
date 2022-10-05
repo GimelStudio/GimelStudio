@@ -3,9 +3,9 @@ import QtQuick.Controls 2.15
 
 import GimelStudio.Ui 1.0
 
-Label {
+Text {
     id: root
 
     color: UiTheme.fontPrimaryColor
-    font.pixelSize: 8
+    font.pixelSize: 12
 }
