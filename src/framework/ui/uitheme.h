@@ -103,17 +103,17 @@ private:
     bool m_isDark;
 
     // See todo above init() declaration
-    QColor m_accentColor = "#A4C3FF";
-    QColor m_backgroundPrimaryColor = "#FFFFFF";
-    QColor m_backgroundSecondaryColor = "#F3F3F3";
-    QColor m_buttonColor = "#DBDBDB";
-    QColor m_componentColor = "#E9E9E9";
-    QColor m_focusColor = "#C2D7FF";
-    QColor m_fontPrimaryColor = "#000000";
+    QColor m_accentColor = "#3D63C6";
+    QColor m_backgroundPrimaryColor = "#E3E3E3";
+    QColor m_backgroundSecondaryColor = "#D7D7D7";
+    QColor m_buttonColor = "#B8BDC9";
+    QColor m_componentColor = "#CFD2DA";
+    QColor m_focusColor = "#9DB9FF";
+    QColor m_fontPrimaryColor = "#1C1C1C";
     QColor m_fontSecondaryColor = "#A5A5A5";
     QColor m_linkColor = "#0057FF";
-    QColor m_popupBackgroundColor = "#F3F3F3";
-    QColor m_strokeColor = "#D6D6D6";
+    QColor m_popupBackgroundColor = "#DADADA";
+    QColor m_strokeColor = "#9F9F9F";
 
     QFont m_bodyFont = QFont(":/fonts/inter.ttf", 12, QFont::Normal);
     QFont m_bodyBoldFont = QFont(":/fonts/inter.ttf", 12, QFont::Bold);
