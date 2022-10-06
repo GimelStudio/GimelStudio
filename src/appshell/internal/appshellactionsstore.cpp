@@ -10,7 +10,7 @@ using namespace gs::appshell;
 
 void AppShellActionsStore::init()
 {
-    Interactive::instance()->regDialog("gslauncher://appshell/about", "qrc:/qml/GimelStudio/AppShell/AboutDialog.qml");
+    Interactive::instance()->regDialog("gslauncher://appshell/about", "AppShell/AboutDialog.qml");
 }
 
 void AppShellActionsStore::about()

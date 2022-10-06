@@ -13,7 +13,7 @@ using namespace gs::interactive;
 
 void DevActionsStore::init()
 {
-    Interactive::instance()->regDialog("gimelstudio://dev/testdialog", "qrc:/qml/GimelStudio/Dev/TestDialog.qml");
+    Interactive::instance()->regDialog("gimelstudio://dev/testdialog", "Dev/TestDialog.qml");
 }
 
 void DevActionsStore::openTestDialog()

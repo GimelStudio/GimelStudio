@@ -43,7 +43,7 @@ Interactive::Result Interactive::openDialog(const std::string& path, Params& par
         // Resource path
         std::string rp = iter->second;
         if (path == p) {
-            QQmlComponent* component = new QQmlComponent(qmlAppEngine(), QUrl(QString::fromStdString(rp)));
+            QQmlComponent* component = new QQmlComponent(qmlAppEngine(), QUrl("qrc:/qml/GimelStudio/" + QString::fromStdString(rp)));
             if (component->isError()) {
                 // TODO: Use a logger
                 std::cout << "Will not open dialog due to the following error." << std::endl;
