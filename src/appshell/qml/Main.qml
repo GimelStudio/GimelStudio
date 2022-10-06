@@ -23,6 +23,7 @@ ApplicationWindow {
     GSStackLayout {
         id: stackLayout
         anchors.fill: parent
+        anchors.margins: 32
 
         itemNames: ["Dev"]
 
