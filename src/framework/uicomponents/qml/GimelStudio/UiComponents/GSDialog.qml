@@ -13,9 +13,6 @@ DialogView {
     contentItem: FocusScope {
         id: rootContainer
 
-        width: root.width
-        height: root.height
-
         Rectangle {
             anchors.fill: rootContainer
             color: UiTheme.backgroundPrimaryColor
