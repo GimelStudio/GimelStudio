@@ -12,6 +12,7 @@
         <file>qml/GimelStudio/UiComponents/GSPopupBackground.qml</file>
         <file>qml/GimelStudio/UiComponents/GSScrollBar.qml</file>
         <file>qml/GimelStudio/UiComponents/GSStackLayout.qml</file>
+        <file>qml/GimelStudio/UiComponents/GSTextInput.qml</file>
         <file>qml/GimelStudio/UiComponents/qmldir</file>
     </qresource>
 </RCC>

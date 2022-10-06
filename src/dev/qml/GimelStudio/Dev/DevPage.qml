@@ -103,6 +103,30 @@ Item {
                     }
                 }
             }
+
+            Column {
+                spacing: 16
+
+                Row {
+                    spacing: 16
+                    GSLabel {
+                        font: UiTheme.headerFont
+                        text: qsTr("Text Inputs")
+                    }
+
+                    GSLabel {
+                        anchors.verticalCenter: parent.verticalCenter
+                        font: UiTheme.bodyFont
+                        text: qsTr("(GSTextInput)")
+                    }
+                }
+
+                Column {
+                    spacing: 8
+
+                    GSTextInput {}
+                }
+            }
         }
     }
 }

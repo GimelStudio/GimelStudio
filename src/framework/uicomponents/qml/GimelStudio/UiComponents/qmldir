@@ -11,3 +11,4 @@ GSPopup 1.0 GSPopup.qml
 GSPopupBackground 1.0 GSPopupBackground.qml
 GSScrollBar 1.0 GSScrollBar.qml
 GSStackLayout 1.0 GSStackLayout.qml
+GSTextInput 1.0 GSTextInput.qml
