@@ -98,7 +98,7 @@ Item {
             spacing: root.spacingX
 
             Loader {
-                active: (root.iconPos === GSButton.IconPos.Left) && (root.showIcon)
+                active: root.iconPos === GSButton.IconPos.Left && root.showIcon
                 anchors.verticalCenter: parent.verticalCenter
                 sourceComponent: iconComponent
             }
@@ -109,7 +109,7 @@ Item {
             }
 
             Loader {
-                active: (root.iconPos === GSButton.IconPos.Right) && (root.showIcon)
+                active: root.iconPos === GSButton.IconPos.Right && root.showIcon
                 anchors.verticalCenter: parent.verticalCenter
                 sourceComponent: iconComponent
             }
@@ -123,7 +123,7 @@ Item {
             spacing: root.spacingY
 
             Loader {
-                active: (root.iconPos === GSButton.IconPos.Top) && (root.showIcon)
+                active: root.iconPos === GSButton.IconPos.Top && root.showIcon
                 anchors.horizontalCenter: parent.horizontalCenter
                 sourceComponent: iconComponent
             }
@@ -134,7 +134,7 @@ Item {
             }
 
             Loader {
-                active: (root.iconPos === GSButton.IconPos.Bottom) && (root.showIcon)
+                active: root.iconPos === GSButton.IconPos.Bottom && root.showIcon
                 anchors.horizontalCenter: parent.horizontalCenter
                 sourceComponent: iconComponent
             }
