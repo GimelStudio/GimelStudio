@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
+        <file>qml/GimelStudio/Dev/internal/ComponentsPage.qml</file>
+        <file>qml/GimelStudio/Dev/internal/InteractivePage.qml</file>
         <file>qml/GimelStudio/Dev/DevPage.qml</file>
         <file>qml/GimelStudio/Dev/qmldir</file>
     </qresource>
