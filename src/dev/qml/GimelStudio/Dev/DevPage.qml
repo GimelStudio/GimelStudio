@@ -131,6 +131,10 @@ Item {
                     spacing: 8
 
                     GSTextInput {}
+
+                    GSTextInput {
+                        placeholderText: qsTr("Placeholder")
+                    }
                 }
             }
         }
