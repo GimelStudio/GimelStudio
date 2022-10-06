@@ -23,6 +23,6 @@ void UiComponentsModule::registerResources()
 
 void UiComponentsModule::registerUiTypes()
 {
-    qmlRegisterType<DialogView>("GimelStudio.UiComponents", 0, 1, "DialogView");
-    qmlRegisterType<PopupView>("GimelStudio.UiComponents", 0, 1, "PopupView");
+    qmlRegisterType<DialogView>("GimelStudio.UiComponents", 1, 0, "DialogView");
+    qmlRegisterType<PopupView>("GimelStudio.UiComponents", 1, 0, "PopupView");
 }
