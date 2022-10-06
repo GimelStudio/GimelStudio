@@ -22,5 +22,5 @@ void AppShellModule::registerResources()
 
 void AppShellModule::registerStores()
 {
-    qmlRegisterSingletonInstance<AppShellActionsStore>("GimelStudio.AppShell", 0, 1, "AppShell", new AppShellActionsStore());
+    qmlRegisterSingletonInstance<AppShellActionsStore>("GimelStudio.AppShell", 1, 0, "AppShell", new AppShellActionsStore());
 }
