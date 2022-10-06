@@ -5,7 +5,7 @@ import GimelStudio.UiComponents 1.0
 
 Item {
     id: root
-    
+
     Rectangle {
         anchors.fill: parent
         color: UiTheme.backgroundPrimaryColor
