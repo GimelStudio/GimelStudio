@@ -165,7 +165,7 @@ Item {
 
             PropertyChanges {
                 target: root
-                implicitHeight: root.UiTheme.defaultButtonSize.y
+                implicitHeight: UiTheme.defaultButtonSize.y
             } 
         },
 
@@ -175,7 +175,7 @@ Item {
 
             PropertyChanges {
                 target: root
-                implicitWidth: root.UiTheme.defaultButtonSize.x
+                implicitWidth: UiTheme.defaultButtonSize.x
             }
         }
     ]
