@@ -253,3 +253,33 @@ void UiTheme::setTitleFont(QFont titleFont)
     m_titleFont = titleFont;
     emit themeChanged();
 }
+
+QVector2D UiTheme::defaultButtonSize() const
+{
+    return m_defaultButtonSize;
+}
+
+void UiTheme::setDefaultButtonSize(QVector2D buttonSize)
+{
+    if (m_defaultButtonSize == buttonSize) {
+        return;
+    }
+
+    m_defaultButtonSize = buttonSize;
+    emit themeChanged();
+}
+
+QVector2D UiTheme::defaultComponentSize() const
+{
+    return m_defaultComponentSize;
+}
+
+void UiTheme::setDefaultComponentSize(QVector2D componentSize)
+{
+    if (m_defaultComponentSize == componentSize) {
+        return;
+    }
+
+    m_defaultComponentSize = componentSize;
+    emit themeChanged();
+}

@@ -15,9 +15,6 @@ Item {
         Right
     }
 
-    property int defaultSizeX: 102
-    property int defaultSizeY: 30
-
     property int paddingX: 32
     property int paddingY: 6
     property int spacingX: 8
@@ -168,7 +165,7 @@ Item {
 
             PropertyChanges {
                 target: root
-                implicitHeight: root.defaultSizeY
+                implicitHeight: root.UiTheme.defaultButtonSize.y
             } 
         },
 
@@ -178,7 +175,7 @@ Item {
 
             PropertyChanges {
                 target: root
-                implicitWidth: root.defaultSizeX
+                implicitWidth: root.UiTheme.defaultButtonSize.x
             }
         }
     ]

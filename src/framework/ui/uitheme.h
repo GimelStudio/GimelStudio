@@ -6,6 +6,7 @@
 #include <QList>
 #include <QObject>
 #include <QVariantMap>
+#include <QVector2D>
 
 // TODO: Should `iuitheme.h` exist?
 
@@ -33,6 +34,9 @@ class UiTheme : public QObject
     Q_PROPERTY(QFont bodyBoldFont READ bodyBoldFont WRITE setBodyBoldFont NOTIFY themeChanged)
     Q_PROPERTY(QFont headerFont READ headerFont WRITE setHeaderFont NOTIFY themeChanged)
     Q_PROPERTY(QFont titleFont READ titleFont WRITE setTitleFont NOTIFY themeChanged)
+
+    Q_PROPERTY(QVector2D defaultButtonSize READ defaultButtonSize WRITE setDefaultButtonSize NOTIFY themeChanged)
+    Q_PROPERTY(QVector2D defaultComponentSize READ defaultComponentSize WRITE setDefaultComponentSize NOTIFY themeChanged)
 
 public:
     // TODO: Dynamically load the ui theme properties (either from std::map or a file)
@@ -89,6 +93,12 @@ public:
     QFont titleFont() const;
     void setTitleFont(QFont titleFont);
 
+    QVector2D defaultButtonSize() const;
+    void setDefaultButtonSize(QVector2D buttonSize);
+
+    QVector2D defaultComponentSize() const;
+    void setDefaultComponentSize(QVector2D componentSize);
+
 private:
     // TODO: Should this be named "UiState" instead?
     struct StyleState {
@@ -119,6 +129,9 @@ private:
     QFont m_bodyBoldFont = QFont(":/fonts/inter.ttf", 12, QFont::Bold);
     QFont m_headerFont = QFont(":/fonts/inter.ttf", 16, QFont::Bold);
     QFont m_titleFont = QFont(":/fonts/inter.ttf", 32, QFont::Bold);
+
+    QVector2D m_defaultButtonSize = QVector2D(102, 30);
+    QVector2D m_defaultComponentSize = QVector2D(172, 30);
 
     // TODO: Add the rest of the ui properties
 

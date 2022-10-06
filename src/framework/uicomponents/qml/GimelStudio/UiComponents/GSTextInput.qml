@@ -6,8 +6,8 @@ import GimelStudio.UiComponents 1.0
 Item {
     id: root
 
-    implicitWidth: 174
-    implicitHeight: 30
+    implicitWidth: UiTheme.defaultComponentSize.x
+    implicitHeight: UiTheme.defaultComponentSize.y
 
     property string placeholderText: ""
     property alias text: textInput.text
