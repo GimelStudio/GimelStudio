@@ -4,5 +4,6 @@
         <file>qml/GimelStudio/Dev/internal/InteractivePage.qml</file>
         <file>qml/GimelStudio/Dev/DevPage.qml</file>
         <file>qml/GimelStudio/Dev/qmldir</file>
+        <file>qml/GimelStudio/Dev/TestDialog.qml</file>
     </qresource>
 </RCC>

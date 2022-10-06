@@ -1,6 +1,7 @@
 #include <QQmlEngine>
 
 #include "devmodule.h"
+#include "internal/devactionsstore.h"
 
 using namespace gs::dev;
 
@@ -21,4 +22,5 @@ void DevModule::registerResources()
 
 void DevModule::registerStores()
 {
+    qmlRegisterSingletonInstance<DevActionsStore>("GimelStudio.Dev", 1, 0, "Dev", new DevActionsStore());
 }
