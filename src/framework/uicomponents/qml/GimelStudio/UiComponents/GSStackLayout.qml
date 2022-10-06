@@ -8,7 +8,7 @@ StackLayout {
 
     property var itemNames: []
 
-    function switchPage(itemName) {
+    function switchItem(itemName) {
         // TODO: Add a check to see if itemName exists in the itemNames array
         root.currentIndex = root.itemNames.indexOf(itemName)
     }

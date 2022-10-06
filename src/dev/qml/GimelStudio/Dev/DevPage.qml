@@ -8,135 +8,178 @@ import GimelStudio.UiComponents 1.0
 Item {
     id: root
 
-    GSFlickable {
-        anchors.fill: parent
-        contentWidth: mainLayout.width
-        contentHeight: mainLayout.height 
+    Row {
+        id: tabRow
 
-        Column {
-            id: mainLayout
-            spacing: 32
+        anchors.horizontalCenter: root.horizontalCenter
 
-            width: root.width
+        y: 16
+        spacing: 8
 
-            Column {
-                spacing: 16
+        GSButton {
+            text: qsTr("Component Demos")
+            showIcon: false
+            onClicked: tabContent.switchItem("Component Demos")
+        }
 
-                Row {
-                    spacing: 16
-                    GSLabel {
-                        font: UiTheme.headerFont
-                        text: qsTr("Labels")
-                    }
+        GSButton {
+            text: qsTr("Interactive")
+            showIcon: false
+            onClicked: tabContent.switchItem("Interactive")
+        }
+    }
 
-                    GSLabel {
-                        anchors.verticalCenter: parent.verticalCenter
-                        font: UiTheme.bodyFont
-                        text: qsTr("(GSLabel)")
-                    }
-                }
+    GSStackLayout {
+        id: tabContent
 
-                Column {
-                    spacing: 8
+        anchors {
+            fill: root
+            leftMargin: 16
+            rightMargin: 16
+            topMargin: tabRow.y + tabRow.height + 16
+            bottomMargin: 16
+        }
 
-                    GSLabel {
-                        font: UiTheme.titleFont
-                        text: qsTr("Label Using Title Font")
-                    }
+        itemNames: ["Component Demos", "Interactive"]
 
-                    GSLabel {
-                        font: UiTheme.headerFont
-                        text: qsTr("Label Using Header Font")
-                    }
-
-                    GSLabel {
-                        font: UiTheme.bodyBoldFont
-                        text: qsTr("Label using body bold font")
-                    }
-
-                    GSLabel {
-                        text: qsTr("Label using body font")
-                    }
-                }
-            }
+        GSFlickable {
+            contentWidth: mainLayout.width
+            contentHeight: mainLayout.height 
 
             Column {
-                spacing: 16
+                id: mainLayout
+                spacing: 32
 
-                Row {
-                    spacing: 16
-                    GSLabel {
-                        font: UiTheme.headerFont
-                        text: qsTr("Buttons")
-                    }
-
-                    GSLabel {
-                        anchors.verticalCenter: parent.verticalCenter
-                        font: UiTheme.bodyFont
-                        text: qsTr("(GSButton)")
-                    }
-                }
+                width: root.width
 
                 Column {
-                    spacing: 8
+                    spacing: 16
+
+                    Row {
+                        spacing: 16
+                        GSLabel {
+                            font: UiTheme.headerFont
+                            text: qsTr("Labels")
+                        }
+
+                        GSLabel {
+                            anchors.verticalCenter: parent.verticalCenter
+                            font: UiTheme.bodyFont
+                            text: qsTr("(GSLabel)")
+                        }
+                    }
 
                     Column {
                         spacing: 8
 
-                        GSButton {
-                            showIcon: false
-                            text: qsTr("Button")
+                        GSLabel {
+                            font: UiTheme.titleFont
+                            text: qsTr("Label Using Title Font")
                         }
 
-                        GSButton {
-                            text: qsTr("Button")
+                        GSLabel {
+                            font: UiTheme.headerFont
+                            text: qsTr("Label Using Header Font")
                         }
 
-                        GSButton {
-                            iconPos: GSButton.IconPos.Right
-                            text: qsTr("Button")
+                        GSLabel {
+                            font: UiTheme.bodyBoldFont
+                            text: qsTr("Label using body bold font")
                         }
 
-                        GSButton {
-                            iconPos: GSButton.IconPos.Top
-                            text: qsTr("Button")
+                        GSLabel {
+                            text: qsTr("Label using body font")
                         }
-
-                        GSButton {
-                            iconPos: GSButton.IconPos.Bottom
-                            text: qsTr("Button")
-                        }
-                    }
-                }
-            }
-
-            Column {
-                spacing: 16
-
-                Row {
-                    spacing: 16
-                    GSLabel {
-                        font: UiTheme.headerFont
-                        text: qsTr("Text Inputs")
-                    }
-
-                    GSLabel {
-                        anchors.verticalCenter: parent.verticalCenter
-                        font: UiTheme.bodyFont
-                        text: qsTr("(GSTextInput)")
                     }
                 }
 
                 Column {
-                    spacing: 8
+                    spacing: 16
 
-                    GSTextInput {}
+                    Row {
+                        spacing: 16
+                        GSLabel {
+                            font: UiTheme.headerFont
+                            text: qsTr("Buttons")
+                        }
 
-                    GSTextInput {
-                        placeholderText: qsTr("Placeholder")
+                        GSLabel {
+                            anchors.verticalCenter: parent.verticalCenter
+                            font: UiTheme.bodyFont
+                            text: qsTr("(GSButton)")
+                        }
+                    }
+
+                    Column {
+                        spacing: 8
+
+                        Column {
+                            spacing: 8
+
+                            GSButton {
+                                showIcon: false
+                                text: qsTr("Button")
+                            }
+
+                            GSButton {
+                                text: qsTr("Button")
+                            }
+
+                            GSButton {
+                                iconPos: GSButton.IconPos.Right
+                                text: qsTr("Button")
+                            }
+
+                            GSButton {
+                                iconPos: GSButton.IconPos.Top
+                                text: qsTr("Button")
+                            }
+
+                            GSButton {
+                                iconPos: GSButton.IconPos.Bottom
+                                text: qsTr("Button")
+                            }
+                        }
+                    }
+                }
+
+                Column {
+                    spacing: 16
+
+                    Row {
+                        spacing: 16
+                        GSLabel {
+                            font: UiTheme.headerFont
+                            text: qsTr("Text Inputs")
+                        }
+
+                        GSLabel {
+                            anchors.verticalCenter: parent.verticalCenter
+                            font: UiTheme.bodyFont
+                            text: qsTr("(GSTextInput)")
+                        }
+                    }
+
+                    Column {
+                        spacing: 8
+
+                        GSTextInput {}
+
+                        GSTextInput {
+                            placeholderText: qsTr("Placeholder")
+                        }
                     }
                 }
             }
         }
-    }
+
+        Item {
+            id: interactiveRoot
+
+            GSLabel {
+                text: qsTr("Interactive")
+                anchors.centerIn: interactiveRoot
+            }
+        }
+    }    
 }
