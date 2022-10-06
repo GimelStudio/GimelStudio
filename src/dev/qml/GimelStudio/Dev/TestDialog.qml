@@ -10,4 +10,10 @@ GSDialog {
     title: qsTr("Test Dialog")
     width: 400
     height: 300
+
+    GSButton {
+        anchors.centerIn: parent
+        text: qsTr("Close")
+        onClicked: root.close()
+    }
 }
