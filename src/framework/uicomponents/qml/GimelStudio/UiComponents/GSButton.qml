@@ -37,6 +37,10 @@ Item {
     property bool showIcon: false
     property bool showText: true
 
+    // TODO: Should these properties be prefixed with "is"?
+    property bool flat: false
+    property bool accented: true
+
     property string text: ""
 
     Rectangle {
