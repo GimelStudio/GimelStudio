@@ -8,13 +8,6 @@ import GimelStudio.UiComponents 1.0
 Item {
     id: root
 
-    signal clicked
-
-    // Minimum width: 102
-    implicitWidth: content.width + (root.paddingX * 2)
-    // Minimum height: 30
-    implicitHeight: content.height + (root.paddingY * 2)
-
     enum IconPos {
         Top,
         Bottom,
@@ -43,10 +36,17 @@ Item {
 
     property string text: ""
 
+    signal clicked
+
+    // Minimum width: 102
+    implicitWidth: content.width + (root.paddingX * 2)
+    // Minimum height: 30
+    implicitHeight: content.height + (root.paddingY * 2)
+
     Rectangle {
         id: background
 
-        anchors.fill: parent
+        anchors.fill: root
         color: UiTheme.buttonColor
         opacity: 1
         radius: 4
@@ -78,7 +78,7 @@ Item {
 
     Loader {
         id: content
-        anchors.centerIn: parent
+        anchors.centerIn: root
 
         sourceComponent: {
             if (root.isHorizontal) {
@@ -95,22 +95,24 @@ Item {
         id: rowContentComponent
 
         Row {
+            id: rowContentLayout
+
             spacing: root.spacingX
 
             Loader {
                 active: root.iconPos === GSButton.IconPos.Left && root.showIcon
-                anchors.verticalCenter: parent.verticalCenter
+                anchors.verticalCenter: rowContentLayout.verticalCenter
                 sourceComponent: iconComponent
             }
 
             Loader {
-                anchors.verticalCenter: parent.verticalCenter
+                anchors.verticalCenter: rowContentLayout.verticalCenter
                 sourceComponent: labelComponent
             }
 
             Loader {
                 active: root.iconPos === GSButton.IconPos.Right && root.showIcon
-                anchors.verticalCenter: parent.verticalCenter
+                anchors.verticalCenter: rowContentLayout.verticalCenter
                 sourceComponent: iconComponent
             }
         }
@@ -120,22 +122,24 @@ Item {
         id: columnContentComponent
 
         Column {
+            id: columnContentLayout
+
             spacing: root.spacingY
 
             Loader {
                 active: root.iconPos === GSButton.IconPos.Top && root.showIcon
-                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.horizontalCenter: columnContentLayout.horizontalCenter
                 sourceComponent: iconComponent
             }
 
             Loader {
-                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.horizontalCenter: columnContentLayout.horizontalCenter
                 sourceComponent: labelComponent
             }
 
             Loader {
                 active: root.iconPos === GSButton.IconPos.Bottom && root.showIcon
-                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.horizontalCenter: columnContentLayout.horizontalCenter
                 sourceComponent: iconComponent
             }
         }
@@ -181,7 +185,7 @@ Item {
 
     MouseArea {
         id: mouseArea
-        anchors.fill: parent
+        anchors.fill: root
 
         hoverEnabled: true
         onClicked: root.clicked()
