@@ -21,6 +21,7 @@ PopupView {
         Item {
             id: contentBody
             anchors.fill: parent
+            anchors.margins: root.margins
         }
     }
 }
