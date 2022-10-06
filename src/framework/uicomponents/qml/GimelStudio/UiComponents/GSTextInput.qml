@@ -6,7 +6,7 @@ import GimelStudio.UiComponents 1.0
 Item {
     id: root
 
-    implicitWidth: 102
+    implicitWidth: 174
     implicitHeight: 30
 
     property string placeholderText: ""
