@@ -34,7 +34,7 @@ Item {
     property bool isHorizontal: root.iconPos === GSButton.IconPos.Left || root.iconPos === GSButton.IconPos.Right
     property bool isVertical: root.iconPos === GSButton.IconPos.Top || root.iconPos === GSButton.IconPos.Bottom
 
-    property bool showIcon: false
+    property bool showIcon: true
     property bool showText: true
 
     // TODO: Should these properties be prefixed with "is"?
@@ -98,7 +98,7 @@ Item {
             spacing: root.spacingX
 
             Loader {
-                active: root.iconPos === GSButton.IconPos.Left
+                active: (root.iconPos === GSButton.IconPos.Left) && (root.showIcon)
                 anchors.verticalCenter: parent.verticalCenter
                 sourceComponent: iconComponent
             }
@@ -109,7 +109,7 @@ Item {
             }
 
             Loader {
-                active: root.iconPos === GSButton.IconPos.Right
+                active: (root.iconPos === GSButton.IconPos.Right) && (root.showIcon)
                 anchors.verticalCenter: parent.verticalCenter
                 sourceComponent: iconComponent
             }
@@ -123,7 +123,7 @@ Item {
             spacing: root.spacingY
 
             Loader {
-                active: root.iconPos === GSButton.IconPos.Top
+                active: (root.iconPos === GSButton.IconPos.Top) && (root.showIcon)
                 anchors.horizontalCenter: parent.horizontalCenter
                 sourceComponent: iconComponent
             }
@@ -134,7 +134,7 @@ Item {
             }
 
             Loader {
-                active: root.iconPos === GSButton.IconPos.Bottom
+                active: (root.iconPos === GSButton.IconPos.Bottom) && (root.showIcon)
                 anchors.horizontalCenter: parent.horizontalCenter
                 sourceComponent: iconComponent
             }

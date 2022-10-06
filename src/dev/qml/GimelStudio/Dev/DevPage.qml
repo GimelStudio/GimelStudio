@@ -82,6 +82,12 @@ Item {
 
                     Column {
                         spacing: 8
+
+                        GSButton {
+                            showIcon: false
+                            text: qsTr("Button")
+                        }
+
                         GSButton {
                             text: qsTr("Button")
                         }
