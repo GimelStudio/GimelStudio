@@ -28,7 +28,7 @@ Item {
     property int paddingX: 32
     property int paddingY: 6
     property int spacingX: 8
-    property int spacingY: 8
+    property int spacingY: 4
 
     property int iconPos: GSButton.IconPos.Left
     property bool isHorizontal: root.iconPos === GSButton.IconPos.Left || root.iconPos === GSButton.IconPos.Right
