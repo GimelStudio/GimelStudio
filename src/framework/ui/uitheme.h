@@ -29,6 +29,11 @@ class UiTheme : public QObject
     Q_PROPERTY(QColor popupBackgroundColor READ popupBackgroundColor WRITE setPopupBackgroundColor NOTIFY themeChanged)
     Q_PROPERTY(QColor strokeColor READ strokeColor WRITE setStrokeColor NOTIFY themeChanged)
 
+    Q_PROPERTY(QFont bodyFont READ bodyFont WRITE setBodyFont NOTIFY themeChanged)
+    Q_PROPERTY(QFont bodyBoldFont READ bodyBoldFont WRITE setBodyBoldFont NOTIFY themeChanged)
+    Q_PROPERTY(QFont headerFont READ headerFont WRITE setHeaderFont NOTIFY themeChanged)
+    Q_PROPERTY(QFont titleFont READ titleFont WRITE setTitleFont NOTIFY themeChanged)
+
 public:
     // TODO: Dynamically load the ui theme properties (either from std::map or a file)
     void init();
@@ -72,6 +77,18 @@ public:
     QColor strokeColor() const;
     void setStrokeColor(QColor strokeColor);
 
+    QFont bodyFont() const;
+    void setBodyFont(QFont bodyFont);
+
+    QFont bodyBoldFont() const;
+    void setBodyBoldFont(QFont bodyBoldFont);
+
+    QFont headerFont() const;
+    void setHeaderFont(QFont headerFont);
+
+    QFont titleFont() const;
+    void setTitleFont(QFont titleFont);
+
 private:
     // TODO: Should this be named "UiState" instead?
     struct StyleState {
@@ -97,6 +114,11 @@ private:
     QColor m_linkColor = "#0057FF";
     QColor m_popupBackgroundColor = "#F3F3F3";
     QColor m_strokeColor = "#D6D6D6";
+
+    QFont m_bodyFont = QFont(":/fonts/inter.ttf", 12, QFont::Normal);
+    QFont m_bodyBoldFont = QFont(":/fonts/inter.ttf", 12, QFont::Bold);
+    QFont m_headerFont = QFont(":/fonts/inter.ttf", 16, QFont::Bold);
+    QFont m_titleFont = QFont(":/fonts/inter.ttf", 32, QFont::Bold);
 
     // TODO: Add the rest of the ui properties
 

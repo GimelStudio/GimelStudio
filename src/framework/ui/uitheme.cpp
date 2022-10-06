@@ -193,3 +193,63 @@ void UiTheme::setStrokeColor(QColor strokeColor)
     m_strokeColor = strokeColor;
     emit themeChanged();
 }
+
+QFont UiTheme::bodyFont() const
+{
+    return m_bodyFont;
+}
+
+void UiTheme::setBodyFont(QFont bodyFont)
+{
+    if (m_bodyFont == bodyFont) {
+        return;
+    }
+
+    m_bodyFont = bodyFont;
+    emit themeChanged();
+}
+
+QFont UiTheme::bodyBoldFont() const
+{
+    return m_bodyBoldFont;
+}
+
+void UiTheme::setBodyBoldFont(QFont bodyBoldFont)
+{
+    if (m_bodyBoldFont == bodyBoldFont) {
+        return;
+    }
+
+    m_bodyBoldFont = bodyBoldFont;
+    emit themeChanged();
+}
+
+QFont UiTheme::headerFont() const
+{
+    return m_headerFont;
+}
+
+void UiTheme::setHeaderFont(QFont headerFont)
+{
+    if (m_headerFont == headerFont) {
+        return;
+    }
+
+    m_headerFont = headerFont;
+    emit themeChanged();
+}
+
+QFont UiTheme::titleFont() const
+{
+    return m_titleFont;
+}
+
+void UiTheme::setTitleFont(QFont titleFont)
+{
+    if (m_titleFont == titleFont) {
+        return;
+    }
+
+    m_titleFont = titleFont;
+    emit themeChanged();
+}

@@ -10,6 +10,5 @@ Text {
     verticalAlignment: Text.AlignVCenter
 
     color: UiTheme.fontPrimaryColor
-
-    font.pixelSize: 12
+    font: UiTheme.bodyFont
 }

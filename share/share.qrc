@@ -1,4 +1,5 @@
 <RCC>
     <qresource prefix="/">
+        <file>fonts/inter.ttf</file>
     </qresource>
 </RCC>
