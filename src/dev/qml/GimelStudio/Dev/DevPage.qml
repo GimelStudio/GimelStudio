@@ -19,9 +19,9 @@ Item {
         spacing: 8
 
         GSButton {
-            text: qsTr("Component Demos")
+            text: qsTr("Components")
             showIcon: false
-            onClicked: tabContent.switchItem("Component Demos")
+            onClicked: tabContent.switchItem("Components")
         }
 
         GSButton {
@@ -42,7 +42,7 @@ Item {
             bottomMargin: 16
         }
 
-        itemNames: ["Component Demos", "Interactive"]
+        itemNames: ["Components", "Interactive"]
 
         ComponentsPage {}
 
