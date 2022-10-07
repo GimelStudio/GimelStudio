@@ -86,6 +86,16 @@ GSFlickable {
                     }
 
                     GSButton {
+                        accented: true
+                        text: qsTr("Accented Button")
+                    }
+
+                    GSButton {
+                        flat: true
+                        text: qsTr("Flat Button")
+                    }
+
+                    GSButton {
                         iconCode: IconCode.Book
                         text: qsTr("Button")
                     }

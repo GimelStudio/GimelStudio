@@ -29,7 +29,7 @@ Item {
 
     // TODO: Should these properties be prefixed with "is"?
     property bool flat: false
-    property bool accented: true
+    property bool accented: false
 
     property string text: ""
 
@@ -44,8 +44,24 @@ Item {
         id: background
 
         anchors.fill: root
-        color: UiTheme.buttonColor
-        opacity: 1
+        color: {
+            if (root.accented) {
+                return UiTheme.accentColor
+            } else if (root.flat) {
+                return UiTheme.buttonColor
+            } else {
+                return UiTheme.buttonColor
+            }
+        }
+
+        opacity: {
+            if (root.flat) {
+                return 0
+            } else {
+                return 1
+            }
+        }
+
         radius: 4
 
         states: [
@@ -56,7 +72,13 @@ Item {
                 // TODO: May want to chagne the color as well
                 PropertyChanges {
                     target: background
-                    opacity: 0.8
+                    opacity: {
+                        if (root.flat) {
+                            return 0.2
+                        } else {
+                            return 0.8
+                        }
+                    }
                 }
             },
 
@@ -67,7 +89,13 @@ Item {
                 // TODO: May want to chagne the color as well
                 PropertyChanges {
                     target: background
-                    opacity: 0.5
+                    opacity: {
+                        if (root.flat) {
+                            return 0.4
+                        } else {
+                            return 0.6
+                        }
+                    }
                 }
             }
         ]
