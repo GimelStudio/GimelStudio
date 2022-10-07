@@ -12,4 +12,8 @@ StackLayout {
         // TODO: Add a check to see if itemName exists in the itemNames array
         root.currentIndex = root.itemNames.indexOf(itemName)
     }
+
+    function currentItem() {
+        return root.itemNames[root.currentIndex]
+    }
 }

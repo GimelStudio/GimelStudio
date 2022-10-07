@@ -19,11 +19,13 @@ Item {
         spacing: 8
 
         GSButton {
+            accented: tabContent.currentItem() === "Components"
             text: qsTr("Components")
             onClicked: tabContent.switchItem("Components")
         }
 
         GSButton {
+            accented: tabContent.currentItem() === "Interactive"
             text: qsTr("Interactive")
             onClicked: tabContent.switchItem("Interactive")
         }
