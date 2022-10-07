@@ -5,7 +5,10 @@ import GimelStudio.UiComponents 1.0
 
 GSLabel {
     id: root
-    // property int iconCode
 
     font: UiTheme.iconFont
+
+    property int iconCode: IconCode.None
+
+    text: String.fromCharCode(root.iconCode)
 }

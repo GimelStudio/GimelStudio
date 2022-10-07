@@ -4,6 +4,11 @@
 
 using namespace gs::ui;
 
+UiTheme::UiTheme(QObject* parent) : QObject(parent)
+{
+    init();
+}
+
 void UiTheme::init()
 {
     initFonts();

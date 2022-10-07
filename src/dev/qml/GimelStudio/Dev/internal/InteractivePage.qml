@@ -20,7 +20,6 @@ Item {
 
             GSButton {
                 text: qsTr("Open Test Dialog")
-                showIcon: false
                 onClicked: Dev.openTestDialog()
             }
         }

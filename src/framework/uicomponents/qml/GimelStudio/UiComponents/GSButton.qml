@@ -24,7 +24,7 @@ Item {
     property bool isHorizontal: root.iconPos === GSButton.IconPos.Left || root.iconPos === GSButton.IconPos.Right
     property bool isVertical: root.iconPos === GSButton.IconPos.Top || root.iconPos === GSButton.IconPos.Bottom
 
-    property bool showIcon: true
+    property int iconCode: IconCode.None
     property bool showText: true
 
     // TODO: Should these properties be prefixed with "is"?
@@ -97,7 +97,7 @@ Item {
             spacing: root.spacingX
 
             Loader {
-                active: root.iconPos === GSButton.IconPos.Left && root.showIcon
+                active: root.iconPos === GSButton.IconPos.Left && root.iconCode !== IconCode.None
                 anchors.verticalCenter: rowContentLayout.verticalCenter
                 sourceComponent: iconComponent
             }
@@ -108,7 +108,7 @@ Item {
             }
 
             Loader {
-                active: root.iconPos === GSButton.IconPos.Right && root.showIcon
+                active: root.iconPos === GSButton.IconPos.Right && root.iconCode !== IconCode.None
                 anchors.verticalCenter: rowContentLayout.verticalCenter
                 sourceComponent: iconComponent
             }
@@ -124,7 +124,7 @@ Item {
             spacing: root.spacingY
 
             Loader {
-                active: root.iconPos === GSButton.IconPos.Top && root.showIcon
+                active: root.iconPos === GSButton.IconPos.Top && root.iconCode !== IconCode.None
                 anchors.horizontalCenter: columnContentLayout.horizontalCenter
                 sourceComponent: iconComponent
             }
@@ -135,7 +135,7 @@ Item {
             }
 
             Loader {
-                active: root.iconPos === GSButton.IconPos.Bottom && root.showIcon
+                active: root.iconPos === GSButton.IconPos.Bottom && root.iconCode !== IconCode.None
                 anchors.horizontalCenter: columnContentLayout.horizontalCenter
                 sourceComponent: iconComponent
             }
@@ -146,8 +146,7 @@ Item {
         id: iconComponent
 
         GSIconLabel {
-            // text: "\uf45b" // String.fromCharCode(0xF45B)
-            text: String.fromCharCode(0xF627)
+            iconCode: root.iconCode
         }
     }
 

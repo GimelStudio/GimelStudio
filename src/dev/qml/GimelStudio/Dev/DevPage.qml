@@ -20,13 +20,11 @@ Item {
 
         GSButton {
             text: qsTr("Components")
-            showIcon: false
             onClicked: tabContent.switchItem("Components")
         }
 
         GSButton {
             text: qsTr("Interactive")
-            showIcon: false
             onClicked: tabContent.switchItem("Interactive")
         }
     }

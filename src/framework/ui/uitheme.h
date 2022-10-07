@@ -42,6 +42,7 @@ class UiTheme : public QObject
 
 public:
     // TODO: Dynamically load the ui theme properties (either from std::map or a file)
+    explicit UiTheme(QObject* parent = nullptr);
     void init();
     void initFonts();
     // TODO: Load from a TOML file

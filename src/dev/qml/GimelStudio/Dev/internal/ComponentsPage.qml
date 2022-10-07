@@ -82,7 +82,6 @@ GSFlickable {
                     spacing: 8
 
                     GSButton {
-                        showIcon: false
                         text: qsTr("Button")
                     }
 

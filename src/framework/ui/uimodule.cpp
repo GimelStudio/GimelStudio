@@ -2,6 +2,7 @@
 
 #include <QQmlEngine>
 
+#include "iconcodes.h"
 #include "uitheme.h"
 
 using namespace gs::ui;
@@ -13,9 +14,9 @@ std::string UiModule::moduleName() const
 
 void UiModule::registerUiTypes()
 {
-    UiTheme* uitheme = new UiTheme();
-    // TODO: init() should probably be called in the UiTheme constructor
-    uitheme->init();
+    qmlRegisterUncreatableType<IconCode>("GimelStudio.Ui", 1, 0, "IconCode", "Not creatable as it is an enum type");
+
     // TODO: Is ui.theme a better accesser in QML?
-    qmlRegisterSingletonInstance<UiTheme>("GimelStudio.Ui", 1, 0, "UiTheme", uitheme);
+    qmlRegisterSingletonInstance<UiTheme>("GimelStudio.Ui", 1, 0, "UiTheme", new UiTheme());
+
 }

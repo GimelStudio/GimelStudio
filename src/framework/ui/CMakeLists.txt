@@ -1,6 +1,7 @@
 set(MODULE_NAME ui)
 
 set(MODULE_SRC
+    iconcodes.h
     uiengines.cpp
     uiengines.h
     uimodule.cpp
