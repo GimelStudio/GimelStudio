@@ -1,9 +1,18 @@
 #include "uitheme.h"
 
+#include <QFontDatabase>
+
 using namespace gs::ui;
 
 void UiTheme::init()
 {
+    initFonts();
+}
+
+void UiTheme::initFonts()
+{
+    QFontDatabase::addApplicationFont(":/fonts/Inter.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/bootstrap-icons.woff2");
 }
 
 void UiTheme::loadTheme(const QString& file)
@@ -251,6 +260,21 @@ void UiTheme::setTitleFont(QFont titleFont)
     }
 
     m_titleFont = titleFont;
+    emit themeChanged();
+}
+
+QFont UiTheme::iconFont() const
+{
+    return m_iconFont;
+}
+
+void UiTheme::setIconFont(QFont iconFont)
+{
+    if (m_iconFont == iconFont) {
+        return;
+    }
+
+    m_iconFont = iconFont;
     emit themeChanged();
 }
 

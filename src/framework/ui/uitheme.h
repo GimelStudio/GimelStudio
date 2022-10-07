@@ -35,12 +35,15 @@ class UiTheme : public QObject
     Q_PROPERTY(QFont headerFont READ headerFont WRITE setHeaderFont NOTIFY themeChanged)
     Q_PROPERTY(QFont titleFont READ titleFont WRITE setTitleFont NOTIFY themeChanged)
 
+    Q_PROPERTY(QFont iconFont READ iconFont WRITE setIconFont NOTIFY themeChanged)
+
     Q_PROPERTY(QVector2D defaultButtonSize READ defaultButtonSize WRITE setDefaultButtonSize NOTIFY themeChanged)
     Q_PROPERTY(QVector2D defaultComponentSize READ defaultComponentSize WRITE setDefaultComponentSize NOTIFY themeChanged)
 
 public:
     // TODO: Dynamically load the ui theme properties (either from std::map or a file)
     void init();
+    void initFonts();
     // TODO: Load from a TOML file
     void loadTheme(const QString& file);
     void update();
@@ -93,6 +96,9 @@ public:
     QFont titleFont() const;
     void setTitleFont(QFont titleFont);
 
+    QFont iconFont() const;
+    void setIconFont(QFont iconFont);
+
     QVector2D defaultButtonSize() const;
     void setDefaultButtonSize(QVector2D buttonSize);
 
@@ -125,10 +131,12 @@ private:
     QColor m_popupBackgroundColor = "#DADADA";
     QColor m_strokeColor = "#9F9F9F";
 
-    QFont m_bodyFont = QFont(":/fonts/inter.ttf", 12, QFont::Normal);
-    QFont m_bodyBoldFont = QFont(":/fonts/inter.ttf", 12, QFont::Bold);
-    QFont m_headerFont = QFont(":/fonts/inter.ttf", 16, QFont::Bold);
-    QFont m_titleFont = QFont(":/fonts/inter.ttf", 32, QFont::Bold);
+    QFont m_bodyFont = QFont("Inter", 12, QFont::Normal);
+    QFont m_bodyBoldFont = QFont("Inter", 12, QFont::Bold);
+    QFont m_headerFont = QFont("Inter", 16, QFont::Bold);
+    QFont m_titleFont = QFont("Inter", 32, QFont::Bold);
+
+    QFont m_iconFont = QFont("bootstrap-icons", 12);
 
     QVector2D m_defaultButtonSize = QVector2D(102, 30);
     QVector2D m_defaultComponentSize = QVector2D(172, 30);

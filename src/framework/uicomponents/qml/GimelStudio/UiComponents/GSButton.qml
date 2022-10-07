@@ -146,7 +146,8 @@ Item {
         id: iconComponent
 
         GSIconLabel {
-            text: "+"
+            // text: "\uf45b" // String.fromCharCode(0xF45B)
+            text: String.fromCharCode(0xF627)
         }
     }
 

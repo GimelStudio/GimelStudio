@@ -13,6 +13,8 @@ std::string UiModule::moduleName() const
 
 void UiModule::registerUiTypes()
 {
+    UiTheme* uitheme = new UiTheme();
+    uitheme->init();
     // TODO: Is ui.theme a better accesser in QML?
-    qmlRegisterSingletonInstance<UiTheme>("GimelStudio.Ui", 1, 0, "UiTheme", new UiTheme());
+    qmlRegisterSingletonInstance<UiTheme>("GimelStudio.Ui", 1, 0, "UiTheme", uitheme);
 }

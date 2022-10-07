@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>fonts/inter.ttf</file>
+        <file>fonts/bootstrap-icons.woff2</file>
+        <file>fonts/Inter.ttf</file>
     </qresource>
 </RCC>
