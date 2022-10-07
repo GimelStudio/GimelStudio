@@ -15,9 +15,9 @@ Item {
 
     Rectangle {
         id: background
-        
+
         anchors.fill: parent
-        
+
         border.width: 0
         color: UiTheme.componentColor
         
@@ -68,7 +68,7 @@ Item {
         id: textInput
 
         anchors.fill: parent
-        
+
         leftPadding: root.iconCode === IconCode.None ? 16 : iconLabel.x + iconLabel.width + 24
         rightPadding: 16
         topPadding: 6
