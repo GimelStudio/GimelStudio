@@ -52,7 +52,7 @@ with open("../src/framework/ui/iconcodes.h", "a") as f:
     f.write(TOP_OF_FILE)
 
     for icon_name, icon_code in icons_dict.items():
-        # TODO: Should probably replace all the digits for consistancy
+        # TODO: Should probably replace all the digits for consistency
         if (icon_name[0].isdigit()):
             icon_name = icon_name[0].replace(icon_name[0], digits_mapping[icon_name[0]]) + icon_name[1:]
 
