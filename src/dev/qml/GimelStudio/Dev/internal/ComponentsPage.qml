@@ -131,9 +131,17 @@ GSFlickable {
             Column {
                 spacing: 8
 
-                GSTextInput {}
+                GSTextInput {
+                    placeholderText: qsTr("No icon")
+                }
 
                 GSTextInput {
+                    iconCode: IconCode.Search
+                    text: qsTr("No placeholder")
+                }
+
+                GSTextInput {
+                    iconCode: IconCode.Search
                     placeholderText: qsTr("Placeholder")
                 }
             }

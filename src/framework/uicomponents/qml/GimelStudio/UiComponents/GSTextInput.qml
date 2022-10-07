@@ -11,6 +11,7 @@ Item {
 
     property string placeholderText: ""
     property alias text: textInput.text
+    property int iconCode: IconCode.None
 
     Rectangle {
         id: background
@@ -38,7 +39,9 @@ Item {
         ]
     }
 
-    GSLabel {
+    Row {
+        spacing: 8
+
         anchors {
             fill: parent
             leftMargin: 16
@@ -46,10 +49,19 @@ Item {
             verticalCenter: parent.verticalCenter
         }
 
-        color: UiTheme.fontSecondaryColor
-        elide: Text.ElideRight
-        text: root.placeholderText
-        visible: root.placeholderText != "" && root.text.length === 0
+        GSIconLabel {
+            id: iconLabel
+            anchors.verticalCenter: parent.verticalCenter
+            iconCode: root.iconCode
+        }
+
+        GSLabel {
+            anchors.verticalCenter: parent.verticalCenter
+            color: UiTheme.fontSecondaryColor
+            elide: Text.ElideRight
+            text: root.placeholderText
+            visible: root.placeholderText != "" && root.text.length === 0
+        }
     }
 
     TextInput {
@@ -57,7 +69,7 @@ Item {
 
         anchors.fill: parent
         
-        leftPadding: 16
+        leftPadding: root.iconCode === IconCode.None ? 16 : iconLabel.x + iconLabel.width + 24
         rightPadding: 16
         topPadding: 6
         bottomPadding: 6
