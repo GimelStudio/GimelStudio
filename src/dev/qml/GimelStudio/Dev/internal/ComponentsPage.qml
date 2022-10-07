@@ -86,20 +86,24 @@ GSFlickable {
                     }
 
                     GSButton {
+                        iconCode: IconCode.Book
                         text: qsTr("Button")
                     }
 
                     GSButton {
+                        iconCode: IconCode.Activity
                         iconPos: GSButton.IconPos.Right
                         text: qsTr("Button")
                     }
 
                     GSButton {
+                        iconCode: IconCode.Puzzle
                         iconPos: GSButton.IconPos.Top
                         text: qsTr("Button")
                     }
 
                     GSButton {
+                        iconCode: IconCode.Window
                         iconPos: GSButton.IconPos.Bottom
                         text: qsTr("Button")
                     }

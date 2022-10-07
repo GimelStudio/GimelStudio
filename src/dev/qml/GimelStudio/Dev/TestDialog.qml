@@ -13,6 +13,7 @@ GSDialog {
 
     GSButton {
         anchors.centerIn: parent
+        iconCode: IconCode.XOctagon
         text: qsTr("Close")
         onClicked: root.close()
     }
