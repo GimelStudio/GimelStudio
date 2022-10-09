@@ -1,7 +1,7 @@
 #include <QQmlEngine>
 
 #include "appshellmodule.h"
-#include "internal/appshellactionsstore.h"
+#include "internal/appshelluiactions.h"
 
 using namespace gs::appshell;
 
@@ -22,5 +22,5 @@ void AppShellModule::registerResources()
 
 void AppShellModule::registerStores()
 {
-    qmlRegisterSingletonInstance<AppShellActionsStore>("GimelStudio.AppShell", 1, 0, "AppShell", new AppShellActionsStore());
+    qmlRegisterSingletonInstance<AppShellUiActions>("GimelStudio.AppShell", 1, 0, "AppShell", new AppShellUiActions());
 }

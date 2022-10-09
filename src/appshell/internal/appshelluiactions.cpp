@@ -1,4 +1,4 @@
-#include "appshellactionsstore.h"
+#include "appshelluiactions.h"
 #include "actions/dispatcher.h"
 #include "interactive/internal/interactive.h"
 
@@ -8,18 +8,18 @@ using namespace gs::actions;
 using namespace gs::interactive;
 using namespace gs::appshell;
 
-void AppShellActionsStore::init()
+AppShellUiActions::AppShellUiActions()
 {
     Interactive::instance()->regDialog("gslauncher://appshell/about", "AppShell/AboutDialog.qml");
 }
 
-void AppShellActionsStore::about()
+void AppShellUiActions::about()
 {
     Interactive::Params params;
     Interactive::instance()->openDialog("gslauncher://appshell/about", params);
 }
 
-void AppShellActionsStore::aboutQt()
+void AppShellUiActions::aboutQt()
 {
     qApp->aboutQt();
 }

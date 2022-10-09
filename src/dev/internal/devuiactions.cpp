@@ -1,4 +1,4 @@
-#include "devactionsstore.h"
+#include "devuiactions.h"
 
 #include <QVariant>
 #include <QDebug>
@@ -11,12 +11,12 @@ using namespace gs::actions;
 using namespace gs::dev;
 using namespace gs::interactive;
 
-void DevActionsStore::init()
+DevUiActions::DevUiActions()
 {
     Interactive::instance()->regDialog("gimelstudio://dev/testdialog", "Dev/TestDialog.qml");
 }
 
-void DevActionsStore::openTestDialog()
+void DevUiActions::openTestDialog()
 {
     Interactive::Params params = {};
     Interactive::Result result = Interactive::instance()->openDialog("gimelstudio://dev/testdialog", params);

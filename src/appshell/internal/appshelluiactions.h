@@ -1,5 +1,5 @@
-#ifndef GS_APPSHELL_APPSHELLACTIONSSTORE
-#define GS_APPSHELL_APPSHELLACTIONSSTORE
+#ifndef GS_APPSHELL_APPSHELLUIACTIONS
+#define GS_APPSHELL_APPSHELLUIACTIONS
 
 #include <QObject>
 #include <QVariantMap>
@@ -10,16 +10,11 @@ using namespace gs::actions;
 
 namespace gs::appshell
 {
-class AppShellActionsStore : public QObject, public IStore
+class AppShellUiActions : public QObject, public IStore
 {
     Q_OBJECT
 public:
-    AppShellActionsStore()
-    {
-        init();
-    }
-
-    void init() override;
+    AppShellUiActions();
     
     Q_INVOKABLE void about();
     Q_INVOKABLE void aboutQt();

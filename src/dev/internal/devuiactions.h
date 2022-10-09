@@ -1,5 +1,5 @@
-#ifndef GT_DEV_DEVACTIONSSTORE_H
-#define GT_DEV_DEVACTIONSSTORE_H
+#ifndef GT_DEV_DEVUIACTIONS_H
+#define GT_DEV_DEVUIACTIONS_H
 
 #include <QObject>
 #include <QString>
@@ -11,16 +11,11 @@ using namespace gs::actions;
 
 namespace gs::dev
 {
-class DevActionsStore : public QObject, public IStore
+class DevUiActions : public QObject, public IStore
 {
     Q_OBJECT
 public:
-    DevActionsStore()
-    {
-        init();
-    }
-
-    void init() override;
+    DevUiActions();
 
     Q_INVOKABLE void openTestDialog();
 };
