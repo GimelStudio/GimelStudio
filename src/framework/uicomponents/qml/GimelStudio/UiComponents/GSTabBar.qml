@@ -14,6 +14,7 @@ Item {
 
     property var tabs: []
     property var tabItems: []
+    // TODO: Add orientation setting
     property var stackLayout
 
     function finishTabCreation(component, tab, tabData) {
