@@ -39,7 +39,6 @@ Item {
                 tab.isCurrent = true
             })
 
-
             root.tabItems.push(tab)
             root.implicitWidth += tab.width
 
