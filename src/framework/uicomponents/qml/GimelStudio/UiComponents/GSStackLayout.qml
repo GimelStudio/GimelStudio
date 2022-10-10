@@ -8,7 +8,11 @@ StackLayout {
 
     property var itemNames: []
 
-    function switchItem(itemName) {
+    function switchItemByIndex(itemIndex) {
+        root.currentIndex = itemIndex
+    }
+
+    function switchItemByName(itemName) {
         // TODO: Add a check to see if itemName exists in the itemNames array
         root.currentIndex = root.itemNames.indexOf(itemName)
     }

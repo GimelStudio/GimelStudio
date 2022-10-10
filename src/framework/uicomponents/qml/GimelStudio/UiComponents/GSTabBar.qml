@@ -13,21 +13,33 @@ Item {
     implicitHeight: UiTheme.defaultButtonSize.y
 
     property var tabs: []
+    property var tabItems: []
     property var stackLayout
 
     function finishTabCreation(component, tab, tabData) {
         if (component.status == Component.Ready) {
+            var tabIndex = root.tabs.indexOf(tabData)
             root.stackLayout.children.push(tabData["Item"])
             if (tabData["Is Current"]) {
-                root.stackLayout.currentIndex = root.tabs.indexOf(tabData)
+                root.stackLayout.currentIndex = tabIndex
             }
 
             tab = component.createObject(contentRow, {
                 iconCode: tabData["Icon Code"],
                 isCurrent: tabData["Is Current"],
                 text: tabData["Name"],
-                onClicked: console.log("Hello")
             })
+
+            tab.clicked.connect(function() {
+                tabItems.forEach((tabItem, index) => {
+                    tabItem.isCurrent = false
+                })
+
+                root.stackLayout.switchItemByIndex(tabIndex)
+                tab.isCurrent = true
+            })
+
+            root.tabItems.push(tab)
 
             if (tab == null) {
                 console.log("Error creating GSTab: ", component.errorString())
