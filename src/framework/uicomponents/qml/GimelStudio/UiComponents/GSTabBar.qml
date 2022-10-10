@@ -44,8 +44,6 @@ Item {
 
             if (tab == null) {
                 console.log("Error creating GSTab: ", component.errorString())
-            } else {
-                print("Success")
             }
         } else if (component.status == Component.Error) {
             console.log("Error loading GSTab: ", component.errorString())
@@ -86,6 +84,8 @@ Item {
                 component.statusChanged.connect(function(component, tab, tabData) {finishTabCreation(component, tab, tabData)})
             }
         })
+
+        print(root.width)
 
         if (contentRow.width <= UiTheme.defaultButtonSize.x) {
             root.implicitWidth = UiTheme.defaultButtonSize.x

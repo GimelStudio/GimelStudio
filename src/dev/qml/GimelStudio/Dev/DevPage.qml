@@ -10,12 +10,9 @@ import "internal"
 Item {
     id: root
 
-    GSTabBar {
-        // id: tabBar
-        id: tabRow
-        anchors.horizontalCenter: root.horizontalCenter
-
-        y: 16
+    GSTabLayout {
+        anchors.fill: root
+        anchors.margins: 16
 
         tabs: [
             {
@@ -29,30 +26,6 @@ Item {
                 "Item": interactivePage
             }
         ]
-
-        stackLayout: tabContent
-    }
-
-    GSStackLayout {
-        id: tabContent
-
-        anchors {
-            fill: root
-            leftMargin: 16
-            rightMargin: 16
-            topMargin: tabRow.y + tabRow.height + 16
-            bottomMargin: 16
-        }
-
-        itemNames: ["Components", "Interactive"]
-
-        // ComponentsPage {
-        //     id: componentsPage
-        // }
-
-        // InteractivePage {
-        //     id: interactivePage
-        // }
     }
 
     ComponentsPage {
