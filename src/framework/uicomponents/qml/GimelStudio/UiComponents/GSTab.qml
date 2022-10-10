@@ -15,6 +15,7 @@ Item {
 
     signal clicked
 
+    // TODO: Make a consistent width (as the bold text changes the width of the tab)
     implicitWidth: {
         var w = contentRow.width + (root.paddingX * 2)
         if (w <= UiTheme.defaultButtonSize.x) {
