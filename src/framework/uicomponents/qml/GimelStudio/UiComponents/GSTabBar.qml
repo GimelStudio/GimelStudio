@@ -9,7 +9,6 @@ import "internal"
 Item {
     id: root
 
-    implicitWidth: UiTheme.defaultButtonSize.x
     implicitHeight: UiTheme.defaultButtonSize.y
 
     property var tabs: []
@@ -40,7 +39,9 @@ Item {
                 tab.isCurrent = true
             })
 
+
             root.tabItems.push(tab)
+            root.implicitWidth += tab.width
 
             if (tab == null) {
                 console.log("Error creating GSTab: ", component.errorString())
@@ -84,13 +85,5 @@ Item {
                 component.statusChanged.connect(function(component, tab, tabData) {finishTabCreation(component, tab, tabData)})
             }
         })
-
-        print(root.width)
-
-        if (contentRow.width <= UiTheme.defaultButtonSize.x) {
-            root.implicitWidth = UiTheme.defaultButtonSize.x
-        } else {
-            root.implicitWidth = contentRow.width
-        }
     }
 }
