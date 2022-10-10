@@ -10,25 +10,27 @@ import "internal"
 Item {
     id: root
 
-    Row {
+    GSTabBar {
+        // id: tabBar
         id: tabRow
-
         anchors.horizontalCenter: root.horizontalCenter
 
         y: 16
-        spacing: 8
 
-        GSButton {
-            accented: tabContent.currentItem() === "Components"
-            text: qsTr("Components")
-            onClicked: tabContent.switchItem("Components")
-        }
+        tabs: [
+            {
+                "Name": "Components",
+                "Icon Code": IconCode.MenuButtonWide,
+                "Is Current": true,
+                "Item": componentsPage
+            }, {
+                "Name": "Interactive",
+                "Icon Code": IconCode.WindowStack,
+                "Item": interactivePage
+            }
+        ]
 
-        GSButton {
-            accented: tabContent.currentItem() === "Interactive"
-            text: qsTr("Interactive")
-            onClicked: tabContent.switchItem("Interactive")
-        }
+        stackLayout: tabContent
     }
 
     GSStackLayout {
@@ -44,8 +46,20 @@ Item {
 
         itemNames: ["Components", "Interactive"]
 
-        ComponentsPage {}
+        // ComponentsPage {
+        //     id: componentsPage
+        // }
 
-        InteractivePage {}
-    }    
+        // InteractivePage {
+        //     id: interactivePage
+        // }
+    }
+
+    ComponentsPage {
+        id: componentsPage
+    }
+
+    InteractivePage {
+        id: interactivePage
+    }
 }

@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
+        <file>qml/GimelStudio/UiComponents/internal/GSTabTemplate.qml</file>
+        <file>qml/GimelStudio/UiComponents/internal/ItemTemplate.qml</file>
         <file>qml/GimelStudio/UiComponents/GSButton.qml</file>
         <file>qml/GimelStudio/UiComponents/GSDialog.qml</file>
         <file>qml/GimelStudio/UiComponents/GSFlickable.qml</file>
@@ -10,6 +12,8 @@
         <file>qml/GimelStudio/UiComponents/GSPopup.qml</file>
         <file>qml/GimelStudio/UiComponents/GSScrollBar.qml</file>
         <file>qml/GimelStudio/UiComponents/GSStackLayout.qml</file>
+        <file>qml/GimelStudio/UiComponents/GSTab.qml</file>
+        <file>qml/GimelStudio/UiComponents/GSTabBar.qml</file>
         <file>qml/GimelStudio/UiComponents/GSTextInput.qml</file>
         <file>qml/GimelStudio/UiComponents/qmldir</file>
     </qresource>
