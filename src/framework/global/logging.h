@@ -1,0 +1,6 @@
+#ifndef GS_GLOBAL_LOGGING_H
+#define GS_GLOBAL_LOGGING_H
+
+// TODO
+
+#endif // GS_GLOBAL_LOGGING_H
