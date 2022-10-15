@@ -4,13 +4,13 @@
 #include <QObject>
 #include <QVariantMap>
 
-#include "actions/istore.h"
+#include "actions/iactionable.h"
 
 using namespace gs::actions;
 
 namespace gs::appshell
 {
-class AppShellUiActions : public QObject, public IStore
+class AppShellUiActions : public QObject, public IActionable
 {
     Q_OBJECT
 public:

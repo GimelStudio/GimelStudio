@@ -6,7 +6,7 @@ set(MODULE_SRC
     actiontypes.h
     dispatcher.h
     idispatcher.h
-    istore.h
+    iactionable.h
 )
 
 include(${PROJECT_SOURCE_DIR}/build/module.cmake)

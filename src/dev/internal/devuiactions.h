@@ -5,13 +5,13 @@
 #include <QString>
 #include <QVariantMap>
 
-#include "actions/istore.h"
+#include "actions/iactionable.h"
 
 using namespace gs::actions;
 
 namespace gs::dev
 {
-class DevUiActions : public QObject, public IStore
+class DevUiActions : public QObject, public IActionable
 {
     Q_OBJECT
 public:

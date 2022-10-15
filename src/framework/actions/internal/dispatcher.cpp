@@ -18,7 +18,7 @@ void Dispatcher::dispatch(std::string actionCode, QVariantMap actionData)
 
     const Clients clients = actionIter->second;
     for (auto clientIter = clients.begin(); clientIter != clients.end(); ++clientIter) {
-        const IStore* store = clientIter->first;
+        const IActionable* store = clientIter->first;
         const Callbacks callbacks = clientIter->second;
         auto a = callbacks.find(actionCode);
         if (callbacks.size() == 0) {
@@ -28,7 +28,7 @@ void Dispatcher::dispatch(std::string actionCode, QVariantMap actionData)
     }
 }
 
-void Dispatcher::reg(IStore* client, const std::string& actionCode, const MethodWithData& callback)
+void Dispatcher::reg(IActionable* client, const std::string& actionCode, const MethodWithData& callback)
 {
     Clients& clients = m_clients[actionCode];
     Callbacks& callbacks = clients[client];
