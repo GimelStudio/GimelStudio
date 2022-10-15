@@ -8,6 +8,7 @@
 #include "../view/shortcutsmodel.h"
 
 #include <QDebug>
+#include <QKeySequence>
 
 
 using namespace gs::shortcuts;
@@ -21,7 +22,7 @@ bool ShortcutsHandler::eventFilter(QObject *obj, QEvent *event)
 
         // TODO: Not sure if this is the most efficient way of doing this
         for (QVariantMap scMap : ShortcutsModel::instance()->shortcuts()) {
-            if (scMap["seq"].toString().toLower() == keyEvent->text()) {
+            if (scMap["seq"].toString() == QKeySequence(keyEvent->key() | keyEvent->modifiers()).toString()) {
                 dispatcher()->dispatch(scMap["key"].toString().toStdString(), QVariantMap());
                 break;
             }
