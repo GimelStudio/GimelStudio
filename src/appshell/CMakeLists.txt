@@ -17,6 +17,7 @@ set(MODULE_LINK
     actions
     global
     interactive
+    shortcuts
     uicomponents
 )
 

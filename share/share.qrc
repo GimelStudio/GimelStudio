@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>fonts/bootstrap-icons.woff2</file>
         <file>fonts/Inter.ttf</file>
+        <file>shortcuts/shortcuts_qwerty.xml</file>
     </qresource>
 </RCC>
