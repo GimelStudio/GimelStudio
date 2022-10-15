@@ -1,8 +1,8 @@
 set(MODULE_NAME shortcuts)
 
 set(MODULE_SRC
-    internal/shortcutsregister.cpp
-    internal/shortcutsregister.h
+    internal/shortcutshandler.cpp
+    internal/shortcutshandler.h
 )
 
 set(MODULE_LINK

@@ -1,4 +1,4 @@
-#include "shortcutsregister.h"
+#include "shortcutshandler.h"
 
 #include <QKeyEvent>
 
@@ -7,9 +7,9 @@
 
 using namespace gs::shortcuts;
 
-ShortcutsRegister::ShortcutsRegister(QObject *parent) : QObject(parent) {}
+ShortcutsHandler::ShortcutsHandler(QObject *parent) : QObject(parent) {}
 
-bool ShortcutsRegister::eventFilter(QObject *obj, QEvent *event)
+bool ShortcutsHandler::eventFilter(QObject *obj, QEvent *event)
 {
     if (event->type() == QEvent::KeyPress) {
         QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
