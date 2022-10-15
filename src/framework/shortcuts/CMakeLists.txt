@@ -3,6 +3,8 @@ set(MODULE_NAME shortcuts)
 set(MODULE_SRC
     internal/shortcutshandler.cpp
     internal/shortcutshandler.h
+    view/shortcutsmodel.cpp
+    view/shortcutsmodel.h
 )
 
 set(MODULE_LINK

@@ -9,12 +9,13 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR})
 
-find_package(Qt5 COMPONENTS Core Gui Quick Widgets REQUIRED)
+find_package(Qt5 COMPONENTS Core Gui Quick Widgets Xml REQUIRED)
 set(QT_LIBRARIES
     Qt5::Core
     Qt5::Gui
     Qt5::Quick
     Qt5::Widgets
+    Qt5::Xml
 )
 
 include_directories(PUBLIC
