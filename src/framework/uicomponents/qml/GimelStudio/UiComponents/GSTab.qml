@@ -74,11 +74,12 @@ Item {
     
         GSIconLabel {
             id: iconLabel
+            anchors.verticalCenter: contentRow.verticalCenter
         }
 
         GSLabel {
             id: label
-
+            anchors.verticalCenter: contentRow.verticalCenter
             font.bold: root.isCurrent
         }
     }
