@@ -7,7 +7,7 @@
 
 #include "../view/shortcutsmodel.h"
 
-#include <QDebug>
+#include <QApplication>
 #include <QKeySequence>
 
 
@@ -17,6 +17,13 @@ ShortcutsHandler::ShortcutsHandler(QObject *parent) : QObject(parent) {}
 
 bool ShortcutsHandler::eventFilter(QObject *obj, QEvent *event)
 {
+    if (qApp->focusObject()) {
+        // Check if there is a focused UI component
+        if (QString(qApp->focusObject()->metaObject()->className()) != "QQuickContentItem") {
+            return QObject::eventFilter(obj, event);
+        }
+    }
+
     if (event->type() == QEvent::KeyPress) {
         QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
 
