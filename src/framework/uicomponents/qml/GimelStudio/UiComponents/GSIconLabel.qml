@@ -9,6 +9,7 @@ GSLabel {
     font: UiTheme.iconFont
 
     property int iconCode: IconCode.None
+    readonly property bool isEmpty: iconCode === IconCode.NONE
 
-    text: String.fromCharCode(root.iconCode)
+    text: !isEmpty ? String.fromCharCode(root.iconCode) : ""
 }
