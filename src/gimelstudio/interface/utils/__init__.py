@@ -1,2 +1,0 @@
-from .ui import ComputeMenuPosAlignedLeft
-
