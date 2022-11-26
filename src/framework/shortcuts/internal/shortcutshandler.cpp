@@ -17,6 +17,8 @@ ShortcutsHandler::ShortcutsHandler(QObject *parent) : QObject(parent) {}
 
 bool ShortcutsHandler::eventFilter(QObject *obj, QEvent *event)
 {
+    // TODO: Allow shortcuts in focused UI components
+
     if (qApp->focusObject()) {
         // Check if there is a focused UI component
         if (QString(qApp->focusObject()->metaObject()->className()) != "QQuickContentItem") {
