@@ -475,3 +475,62 @@ class IntegerProp(Property):
 
     def WidgetEvent(self, event):
         self.SetValue(event.value)
+
+class FloatProp(Property):
+    """ 
+    Allows the user to select a float via a Number Field. 
+    """
+    def __init__(self, idname, default=0.0, lbl_suffix="", min_val=0.0, max_val=10.0,
+                 step_size=0.5, show_p=False, fpb_label="", exposed=True,
+                 can_be_exposed=True, expanded=True, visible=True):
+        Property.__init__(self, idname, default, fpb_label, exposed, 
+                          can_be_exposed, expanded, visible)
+        self.min_value = min_val
+        self.max_value = max_val
+        self.step_size = step_size
+        self.lbl_suffix = lbl_suffix
+        self.show_p = show_p
+
+        self.datatype = "FLOAT"
+        self.label = fpb_label
+
+        self._RunErrorCheck()
+
+    def _RunErrorCheck(self):
+        if self.value > self.max_value:
+            raise TypeError(
+                "FloatField value must be set to an integer less than 'max_val'"
+            )
+        if self.value < self.min_value:
+            raise TypeError(
+                "Floatield value must be set to an integer greater than 'min_val'"
+            )
+
+    def GetMinValue(self):
+        return self.min_value
+
+    def GetMaxValue(self):
+        return self.max_value
+
+    def GetP(self):
+        return self.show_p
+
+    def CreateUI(self, parent, sizer):
+        fold_panel = self.CreateFoldPanel(sizer)
+
+        self.numberfield = NumberField(fold_panel,
+                                       default_value=self.GetValue(),
+                                       label=self.GetLabel(),
+                                       type_="FLOAT",
+                                       min_value=self.GetMinValue(),
+                                       max_value=self.GetMaxValue(),
+                                       step_size=self.step_size,
+                                       suffix=self.lbl_suffix, show_p=self.GetP(),
+                                       size=(-1, 32))
+
+        self.AddToFoldPanel(sizer, fold_panel, self.numberfield)
+
+        self.numberfield.Bind(EVT_NUMBERFIELD, self.WidgetEvent)
+
+    def WidgetEvent(self, event):
+        self.SetValue(event.value)
