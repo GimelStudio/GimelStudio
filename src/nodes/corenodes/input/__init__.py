@@ -1,3 +1,4 @@
+from .float_node import FloatNode
 from .image_node import ImageNode
 from .integer_node import IntegerNode
 from .color_node import ColorNode
