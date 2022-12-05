@@ -23,7 +23,7 @@ gswidgetkit
 tests
 
 # Ignore test Gimel Studio project files
-*gimel
+*.gimel
 
 # Ignore .sketch files
 *.sketch
