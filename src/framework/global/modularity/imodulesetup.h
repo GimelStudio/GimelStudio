@@ -7,15 +7,14 @@ namespace modularity {
 class IModuleSetup
 {
 public:
-    // virtual IModuleSetup();
     virtual ~IModuleSetup() {}
     virtual std::string moduleName() const = 0;
     virtual void registerImports() {}
-    virtual void registerResources() {}
-    // As a general rule, singletons are used for action stores while types are used for data stores
+    // As a general rule, singletons are used for action models while types are used for data models
     // singletons -> use qmlRegisterSingletonInstance
     // types -> use qmlRegisterType
-    virtual void registerStores() {}
+    virtual void registerModels() {}
+    virtual void registerResources() {}
     virtual void registerUiTypes() {}
 };
 } // gs::modularity

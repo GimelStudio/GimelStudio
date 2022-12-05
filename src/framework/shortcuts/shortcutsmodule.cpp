@@ -20,7 +20,7 @@ void ShortcutsModule::registerResources()
     shortcutsInitResources();
 }
 
-void ShortcutsModule::registerStores()
+void ShortcutsModule::registerModels()
 {
     qmlRegisterType<ShortcutsModel>("GimelStudio.Shortcuts", 1, 0, "ShortcutsModel");
 }

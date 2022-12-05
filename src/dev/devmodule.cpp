@@ -20,7 +20,7 @@ void DevModule::registerResources()
     devInitResources();
 }
 
-void DevModule::registerStores()
+void DevModule::registerModels()
 {
     qmlRegisterSingletonInstance<DevUiActions>("GimelStudio.Dev", 1, 0, "Dev", new DevUiActions());
 }

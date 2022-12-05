@@ -10,7 +10,7 @@ class DevModule : public modularity::IModuleSetup
 public:
     std::string moduleName() const override;
     void registerResources() override;
-    void registerStores() override;
+    void registerModels() override;
 };
 
 } // namespace gs::dev

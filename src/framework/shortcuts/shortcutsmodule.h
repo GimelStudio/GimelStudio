@@ -9,7 +9,7 @@ class ShortcutsModule : public modularity::IModuleSetup
 {
     std::string moduleName() const override;
     void registerResources() override;
-    void registerStores() override;
+    void registerModels() override;
 };
 } // namespace gs::shortcuts
 

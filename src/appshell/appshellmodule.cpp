@@ -20,7 +20,7 @@ void AppShellModule::registerResources()
     appshellInitResources();
 }
 
-void AppShellModule::registerStores()
+void AppShellModule::registerModels()
 {
     qmlRegisterSingletonInstance<AppShellUiActions>("GimelStudio.AppShell", 1, 0, "AppShell", new AppShellUiActions());
 }
