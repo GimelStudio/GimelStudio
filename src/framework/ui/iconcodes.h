@@ -1873,7 +1873,7 @@ public:
         FuelPump = 0XF83E,
     };
 
-    Q_ENUM(Code)
+    Q_ENUM(Code);
 };
 }
 
