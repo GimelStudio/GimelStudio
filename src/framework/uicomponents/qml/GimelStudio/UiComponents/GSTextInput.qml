@@ -80,6 +80,32 @@ FocusScope {
         font: UiTheme.bodyFont
 
         // TODO: Loose focus when mouse clicks outside of this component
-        onEditingFinished: root.focus = false
+        Keys.onShortcutOverride: function (keyEvent) {
+            switch (keyEvent.key) {
+                case Qt.Key_Enter:
+                case Qt.Key_Return:
+                case Qt.Key_Escape:
+                    root.focus = false
+                    keyEvent.accepted = true
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    MouseArea {
+        id: mouseArea
+
+        anchors.fill: parent
+
+        propagateComposedEvents: true
+        hoverEnabled: true
+        cursorShape: Qt.IBeamCursor
+
+        onPressed: function(mouseEvent) {
+            root.focus = true
+            mouseEvent.accepted = false
+        }
     }
 }
