@@ -1,0 +1,29 @@
+#
+# This file is part of KDDockWidgets.
+#
+# SPDX-FileCopyrightText: 2019-2022 Klarälvdalens Datakonsult AB, a KDAB Group company <info@kdab.com>
+# Author: Jean-Michaël Celerier <jean-michael.celerier@kdab.com>
+#
+# SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only
+#
+# Contact KDAB at <info@kdab.com> for commercial licensing options.
+#
+
+include(CMakeFindDependencyMacro)
+
+find_dependency(Qt@Qt_VERSION_MAJOR@Widgets REQUIRED)
+if (@KDDW_FRONTEND_QTQUICK@)
+    find_dependency(Qt@Qt_VERSION_MAJOR@Quick REQUIRED)
+    find_dependency(Qt@Qt_VERSION_MAJOR@QuickControls2 REQUIRED)
+endif()
+
+if (@KDDockWidgets_DEVELOPER_MODE@)
+    find_dependency(Qt@Qt_VERSION_MAJOR@Test REQUIRED)
+endif()
+
+if (NOT WIN32 AND NOT APPLE AND NOT EMSCRIPTEN AND NOT @KDDockWidgets_QT6@ AND @KDDockWidgets_X11EXTRAS@)
+    find_dependency(Qt5X11Extras REQUIRED)
+endif()
+
+# Add the targets file
+include("${CMAKE_CURRENT_LIST_DIR}/KDDockWidgets@KDDockWidgets_LIBRARY_QTID@Targets.cmake")

@@ -1,0 +1,176 @@
+{
+  "folders": [
+    {
+      "name": "kddockwidgets",
+      "path": "."
+    },
+    {
+      "path": "/data/sources/kddockwidgets-flutter-example"
+    }
+  ],
+  "settings": {
+    "C_Cpp.default.compileCommands": "${workspaceFolder:kddockwidgets}/build-dev/compile_commands.json",
+    "C_Cpp.default.cStandard": "c17",
+    "files.trimTrailingWhitespace": true,
+    "editor.formatOnSave": true,
+    "C_Cpp.autocompleteAddParentheses": true,
+    "clangd.arguments": [
+      "-header-insertion=never"
+    ],
+    "todo-tree.tree.scanMode": "workspace only",
+    "todo-tree.tree.disableCompactFolders": false,
+    "todo-tree.tree.showBadges": true,
+    "todo-tree.general.tags": [
+      "BUG",
+      "HACK",
+      "FIXME",
+      "TODO",
+      "XXX",
+      "[ ]",
+      "[x]",
+      "TODOm2",
+      "TODOm3",
+      "TODOm4"
+    ],
+    "testMate.cpp.test.executables": "{build-dev}/**/*{tst}*",
+    "todo-tree.filtering.excludeGlobs": [
+      "**/ECM",
+      "**/3rdparty"
+    ],
+    "cmake.copyCompileCommands": "${workspaceFolder:kddockwidgets}/compile_commands.json"
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "qtwidgets_dockwidgets",
+        "type": "lldb",
+        "request": "launch",
+        "program": "${workspaceFolder:kddockwidgets}/build-dev/bin/examples/qtwidgets_dockwidgets",
+        "args": [],
+        "cwd": "${workspaceFolder:kddockwidgets}"
+      },
+      {
+        "name": "qtwidgets_minimal",
+        "type": "lldb",
+        "request": "launch",
+        "program": "${workspaceFolder:kddockwidgets}/build-dev/bin/examples/qtwidgets_minimal",
+        "args": [],
+        "cwd": "${workspaceFolder:kddockwidgets}"
+      },
+      {
+        "name": "qtwidgets_mdi",
+        "type": "lldb",
+        "request": "launch",
+        "program": "${workspaceFolder:kddockwidgets}/build-dev/bin/examples/qtwidgets_mdi",
+        "args": [],
+        "cwd": "${workspaceFolder:kddockwidgets}"
+      },
+      {
+        "name": "qtwidgets_mdi_with_docking",
+        "type": "lldb",
+        "request": "launch",
+        "program": "${workspaceFolder:kddockwidgets}/build-dev/bin/examples/qtwidgets_mdi_with_docking",
+        "args": [],
+        "cwd": "${workspaceFolder:kddockwidgets}"
+      },
+      {
+        "name": "qtquick_dockwidgets",
+        "type": "lldb",
+        "request": "launch",
+        "program": "${workspaceFolder:kddockwidgets}/build-dev/bin/examples/qtquick_dockwidgets",
+        "args": [],
+        "cwd": "${workspaceFolder:kddockwidgets}"
+      },
+      {
+        "name": "qtquick_customtitlebar",
+        "type": "lldb",
+        "request": "launch",
+        "program": "${workspaceFolder:kddockwidgets}/build-dev/bin/examples/qtquick_customtitlebar",
+        "args": [],
+        "cwd": "${workspaceFolder:kddockwidgets}"
+      },
+      {
+        "name": "tst_docks",
+        "type": "lldb",
+        "request": "launch",
+        "program": "${workspaceFolder:kddockwidgets}/build-dev/bin/tst_docks",
+        "args": [],
+        "cwd": "${workspaceFolder:kddockwidgets}"
+      },
+      {
+        "name": "tst_droparea",
+        "type": "lldb",
+        "request": "launch",
+        "program": "${workspaceFolder:kddockwidgets}/build-dev/bin/tst_droparea",
+        "args": [],
+        "cwd": "${workspaceFolder:kddockwidgets}"
+      },
+      {
+        "name": "tst_dockwidget",
+        "type": "lldb",
+        "request": "launch",
+        "program": "${workspaceFolder:kddockwidgets}/build-dev/bin/tst_dockwidget",
+        "args": [],
+        "cwd": "${workspaceFolder:kddockwidgets}"
+      },
+      {
+        "name": "tst_group",
+        "type": "lldb",
+        "request": "launch",
+        "program": "${workspaceFolder:kddockwidgets}/build-dev/bin/tst_group",
+        "args": [],
+        "cwd": "${workspaceFolder:kddockwidgets}"
+      },
+      {
+        "name": "tst_separator",
+        "type": "lldb",
+        "request": "launch",
+        "program": "${workspaceFolder:kddockwidgets}/build-dev/bin/tst_separator",
+        "args": [],
+        "cwd": "${workspaceFolder:kddockwidgets}"
+      },
+      {
+        "name": "tst_stack",
+        "type": "lldb",
+        "request": "launch",
+        "program": "${workspaceFolder:kddockwidgets}/build-dev/bin/tst_stack",
+        "args": [],
+        "cwd": "${workspaceFolder:kddockwidgets}"
+      },
+      {
+        "name": "tst_tabbar",
+        "type": "lldb",
+        "request": "launch",
+        "program": "${workspaceFolder:kddockwidgets}/build-dev/bin/tst_tabbar",
+        "args": [],
+        "cwd": "${workspaceFolder:kddockwidgets}"
+      },
+      {
+        "name": "tst_floatingwindow",
+        "type": "lldb",
+        "request": "launch",
+        "program": "${workspaceFolder:kddockwidgets}/build-dev/bin/tst_floatingwindow",
+        "cwd": "${workspaceFolder:kddockwidgets}"
+      },
+      {
+        "name": "tst_qtwidgets",
+        "type": "lldb",
+        "request": "launch",
+        "program": "${workspaceFolder:kddockwidgets}/build-dev/bin/tst_qtwidgets",
+        "args": [
+          "tst_mainWindowAlwaysHasCentralWidget"
+        ],
+        "cwd": "${workspaceFolder:kddockwidgets}"
+      },
+      {
+        "name": "tst_qtquick",
+        "type": "lldb",
+        "request": "launch",
+        "program": "${workspaceFolder:kddockwidgets}/build-dev/bin/tst_qtquick",
+        "args": [],
+        "cwd": "${workspaceFolder:kddockwidgets}"
+      }
+    ]
+  }
+}

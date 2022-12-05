@@ -22,8 +22,9 @@ include_directories(PUBLIC
     "${PROJECT_SOURCE_DIR}/src"
 )
 
+add_subdirectory(thirdparty)
 add_subdirectory(src)
 
 # TODO: Move gimelstudio executable and the required shared libraries (Qt etc.) to "bin"
-install(TARGETS gimelstudio DESTINATION ${CMAKE_BINARY_DIR})
-# install(DIRECTORY ${CMAKE_SOURCE_DIR}/share DESTINATION ${CMAKE_BINARY_DIR})
+# install(TARGETS gimelstudio DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
+# install(DIRECTORY ${CMAKE_SOURCE_DIR}/share DESTINATION ${CMAKE_INSTALL_PREFIX})
