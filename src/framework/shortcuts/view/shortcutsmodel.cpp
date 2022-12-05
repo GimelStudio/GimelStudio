@@ -31,6 +31,18 @@ ShortcutsModel* ShortcutsModel::instance()
     return &s;
 }
 
+ bool ShortcutsModel::activate(const QString& sequence)
+ {
+    for (QVariantMap shortcut : m_shortcuts) {
+        if (shortcut["seq"].toString() == sequence) {
+            dispatcher()->dispatch(shortcut["key"].toString().toStdString(), QVariantMap());   
+            return true;    
+        }
+    }
+
+    return false;
+ }
+
 QVariant ShortcutsModel::data(const QModelIndex& index, int role) const
 {
     if (!index.isValid()) {

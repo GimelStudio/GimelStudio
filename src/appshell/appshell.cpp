@@ -11,9 +11,6 @@
 
 #include "ui/uiengines.h"
 
-#include "shortcuts/internal/shortcutshandler.h"
-#include "shortcuts/view/shortcutsmodel.h"
-
 using namespace gs::appshell;
 
 AppShell::AppShell()
@@ -29,11 +26,6 @@ int AppShell::run(int argc, char** argv)
 {
     QApplication app(argc, argv);
 
-    gs::shortcuts::ShortcutsModel *shortcutsModel = new gs::shortcuts::ShortcutsModel(&app);
-    gs::shortcuts::ShortcutsHandler *shortcutsHandler = new gs::shortcuts::ShortcutsHandler(&app);
-
-    app.installEventFilter(shortcutsHandler);
-
     qmlAppEngine()->addImportPath(":/qml");
 
     for (modularity::IModuleSetup* m : m_modules) {
@@ -46,8 +38,6 @@ int AppShell::run(int argc, char** argv)
     qmlAppEngine()->load(url);
 
     int result = app.exec();
-
-    app.removeEventFilter(shortcutsHandler);
 
     qDeleteAll(m_modules);
     m_modules.clear();

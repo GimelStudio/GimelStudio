@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/GimelStudio/Shortcuts/Shortcuts.qml</file>
+        <file>qml/GimelStudio/Shortcuts/qmldir</file>
+    </qresource>
+</RCC>

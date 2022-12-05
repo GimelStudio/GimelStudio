@@ -4,6 +4,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
 import GimelStudio.Dev 1.0
+import GimelStudio.Shortcuts 1.0
 import GimelStudio.Ui 1.0
 import GimelStudio.UiComponents 1.0
 
@@ -13,6 +14,8 @@ ApplicationWindow {
     height: 600
     title: qsTr("Gimel Studio")
     visible: true
+
+    Shortcuts {}
 
     Rectangle {
         id: backgroundRect

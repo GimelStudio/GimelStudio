@@ -1,10 +1,14 @@
 set(MODULE_NAME shortcuts)
 
 set(MODULE_SRC
-    internal/shortcutshandler.cpp
-    internal/shortcutshandler.h
     view/shortcutsmodel.cpp
     view/shortcutsmodel.h
+    shortcutsmodule.cpp
+    shortcutsmodule.h
+)
+
+set(MODULE_QRC
+    ${CMAKE_CURRENT_LIST_DIR}/shortcuts.qrc
 )
 
 set(MODULE_LINK

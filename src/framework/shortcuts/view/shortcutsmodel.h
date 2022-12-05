@@ -18,11 +18,15 @@ namespace gs::shortcuts {
 
 class ShortcutsModel : public QAbstractListModel, public IActionable
 {
+    Q_PROPERTY(QList<QVariantMap> shortcuts READ shortcuts NOTIFY shortcutsChanged)
+
     Q_OBJECT
 
 public:
     explicit ShortcutsModel(QObject* parent = nullptr);
     static ShortcutsModel* instance();
+
+    Q_INVOKABLE bool activate(const QString& sequence);
 
     QVariant data(const QModelIndex& index, int role) const override;
     int rowCount(const QModelIndex& parent = QModelIndex()) const override;
@@ -47,6 +51,8 @@ private:
 
     QHash<int, QByteArray> m_roles;
     QList<QVariantMap> m_shortcuts;
+signals:
+    void shortcutsChanged();
 };
 
 } // gs::shortcuts
