@@ -4,4 +4,8 @@
         <key>about</key>
         <seq>F12</seq>
     </sc>
+    <sc>
+        <key>quit</key>
+        <seq>Ctrl+Q</seq>
+    </sc>
 </shortcuts>
