@@ -4,6 +4,5 @@
         <file>qml/GimelStudio/AppShell/AboutDialog.qml</file>
         <file>qml/GimelStudio/AppShell/qmldir</file>
         <file>qml/GimelStudio/AppShell/GSDockTabBar.qml</file>
-        <file>qml/GimelStudio/AppShell/GSDockTitleBar.qml</file>
     </qresource>
 </RCC>

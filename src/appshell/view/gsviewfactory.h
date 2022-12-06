@@ -18,7 +18,6 @@ public:
     ~GSViewFactory() override;
 
     QUrl tabbarFilename() const override;
-    QUrl titleBarFilename() const override;
 };
 } // gs::appshell
 

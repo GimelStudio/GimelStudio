@@ -39,7 +39,9 @@ int AppShell::run(int argc, char** argv)
     KDDockWidgets::initFrontend(KDDockWidgets::FrontendType::QtQuick);
 
     auto &config = KDDockWidgets::Config::self();
-    auto flags = config.flags();// | KDDockWidgets::Config::Flag_TitleBarIsFocusable;
+    auto flags = config.flags() | KDDockWidgets::Config::Flag_AlwaysShowTabs
+                                     | KDDockWidgets::Config::Flag_AllowReorderTabs
+                                     | KDDockWidgets::Config::Flag_HideTitleBarWhenTabsVisible;
 
     config.setFlags(flags);
     config.setViewFactory(new GSViewFactory());

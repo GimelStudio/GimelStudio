@@ -1,4 +1,3 @@
 module GimelStudio.AppShell
 AboutDialog 1.0 AboutDialog.qml
 GSDockTabBar 1.0 GSDockTabBar.qml
-GSDockTitleBar 1.0 GSDockTitleBar.qml
