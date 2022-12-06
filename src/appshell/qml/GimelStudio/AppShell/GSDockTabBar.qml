@@ -1,4 +1,7 @@
-import QtQuick 2.6
+import QtQuick 2.15
+
+import GimelStudio.Ui 1.0
+import GimelStudio.UiComponents 1.0
 
 import "qrc:/kddockwidgets/qtquick/views/qml/" as KDDW
 
@@ -38,14 +41,14 @@ KDDW.TabBarBase {
                 id: tab
                 height: parent.height
                 width: 100
-                color: (tabBarRow.hoveredIndex == index) ? "#ba7600" : "orange"
-                border.color: "black"
+                color: (tabBarRow.hoveredIndex == index) ? UiTheme.componentColor : UiTheme.backgroundSecondaryColor
+                border.color: UiTheme.strokeColor
 
-                border.width: index == root.groupCpp.currentIndex ? 3 : 1
+                border.width: 1
 
                 readonly property int tabIndex: index
 
-                Text {
+                GSLabel {
                     anchors.centerIn: parent
                     text: title
                 }

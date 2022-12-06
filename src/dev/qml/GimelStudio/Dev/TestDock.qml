@@ -1,5 +1,7 @@
 import QtQuick 2.15
 
+import GimelStudio.Ui 1.0
+
 import com.kdab.dockwidgets 2.0 as KDDW
 
 KDDW.DockWidget {
@@ -9,6 +11,6 @@ KDDW.DockWidget {
     Rectangle {
         id: background
         anchors.fill: parent
-        color: "red"
+        color: UiTheme.backgroundSecondaryColor
     }
 }
