@@ -17,6 +17,7 @@ class GSViewFactory : public KDDockWidgets::ViewFactory_qtquick
 public:
     ~GSViewFactory() override;
 
+    QUrl tabbarFilename() const override;
     QUrl titleBarFilename() const override;
 };
 } // gs::appshell

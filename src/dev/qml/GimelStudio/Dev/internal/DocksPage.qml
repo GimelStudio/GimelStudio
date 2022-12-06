@@ -19,8 +19,14 @@ Item {
             id: testDock
         }
 
+        TestDock {
+            id: testDock2
+            uniqueName: "testDock2"
+        }
+
         Component.onCompleted: {
             addDockWidget(testDock, KDDW.KDDockWidgets.Location_OnLeft);
+            addDockWidget(testDock2, KDDW.KDDockWidgets.Location_OnLeft);
         }
     }
 }

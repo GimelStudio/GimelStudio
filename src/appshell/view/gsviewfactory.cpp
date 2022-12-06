@@ -8,3 +8,8 @@ QUrl GSViewFactory::titleBarFilename() const
 {
     return QUrl("qrc:/qml/GimelStudio/AppShell/GSTitleBar.qml");
 }
+
+QUrl GSViewFactory::tabbarFilename() const
+{
+    return QUrl("qrc:/qml/GimelStudio/AppShell/GSDockTabBar.qml");
+}
