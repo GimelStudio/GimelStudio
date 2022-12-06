@@ -23,7 +23,6 @@ target_include_directories(${MODULE_NAME} PUBLIC
     ${PROJECT_ROOT_DIR}/src/framework
     ${PROJECT_ROOT_DIR}/src/framework/global
     ${PROJECT_ROOT_DIR}/thirdparty
-    ${PROJECT_ROOT_DIR}/KDDockWidgets
     ${MODULE_INCLUDE}
 )
 
