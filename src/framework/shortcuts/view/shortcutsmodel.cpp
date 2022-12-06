@@ -23,12 +23,6 @@ ShortcutsModel::ShortcutsModel(QObject* parent) : QAbstractListModel(parent), IA
     load();
 }
 
-ShortcutsModel* ShortcutsModel::instance()
-{
-    static ShortcutsModel s;
-    return &s;
-}
-
  bool ShortcutsModel::activate(const QString& sequence)
  {
     for (QVariantMap shortcut : m_shortcuts) {

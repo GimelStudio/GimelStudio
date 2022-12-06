@@ -25,10 +25,10 @@ class ShortcutsModel : public QAbstractListModel, public IActionable
     Q_PROPERTY(QList<QVariantMap> shortcuts READ shortcuts NOTIFY shortcutsChanged)
 
     Q_OBJECT
+    INJECT_INSTANCE_METHOD(ShortcutsModel)
     INJECT_STATIC(Dispatcher, dispatcher)
 public:
     explicit ShortcutsModel(QObject* parent = nullptr);
-    static ShortcutsModel* instance();
 
     Q_INVOKABLE bool activate(const QString& sequence);
 
