@@ -6,7 +6,7 @@ GSViewFactory::~GSViewFactory() = default;
 
 QUrl GSViewFactory::titleBarFilename() const
 {
-    return QUrl("qrc:/qml/GimelStudio/AppShell/GSTitleBar.qml");
+    return QUrl("qrc:/qml/GimelStudio/AppShell/GSDockTitleBar.qml");
 }
 
 QUrl GSViewFactory::tabbarFilename() const
