@@ -18,6 +18,9 @@
 
 #include "ui/uiengines.h"
 
+#include "view/gsviewfactory.h"
+
+
 using namespace gs::appshell;
 
 AppShell::AppShell()
@@ -36,9 +39,10 @@ int AppShell::run(int argc, char** argv)
     KDDockWidgets::initFrontend(KDDockWidgets::FrontendType::QtQuick);
 
     auto &config = KDDockWidgets::Config::self();
-    auto flags = config.flags() | KDDockWidgets::Config::Flag_TitleBarIsFocusable;
+    auto flags = config.flags();// | KDDockWidgets::Config::Flag_TitleBarIsFocusable;
 
     config.setFlags(flags);
+    config.setViewFactory(new GSViewFactory());
 
     qmlAppEngine()->addImportPath(":/qml");
     KDDockWidgets::Platform_qtquick::instance()->setQmlEngine(qmlAppEngine());

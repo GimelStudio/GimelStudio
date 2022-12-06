@@ -1,2 +1,3 @@
 module GimelStudio.AppShell
 AboutDialog 1.0 AboutDialog.qml
+GSTitleBar 1.0 GSTitleBar.qml
