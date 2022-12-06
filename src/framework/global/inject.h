@@ -1,3 +1,6 @@
+#ifndef GS_GLOBAL_INJECT_H
+#define GS_GLOBAL_INJECT_H
+
 // This macro can be used for any class
 #define INJECT(_Class, _name) \
 private: \
@@ -17,9 +20,11 @@ private: \
 
 // Use this as a shorter way to add an instance method to a class
 #define INJECT_INSTANCE_METHOD(_Class) \
-private: \
-    _Class* _name() \
+public: \
+    static _Class* instance() \
     { \
         static _Class cls; \
         return &cls; \
     }
+
+#endif // GS_GLOBAL_INJECT_H

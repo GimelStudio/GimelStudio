@@ -4,6 +4,9 @@
 #include <QObject>
 #include <QVariantMap>
 
+#include "global/inject.h"
+
+#include "actions/internal/dispatcher.h"
 #include "actions/iactionable.h"
 
 using namespace gs::actions;
@@ -13,6 +16,7 @@ namespace gs::appshell
 class AppShellUiActions : public QObject, public IActionable
 {
     Q_OBJECT
+    INJECT_STATIC(Dispatcher, dispatcher)
 public:
     AppShellUiActions();
     

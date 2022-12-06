@@ -10,6 +10,10 @@
 #include <QVariant>
 
 
+#include "global/inject.h"
+
+#include "actions/internal/dispatcher.h"
+
 #include "actions/iactionable.h"
 
 using namespace gs::actions;
@@ -21,7 +25,7 @@ class ShortcutsModel : public QAbstractListModel, public IActionable
     Q_PROPERTY(QList<QVariantMap> shortcuts READ shortcuts NOTIFY shortcutsChanged)
 
     Q_OBJECT
-
+    INJECT_STATIC(Dispatcher, dispatcher)
 public:
     explicit ShortcutsModel(QObject* parent = nullptr);
     static ShortcutsModel* instance();

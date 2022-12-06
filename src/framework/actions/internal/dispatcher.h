@@ -3,14 +3,16 @@
 
 #include <QVariantMap>
 
+#include "global/inject.h"
+
 #include "../idispatcher.h"
 
 namespace gs::actions
 {
 class Dispatcher : public IDispatcher
 {
+    INJECT_INSTANCE_METHOD(Dispatcher)
 public:
-    static Dispatcher* instance();
     void dispatch(std::string actionCode, QVariantMap actionData) override;
     void reg(IActionable* client, const std::string& actionCode, const MethodWithData& callback) override;
 private:

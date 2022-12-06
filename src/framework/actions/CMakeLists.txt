@@ -4,7 +4,6 @@ set(MODULE_SRC
     internal/dispatcher.cpp
     internal/dispatcher.h
     actiontypes.h
-    dispatcher.h
     idispatcher.h
     iactionable.h
 )

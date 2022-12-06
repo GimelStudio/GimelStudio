@@ -3,12 +3,6 @@
 
 using namespace gs::actions;
 
-Dispatcher* Dispatcher::instance()
-{
-    static Dispatcher d;
-    return &d;
-}
-
 void Dispatcher::dispatch(std::string actionCode, QVariantMap actionData)
 {
     auto actionIter = m_clients.find(actionCode);

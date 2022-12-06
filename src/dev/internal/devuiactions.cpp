@@ -3,7 +3,6 @@
 #include <QVariant>
 #include <QDebug>
 
-#include "actions/dispatcher.h"
 #include "actions/actiontypes.h"
 #include "interactive/internal/interactive.h"
 

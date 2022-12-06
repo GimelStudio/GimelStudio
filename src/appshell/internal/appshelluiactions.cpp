@@ -1,5 +1,5 @@
 #include "appshelluiactions.h"
-#include "actions/dispatcher.h"
+#include "actions/internal/dispatcher.h"
 #include "interactive/internal/interactive.h"
 
 #include <QApplication>

@@ -10,8 +10,6 @@
 #include <QVariantMap>
 #include <QXmlStreamReader>
 
-#include "actions/dispatcher.h"
-
 using namespace gs::shortcuts;
 
 ShortcutsModel::ShortcutsModel(QObject* parent) : QAbstractListModel(parent), IActionable()
@@ -36,7 +34,7 @@ ShortcutsModel* ShortcutsModel::instance()
     for (QVariantMap shortcut : m_shortcuts) {
         if (shortcut["seq"].toString() == sequence) {
             dispatcher()->dispatch(shortcut["key"].toString().toStdString(), QVariantMap());   
-            return true;    
+            return true;
         }
     }
 

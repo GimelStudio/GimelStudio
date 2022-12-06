@@ -14,7 +14,6 @@
 #include <kddockwidgets/views/MainWindow_qtquick.h>
 
 #include "appshell.h"
-#include "actions/dispatcher.h"
 
 #include "ui/uiengines.h"
 
