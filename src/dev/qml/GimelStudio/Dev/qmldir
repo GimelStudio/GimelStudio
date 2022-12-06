@@ -1,2 +1,4 @@
 module GimelStudio.Dev
 DevPage 1.0 DevPage.qml
+TestDialog 1.0 TestDialog.qml
+TestDock 1.0 TestDock.qml

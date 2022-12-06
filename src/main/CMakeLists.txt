@@ -9,7 +9,6 @@ target_sources(gimelstudio PRIVATE
 
 target_link_libraries(gimelstudio PRIVATE
     ${QT_LIBRARIES}
-    KDAB::kddockwidgets
     actions
     appshell
     dev

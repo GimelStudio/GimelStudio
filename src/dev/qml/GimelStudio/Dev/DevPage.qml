@@ -21,6 +21,10 @@ Item {
                 "Is Current": true,
                 "Item": componentsPage
             }, {
+                "Name": "Docks",
+                "Icon Code": IconCode.None,
+                "Item": docksPage,
+            }, {
                 "Name": "Interactive",
                 "Icon Code": IconCode.WindowStack,
                 "Item": interactivePage
@@ -30,6 +34,10 @@ Item {
 
     ComponentsPage {
         id: componentsPage
+    }
+
+    DocksPage {
+        id: docksPage
     }
 
     InteractivePage {

@@ -6,6 +6,13 @@
 #include <QUrl>
 #include <QVariantMap>
 
+#include <kddockwidgets/Config.h>
+#include <kddockwidgets/views/DockWidget_qtquick.h>
+#include <kddockwidgets/Platform_qtquick.h>
+#include <kddockwidgets/ViewFactory_qtquick.h>
+#include <kddockwidgets/private/DockRegistry.h>
+#include <kddockwidgets/views/MainWindow_qtquick.h>
+
 #include "appshell.h"
 #include "actions/dispatcher.h"
 
@@ -26,7 +33,15 @@ int AppShell::run(int argc, char** argv)
 {
     QApplication app(argc, argv);
 
+    KDDockWidgets::initFrontend(KDDockWidgets::FrontendType::QtQuick);
+
+    auto &config = KDDockWidgets::Config::self();
+    auto flags = config.flags() | KDDockWidgets::Config::Flag_TitleBarIsFocusable;
+
+    config.setFlags(flags);
+
     qmlAppEngine()->addImportPath(":/qml");
+    KDDockWidgets::Platform_qtquick::instance()->setQmlEngine(qmlAppEngine());
 
     for (modularity::IModuleSetup* m : m_modules) {
         m->registerResources();
