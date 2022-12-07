@@ -6,14 +6,18 @@
 #include <QVariantMap>
 
 #include "actions/iactionable.h"
+#include "interactive/internal/interactive.h"
 
 using namespace gs::actions;
+using namespace gs::interactive;
 
 namespace gs::dev
 {
 class DevUiActions : public QObject, public IActionable
 {
     Q_OBJECT
+
+    INJECT_STATIC(Interactive, interactive)
 public:
     DevUiActions();
 

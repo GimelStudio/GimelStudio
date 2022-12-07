@@ -23,12 +23,6 @@ Interactive::Interactive(QObject* parent) : QObject(parent)
 {
 }
 
-Interactive* Interactive::instance()
-{
-    static Interactive i;
-    return &i;
-}
-
 void Interactive::regDialog(const std::string& path, const std::string& resourcePath)
 {
     m_dialogs.insert({path, resourcePath});

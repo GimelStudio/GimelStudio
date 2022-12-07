@@ -13,13 +13,13 @@ AppShellUiActions::AppShellUiActions()
 {
     dispatcher()->reg(this, "about", [this](QVariantMap args) {this->about();});
     dispatcher()->reg(this, "quit", [this](QVariantMap args) {this->quit();});
-    Interactive::instance()->regDialog("gslauncher://appshell/about", "AppShell/AboutDialog.qml");
+    interactive()->regDialog("gslauncher://appshell/about", "AppShell/AboutDialog.qml");
 }
 
 void AppShellUiActions::about()
 {
     Interactive::Params params;
-    Interactive::instance()->openDialog("gslauncher://appshell/about", params);
+    interactive()->openDialog("gslauncher://appshell/about", params);
 }
 
 void AppShellUiActions::aboutQt()

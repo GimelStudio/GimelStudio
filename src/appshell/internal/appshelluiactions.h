@@ -6,10 +6,12 @@
 
 #include "global/inject.h"
 
-#include "actions/internal/dispatcher.h"
 #include "actions/iactionable.h"
+#include "actions/internal/dispatcher.h"
+#include "interactive/internal/interactive.h"
 
 using namespace gs::actions;
+using namespace gs::interactive;
 
 namespace gs::appshell
 {
@@ -17,6 +19,7 @@ class AppShellUiActions : public QObject, public IActionable
 {
     Q_OBJECT
     INJECT_STATIC(Dispatcher, dispatcher)
+    INJECT_STATIC(Interactive, interactive)
 public:
     AppShellUiActions();
     
