@@ -5,6 +5,7 @@ include(${CMAKE_CURRENT_LIST_DIR}/modularity/modularity.cmake)
 set(MODULE_SRC
     ${MODULARITY_SRC}
     ${CMAKE_CURRENT_LIST_DIR}/types/string.h
+    ${CMAKE_CURRENT_LIST_DIR}/types/variant.h
     inject.h
     ret.cpp
     ret.h
