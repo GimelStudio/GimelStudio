@@ -3,18 +3,19 @@
 
 #include "config.h"
 
+#include "itype.h"
+
 #include <map>
 #include <string>
 #include <variant>
 
 #ifdef QT_SUPPORT
-#include <QMetaObject>
 #include <QVariant>
 #endif
 
 namespace gs
 {
-typedef std::variant<double, float, int, std::string> VariantType;
+typedef std::variant<double, float, int, IType, IType*, std::string> VariantType;
 
 class Variant
 {
