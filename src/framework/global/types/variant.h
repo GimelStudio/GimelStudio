@@ -12,6 +12,8 @@
 #include <QVariant>
 #endif
 
+namespace gs
+{
 typedef std::variant<double, float, int, std::string> VariantType;
 
 class Variant
@@ -47,5 +49,6 @@ public:
     std::string toString() { return std::get<std::string>(m_variant); }
     VariantType variant() const { return m_variant; }
 };
+}
 
 #endif // GS_GLOBAL_TYPES_VARIANT_H
