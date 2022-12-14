@@ -11,6 +11,8 @@ namespace gs
 class IType {};
 }
 
+#ifdef QT_SUPPORT
 Q_DECLARE_METATYPE(gs::IType)
+#endif
 
 #endif // GS_GLOBAL_TYPES_ITYPE_H
