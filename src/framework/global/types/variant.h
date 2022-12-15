@@ -4,6 +4,7 @@
 #include "config.h"
 
 #include "itype.h"
+#include "string.h"
 
 #include <map>
 #include <string>
@@ -15,7 +16,7 @@
 
 namespace gs
 {
-typedef std::variant<double, float, int, IType, IType*, std::string> VariantType;
+typedef std::variant<double, float, int, IType, IType*, String> VariantType;
 
 class Variant
 {
@@ -38,8 +39,8 @@ public:
     // Unfortunately, a template has to be used here. Otherwise Qt has a massive hissy fit
     template<typename T> QVariant toQVariant();
 #endif
-    std::string toString()
-    VariantType variant();
+    String toString();
+    VariantType variant() const;
 };
 }
 

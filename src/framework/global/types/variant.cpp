@@ -63,9 +63,9 @@ template<typename T> QVariant Variant::toQVariant()
 }
 #endif
 
-std::string Variant::toString()
+String Variant::toString()
 {
-    return std::get<std::string>(m_variant);
+    return std::get<String>(m_variant);
 }
 
 VariantType Variant::variant() const
