@@ -5,6 +5,7 @@
 
 #include "itype.h"
 #include "string.h"
+#include "versionnumber.h"
 
 #include <map>
 #include <string>
@@ -16,7 +17,7 @@
 
 namespace gs
 {
-typedef std::variant<double, float, int, IType, IType*, String> VariantType;
+typedef std::variant<double, float, int, IType, IType*, String, VersionNumber> VariantType;
 
 class Variant
 {
