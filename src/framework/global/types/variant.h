@@ -15,7 +15,7 @@
 #include <QVariant>
 #endif
 
-namespace gs
+namespace gs::types
 {
 typedef std::variant<double, float, int, IType, IType*, String, VersionNumber> VariantType;
 

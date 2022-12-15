@@ -1,6 +1,6 @@
 #include "versionnumber.h"
 
-using namespace gs;
+using namespace gs::types;
 
 VersionNumber::VersionNumber() {}
 

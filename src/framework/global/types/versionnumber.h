@@ -5,7 +5,7 @@
 #include <QMetaType>
 #endif
 
-namespace gs
+namespace gs::types
 {
 class VersionNumber
 {
@@ -46,7 +46,7 @@ public:
 }
 
 #ifdef QT_SUPPORT
-Q_DECLARE_METATYPE(gs::VersionNumber)
+Q_DECLARE_METATYPE(gs::types::VersionNumber)
 #endif
 
 #endif // GS_GLOBAL_TYPES_VERSIONNUMBER_H

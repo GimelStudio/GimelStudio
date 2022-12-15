@@ -3,7 +3,7 @@
 
 #include <string>
 
-namespace gs
+namespace gs::types
 {
 // Until a custom string type is made
 using String = std::string;

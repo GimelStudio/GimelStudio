@@ -1,6 +1,6 @@
 #include "variant.h"
 
-using namespace gs;
+using namespace gs::types;
 
 Variant Variant::fromValue(VariantType val)
 {

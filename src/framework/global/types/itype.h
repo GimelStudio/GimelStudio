@@ -6,13 +6,13 @@
 #include <QVariant>
 #endif
 
-namespace gs
+namespace gs::types
 {
 class IType {};
 }
 
 #ifdef QT_SUPPORT
-Q_DECLARE_METATYPE(gs::IType)
+Q_DECLARE_METATYPE(gs::types::IType)
 #endif
 
 #endif // GS_GLOBAL_TYPES_ITYPE_H

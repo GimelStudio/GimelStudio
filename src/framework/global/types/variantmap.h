@@ -6,7 +6,7 @@
 #include "string.h"
 #include "variant.h"
 
-namespace gs
+namespace gs::types
 {
 // Use the standard library map for now (not even sure if a custom class should be created for this)
 using VariantMap = std::map<String, Variant>;
