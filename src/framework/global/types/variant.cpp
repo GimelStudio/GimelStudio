@@ -16,12 +16,12 @@ template<typename T> Variant Variant::fromValue(T val)
     return v;
 }
 
-template<typename T> T Variant::value()
+template<typename T> T Variant::value() const
 {
     return std::get<T>(m_variant);
 }
 
-template<typename T> T Variant::valueToType()
+template<typename T> T Variant::valueToType() const
 {
     return static_cast<T>(toIType());
 }
@@ -36,22 +36,22 @@ void Variant::setValue(VariantType val)
     m_variant = val;
 }
 
-double Variant::toDouble()
+double Variant::toDouble() const
 {
     return std::get<double>(m_variant);
 }
 
-float Variant::toFloat()
+float Variant::toFloat() const
 {
     return std::get<float>(m_variant);
 }
 
-int Variant::toInt()
+int Variant::toInt() const
 {
     return std::get<int>(m_variant);
 }
 
-IType* Variant::toIType()
+IType* Variant::toIType() const
 {
     return std::get<IType*>(m_variant);
 }
@@ -63,7 +63,7 @@ template<typename T> QVariant Variant::toQVariant()
 }
 #endif
 
-String Variant::toString()
+String Variant::toString() const
 {
     return std::get<String>(m_variant);
 }

@@ -26,20 +26,20 @@ public:
     static Variant fromValue(VariantType val);
     template<typename T> static Variant fromValue(T val);
 
-    template<typename T> T value();
-    template<typename T> T valueToType();
+    template<typename T> T value() const;
+    template<typename T> T valueToType() const;
     void setValue(Variant val);
     void setValue(VariantType val);
 
-    double toDouble();
-    float toFloat();
-    int toInt();
-    IType* toIType();
+    double toDouble() const;
+    float toFloat() const;
+    int toInt() const;
+    IType* toIType() const;
 #ifdef QT_SUPPORT
     // Unfortunately, a template has to be used here. Otherwise Qt has a massive hissy fit
     template<typename T> QVariant toQVariant();
 #endif
-    String toString();
+    String toString() const;
     VariantType variant() const;
 };
 }
