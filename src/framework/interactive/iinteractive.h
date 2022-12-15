@@ -9,6 +9,9 @@
 #include <QVariant>
 
 #include "global/ret.h"
+#include "types/string.h"
+
+using namespace gs::types;
 
 using namespace gs;
 
@@ -18,15 +21,15 @@ class IInteractive
 {
 public:
     // TODO: Should std::any or std::variant be used?
-    // using Values = std::variant<bool, int, float, double, std::string>;
-    // using Params = std::map<std::string, Values>;
+    // using Values = std::variant<bool, int, float, double, String>;
+    // using Params = std::map<String, Values>;
     // NOTE: Using a QVariant for now
-    using Params = std::map<std::string, QVariant>;
-    // using Params = std::map<std::string, std::any>;
-    virtual void regDialog(const std::string& path, const std::string& resourcePath) {}
+    using Params = std::map<String, QVariant>;
+    // using Params = std::map<String, std::any>;
+    virtual void regDialog(const String& path, const String& resourcePath) {}
     // TODO: Use Ret and Val instead of Qt types
     using Result = QVariantMap;
-    virtual Result openDialog(const std::string& path, Params& params) {return Result();}
+    virtual Result openDialog(const String& path, Params& params) {return Result();}
 };
 } // gs::interactive
 

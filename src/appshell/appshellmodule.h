@@ -2,13 +2,16 @@
 #define GS_APPSHELL_APPSHELLMODULE_H
 
 #include "modularity/imodulesetup.h"
+#include "types/string.h"
+
+using namespace gs::types;
 
 namespace gs::appshell
 {
 class AppShellModule : public modularity::IModuleSetup
 {
 public:
-    std::string moduleName() const override;
+    String moduleName() const override;
     void registerResources() override;
     void registerModels() override;
 };

@@ -10,7 +10,7 @@ static void appshellInitResources()
     Q_INIT_RESOURCE(appshell);
 }
 
-std::string AppShellModule::moduleName() const
+String AppShellModule::moduleName() const
 {
     return "appshell";
 }

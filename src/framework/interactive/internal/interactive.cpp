@@ -23,19 +23,19 @@ Interactive::Interactive(QObject* parent) : QObject(parent)
 {
 }
 
-void Interactive::regDialog(const std::string& path, const std::string& resourcePath)
+void Interactive::regDialog(const String& path, const String& resourcePath)
 {
     m_dialogs.insert({path, resourcePath});
 }
 
-Interactive::Result Interactive::openDialog(const std::string& path, Params& params)
+Interactive::Result Interactive::openDialog(const String& path, Params& params)
 {
     Interactive::Result result;
     for (auto iter = m_dialogs.begin(); iter != m_dialogs.end(); ++iter) {
         // Path
-        std::string p = iter->first;
+        String p = iter->first;
         // Resource path
-        std::string rp = iter->second;
+        String rp = iter->second;
         if (path == p) {
             QQmlComponent* component = new QQmlComponent(qmlAppEngine(), QUrl("qrc:/qml/GimelStudio/" + QString::fromStdString(rp)));
             if (component->isError()) {

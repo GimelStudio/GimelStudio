@@ -11,7 +11,7 @@ static void uicomponentsInitResources()
     Q_INIT_RESOURCE(uicomponents);
 }
 
-std::string UiComponentsModule::moduleName() const
+String UiComponentsModule::moduleName() const
 {
     return "uicomponents";
 }

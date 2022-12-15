@@ -8,6 +8,10 @@
 #include <QObject>
 #include <QMetaType>
 
+#include "types/string.h"
+
+using namespace gs::types;
+
 namespace gs
 {
 class Ret
@@ -26,7 +30,7 @@ public:
     Ret() = default;
     explicit Ret(int c);
     explicit Ret(Code c);
-    explicit Ret(const int& c, const std::string& text);
+    explicit Ret(const int& c, const String& text);
 
     inline Ret& operator=(int c) { m_code = c; return *this; }
     inline Ret& operator=(bool arg) { m_code = arg ? int(Code::Ok) : int(Code::UnknownError); return *this; }
@@ -39,14 +43,14 @@ public:
     void setCode(int c);
     bool isValid() const;
     bool isSuccess() const;
-    const std::string& text() const;
-    void setText(const std::string& s);
-    std::any data(const std::string& key);
-    void setData(const std::string& key, const std::any& val);
+    const String& text() const;
+    void setText(const String& s);
+    std::any data(const String& key);
+    void setData(const String& key, const std::any& val);
 private:
     int m_code = static_cast<int>(Code::Undefined);
-    std::string m_text;
-    std::map<std::string, std::any> m_data;
+    String m_text;
+    std::map<String, std::any> m_data;
 };
 }
 

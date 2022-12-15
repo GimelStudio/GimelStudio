@@ -1,14 +1,16 @@
 #ifndef GS_MODULARITY_IMODULESETUP_H
 #define GS_MODULARITY_IMODULESETUP_H
 
-#include <string>
+#include "types/string.h"
+
+using namespace gs::types;
 
 namespace modularity {
 class IModuleSetup
 {
 public:
     virtual ~IModuleSetup() {}
-    virtual std::string moduleName() const = 0;
+    virtual String moduleName() const = 0;
     virtual void registerImports() {}
     // As a general rule, singletons are used for action models while types are used for data models
     // singletons -> use qmlRegisterSingletonInstance

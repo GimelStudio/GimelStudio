@@ -10,7 +10,7 @@ static void devInitResources()
     Q_INIT_RESOURCE(dev);
 }
 
-std::string DevModule::moduleName() const
+String DevModule::moduleName() const
 {
     return "dev";
 }

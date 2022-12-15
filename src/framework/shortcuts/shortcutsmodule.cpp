@@ -10,7 +10,7 @@ static void shortcutsInitResources()
     Q_INIT_RESOURCE(shortcuts);
 }
 
-std::string ShortcutsModule::moduleName() const
+String ShortcutsModule::moduleName() const
 {
     return "shortcuts";
 }

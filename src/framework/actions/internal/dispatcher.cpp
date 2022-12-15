@@ -3,7 +3,7 @@
 
 using namespace gs::actions;
 
-void Dispatcher::dispatch(std::string actionCode, QVariantMap actionData)
+void Dispatcher::dispatch(String actionCode, QVariantMap actionData)
 {
     auto actionIter = m_clients.find(actionCode);
     if (actionIter == m_clients.end()) {
@@ -22,7 +22,7 @@ void Dispatcher::dispatch(std::string actionCode, QVariantMap actionData)
     }
 }
 
-void Dispatcher::reg(IActionable* client, const std::string& actionCode, const MethodWithData& callback)
+void Dispatcher::reg(IActionable* client, const String& actionCode, const MethodWithData& callback)
 {
     Clients& clients = m_clients[actionCode];
     Callbacks& callbacks = clients[client];

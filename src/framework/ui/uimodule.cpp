@@ -7,7 +7,7 @@
 
 using namespace gs::ui;
 
-std::string UiModule::moduleName() const
+String UiModule::moduleName() const
 {
     return "ui";
 }
