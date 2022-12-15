@@ -40,13 +40,13 @@ public:
     int microVersion() const;
     void setMicroVersion(int val);
 
-    int tag();
+    int tag() const;
     void setTag(int val);
 };
 }
 
 #ifdef QT_SUPPORT
-Q_DECLARE_METATYPE(VersionNumber)
+Q_DECLARE_METATYPE(gs::VersionNumber)
 #endif
 
 #endif // GS_GLOBAL_TYPES_VERSIONNUMBER_H
