@@ -8,6 +8,7 @@ set(MODULE_SRC
     ${CMAKE_CURRENT_LIST_DIR}/types/string.h
     ${CMAKE_CURRENT_LIST_DIR}/types/variant.cpp
     ${CMAKE_CURRENT_LIST_DIR}/types/variant.h
+    ${CMAKE_CURRENT_LIST_DIR}/types/variantmap.h
     ${CMAKE_CURRENT_LIST_DIR}/types/versionnumber.cpp
     ${CMAKE_CURRENT_LIST_DIR}/types/versionnumber.h
     inject.h
