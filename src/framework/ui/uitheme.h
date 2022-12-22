@@ -1,14 +1,18 @@
 #ifndef GS_UI_UITHEME_H
 #define GS_UI_UITHEME_H
 
+#include "types/list.h"
+#include "types/variant.h"
+#include "types/variantmap.h"
+
 #include <QColor>
 #include <QFont>
-#include <QList>
 #include <QObject>
-#include <QVariantMap>
 #include <QVector2D>
 
 // TODO: Should `iuitheme.h` exist?
+
+using namespace gs::types;
 
 namespace gs::ui
 {
@@ -115,7 +119,7 @@ private:
         bool focused = false;
     };
 
-    QList<QVariantMap> m_themes;
+    List<VariantMap> m_themes;
 
     bool m_isDark;
 
