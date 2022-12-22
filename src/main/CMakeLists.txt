@@ -13,6 +13,8 @@ target_link_libraries(gimelstudio PRIVATE
     appshell
     dev
     interactive
+    nodes
+    shortcuts
     ui
     uicomponents
 )
