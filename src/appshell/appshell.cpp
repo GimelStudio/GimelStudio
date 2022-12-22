@@ -4,7 +4,6 @@
 #include <QString>
 #include <QStringLiteral>
 #include <QUrl>
-#include <QVariantMap>
 
 #include <kddockwidgets/Config.h>
 #include <kddockwidgets/views/DockWidget_qtquick.h>

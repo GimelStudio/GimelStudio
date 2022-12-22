@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include <QString>
-#include <QVariantMap>
 
 #include "actions/iactionable.h"
 #include "interactive/internal/interactive.h"

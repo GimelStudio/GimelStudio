@@ -2,7 +2,6 @@
 #define GS_APPSHELL_APPSHELLUIACTIONS
 
 #include <QObject>
-#include <QVariantMap>
 
 #include "global/inject.h"
 
