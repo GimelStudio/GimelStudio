@@ -13,6 +13,7 @@ set(MODULE_QRC
 
 set(MODULE_LINK
     actions
+    global
 )
 
 include(${PROJECT_SOURCE_DIR}/build/module.cmake)

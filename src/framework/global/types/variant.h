@@ -12,6 +12,7 @@
 #include <variant>
 
 #ifdef QT_SUPPORT
+#include <QMetaType>
 #include <QVariant>
 #endif
 
@@ -44,5 +45,9 @@ public:
     VariantType variant() const;
 };
 }
+
+#ifdef QT_SUPPORT
+Q_DECLARE_METATYPE(gs::types::Variant)
+#endif
 
 #endif // GS_GLOBAL_TYPES_VARIANT_H

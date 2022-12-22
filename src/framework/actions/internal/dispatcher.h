@@ -1,10 +1,10 @@
 #ifndef GS_ACTIONS_INTERNAL_DISPATCHER_H
 #define GS_ACTIONS_INTERNAL_DISPATCHER_H
 
-#include <QVariantMap>
-
 #include "global/inject.h"
 #include "types/string.h"
+#include "types/variant.h"
+#include "types/variantmap.h"
 
 #include "../idispatcher.h"
 
@@ -16,7 +16,8 @@ class Dispatcher : public IDispatcher
 {
     INJECT_INSTANCE_METHOD(Dispatcher)
 public:
-    void dispatch(String actionCode, QVariantMap actionData) override;
+    void dispatch(String actionCode, VariantMap actionData) override;
+    void dispatch(Variant actionCode, VariantMap actionData) override;
     void reg(IActionable* client, const String& actionCode, const MethodWithData& callback) override;
 private:
     // TODO: Avoid using Qt classes here

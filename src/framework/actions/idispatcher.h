@@ -9,6 +9,8 @@
 #include "iactionable.h"
 
 #include "types/string.h"
+#include "types/variant.h"
+#include "types/variantmap.h"
 
 using namespace gs::types;
 
@@ -19,10 +21,11 @@ class IDispatcher
 public:
     virtual void dispatch(String actionCode)
     {
-        QVariantMap dummy;
+        VariantMap dummy;
         dispatch(actionCode, dummy);
     }
-    virtual void dispatch(String actionCode, QVariantMap actionData) {}
+    virtual void dispatch(String actionCode, VariantMap actionData) {}
+    virtual void dispatch(Variant actionCode, VariantMap actionData) {}
     virtual void reg(IActionable* store, const String& actionCode, const MethodWithData& callback) {}
     virtual void unReg(IActionable* store) {}
     virtual void unReg(IActionable* store, String actionCode) {}

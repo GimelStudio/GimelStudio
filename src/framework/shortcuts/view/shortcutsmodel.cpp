@@ -27,7 +27,7 @@ ShortcutsModel::ShortcutsModel(QObject* parent) : QAbstractListModel(parent), IA
  {
     for (QVariantMap shortcut : m_shortcuts) {
         if (shortcut["seq"].toString() == sequence) {
-            dispatcher()->dispatch(shortcut["key"].toString().toStdString(), QVariantMap());   
+            dispatcher()->dispatch(shortcut["key"].toString().toStdString(), VariantMap());   
             return true;
         }
     }

@@ -1,6 +1,8 @@
 #ifndef GS_GLOBAL_TYPES_VERSIONNUMBER_H
 #define GS_GLOBAL_TYPES_VERSIONNUMBER_H
 
+#include "config.h"
+
 #ifdef QT_SUPPORT
 #include <QMetaType>
 #endif

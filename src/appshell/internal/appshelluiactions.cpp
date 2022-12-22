@@ -3,7 +3,7 @@
 #include "interactive/internal/interactive.h"
 
 #include <QApplication>
-#include <QVariantMap>
+#include "types/variantmap.h"
 
 using namespace gs::actions;
 using namespace gs::interactive;
@@ -11,8 +11,8 @@ using namespace gs::appshell;
 
 AppShellUiActions::AppShellUiActions()
 {
-    dispatcher()->reg(this, "about", [this](QVariantMap args) {this->about();});
-    dispatcher()->reg(this, "quit", [this](QVariantMap args) {this->quit();});
+    dispatcher()->reg(this, "about", [this](VariantMap args) {this->about();});
+    dispatcher()->reg(this, "quit", [this](VariantMap args) {this->quit();});
     interactive()->regDialog("gslauncher://appshell/about", "AppShell/AboutDialog.qml");
 }
 
