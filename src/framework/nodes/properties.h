@@ -57,8 +57,6 @@ public:
 };
 
 // Sub-classes also implement the UI
-class IntegerProperty : public IProperty
-{
-};
+class IntegerProperty : public IProperty {};
 
 #endif // GS_NODES_PROPERTIES_H
