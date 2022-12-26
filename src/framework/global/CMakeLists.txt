@@ -3,6 +3,7 @@ set(MODULE_NAME global)
 include(${CMAKE_CURRENT_LIST_DIR}/modularity/modularity.cmake)
 
 set(MODULE_SRC
+    ${BINDINGS_SRC}
     ${MODULARITY_SRC}
     ${CMAKE_CURRENT_LIST_DIR}/types/itype.h
     ${CMAKE_CURRENT_LIST_DIR}/types/list.h
