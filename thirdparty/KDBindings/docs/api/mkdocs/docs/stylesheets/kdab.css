@@ -1,0 +1,18 @@
+[data-md-color-scheme="kdab"] {
+  --md-primary-fg-color:        #0077c8;
+  --md-primary-fg-color--light: #208bda;
+  --md-primary-fg-color--dark:  #0d6bad;
+
+}
+
+/* Overwrite the logo width so the logo doesn't have to be square */
+.md-header__button.md-logo img, .md-header__button.md-logo svg {
+  height: 1.2rem;
+  width: 5.22rem;
+}
+
+/* Same overwrite for the mobile navigation */
+.md-nav__title .md-nav__button.md-logo img, .md-nav__title .md-nav__button.md-logo svg {
+    height: 2.4rem;
+    width: 10.44rem;
+}

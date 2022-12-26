@@ -1,0 +1,27 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: KDBindings
+Upstream-Contact:  <info@kdab.com>
+Source: https://www.github.com/KDAB/KDBindings
+
+Files: *.json *.html *.md docs/api/Doxyfile.cmake docs/api/mkdocs/mkdocs.yml docs/api/mkdocs/docs/stylesheets/kdab.css
+Copyright: 2020-2022 Klarälvdalens Datakonsult AB, a KDAB Group company <info@kdab.com>
+License: MIT
+
+#artwork
+Files: docs/api/*.png docs/api/mkdocs/docs/assets/*.svg
+Copyright: 2001-2022 Klarälvdalens Datakonsult AB, a KDAB Group company <info@kdab.com>
+License: MIT
+
+#3rdparty cmake
+Files: cmake/ECM/modules/*
+Copyright:
+License: BSD-3-Clause
+
+#3rdparty C++
+Files: src/kdbindings/genindex_array.h
+Copyright: 2021 Jeremy Burns
+License: MIT
+
+Files: tests/doctest/doctest.h
+Copyright: 2016-2021 Viktor Kirilov <vik.kirilov@gmail.com>
+License: MIT

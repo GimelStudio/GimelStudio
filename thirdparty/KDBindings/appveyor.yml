@@ -1,0 +1,85 @@
+#---------------------------------#
+#      general configuration      #
+#---------------------------------#
+
+# version format
+version: 1.0.{build}-{branch}
+
+# branches to build
+branches:
+  except:
+    - gh-pages
+
+# Do not build on tags (GitHub and BitBucket)
+skip_tags: false
+
+#---------------------------------#
+#    environment configuration    #
+#---------------------------------#
+
+# Build worker image
+image:
+  - Ubuntu
+  - macos
+  - Visual Studio 2019
+
+# scripts that are called at very beginning, before repo cloning
+init:
+  - git config --global core.autocrlf input
+
+#---------------------------------#
+#       build configuration       #
+#---------------------------------#
+
+# build platform, i.e. x86, x64, Any CPU. This setting is optional.
+platform:
+  - x64
+
+# build Configuration, i.e. Debug, Release, etc.
+configuration:
+  - Release
+  - Debug
+
+install:
+  - sh: if [ "`uname -s`" = "Darwin" ]; then brew install ninja; fi
+
+before_build:
+  - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
+
+build_script:
+  - mkdir build
+  - cd build
+  - cmd: cmake -G Ninja -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DKDBindings_TESTS=True -DKDBindings_EXAMPLES=True ..
+  - sh: cmake -G Ninja -DCMAKE_BUILD_TYPE=$CONFIGURATION -DKDBindings_TESTS=True -DKDBindings_EXAMPLES=True ..
+  - cmake --build .
+  - cmd: cmake --build . --target install
+  - sh: sudo cmake --build . --target install
+  - ctest --test-dir .
+
+# to disable automatic builds
+#build: off
+
+#---------------------------------#
+#       tests configuration       #
+#---------------------------------#
+
+# to disable automatic tests
+test: off
+
+
+#---------------------------------#
+#     deployment configuration    #
+#---------------------------------#
+
+deploy: off
+
+#---------------------------------#
+#         notifications           #
+#---------------------------------#
+notifications:
+  # Email
+  - provider: Email
+    to:
+      - allen.winter@kdab.com
+    on_build_success: false
+    on_build_failure: true

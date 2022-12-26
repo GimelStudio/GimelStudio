@@ -1,0 +1,16 @@
+{
+  "baseUrl": "",
+  "useFolders": false,
+  "indexInFolders": false,
+  "linkSuffix": ".md",
+  "mainPageInRoot": true,
+  "mainPageName": "index",
+  "filesFilter": [".h", ".hpp", ".cpp"],
+  "foldersToGenerate": ["classes", "files", "pages", "namespaces", "examples"],
+  "indexClassesName": "Classes",
+  "indexFilesName": "Files",
+  "indexGroupsName": "Modules",
+  "indexNamespacesName": "Namespaces",
+  "indexRelatedPagesName": "Pages",
+  "indexExamplesName": "examples"
+}

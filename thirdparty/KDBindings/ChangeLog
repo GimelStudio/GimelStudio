@@ -1,0 +1,6 @@
+* v1.0.1
+  - Property: Make moved Signal private (#24 & #26) - BREAKING!
+  - Documentation: Small fixes & updates
+
+* v1.0.0
+  - Initial Release

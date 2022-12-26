@@ -1,0 +1,4 @@
+[codespell]
+skip = *.ts,./build-*,.git
+interactive = 3
+ignore-words-list = seh

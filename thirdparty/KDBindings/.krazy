@@ -1,0 +1,28 @@
+CHECKSETS c++
+
+#KDAB-specific checks
+EXTRA kdabcopyright-reuse,kdabcontactus,fosslicense-reuse
+
+#additional checks
+#EXTRA defines,null
+
+#exclude checks now being done by clazy or clang-tools
+EXCLUDE strings,explicit,normalize,passbyvalue,operators,nullstrcompare,nullstrassign,doublequote_chars,qobject,sigsandslots,staticobjects,dpointer,inline,postfixop
+#exclude more checks
+EXCLUDE style
+
+#if you have a build subdir, skip it
+SKIP /build-
+#skip 3rdparty
+SKIP /genindex_array.c|/genindex_array.h
+#skip generated files
+SKIP /tests/doctest/doctest.h
+#skip CMake files
+SKIP Doxyfile.cmake
+SKIP /mkdocs.yml.cmake
+SKIP /KDBindingsConfig.cmake.in
+#skip more files
+SKIP CMakePresets.json
+#skip the borrowed code in the cmake subdir
+SKIP /cmake/ECM/|/cmake/InstallLocation.cmake
+

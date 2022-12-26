@@ -26,5 +26,5 @@ target_include_directories(${MODULE_NAME} PUBLIC
     ${MODULE_INCLUDE}
 )
 
-set(MODULE_LINK ${QT_LIBRARIES} KDAB::kddockwidgets ${MODULE_LINK})
+set(MODULE_LINK ${QT_LIBRARIES} KDAB::KDBindings KDAB::kddockwidgets ${MODULE_LINK})
 target_link_libraries(${MODULE_NAME} PRIVATE ${MODULE_LINK})
