@@ -1,8 +1,10 @@
 This directory contains all thirdparty libraries except for Qt.
 
-Not sure if we will use submodules in future.
-
 ## Versions
+
+KDBindings
+- Tag: v1.0.1
+- Commit: b79b16ed32f6b47d44d8f119f96bfc6b1e318026
 
 KDDockWidgets
 - Branch: 2.0
