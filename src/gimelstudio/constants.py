@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------
-# Gimel Studio Copyright 2019-2022 by the Gimel Studio project contributors
+# Gimel Studio Copyright 2019-2023 by the Gimel Studio project contributors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ APP_VERSION_FULL = "{0}{1}".format(APP_VERSION, APP_VERSION_TAG)
 
 APP_NAME = "Gimel Studio"
 APP_DESCRIPTION = "Non-destructive, node-based 2D image graphics editor focused on simplicity, speed, elegance & usability"
-APP_COPYRIGHT = "© 2019–2022 Gimel Studio contributors"
+APP_COPYRIGHT = "© 2019–2023 Gimel Studio contributors"
 
 APP_WEBSITE_URL = "https://gimelstudio.github.io"
 APP_LICENSE_URL = "https://github.com/GimelStudio/GimelStudio/blob/master/LICENSE"
