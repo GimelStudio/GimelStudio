@@ -1,5 +1,5 @@
-#ifndef GS_NODES_PROPERTIES_H
-#define GS_NODES_PROPERTIES_H
+#ifndef GS_NODES_IPROPERTY_H
+#define GS_NODES_IPROPERTY_H
 
 #include <iostream>
 #include <vector>
@@ -59,4 +59,4 @@ public:
 // Sub-classes also implement the UI
 class IntegerProperty : public IProperty {};
 
-#endif // GS_NODES_PROPERTIES_H
+#endif // GS_NODES_IPROPERTY_H

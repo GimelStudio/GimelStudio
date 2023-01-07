@@ -6,7 +6,7 @@
 #include "types/string.h"
 #include "types/variantmap.h"
 
-#include "properties.h"
+#include "iproperty.h"
 
 using namespace gs::types;
 

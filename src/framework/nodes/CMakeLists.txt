@@ -7,7 +7,7 @@ set(MODULE_SRC
     nodesmodule.h
     nodetree.cpp
     nodetree.h
-    properties.h
+    iproperty.h
 )
 
 set(MODULE_LINK

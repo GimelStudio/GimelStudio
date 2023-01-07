@@ -4,7 +4,7 @@
 
 #include "types/versionnumber.h"
 
-#include "properties.h"
+#include "iproperty.h"
 
 
 void Node::addProperty(String name, IProperty* property)
