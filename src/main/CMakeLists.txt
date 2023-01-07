@@ -14,6 +14,7 @@ target_link_libraries(gimelstudio PRIVATE
     dev
     interactive
     nodes
+    properties
     shortcuts
     ui
     uicomponents
