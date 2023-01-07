@@ -1,6 +1,7 @@
 set(MODULE_NAME properties)
 
 set(MODULE_SRC
+    integerproperty.h
     propertiesmodule.cpp
     propertiesmodule.h
 )

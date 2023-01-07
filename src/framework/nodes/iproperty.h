@@ -56,7 +56,4 @@ public:
     void setValue(VariantType v) { m_variant.setValue(v); }
 };
 
-// Sub-classes also implement the UI
-class IntegerProperty : public IProperty {};
-
 #endif // GS_NODES_IPROPERTY_H
