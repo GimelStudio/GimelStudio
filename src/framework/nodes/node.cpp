@@ -5,6 +5,7 @@
 #include "types/versionnumber.h"
 
 #include "iproperty.h"
+#include "properties/integerproperty.h"
 
 
 void Node::addProperty(String name, IProperty* property)
