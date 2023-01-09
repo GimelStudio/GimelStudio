@@ -26,10 +26,24 @@ private:
     VariantType m_variant;
 public:
     static Variant fromValue(VariantType val);
-    template<typename T> static Variant fromValue(T val);
+    // See https://stackoverflow.com/a/495056 and https://stackoverflow.com/a/10632266 for why the implementation is here
+    template<typename T> static Variant fromValue(T val)
+    {
+        Variant v = Variant();
+        v.setValue(val);
+        return v;
+    }
 
-    template<typename T> T value() const;
-    template<typename T> T valueToType() const;
+    template<typename T> T value() const
+    {
+        return std::get<T>(m_variant);
+    }
+
+    template<typename T> T valueToType() const
+    {
+        return static_cast<T>(toIType());
+    }
+
     void setValue(Variant val);
     void setValue(VariantType val);
 
@@ -39,7 +53,10 @@ public:
     IType* toIType() const;
 #ifdef QT_SUPPORT
     // Unfortunately, a template has to be used here. Otherwise Qt has a massive hissy fit
-    template<typename T> QVariant toQVariant();
+    template<typename T> QVariant toQVariant()
+    {
+        return QVariant::fromValue<T>(m_variant);
+    }
 #endif
     String toString() const;
     VariantType variant() const;
