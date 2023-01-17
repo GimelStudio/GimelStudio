@@ -3,6 +3,8 @@
 
 #include "nodes/iproperty.h"
 
+using namespace gs::nodes;
+
 namespace gs::properties {
 class IntegerProperty : public IProperty {};
 } // gs::properties

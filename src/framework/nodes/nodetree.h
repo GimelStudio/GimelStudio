@@ -6,6 +6,7 @@
 
 #include "types/list.h"
 
+namespace gs::nodes {
 class NodeTree
 {
 private:
@@ -22,5 +23,6 @@ public:
     Node* outputNode();
     void setOutputNode(Node* n);
 };
+} // gs::nodes
 
 #endif // GS_NODES_NODETREE_H

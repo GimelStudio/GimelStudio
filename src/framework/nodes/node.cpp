@@ -7,8 +7,8 @@
 #include "iproperty.h"
 #include "properties/integerproperty.h"
 
+using namespace gs::nodes;
 using namespace gs::properties;
-
 
 void Node::addProperty(String name, IProperty* property)
 {

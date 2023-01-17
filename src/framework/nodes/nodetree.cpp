@@ -1,5 +1,7 @@
 #include "nodetree.h"
 
+using namespace gs::nodes;
+
 void NodeTree::addNode(Node* n)
 {
     n->initProperties();

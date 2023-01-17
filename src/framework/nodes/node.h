@@ -10,6 +10,7 @@
 
 using namespace gs::types;
 
+namespace gs::nodes {
 class Node
 {
 private:
@@ -38,5 +39,6 @@ public:
 
     template<typename T> T property(String propertyName);
 };
+} // gs::nodes
 
 #endif // GS_NODES_NODE_H
