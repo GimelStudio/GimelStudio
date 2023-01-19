@@ -49,7 +49,7 @@ We also use GLSL in addition to Python for image-editing, as applicable, via [Mo
 
 [OpenImageIO](https://openimageio.readthedocs.io/en/release-2.2.8.0) – OIIO is used for image input/output and some image editing. OpenImageIO is a library for reading, writing, and processing images in a wide variety of file formats using a format-agnostic API. It is used in professional large-scale visual effects and feature film animation, and it is used ubiquitously by large VFX studios, as well as incorporated into many commercial products.
 
-[Cario](https://pycairo.readthedocs.io/en/latest) – Cairo is a 2D graphics library with support for multiple output devices, including SVG, etc. We will use either Cairo or another library (suggestions welcome) for vector graphics support.
+[Cairo](https://pycairo.readthedocs.io/en/latest) – Cairo is a 2D graphics library with support for multiple output devices, including SVG, etc. We will use either Cairo or another library (suggestions welcome) for vector graphics support.
 
 [G'MIC](https://gmic.eu) – For additional image effects and filters (CPU-based). *Mainly need to wait for the [GMIC python bindings](https://github.com/myselfhimself/gmic-py) to support Windows and macOS before implementing this into Gimel Studio, but this probably won’t be implemented until after the core is stable anyway.*
 
