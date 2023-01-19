@@ -26,7 +26,7 @@ class ShortcutsModel : public QAbstractListModel, public IActionable
 
     Q_OBJECT
     INJECT_INSTANCE_METHOD(ShortcutsModel)
-    INJECT_STATIC(Dispatcher, dispatcher)
+    INJECT_CLASS_INSTANCE(Dispatcher, dispatcher)
 public:
     explicit ShortcutsModel(QObject* parent = nullptr);
 

@@ -1,17 +1,8 @@
 #ifndef GS_GLOBAL_INJECT_H
 #define GS_GLOBAL_INJECT_H
 
-// This macro can be used for any class
-#define INJECT(_Class, _name) \
-private: \
-    _Class* _name() \
-    { \
-        static _Class cls; \
-        return &cls; \
-    }
-
 // This macro can only be used if the class supplies its own instance method
-#define INJECT_STATIC(_Class, _name) \
+#define INJECT_CLASS_INSTANCE(_Class, _name) \
 private: \
     _Class* _name() \
     { \
@@ -26,5 +17,12 @@ public: \
         static _Class cls; \
         return &cls; \
     }
+
+#define INJECT_PROPERTY(_Type, _name, _getter, _setter) \
+public: \
+    _Type _getter() { return m_##_name; } \
+    void _setter(_Type val) { m_##_name = val; } \
+private: \
+    _Type m_##_name;
 
 #endif // GS_GLOBAL_INJECT_H

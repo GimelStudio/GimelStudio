@@ -16,7 +16,7 @@ class DevUiActions : public QObject, public IActionable
 {
     Q_OBJECT
 
-    INJECT_STATIC(Interactive, interactive)
+    INJECT_CLASS_INSTANCE(Interactive, interactive)
 public:
     DevUiActions();
 

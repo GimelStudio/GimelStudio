@@ -17,8 +17,8 @@ namespace gs::appshell
 class AppShellUiActions : public QObject, public IActionable
 {
     Q_OBJECT
-    INJECT_STATIC(Dispatcher, dispatcher)
-    INJECT_STATIC(Interactive, interactive)
+    INJECT_CLASS_INSTANCE(Dispatcher, dispatcher)
+    INJECT_CLASS_INSTANCE(Interactive, interactive)
 public:
     AppShellUiActions();
     
