@@ -1,5 +1,5 @@
 gsnodegraph==0.5.4
-gswidgetkit==0.3.1
+gswidgetkit==0.3.2
 moderngl==5.6.4
 numpy==1.22.0
 opencv-python==4.5.3.56
