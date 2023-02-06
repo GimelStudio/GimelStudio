@@ -69,11 +69,9 @@ Please see the [CONTRIBUTING.md](CONTRIBUTING.md) for some details on contributi
 
 *Please note: At this stage of development, the code is highly WIP and likely to change a lot. Many things are not implemented and not stable. Please don't expect too much at this point...*
 
-**Python 3.10 support is not available quite yet as we are waiting for upstream packages to update**
-
 ## Windows
 
-1. Make sure you have Python 3.8 or 3.9 installed on your system.
+1. Make sure you have Python 3.9 or 3.10 installed on your system.
 2. Run ``pip install -r requirements.txt``
 3. You can get an older release of OIIO (OpenImageIO) [here](https://www.lfd.uci.edu/~gohlke/pythonlibs/#openimageio) and install it with ``pip install <the_path_to_the_whl_here>``. Or, to use the latest version of OIIO, follow the build instructions [here](https://github.com/Correct-Syntax/py-oiio#windows-build-steps).
 4. Run ``cd src`` then ``python main.py`` to navigate to the src directory and run Gimel Studio.
