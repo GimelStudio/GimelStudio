@@ -66,8 +66,8 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
         """
 
         dcsaver = DCSaver(dc)
-        sepRect1 = wx.Rect(xCoord + textX, yCoord + 1, sepWidth/2, 1)
-        sepRect2 = wx.Rect(xCoord + textX + sepWidth/2, yCoord + 1, sepWidth/2-1, 1)
+        sepRect1 = wx.Rect(xCoord + textX, yCoord + 1, int(sepWidth/2), 1)
+        sepRect2 = wx.Rect(int(xCoord + textX + sepWidth/2), yCoord + 1, int(sepWidth/2-1), 1)
 
         artMgr = ArtManager.Get()
         backColour = wx.Colour("#3b3b3b")
@@ -147,11 +147,11 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
             imgWidth = bmp.GetWidth()
 
             if imageMarginX == 0:
-                xx = rect.x + (leftMarginWidth - imgWidth) / 2
+                xx = int(rect.x + (leftMarginWidth - imgWidth) / 2)
             else:
-                xx = rect.x + ((leftMarginWidth - rect.height) - imgWidth) / 2 + rect.height
+                xx = int(rect.x + ((leftMarginWidth - rect.height) - imgWidth) / 2 + rect.height)
 
-            yy = rect.y + (rect.height - imgHeight) / 2
+            yy = int(rect.y + (rect.height - imgHeight) / 2)
             dc.DrawBitmap(bmp, xx, yy, True)
 
         if item.GetKind() == wx.ITEM_CHECK:
@@ -167,7 +167,7 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
                 if not selected and self.highlightCheckAndRadio:
                     self.DrawButton(dc, rr, ControlFocus)
 
-                dc.DrawBitmap(item._checkMarkBmp, rr.x + (rr.width - 16) / 2, rr.y + (rr.height - 16) / 2, True)
+                dc.DrawBitmap(item._checkMarkBmp, int(rr.x + (rr.width - 16) / 2), int(rr.y + (rr.height - 16) / 2), True)
 
         if item.GetKind() == wx.ITEM_RADIO:
 
@@ -240,15 +240,15 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
             else:
 
                 w, h = dc.GetTextExtent(text)
-                dc.DrawText(text, xCoord + textX + borderXSize, (itemHeight - h) / 2 + yCoord)
+                dc.DrawText(text, int(xCoord + textX + borderXSize), int((itemHeight - h) / 2 + yCoord))
 
         # Now draw accelerator
         # Accelerators are aligned to the right
         if item.GetAccelString():
 
             accelWidth, accelHeight = dc.GetTextExtent(item.GetAccelString())
-            dc.DrawText(item.GetAccelString(), xCoord + rightMarginX -
-                        accelWidth, (itemHeight - accelHeight) / 2 + yCoord)
+            dc.DrawText(item.GetAccelString(), int(xCoord + rightMarginX -
+                        accelWidth), int((itemHeight - accelHeight) / 2 + yCoord))
 
         # Check if this item has sub-menu - if it does, draw
         # right arrow on the right margin
@@ -260,7 +260,7 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
 
             xx = xCoord + rightMarginX + borderXSize
             rr = wx.Rect(xx, rect.y + 1, rect.height - 2, rect.height - 2)
-            dc.DrawBitmap(rightArrowBmp, rr.x + 4, rr.y + (rr.height - 16) / 2, True)
+            dc.DrawBitmap(rightArrowBmp, rr.x + 4, int(rr.y + (rr.height - 16) / 2), True)
 
     def DrawButton(self, dc, rect, state, colour=None):
         """
@@ -353,7 +353,7 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
             # Get the menu item rect
             textWidth, textHeight = dc.GetTextExtent(fixedText)
             #rect = wx.Rect(posx+menubar._spacer/2, posy, textWidth, textHeight)
-            rect = wx.Rect(posx + padding / 2, posy, textWidth, textHeight)
+            rect = wx.Rect(int(posx + padding / 2), posy, textWidth, textHeight)
 
             # Can we draw more??
             # the +DROP_DOWN_ARROW_WIDTH  is the width of the drop down arrow
@@ -383,7 +383,7 @@ class UIMenuBarRenderer(flatmenu.FMRenderer):
                 dc.SetTextForeground(textColour)
 
             ww, hh = dc.GetTextExtent(labelOnly)
-            textOffset = (rect.width - ww) / 2
+            textOffset = int((rect.width - ww) / 2)
 
             if not menubar._isLCD and item.GetTextBitmap().IsOk() and not selected:
                 dc.DrawBitmap(item.GetTextBitmap(), rect.x, rect.y, True)

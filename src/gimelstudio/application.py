@@ -375,9 +375,9 @@ class ApplicationFrame(wx.Frame):
         self.main_sizer.Add(self.menubar, 0, wx.EXPAND)
 
         # Create the statusbar
-        # self.statusbar = StatusBar(self)
-        # self.SetStatusBar(self.statusbar)
-        # self.statusbar.Hide()
+        self.statusbar = StatusBar(self)
+        #self.SetStatusBar(self.statusbar)
+        self.statusbar.Hide()
 
         # Window manager
         self.mgr = AUIManager(self)

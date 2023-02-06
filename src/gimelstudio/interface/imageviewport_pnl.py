@@ -133,8 +133,8 @@ class ImageViewport(ZoomPanel):
 
     def OnDrawScene(self, dc):
         image = self.GetImage()
-        x = (self.Size[0] - image.Width) / 2.0
-        y = (self.Size[1] - image.Height) / 2.0
+        x = int((self.Size[0] - image.Width) / 2.0)
+        y = int((self.Size[1] - image.Height) / 2.0)
 
         # Draw checkerboard background using bitmap
         dc.SetPen(wx.TRANSPARENT_PEN)
@@ -142,7 +142,7 @@ class ImageViewport(ZoomPanel):
 
         # For some odd reason, we have to shave off 2px here
         # otherwise the background is too large for the image.
-        dc.DrawRectangle(wx.Rect(x, y, int(image.Width)-2, int(image.Height)-2))
+        dc.DrawRectangle(wx.Rect(x, y, int(image.Width-2), int(image.Height-2)))
 
         # Draw the image
         dc.DrawBitmap(image, x, y, useMask=False)
@@ -182,8 +182,8 @@ class ImageViewport(ZoomPanel):
 
     def SetZoomLevel(self, zoom, x=0, y=0):
         if x == 0:
-            x = self.Size[0]/2
-            y = self.Size[1]/2
+            x = int(self.Size[0]/2)
+            y = int(self.Size[1]/2)
         self.ScenePostScale(zoom, zoom, x, y)
         self.UpdateZoomValue()
         self.UpdateDrawing()
