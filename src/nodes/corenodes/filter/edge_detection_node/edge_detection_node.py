@@ -26,7 +26,7 @@ class EdgeDetectionNode(api.Node):
         meta_info = {
             "label": "Edge Detection",
             "author": "Gimel Studio",
-            "version": (0, 5, 0),
+            "version": (0, 6, 0),
             "category": "FILTER",
             "description": "Detect the edges in an image.",
         }
