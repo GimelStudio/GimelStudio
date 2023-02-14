@@ -152,7 +152,7 @@ class ImageViewport(ZoomPanel):
 
     def OnKeyEvent(self, event):
         code = event.GetKeyCode()
-        mouse = wx.Point(self.Size[0] / 2, self.Size[1] / 2)
+        mouse = wx.Point(int(self.Size[0] / 2), int(self.Size[1] / 2))
 
         # plus (+)
         if code == wx.WXK_NUMPAD_ADD:
