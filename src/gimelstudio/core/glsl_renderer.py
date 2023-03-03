@@ -89,7 +89,11 @@ class GLSLRenderer(object):
         if vao is None:
             vertex_shader = """
                 #version 330
+                
                 in vec2 in_position;
+
+                out vec2 tex_coord;
+
                 void main() {
                     gl_Position = vec4(in_position, 0.0, 1.0);
                 }
