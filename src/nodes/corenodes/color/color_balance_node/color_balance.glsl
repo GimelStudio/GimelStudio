@@ -1,5 +1,5 @@
 // ----------------------------------------------------------------------------
-// Gimel Studio Copyright 2019-2022 by the Gimel Studio project contributors
+// Gimel Studio Copyright 2019-2023 by the Gimel Studio project contributors
 // Licensed under the Apache License 2.0
 //
 // GLSL code is from https://github.com/kajott/GIPS
