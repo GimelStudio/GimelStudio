@@ -15,6 +15,6 @@ vec4 gamma(vec4 in_color, float g) {
 }
 
 void main() {
-  	vec4 col = texelFetch(input_img, ivec2(gl_FragCoord.xy), 0);
+    vec4 col = texelFetch(input_img, ivec2(gl_FragCoord.xy), 0);
     output_img = gamma(col, 1.5);
 }
