@@ -40,7 +40,7 @@ class GammaNode(api.Node):
             idname="gamma_value",
             default=1,
             min_val=1,
-            max_val=20,
+            max_val=100,
             show_p=True,
             fpb_label="Gamma"
         )
@@ -63,8 +63,6 @@ class GammaNode(api.Node):
 
         # Make correction for slider range of 1-100
         gamma_value = (gamma_value * 0.1)
-
-        print(gamma_value)
 
         props = {
             "gamma_value": gamma_value,
