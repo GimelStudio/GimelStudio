@@ -108,9 +108,9 @@ class AddTextNode(api.Node):
 
         spec = img.spec()
         txt = oiio.ImageBuf(oiio.ImageSpec(spec.width, spec.height, 4, oiio.INT16))
-        oiio.ImageBufAlgo.render_text (txt, position[0], position[1], text,
-                                       font_size, font, (255,255,255,1), alignx=align_x.lower(), 
-                                       aligny=align_y.lower())
+        oiio.ImageBufAlgo.render_text(txt, position[0], position[1], text,
+                                      font_size, font, (255,255,255,1), alignx=align_x.lower(), 
+                                      aligny=align_y.lower())
         dst = oiio.ImageBufAlgo.over(txt, img)
 
         render_image.SetAsImage(dst)
