@@ -86,52 +86,56 @@ class ProjectFileIO(object):
         self.contents["node_graph"]["nodes"] = nodes_data
 
     def CreateNodesFromData(self, nodegraph):
-        # Clear previous nodes and wires
-        nodegraph.nodes = {}
-        nodegraph.wires = []
+        try:
+            # Clear previous nodes and wires
+            nodegraph.nodes = {}
+            nodegraph.wires = []
 
-        # Create the nodes from the data
-        nodes_data = self.contents["node_graph"]["nodes"]
-        for node_id in nodes_data:
-            node_data = nodes_data[node_id]
+            # Create the nodes from the data
+            nodes_data = self.contents["node_graph"]["nodes"]
+            for node_id in nodes_data:
+                node_data = nodes_data[node_id]
 
-            # Create the node object
-            node = nodegraph.AddNode(node_data["idname"], 
+                # Create the node object
+                node = nodegraph.AddNode(node_data["idname"], 
                                     pos=node_data["pos"], 
                                     nodeid=node_id,
                                     location="POSITION")
 
-            # Create the node properties
-            prop_data = node_data["properties"]
-            for prop in prop_data:
-                node.NodeEditProp(idname=prop_data[prop]["idname"],
+                # Create the node properties
+                prop_data = node_data["properties"]
+                for prop in prop_data:
+                    node.NodeEditProp(idname=prop_data[prop]["idname"],
                                   value=prop_data[prop]["value"], 
                                   render=False)
 
-        # Create the parameters and node connections
-        for node_id in nodes_data:
-            node_data = nodes_data[node_id]
-            node_objs = nodegraph.GetNodes()
-            param_data = node_data["parameters"]
-            node = node_objs[node_id]
+            # Create the parameters and node connections
+            for node_id in nodes_data:
+                node_data = nodes_data[node_id]
+                node_objs = nodegraph.GetNodes()
+                param_data = node_data["parameters"]
+                node = node_objs[node_id]
 
-            for socket in node.GetSockets():
-                if socket.direction == SOCKET_INPUT:
-                    dst_socket = socket
+                for socket in node.GetSockets():
+                    if socket.direction == SOCKET_INPUT:
+                        dst_socket = socket
 
-                    # Find the output socket, connect the input socket
-                    src_node_id = param_data[dst_socket.idname]["binding"]  
-                    if src_node_id != "":  # Make sure there actually is a node connected
-                        src_node = node_objs[src_node_id]
+                        # Find the output socket, connect the input socket
+                        src_node_id = param_data[dst_socket.idname]["binding"]  
+                        if src_node_id != "":  # Make sure there actually is a node connected
+                            src_node = node_objs[src_node_id]
 
-                        for socket in src_node.GetSockets():
-                            # We're assuming there is only one output
-                            if socket.direction == SOCKET_OUTPUT:
-                                src_socket = socket
+                            for socket in src_node.GetSockets():
+                                # We're assuming there is only one output
+                                if socket.direction == SOCKET_OUTPUT:
+                                    src_socket = socket
 
-                        # Finally, connect the sockets
-                        nodegraph.ConnectNodes(src_socket, dst_socket)
+                            # Finally, connect the sockets
+                            nodegraph.ConnectNodes(src_socket, dst_socket)
             
+        except:
+            wx.MessageBox(message="Unable to create graph from file, is the file corrupted?")
+
         nodegraph.UpdateNodeGraph()
 
     def WriteFile(self, file_path, contents):
