@@ -133,9 +133,9 @@ class ProjectFileIO(object):
                             # Finally, connect the sockets
                             nodegraph.ConnectNodes(src_socket, dst_socket)
             
-        except:
-            wx.MessageBox(message=_("Unable to create graph from file, the file may be corrupted."))
-
+        except Exception as e:
+            wx.MessageBox(message=_("Unable to create graph from file, the file may be corrupt\n(Details: check 1 failed to complete:)"))
+            
         nodegraph.UpdateNodeGraph()
 
     def WriteFile(self, file_path, contents):
@@ -148,8 +148,11 @@ class ProjectFileIO(object):
 
     def OpenFile(self, file_path):
         with open(file_path, "r") as file:
-            file_contents = json.load(file)
-            self.contents = file_contents
+            try:
+                file_contents = json.load(file)
+                self.contents = file_contents
+            except Exception as e:
+                wx.MessageBox(message=_("Unable to create graph from file, the file maybe corrupt\n(Details: check 2 failed to complete:)"))
         self.file_path = file_path
 
     def SaveFile(self):
