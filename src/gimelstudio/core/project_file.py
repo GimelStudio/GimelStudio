@@ -134,7 +134,7 @@ class ProjectFileIO(object):
                             nodegraph.ConnectNodes(src_socket, dst_socket)
             
         except:
-            wx.MessageBox(message=_("Unable to create graph from file, is the file corrupted?"))
+            wx.MessageBox(message=_("Unable to create graph from file, the file may be corrupted."))
 
         nodegraph.UpdateNodeGraph()
 
