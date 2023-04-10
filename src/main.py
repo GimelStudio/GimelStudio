@@ -73,7 +73,7 @@ class MainApp(wx.App):
 
         # Setup the Locale
         self.InitI18n()
-        self.Setlang(self.language)
+        self.SetLang(self.language)
 
         # Show the application window
         self.frame = ApplicationFrame(app_config=self.app_config)
@@ -93,7 +93,7 @@ class MainApp(wx.App):
         self.locale.AddCatalogLookupPathPrefix(path)
         self.locale.AddCatalog(self.GetAppName())
 
-    def Setlang(self, language):
+    def SetLang(self, language):
         supported_langs = {
             "LANGUAGE_ENGLISH": "en",
             "LANGUAGE_FRENCH": "fr",
