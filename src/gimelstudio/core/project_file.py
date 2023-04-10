@@ -106,8 +106,8 @@ class ProjectFileIO(object):
                 prop_data = node_data["properties"]
                 for prop in prop_data:
                     node.NodeEditProp(idname=prop_data[prop]["idname"],
-                                  value=prop_data[prop]["value"], 
-                                  render=False)
+                                      value=prop_data[prop]["value"], 
+                                      render=False)
 
             # Create the parameters and node connections
             for node_id in nodes_data:
