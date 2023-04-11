@@ -134,7 +134,7 @@ class ProjectFileIO(object):
                             nodegraph.ConnectNodes(src_socket, dst_socket)
             
         except:
-            wx.MessageBox(message=_("Unable to create graph from file. The file may be corrupt\n(Details: check 1 failed to complete)"))
+            wx.MessageBox(message=_("Unable to open the project from file. Loading the nodes failed. The file may be corrupted."))
             
         nodegraph.UpdateNodeGraph()
 
@@ -152,7 +152,7 @@ class ProjectFileIO(object):
                 file_contents = json.load(file)
                 self.contents = file_contents
             except:
-                wx.MessageBox(message=_("Unable to create graph from file, the file may be corrupt\n(Details: check 2 failed to complete:)"))
+                wx.MessageBox(message=_("Unable to open the project because opening the file failed. The file may be corrupted."))
         self.file_path = file_path
 
     def SaveFile(self):
