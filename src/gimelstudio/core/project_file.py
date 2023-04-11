@@ -152,7 +152,7 @@ class ProjectFileIO(object):
                 file_contents = json.load(file)
                 self.contents = file_contents
             except Exception as e:
-                wx.MessageBox(message=_("Unable to create graph from file, the file maybe corrupt\n(Details: check 2 failed to complete:)"))
+                wx.MessageBox(message=_("Unable to create graph from file, the file may be corrupt\n(Details: check 2 failed to complete:)"))
         self.file_path = file_path
 
     def SaveFile(self):
