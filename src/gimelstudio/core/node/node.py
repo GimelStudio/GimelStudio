@@ -238,7 +238,9 @@ class Node(NodeView):
             "image": render_image
         }
 
-    def RenderGLSL(self, path, props, image=None, image2=None):
+    def RenderGLSL(self, path, props, image, image2=None):
+        if image is None:
+            image = Image(200, 200)
         if self.shader_cache_enabled == True:
             if self.shader_cache == None:
                 self.shader_cache = self.LoadGLSL(path)

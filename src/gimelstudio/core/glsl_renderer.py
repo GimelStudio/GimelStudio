@@ -81,7 +81,7 @@ class GLSLRenderer(object):
             glsl_shader = str(fp.read())
         return glsl_shader
 
-    def Render(self, frag_shader, props, image=None, image2=None):
+    def Render(self, frag_shader, props, image, image2=None):
         hash_value = hashlib.md5(copy.copy(frag_shader).encode())
         vao = self._vaos.get(hash_value)
         self.WriteViewports(image, image2)
