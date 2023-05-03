@@ -223,7 +223,7 @@ class Node(NodeView):
         if self.IsMuted():
             return self.MutedNodeEvaluation
         return self.NodeEvaluation
- 
+
     def EvalMutedNode(self, eval_info):
         try:
             image = self.EvalProperty(eval_info, "in_image").GetImage()
@@ -232,15 +232,13 @@ class Node(NodeView):
         render_image = Image()
         render_image.SetAsImage(image)
         self.NodeUpdateThumb(render_image)
-        
+
         # TODO: support multi-outputs
         return {
             "image": render_image
         }
 
-    def RenderGLSL(self, path, props, image, image2=None):
-        if image is None:
-            image = Image(200, 200)
+    def RenderGLSL(self, path, props, image=Image(200, 200), image2=None):
         if self.shader_cache_enabled == True:
             if self.shader_cache == None:
                 self.shader_cache = self.LoadGLSL(path)
