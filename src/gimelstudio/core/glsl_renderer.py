@@ -101,7 +101,7 @@ class GLSLRenderer(object):
 
             program = self.gl_context.program(vertex_shader=vertex_shader,
                                               fragment_shader=frag_shader)
-            program["input_img"] = 0
+            # program["input_img"] = 0
             if image2 is not None:
                 program["input_img2"] = 1
 
