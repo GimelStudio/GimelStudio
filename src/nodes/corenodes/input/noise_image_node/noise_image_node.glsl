@@ -30,7 +30,7 @@ float simplex_noise(vec2 pos) {
 
 void main() {
     vec2 res = textureSize(input_img, 0);
-    vec2 st = gl_FragCoord.xy/vec2(512.0, 512.0);
+    vec2 st = gl_FragCoord.xy/res;
     float randomValue = simplex_noise(st);
     vec3 color = step(0.5, vec3(randomValue));
     gl_FragColor = vec4(vec3(color),1.0);

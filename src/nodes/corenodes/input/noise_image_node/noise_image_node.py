@@ -51,23 +51,13 @@ class NoiseImageNode(api.Node):
         self.RefreshNodeGraph()
 
     def NodeInitProps(self):
-        noise_seed = api.IntegerProp(
-            idname="noise_seed",
-            default=1,
-            min_val=0,
-            max_val=100,
-            fpb_label="Noise Seed"
-        )
-
-        self.NodeAddProp(noise_seed)
-
         height = api.IntegerProp(
             idname="height",
             default=512,
             min_val=1,
             max_val=10000,
             show_p=True,
-            fpb_label="Opacity"
+            fpb_label="Height"
         )
 
         width = api.IntegerProp(
@@ -76,7 +66,7 @@ class NoiseImageNode(api.Node):
             min_val=1,
             max_val=10000,
             show_p=True,
-            fpb_label="Opacity"
+            fpb_label="Width"
         )
         self.NodeAddProp(height)
         self.NodeAddProp(width)
@@ -98,16 +88,6 @@ class NoiseImageNode(api.Node):
         return {
             "image": render_image
         }
-        # noise_seed = self.EvalProperty(eval_info, "noise_seed")
-        #
-        # render_image = api.Image()
-        #
-        # buf = oiio.ImageBuf(oiio.ImageSpec(1200, 1200, 4, oiio.FLOAT))
-        # oiio.ImageBufAlgo.noise (buf, "gaussian", 0.5, 0.5, mono=True, seed=noise_seed)
-        #
-        # render_image.SetAsImage(buf)
-        # self.NodeUpdateThumb(render_image)
-        # # return render_image
 
 
 api.RegisterNode(NoiseImageNode, "corenode_noiseimage")
