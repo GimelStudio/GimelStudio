@@ -80,7 +80,9 @@ class NoiseImageNode(api.Node):
         render_image = api.Image()
         props = {}
         shader_src = "nodes/corenodes/input/noise_image_node/noise_image_node.glsl"
-        image = Image((eval_info.node.properties['width'].value, eval_info.node.properties['height'].value))
+        image_width = self.EvalProperty(eval_info, "width")
+        image_height = self.EvalProperty(eval_info, "height")
+        image = Image((image_width, image_height))
         result = self.RenderGLSL(shader_src, props, image)
 
         render_image.SetAsImage(result)
