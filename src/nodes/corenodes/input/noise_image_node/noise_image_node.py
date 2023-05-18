@@ -23,6 +23,7 @@ except ImportError:
 from gimelstudio import api
 from gimelstudio.core import EvalInfo, Image
 
+
 class NoiseImageNode(api.Node):
     def __init__(self, nodegraph, id):
         api.Node.__init__(self, nodegraph, id)
@@ -38,7 +39,6 @@ class NoiseImageNode(api.Node):
         }
         return meta_info
 
-
     def NodeWidgetEventHook(self, idname, value):
         if idname == "noise_seed":
             image = self.NodeEvalSelf()
@@ -51,15 +51,6 @@ class NoiseImageNode(api.Node):
         self.RefreshNodeGraph()
 
     def NodeInitProps(self):
-        height = api.IntegerProp(
-            idname="height",
-            default=512,
-            min_val=1,
-            max_val=10000,
-            show_p=True,
-            fpb_label="Height"
-        )
-
         width = api.IntegerProp(
             idname="width",
             default=512,
@@ -68,8 +59,16 @@ class NoiseImageNode(api.Node):
             show_p=True,
             fpb_label="Width"
         )
-        self.NodeAddProp(height)
+        height = api.IntegerProp(
+            idname="height",
+            default=512,
+            min_val=1,
+            max_val=10000,
+            show_p=True,
+            fpb_label="Height"
+        )
         self.NodeAddProp(width)
+        self.NodeAddProp(height)
 
     def NodeInitOutputs(self):
         self.outputs = {
