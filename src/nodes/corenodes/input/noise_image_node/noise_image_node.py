@@ -21,6 +21,7 @@ except ImportError:
      https://www.lfd.uci.edu/~gohlke/pythonlibs/#openimageio""")
 
 from gimelstudio import api
+from gimelstudio.core import EvalInfo, Image
 
 
 class NoiseImageNode(api.Node):
@@ -32,7 +33,7 @@ class NoiseImageNode(api.Node):
         meta_info = {
             "label": "Noise",
             "author": "Gimel Studio",
-            "version": (0, 0, 5),
+            "version": (0, 6, 0),
             "category": "INPUT",
             "description": "Creates a noise image."
         }
@@ -50,27 +51,44 @@ class NoiseImageNode(api.Node):
         self.RefreshNodeGraph()
 
     def NodeInitProps(self):
-        noise_seed = api.PositiveIntegerProp(
-            idname="noise_seed",
-            default=1,
-            min_val=0,
-            max_val=100,
-            fpb_label="Noise Seed"
+        width = api.IntegerProp(
+            idname="width",
+            default=512,
+            min_val=1,
+            max_val=10000,
+            show_p=True,
+            fpb_label="Width"
         )
+        height = api.IntegerProp(
+            idname="height",
+            default=512,
+            min_val=1,
+            max_val=10000,
+            show_p=True,
+            fpb_label="Height"
+        )
+        self.NodeAddProp(width)
+        self.NodeAddProp(height)
 
-        self.NodeAddProp(noise_seed)
+    def NodeInitOutputs(self):
+        self.outputs = {
+            "image": api.Output(idname="image", datatype="IMAGE", label="Image"),
+        }
 
     def NodeEvaluation(self, eval_info):
-        noise_seed = self.EvalProperty(eval_info, "noise_seed")
-
         render_image = api.Image()
+        image_width = self.EvalProperty(eval_info, "width")
+        image_height = self.EvalProperty(eval_info, "height")
+        props = {}
+        shader_src = "nodes/corenodes/input/noise_image_node/noise_image_node.glsl"
+        image = Image((image_width, image_height))
+        result = self.RenderGLSL(shader_src, props, image)
 
-        buf = oiio.ImageBuf(oiio.ImageSpec(1200, 1200, 4, oiio.FLOAT))
-        oiio.ImageBufAlgo.noise (buf, "gaussian", 0.5, 0.5, mono=True, seed=noise_seed)
-
-        render_image.SetAsImage(buf)
+        render_image.SetAsImage(result)
         self.NodeUpdateThumb(render_image)
-        return render_image
+        return {
+            "image": render_image
+        }
 
 
 api.RegisterNode(NoiseImageNode, "corenode_noiseimage")
