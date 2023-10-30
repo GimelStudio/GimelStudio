@@ -19,7 +19,7 @@ This repository tracks the next step of Gimel Studio to become a truly usable an
 
 You’re always welcome to help out, ask questions, give feedback, and suggest ideas/improvements.
 
-**Join us in our Zulip chat organization [here](https://gimelstudio.zulipchat.com/join/sif32f3gjpnikveonzgc7zhw/) to give your feedback and stay in the loop!**
+**Join us in the Zulip chat organization [here](https://gimelstudio.zulipchat.com/join/sif32f3gjpnikveonzgc7zhw/) to give your feedback and stay in the loop!**
 
 
 # Project Vision
@@ -48,10 +48,6 @@ With a fully non-destructive workflow that uses both GPU and CPU processing (via
 
 
 # Current Status
-
-**6/6/22 update:** We're in the process of planning for another step to hopefully propel the project forward with a clearer goals and organization.
-
-**Join us in our Zulip chat organization [here](https://gimelstudio.zulipchat.com/join/sif32f3gjpnikveonzgc7zhw/) to give your feedback and stay in the loop!**
 
 There are [alpha pre-releases](https://github.com/GimelStudio/GimelStudio/releases) available for those wanting to test the current functionality.
 
