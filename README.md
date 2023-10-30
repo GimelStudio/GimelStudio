@@ -12,6 +12,9 @@
 
 # About Gimel Studio
 
+> [!NOTE]
+> 10/30/2023 The Gimel Studio maintainers have decided to place the project on a **temporary hiatus**. Our dedication to Gimel Studio remains and we have some ideas we want to bring to the open-source community. We plan to pick back up on planning, design, and development sometime in 2024. Thanks for your support and understanding. -Noah, on behalf of the Gimel Studio maintainers
+
 This repository tracks the next step of Gimel Studio to become a truly usable and serious non-destructive graphics editor. It is currently in ``initial planning/development`` stage, working towards a usable MVP application. Things will probably change **a lot** from what is currently here.
 
 You’re always welcome to help out, ask questions, give feedback, and suggest ideas/improvements.
