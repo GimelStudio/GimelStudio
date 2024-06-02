@@ -153,6 +153,8 @@ class AddNodeMenu(wx.PopupTransientWindow):
 
         self.SetBackgroundColour(const.ADD_NODE_MENU_BG)
 
+        self.Bind(wx.EVT_KILL_FOCUS, self.Dismiss)
+
         self.InitRegistryMapping()
         self.InitAddNodeMenuUI()
 
