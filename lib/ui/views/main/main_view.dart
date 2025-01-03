@@ -1,4 +1,3 @@
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:gimelstudio/ui/widgets/layers_panel/layers_panel.dart';
 import 'package:gimelstudio/ui/widgets/menu_bar/top_menu_bar.dart';
@@ -47,45 +46,6 @@ class MainView extends StackedView<MainViewModel> {
                                       children: [
                                         const Expanded(
                                           child: ViewportPanel(),
-                                        ),
-                                        Container(
-                                          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
-                                          child: Row(
-                                            children: [
-
-                                              Text(
-                                                '${viewModel.imageFileName} ${viewModel.imageWidthHeight}',
-                                                style: const TextStyle(
-                                                  color: Colors.white70,
-                                                  fontSize: 12.0,
-                                                ),
-                                              ),
-                                              const SizedBox(width: 20.0),
-                                              InkWell(
-                                                onTap: viewModel.onChangeImageBtn,
-                                                child: Container(
-                                                  height: 30,
-                                                  width: 110,
-                                                  decoration: BoxDecoration(
-                                                    color: Color.fromARGB(255, 52, 52, 52),
-                                                    borderRadius: BorderRadius.circular(4.0),
-                                                  ),
-                                                  child: const Row(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    children: [
-                                                      Text(
-                                                        'Change image',
-                                                        style: TextStyle(
-                                                          color: Colors.white70,
-                                                          fontSize: 12.0,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
                                         ),
                                       ],
                                     ),

@@ -6,6 +6,7 @@ import 'package:gimelstudio/services/viewport_service.dart';
 import 'package:gimelstudio/services/file_service.dart';
 import 'package:gimelstudio/services/image_service.dart';
 import 'package:gimelstudio/services/layers_service.dart';
+import 'package:gimelstudio/services/nodegraphs_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -18,6 +19,7 @@ import 'test_helpers.mocks.dart';
   MockSpec<FileService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<ImageService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<LayersService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<NodegraphsService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -28,6 +30,7 @@ void registerServices() {
   getAndRegisterFileService();
   getAndRegisterImageService();
   getAndRegisterLayersService();
+  getAndRegisterNodegraphsService();
 // @stacked-mock-register
 }
 
@@ -105,6 +108,13 @@ MockLayersService getAndRegisterLayersService() {
   _removeRegistrationIfExists<LayersService>();
   final service = MockLayersService();
   locator.registerSingleton<LayersService>(service);
+  return service;
+}
+
+MockNodegraphsService getAndRegisterNodegraphsService() {
+  _removeRegistrationIfExists<NodegraphsService>();
+  final service = MockNodegraphsService();
+  locator.registerSingleton<NodegraphsService>(service);
   return service;
 }
 // @stacked-mock-create

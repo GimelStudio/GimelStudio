@@ -190,14 +190,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.7"
-  dartcv4:
-    dependency: transitive
-    description:
-      name: dartcv4
-      sha256: a1322359f9aede04f3959211f40c3806175b32c2772b2655ce434e64b90c7b9a
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.1"
   fake_async:
     dependency: transitive
     description:
@@ -573,14 +565,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
-  opencv_core:
-    dependency: "direct main"
-    description:
-      name: opencv_core
-      sha256: c100440faa93c8fcf918386bdb46d49495d7e13367e0a0024d54e63e19a4bab6
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.3.3"
   package_config:
     dependency: transitive
     description:

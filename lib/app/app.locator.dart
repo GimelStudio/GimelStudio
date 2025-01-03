@@ -14,6 +14,7 @@ import 'package:stacked_shared/stacked_shared.dart';
 import '../services/file_service.dart';
 import '../services/image_service.dart';
 import '../services/layers_service.dart';
+import '../services/nodegraphs_service.dart';
 import '../services/viewport_service.dart';
 
 final locator = StackedLocator.instance;
@@ -33,4 +34,5 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => FileService());
   locator.registerLazySingleton(() => ImageService());
   locator.registerLazySingleton(() => LayersService());
+  locator.registerLazySingleton(() => NodegraphsService());
 }

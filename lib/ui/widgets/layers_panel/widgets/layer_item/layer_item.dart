@@ -47,11 +47,11 @@ class LayerItem extends StackedView<LayerItemModel> {
               child: Row(
                 spacing: 8.0,
                 children: [
-                  PhosphorIcon(
-                    PhosphorIcons.caretRight(PhosphorIconsStyle.light),
-                    color: Colors.white70,
-                    size: 12.0,
-                  ),
+                  // PhosphorIcon(
+                  //   PhosphorIcons.caretRight(PhosphorIconsStyle.light),
+                  //   color: Colors.white70,
+                  //   size: 12.0,
+                  // ),
                   Container(
                     color: Colors.white,
                     width: 26.0,
