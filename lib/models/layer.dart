@@ -1,3 +1,5 @@
+import 'package:gimelstudio/models/nodegraph.dart';
+
 enum BlendMode {
   normal,
   darken,
@@ -16,7 +18,7 @@ class Layer {
     required this.locked,
     required this.opacity,
     required this.blend,
-    required this.data,
+    required this.nodegraph,
   });
 
   final int id;
@@ -27,7 +29,7 @@ class Layer {
   bool locked;
   int opacity;
   BlendMode blend;
-  Object data;
+  NodeGraph nodegraph;
 
   dynamic thumbnail = null;
 

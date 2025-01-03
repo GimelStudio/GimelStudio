@@ -24,6 +24,29 @@ class PropertiesPanel extends StackedView<PropertiesPanelModel> {
         //     await viewModel.updateBlur(value.toInt(), value.toInt());
         //   },
         // ),
+
+        DropdownButton<String>(
+          // Step 3.
+          value: 'Dog',
+          // Step 4.
+          items: <String>['Dog', 'Cat', 'Tiger', 'Lion'].map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(
+                value,
+                style: const TextStyle(
+                  fontSize: 30.0,
+                ),
+              ),
+            );
+          }).toList(),
+          // Step 5.
+          onChanged: (String? newValue) {
+            // setState(() {
+            //   dropdownValue = newValue!;
+            // });
+          },
+        ),
       ],
     );
   }

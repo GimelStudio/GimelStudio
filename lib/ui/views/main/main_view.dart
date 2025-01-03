@@ -53,7 +53,7 @@ class MainView extends StackedView<MainViewModel> {
                                 },
                               ),
                               Area(
-                                size: 70.0,
+                                size: 170.0,
                                 max: 250.0,
                                 min: 50.0,
                                 builder: (context, area) {
@@ -98,8 +98,10 @@ class MainView extends StackedView<MainViewModel> {
                                       ),
 
                                       // Node editor
-                                      const Expanded(
-                                        child: NodeGraphPanel(),
+                                      Expanded(
+                                        child: InteractiveViewer(
+                                          child: NodeGraphPanel(),
+                                        ),
                                       ),
                                     ],
                                   );

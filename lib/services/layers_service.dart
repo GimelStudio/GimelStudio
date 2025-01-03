@@ -1,5 +1,7 @@
 import 'dart:math' as math;
 
+import 'package:gimelstudio/models/nodegraph.dart';
+import 'package:gimelstudio/models/nodes.dart';
 import 'package:stacked/stacked.dart';
 
 import '../models/layer.dart';
@@ -26,7 +28,15 @@ class LayersService with ListenableServiceMixin {
       locked: false,
       opacity: 100,
       blend: BlendMode.normal,
-      data: 0,
+      nodegraph: NodeGraph(
+        id: 0,
+        nodes: {
+          'integer': IntegerNode(),
+          'integer2': IntegerNode(),
+          'add': AddNode(),
+          'output': OutputNode(),
+        },
+      ),
     ),
     Layer(
       id: 1,
@@ -37,7 +47,14 @@ class LayersService with ListenableServiceMixin {
       locked: false,
       opacity: 100,
       blend: BlendMode.normal,
-      data: 0,
+      nodegraph: NodeGraph(
+        id: 1,
+        nodes: {
+          'integer': IntegerNode(),
+          'add': AddNode(),
+          'output': OutputNode(),
+        },
+      ),
     ),
     Layer(
       id: 2,
@@ -48,7 +65,15 @@ class LayersService with ListenableServiceMixin {
       locked: false,
       opacity: 100,
       blend: BlendMode.normal,
-      data: 0,
+      nodegraph: NodeGraph(
+        id: 2,
+        nodes: {
+          'integer': IntegerNode(),
+          'integer2': IntegerNode(),
+          'add': AddNode(),
+          'output': OutputNode(),
+        },
+      ),
     ),
   ];
   List<Layer> get layers => _layers;
@@ -107,7 +132,13 @@ class LayersService with ListenableServiceMixin {
         locked: false,
         opacity: 100,
         blend: BlendMode.normal,
-        data: 0,
+        nodegraph: NodeGraph(
+          id: layers.length + 1, // TODO
+          nodes: {
+            'integer': IntegerNode(),
+            'output': OutputNode(),
+          },
+        ),
       ),
     );
     notifyListeners();

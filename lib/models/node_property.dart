@@ -1,0 +1,50 @@
+import 'package:gimelstudio/models/node_base.dart';
+
+/// Base class for all properties.
+///
+/// A Property is the representation of a single point of
+/// data that can changed either be evaluation of an input
+/// or by the change of the value directly by the user.
+abstract class Property {
+  Property({
+    required this.name,
+    required this.dataType,
+    required this.value,
+  });
+
+  /// The string by which this property will be referenced.
+  /// This should be unique per node type.
+  final String name;
+
+  /// The data type of this property.
+  final Type dataType;
+
+  /// The current value of the property, which is
+  /// used if ``connection`` is null.
+  Object value;
+
+  /// The connected node to evaluate the value from.
+  /// If this is null, then value is used during evaluation.
+  /// (NodeBase object, name of the connected node's Output)
+  (NodeBase, String)? connection;
+
+  void setValue(Object newValue) {
+    if (dataType == int) {
+      assert(newValue is int);
+    }
+    value = newValue;
+  }
+
+  void setConnection((NodeBase, String) newConnection) {
+    connection = newConnection;
+  }
+}
+
+/// Integer input.
+class IntegerProperty extends Property {
+  IntegerProperty({
+    required super.name,
+    required super.dataType,
+    required super.value,
+  }) : assert(value is int);
+}
