@@ -8,7 +8,7 @@ import 'package:gimelstudio/models/node_base.dart';
 abstract class Property {
   Property({
     required this.id,
-    required this.name,
+    required this.idname,
     required this.dataType,
     required this.value,
   });
@@ -18,7 +18,7 @@ abstract class Property {
 
   /// The string by which this property will be referenced.
   /// This should be unique per node type.
-  final String name;
+  final String idname;
 
   /// The data type of this property.
   final Type dataType;
@@ -48,7 +48,7 @@ abstract class Property {
     return {
       // TODO
       'id': id,
-      'name': name,
+      'idname': idname,
       'dataType': dataType.toString(),
       'value': value,
       'connection': connection,
@@ -57,14 +57,15 @@ abstract class Property {
 
   // TODO
   // Property.fromJson(Map<String, dynamic> json)
-  //     : name = json['name'],
+  //     : id = json['id'],
+  //       idname = json['idname'],
   //       dataType = json['dataType'],
   //       value = json['value'],
   //       connection = json['connection'];
 
   @override
   String toString() {
-    return 'id: $id, name: $name, dataType: $dataType, value: $value, connection: $connection';
+    return 'id: $id, idname: $idname, dataType: $dataType, value: $value, connection: $connection';
   }
 }
 
@@ -72,7 +73,7 @@ abstract class Property {
 class IntegerProperty extends Property {
   IntegerProperty({
     required super.id,
-    required super.name,
+    required super.idname,
     required super.dataType,
     required super.value,
   }) : assert(value is int);
