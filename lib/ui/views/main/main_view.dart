@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gimelstudio/ui/widgets/layers_panel/layers_panel.dart';
-import 'package:gimelstudio/ui/widgets/menu_bar/top_menu_bar.dart';
+import 'package:gimelstudio/ui/widgets/top_bar/top_bar.dart';
 import 'package:gimelstudio/ui/widgets/node_graph_panel/node_graph_panel.dart';
 import 'package:gimelstudio/ui/widgets/viewport_panel/viewport_panel.dart';
 import 'package:multi_split_view/multi_split_view.dart';
@@ -22,7 +22,7 @@ class MainView extends StackedView<MainViewModel> {
     return Scaffold(
       body: Column(
         children: [
-          const TopMenuBar(),
+          const TopBar(),
           Expanded(
             child: Row(
               children: [

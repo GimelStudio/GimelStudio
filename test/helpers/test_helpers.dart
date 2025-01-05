@@ -7,6 +7,9 @@ import 'package:gimelstudio/services/file_service.dart';
 import 'package:gimelstudio/services/image_service.dart';
 import 'package:gimelstudio/services/layers_service.dart';
 import 'package:gimelstudio/services/nodegraphs_service.dart';
+import 'package:gimelstudio/services/id_service.dart';
+import 'package:gimelstudio/services/node_registry_service.dart';
+import 'package:gimelstudio/services/document_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -20,6 +23,9 @@ import 'test_helpers.mocks.dart';
   MockSpec<ImageService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<LayersService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<NodegraphsService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<IdService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<NodeRegistryService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<DocumentService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -31,6 +37,9 @@ void registerServices() {
   getAndRegisterImageService();
   getAndRegisterLayersService();
   getAndRegisterNodegraphsService();
+  getAndRegisterIdService();
+  getAndRegisterNodeRegistryService();
+  getAndRegisterDocumentService();
 // @stacked-mock-register
 }
 
@@ -115,6 +124,27 @@ MockNodegraphsService getAndRegisterNodegraphsService() {
   _removeRegistrationIfExists<NodegraphsService>();
   final service = MockNodegraphsService();
   locator.registerSingleton<NodegraphsService>(service);
+  return service;
+}
+
+MockIdService getAndRegisterIdService() {
+  _removeRegistrationIfExists<IdService>();
+  final service = MockIdService();
+  locator.registerSingleton<IdService>(service);
+  return service;
+}
+
+MockNodeRegistryService getAndRegisterNodeRegistryService() {
+  _removeRegistrationIfExists<NodeRegistryService>();
+  final service = MockNodeRegistryService();
+  locator.registerSingleton<NodeRegistryService>(service);
+  return service;
+}
+
+MockDocumentService getAndRegisterDocumentService() {
+  _removeRegistrationIfExists<DocumentService>();
+  final service = MockDocumentService();
+  locator.registerSingleton<DocumentService>(service);
   return service;
 }
 // @stacked-mock-create

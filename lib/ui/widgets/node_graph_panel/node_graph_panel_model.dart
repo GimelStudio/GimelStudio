@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:gimelstudio/app/app.locator.dart';
 import 'package:gimelstudio/models/node_base.dart';
-import 'package:gimelstudio/models/nodes.dart';
 import 'package:gimelstudio/services/layers_service.dart';
-import 'package:gimelstudio/services/nodegraphs_service.dart';
+import 'package:gimelstudio/services/node_registry_service.dart';
 import 'package:stacked/stacked.dart';
 
 class NodeGraphPanelModel extends ReactiveViewModel {
   final _layersService = locator<LayersService>();
-  final _nodegraphsService = locator<NodegraphsService>();
+  final _nodeRegistryService = locator<NodeRegistryService>();
+
+  Map<String, NodeBase> get nodeRegistry => _nodeRegistryService.nodeRegistry;
 
   // TODO: Maybe create a currentLayer (object)?
-  Map<String, NodeBase> get nodes => _layersService.layers[_layersService.selectedLayerIndex].nodegraph.nodes;
+  Map<String, NodeBase> get nodes =>
+      _layersService.layers.isEmpty ? {} : _layersService.layers[_layersService.selectedLayerIndex].nodegraph.nodes;
 
   // TODO: move work to service
   void onSelectNode(MapEntry<String, NodeBase> key) {

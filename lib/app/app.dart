@@ -9,6 +9,9 @@ import 'package:gimelstudio/services/image_service.dart';
 import 'package:gimelstudio/services/layers_service.dart';
 import 'package:gimelstudio/ui/views/main/main_view.dart';
 import 'package:gimelstudio/services/nodegraphs_service.dart';
+import 'package:gimelstudio/services/id_service.dart';
+import 'package:gimelstudio/services/node_registry_service.dart';
+import 'package:gimelstudio/services/document_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -26,6 +29,9 @@ import 'package:gimelstudio/services/nodegraphs_service.dart';
     LazySingleton(classType: ImageService),
     LazySingleton(classType: LayersService),
     LazySingleton(classType: NodegraphsService),
+    LazySingleton(classType: IdService),
+    LazySingleton(classType: NodeRegistryService),
+    LazySingleton(classType: DocumentService),
 // @stacked-service
   ],
   bottomsheets: [

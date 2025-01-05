@@ -21,7 +21,7 @@ class Layer {
     required this.nodegraph,
   });
 
-  final int id;
+  final String id;
   int index;
   String name;
   bool selected;
@@ -51,6 +51,6 @@ class Layer {
 
   @override
   String toString() {
-    return '$index';
+    return 'id: $id, index: $index, name: $name, selected: $selected, visible: $visible, locked: $locked, opacity: $opacity, blend: ${blend.name} nodegraph: $nodegraph';
   }
 }

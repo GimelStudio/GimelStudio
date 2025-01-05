@@ -1,12 +1,20 @@
 import 'dart:math' as math;
 
+import 'package:flutter/material.dart';
+import 'package:gimelstudio/app/app.locator.dart';
+import 'package:gimelstudio/models/node_base.dart';
 import 'package:gimelstudio/models/nodegraph.dart';
 import 'package:gimelstudio/models/nodes.dart';
+import 'package:gimelstudio/services/id_service.dart';
+import 'package:gimelstudio/services/node_registry_service.dart';
 import 'package:stacked/stacked.dart';
 
 import '../models/layer.dart';
 
 class LayersService with ListenableServiceMixin {
+  final _idService = locator<IdService>();
+  final _nodeRegistryService = locator<NodeRegistryService>();
+
   LayersService() {
     listenToReactiveValues([
       _selectedLayerIndex,
@@ -17,66 +25,30 @@ class LayersService with ListenableServiceMixin {
   int _selectedLayerIndex = 0;
   int get selectedLayerIndex => _selectedLayerIndex;
 
-  List<Layer> _layers = [
-    // TODO: remove these test layers
-    Layer(
-      id: 0,
-      index: 0,
-      name: 'Really long named layer 1',
-      selected: true,
-      visible: true,
-      locked: false,
-      opacity: 100,
-      blend: BlendMode.normal,
-      nodegraph: NodeGraph(
-        id: 0,
-        nodes: {
-          'integer': IntegerNode(),
-          'integer2': IntegerNode(),
-          'add': AddNode(),
-          'output': OutputNode(),
-        },
-      ),
-    ),
-    Layer(
-      id: 1,
-      index: 1,
-      name: 'Layer 2',
-      selected: false,
-      visible: true,
-      locked: false,
-      opacity: 100,
-      blend: BlendMode.normal,
-      nodegraph: NodeGraph(
-        id: 1,
-        nodes: {
-          'integer': IntegerNode(),
-          'add': AddNode(),
-          'output': OutputNode(),
-        },
-      ),
-    ),
-    Layer(
-      id: 2,
-      index: 2,
-      name: 'Layer 3',
-      selected: false,
-      visible: true,
-      locked: false,
-      opacity: 100,
-      blend: BlendMode.normal,
-      nodegraph: NodeGraph(
-        id: 2,
-        nodes: {
-          'integer': IntegerNode(),
-          'integer2': IntegerNode(),
-          'add': AddNode(),
-          'output': OutputNode(),
-        },
-      ),
-    ),
-  ];
+  List<Layer> _layers = [];
   List<Layer> get layers => _layers;
+
+  void initaddTestLayers() {
+    // Layer(
+    //   id: '0',
+    //   index: 0,
+    //   name: 'Really long named layer 1',
+    //   selected: true,
+    //   visible: true,
+    //   locked: false,
+    //   opacity: 100,
+    //   blend: BlendMode.normal,
+    //   nodegraph: NodeGraph(
+    //     id: '0',
+    //     nodes: {
+    //       'integer': IntegerNode(),
+    //       'integer2': IntegerNode(),
+    //       'add': AddNode(),
+    //       'output': OutputNode(),
+    //     },
+    //   ),
+    // ),
+  }
 
   void setSelectedLayer(Layer selectedLayer) {
     for (Layer layer in layers) {
@@ -114,33 +86,39 @@ class LayersService with ListenableServiceMixin {
   }
 
   void addNewLayer() {
-    math.Random random = math.Random(); // TODO: use uuid
-    int randInt = random.nextInt(30003) + 89;
     print(_selectedLayerIndex);
     int insertAt = 0;
     if (layers.isNotEmpty) {
       insertAt = _selectedLayerIndex + 1;
     }
+
+    // Default nodes
+    // TODO: refactor
+    Map<String, NodeBase> defaultNodes = {};
+    NodeBase integerNode = _nodeRegistryService.createNode('integer_corenode', Offset(100, 80));
+    integerNode.selected = true;
+    defaultNodes[integerNode.id] = integerNode;
+    NodeBase outputNode = _nodeRegistryService.createNode('output_corenode', Offset(410, 80));
+    defaultNodes[outputNode.id] = outputNode;
+
     _layers.insert(
       insertAt,
       Layer(
-        id: randInt,
-        index: layers.length + 1, // TODO
-        name: 'New Layer #${layers.length + 1}',
+        id: _idService.newId(),
+        index: layers.length + 1, // TODO: need to update indexes when reordering layers
+        name: 'Untitled ${layers.length + 1}',
         selected: layers.isNotEmpty ? false : true, // If this is the first layer it should be automatically selected
         visible: true,
         locked: false,
         opacity: 100,
         blend: BlendMode.normal,
         nodegraph: NodeGraph(
-          id: layers.length + 1, // TODO
-          nodes: {
-            'integer': IntegerNode(),
-            'output': OutputNode(),
-          },
+          id: _idService.newId(),
+          nodes: defaultNodes,
         ),
       ),
     );
+    //print(layers);
     notifyListeners();
   }
 

@@ -6,6 +6,23 @@ class NodeGraph {
     required this.nodes,
   });
 
-  final int id; // TODO: use uuid
+  final String id;
   Map<String, NodeBase> nodes;
+
+  // void initDefault() {
+  //   nodes = {};
+  // }
+
+  void addNode(String id, NodeBase node) {
+    nodes[id] = node;
+  }
+
+  void removeNode(NodeBase node) {
+    nodes.remove(node);
+  }
+
+  @override
+  String toString() {
+    return 'id: $id, nodes: $nodes';
+  }
 }

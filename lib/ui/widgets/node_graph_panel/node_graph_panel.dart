@@ -4,8 +4,6 @@ import 'package:gimelstudio/ui/widgets/node_graph_panel/node_graph_panel_model.d
 import 'package:gimelstudio/ui/widgets/node_graph_panel/widgets/node_widget/node_widget.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../../models/node_registry.dart';
-
 class NodeGraphPanel extends StackedView<NodeGraphPanelModel> {
   const NodeGraphPanel({super.key});
 
@@ -20,7 +18,7 @@ class NodeGraphPanel extends StackedView<NodeGraphPanelModel> {
         Container(color: Color(0xFF262626)),
         ...viewModel.nodes.entries.map(
           (MapEntry<String, NodeBase> key) {
-            NodeBase? definition = nodeRegistry[key.value.name];
+            NodeBase? definition = viewModel.nodeRegistry[key.value.idname];
             if (definition != null) {
               return NodeWidget(
                 node: key.value,
@@ -33,16 +31,6 @@ class NodeGraphPanel extends StackedView<NodeGraphPanelModel> {
           },
         ),
       ],
-    );
-
-    return Container(
-      height: 100,
-      color: Color(0xFF262626),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [],
-      ),
     );
   }
 
