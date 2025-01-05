@@ -7,10 +7,14 @@ import 'package:gimelstudio/models/node_base.dart';
 /// or by the change of the value directly by the user.
 abstract class Property {
   Property({
+    required this.id,
     required this.name,
     required this.dataType,
     required this.value,
   });
+
+  /// A unique id.
+  String id;
 
   /// The string by which this property will be referenced.
   /// This should be unique per node type.
@@ -43,10 +47,11 @@ abstract class Property {
   Map<String, dynamic> toJson() {
     return {
       // TODO
-      // 'name': name,
-      // 'dataType': dataType.toString(),
-      // 'value': value,
-      // 'connection': connection,
+      'id': id,
+      'name': name,
+      'dataType': dataType.toString(),
+      'value': value,
+      'connection': connection,
     };
   }
 
@@ -59,13 +64,14 @@ abstract class Property {
 
   @override
   String toString() {
-    return 'name: $name, dataType: $dataType, value: $value, connection: $connection';
+    return 'id: $id, name: $name, dataType: $dataType, value: $value, connection: $connection';
   }
 }
 
 /// Integer input.
 class IntegerProperty extends Property {
   IntegerProperty({
+    required super.id,
     required super.name,
     required super.dataType,
     required super.value,
