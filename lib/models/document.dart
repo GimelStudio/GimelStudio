@@ -7,7 +7,7 @@ class Document {
     required this.name,
     required this.size,
     this.isSaved = false,
-    this.layers = const [],
+    required this.layers,
   });
 
   final String id;

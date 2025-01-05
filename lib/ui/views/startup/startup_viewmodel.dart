@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gimelstudio/models/document.dart';
 import 'package:gimelstudio/services/document_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:gimelstudio/app/app.locator.dart';

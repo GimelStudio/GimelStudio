@@ -1,10 +1,8 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 import 'package:gimelstudio/app/app.locator.dart';
 import 'package:gimelstudio/models/node_base.dart';
 import 'package:gimelstudio/models/nodegraph.dart';
-import 'package:gimelstudio/models/nodes.dart';
+import 'package:gimelstudio/services/document_service.dart';
 import 'package:gimelstudio/services/id_service.dart';
 import 'package:gimelstudio/services/node_registry_service.dart';
 import 'package:stacked/stacked.dart';
@@ -13,48 +11,27 @@ import '../models/layer.dart';
 
 class LayersService with ListenableServiceMixin {
   final _idService = locator<IdService>();
+  final _documentsService = locator<DocumentService>();
   final _nodeRegistryService = locator<NodeRegistryService>();
 
   LayersService() {
     listenToReactiveValues([
-      _selectedLayerIndex,
-      _layers,
+      selectedDocumentIndex,
+      selectedLayerIndex,
+      layers,
     ]);
   }
 
-  int _selectedLayerIndex = 0;
-  int get selectedLayerIndex => _selectedLayerIndex;
+  int get selectedDocumentIndex => _documentsService.selectedDocumentIndex;
 
-  List<Layer> _layers = [];
-  List<Layer> get layers => _layers;
+  int get selectedLayerIndex => layers.isEmpty ? 0 : layers.indexWhere((item) => item.selected == true);
 
-  void initaddTestLayers() {
-    // Layer(
-    //   id: '0',
-    //   index: 0,
-    //   name: 'Really long named layer 1',
-    //   selected: true,
-    //   visible: true,
-    //   locked: false,
-    //   opacity: 100,
-    //   blend: BlendMode.normal,
-    //   nodegraph: NodeGraph(
-    //     id: '0',
-    //     nodes: {
-    //       'integer': IntegerNode(),
-    //       'integer2': IntegerNode(),
-    //       'add': AddNode(),
-    //       'output': OutputNode(),
-    //     },
-    //   ),
-    // ),
-  }
+  List<Layer> get layers => _documentsService.documents[selectedDocumentIndex].layers;
 
   void setSelectedLayer(Layer selectedLayer) {
     for (Layer layer in layers) {
       if (selectedLayer == layer) {
         layer.setSelected(true);
-        _selectedLayerIndex = layers.indexOf(layer);
       } else {
         layer.setSelected(false);
       }
@@ -78,18 +55,21 @@ class LayersService with ListenableServiceMixin {
       // in the Flutter widget.
       newIndex -= 1;
     }
-    final Layer item = layers.removeAt(oldIndex);
-    _selectedLayerIndex = newIndex;
-    _layers.insert(newIndex, item);
+    final Layer layer = layers.removeAt(oldIndex);
+    layers.insert(newIndex, layer);
+
+    syncLayerIndexes();
     print(layers);
     notifyListeners();
   }
 
   void addNewLayer() {
-    print(_selectedLayerIndex);
     int insertAt = 0;
     if (layers.isNotEmpty) {
-      insertAt = _selectedLayerIndex + 1;
+      // Note for the future: Layers are added underneath the selected layer.
+      // When working with a vector layer stack, the next layer
+      // would be placed above the current layer rather than underneath.
+      insertAt = selectedLayerIndex + 1;
     }
 
     // Default nodes
@@ -101,7 +81,7 @@ class LayersService with ListenableServiceMixin {
     NodeBase outputNode = _nodeRegistryService.createNode('output_corenode', Offset(410, 80));
     defaultNodes[outputNode.id] = outputNode;
 
-    _layers.insert(
+    layers.insert(
       insertAt,
       Layer(
         id: _idService.newId(),
@@ -119,56 +99,52 @@ class LayersService with ListenableServiceMixin {
       ),
     );
     //print(layers);
+    syncLayerIndexes();
     notifyListeners();
   }
 
-  // TODO: deleting middle layers is buggy
+  /// Delete the selected layer.
   void deleteLayer() {
-    // Delete the selected layer
-    print('-----selected layer index: $selectedLayerIndex');
-    print('layers: $layers');
+    int oldSelectedLayerIndex = selectedLayerIndex;
 
     if (layers.isNotEmpty) {
-      // First de-select the current layer.
-      layers.elementAt(selectedLayerIndex).setSelected(false);
-
       int newSelectedIndex = 0;
 
       // If this is the last layer, there will be no selection.
       if (selectedLayerIndex == 0 && layers.length == 1) {
         newSelectedIndex = 0;
-        print('one');
-      } else if (selectedLayerIndex == layers.indexOf(layers.last) && layers.length >= 2) {
+      } else if (oldSelectedLayerIndex == layers.indexOf(layers.last)) {
         // If the selected layer is the last in the stack, select the next layer above.
-        newSelectedIndex = selectedLayerIndex - 1;
-        print('last');
-      } else if (selectedLayerIndex == layers.indexOf(layers.first) && layers.length >= 2) {
+        newSelectedIndex = oldSelectedLayerIndex - 1;
+      } else if (oldSelectedLayerIndex == layers.indexOf(layers.first)) {
         // If the selected layer is the first in the stack, select the next layer below.
-        newSelectedIndex = selectedLayerIndex + 1;
-        print('first');
-      } else if (selectedLayerIndex != 0 && selectedLayerIndex != layers.indexOf(layers.last) && layers.length >= 2) {
-        // // if the selected layer in in the middle of the stack, select the next layer below until there are none below to select.
-        // //if (selectedLayerIndex > layers.indexOf(layers.last)) {
-        // newSelectedIndex = selectedLayerIndex + 1;
-        // // } else {
-        // //   newSelectedIndex = selectedLayerIndex - 1;
-        // // }
-
-        print('middle');
-      } else {
-        print('else');
+        newSelectedIndex = oldSelectedLayerIndex + 1;
+      } else if (oldSelectedLayerIndex != 0 &&
+          oldSelectedLayerIndex != layers.indexOf(layers.last) &&
+          oldSelectedLayerIndex != layers.indexOf(layers.first) &&
+          layers.length >= 2) {
+        // if the selected layer in in the middle of the stack, select the
+        // next layer below it until there are none below to select.
+        newSelectedIndex = oldSelectedLayerIndex + 1;
       }
 
-      //print(newSelectedIndex);
-      layers.elementAt(newSelectedIndex).setSelected(true);
+      // Select the other layer.
+      setSelectedLayer(layers.firstWhere((item) => layers.indexOf(item) == newSelectedIndex));
 
-      // // Delete the selected layer
-      layers.removeAt(selectedLayerIndex);
-
-      _selectedLayerIndex = newSelectedIndex;
-    } else {
-      _selectedLayerIndex = 0;
+      // Finally delete the selected layer.
+      layers.removeAt(oldSelectedLayerIndex);
     }
     notifyListeners();
+  }
+
+  void renameLayer() {
+    notifyListeners();
+  }
+
+  /// Re-sync the Layer Object indexes with the indexes in the layer stack list.
+  void syncLayerIndexes() {
+    for (Layer layer in layers) {
+      layer.index = layers.indexOf(layer);
+    }
   }
 }

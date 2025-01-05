@@ -1,10 +1,12 @@
 import 'package:gimelstudio/app/app.locator.dart';
 import 'package:gimelstudio/models/layer.dart';
+import 'package:gimelstudio/services/document_service.dart';
 import 'package:gimelstudio/services/layers_service.dart';
 import 'package:stacked/stacked.dart';
 
 class LayersPanelModel extends ReactiveViewModel {
   final _layersService = locator<LayersService>();
+  final _documentsService = locator<DocumentService>();
 
   List<Layer> get layers => _layersService.layers;
 
@@ -33,5 +35,5 @@ class LayersPanelModel extends ReactiveViewModel {
   }
 
   @override
-  List<ListenableServiceMixin> get listenableServices => [_layersService];
+  List<ListenableServiceMixin> get listenableServices => [_layersService, _documentsService];
 }

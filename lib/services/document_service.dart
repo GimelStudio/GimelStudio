@@ -24,7 +24,6 @@ class DocumentService with ListenableServiceMixin {
 
   void setSelectedDocumentTab(Document selectedDocument) {
     _selectedDocumentIndex = _documents.indexOf(selectedDocument);
-
     notifyListeners();
   }
 
@@ -46,6 +45,7 @@ class DocumentService with ListenableServiceMixin {
       id: _idsService.newId(),
       name: name,
       size: size,
+      layers: [],
     );
     _documents.add(newDocument);
     notifyListeners();
@@ -63,7 +63,11 @@ class DocumentService with ListenableServiceMixin {
     notifyListeners();
   }
 
-  void saveDocument(Document document) {}
+  void saveDocument(Document document) {
+    notifyListeners();
+  }
 
-  void renameDocument(Document document, String newName) {}
+  void renameDocument(Document document, String newName) {
+    notifyListeners();
+  }
 }
