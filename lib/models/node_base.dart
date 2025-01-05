@@ -69,6 +69,34 @@ class NodeBase {
     return {};
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'idname': idname,
+      'isOutput': isOutput,
+      'label': label,
+      'selected': selected,
+      'properties': {for (Property property in properties.values) property.id: property.toJson()},
+      'outputs': {}, // outputs, // TODO
+      'position': [position.dx, position.dy],
+    };
+  }
+
+  NodeBase.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        idname = json['idname'],
+        isOutput = json['isOutput'],
+        label = json['label'],
+        selected = json['selected'],
+        properties = json['properties'], // TODO
+        outputs = json['outputs'], // TODO
+        position = Offset(json['position'][0], json['position'][1]);
+
+  @override
+  String toString() {
+    return 'id: $id, idname: $idname, isOutput: $isOutput, label: $label, selected: $selected, properties: $properties, outputs: $outputs, position: (${position.dx}x${position.dy})';
+  }
+
   factory NodeBase.clone(NodeBase source) {
     return NodeBase(
       id: source.id,

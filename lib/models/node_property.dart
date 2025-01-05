@@ -26,17 +26,40 @@ abstract class Property {
   /// The connected node to evaluate the value from.
   /// If this is null, then value is used during evaluation.
   /// (NodeBase object, name of the connected node's Output)
+  // TODO: for the purposes of converting to json and back, NodeBase should be the id of the node.
   (NodeBase, String)? connection;
 
   void setValue(Object newValue) {
     if (dataType == int) {
-      assert(newValue is int);
+      assert(newValue is int); // TODO: remove after testing
     }
     value = newValue;
   }
 
   void setConnection((NodeBase, String) newConnection) {
     connection = newConnection;
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      // TODO
+      // 'name': name,
+      // 'dataType': dataType.toString(),
+      // 'value': value,
+      // 'connection': connection,
+    };
+  }
+
+  // TODO
+  // Property.fromJson(Map<String, dynamic> json)
+  //     : name = json['name'],
+  //       dataType = json['dataType'],
+  //       value = json['value'],
+  //       connection = json['connection'];
+
+  @override
+  String toString() {
+    return 'name: $name, dataType: $dataType, value: $value, connection: $connection';
   }
 }
 

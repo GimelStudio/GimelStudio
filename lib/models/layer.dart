@@ -49,6 +49,31 @@ class Layer {
     locked = isLocked;
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'index': index,
+      'name': name,
+      'selected': selected,
+      'visible': visible,
+      'locked': locked,
+      'opacity': opacity,
+      'blend': blend.name,
+      'nodegraph': nodegraph.toJson(),
+    };
+  }
+
+  Layer.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        index = json['index'],
+        name = json['name'],
+        selected = json['selected'],
+        visible = json['visible'],
+        locked = json['locked'],
+        opacity = json['opacity'],
+        blend = BlendMode.values.byName(json['blend']),
+        nodegraph = NodeGraph.fromJson(json['nodegraph']);
+
   @override
   String toString() {
     return 'id: $id, index: $index, name: $name, selected: $selected, visible: $visible, locked: $locked, opacity: $opacity, blend: ${blend.name} nodegraph: $nodegraph';

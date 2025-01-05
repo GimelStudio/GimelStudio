@@ -21,6 +21,17 @@ class NodeGraph {
     nodes.remove(node);
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'nodes': {for (NodeBase node in nodes.values) node.id: node.toJson()}
+    };
+  }
+
+  NodeGraph.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        nodes = {for (Map<String, dynamic> node in json['nodes']) node['id']: NodeBase.fromJson(node)};
+
   @override
   String toString() {
     return 'id: $id, nodes: $nodes';
