@@ -30,7 +30,7 @@ class NodeWidget extends StackedView<NodeWidgetModel> {
         child: MouseRegion(
           cursor: viewModel.draggingStartPosition != null ? SystemMouseCursors.grabbing : SystemMouseCursors.grab,
           child: GestureDetector(
-            onTapUp: (event) => onTapNode,
+            onTapUp: (event) => onTapNode(),
             onPanDown: (event) => viewModel.onPanDown(event, node),
             onPanUpdate: (event) => viewModel.onPanUpdate(event, onNodeMoved),
             onPanCancel: () => viewModel.onPanCancel(onNodeMoved),

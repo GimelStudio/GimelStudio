@@ -11,6 +11,7 @@ abstract class Property {
     required this.idname,
     required this.dataType,
     required this.value,
+    required this.isExposed,
   });
 
   /// A unique id.
@@ -25,7 +26,10 @@ abstract class Property {
 
   /// The current value of the property, which is
   /// used if ``connection`` is null.
-  Object value;
+  dynamic value;
+
+  /// Whether this property is exposed in the node graph.
+  bool isExposed;
 
   /// The connected node to evaluate the value from.
   /// If this is null, then value is used during evaluation.
@@ -65,7 +69,7 @@ abstract class Property {
 
   @override
   String toString() {
-    return 'id: $id, idname: $idname, dataType: $dataType, value: $value, connection: $connection';
+    return 'id: $id, idname: $idname, dataType: $dataType, value: $value, isExposed: $isExposed, connection: $connection';
   }
 }
 
@@ -76,5 +80,6 @@ class IntegerProperty extends Property {
     required super.idname,
     required super.dataType,
     required super.value,
+    required super.isExposed,
   }) : assert(value is int);
 }

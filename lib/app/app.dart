@@ -12,6 +12,7 @@ import 'package:gimelstudio/services/nodegraphs_service.dart';
 import 'package:gimelstudio/services/id_service.dart';
 import 'package:gimelstudio/services/node_registry_service.dart';
 import 'package:gimelstudio/services/document_service.dart';
+import 'package:gimelstudio/services/evaluation_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -32,6 +33,7 @@ import 'package:gimelstudio/services/document_service.dart';
     LazySingleton(classType: IdService),
     LazySingleton(classType: NodeRegistryService),
     LazySingleton(classType: DocumentService),
+    LazySingleton(classType: EvaluationService),
 // @stacked-service
   ],
   bottomsheets: [

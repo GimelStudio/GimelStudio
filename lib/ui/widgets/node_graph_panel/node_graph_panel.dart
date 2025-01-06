@@ -13,24 +13,28 @@ class NodeGraphPanel extends StackedView<NodeGraphPanelModel> {
     NodeGraphPanelModel viewModel,
     Widget? child,
   ) {
-    return Stack(
-      children: [
-        Container(color: Color(0xFF262626)),
-        ...viewModel.nodes.entries.map(
-          (MapEntry<String, NodeBase> key) {
-            NodeBase? definition = viewModel.nodeRegistry[key.value.idname];
-            if (definition != null) {
-              return NodeWidget(
-                node: key.value,
-                onTapNode: () => viewModel.onSelectNode(key),
-                onNodeMoved: (newPosition) => viewModel.onNodeMoved(key, newPosition),
-              );
-            } else {
-              return const SizedBox();
-            }
-          },
-        ),
-      ],
+    return InteractiveViewer(
+      maxScale: 4.0,
+      minScale: 0.4,
+      child: Stack(
+        children: [
+          Container(color: Color(0xFF262626)),
+          ...viewModel.nodes.entries.map(
+            (MapEntry<String, NodeBase> key) {
+              NodeBase? definition = viewModel.nodeRegistry[key.value.idname];
+              if (definition != null) {
+                return NodeWidget(
+                  node: key.value,
+                  onTapNode: () => viewModel.onSelectNode(key),
+                  onNodeMoved: (newPosition) => viewModel.onNodeMoved(key, newPosition),
+                );
+              } else {
+                return const SizedBox();
+              }
+            },
+          ),
+        ],
+      ),
     );
   }
 

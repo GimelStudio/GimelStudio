@@ -19,7 +19,7 @@ class StartupViewModel extends BaseViewModel {
   void registerNodes() {
     final integerNode = IntegerNode(
       properties: {
-        'number': IntegerProperty(id: _idService.newId(), idname: 'number', dataType: int, value: 21),
+        'number': IntegerProperty(id: _idService.newId(), idname: 'number', dataType: int, value: 21, isExposed: false),
       },
       outputs: {
         'output': Output(name: 'output', dataType: int),
@@ -28,8 +28,8 @@ class StartupViewModel extends BaseViewModel {
 
     final addNode = AddNode(
       properties: {
-        'a': IntegerProperty(id: _idService.newId(), idname: 'a', dataType: int, value: 0),
-        'b': IntegerProperty(id: _idService.newId(), idname: 'b', dataType: int, value: 0),
+        'a': IntegerProperty(id: _idService.newId(), idname: 'a', dataType: int, value: 0, isExposed: true),
+        'b': IntegerProperty(id: _idService.newId(), idname: 'b', dataType: int, value: 0, isExposed: true),
       },
       outputs: {
         'output': Output(name: 'output', dataType: int),
@@ -38,14 +38,14 @@ class StartupViewModel extends BaseViewModel {
 
     final outputNode = OutputNode(
       properties: {
-        'final': IntegerProperty(id: _idService.newId(), idname: 'final', dataType: int, value: 10),
+        'final': IntegerProperty(id: _idService.newId(), idname: 'final', dataType: int, value: 10, isExposed: true),
       },
       outputs: {},
     );
 
     final outputNode2 = OutputNode2(
       properties: {
-        'final': IntegerProperty(id: _idService.newId(), idname: 'final', dataType: int, value: 10),
+        'final': IntegerProperty(id: _idService.newId(), idname: 'final', dataType: int, value: 10, isExposed: true),
       },
       outputs: {},
     );

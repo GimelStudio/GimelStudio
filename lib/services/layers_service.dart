@@ -26,7 +26,8 @@ class LayersService with ListenableServiceMixin {
 
   int get selectedLayerIndex => layers.isEmpty ? 0 : layers.indexWhere((item) => item.selected == true);
 
-  List<Layer> get layers => _documentsService.documents[selectedDocumentIndex].layers;
+  List<Layer> get layers =>
+      _documentsService.documents.isEmpty ? [] : _documentsService.documents[selectedDocumentIndex].layers;
 
   void setSelectedLayer(Layer selectedLayer) {
     for (Layer layer in layers) {

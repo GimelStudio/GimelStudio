@@ -60,6 +60,8 @@ class DocumentService with ListenableServiceMixin {
 
   void closeDocument(Document document) {
     _documents.remove(document);
+    // TODO: set _selectedDocumentIndex similarily to how removing a layer works.
+    _selectedDocumentIndex = 0;
     notifyListeners();
   }
 

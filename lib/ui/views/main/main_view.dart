@@ -99,9 +99,7 @@ class MainView extends StackedView<MainViewModel> {
 
                                       // Node editor
                                       Expanded(
-                                        child: InteractiveViewer(
-                                          child: NodeGraphPanel(),
-                                        ),
+                                        child: NodeGraphPanel(),
                                       ),
                                     ],
                                   );
