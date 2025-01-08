@@ -25,21 +25,25 @@ class NodeRegistryService {
     // Set the position.
     node.position = position;
 
+    Map<String, Property> protoProperties = node.properties;
+    Map<String, Output> protoOutputs = node.outputs;
+    
     // Re-create the properties and outputs for the node type.
-    for (Property property in node.properties.values) {
+    node.properties = {};
+    for (Property property in protoProperties.values) {
       Property newProperty;
       String newPropertyId = _idService.newId();
-
       switch (property.dataType) {
         case int:
-          newProperty = IntegerProperty.clone(property, _idService.newId());
+          newProperty = IntegerProperty.clone(property, newPropertyId);
         default:
           newProperty = IntegerProperty.clone(property, newPropertyId);
       }
       node.properties[property.idname] = newProperty;
     }
 
-    for (Output output in node.outputs.values) {
+    node.outputs = {};
+    for (Output output in protoOutputs.values) {
       String newOutputId = _idService.newId();
       node.outputs[output.idname] = Output.clone(output, newOutputId);
     }
