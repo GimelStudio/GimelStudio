@@ -6,7 +6,7 @@ import 'package:gimelstudio/models/node_property.dart';
 /// The base class for all nodes.
 class NodeBase {
   NodeBase({
-    this.id = '', // Will be assigned when created in the node graph.
+    this.id = '', // Id will be assigned when created in the node graph.
     required this.idname,
     required this.isOutput,
     this.label = '...',
@@ -49,14 +49,14 @@ class NodeBase {
     return null;
   }
 
-  void setPropertyValue(String name, Object newValue) {
-    Property? property = properties[name];
+  void setPropertyValue(String idname, Object newValue) {
+    Property? property = properties[idname];
     assert(property != null);
     property?.setValue(newValue);
   }
 
-  void setConnection(String name, NodeBase connectedNode, String connectedNodeOutputName) {
-    Property? property = properties[name];
+  void setConnection(String idname, NodeBase connectedNode, String connectedNodeOutputName) {
+    Property? property = properties[idname];
     assert(property != null);
     property?.setConnection((connectedNode, connectedNodeOutputName));
   }
@@ -76,8 +76,8 @@ class NodeBase {
       'isOutput': isOutput,
       'label': label,
       'selected': selected,
-      'properties': {for (Property property in properties.values) property.id: property.toJson()},
-      'outputs': {}, // outputs, // TODO
+      'properties': {for (Property property in properties.values) property.idname: property.toJson()},
+      'outputs': {for (Output output in outputs.values) output.idname: output.toJson()},
       'position': [position.dx, position.dy],
     };
   }
@@ -88,18 +88,20 @@ class NodeBase {
         isOutput = json['isOutput'],
         label = json['label'],
         selected = json['selected'],
-        properties = json['properties'], // TODO
-        outputs = json['outputs'], // TODO
+        properties = {
+          for (Map<String, dynamic> property in json['properties']) property['idname']: Property.fromJson(property)
+        },
+        outputs = {for (Map<String, dynamic> output in json['outputs']) json['idname']: Output.fromJson(output)},
         position = Offset(json['position'][0], json['position'][1]);
 
   @override
   String toString() {
-    return 'id: $id, idname: $idname, isOutput: $isOutput, label: $label, selected: $selected, properties: $properties, outputs: $outputs, position: (${position.dx}x${position.dy})';
+    return 'id: $id, idname: $idname, isOutput: $isOutput, label: $label, selected: $selected, properties: $properties, outputs: $outputs, position: (${position.dx}, ${position.dy})';
   }
 
-  factory NodeBase.clone(NodeBase source) {
+  factory NodeBase.clone(NodeBase source, String id) {
     return NodeBase(
-      id: source.id,
+      id: id,
       idname: source.idname,
       isOutput: source.isOutput,
       label: source.label,

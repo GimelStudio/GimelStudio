@@ -21,9 +21,9 @@ class PropertiesPanel extends StackedView<PropertiesPanelModel> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Text('${viewModel.selectedNode?.idname}', style: TextStyle(color: Colors.white)),
+                  Text('nodeid: ${viewModel.selectedNode?.id}', style: TextStyle(color: Colors.white)),
 
-                  if (viewModel.selectedNode != null)
+                  if (viewModel.selectedNode != null && viewModel.selectedNode?.isOutput == false)
                     Column(
                       children: [
                         for (Property property in viewModel.selectedNode!.properties.values)
@@ -31,7 +31,7 @@ class PropertiesPanel extends StackedView<PropertiesPanelModel> {
                             Row(
                               children: [
                                 Text(
-                                  '${property.idname}: (${property.value})',
+                                  '${property.idname}: (${property.value}) \n propid: ${property.id.split('-')[0]}',
                                   style: TextStyle(
                                     color: Colors.white70,
                                   ),

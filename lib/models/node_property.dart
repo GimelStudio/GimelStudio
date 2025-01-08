@@ -5,10 +5,11 @@ import 'package:gimelstudio/models/node_base.dart';
 /// A Property is the representation of a single point of
 /// data that can changed either be evaluation of an input
 /// or by the change of the value directly by the user.
-abstract class Property {
+class Property {
   Property({
     required this.id,
     required this.idname,
+    required this.label,
     required this.dataType,
     required this.value,
     required this.isExposed,
@@ -20,6 +21,9 @@ abstract class Property {
   /// The string by which this property will be referenced.
   /// This should be unique per node type.
   final String idname;
+
+  /// The displayed label for this property.
+  String label;
 
   /// The data type of this property.
   final Type dataType;
@@ -50,26 +54,28 @@ abstract class Property {
 
   Map<String, dynamic> toJson() {
     return {
-      // TODO
       'id': id,
       'idname': idname,
-      'dataType': dataType.toString(),
+      'label': label,
+      'dataType': dataType, // TODO
       'value': value,
+      'isExposed': isExposed,
       'connection': connection,
     };
   }
 
-  // TODO
-  // Property.fromJson(Map<String, dynamic> json)
-  //     : id = json['id'],
-  //       idname = json['idname'],
-  //       dataType = json['dataType'],
-  //       value = json['value'],
-  //       connection = json['connection'];
+  Property.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        idname = json['idname'],
+        label = json['label'],
+        dataType = json['dataType'], // TODO
+        value = json['value'],
+        isExposed = json['isExposed'],
+        connection = json['connection'];
 
   @override
   String toString() {
-    return 'id: $id, idname: $idname, dataType: $dataType, value: $value, isExposed: $isExposed, connection: $connection';
+    return 'id: $id, idname: $idname, label: $label, dataType: $dataType, value: $value, isExposed: $isExposed, connection: $connection';
   }
 }
 
@@ -78,8 +84,20 @@ class IntegerProperty extends Property {
   IntegerProperty({
     required super.id,
     required super.idname,
+    required super.label,
     required super.dataType,
     required super.value,
     required super.isExposed,
   }) : assert(value is int);
+
+  factory IntegerProperty.clone(Property source, String id) {
+    return IntegerProperty(
+      id: id,
+      idname: source.idname,
+      label: source.label,
+      dataType: source.dataType,
+      value: source.value,
+      isExposed: source.isExposed,
+    );
+  }
 }

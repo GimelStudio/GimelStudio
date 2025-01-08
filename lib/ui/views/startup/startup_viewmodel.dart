@@ -3,7 +3,6 @@ import 'package:gimelstudio/models/node_output.dart';
 import 'package:gimelstudio/models/node_property.dart';
 import 'package:gimelstudio/models/nodes.dart';
 import 'package:gimelstudio/services/document_service.dart';
-import 'package:gimelstudio/services/id_service.dart';
 import 'package:gimelstudio/services/node_registry_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:gimelstudio/app/app.locator.dart';
@@ -14,38 +13,72 @@ class StartupViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _documentsService = locator<DocumentService>();
   final _nodeRegistryService = locator<NodeRegistryService>();
-  final _idService = locator<IdService>();
 
   void registerNodes() {
     final integerNode = IntegerNode(
       properties: {
-        'number': IntegerProperty(id: _idService.newId(), idname: 'number', dataType: int, value: 21, isExposed: false),
+        'number': IntegerProperty(
+          id: '',
+          idname: 'number',
+          label: 'label',
+          dataType: int,
+          value: 21,
+          isExposed: false,
+        ),
       },
       outputs: {
-        'output': Output(name: 'output', dataType: int),
+        'output': Output(id: '', idname: 'output', dataType: int),
       },
     );
 
     final addNode = AddNode(
       properties: {
-        'a': IntegerProperty(id: _idService.newId(), idname: 'a', dataType: int, value: 0, isExposed: true),
-        'b': IntegerProperty(id: _idService.newId(), idname: 'b', dataType: int, value: 0, isExposed: true),
+        'a': IntegerProperty(
+          id: '',
+          idname: 'a',
+          label: 'a',
+          dataType: int,
+          value: 1,
+          isExposed: true,
+        ),
+        'b': IntegerProperty(
+          id: '',
+          idname: 'b',
+          label: 'b',
+          dataType: int,
+          value: 1,
+          isExposed: true,
+        ),
       },
       outputs: {
-        'output': Output(name: 'output', dataType: int),
+        'output': Output(id: '', idname: 'output', dataType: int),
       },
     );
 
     final outputNode = OutputNode(
       properties: {
-        'final': IntegerProperty(id: _idService.newId(), idname: 'final', dataType: int, value: 10, isExposed: true),
+        'final': IntegerProperty(
+          id: '',
+          idname: 'final',
+          label: 'Layer',
+          dataType: int,
+          value: 10,
+          isExposed: true,
+        ),
       },
       outputs: {},
     );
 
     final outputNode2 = OutputNode2(
       properties: {
-        'final': IntegerProperty(id: _idService.newId(), idname: 'final', dataType: int, value: 10, isExposed: true),
+        'final': IntegerProperty(
+          id: '',
+          idname: 'final',
+          label: 'Layer',
+          dataType: int,
+          value: 10,
+          isExposed: true,
+        ),
       },
       outputs: {},
     );

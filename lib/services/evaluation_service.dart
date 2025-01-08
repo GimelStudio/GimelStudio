@@ -15,6 +15,7 @@ class EvaluationService extends ReactiveViewModel {
     return 0;
   }
 
+  // TODO
   void flattenLayersIntoSingleNodegraph() {
     for (Layer layer in layers) {
       NodeGraph nodeGraph = layer.nodegraph;

@@ -76,9 +76,14 @@ class LayersService with ListenableServiceMixin {
     // Default nodes
     // TODO: refactor
     Map<String, NodeBase> defaultNodes = {};
+
     NodeBase integerNode = _nodeRegistryService.createNode('integer_corenode', Offset(100, 80));
     integerNode.selected = true;
     defaultNodes[integerNode.id] = integerNode;
+
+    NodeBase addNode = _nodeRegistryService.createNode('add_corenode', Offset(200, 80));
+    defaultNodes[addNode.id] = addNode;
+
     NodeBase outputNode = _nodeRegistryService.createNode('output_corenode', Offset(410, 80));
     defaultNodes[outputNode.id] = outputNode;
 
@@ -86,7 +91,7 @@ class LayersService with ListenableServiceMixin {
       insertAt,
       Layer(
         id: _idService.newId(),
-        index: layers.length + 1, // TODO: need to update indexes when reordering layers
+        index: layers.length + 1,
         name: 'Untitled ${layers.length + 1}',
         selected: layers.isNotEmpty ? false : true, // If this is the first layer it should be automatically selected
         visible: true,

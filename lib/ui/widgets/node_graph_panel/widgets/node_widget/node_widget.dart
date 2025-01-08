@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gimelstudio/models/node_base.dart';
+import 'package:gimelstudio/models/node_output.dart';
+import 'package:gimelstudio/models/node_property.dart';
 import 'package:stacked/stacked.dart';
 
 import 'node_widget_model.dart';
@@ -61,7 +63,7 @@ class NodeWidget extends StackedView<NodeWidgetModel> {
                         //   size: 14.0,
                         // ),
                         Text(
-                          node.label,
+                          '', //node.label ,//+ ' ${node.id}',
                           style: TextStyle(
                             color: node.selected ? Colors.white : Colors.white70,
                             fontSize: 12.0,
@@ -70,31 +72,44 @@ class NodeWidget extends StackedView<NodeWidgetModel> {
                       ],
                     ),
                   ),
-                  for (var t in node.properties.entries)
+                  for (Property property in node.properties.values)
                     Positioned(
-                      //top: 0,
-                      left: -6,
+                      top: viewModel.layoutSocketsVertically(node.properties.values.toList(), property),
+                      left: -6.0,
                       child: Align(
                         alignment: Alignment.centerLeft,
-                        child: Container(
-                          height: 10,
-                          width: 10,
-                          decoration: BoxDecoration(
-                            color: Color(0xFFCBCE17),
-                            borderRadius: BorderRadius.circular(50.0),
-                            border: Border.all(color: Color(0xFF1F1F1F)),
-                          ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              height: 10.0,
+                              width: 10.0,
+                              decoration: BoxDecoration(
+                                color: Color(0xFFCBCE17),
+                                borderRadius: BorderRadius.circular(50.0),
+                                border: Border.all(color: Color(0xFF1F1F1F)),
+                              ),
+                            ),
+                            Text(
+                              property.id.split('-')[0],
+                              style: TextStyle(
+                                color: node.selected ? Colors.white : Colors.white70,
+                                fontSize: 12.0,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                  for (var t in node.outputs.entries)
+                  for (Output output in node.outputs.values)
                     Positioned(
-                      left: 124,
+                      top: viewModel.layoutSocketsVertically(node.outputs.values.toList(), output),
+                      left: 124.0,
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: Container(
-                          height: 10,
-                          width: 10,
+                          height: 10.0,
+                          width: 10.0,
                           decoration: BoxDecoration(
                             color: Color(0xFFCBCE17),
                             borderRadius: BorderRadius.circular(50.0),
