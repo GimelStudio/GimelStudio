@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:gimelstudio/app/app.locator.dart';
 import 'package:gimelstudio/models/node_base.dart';
 import 'package:gimelstudio/models/nodegraph.dart';
@@ -10,29 +11,32 @@ class NodegraphsService extends ReactiveViewModel with ListenableServiceMixin {
 
   NodegraphsService() {
     listenToReactiveValues([
-      //selectedLayerIndex,
       nodegraph,
       nodes,
       selectedNode,
     ]);
   }
 
-  NodeGraph? get nodegraph =>
-      _layersService.layers.isEmpty ? null : _layersService.layers[_layersService.selectedLayerIndex].nodegraph;
+  NodeGraph? get nodegraph => _layersService.layers.isEmpty ? null : _layersService.selectedLayer?.nodegraph;
 
-  Map<String, NodeBase> get nodes =>
-      _layersService.layers.isEmpty ? {} : _layersService.layers[_layersService.selectedLayerIndex].nodegraph.nodes;
+  Map<String, NodeBase> get nodes => nodegraph == null ? {} : nodegraph!.nodes;
 
   NodeBase? get selectedNode => nodes.values.isEmpty ? null : nodes.values.firstWhere((item) => item.selected == true);
 
-  void selectNode(MapEntry<String, NodeBase> key) {
-    // Deselect all nodes first.
-    // for (MapEntry<String, NodeBase> item in nodes.entries) {
-    //   item.value.selected = false;
-    // }
-    nodes[key.key]!.selected = true;
+  void selectNode(NodeBase node) {
+    nodes[node.id]?.selected = true;
     notifyListeners();
-    rebuildUi();
+  }
+
+  void moveNode(NodeBase node, Offset newPosition) {
+    // Deselect all nodes first.
+    for (MapEntry<String, NodeBase> item in nodes.entries) {
+      item.value.selected = false;
+    }
+
+    nodes[node.id]?.selected = true;
+    nodes[node.id]?.position = newPosition;
+    notifyListeners();
   }
 
   @override

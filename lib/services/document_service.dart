@@ -9,12 +9,15 @@ class DocumentService with ListenableServiceMixin {
 
   DocumentService() {
     listenToReactiveValues([
+      selectedDocument,
       _selectedDocumentIndex,
       _documents,
     ]);
   }
 
   /// The current, active document in the interface.
+  Document? get selectedDocument => _documents.isEmpty ? null : _documents[_selectedDocumentIndex];
+
   int _selectedDocumentIndex = 0;
   int get selectedDocumentIndex => _selectedDocumentIndex;
 

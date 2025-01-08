@@ -15,25 +15,15 @@ class NodeGraphPanelModel extends ReactiveViewModel {
 
   Map<String, NodeBase> get nodeRegistry => _nodeRegistryService.nodeRegistry;
 
-  // TODO: Maybe create a currentLayer (object)?
-  Map<String, NodeBase> get nodes =>
-      _layersService.layers.isEmpty ? {} : _layersService.layers[_layersService.selectedLayerIndex].nodegraph.nodes;
+  Map<String, NodeBase> get nodes => _nodegraphsService.nodegraph == null ? {} : _nodegraphsService.nodegraph!.nodes;
 
-  void onSelectNode(MapEntry<String, NodeBase> key) {
-    _nodegraphsService.selectNode(key);
-    notifyListeners();
+  void onSelectNode(NodeBase node) {
+    _nodegraphsService.selectNode(node);
   }
 
   // TODO: move work to service
-  void onNodeMoved(MapEntry<String, NodeBase> key, Offset newPosition) {
-    // Deselect all nodes first.
-    for (MapEntry<String, NodeBase> item in nodes.entries) {
-      item.value.selected = false;
-    }
-
-    nodes[key.key]?.selected = true;
-    nodes[key.key]?.position = newPosition;
-    rebuildUi();
+  void onNodeMoved(NodeBase node, Offset newPosition) {
+    _nodegraphsService.moveNode(node, newPosition);
   }
 
   @override

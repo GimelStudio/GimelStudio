@@ -16,18 +16,18 @@ class LayersService with ListenableServiceMixin {
 
   LayersService() {
     listenToReactiveValues([
-      selectedDocumentIndex,
       selectedLayerIndex,
+      selectedLayer,
       layers,
     ]);
   }
 
-  int get selectedDocumentIndex => _documentsService.selectedDocumentIndex;
-
   int get selectedLayerIndex => layers.isEmpty ? 0 : layers.indexWhere((item) => item.selected == true);
 
+  Layer? get selectedLayer => layers.isEmpty ? null : layers[selectedLayerIndex];
+
   List<Layer> get layers =>
-      _documentsService.documents.isEmpty ? [] : _documentsService.documents[selectedDocumentIndex].layers;
+      _documentsService.selectedDocument == null ? [] : _documentsService.selectedDocument!.layers;
 
   void setSelectedLayer(Layer selectedLayer) {
     for (Layer layer in layers) {

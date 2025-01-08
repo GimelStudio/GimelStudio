@@ -25,8 +25,8 @@ class NodeGraphPanel extends StackedView<NodeGraphPanelModel> {
               if (definition != null) {
                 return NodeWidget(
                   node: key.value,
-                  onTapNode: () => viewModel.onSelectNode(key),
-                  onNodeMoved: (newPosition) => viewModel.onNodeMoved(key, newPosition),
+                  onTapNode: () => viewModel.onSelectNode(key.value),
+                  onNodeMoved: (newPosition) => viewModel.onNodeMoved(key.value, newPosition),
                 );
               } else {
                 return const SizedBox();
