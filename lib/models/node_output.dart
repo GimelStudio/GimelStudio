@@ -19,18 +19,18 @@ class Output {
     return {
       'id': id,
       'idname': idname,
-      'dataType': dataType,
+      'dataType': dataType.toString(),
     };
   }
 
   Output.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-        idname = json['idname'],
-        dataType = json['dataType'];
+      : id = json['id'] as String,
+        idname = json['idname'] as String,
+        dataType = json['dataType']; // TODO
 
   @override
   String toString() {
-    return 'id: $id, idname: $idname, dataType: $dataType';
+    return 'Output{id: $id, idname: $idname, dataType: $dataType}';
   }
 
   factory Output.clone(Output source, String id) {

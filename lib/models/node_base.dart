@@ -37,7 +37,7 @@ class NodeBase {
   Map<String, Output> outputs;
 
   /// The (x, y) position of the node in the node graph.
-  Offset position;
+  Offset position; // TODO create types
 
   /// Whether this node is selected in the node graph.
   bool selected;
@@ -83,20 +83,23 @@ class NodeBase {
   }
 
   NodeBase.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-        idname = json['idname'],
-        isOutput = json['isOutput'],
-        label = json['label'],
-        selected = json['selected'],
+      : id = json['id'] as String,
+        idname = json['idname'] as String,
+        isOutput = json['isOutput'] as bool,
+        label = json['label'] as String,
+        selected = json['selected'] as bool,
         properties = {
-          for (Map<String, dynamic> property in json['properties']) property['idname']: Property.fromJson(property)
+          for (Map<String, dynamic> property in json['properties'])
+            property['idname'] as String: Property.fromJson(property)
         },
-        outputs = {for (Map<String, dynamic> output in json['outputs']) json['idname']: Output.fromJson(output)},
-        position = Offset(json['position'][0], json['position'][1]);
+        outputs = {
+          for (Map<String, dynamic> output in json['outputs']) json['idname'] as String: Output.fromJson(output)
+        },
+        position = Offset(json['position'][0] as double, json['position'][1] as double);
 
   @override
   String toString() {
-    return 'id: $id, idname: $idname, isOutput: $isOutput, label: $label, selected: $selected, properties: $properties, outputs: $outputs, position: (${position.dx}, ${position.dy})';
+    return 'Node{id: $id, idname: $idname, isOutput: $isOutput, label: $label, selected: $selected, properties: $properties, outputs: $outputs, position: (${position.dx}, ${position.dy})}';
   }
 
   factory NodeBase.clone(NodeBase source, String id) {

@@ -26,14 +26,14 @@ class Document {
   }
 
   Document.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-        name = json['name'],
-        size = Size(json['size'][0], json['size'][1]),
+      : id = json['id'] as String,
+        name = json['name'] as String,
+        size = Size(json['size'][0] as double, json['size'][1] as double),
         isSaved = true,
         layers = [for (Map<String, dynamic> layer in json['layers']) Layer.fromJson(layer)];
 
   @override
   String toString() {
-    return 'id: $id, name: $name, size: (${size.width}X${size.height}), layers: $layers';
+    return 'Document{id: $id, name: $name, size: (${size.width}, ${size.height}), layers: $layers}';
   }
 }

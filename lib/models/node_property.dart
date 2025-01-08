@@ -57,7 +57,7 @@ class Property {
       'id': id,
       'idname': idname,
       'label': label,
-      'dataType': dataType, // TODO
+      'dataType': dataType.toString(), // TODO
       'value': value,
       'isExposed': isExposed,
       'connection': connection,
@@ -65,17 +65,17 @@ class Property {
   }
 
   Property.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-        idname = json['idname'],
-        label = json['label'],
+      : id = json['id'] as String,
+        idname = json['idname'] as String,
+        label = json['label'] as String,
         dataType = json['dataType'], // TODO
         value = json['value'],
-        isExposed = json['isExposed'],
-        connection = json['connection'];
+        isExposed = json['isExposed'] as bool,
+        connection = json['connection']; // TODO
 
   @override
   String toString() {
-    return 'id: $id, idname: $idname, label: $label, dataType: $dataType, value: $value, isExposed: $isExposed, connection: $connection';
+    return 'Property{id: $id, idname: $idname, label: $label, dataType: $dataType, value: $value, isExposed: $isExposed, connection: $connection}';
   }
 }
 
