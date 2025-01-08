@@ -21,11 +21,10 @@ class NodeGraphPanelModel extends ReactiveViewModel {
     _nodegraphsService.selectNode(node);
   }
 
-  // TODO: move work to service
   void onNodeMoved(NodeBase node, Offset newPosition) {
     _nodegraphsService.moveNode(node, newPosition);
   }
 
   @override
-  List<ListenableServiceMixin> get listenableServices => [_layersService, _documentsService];
+  List<ListenableServiceMixin> get listenableServices => [_nodegraphsService, _layersService, _documentsService];
 }

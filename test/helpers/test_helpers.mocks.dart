@@ -792,13 +792,6 @@ class MockImageService extends _i1.Mock implements _i10.ImageService {
 /// See the documentation for Mockito's code generation for more information.
 class MockLayersService extends _i1.Mock implements _i11.LayersService {
   @override
-  int get selectedDocumentIndex => (super.noSuchMethod(
-        Invocation.getter(#selectedDocumentIndex),
-        returnValue: 0,
-        returnValueForMissingStub: 0,
-      ) as int);
-
-  @override
   int get selectedLayerIndex => (super.noSuchMethod(
         Invocation.getter(#selectedLayerIndex),
         returnValue: 0,
@@ -1040,10 +1033,26 @@ class MockNodegraphsService extends _i1.Mock implements _i13.NodegraphsService {
       ) as int);
 
   @override
-  void selectNode(MapEntry<String, _i3.NodeBase>? key) => super.noSuchMethod(
+  void selectNode(_i3.NodeBase? node) => super.noSuchMethod(
         Invocation.method(
           #selectNode,
-          [key],
+          [node],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void moveNode(
+    _i3.NodeBase? node,
+    _i7.Offset? newPosition,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #moveNode,
+          [
+            node,
+            newPosition,
+          ],
         ),
         returnValueForMissingStub: null,
       );
