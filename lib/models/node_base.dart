@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'dart:ui';
 import 'package:gimelstudio/models/eval_info.dart';
 import 'package:gimelstudio/models/node_output.dart';
 import 'package:gimelstudio/models/node_property.dart';
@@ -13,7 +13,8 @@ class NodeBase {
     this.selected = false,
     required this.properties,
     required this.outputs,
-    this.position = const Offset(10, 10),
+    this.size = const Size(36.0, 130.0),
+    this.position = const Offset(10.0, 10.0),
   });
 
   /// A unique id.
@@ -30,17 +31,20 @@ class NodeBase {
   /// The node's displayed label.
   String label;
 
+  /// Whether this node is selected in the node graph.
+  bool selected;
+
   /// Properties
   Map<String, Property> properties;
 
   /// Outputs
   Map<String, Output> outputs;
 
-  /// The (x, y) position of the node in the node graph.
-  Offset position; // TODO create types
+  /// The (w, h) size of the node in the node graph.
+  Size size;
 
-  /// Whether this node is selected in the node graph.
-  bool selected;
+  /// The (x, y) position of the node in the node graph.
+  Offset position;
 
   //PhosphorIconData icon = PhosphorIcons.notepad(PhosphorIconsStyle.light);
 
@@ -78,6 +82,7 @@ class NodeBase {
       'selected': selected,
       'properties': {for (Property property in properties.values) property.idname: property.toJson()},
       'outputs': {for (Output output in outputs.values) output.idname: output.toJson()},
+      'size': [size.width, size.height],
       'position': [position.dx, position.dy],
     };
   }
@@ -95,11 +100,12 @@ class NodeBase {
         outputs = {
           for (Map<String, dynamic> output in json['outputs']) json['idname'] as String: Output.fromJson(output)
         },
+        size = Size(json['size'][0] as double, json['size'][1] as double),
         position = Offset(json['position'][0] as double, json['position'][1] as double);
 
   @override
   String toString() {
-    return 'Node{id: $id, idname: $idname, isOutput: $isOutput, label: $label, selected: $selected, properties: $properties, outputs: $outputs, position: (${position.dx}, ${position.dy})}';
+    return 'Node{id: $id, idname: $idname, isOutput: $isOutput, label: $label, selected: $selected, properties: $properties, outputs: $outputs, size: (${size.width}, ${size.height}), position: (${position.dx}, ${position.dy})}';
   }
 
   factory NodeBase.clone(NodeBase source, String id) {
@@ -111,6 +117,7 @@ class NodeBase {
       selected: source.selected,
       properties: source.properties,
       outputs: source.outputs,
+      size: source.size,
       position: source.position,
     );
   }

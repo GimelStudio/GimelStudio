@@ -27,7 +27,7 @@ class NodeRegistryService {
 
     Map<String, Property> protoProperties = node.properties;
     Map<String, Output> protoOutputs = node.outputs;
-    
+
     // Re-create the properties and outputs for the node type.
     node.properties = {};
     for (Property property in protoProperties.values) {

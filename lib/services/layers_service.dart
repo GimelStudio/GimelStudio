@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'dart:ui';
+
 import 'package:gimelstudio/app/app.locator.dart';
 import 'package:gimelstudio/models/node_base.dart';
 import 'package:gimelstudio/models/nodegraph.dart';
@@ -60,8 +61,24 @@ class LayersService with ListenableServiceMixin {
     layers.insert(newIndex, layer);
 
     syncLayerIndexes();
-    print(layers);
+    //print(layers);
     notifyListeners();
+  }
+
+  Map<String, NodeBase> newDefaultNodes() {
+    Map<String, NodeBase> defaultNodes = {};
+
+    NodeBase integerNode = _nodeRegistryService.createNode('integer_corenode', Offset(100, 80));
+    integerNode.selected = true;
+    defaultNodes[integerNode.id] = integerNode;
+
+    NodeBase addNode = _nodeRegistryService.createNode('add_corenode', Offset(200, 80));
+    defaultNodes[addNode.id] = addNode;
+
+    NodeBase outputNode = _nodeRegistryService.createNode('output_corenode', Offset(410, 80));
+    defaultNodes[outputNode.id] = outputNode;
+
+    return defaultNodes;
   }
 
   void addNewLayer() {
@@ -75,17 +92,7 @@ class LayersService with ListenableServiceMixin {
 
     // Default nodes
     // TODO: refactor
-    Map<String, NodeBase> defaultNodes = {};
-
-    NodeBase integerNode = _nodeRegistryService.createNode('integer_corenode', Offset(100, 80));
-    integerNode.selected = true;
-    defaultNodes[integerNode.id] = integerNode;
-
-    NodeBase addNode = _nodeRegistryService.createNode('add_corenode', Offset(200, 80));
-    defaultNodes[addNode.id] = addNode;
-
-    NodeBase outputNode = _nodeRegistryService.createNode('output_corenode', Offset(410, 80));
-    defaultNodes[outputNode.id] = outputNode;
+    Map<String, NodeBase> defaultNodes = newDefaultNodes();
 
     layers.insert(
       insertAt,

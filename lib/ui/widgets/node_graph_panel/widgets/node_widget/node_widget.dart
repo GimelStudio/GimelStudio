@@ -38,8 +38,8 @@ class NodeWidget extends StackedView<NodeWidgetModel> {
             onPanCancel: () => viewModel.onPanCancel(onNodeMoved),
             onPanEnd: (event) => viewModel.onPanEnd(event),
             child: Container(
-              height: 36,
-              width: 130,
+              height: node.size.width,
+              width: node.size.height,
               decoration: BoxDecoration(
                 color: Color(0xFF333333),
                 borderRadius: BorderRadius.circular(8.0),
