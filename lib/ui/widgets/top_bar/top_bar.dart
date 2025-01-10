@@ -43,7 +43,7 @@ class TopBar extends StackedView<TopBarModel> {
               ),
             ),
           ),
-          const SizedBox(width: 8.0),
+          const SizedBox(width: 2.0),
           viewModel.showMenu == true ? const TopBarMenubar() : const SizedBox(),
           viewModel.showMenu == true ? const SizedBox(width: 20.0) : const SizedBox(),
           const DocumentTabs(),

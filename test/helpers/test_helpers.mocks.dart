@@ -7,16 +7,17 @@ import 'dart:async' as _i2;
 import 'dart:ui' as _i7;
 
 import 'package:flutter/material.dart' as _i6;
-import 'package:gimelstudio/models/document.dart' as _i18;
+import 'package:gimelstudio/models/document.dart' as _i19;
 import 'package:gimelstudio/models/layer.dart' as _i12;
 import 'package:gimelstudio/models/node_base.dart' as _i3;
-import 'package:gimelstudio/services/document_service.dart' as _i17;
-import 'package:gimelstudio/services/evaluation_service.dart' as _i19;
+import 'package:gimelstudio/models/node_property.dart' as _i15;
+import 'package:gimelstudio/services/document_service.dart' as _i18;
+import 'package:gimelstudio/services/evaluation_service.dart' as _i20;
 import 'package:gimelstudio/services/file_service.dart' as _i9;
-import 'package:gimelstudio/services/id_service.dart' as _i15;
+import 'package:gimelstudio/services/id_service.dart' as _i16;
 import 'package:gimelstudio/services/image_service.dart' as _i10;
 import 'package:gimelstudio/services/layers_service.dart' as _i11;
-import 'package:gimelstudio/services/node_registry_service.dart' as _i16;
+import 'package:gimelstudio/services/node_registry_service.dart' as _i17;
 import 'package:gimelstudio/services/nodegraphs_service.dart' as _i13;
 import 'package:gimelstudio/services/viewport_service.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
@@ -715,7 +716,17 @@ class MockViewportService extends _i1.Mock implements _i8.ViewportService {}
 /// A class which mocks [FileService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFileService extends _i1.Mock implements _i9.FileService {}
+class MockFileService extends _i1.Mock implements _i9.FileService {
+  @override
+  _i2.Future<void> saveFile(String? content) => (super.noSuchMethod(
+        Invocation.method(
+          #saveFile,
+          [content],
+        ),
+        returnValue: _i2.Future<void>.value(),
+        returnValueForMissingStub: _i2.Future<void>.value(),
+      ) as _i2.Future<void>);
+}
 
 /// A class which mocks [ImageService].
 ///
@@ -868,6 +879,16 @@ class MockLayersService extends _i1.Mock implements _i11.LayersService {
         ),
         returnValueForMissingStub: null,
       );
+
+  @override
+  Map<String, _i3.NodeBase> newDefaultNodes() => (super.noSuchMethod(
+        Invocation.method(
+          #newDefaultNodes,
+          [],
+        ),
+        returnValue: <String, _i3.NodeBase>{},
+        returnValueForMissingStub: <String, _i3.NodeBase>{},
+      ) as Map<String, _i3.NodeBase>);
 
   @override
   void addNewLayer() => super.noSuchMethod(
@@ -1052,6 +1073,22 @@ class MockNodegraphsService extends _i1.Mock implements _i13.NodegraphsService {
           [
             node,
             newPosition,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onEditNodePropertyValue(
+    _i15.Property? property,
+    dynamic value,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onEditNodePropertyValue,
+          [
+            property,
+            value,
           ],
         ),
         returnValueForMissingStub: null,
@@ -1427,7 +1464,7 @@ class MockNodegraphsService extends _i1.Mock implements _i13.NodegraphsService {
 /// A class which mocks [IdService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIdService extends _i1.Mock implements _i15.IdService {
+class MockIdService extends _i1.Mock implements _i16.IdService {
   @override
   String newId() => (super.noSuchMethod(
         Invocation.method(
@@ -1454,7 +1491,7 @@ class MockIdService extends _i1.Mock implements _i15.IdService {
 /// A class which mocks [NodeRegistryService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNodeRegistryService extends _i1.Mock implements _i16.NodeRegistryService {
+class MockNodeRegistryService extends _i1.Mock implements _i17.NodeRegistryService {
   @override
   Map<String, _i3.NodeBase> get nodeRegistry => (super.noSuchMethod(
         Invocation.getter(#nodeRegistry),
@@ -1510,7 +1547,7 @@ class MockNodeRegistryService extends _i1.Mock implements _i16.NodeRegistryServi
 /// A class which mocks [DocumentService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockDocumentService extends _i1.Mock implements _i17.DocumentService {
+class MockDocumentService extends _i1.Mock implements _i18.DocumentService {
   @override
   int get selectedDocumentIndex => (super.noSuchMethod(
         Invocation.getter(#selectedDocumentIndex),
@@ -1519,11 +1556,11 @@ class MockDocumentService extends _i1.Mock implements _i17.DocumentService {
       ) as int);
 
   @override
-  List<_i18.Document> get documents => (super.noSuchMethod(
+  List<_i19.Document> get documents => (super.noSuchMethod(
         Invocation.getter(#documents),
-        returnValue: <_i18.Document>[],
-        returnValueForMissingStub: <_i18.Document>[],
-      ) as List<_i18.Document>);
+        returnValue: <_i19.Document>[],
+        returnValueForMissingStub: <_i19.Document>[],
+      ) as List<_i19.Document>);
 
   @override
   int get listenersCount => (super.noSuchMethod(
@@ -1533,7 +1570,7 @@ class MockDocumentService extends _i1.Mock implements _i17.DocumentService {
       ) as int);
 
   @override
-  void setSelectedDocumentTab(_i18.Document? selectedDocument) => super.noSuchMethod(
+  void setSelectedDocumentTab(_i19.Document? selectedDocument) => super.noSuchMethod(
         Invocation.method(
           #setSelectedDocumentTab,
           [selectedDocument],
@@ -1583,7 +1620,7 @@ class MockDocumentService extends _i1.Mock implements _i17.DocumentService {
       );
 
   @override
-  void closeDocument(_i18.Document? document) => super.noSuchMethod(
+  void closeDocument(_i19.Document? document) => super.noSuchMethod(
         Invocation.method(
           #closeDocument,
           [document],
@@ -1592,17 +1629,28 @@ class MockDocumentService extends _i1.Mock implements _i17.DocumentService {
       );
 
   @override
-  void saveDocument(_i18.Document? document) => super.noSuchMethod(
+  _i2.Future<void> saveDocument(_i19.Document? document) => (super.noSuchMethod(
         Invocation.method(
           #saveDocument,
           [document],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i2.Future<void>.value(),
+        returnValueForMissingStub: _i2.Future<void>.value(),
+      ) as _i2.Future<void>);
+
+  @override
+  _i2.Future<void> saveDocumentToFile(_i19.Document? document) => (super.noSuchMethod(
+        Invocation.method(
+          #saveDocumentToFile,
+          [document],
+        ),
+        returnValue: _i2.Future<void>.value(),
+        returnValueForMissingStub: _i2.Future<void>.value(),
+      ) as _i2.Future<void>);
 
   @override
   void renameDocument(
-    _i18.Document? document,
+    _i19.Document? document,
     String? newName,
   ) =>
       super.noSuchMethod(
@@ -1656,7 +1704,7 @@ class MockDocumentService extends _i1.Mock implements _i17.DocumentService {
 /// A class which mocks [EvaluationService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockEvaluationService extends _i1.Mock implements _i19.EvaluationService {
+class MockEvaluationService extends _i1.Mock implements _i20.EvaluationService {
   @override
   List<_i12.Layer> get layers => (super.noSuchMethod(
         Invocation.getter(#layers),
