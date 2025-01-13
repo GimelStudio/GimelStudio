@@ -2,130 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gimelstudio/ui/common/app_styles.dart';
 import 'package:gimelstudio/ui/menubar/button.dart';
-import 'package:gimelstudio/ui/menubar/divider.dart';
 import 'package:gimelstudio/ui/menubar/entry.dart';
 import 'package:gimelstudio/ui/menubar/submenu.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stacked/stacked.dart';
 
 import 'top_bar_menubar_model.dart';
-
-List<BarButton> _menuBarButtons = [
-  BarButton(
-    text: Text(
-      'File',
-      style: AppStyles.menubarItemTextStyle,
-    ),
-    submenu: SubMenu(
-      menuItems: [
-        MenuButton(
-          onTap: () {},
-          text: Text(
-            'New…',
-            style: AppStyles.menuTextStyle,
-          ),
-          shortcutText: 'Ctrl+N',
-          shortcut: const SingleActivator(LogicalKeyboardKey.keyN, control: true),
-        ),
-        MenuButton(
-          onTap: () {},
-          text: Text(
-            'Open…',
-            style: AppStyles.menuTextStyle,
-          ),
-          shortcutText: 'Ctrl+O',
-          shortcut: const SingleActivator(LogicalKeyboardKey.keyO, control: true),
-        ),
-        MenuButton(
-          onTap: () {},
-          text: Text(
-            'Close',
-            style: AppStyles.menuTextStyle,
-          ),
-          shortcutText: 'Ctrl+W',
-          shortcut: const SingleActivator(LogicalKeyboardKey.keyW, control: true),
-        ),
-        MenuButton(
-          onTap: () {},
-          text: Text(
-            'Close All',
-            style: AppStyles.menuTextStyle,
-          ),
-          shortcutText: 'Ctrl+Alt+W',
-          shortcut: const SingleActivator(LogicalKeyboardKey.keyW, control: true, alt: true),
-        ),
-        MenuButton(
-          onTap: () => print('Save'),
-          text: Text(
-            'Save',
-            style: AppStyles.menuTextStyle,
-          ),
-          shortcutText: 'Ctrl+S',
-          shortcut: const SingleActivator(LogicalKeyboardKey.keyS, control: true),
-        ),
-        MenuButton(
-          onTap: () {},
-          text: Text(
-            'Save As…',
-            style: AppStyles.menuTextStyle,
-          ),
-          shortcutText: 'Ctrl+Shift+S',
-          shortcut: const SingleActivator(LogicalKeyboardKey.keyS, control: true, shift: true),
-        ),
-        MenuButton(
-          onTap: () {},
-          text: Text(
-            'Export…',
-            style: AppStyles.menuTextStyle,
-          ),
-          shortcutText: 'Ctrl+Alt+Shift+S',
-          shortcut: const SingleActivator(LogicalKeyboardKey.keyS, control: true, alt: true, shift: true),
-        ),
-        MenuButton(
-          onTap: () {},
-          text: Text(
-            'Exit',
-            style: AppStyles.menuTextStyle,
-          ),
-        ),
-      ],
-    ),
-  ),
-  BarButton(
-    text: Text(
-      'Edit',
-      style: AppStyles.menubarItemTextStyle,
-    ),
-    submenu: SubMenu(
-      menuItems: [
-        MenuButton(
-          onTap: () {},
-          text: Text(
-            'Preferences',
-            style: AppStyles.menuTextStyle,
-          ),
-        ),
-      ],
-    ),
-  ),
-  BarButton(
-    text: Text(
-      'Help',
-      style: AppStyles.menubarItemTextStyle,
-    ),
-    submenu: SubMenu(
-      menuItems: [
-        MenuButton(
-          onTap: () {},
-          text: Text(
-            'About',
-            style: AppStyles.menuTextStyle,
-          ),
-        ),
-      ],
-    ),
-  ),
-];
 
 class TopBarMenubar extends StackedView<TopBarMenubarModel> {
   const TopBarMenubar({super.key});
@@ -142,10 +23,127 @@ class TopBarMenubar extends StackedView<TopBarMenubarModel> {
     TopBarMenubarModel viewModel,
     Widget? child,
   ) {
-    // TODO: this shouldn't be in the build method.
+    List<BarButton> menuBarButtons = [
+      BarButton(
+        text: Text(
+          'File',
+          style: AppStyles.menubarItemTextStyle,
+        ),
+        submenu: SubMenu(
+          menuItems: [
+            MenuButton(
+              onTap: viewModel.onNew,
+              text: Text(
+                'New…',
+                style: AppStyles.menuTextStyle,
+              ),
+              shortcutText: 'Ctrl+N',
+              shortcut: const SingleActivator(LogicalKeyboardKey.keyN, control: true),
+            ),
+            MenuButton(
+              onTap: viewModel.onOpen,
+              text: Text(
+                'Open…',
+                style: AppStyles.menuTextStyle,
+              ),
+              shortcutText: 'Ctrl+O',
+              shortcut: const SingleActivator(LogicalKeyboardKey.keyO, control: true),
+            ),
+            MenuButton(
+              onTap: viewModel.onClose,
+              text: Text(
+                'Close',
+                style: AppStyles.menuTextStyle,
+              ),
+              shortcutText: 'Ctrl+W',
+              shortcut: const SingleActivator(LogicalKeyboardKey.keyW, control: true),
+            ),
+            MenuButton(
+              onTap: viewModel.onCloseAll,
+              text: Text(
+                'Close All',
+                style: AppStyles.menuTextStyle,
+              ),
+              shortcutText: 'Ctrl+Alt+W',
+              shortcut: const SingleActivator(LogicalKeyboardKey.keyW, control: true, alt: true),
+            ),
+            MenuButton(
+              onTap: viewModel.onSave,
+              text: Text(
+                'Save',
+                style: AppStyles.menuTextStyle,
+              ),
+              shortcutText: 'Ctrl+S',
+              shortcut: const SingleActivator(LogicalKeyboardKey.keyS, control: true),
+            ),
+            MenuButton(
+              onTap: viewModel.onSaveAs,
+              text: Text(
+                'Save As…',
+                style: AppStyles.menuTextStyle,
+              ),
+              shortcutText: 'Ctrl+Shift+S',
+              shortcut: const SingleActivator(LogicalKeyboardKey.keyS, control: true, shift: true),
+            ),
+            MenuButton(
+              onTap: viewModel.onExport,
+              text: Text(
+                'Export…',
+                style: AppStyles.menuTextStyle,
+              ),
+              shortcutText: 'Ctrl+Alt+Shift+S',
+              shortcut: const SingleActivator(LogicalKeyboardKey.keyS, control: true, alt: true, shift: true),
+            ),
+            MenuButton(
+              onTap: viewModel.onExit,
+              text: Text(
+                'Exit',
+                style: AppStyles.menuTextStyle,
+              ),
+            ),
+          ],
+        ),
+      ),
+      BarButton(
+        text: Text(
+          'Edit',
+          style: AppStyles.menubarItemTextStyle,
+        ),
+        submenu: SubMenu(
+          menuItems: [
+            MenuButton(
+              onTap: viewModel.onPreferences,
+              text: Text(
+                'Preferences',
+                style: AppStyles.menuTextStyle,
+              ),
+            ),
+          ],
+        ),
+      ),
+      BarButton(
+        text: Text(
+          'Help',
+          style: AppStyles.menubarItemTextStyle,
+        ),
+        submenu: SubMenu(
+          menuItems: [
+            MenuButton(
+              onTap: viewModel.onAbout,
+              text: Text(
+                'About',
+                style: AppStyles.menuTextStyle,
+              ),
+            ),
+          ],
+        ),
+      ),
+    ];
+
+    // TODO: should this be in the build method?
     viewModel.shortcutsEntry?.dispose();
-    if (MenuEntry.shortcuts(_menuBarButtons).isNotEmpty) {
-      viewModel.shortcutsEntry = ShortcutRegistry.of(context).addAll(MenuEntry.shortcuts(_menuBarButtons));
+    if (MenuEntry.shortcuts(menuBarButtons).isNotEmpty) {
+      viewModel.shortcutsEntry = ShortcutRegistry.of(context).addAll(MenuEntry.shortcuts(menuBarButtons));
     }
 
     return MenuBar(
@@ -158,7 +156,7 @@ class TopBarMenubar extends StackedView<TopBarMenubarModel> {
         side: WidgetStatePropertyAll(BorderSide(width: 0, color: Colors.transparent)),
       ),
       children: MenuEntry.build(
-        entries: _menuBarButtons,
+        entries: menuBarButtons,
         barButtonStyle: const ButtonStyle(
           visualDensity: VisualDensity(horizontal: 0.5, vertical: 2.0),
           textStyle: WidgetStatePropertyAll(TextStyle(color: Colors.white60, fontWeight: FontWeight.normal)),

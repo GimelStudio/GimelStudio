@@ -20,8 +20,9 @@ class PropertiesPanel extends StackedView<PropertiesPanelModel> {
             padding: const EdgeInsets.symmetric(horizontal: 5.0),
             child: SingleChildScrollView(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('nodeid: ${viewModel.selectedNode?.id}', style: TextStyle(color: Colors.white)),
+                  Text('${viewModel.selectedNode?.label}', style: TextStyle(color: Colors.white)),
 
                   if (viewModel.selectedNode != null && viewModel.selectedNode?.isOutput == false)
                     Column(
@@ -31,8 +32,8 @@ class PropertiesPanel extends StackedView<PropertiesPanelModel> {
                             Row(
                               children: [
                                 Text(
-                                  '${property.idname}: (${property.value}) \n propid: ${property.id.split('-')[0]}',
-                                  style: TextStyle(
+                                  '${property.idname}: (${property.value})',
+                                  style: const TextStyle(
                                     color: Colors.white70,
                                   ),
                                 ),

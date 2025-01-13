@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart';
+import 'dart:ui';
+
 import 'package:gimelstudio/app/app.locator.dart';
 import 'package:gimelstudio/models/node_base.dart';
+import 'package:gimelstudio/models/node_property.dart';
 import 'package:gimelstudio/models/nodegraph.dart';
 import 'package:gimelstudio/services/layers_service.dart';
 import 'package:stacked/stacked.dart';
@@ -36,6 +38,11 @@ class NodegraphsService extends ReactiveViewModel with ListenableServiceMixin {
 
     nodes[node.id]?.selected = true;
     nodes[node.id]?.position = newPosition;
+    notifyListeners();
+  }
+
+  void onEditNodePropertyValue(Property property, dynamic value) {
+    property.value = value;
     notifyListeners();
   }
 

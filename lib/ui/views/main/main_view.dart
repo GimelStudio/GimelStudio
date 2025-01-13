@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gimelstudio/ui/widgets/layers_panel/layers_panel.dart';
+import 'package:gimelstudio/ui/widgets/tool_bar/tool_bar.dart';
 import 'package:gimelstudio/ui/widgets/top_bar/top_bar.dart';
 import 'package:gimelstudio/ui/widgets/node_graph_panel/node_graph_panel.dart';
 import 'package:gimelstudio/ui/widgets/viewport_panel/viewport_panel.dart';
@@ -26,7 +27,7 @@ class MainView extends StackedView<MainViewModel> {
           Expanded(
             child: Row(
               children: [
-                // TODO: Toolbar goes here
+                ToolBar(),
                 Expanded(
                   child: Container(
                     color: Color(0xFF272727),
@@ -110,7 +111,7 @@ class MainView extends StackedView<MainViewModel> {
                         ),
                         Area(
                           size: 220.0,
-                          max: 280.0,
+                          max: 350.0,
                           min: 180.0,
                           builder: (context, area) {
                             return MultiSplitView(

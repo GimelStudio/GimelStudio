@@ -1,12 +1,15 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:gimelstudio/app/app.locator.dart';
 import 'package:gimelstudio/models/document.dart';
+import 'package:gimelstudio/services/file_service.dart';
 import 'package:gimelstudio/services/id_service.dart';
 import 'package:stacked/stacked.dart';
 
 class DocumentService with ListenableServiceMixin {
   final _idsService = locator<IdService>();
+  final _fileService = locator<FileService>();
 
   DocumentService() {
     listenToReactiveValues([
@@ -69,7 +72,23 @@ class DocumentService with ListenableServiceMixin {
     notifyListeners();
   }
 
-  void saveDocument(Document document) {
+  Future<void> saveDocument(Document document) async {
+    if (selectedDocument != null) {
+      await saveDocumentToFile(selectedDocument!);
+    }
+    notifyListeners();
+  }
+
+  Future<void> saveDocumentToFile(Document document) async {
+    Map<String, dynamic> data = {
+      'metadata': {
+        'version': 0.1,
+      },
+      'contents': document.toJson(),
+    };
+
+    await _fileService.saveFile(jsonEncode(data));
+    document.isSaved = true;
     notifyListeners();
   }
 

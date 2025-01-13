@@ -63,7 +63,7 @@ class NodeWidget extends StackedView<NodeWidgetModel> {
                         //   size: 14.0,
                         // ),
                         Text(
-                          '', //node.label ,//+ ' ${node.id}',
+                          node.label,
                           style: TextStyle(
                             color: node.selected ? Colors.white : Colors.white70,
                             fontSize: 12.0,
@@ -78,26 +78,14 @@ class NodeWidget extends StackedView<NodeWidgetModel> {
                       left: -6.0,
                       child: Align(
                         alignment: Alignment.centerLeft,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Container(
-                              height: 10.0,
-                              width: 10.0,
-                              decoration: BoxDecoration(
-                                color: Color(0xFFCBCE17),
-                                borderRadius: BorderRadius.circular(50.0),
-                                border: Border.all(color: Color(0xFF1F1F1F)),
-                              ),
-                            ),
-                            Text(
-                              property.id.split('-')[0],
-                              style: TextStyle(
-                                color: node.selected ? Colors.white : Colors.white70,
-                                fontSize: 12.0,
-                              ),
-                            ),
-                          ],
+                        child: Container(
+                          height: 10.0,
+                          width: 10.0,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFCBCE17),
+                            borderRadius: BorderRadius.circular(50.0),
+                            border: Border.all(color: Color(0xFF1F1F1F)),
+                          ),
                         ),
                       ),
                     ),

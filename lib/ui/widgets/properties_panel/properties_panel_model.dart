@@ -14,13 +14,14 @@ class PropertiesPanelModel extends ReactiveViewModel {
   NodeBase? get selectedNode => _nodegraphsService.selectedNode;
 
   void setPropertyValue(Property property, dynamic value) {
-    property.value = value;
+    _nodegraphsService.onEditNodePropertyValue(property, value);
     rebuildUi();
   }
 
   void onTogglePropertyExposed(Property property) {
-    print('${property.id}\n');
+    //print('${property.id}\n');
     property.isExposed = !property.isExposed;
+
     rebuildUi();
   }
 
