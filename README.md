@@ -28,6 +28,11 @@ Please see the [CONTRIBUTING.md](CONTRIBUTING.md) for some details on contributi
 - Hit ``F5`` to run the code in the emulator.
 
 
+### Looking for the v0.6.x series?
+
+You can find the previous v0.6.x series written in Python and GLSL [here](https://github.com/GimelStudio/GimelStudio/tree/v0.6.x-series).
+
+
 ### License
 
 Gimel Studio is licensed under the GPL-3.0 license. See [LICENSE](/LICENSE) for details.
