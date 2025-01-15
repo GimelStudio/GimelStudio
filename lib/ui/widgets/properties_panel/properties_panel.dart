@@ -40,7 +40,7 @@ class PropertiesPanel extends StackedView<PropertiesPanelModel> {
                                 Expanded(
                                   child: Slider(
                                     min: 1.0,
-                                    max: 120.0,
+                                    max: 500.0,
                                     value: property.value.toDouble(),
                                     onChanged: (double value) => viewModel.setPropertyValue(property, value.toInt()),
                                   ),

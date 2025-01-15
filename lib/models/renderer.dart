@@ -8,30 +8,31 @@ class Renderer {
 
   final Map<String, NodeBase> nodes;
 
-  int render(String outputNodeId) {
-    NodeBase outputNode = getOutputNode(outputNodeId);
-    print('${outputNode.idname} connection -> ${outputNode.properties['final']?.connection}');
+  dynamic render(String outputNodeIdname) {
+    NodeBase outputNode = getOutputNode(outputNodeIdname);
+    //print('${outputNode.idname} connection -> ${outputNode.properties['layer']?.connection}');
 
     // The node that is connected to this output node.
     NodeBase? nodeConnectedToOutput = outputNode.connectedNode?.$1;
     // The name of the output of the node connected to this output node.
-    String? connectedOutputName = outputNode.connectedNode?.$2;
+    String? connectedOutputIdname = outputNode.connectedNode?.$2;
 
-    if (nodeConnectedToOutput == null || connectedOutputName == null) {
+    if (nodeConnectedToOutput == null || connectedOutputIdname == null) {
       // No node is connected to the output node.
+      print('No node is connected to the output node. $nodeConnectedToOutput | $connectedOutputIdname');
       return -1;
     }
 
     EvalInfo evalInfo = EvalInfo(node: nodeConnectedToOutput);
-    int result = evalInfo.node.evaluateNode(evalInfo)[connectedOutputName];
+    dynamic result = evalInfo.node.evaluateNode(evalInfo)[connectedOutputIdname];
 
     return result;
   }
 
-  NodeBase getOutputNode(String outputNodeId) {
+  NodeBase getOutputNode(String outputNodeIdname) {
     NodeBase? outputNode;
     for (String key in nodes.keys) {
-      if (nodes[key]?.isOutput == true && outputNodeId == key) {
+      if (nodes[key]?.isOutput == true && nodes[key]?.idname == outputNodeIdname) {
         outputNode = nodes[key];
       }
     }

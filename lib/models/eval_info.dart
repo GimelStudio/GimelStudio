@@ -8,11 +8,13 @@ class EvalInfo {
 
   /// Evaluate the value of the parameter [name] of [node].
   dynamic evaluateProperty(String name) {
-    Property prop = node.properties[name]!;
+    Property prop = node.properties.values.firstWhere((item) => item.idname == name);
     if (prop.connection != null) {
       // Evaluate the next node
-      EvalInfo info = EvalInfo(node: prop.connection!.$1);
-      return prop.connection?.$1.evaluateNode(info)[prop.connection!.$2];
+      NodeBase connection = prop.connection!.$1;
+      String outputIdname = prop.connection!.$2;
+      EvalInfo info = EvalInfo(node: connection);
+      return connection.evaluateNode(info)[outputIdname];
     }
     return prop.value;
   }

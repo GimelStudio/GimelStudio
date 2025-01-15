@@ -77,7 +77,7 @@ class MainView extends StackedView<MainViewModel> {
                                               child: Row(
                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                 children: [
-                                                  const Text(
+                                                  Text(
                                                     'Node Editor',
                                                     style: TextStyle(
                                                       color: Colors.white70,

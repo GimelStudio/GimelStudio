@@ -3,6 +3,7 @@ import 'package:gimelstudio/app/app.locator.dart';
 import 'package:gimelstudio/models/node_base.dart';
 import 'package:gimelstudio/models/node_output.dart';
 import 'package:gimelstudio/models/node_property.dart';
+import 'package:gimelstudio/models/nodes.dart';
 import 'package:gimelstudio/services/id_service.dart';
 
 class NodeRegistryService {
@@ -21,7 +22,24 @@ class NodeRegistryService {
 
   NodeBase createNode(String idname, Offset position) {
     // Create a new node object.
-    NodeBase node = NodeBase.clone(nodeRegistry.values.firstWhere((item) => item.idname == idname), _idService.newId());
+    NodeBase node;
+    NodeBase protoNode = nodeRegistry.values.firstWhere((item) => item.idname == idname);
+    String newNodeId = _idService.newId();
+
+    // TODO: find a way to register nodes without being so verbose.
+    switch (idname) {
+      case 'integer_corenode':
+        node = IntegerNode.clone(protoNode, newNodeId);
+      case 'rectangle_corenode':
+        node = RectangleNode.clone(protoNode, newNodeId);
+      case 'add_corenode':
+        node = AddNode.clone(protoNode, newNodeId);
+      case 'output_corenode':
+        node = OutputNode.clone(protoNode, newNodeId);
+      default:
+        throw ('No node in the registry with the specified idname, $idname');
+    }
+
     // Set the position.
     node.position = position;
 

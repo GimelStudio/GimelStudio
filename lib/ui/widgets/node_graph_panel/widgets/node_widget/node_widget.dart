@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gimelstudio/models/node_base.dart';
 import 'package:gimelstudio/models/node_output.dart';
 import 'package:gimelstudio/models/node_property.dart';
+import 'package:gimelstudio/ui/widgets/node_graph_panel/widgets/node_socket_widget/node_socket_widget.dart';
 import 'package:stacked/stacked.dart';
 
 import 'node_widget_model.dart';
@@ -73,36 +74,28 @@ class NodeWidget extends StackedView<NodeWidgetModel> {
                     ),
                   ),
                   for (Property property in node.properties.values)
-                    Positioned(
-                      top: viewModel.layoutSocketsVertically(node.properties.values.toList(), property),
-                      left: -6.0,
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Container(
-                          height: 10.0,
-                          width: 10.0,
-                          decoration: BoxDecoration(
-                            color: Color(0xFFCBCE17),
-                            borderRadius: BorderRadius.circular(50.0),
-                            border: Border.all(color: Color(0xFF1F1F1F)),
+                    if (property.isExposed == true)
+                      Positioned(
+                        top: viewModel.layoutSocketsVertically(
+                            node.properties.values.where((item) => item.isExposed == true).toList(), property), // TODO
+                        left: -6.0,
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: NodeSocketWidget(
+                            type: property.dataType,
+                            isOutput: false,
                           ),
                         ),
                       ),
-                    ),
                   for (Output output in node.outputs.values)
                     Positioned(
-                      top: viewModel.layoutSocketsVertically(node.outputs.values.toList(), output),
+                      top: viewModel.layoutSocketsVertically(node.outputs.values.toList(), output), // TODO
                       left: 124.0,
                       child: Align(
                         alignment: Alignment.centerRight,
-                        child: Container(
-                          height: 10.0,
-                          width: 10.0,
-                          decoration: BoxDecoration(
-                            color: Color(0xFFCBCE17),
-                            borderRadius: BorderRadius.circular(50.0),
-                            border: Border.all(color: Color(0xFF1F1F1F)),
-                          ),
+                        child: NodeSocketWidget(
+                          type: output.dataType,
+                          isOutput: true,
                         ),
                       ),
                     ),

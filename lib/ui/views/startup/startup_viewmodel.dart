@@ -20,9 +20,49 @@ class StartupViewModel extends BaseViewModel {
         'number': IntegerProperty(
           id: '',
           idname: 'number',
-          label: 'label',
+          label: 'Number',
           dataType: int,
           value: 21,
+          isExposed: false,
+        ),
+      },
+      outputs: {
+        'output': Output(id: '', idname: 'output', dataType: int),
+      },
+    );
+
+    final rectangleNode = RectangleNode(
+      properties: {
+        'x': IntegerProperty(
+          id: '',
+          idname: 'x',
+          label: 'X',
+          dataType: int,
+          value: 11,
+          isExposed: false,
+        ),
+        'y': IntegerProperty(
+          id: '',
+          idname: 'y',
+          label: 'Y',
+          dataType: int,
+          value: 11,
+          isExposed: false,
+        ),
+        'width': IntegerProperty(
+          id: '',
+          idname: 'width',
+          label: 'W',
+          dataType: int,
+          value: 400,
+          isExposed: false,
+        ),
+        'height': IntegerProperty(
+          id: '',
+          idname: 'height',
+          label: 'H',
+          dataType: int,
+          value: 400,
           isExposed: false,
         ),
       },
@@ -57,9 +97,9 @@ class StartupViewModel extends BaseViewModel {
 
     final outputNode = OutputNode(
       properties: {
-        'final': IntegerProperty(
+        'layer': IntegerProperty(
           id: '',
-          idname: 'final',
+          idname: 'layer',
           label: 'Layer',
           dataType: int,
           value: 10,
@@ -71,9 +111,9 @@ class StartupViewModel extends BaseViewModel {
 
     final outputNode2 = OutputNode2(
       properties: {
-        'final': IntegerProperty(
+        'layer': IntegerProperty(
           id: '',
-          idname: 'final',
+          idname: 'layer',
           label: 'Layer',
           dataType: int,
           value: 10,
@@ -84,6 +124,7 @@ class StartupViewModel extends BaseViewModel {
     );
 
     _nodeRegistryService.registerNodeType(integerNode);
+    _nodeRegistryService.registerNodeType(rectangleNode);
     _nodeRegistryService.registerNodeType(addNode);
     _nodeRegistryService.registerNodeType(outputNode);
     _nodeRegistryService.registerNodeType(outputNode2);

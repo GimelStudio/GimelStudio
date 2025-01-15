@@ -5,7 +5,7 @@ import 'package:gimelstudio/models/node_base.dart';
 /// A Property is the representation of a single point of
 /// data that can changed either be evaluation of an input
 /// or by the change of the value directly by the user.
-class Property {
+class Property<T> {
   Property({
     required this.id,
     required this.idname,
@@ -26,11 +26,11 @@ class Property {
   String label;
 
   /// The data type of this property.
-  final Type dataType;
+  final T dataType;
 
   /// The current value of the property, which is
   /// used if ``connection`` is null.
-  dynamic value;
+  T value;
 
   /// Whether this property is exposed in the node graph.
   bool isExposed;
@@ -41,10 +41,7 @@ class Property {
   // TODO: for the purposes of converting to json and back, NodeBase should be the id of the node.
   (NodeBase, String)? connection;
 
-  void setValue(Object newValue) {
-    if (dataType == int) {
-      assert(newValue is int); // TODO: remove after testing
-    }
+  void setValue(T newValue) {
     value = newValue;
   }
 
@@ -79,8 +76,8 @@ class Property {
   }
 }
 
-/// Integer input.
-class IntegerProperty extends Property {
+/// Integer input for integer values.
+class IntegerProperty<int> extends Property {
   IntegerProperty({
     required super.id,
     required super.idname,
@@ -91,7 +88,7 @@ class IntegerProperty extends Property {
   }) : assert(value is int);
 
   factory IntegerProperty.clone(Property source, String id) {
-    return IntegerProperty(
+    return IntegerProperty<int>(
       id: id,
       idname: source.idname,
       label: source.label,

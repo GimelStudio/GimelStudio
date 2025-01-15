@@ -54,15 +54,13 @@ class NodeBase {
   }
 
   void setPropertyValue(String idname, Object newValue) {
-    Property? property = properties[idname];
-    assert(property != null);
-    property?.setValue(newValue);
+    Property property = properties.values.firstWhere((item) => item.idname == idname);
+    property.setValue(newValue);
   }
 
   void setConnection(String idname, NodeBase connectedNode, String connectedNodeOutputName) {
-    Property? property = properties[idname];
-    assert(property != null);
-    property?.setConnection((connectedNode, connectedNodeOutputName));
+    Property property = properties.values.firstWhere((item) => item.idname == idname);
+    property.setConnection((connectedNode, connectedNodeOutputName));
   }
 
   dynamic evaluateProperty(EvalInfo eval, String id) {
@@ -106,19 +104,5 @@ class NodeBase {
   @override
   String toString() {
     return 'Node{id: $id, idname: $idname, isOutput: $isOutput, label: $label, selected: $selected, properties: $properties, outputs: $outputs, size: (${size.width}, ${size.height}), position: (${position.dx}, ${position.dy})}';
-  }
-
-  factory NodeBase.clone(NodeBase source, String id) {
-    return NodeBase(
-      id: id,
-      idname: source.idname,
-      isOutput: source.isOutput,
-      label: source.label,
-      selected: source.selected,
-      properties: source.properties,
-      outputs: source.outputs,
-      size: source.size,
-      position: source.position,
-    );
   }
 }

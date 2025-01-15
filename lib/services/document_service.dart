@@ -80,6 +80,10 @@ class DocumentService with ListenableServiceMixin {
   }
 
   Future<void> saveDocumentToFile(Document document) async {
+    // Note for the future: currently, there is a 1:1 saving of each model's data.
+    // For debugging purposes, saving all of the model data is helpful.
+    // However, in the future we should only save the fields that make sense,
+    // for both file size and backwards-compatibility reasons.
     Map<String, dynamic> data = {
       'metadata': {
         'version': 0.1,
@@ -93,6 +97,7 @@ class DocumentService with ListenableServiceMixin {
   }
 
   void renameDocument(Document document, String newName) {
+    // TODO
     notifyListeners();
   }
 }

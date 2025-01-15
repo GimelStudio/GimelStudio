@@ -65,18 +65,23 @@ class LayersService with ListenableServiceMixin {
     notifyListeners();
   }
 
-  Map<String, NodeBase> newDefaultNodes() {
+  Map<String, NodeBase> newDefaultNodes(String outputLabel) {
     Map<String, NodeBase> defaultNodes = {};
 
-    NodeBase integerNode = _nodeRegistryService.createNode('integer_corenode', Offset(100, 80));
-    integerNode.selected = true;
-    defaultNodes[integerNode.id] = integerNode;
+    // NodeBase integerNode = _nodeRegistryService.createNode('integer_corenode', Offset(100, 80));
+    // integerNode.selected = true;
+    // defaultNodes[integerNode.id] = integerNode;
 
-    NodeBase addNode = _nodeRegistryService.createNode('add_corenode', Offset(200, 80));
-    defaultNodes[addNode.id] = addNode;
+    // NodeBase addNode = _nodeRegistryService.createNode('add_corenode', Offset(200, 80));
+    // defaultNodes[addNode.id] = addNode;
+
+    NodeBase rectangleNode = _nodeRegistryService.createNode('rectangle_corenode', Offset(200, 80));
+    rectangleNode.selected = true;
+    defaultNodes[rectangleNode.id] = rectangleNode;
 
     NodeBase outputNode = _nodeRegistryService.createNode('output_corenode', Offset(410, 80));
     defaultNodes[outputNode.id] = outputNode;
+    outputNode.label = outputLabel; // TODO: need to keep this in sync with the layer name
 
     return defaultNodes;
   }
@@ -92,7 +97,7 @@ class LayersService with ListenableServiceMixin {
 
     // Default nodes
     // TODO: refactor
-    Map<String, NodeBase> defaultNodes = newDefaultNodes();
+    Map<String, NodeBase> defaultNodes = newDefaultNodes('Untitled ${layers.length + 1}');
 
     layers.insert(
       insertAt,

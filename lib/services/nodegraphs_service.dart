@@ -46,6 +46,11 @@ class NodegraphsService extends ReactiveViewModel with ListenableServiceMixin {
     notifyListeners();
   }
 
+  void onSetPropertyExposed(Property property, bool isExposed) {
+    property.isExposed = isExposed;
+    notifyListeners();
+  }
+
   @override
   List<ListenableServiceMixin> get listenableServices => [_layersService];
 }
