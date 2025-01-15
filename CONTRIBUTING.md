@@ -27,6 +27,7 @@ Gimel Studio is an open source project and we love to receive contributions from
   * [Your First Code Contribution](#your-first-code-contribution)
 
 [Styleguides](#styleguides)
+[Stacked CLI Commands](#stacked-cli-commands)
 
 
 ## Asking For Help
@@ -100,3 +101,10 @@ Dart code should largely **the [Effective Dart guidlines](https://dart.dev/effec
 * The line length should be ``120``.
 
 Format your code by running ``dart format . -l 120`` in your terminal.
+
+
+## Stacked CLI Commands
+
+- Use ``stacked generate`` to re-sync the generated files.
+
+- Use ``stacked create service <service_name>`` to create a new service.
