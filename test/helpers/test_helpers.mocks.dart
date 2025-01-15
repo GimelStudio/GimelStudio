@@ -7,6 +7,7 @@ import 'dart:async' as _i2;
 import 'dart:ui' as _i7;
 
 import 'package:flutter/material.dart' as _i6;
+import 'package:gimelstudio/models/canvas_item.dart' as _i21;
 import 'package:gimelstudio/models/document.dart' as _i19;
 import 'package:gimelstudio/models/layer.dart' as _i12;
 import 'package:gimelstudio/models/node_base.dart' as _i3;
@@ -881,10 +882,10 @@ class MockLayersService extends _i1.Mock implements _i11.LayersService {
       );
 
   @override
-  Map<String, _i3.NodeBase> newDefaultNodes() => (super.noSuchMethod(
+  Map<String, _i3.NodeBase> newDefaultNodes(String? outputLabel) => (super.noSuchMethod(
         Invocation.method(
           #newDefaultNodes,
-          [],
+          [outputLabel],
         ),
         returnValue: <String, _i3.NodeBase>{},
         returnValueForMissingStub: <String, _i3.NodeBase>{},
@@ -1080,7 +1081,7 @@ class MockNodegraphsService extends _i1.Mock implements _i13.NodegraphsService {
 
   @override
   void onEditNodePropertyValue(
-    _i15.Property? property,
+    _i15.Property<dynamic>? property,
     dynamic value,
   ) =>
       super.noSuchMethod(
@@ -1089,6 +1090,22 @@ class MockNodegraphsService extends _i1.Mock implements _i13.NodegraphsService {
           [
             property,
             value,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onSetPropertyExposed(
+    _i15.Property<dynamic>? property,
+    bool? isExposed,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onSetPropertyExposed,
+          [
+            property,
+            isExposed,
           ],
         ),
         returnValueForMissingStub: null,
@@ -1713,101 +1730,51 @@ class MockEvaluationService extends _i1.Mock implements _i20.EvaluationService {
       ) as List<_i12.Layer>);
 
   @override
-  List<_i14.ListenableServiceMixin> get listenableServices => (super.noSuchMethod(
-        Invocation.getter(#listenableServices),
-        returnValue: <_i14.ListenableServiceMixin>[],
-        returnValueForMissingStub: <_i14.ListenableServiceMixin>[],
-      ) as List<_i14.ListenableServiceMixin>);
+  List<_i21.Rectangle> get result => (super.noSuchMethod(
+        Invocation.getter(#result),
+        returnValue: <_i21.Rectangle>[],
+        returnValueForMissingStub: <_i21.Rectangle>[],
+      ) as List<_i21.Rectangle>);
 
   @override
-  List<_i14.ReactiveServiceMixin> get reactiveServices => (super.noSuchMethod(
-        Invocation.getter(#reactiveServices),
-        returnValue: <_i14.ReactiveServiceMixin>[],
-        returnValueForMissingStub: <_i14.ReactiveServiceMixin>[],
-      ) as List<_i14.ReactiveServiceMixin>);
-
-  @override
-  bool get hasListeners => (super.noSuchMethod(
-        Invocation.getter(#hasListeners),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-
-  @override
-  bool get disposed => (super.noSuchMethod(
-        Invocation.getter(#disposed),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-
-  @override
-  set disposed(bool? _disposed) => super.noSuchMethod(
-        Invocation.setter(
-          #disposed,
-          _disposed,
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  bool get initialised => (super.noSuchMethod(
-        Invocation.getter(#initialised),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-
-  @override
-  bool get onModelReadyCalled => (super.noSuchMethod(
-        Invocation.getter(#onModelReadyCalled),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-
-  @override
-  bool get isBusy => (super.noSuchMethod(
-        Invocation.getter(#isBusy),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-
-  @override
-  bool get anyObjectsBusy => (super.noSuchMethod(
-        Invocation.getter(#anyObjectsBusy),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-
-  @override
-  bool get hasError => (super.noSuchMethod(
-        Invocation.getter(#hasError),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-
-  @override
-  int evaluate() => (super.noSuchMethod(
-        Invocation.method(
-          #evaluate,
-          [],
-        ),
+  int get listenersCount => (super.noSuchMethod(
+        Invocation.getter(#listenersCount),
         returnValue: 0,
         returnValueForMissingStub: 0,
       ) as int);
 
   @override
-  void flattenLayersIntoSingleNodegraph() => super.noSuchMethod(
+  void evaluate() => super.noSuchMethod(
         Invocation.method(
-          #flattenLayersIntoSingleNodegraph,
+          #evaluate,
           [],
         ),
         returnValueForMissingStub: null,
       );
 
   @override
-  void dispose() => super.noSuchMethod(
+  void listenToReactiveValues(List<dynamic>? reactiveValues) => super.noSuchMethod(
         Invocation.method(
-          #dispose,
-          [],
+          #listenToReactiveValues,
+          [reactiveValues],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void addListener(void Function()? listener) => super.noSuchMethod(
+        Invocation.method(
+          #addListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void removeListener(void Function()? listener) => super.noSuchMethod(
+        Invocation.method(
+          #removeListener,
+          [listener],
         ),
         returnValueForMissingStub: null,
       );
@@ -1817,345 +1784,6 @@ class MockEvaluationService extends _i1.Mock implements _i20.EvaluationService {
         Invocation.method(
           #notifyListeners,
           [],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void rebuildUi() => super.noSuchMethod(
-        Invocation.method(
-          #rebuildUi,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void addListener(_i7.VoidCallback? listener) => super.noSuchMethod(
-        Invocation.method(
-          #addListener,
-          [listener],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void removeListener(_i7.VoidCallback? listener) => super.noSuchMethod(
-        Invocation.method(
-          #removeListener,
-          [listener],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void setInitialised(bool? value) => super.noSuchMethod(
-        Invocation.method(
-          #setInitialised,
-          [value],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void setOnModelReadyCalled(bool? value) => super.noSuchMethod(
-        Invocation.method(
-          #setOnModelReadyCalled,
-          [value],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  bool busy(Object? object) => (super.noSuchMethod(
-        Invocation.method(
-          #busy,
-          [object],
-        ),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-
-  @override
-  void setBusyForObject(
-    Object? object,
-    bool? value,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #setBusyForObject,
-          [
-            object,
-            value,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void setBusy(bool? value) => super.noSuchMethod(
-        Invocation.method(
-          #setBusy,
-          [value],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  T skeletonData<T>({
-    required T? realData,
-    required T? busyData,
-    Object? busyKey,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #skeletonData,
-          [],
-          {
-            #realData: realData,
-            #busyData: busyData,
-            #busyKey: busyKey,
-          },
-        ),
-        returnValue: _i5.dummyValue<T>(
-          this,
-          Invocation.method(
-            #skeletonData,
-            [],
-            {
-              #realData: realData,
-              #busyData: busyData,
-              #busyKey: busyKey,
-            },
-          ),
-        ),
-        returnValueForMissingStub: _i5.dummyValue<T>(
-          this,
-          Invocation.method(
-            #skeletonData,
-            [],
-            {
-              #realData: realData,
-              #busyData: busyData,
-              #busyKey: busyKey,
-            },
-          ),
-        ),
-      ) as T);
-
-  @override
-  _i2.Future<T> runBusyFuture<T>(
-    _i2.Future<T>? busyFuture, {
-    Object? busyObject,
-    bool? throwException = false,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #runBusyFuture,
-          [busyFuture],
-          {
-            #busyObject: busyObject,
-            #throwException: throwException,
-          },
-        ),
-        returnValue: _i5.ifNotNull(
-              _i5.dummyValueOrNull<T>(
-                this,
-                Invocation.method(
-                  #runBusyFuture,
-                  [busyFuture],
-                  {
-                    #busyObject: busyObject,
-                    #throwException: throwException,
-                  },
-                ),
-              ),
-              (T v) => _i2.Future<T>.value(v),
-            ) ??
-            _FakeFuture_0<T>(
-              this,
-              Invocation.method(
-                #runBusyFuture,
-                [busyFuture],
-                {
-                  #busyObject: busyObject,
-                  #throwException: throwException,
-                },
-              ),
-            ),
-        returnValueForMissingStub: _i5.ifNotNull(
-              _i5.dummyValueOrNull<T>(
-                this,
-                Invocation.method(
-                  #runBusyFuture,
-                  [busyFuture],
-                  {
-                    #busyObject: busyObject,
-                    #throwException: throwException,
-                  },
-                ),
-              ),
-              (T v) => _i2.Future<T>.value(v),
-            ) ??
-            _FakeFuture_0<T>(
-              this,
-              Invocation.method(
-                #runBusyFuture,
-                [busyFuture],
-                {
-                  #busyObject: busyObject,
-                  #throwException: throwException,
-                },
-              ),
-            ),
-      ) as _i2.Future<T>);
-
-  @override
-  dynamic error(Object? object) => super.noSuchMethod(
-        Invocation.method(
-          #error,
-          [object],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void clearErrors() => super.noSuchMethod(
-        Invocation.method(
-          #clearErrors,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  bool hasErrorForKey(Object? key) => (super.noSuchMethod(
-        Invocation.method(
-          #hasErrorForKey,
-          [key],
-        ),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-
-  @override
-  void setError(dynamic error) => super.noSuchMethod(
-        Invocation.method(
-          #setError,
-          [error],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void setErrorForModelOrObject(
-    dynamic value, {
-    Object? key,
-  }) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #setErrorForModelOrObject,
-          [value],
-          {#key: key},
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void setErrorForObject(
-    Object? object,
-    dynamic value,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #setErrorForObject,
-          [
-            object,
-            value,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  _i2.Future<T> runErrorFuture<T>(
-    _i2.Future<T>? future, {
-    Object? key,
-    bool? throwException = false,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #runErrorFuture,
-          [future],
-          {
-            #key: key,
-            #throwException: throwException,
-          },
-        ),
-        returnValue: _i5.ifNotNull(
-              _i5.dummyValueOrNull<T>(
-                this,
-                Invocation.method(
-                  #runErrorFuture,
-                  [future],
-                  {
-                    #key: key,
-                    #throwException: throwException,
-                  },
-                ),
-              ),
-              (T v) => _i2.Future<T>.value(v),
-            ) ??
-            _FakeFuture_0<T>(
-              this,
-              Invocation.method(
-                #runErrorFuture,
-                [future],
-                {
-                  #key: key,
-                  #throwException: throwException,
-                },
-              ),
-            ),
-        returnValueForMissingStub: _i5.ifNotNull(
-              _i5.dummyValueOrNull<T>(
-                this,
-                Invocation.method(
-                  #runErrorFuture,
-                  [future],
-                  {
-                    #key: key,
-                    #throwException: throwException,
-                  },
-                ),
-              ),
-              (T v) => _i2.Future<T>.value(v),
-            ) ??
-            _FakeFuture_0<T>(
-              this,
-              Invocation.method(
-                #runErrorFuture,
-                [future],
-                {
-                  #key: key,
-                  #throwException: throwException,
-                },
-              ),
-            ),
-      ) as _i2.Future<T>);
-
-  @override
-  void onFutureError(
-    dynamic error,
-    Object? key,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onFutureError,
-          [
-            error,
-            key,
-          ],
         ),
         returnValueForMissingStub: null,
       );
