@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gimelstudio/models/canvas_item.dart';
 import 'package:gimelstudio/services/evaluation_service.dart';
 import 'package:gimelstudio/services/image_service.dart';
+import 'package:gimelstudio/services/layers_service.dart';
 
 import '../../../app/app.locator.dart';
 import 'package:stacked/stacked.dart';
@@ -9,10 +10,13 @@ import 'package:stacked/stacked.dart';
 class ViewportPanelModel extends ReactiveViewModel {
   final _imageService = locator<ImageService>();
   final _evaluationService = locator<EvaluationService>();
+  final _layersService = locator<LayersService>();
 
   List<Rectangle>? get result => _evaluationService.result;
 
   List<Rectangle> get items => result == null ? [] : result ?? [];
+
+  Rectangle? get selectedItem => items[_layersService.selectedLayerIndex];
 
   Offset? _draggingStartPosition;
   Offset? get draggingStartPosition => _draggingStartPosition;
@@ -20,16 +24,21 @@ class ViewportPanelModel extends ReactiveViewModel {
   Offset? get draggingInitialNodePosition => _draggingInitialNodePosition;
 
   void onPanDown(DragDownDetails event) {
-    _draggingStartPosition = event.localPosition;
-    _draggingInitialNodePosition = Offset(items[0].x, items[0].y);
+    if (selectedItem != null) {
+      _draggingStartPosition = event.localPosition;
+      _draggingInitialNodePosition = Offset(selectedItem!.x, selectedItem!.y);
+    }
+
     rebuildUi();
   }
 
   void onPanUpdate(DragUpdateDetails event) {
-    var pos = draggingInitialNodePosition! + event.localPosition - draggingStartPosition!;
+    if (selectedItem != null) {
+      Offset pos = draggingInitialNodePosition! + event.localPosition - draggingStartPosition!;
 
-    items[0].x = pos.dx;
-    items[0].y = pos.dy;
+      selectedItem!.x = pos.dx;
+      selectedItem!.y = pos.dy;
+    }
     rebuildUi();
   }
 
