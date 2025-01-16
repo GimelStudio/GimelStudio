@@ -81,7 +81,7 @@ Unsure where to begin contributing to Gimel Studio? You can start by looking thr
 
 Both issue lists are sorted by total number of comments. While not perfect, number of comments is a reasonable proxy for impact a given change will have.
 
-If you have any questions about contributing, feel free to ask on the official [Discord](https://discord.gg/RqwbDrVDpK) or in a Github issue.
+If you have any questions about contributing, feel free to ask on the official [community chat](https://gimelstudio.zulipchat.com) or in a Github issue.
 
 
 ## Styleguides
