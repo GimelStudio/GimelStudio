@@ -107,4 +107,8 @@ Format your code by running ``dart format . -l 120`` in your terminal.
 
 - Use ``stacked generate`` to re-sync the generated files.
 
-- Use ``stacked create service <service_name>`` to create a new service.
+- **Global widget**: Use ``stacked create widget gs_<widget_name>`` to create a new global widget in the ``lib/ui/widgets/common/`` folder. The ``gs_`` prefix is used for global widgets that are common across the application (dropdowns, buttons, etc.).
+
+- **Local widget**: Use ``stacked create widget <widget_name> --path 'ui/widgets/<the_area_folder>/widgets'`` to create a new widget for a specific area of the application. If you are needing to create a widget inside of a sub-widget, change the ``path`` in the command above accordingly. 
+
+- **Service**: Use ``stacked create service <service_name>`` to create a new service in the ``lib/services/`` folder.
