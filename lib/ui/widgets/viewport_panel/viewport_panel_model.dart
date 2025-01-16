@@ -16,7 +16,7 @@ class ViewportPanelModel extends ReactiveViewModel {
 
   List<Rectangle> get items => result == null ? [] : result ?? [];
 
-  Rectangle? get selectedItem => items[_layersService.selectedLayerIndex];
+  Rectangle? get selectedItem => items.isEmpty ? null : items[_layersService.selectedLayerIndex];
 
   Offset? _draggingStartPosition;
   Offset? get draggingStartPosition => _draggingStartPosition;

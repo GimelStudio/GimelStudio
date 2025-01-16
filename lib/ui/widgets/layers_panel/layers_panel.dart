@@ -61,99 +61,99 @@ class LayersPanel extends StackedView<LayersPanelModel> {
       padding: const EdgeInsets.all(5.0),
       child: Column(
         children: [
-          if (viewModel.layers.isNotEmpty)
-            Row(
-              spacing: 5.0,
-              children: [
-                // Layer blend
-                Expanded(
-                  child: Container(
-                    height: 30,
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF1F1F1F),
-                      borderRadius: BorderRadius.circular(4.0),
-                      border: Border.all(
-                        color: Color(0xFF363636),
-                      ),
+          // TODO: disable the opacity and blend mode widgets if there are no layers
+          Row(
+            spacing: 5.0,
+            children: [
+              // Layer blend
+              Expanded(
+                child: Container(
+                  height: 30,
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF1F1F1F),
+                    borderRadius: BorderRadius.circular(4.0),
+                    border: Border.all(
+                      color: Color(0xFF363636),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Normal',
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 12.0,
-                          ),
-                        ),
-                        PhosphorIcon(
-                          PhosphorIcons.caretDown(PhosphorIconsStyle.light),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Normal',
+                        style: TextStyle(
                           color: Colors.white70,
-                          size: 12.0,
+                          fontSize: 12.0,
                         ),
-                      ],
-                    ),
-                  ),
-                ),
-
-                // Opacity
-                Expanded(
-                  child: Container(
-                    height: 30,
-                    //width: 140,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF1F1F1F),
-                      borderRadius: BorderRadius.circular(4.0),
-                      border: Border.all(
-                        color: Color(0xFF363636),
                       ),
-                    ),
-                    child: Stack(
-                      children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Container(
-                            width: double.infinity,
-                            height: 30,
-                            decoration: BoxDecoration(
-                              color: Color(0xFF363636),
-                              borderRadius: BorderRadius.circular(4.0),
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Text(
-                              '100%',
-                              style: TextStyle(
-                                color: Colors.white70,
-                                fontSize: 12.0,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 8.0),
-                            child: Text(
-                              'Opacity',
-                              style: TextStyle(
-                                color: Colors.white70,
-                                fontSize: 12.0,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                      PhosphorIcon(
+                        PhosphorIcons.caretDown(PhosphorIconsStyle.light),
+                        color: Colors.white70,
+                        size: 12.0,
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+
+              // Opacity
+              Expanded(
+                child: Container(
+                  height: 30,
+                  //width: 140,
+                  decoration: BoxDecoration(
+                    color: Color(0xFF1F1F1F),
+                    borderRadius: BorderRadius.circular(4.0),
+                    border: Border.all(
+                      color: Color(0xFF363636),
+                    ),
+                  ),
+                  child: Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Container(
+                          width: double.infinity,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            color: Color(0xFF363636),
+                            borderRadius: BorderRadius.circular(4.0),
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Text(
+                            '100%',
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 12.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: Text(
+                            'Opacity',
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 12.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
 
           // STACK
           const SizedBox(height: 8.0),

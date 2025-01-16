@@ -140,8 +140,8 @@ class StartupViewModel extends BaseViewModel {
     // TODO: these documents are created here for testing.
     // In the real application the documents will be created or
     // opened by the user.
-    _documentsService.createNewDocument('Untitled', Size(1920, 1080));
-    _documentsService.createNewDocument('Nature project', Size(2048, 2048));
+    // _documentsService.createNewDocument('Untitled', Size(1920, 1080));
+    // _documentsService.createNewDocument('Nature project', Size(2048, 2048));
 
     _navigationService.replaceWithMainView();
   }

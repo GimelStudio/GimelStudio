@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gimelstudio/ui/common/app_colors.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -29,6 +28,9 @@ class NewDocumentDialog extends StackedView<NewDocumentDialogModel> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Row(
+              children: [],
+            ),
             GestureDetector(
               onTap: () => completer(DialogResponse(confirmed: true)),
               child: Container(
@@ -40,7 +42,7 @@ class NewDocumentDialog extends StackedView<NewDocumentDialogModel> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Text(
-                  'Create',
+                  '',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,

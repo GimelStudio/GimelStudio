@@ -1,18 +1,21 @@
 import 'package:gimelstudio/app/app.bottomsheets.dart';
 import 'package:gimelstudio/app/app.dialogs.dart';
 import 'package:gimelstudio/app/app.locator.dart';
+import 'package:gimelstudio/models/document.dart';
+import 'package:gimelstudio/services/document_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class MainViewModel extends BaseViewModel {
+class MainViewModel extends ReactiveViewModel {
   final _dialogService = locator<DialogService>();
   final _bottomSheetService = locator<BottomSheetService>();
+  final _documentsService = locator<DocumentService>();
 
-  void showDialog() {
-    _dialogService.showCustomDialog(
-      variant: DialogType.infoAlert,
-      title: 'Dialog',
-      description: '...',
+  List<Document> get documents => _documentsService.documents;
+
+  Future<void> showStartupDialog() async {
+    await _dialogService.showCustomDialog(
+      variant: DialogType.startup,
     );
   }
 
@@ -23,4 +26,7 @@ class MainViewModel extends BaseViewModel {
       description: '...',
     );
   }
+
+  @override
+  List<ListenableServiceMixin> get listenableServices => [_documentsService];
 }
