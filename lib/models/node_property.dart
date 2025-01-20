@@ -122,6 +122,29 @@ class DoubleProperty<double> extends Property {
   }
 }
 
+// For CanvasItem values.
+class CanvasItemProperty<CanvasItem> extends Property {
+  CanvasItemProperty({
+    required super.id,
+    required super.idname,
+    required super.label,
+    required super.dataType,
+    required super.value,
+    required super.isExposed,
+  }) : assert(value is CanvasItem);
+
+  factory CanvasItemProperty.clone(Property source, String id) {
+    return CanvasItemProperty<CanvasItem>(
+      id: id,
+      idname: source.idname,
+      label: source.label,
+      dataType: source.dataType,
+      value: source.value,
+      isExposed: source.isExposed,
+    );
+  }
+}
+
 // For CanvasItemFill values.
 class CanvasItemFillProperty<CanvasItemFill> extends Property {
   CanvasItemFillProperty({

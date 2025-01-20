@@ -47,11 +47,11 @@ class ViewportCanvasPainter extends CustomPainter {
               letterSpacing: item.letterSpacing,
             ),
           ),
-          textAlign: TextAlign.justify,
+          textAlign: TextAlign.left,
           textDirection: TextDirection.ltr,
-        )..layout(maxWidth: size.width - 12.0 - 12.0);
+        )..layout(maxWidth: item.width);
 
-        final boxRect = RRect.fromRectAndCorners(Rect.fromLTRB(0, 0, 1920, 1080));
+        final RRect boxRect = RRect.fromRectAndCorners(Rect.fromLTRB(0, 0, size.width, size.height));
         canvas.saveLayer(boxRect.outerRect, paint);
         textPainter.paint(canvas, Offset(item.x, item.y));
         canvas.restore();

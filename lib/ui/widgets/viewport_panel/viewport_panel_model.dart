@@ -1,15 +1,9 @@
-import 'dart:io';
-import 'dart:typed_data';
-import 'dart:ui' as ui;
-import 'package:gimelstudio/services/export_service.dart';
-import 'package:gimelstudio/ui/common/enums.dart';
-import 'package:image/image.dart' as img;
-
 import 'package:flutter/material.dart';
 import 'package:gimelstudio/models/canvas_item.dart';
 import 'package:gimelstudio/services/evaluation_service.dart';
 import 'package:gimelstudio/services/image_service.dart';
 import 'package:gimelstudio/services/layers_service.dart';
+import 'package:gimelstudio/services/export_service.dart';
 import 'package:gimelstudio/ui/widgets/viewport_panel/viewport_panel.dart';
 
 import '../../../app/app.locator.dart';
@@ -42,7 +36,7 @@ class ViewportPanelModel extends ReactiveViewModel {
   }
 
   void onPanUpdate(DragUpdateDetails event) {
-    if (selectedItem != null) {
+    if (selectedItem != null && _draggingStartPosition != null && _draggingInitialNodePosition != null) {
       Offset pos = draggingInitialNodePosition! + event.localPosition - draggingStartPosition!;
       // selectedItem!.x = pos.dx;
       // selectedItem!.y = pos.dy;
