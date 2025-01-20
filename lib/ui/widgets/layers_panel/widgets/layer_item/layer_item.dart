@@ -77,16 +77,16 @@ class LayerItem extends StackedView<LayerItemModel> {
             Row(
               spacing: 8.0,
               children: [
-                InkWell(
-                  onTap: onToggleLocked,
-                  child: PhosphorIcon(
-                    isLocked
-                        ? PhosphorIcons.lock(PhosphorIconsStyle.light)
-                        : PhosphorIcons.lockOpen(PhosphorIconsStyle.light),
-                    color: Colors.white70,
-                    size: 14.0,
-                  ),
-                ),
+                // InkWell(
+                //   onTap: onToggleLocked,
+                //   child: PhosphorIcon(
+                //     isLocked
+                //         ? PhosphorIcons.lock(PhosphorIconsStyle.light)
+                //         : PhosphorIcons.lockOpen(PhosphorIconsStyle.light),
+                //     color: Colors.white70,
+                //     size: 14.0,
+                //   ),
+                // ),
                 InkWell(
                   onTap: onToggleVisibility,
                   child: PhosphorIcon(
