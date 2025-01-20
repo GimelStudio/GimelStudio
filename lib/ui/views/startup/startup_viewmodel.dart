@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gimelstudio/models/canvas_item.dart';
+import 'package:gimelstudio/models/canvas_item.dart' as item;
 import 'package:gimelstudio/models/node_output.dart';
 import 'package:gimelstudio/models/node_property.dart';
 import 'package:gimelstudio/models/nodes.dart';
@@ -32,116 +32,132 @@ class StartupViewModel extends BaseViewModel {
       },
     );
 
+    final doubleNode = DoubleNode(
+      properties: {
+        'number': DoubleProperty(
+          id: '',
+          idname: 'number',
+          label: 'Number',
+          dataType: double,
+          value: 1.0,
+          isExposed: false,
+        ),
+      },
+      outputs: {
+        'output': Output(id: '', idname: 'output', dataType: double),
+      },
+    );
+
     final rectangleNode = RectangleNode(
       properties: {
-        'x': IntegerProperty(
+        'x': DoubleProperty(
           id: '',
           idname: 'x',
           label: 'X',
-          dataType: int,
-          value: 11,
+          dataType: double,
+          value: 11.0,
           isExposed: false,
         ),
-        'y': IntegerProperty(
+        'y': DoubleProperty(
           id: '',
           idname: 'y',
           label: 'Y',
-          dataType: int,
-          value: 11,
+          dataType: double,
+          value: 11.0,
           isExposed: false,
         ),
-        'width': IntegerProperty(
+        'width': DoubleProperty(
           id: '',
           idname: 'width',
           label: 'W',
-          dataType: int,
-          value: 400,
+          dataType: double,
+          value: 400.0,
           isExposed: false,
         ),
-        'height': IntegerProperty(
+        'height': DoubleProperty(
           id: '',
           idname: 'height',
           label: 'H',
-          dataType: int,
-          value: 400,
+          dataType: double,
+          value: 400.0,
           isExposed: false,
         ),
         'fill': CanvasItemFillProperty(
           id: '',
           idname: 'fill',
           label: 'Fill',
-          dataType: CanvasItemFill,
-          value: CanvasItemFill(fillType: FillType.solid, solidColor: Colors.purple),
+          dataType: item.CanvasItemFill,
+          value: item.CanvasItemFill(fillType: item.FillType.solid, solidColor: Colors.purple),
           isExposed: false,
         ),
       },
       outputs: {
-        'output': Output(id: '', idname: 'output', dataType: int),
+        'output': Output(id: '', idname: 'output', dataType: item.CanvasItem),
       },
     );
 
     final textNode = TextNode(
       properties: {
-        'x': IntegerProperty(
+        'x': DoubleProperty(
           id: '',
           idname: 'x',
           label: 'X',
-          dataType: int,
-          value: 11,
+          dataType: double,
+          value: 11.0,
           isExposed: false,
         ),
-        'y': IntegerProperty(
+        'y': DoubleProperty(
           id: '',
           idname: 'y',
           label: 'Y',
-          dataType: int,
-          value: 11,
+          dataType: double,
+          value: 11.0,
           isExposed: false,
         ),
-        'width': IntegerProperty(
+        'width': DoubleProperty(
           id: '',
           idname: 'width',
           label: 'W',
-          dataType: int,
-          value: 400,
+          dataType: double,
+          value: 400.0,
           isExposed: false,
         ),
-        'height': IntegerProperty(
+        'height': DoubleProperty(
           id: '',
           idname: 'height',
           label: 'H',
-          dataType: int,
-          value: 400,
+          dataType: double,
+          value: 400.0,
           isExposed: false,
         ),
         //'text':
-        'size': IntegerProperty(
+        'size': DoubleProperty(
           id: '',
           idname: 'size',
           label: 'Size',
-          dataType: int,
-          value: 16,
+          dataType: double,
+          value: 16.0,
           isExposed: false,
         ),
-        'letter_spacing': IntegerProperty(
+        'letter_spacing': DoubleProperty(
           id: '',
           idname: 'letter_spacing',
           label: 'Letter spacing',
-          dataType: int,
-          value: 0,
+          dataType: double,
+          value: 0.0,
           isExposed: false,
         ),
         'fill': CanvasItemFillProperty(
           id: '',
           idname: 'fill',
           label: 'Fill',
-          dataType: CanvasItemFill,
-          value: CanvasItemFill(fillType: FillType.solid, solidColor: Colors.yellow),
+          dataType: item.CanvasItemFill,
+          value: item.CanvasItemFill(fillType: item.FillType.solid, solidColor: Colors.yellow),
           isExposed: false,
         ),
       },
       outputs: {
-        'output': Output(id: '', idname: 'output', dataType: int),
+        'output': Output(id: '', idname: 'output', dataType: item.CanvasItem),
       },
     );
 
@@ -172,24 +188,11 @@ class StartupViewModel extends BaseViewModel {
     final outputNode = OutputNode(
       properties: {
         'layer': IntegerProperty(
+          // TODO: this should be CanvasItem
           id: '',
           idname: 'layer',
           label: 'Layer',
-          dataType: int,
-          value: 10,
-          isExposed: true,
-        ),
-      },
-      outputs: {},
-    );
-
-    final outputNode2 = OutputNode2(
-      properties: {
-        'layer': IntegerProperty(
-          id: '',
-          idname: 'layer',
-          label: 'Layer',
-          dataType: int,
+          dataType: item.CanvasItem, // TODO: this should be CanvasItem
           value: 10,
           isExposed: true,
         ),
@@ -201,8 +204,8 @@ class StartupViewModel extends BaseViewModel {
     _nodeRegistryService.registerNodeType(rectangleNode);
     _nodeRegistryService.registerNodeType(textNode);
     _nodeRegistryService.registerNodeType(addNode);
+    _nodeRegistryService.registerNodeType(doubleNode);
     _nodeRegistryService.registerNodeType(outputNode);
-    _nodeRegistryService.registerNodeType(outputNode2);
   }
 
   // Place anything here that needs to happen before we get into the application

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gimelstudio/app/app.locator.dart';
+import 'package:gimelstudio/models/canvas_item.dart';
 import 'package:gimelstudio/models/node_base.dart';
 import 'package:gimelstudio/models/node_output.dart';
 import 'package:gimelstudio/models/node_property.dart';
@@ -30,6 +31,8 @@ class NodeRegistryService {
     switch (idname) {
       case 'integer_corenode':
         node = IntegerNode.clone(protoNode, newNodeId);
+      case 'double_corenode':
+        node = DoubleNode.clone(protoNode, newNodeId);
       case 'rectangle_corenode':
         node = RectangleNode.clone(protoNode, newNodeId);
       case 'text_corenode':
@@ -56,6 +59,10 @@ class NodeRegistryService {
       switch (property.dataType) {
         case int:
           newProperty = IntegerProperty.clone(property, newPropertyId);
+        case double:
+          newProperty = DoubleProperty.clone(property, newPropertyId);
+        case CanvasItemFill:
+          newProperty = CanvasItemFillProperty.clone(property, newPropertyId);
         default:
           newProperty = IntegerProperty.clone(property, newPropertyId);
       }

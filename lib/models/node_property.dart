@@ -76,7 +76,7 @@ class Property<T> {
   }
 }
 
-/// Integer input for integer values.
+/// For integer values.
 class IntegerProperty<int> extends Property {
   IntegerProperty({
     required super.id,
@@ -99,6 +99,30 @@ class IntegerProperty<int> extends Property {
   }
 }
 
+/// For double values.
+class DoubleProperty<double> extends Property {
+  DoubleProperty({
+    required super.id,
+    required super.idname,
+    required super.label,
+    required super.dataType,
+    required super.value,
+    required super.isExposed,
+  }) : assert(value is double);
+
+  factory DoubleProperty.clone(Property source, String id) {
+    return DoubleProperty<double>(
+      id: id,
+      idname: source.idname,
+      label: source.label,
+      dataType: source.dataType,
+      value: source.value,
+      isExposed: source.isExposed,
+    );
+  }
+}
+
+// For CanvasItemFill values.
 class CanvasItemFillProperty<CanvasItemFill> extends Property {
   CanvasItemFillProperty({
     required super.id,

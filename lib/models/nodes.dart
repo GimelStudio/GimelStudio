@@ -38,6 +38,40 @@ class IntegerNode extends Node {
   }
 }
 
+class DoubleNode extends Node {
+  DoubleNode({
+    super.id = '',
+    super.idname = 'double_corenode',
+    super.isOutput = false,
+    super.label = 'Double',
+    super.selected,
+    required super.properties,
+    required super.outputs,
+    super.position,
+  });
+
+  @override
+  Map<String, double> evaluateNode(EvalInfo eval) {
+    double number = eval.evaluateProperty('number');
+    return {
+      'output': number,
+    };
+  }
+
+  factory DoubleNode.clone(Node source, String id) {
+    return DoubleNode(
+      id: id,
+      idname: source.idname,
+      isOutput: source.isOutput,
+      label: source.label,
+      selected: source.selected,
+      properties: source.properties,
+      outputs: source.outputs,
+      position: source.position,
+    );
+  }
+}
+
 class RectangleNode extends Node {
   RectangleNode({
     super.id = '',
@@ -52,22 +86,20 @@ class RectangleNode extends Node {
 
   @override
   Map<String, item.Rectangle> evaluateNode(EvalInfo eval) {
-    // TODO: For now this uses integers, but it should use doubles to avoid
-    // the need to convert to doubles.
-    int x = eval.evaluateProperty('x');
-    int y = eval.evaluateProperty('y');
-    int width = eval.evaluateProperty('width');
-    int height = eval.evaluateProperty('height');
+    double x = eval.evaluateProperty('x');
+    double y = eval.evaluateProperty('y');
+    double width = eval.evaluateProperty('width');
+    double height = eval.evaluateProperty('height');
     item.CanvasItemFill fill = eval.evaluateProperty('fill');
 
     return {
       'output': item.Rectangle(
         opacity: 100,
         blendMode: BlendMode.srcOver,
-        x: x.toDouble(),
-        y: y.toDouble(),
-        width: width.toDouble(),
-        height: height.toDouble(),
+        x: x,
+        y: y,
+        width: width,
+        height: height,
         fill: fill,
       ),
     };
@@ -101,29 +133,29 @@ class TextNode extends Node {
 
   @override
   Map<String, item.Text> evaluateNode(EvalInfo eval) {
-    int x = eval.evaluateProperty('x');
-    int y = eval.evaluateProperty('y');
-    int width = eval.evaluateProperty('width');
-    int height = eval.evaluateProperty('height');
+    double x = eval.evaluateProperty('x');
+    double y = eval.evaluateProperty('y');
+    double width = eval.evaluateProperty('width');
+    double height = eval.evaluateProperty('height');
     // String text = eval.evaluateProperty('text'); // TODO
     item.CanvasItemFill fill = eval.evaluateProperty('fill');
-    int size = eval.evaluateProperty('size');
-    int letterSpacing = eval.evaluateProperty('letter_spacing');
+    double size = eval.evaluateProperty('size');
+    double letterSpacing = eval.evaluateProperty('letter_spacing');
 
     return {
       'output': item.Text(
         opacity: 100,
         blendMode: BlendMode.srcOver,
-        x: x.toDouble(),
-        y: y.toDouble(),
-        width: width.toDouble(),
-        height: height.toDouble(),
+        x: x,
+        y: y,
+        width: width,
+        height: height,
         text: 'Example text',
         fill: fill,
         border: item.CanvasItemBorder(thickness: 1.0),
         font: '',
-        size: size.toDouble(),
-        letterSpacing: letterSpacing.toDouble(),
+        size: size,
+        letterSpacing: letterSpacing,
         lineSpacing: 1.0,
       ),
     };

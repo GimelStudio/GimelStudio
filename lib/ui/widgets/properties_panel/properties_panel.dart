@@ -26,13 +26,17 @@ class PropertiesPanel extends StackedView<PropertiesPanelModel> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      viewModel.selectedNode?.label.toUpperCase() ?? '',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 12.0,
-                        fontWeight: FontWeight.w500,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          viewModel.selectedNode?.label.toUpperCase() ?? '',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
                     ),
 
                     if (viewModel.selectedNode != null && viewModel.selectedNode?.isOutput == false)
@@ -64,6 +68,47 @@ class PropertiesPanel extends StackedView<PropertiesPanelModel> {
                                             value: property.value.toDouble(),
                                             onChanged: (double value) =>
                                                 viewModel.setPropertyValue(property, value.toInt()),
+                                          ),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        // TODO: eventually this will be a menu with the option to reset to the default value as well.
+                                        onTap: () => viewModel.onTogglePropertyExposed(property),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: PhosphorIcon(
+                                            PhosphorIcons.diamond(property.isExposed
+                                                ? PhosphorIconsStyle.fill
+                                                : PhosphorIconsStyle.light),
+                                            color: Colors.white70,
+                                            size: 10.0,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                } else if (property.dataType == double) {
+                                  return Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        '${property.label} (${property.value.toStringAsFixed(1)})',
+                                        style: const TextStyle(
+                                          color: Colors.white70,
+                                          fontSize: 13.0,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Visibility(
+                                          visible: property.isExposed == false,
+                                          maintainSize: true,
+                                          maintainAnimation: true,
+                                          maintainState: true,
+                                          child: Slider(
+                                            min: 0.0,
+                                            max: 500.0,
+                                            value: property.value,
+                                            onChanged: (double value) => viewModel.setPropertyValue(property, value),
                                           ),
                                         ),
                                       ),

@@ -4,7 +4,6 @@ import 'package:stacked_services/stacked_services.dart';
 
 import 'preferences_dialog_model.dart';
 
-
 class PreferencesDialog extends StackedView<PreferencesDialogModel> {
   final DialogRequest request;
   final Function(DialogResponse) completer;
