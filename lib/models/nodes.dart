@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gimelstudio/models/canvas_item.dart' as item;
+import 'package:gimelstudio/models/canvas_item.dart';
 import 'package:gimelstudio/models/eval_info.dart';
 import 'package:gimelstudio/models/node_base.dart';
 import 'package:gimelstudio/models/node_property.dart';
+import 'package:gimelstudio/models/photo.dart';
 
 class IntegerNode extends Node {
   IntegerNode({
@@ -85,15 +86,15 @@ class RectangleNode extends Node {
   });
 
   @override
-  Map<String, item.Rectangle> evaluateNode(EvalInfo eval) {
+  Map<String, CanvasRectangle> evaluateNode(EvalInfo eval) {
     double x = eval.evaluateProperty('x');
     double y = eval.evaluateProperty('y');
     double width = eval.evaluateProperty('width');
     double height = eval.evaluateProperty('height');
-    item.CanvasItemFill fill = eval.evaluateProperty('fill');
+    CanvasItemFill fill = eval.evaluateProperty('fill');
 
     return {
-      'output': item.Rectangle(
+      'output': CanvasRectangle(
         opacity: 100,
         blendMode: BlendMode.srcOver,
         x: x,
@@ -132,18 +133,18 @@ class TextNode extends Node {
   });
 
   @override
-  Map<String, item.Text> evaluateNode(EvalInfo eval) {
+  Map<String, CanvasText> evaluateNode(EvalInfo eval) {
     double x = eval.evaluateProperty('x');
     double y = eval.evaluateProperty('y');
     double width = eval.evaluateProperty('width');
     double height = eval.evaluateProperty('height');
     // String text = eval.evaluateProperty('text'); // TODO
-    item.CanvasItemFill fill = eval.evaluateProperty('fill');
+    CanvasItemFill fill = eval.evaluateProperty('fill');
     double size = eval.evaluateProperty('size');
     double letterSpacing = eval.evaluateProperty('letter_spacing');
 
     return {
-      'output': item.Text(
+      'output': CanvasText(
         opacity: 100,
         blendMode: BlendMode.srcOver,
         x: x,
@@ -152,7 +153,7 @@ class TextNode extends Node {
         height: height,
         text: 'Example text',
         fill: fill,
-        border: item.CanvasItemBorder(thickness: 1.0),
+        border: CanvasItemBorder(thickness: 1.0),
         font: '',
         size: size,
         letterSpacing: letterSpacing,
@@ -163,6 +164,53 @@ class TextNode extends Node {
 
   factory TextNode.clone(Node source, String id) {
     return TextNode(
+      id: id,
+      idname: source.idname,
+      isOutput: source.isOutput,
+      label: source.label,
+      selected: source.selected,
+      properties: source.properties,
+      outputs: source.outputs,
+      position: source.position,
+    );
+  }
+}
+
+class ImageNode extends Node {
+  ImageNode({
+    super.id = '',
+    super.idname = 'image_corenode',
+    super.isOutput = false,
+    super.label = 'Image',
+    super.selected,
+    required super.properties,
+    required super.outputs,
+    super.position,
+  });
+
+  @override
+  Map<String, CanvasImage> evaluateNode(EvalInfo eval) {
+    double x = eval.evaluateProperty('x');
+    double y = eval.evaluateProperty('y');
+    double width = eval.evaluateProperty('width');
+    double height = eval.evaluateProperty('height');
+    Photo photo = eval.evaluateProperty('photo');
+
+    return {
+      'output': CanvasImage(
+        opacity: 100,
+        blendMode: BlendMode.srcOver,
+        x: x,
+        y: y,
+        width: width,
+        height: height,
+        imageData: photo.uiData,
+      ),
+    };
+  }
+
+  factory ImageNode.clone(Node source, String id) {
+    return ImageNode(
       id: id,
       idname: source.idname,
       isOutput: source.isOutput,

@@ -5,6 +5,7 @@ import 'package:gimelstudio/models/node_base.dart';
 import 'package:gimelstudio/models/node_output.dart';
 import 'package:gimelstudio/models/node_property.dart';
 import 'package:gimelstudio/models/nodes.dart';
+import 'package:gimelstudio/models/photo.dart';
 import 'package:gimelstudio/services/id_service.dart';
 
 class NodeRegistryService {
@@ -37,6 +38,8 @@ class NodeRegistryService {
         node = RectangleNode.clone(protoNode, newNodeId);
       case 'text_corenode':
         node = TextNode.clone(protoNode, newNodeId);
+      case 'image_corenode':
+        node = ImageNode.clone(protoNode, newNodeId);
       case 'add_corenode':
         node = AddNode.clone(protoNode, newNodeId);
       case 'output_corenode':
@@ -61,6 +64,8 @@ class NodeRegistryService {
           newProperty = IntegerProperty.clone(property, newPropertyId);
         case double:
           newProperty = DoubleProperty.clone(property, newPropertyId);
+        case Photo:
+          newProperty = PhotoProperty.clone(property, newPropertyId);
         case CanvasItemFill:
           newProperty = CanvasItemFillProperty.clone(property, newPropertyId);
         default:

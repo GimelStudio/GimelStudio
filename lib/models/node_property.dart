@@ -122,6 +122,29 @@ class DoubleProperty<double> extends Property {
   }
 }
 
+/// For double values.
+class PhotoProperty<Photo> extends Property {
+  PhotoProperty({
+    required super.id,
+    required super.idname,
+    required super.label,
+    required super.dataType,
+    required super.value,
+    required super.isExposed,
+  }) : assert(value is Photo);
+
+  factory PhotoProperty.clone(Property source, String id) {
+    return PhotoProperty<Photo>(
+      id: id,
+      idname: source.idname,
+      label: source.label,
+      dataType: source.dataType,
+      value: source.value,
+      isExposed: source.isExposed,
+    );
+  }
+}
+
 // For CanvasItem values.
 class CanvasItemProperty<CanvasItem> extends Property {
   CanvasItemProperty({

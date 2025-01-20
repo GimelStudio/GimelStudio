@@ -1,7 +1,11 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:gimelstudio/models/canvas_item.dart' as item;
 import 'package:gimelstudio/models/node_property.dart';
+import 'package:gimelstudio/models/photo.dart';
 import 'package:gimelstudio/ui/widgets/properties_panel/properties_panel_model.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stacked/stacked.dart';
@@ -145,6 +149,8 @@ class PropertiesPanel extends StackedView<PropertiesPanelModel> {
                                   //     ),
                                   //   ],
                                   // );
+                                } else if (property.dataType == Photo) {
+                                  return Container();
                                 } else {
                                   return Container();
                                 }

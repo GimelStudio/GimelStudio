@@ -1,5 +1,9 @@
+import 'dart:io';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
-import 'package:gimelstudio/models/canvas_item.dart' as i;
+import 'package:gimelstudio/models/canvas_item.dart';
 import 'package:gimelstudio/ui/widgets/viewport_panel/viewport_panel_model.dart';
 import 'package:stacked/stacked.dart';
 
@@ -8,15 +12,15 @@ class ViewportCanvasPainter extends CustomPainter {
     required this.items,
   });
 
-  final List<i.CanvasItem> items;
+  final List<CanvasItem> items;
 
   @override
   void paint(Canvas canvas, Size size) {
     for (int index = 0; index < items.length; index++) {
-      i.CanvasItem item = items[index];
+      CanvasItem item = items[index];
 
       if (item.type == 'rect') {
-        item = item as i.Rectangle;
+        item = item as CanvasRectangle;
 
         final paint = Paint()
           ..color = item.fill.solidColor.withAlpha(item.opacity)
@@ -30,9 +34,20 @@ class ViewportCanvasPainter extends CustomPainter {
           item.height,
         );
 
-        canvas.drawRect(rect, paint);
+        //canvas.drawRect(rect, paint);
+
+        canvas.drawRRect(
+          RRect.fromRectAndCorners(
+            rect,
+            topLeft: Radius.zero,
+            topRight: Radius.circular(60),
+            bottomLeft: Radius.zero,
+            bottomRight: Radius.zero,
+          ),
+          paint,
+        );
       } else if (item.type == 'text') {
-        item = item as i.Text;
+        item = item as CanvasText;
 
         final paint = Paint()
           ..color = item.fill.solidColor.withAlpha(item.opacity)
@@ -55,12 +70,35 @@ class ViewportCanvasPainter extends CustomPainter {
         canvas.saveLayer(boxRect.outerRect, paint);
         textPainter.paint(canvas, Offset(item.x, item.y));
         canvas.restore();
+      } else if (item.type == 'image') {
+        item = item as CanvasImage;
+
+        ui.Image? image = item.imageData;
+        if (image != null) {
+          // paintImage(
+          //   canvas: canvas,
+          //   rect: Rect.fromLTRB(item.x, item.y, item.width, item.height),
+          //   image: image,
+          //   fit: BoxFit.scaleDown,
+          //   );
+          final paint = Paint()..blendMode = item.blendMode;
+
+          canvas.drawImage(image, Offset(item.x, item.y), paint);
+        }
+      } else if (item.type == 'oval') {
+        item = item as CanvasOval;
+
+        final paint = Paint()
+          ..color = item.fill.solidColor.withAlpha(item.opacity)
+          ..blendMode = item.blendMode;
+
+        canvas.drawOval(Rect.fromLTWH(item.x, item.y, item.width, item.height), paint);
       }
     }
 
     if (items.isNotEmpty && false == true) {
       var item = items[0];
-      item = item as i.Rectangle;
+      item = item as CanvasRectangle;
 
       // Selection overlay
       var paint = Paint()
@@ -175,7 +213,7 @@ class CanvasWidget extends StatelessWidget {
     required this.items,
   });
 
-  final List<i.CanvasItem> items;
+  final List<CanvasItem> items;
 
   @override
   Widget build(BuildContext context) {
@@ -210,6 +248,7 @@ class ViewportPanel extends StackedView<ViewportPanelModel> {
             },
             child: RepaintBoundary(
               child: GestureDetector(
+                behavior: HitTestBehavior.translucent,
                 onPanDown: (event) => viewModel.onPanDown(event),
                 onPanUpdate: (event) => viewModel.onPanUpdate(event),
                 onPanCancel: () => viewModel.onPanCancel(),

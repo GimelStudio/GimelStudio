@@ -75,9 +75,12 @@ class LayersService with ListenableServiceMixin {
     // Node addNode = _nodeRegistryService.createNode('add_corenode', Offset(200, 80));
     // defaultNodes[addNode.id] = addNode;
 
-    Node rectangleNode = _nodeRegistryService.createNode('rectangle_corenode', Offset(200, 80));
-    rectangleNode.selected = true;
-    defaultNodes[rectangleNode.id] = rectangleNode;
+    Node imageNode = _nodeRegistryService.createNode('image_corenode', Offset(200, 80));
+    imageNode.selected = true;
+    defaultNodes[imageNode.id] = imageNode;
+
+    // Node rectangleNode = _nodeRegistryService.createNode('rectangle_corenode', Offset(200, 80));
+    // defaultNodes[rectangleNode.id] = rectangleNode;
 
     Node textNode = _nodeRegistryService.createNode('text_corenode', Offset(300, 80));
     defaultNodes[textNode.id] = textNode;

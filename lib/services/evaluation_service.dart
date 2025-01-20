@@ -36,7 +36,7 @@ class EvaluationService with ListenableServiceMixin {
         if (layer.index == 0) {
           inNode = layerNodes.values.firstWhere((item) => item.idname == 'text_corenode');
         } else {
-          inNode = layerNodes.values.firstWhere((item) => item.idname == 'rectangle_corenode');
+          inNode = layerNodes.values.firstWhere((item) => item.idname == 'image_corenode');
         }
 
         // TODO

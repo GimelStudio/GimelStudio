@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gimelstudio/models/canvas_item.dart' as item;
+import 'package:gimelstudio/models/canvas_item.dart';
 import 'package:gimelstudio/models/node_output.dart';
 import 'package:gimelstudio/models/node_property.dart';
 import 'package:gimelstudio/models/nodes.dart';
+import 'package:gimelstudio/models/photo.dart';
 import 'package:gimelstudio/services/node_registry_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:gimelstudio/app/app.locator.dart';
@@ -84,13 +85,13 @@ class StartupViewModel extends BaseViewModel {
           id: '',
           idname: 'fill',
           label: 'Fill',
-          dataType: item.CanvasItemFill,
-          value: item.CanvasItemFill(fillType: item.FillType.solid, solidColor: Colors.purple),
+          dataType: CanvasItemFill,
+          value: CanvasItemFill(fillType: FillType.solid, solidColor: Colors.purple),
           isExposed: false,
         ),
       },
       outputs: {
-        'output': Output(id: '', idname: 'output', dataType: item.CanvasItem),
+        'output': Output(id: '', idname: 'output', dataType: CanvasItem),
       },
     );
 
@@ -149,13 +150,61 @@ class StartupViewModel extends BaseViewModel {
           id: '',
           idname: 'fill',
           label: 'Fill',
-          dataType: item.CanvasItemFill,
-          value: item.CanvasItemFill(fillType: item.FillType.solid, solidColor: Colors.yellow),
+          dataType: CanvasItemFill,
+          value: CanvasItemFill(fillType: FillType.solid, solidColor: Colors.yellow),
           isExposed: false,
         ),
       },
       outputs: {
-        'output': Output(id: '', idname: 'output', dataType: item.CanvasItem),
+        'output': Output(id: '', idname: 'output', dataType: CanvasItem),
+      },
+    );
+
+    final imageNode = ImageNode(
+      properties: {
+        'x': DoubleProperty(
+          id: '',
+          idname: 'x',
+          label: 'X',
+          dataType: double,
+          value: 11.0,
+          isExposed: false,
+        ),
+        'y': DoubleProperty(
+          id: '',
+          idname: 'y',
+          label: 'Y',
+          dataType: double,
+          value: 11.0,
+          isExposed: false,
+        ),
+        'width': DoubleProperty(
+          id: '',
+          idname: 'width',
+          label: 'W',
+          dataType: double,
+          value: 400.0,
+          isExposed: false,
+        ),
+        'height': DoubleProperty(
+          id: '',
+          idname: 'height',
+          label: 'H',
+          dataType: double,
+          value: 400.0,
+          isExposed: false,
+        ),
+        'photo': PhotoProperty(
+          id: '',
+          idname: 'photo',
+          label: 'Photo',
+          dataType: Photo,
+          value: Photo(filePath: '', data: null),
+          isExposed: false,
+        ),
+      },
+      outputs: {
+        'output': Output(id: '', idname: 'output', dataType: CanvasItem),
       },
     );
 
@@ -189,7 +238,7 @@ class StartupViewModel extends BaseViewModel {
           id: '',
           idname: 'layer',
           label: 'Layer',
-          dataType: item.CanvasItem,
+          dataType: CanvasItem,
           value: 10,
           isExposed: true,
         ),
@@ -200,6 +249,7 @@ class StartupViewModel extends BaseViewModel {
     _nodeRegistryService.registerNodeType(integerNode);
     _nodeRegistryService.registerNodeType(rectangleNode);
     _nodeRegistryService.registerNodeType(textNode);
+    _nodeRegistryService.registerNodeType(imageNode);
     _nodeRegistryService.registerNodeType(addNode);
     _nodeRegistryService.registerNodeType(doubleNode);
     _nodeRegistryService.registerNodeType(outputNode);
