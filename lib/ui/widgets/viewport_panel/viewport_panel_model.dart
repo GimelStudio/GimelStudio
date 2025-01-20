@@ -65,12 +65,6 @@ class ViewportPanelModel extends ReactiveViewModel {
     rebuildUi();
   }
 
-  Future<void> handleSavePressed() async {
-    bool result = await _exportService.export(items, ui.Size(1920, 1080));
-
-    print('Image: $result');
-  }
-
   @override
   List<ListenableServiceMixin> get listenableServices => [_imageService, _evaluationService];
 }

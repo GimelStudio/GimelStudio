@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gimelstudio/ui/common/app_styles.dart';
+import 'package:gimelstudio/ui/common/platform.dart';
 import 'package:gimelstudio/ui/menubar/button.dart';
 import 'package:gimelstudio/ui/menubar/entry.dart';
 import 'package:gimelstudio/ui/menubar/submenu.dart';
@@ -94,13 +95,14 @@ class TopBarMenubar extends StackedView<TopBarMenubarModel> {
               shortcutText: 'Ctrl+Alt+Shift+S',
               shortcut: const SingleActivator(LogicalKeyboardKey.keyS, control: true, alt: true, shift: true),
             ),
-            MenuButton(
-              onTap: viewModel.onExit,
-              text: Text(
-                'Exit',
-                style: AppStyles.menuTextStyle,
+            if (!isWeb)
+              MenuButton(
+                onTap: viewModel.onExit,
+                text: Text(
+                  'Exit',
+                  style: AppStyles.menuTextStyle,
+                ),
               ),
-            ),
           ],
         ),
       ),

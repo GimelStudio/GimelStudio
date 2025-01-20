@@ -11,7 +11,7 @@ class FileService {
   //   return await picker.pickImage(source: ImageSource.gallery);
   // }
 
-  Future<String?> getSaveFilePath() async {
+  Future<String?> getSaveFilePath({suggestedName = 'untitled'}) async {
     // TODO: this does not work on web.
     final FileSaveLocation? result = await getSaveLocation(
       acceptedTypeGroups: [
@@ -28,7 +28,7 @@ class FileService {
         const XTypeGroup(label: 'TGA Files', mimeTypes: ['image/tga'], extensions: ['tga']),
         const XTypeGroup(label: 'ICO Files', mimeTypes: ['image/ico'], extensions: ['ico']),
       ],
-      suggestedName: 'untitled',
+      suggestedName: suggestedName,
     );
 
     return result?.path;

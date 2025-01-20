@@ -14,7 +14,7 @@ class ExportService {
     List<CanvasItem> canvasItems,
     ui.Size canvasSize,
   ) async {
-    String? filePath = await _fileService.getSaveFilePath();
+    String? filePath = await _fileService.getSaveFilePath(suggestedName: 'untitled');
 
     if (filePath != null) {
       String extension = filePath.split('.').last;
@@ -31,6 +31,7 @@ class ExportService {
     }
   }
 
+  /// Export the canvas contents to [exportPath] in the given [exportFormat].
   Future<bool> exportToImageFormat(
     String exportPath,
     ExportImageFormat exportFormat,

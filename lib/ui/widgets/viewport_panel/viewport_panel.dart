@@ -198,12 +198,6 @@ class ViewportPanel extends StackedView<ViewportPanelModel> {
   ) {
     return Row(
       children: [
-        InkWell(
-            onTap: viewModel.handleSavePressed,
-            child: Text(
-              'render',
-              style: TextStyle(color: Colors.white),
-            )),
         Expanded(
           child: InteractiveViewer(
             minScale: 0.01,
