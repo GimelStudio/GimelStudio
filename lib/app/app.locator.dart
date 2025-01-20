@@ -13,6 +13,7 @@ import 'package:stacked_shared/stacked_shared.dart';
 
 import '../services/document_service.dart';
 import '../services/evaluation_service.dart';
+import '../services/export_service.dart';
 import '../services/file_service.dart';
 import '../services/id_service.dart';
 import '../services/image_service.dart';
@@ -43,4 +44,5 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => NodeRegistryService());
   locator.registerLazySingleton(() => DocumentService());
   locator.registerLazySingleton(() => EvaluationService());
+  locator.registerLazySingleton(() => ExportService());
 }

@@ -98,3 +98,25 @@ class IntegerProperty<int> extends Property {
     );
   }
 }
+
+class CanvasItemFillProperty<CanvasItemFill> extends Property {
+  CanvasItemFillProperty({
+    required super.id,
+    required super.idname,
+    required super.label,
+    required super.dataType,
+    required super.value,
+    required super.isExposed,
+  }) : assert(value is CanvasItemFill);
+
+  factory CanvasItemFillProperty.clone(Property source, String id) {
+    return CanvasItemFillProperty<CanvasItemFill>(
+      id: id,
+      idname: source.idname,
+      label: source.label,
+      dataType: source.dataType,
+      value: source.value,
+      isExposed: source.isExposed,
+    );
+  }
+}

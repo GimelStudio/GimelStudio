@@ -1,4 +1,5 @@
-import 'package:gimelstudio/models/canvas_item.dart';
+import 'package:flutter/material.dart';
+import 'package:gimelstudio/models/canvas_item.dart' as item;
 import 'package:gimelstudio/models/eval_info.dart';
 import 'package:gimelstudio/models/node_base.dart';
 import 'package:gimelstudio/models/node_property.dart';
@@ -50,22 +51,86 @@ class RectangleNode extends NodeBase {
   });
 
   @override
-  Map<String, Rectangle> evaluateNode(EvalInfo eval) {
-    // For now this uses integers, but it should use doubles to avoid
-    // the need to convert to doubles later.
+  Map<String, item.Rectangle> evaluateNode(EvalInfo eval) {
+    // TODO: For now this uses integers, but it should use doubles to avoid
+    // the need to convert to doubles.
     int x = eval.evaluateProperty('x');
     int y = eval.evaluateProperty('y');
     int width = eval.evaluateProperty('width');
     int height = eval.evaluateProperty('height');
+    item.CanvasItemFill fill = eval.evaluateProperty('fill');
 
     return {
-      'output':
-          Rectangle(opacity: 100, x: x.toDouble(), y: y.toDouble(), width: width.toDouble(), height: height.toDouble()),
+      'output': item.Rectangle(
+        opacity: 100,
+        blendMode: BlendMode.srcOver,
+        x: x.toDouble(),
+        y: y.toDouble(),
+        width: width.toDouble(),
+        height: height.toDouble(),
+        fill: fill,
+      ),
     };
   }
 
   factory RectangleNode.clone(NodeBase source, String id) {
     return RectangleNode(
+      id: id,
+      idname: source.idname,
+      isOutput: source.isOutput,
+      label: source.label,
+      selected: source.selected,
+      properties: source.properties,
+      outputs: source.outputs,
+      position: source.position,
+    );
+  }
+}
+
+class TextNode extends NodeBase {
+  TextNode({
+    super.id = '',
+    super.idname = 'text_corenode',
+    super.isOutput = false,
+    super.label = 'Text',
+    super.selected,
+    required super.properties,
+    required super.outputs,
+    super.position,
+  });
+
+  @override
+  Map<String, item.Text> evaluateNode(EvalInfo eval) {
+    int x = eval.evaluateProperty('x');
+    int y = eval.evaluateProperty('y');
+    int width = eval.evaluateProperty('width');
+    int height = eval.evaluateProperty('height');
+    // String text = eval.evaluateProperty('text'); // TODO
+    item.CanvasItemFill fill = eval.evaluateProperty('fill');
+    int size = eval.evaluateProperty('size');
+    int letterSpacing = eval.evaluateProperty('letter_spacing');
+
+    return {
+      'output': item.Text(
+        opacity: 100,
+        blendMode: BlendMode.srcOver,
+        x: x.toDouble(),
+        y: y.toDouble(),
+        width: width.toDouble(),
+        height: height.toDouble(),
+        text: 'Example text',
+        fill: fill,
+        border: item.CanvasItemBorder(thickness: 1.0),
+        font: '',
+        size: size.toDouble(),
+        letterSpacing: letterSpacing.toDouble(),
+        lineSpacing: 1.0,
+      ),
+    };
+  }
+
+  factory TextNode.clone(NodeBase source, String id) {
+    return TextNode(
       id: id,
       idname: source.idname,
       isOutput: source.isOutput,

@@ -79,6 +79,9 @@ class LayersService with ListenableServiceMixin {
     rectangleNode.selected = true;
     defaultNodes[rectangleNode.id] = rectangleNode;
 
+    NodeBase textNode = _nodeRegistryService.createNode('text_corenode', Offset(300, 80));
+    defaultNodes[textNode.id] = textNode;
+
     NodeBase outputNode = _nodeRegistryService.createNode('output_corenode', Offset(410, 80));
     defaultNodes[outputNode.id] = outputNode;
     outputNode.label = outputLabel; // TODO: need to keep this in sync with the layer name

@@ -11,6 +11,7 @@ import 'package:gimelstudio/services/id_service.dart';
 import 'package:gimelstudio/services/node_registry_service.dart';
 import 'package:gimelstudio/services/document_service.dart';
 import 'package:gimelstudio/services/evaluation_service.dart';
+import 'package:gimelstudio/services/export_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -28,6 +29,7 @@ import 'test_helpers.mocks.dart';
   MockSpec<NodeRegistryService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<DocumentService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<EvaluationService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<ExportService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -43,6 +45,7 @@ void registerServices() {
   getAndRegisterNodeRegistryService();
   getAndRegisterDocumentService();
   getAndRegisterEvaluationService();
+  getAndRegisterExportService();
 // @stacked-mock-register
 }
 
@@ -158,6 +161,12 @@ MockEvaluationService getAndRegisterEvaluationService() {
   return service;
 }
 
+MockExportService getAndRegisterExportService() {
+  _removeRegistrationIfExists<ExportService>();
+  final service = MockExportService();
+  locator.registerSingleton<ExportService>(service);
+  return service;
+}
 // @stacked-mock-create
 
 void _removeRegistrationIfExists<T extends Object>() {

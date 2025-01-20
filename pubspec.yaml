@@ -16,11 +16,13 @@ dependencies:
 
   # Interface
   multi_split_view: ^3.6.0
+  flutter_colorpicker: ^1.1.0
 
   # Core
   uuid: ^3.0.7
   #image_picker: ^1.0.7
-  #image: ^4.5.2
+  image: ^4.5.2
+  file_selector: ^1.0.3
 
   # Icons
   phosphor_flutter: ^2.1.0

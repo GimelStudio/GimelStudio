@@ -14,6 +14,7 @@ import 'package:gimelstudio/models/node_base.dart' as _i3;
 import 'package:gimelstudio/models/node_property.dart' as _i15;
 import 'package:gimelstudio/services/document_service.dart' as _i18;
 import 'package:gimelstudio/services/evaluation_service.dart' as _i20;
+import 'package:gimelstudio/services/export_service.dart' as _i22;
 import 'package:gimelstudio/services/file_service.dart' as _i9;
 import 'package:gimelstudio/services/id_service.dart' as _i16;
 import 'package:gimelstudio/services/image_service.dart' as _i10;
@@ -1730,11 +1731,11 @@ class MockEvaluationService extends _i1.Mock implements _i20.EvaluationService {
       ) as List<_i12.Layer>);
 
   @override
-  List<_i21.Rectangle> get result => (super.noSuchMethod(
+  List<_i21.CanvasItem> get result => (super.noSuchMethod(
         Invocation.getter(#result),
-        returnValue: <_i21.Rectangle>[],
-        returnValueForMissingStub: <_i21.Rectangle>[],
-      ) as List<_i21.Rectangle>);
+        returnValue: <_i21.CanvasItem>[],
+        returnValueForMissingStub: <_i21.CanvasItem>[],
+      ) as List<_i21.CanvasItem>);
 
   @override
   int get listenersCount => (super.noSuchMethod(
@@ -1788,3 +1789,8 @@ class MockEvaluationService extends _i1.Mock implements _i20.EvaluationService {
         returnValueForMissingStub: null,
       );
 }
+
+/// A class which mocks [ExportService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockExportService extends _i1.Mock implements _i22.ExportService {}

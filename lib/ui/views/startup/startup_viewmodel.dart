@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gimelstudio/models/canvas_item.dart';
 import 'package:gimelstudio/models/node_output.dart';
 import 'package:gimelstudio/models/node_property.dart';
 import 'package:gimelstudio/models/nodes.dart';
@@ -65,6 +66,79 @@ class StartupViewModel extends BaseViewModel {
           value: 400,
           isExposed: false,
         ),
+        'fill': CanvasItemFillProperty(
+          id: '',
+          idname: 'fill',
+          label: 'Fill',
+          dataType: CanvasItemFill,
+          value: CanvasItemFill(fillType: FillType.solid, solidColor: Colors.purple),
+          isExposed: false,
+        ),
+      },
+      outputs: {
+        'output': Output(id: '', idname: 'output', dataType: int),
+      },
+    );
+
+    final textNode = TextNode(
+      properties: {
+        'x': IntegerProperty(
+          id: '',
+          idname: 'x',
+          label: 'X',
+          dataType: int,
+          value: 11,
+          isExposed: false,
+        ),
+        'y': IntegerProperty(
+          id: '',
+          idname: 'y',
+          label: 'Y',
+          dataType: int,
+          value: 11,
+          isExposed: false,
+        ),
+        'width': IntegerProperty(
+          id: '',
+          idname: 'width',
+          label: 'W',
+          dataType: int,
+          value: 400,
+          isExposed: false,
+        ),
+        'height': IntegerProperty(
+          id: '',
+          idname: 'height',
+          label: 'H',
+          dataType: int,
+          value: 400,
+          isExposed: false,
+        ),
+        //'text':
+        'size': IntegerProperty(
+          id: '',
+          idname: 'size',
+          label: 'Size',
+          dataType: int,
+          value: 16,
+          isExposed: false,
+        ),
+        'letter_spacing': IntegerProperty(
+          id: '',
+          idname: 'letter_spacing',
+          label: 'Letter spacing',
+          dataType: int,
+          value: 0,
+          isExposed: false,
+        ),
+        'fill': CanvasItemFillProperty(
+          id: '',
+          idname: 'fill',
+          label: 'Fill',
+          dataType: CanvasItemFill,
+          value: CanvasItemFill(fillType: FillType.solid, solidColor: Colors.yellow),
+          isExposed: false,
+        ),
       },
       outputs: {
         'output': Output(id: '', idname: 'output', dataType: int),
@@ -125,6 +199,7 @@ class StartupViewModel extends BaseViewModel {
 
     _nodeRegistryService.registerNodeType(integerNode);
     _nodeRegistryService.registerNodeType(rectangleNode);
+    _nodeRegistryService.registerNodeType(textNode);
     _nodeRegistryService.registerNodeType(addNode);
     _nodeRegistryService.registerNodeType(outputNode);
     _nodeRegistryService.registerNodeType(outputNode2);

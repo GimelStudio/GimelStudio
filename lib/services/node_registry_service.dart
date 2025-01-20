@@ -32,6 +32,8 @@ class NodeRegistryService {
         node = IntegerNode.clone(protoNode, newNodeId);
       case 'rectangle_corenode':
         node = RectangleNode.clone(protoNode, newNodeId);
+      case 'text_corenode':
+        node = TextNode.clone(protoNode, newNodeId);
       case 'add_corenode':
         node = AddNode.clone(protoNode, newNodeId);
       case 'output_corenode':

@@ -18,11 +18,11 @@ class EvaluationService with ListenableServiceMixin {
 
   List<Layer> get layers => _layersService.layers;
 
-  List<Rectangle> _result = [];
-  List<Rectangle> get result => _result;
+  List<CanvasItem> _result = [];
+  List<CanvasItem> get result => _result;
 
   void evaluate() {
-    List<Rectangle> finalResult = [];
+    List<CanvasItem> finalResult = [];
     if (layers.isNotEmpty) {
       // Sort layers and exclude hidden
       List<Layer> documentLayers = List.from(layers.where((item) => item.visible == true));
@@ -32,14 +32,20 @@ class EvaluationService with ListenableServiceMixin {
         Map<String, NodeBase> layerNodes = layer.nodegraph.nodes;
 
         NodeBase outputNode = layerNodes.values.firstWhere((item) => item.isOutput == true);
-        NodeBase rectNode = layerNodes.values.firstWhere((item) => item.idname == 'rectangle_corenode');
+        NodeBase inNode;
+        if (layer.index == 0) {
+          inNode = layerNodes.values.firstWhere((item) => item.idname == 'text_corenode');
+        } else {
+          inNode = layerNodes.values.firstWhere((item) => item.idname == 'rectangle_corenode');
+        }
+
         // TODO
-        outputNode.setConnection('layer', rectNode, 'output');
+        outputNode.setConnection('layer', inNode, 'output');
         //print(outputNode.connectedNode);
         //print(firstLayerNodes);
 
         Renderer renderer = Renderer(nodes: layerNodes);
-        Rectangle result = renderer.render('output_corenode');
+        CanvasItem result = renderer.render('output_corenode');
         result.opacity = (layer.opacity * 2.55).toInt();
         print(result.opacity);
         finalResult.add(result);

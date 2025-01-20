@@ -1,8 +1,16 @@
+import 'dart:io';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
+import 'package:gimelstudio/services/export_service.dart';
+import 'package:gimelstudio/ui/common/enums.dart';
+import 'package:image/image.dart' as img;
+
 import 'package:flutter/material.dart';
 import 'package:gimelstudio/models/canvas_item.dart';
 import 'package:gimelstudio/services/evaluation_service.dart';
 import 'package:gimelstudio/services/image_service.dart';
 import 'package:gimelstudio/services/layers_service.dart';
+import 'package:gimelstudio/ui/widgets/viewport_panel/viewport_panel.dart';
 
 import '../../../app/app.locator.dart';
 import 'package:stacked/stacked.dart';
@@ -11,12 +19,13 @@ class ViewportPanelModel extends ReactiveViewModel {
   final _imageService = locator<ImageService>();
   final _evaluationService = locator<EvaluationService>();
   final _layersService = locator<LayersService>();
+  final _exportService = locator<ExportService>();
 
-  List<Rectangle>? get result => _evaluationService.result;
+  List<CanvasItem>? get result => _evaluationService.result;
 
-  List<Rectangle> get items => result == null ? [] : result ?? [];
+  List<CanvasItem> get items => result == null ? [] : result ?? [];
 
-  Rectangle? get selectedItem => items.isEmpty ? null : items[_layersService.selectedLayerIndex];
+  CanvasItem? get selectedItem => items.isEmpty ? null : items[_layersService.selectedLayerIndex];
 
   Offset? _draggingStartPosition;
   Offset? get draggingStartPosition => _draggingStartPosition;
@@ -26,7 +35,7 @@ class ViewportPanelModel extends ReactiveViewModel {
   void onPanDown(DragDownDetails event) {
     if (selectedItem != null) {
       _draggingStartPosition = event.localPosition;
-      _draggingInitialNodePosition = Offset(selectedItem!.x, selectedItem!.y);
+      //_draggingInitialNodePosition = Offset(selectedItem!.x, selectedItem!.y);
     }
 
     rebuildUi();
@@ -35,9 +44,8 @@ class ViewportPanelModel extends ReactiveViewModel {
   void onPanUpdate(DragUpdateDetails event) {
     if (selectedItem != null) {
       Offset pos = draggingInitialNodePosition! + event.localPosition - draggingStartPosition!;
-
-      selectedItem!.x = pos.dx;
-      selectedItem!.y = pos.dy;
+      // selectedItem!.x = pos.dx;
+      // selectedItem!.y = pos.dy;
     }
     rebuildUi();
   }
@@ -55,6 +63,12 @@ class ViewportPanelModel extends ReactiveViewModel {
     _draggingInitialNodePosition = null;
 
     rebuildUi();
+  }
+
+  Future<void> handleSavePressed() async {
+    bool result = await _exportService.export(items, ui.Size(1920, 1080));
+
+    print('Image: $result');
   }
 
   @override

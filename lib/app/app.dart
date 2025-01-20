@@ -15,6 +15,7 @@ import 'package:gimelstudio/services/document_service.dart';
 import 'package:gimelstudio/services/evaluation_service.dart';
 import 'package:gimelstudio/ui/dialogs/new_document/new_document_dialog.dart';
 import 'package:gimelstudio/ui/dialogs/startup/startup_dialog.dart';
+import 'package:gimelstudio/services/export_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -36,6 +37,7 @@ import 'package:gimelstudio/ui/dialogs/startup/startup_dialog.dart';
     LazySingleton(classType: NodeRegistryService),
     LazySingleton(classType: DocumentService),
     LazySingleton(classType: EvaluationService),
+    LazySingleton(classType: ExportService),
 // @stacked-service
   ],
   bottomsheets: [
