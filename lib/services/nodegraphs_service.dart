@@ -21,18 +21,18 @@ class NodegraphsService extends ReactiveViewModel with ListenableServiceMixin {
 
   NodeGraph? get nodegraph => _layersService.layers.isEmpty ? null : _layersService.selectedLayer?.nodegraph;
 
-  Map<String, NodeBase> get nodes => nodegraph == null ? {} : nodegraph!.nodes;
+  Map<String, Node> get nodes => nodegraph == null ? {} : nodegraph!.nodes;
 
-  NodeBase? get selectedNode => nodes.values.isEmpty ? null : nodes.values.firstWhere((item) => item.selected == true);
+  Node? get selectedNode => nodes.values.isEmpty ? null : nodes.values.firstWhere((item) => item.selected == true);
 
-  void selectNode(NodeBase node) {
+  void selectNode(Node node) {
     nodes[node.id]?.selected = true;
     notifyListeners();
   }
 
-  void moveNode(NodeBase node, Offset newPosition) {
+  void moveNode(Node node, Offset newPosition) {
     // Deselect all nodes first.
-    for (MapEntry<String, NodeBase> item in nodes.entries) {
+    for (MapEntry<String, Node> item in nodes.entries) {
       item.value.selected = false;
     }
 

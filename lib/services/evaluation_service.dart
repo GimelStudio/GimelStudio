@@ -29,10 +29,10 @@ class EvaluationService with ListenableServiceMixin {
       documentLayers.sort((Layer a, Layer b) => b.index.compareTo(a.index));
 
       for (Layer layer in documentLayers) {
-        Map<String, NodeBase> layerNodes = layer.nodegraph.nodes;
+        Map<String, Node> layerNodes = layer.nodegraph.nodes;
 
-        NodeBase outputNode = layerNodes.values.firstWhere((item) => item.isOutput == true);
-        NodeBase inNode;
+        Node outputNode = layerNodes.values.firstWhere((item) => item.isOutput == true);
+        Node inNode;
         if (layer.index == 0) {
           inNode = layerNodes.values.firstWhere((item) => item.idname == 'text_corenode');
         } else {

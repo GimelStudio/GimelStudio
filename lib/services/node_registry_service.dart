@@ -9,10 +9,10 @@ import 'package:gimelstudio/services/id_service.dart';
 class NodeRegistryService {
   final _idService = locator<IdService>();
 
-  Map<String, NodeBase> _nodeRegistry = {};
-  Map<String, NodeBase> get nodeRegistry => _nodeRegistry;
+  Map<String, Node> _nodeRegistry = {};
+  Map<String, Node> get nodeRegistry => _nodeRegistry;
 
-  void registerNodeType(NodeBase node) {
+  void registerNodeType(Node node) {
     if (_nodeRegistry.keys.contains(node.idname)) {
       throw Exception('Node with idname ${node.idname} has already been registered.');
     } else {
@@ -20,10 +20,10 @@ class NodeRegistryService {
     }
   }
 
-  NodeBase createNode(String idname, Offset position) {
+  Node createNode(String idname, Offset position) {
     // Create a new node object.
-    NodeBase node;
-    NodeBase protoNode = nodeRegistry.values.firstWhere((item) => item.idname == idname);
+    Node node;
+    Node protoNode = nodeRegistry.values.firstWhere((item) => item.idname == idname);
     String newNodeId = _idService.newId();
 
     // TODO: find a way to register nodes without being so verbose.

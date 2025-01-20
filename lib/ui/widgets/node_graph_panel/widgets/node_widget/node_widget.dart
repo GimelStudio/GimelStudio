@@ -15,7 +15,7 @@ class NodeWidget extends StackedView<NodeWidgetModel> {
     required this.onNodeMoved,
   });
 
-  final NodeBase node;
+  final Node node;
   final Function() onTapNode;
   final Function(Offset newPosition) onNodeMoved;
 

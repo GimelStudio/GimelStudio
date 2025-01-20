@@ -14,15 +14,15 @@ class NodeGraphPanelModel extends ReactiveViewModel {
   final _nodeRegistryService = locator<NodeRegistryService>();
   final _nodegraphsService = locator<NodegraphsService>();
 
-  Map<String, NodeBase> get nodeRegistry => _nodeRegistryService.nodeRegistry;
+  Map<String, Node> get nodeRegistry => _nodeRegistryService.nodeRegistry;
 
-  Map<String, NodeBase> get nodes => _nodegraphsService.nodegraph == null ? {} : _nodegraphsService.nodegraph!.nodes;
+  Map<String, Node> get nodes => _nodegraphsService.nodegraph == null ? {} : _nodegraphsService.nodegraph!.nodes;
 
-  void onSelectNode(NodeBase node) {
+  void onSelectNode(Node node) {
     _nodegraphsService.selectNode(node);
   }
 
-  void onNodeMoved(NodeBase node, Offset newPosition) {
+  void onNodeMoved(Node node, Offset newPosition) {
     _nodegraphsService.moveNode(node, newPosition);
   }
 

@@ -13,7 +13,7 @@ class PropertiesPanelModel extends ReactiveViewModel {
   final _documentsService = locator<DocumentService>();
   final _evaluationService = locator<EvaluationService>();
 
-  NodeBase? get selectedNode => _nodegraphsService.selectedNode;
+  Node? get selectedNode => _nodegraphsService.selectedNode;
 
   void setPropertyValue(Property property, dynamic value) {
     _nodegraphsService.onEditNodePropertyValue(property, value);

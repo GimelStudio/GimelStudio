@@ -6,14 +6,14 @@ class Renderer {
     required this.nodes,
   });
 
-  final Map<String, NodeBase> nodes;
+  final Map<String, Node> nodes;
 
   dynamic render(String outputNodeIdname) {
-    NodeBase outputNode = getOutputNode(outputNodeIdname);
+    Node outputNode = getOutputNode(outputNodeIdname);
     //print('${outputNode.idname} connection -> ${outputNode.properties['layer']?.connection}');
 
     // The node that is connected to this output node.
-    NodeBase? nodeConnectedToOutput = outputNode.connectedNode?.$1;
+    Node? nodeConnectedToOutput = outputNode.connectedNode?.$1;
     // The name of the output of the node connected to this output node.
     String? connectedOutputIdname = outputNode.connectedNode?.$2;
 
@@ -29,8 +29,8 @@ class Renderer {
     return result;
   }
 
-  NodeBase getOutputNode(String outputNodeIdname) {
-    NodeBase? outputNode;
+  Node getOutputNode(String outputNodeIdname) {
+    Node? outputNode;
     for (String key in nodes.keys) {
       if (nodes[key]?.isOutput == true && nodes[key]?.idname == outputNodeIdname) {
         outputNode = nodes[key];

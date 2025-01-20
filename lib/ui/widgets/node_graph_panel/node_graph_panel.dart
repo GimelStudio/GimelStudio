@@ -20,8 +20,8 @@ class NodeGraphPanel extends StackedView<NodeGraphPanelModel> {
         children: [
           Container(color: Color(0xFF262626)),
           ...viewModel.nodes.entries.map(
-            (MapEntry<String, NodeBase> key) {
-              NodeBase? definition = viewModel.nodeRegistry[key.value.idname];
+            (MapEntry<String, Node> key) {
+              Node? definition = viewModel.nodeRegistry[key.value.idname];
               if (definition != null) {
                 return NodeWidget(
                   node: key.value,

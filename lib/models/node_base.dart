@@ -3,9 +3,9 @@ import 'package:gimelstudio/models/eval_info.dart';
 import 'package:gimelstudio/models/node_output.dart';
 import 'package:gimelstudio/models/node_property.dart';
 
-/// The base class for all nodes.
-class NodeBase {
-  NodeBase({
+/// The base class for defining all nodes.
+class Node {
+  Node({
     this.id = '', // Id will be assigned when created in the node graph.
     required this.idname,
     required this.isOutput,
@@ -49,7 +49,7 @@ class NodeBase {
   //PhosphorIconData icon = PhosphorIcons.notepad(PhosphorIconsStyle.light);
 
   /// Use for the output node only.
-  (NodeBase, String)? get connectedNode {
+  (Node, String)? get connectedNode {
     return null;
   }
 
@@ -58,7 +58,7 @@ class NodeBase {
     property.setValue(newValue);
   }
 
-  void setConnection(String idname, NodeBase connectedNode, String connectedNodeOutputName) {
+  void setConnection(String idname, Node connectedNode, String connectedNodeOutputName) {
     Property property = properties.values.firstWhere((item) => item.idname == idname);
     property.setConnection((connectedNode, connectedNodeOutputName));
   }
@@ -85,7 +85,7 @@ class NodeBase {
     };
   }
 
-  NodeBase.fromJson(Map<String, dynamic> json)
+  Node.fromJson(Map<String, dynamic> json)
       : id = json['id'] as String,
         idname = json['idname'] as String,
         isOutput = json['isOutput'] as bool,

@@ -37,15 +37,15 @@ class Property<T> {
 
   /// The connected node to evaluate the value from.
   /// If this is null, then value is used during evaluation.
-  /// (NodeBase object, name of the connected node's Output)
-  // TODO: for the purposes of converting to json and back, NodeBase should be the id of the node.
-  (NodeBase, String)? connection;
+  /// (Node object, name of the connected node's Output)
+  // TODO: for the purposes of converting to json and back, Node should be the id of the node.
+  (Node, String)? connection;
 
   void setValue(T newValue) {
     value = newValue;
   }
 
-  void setConnection((NodeBase, String) newConnection) {
+  void setConnection((Node, String) newConnection) {
     connection = newConnection;
   }
 

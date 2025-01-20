@@ -51,7 +51,7 @@ class _FakeFuture_0<T1> extends _i1.SmartFake implements _i2.Future<T1> {
         );
 }
 
-class _FakeNodeBase_1 extends _i1.SmartFake implements _i3.NodeBase {
+class _FakeNodeBase_1 extends _i1.SmartFake implements _i3.Node {
   _FakeNodeBase_1(
     Object parent,
     Invocation parentInvocation,
@@ -883,14 +883,14 @@ class MockLayersService extends _i1.Mock implements _i11.LayersService {
       );
 
   @override
-  Map<String, _i3.NodeBase> newDefaultNodes(String? outputLabel) => (super.noSuchMethod(
+  Map<String, _i3.Node> newDefaultNodes(String? outputLabel) => (super.noSuchMethod(
         Invocation.method(
           #newDefaultNodes,
           [outputLabel],
         ),
-        returnValue: <String, _i3.NodeBase>{},
-        returnValueForMissingStub: <String, _i3.NodeBase>{},
-      ) as Map<String, _i3.NodeBase>);
+        returnValue: <String, _i3.Node>{},
+        returnValueForMissingStub: <String, _i3.Node>{},
+      ) as Map<String, _i3.Node>);
 
   @override
   void addNewLayer() => super.noSuchMethod(
@@ -970,11 +970,11 @@ class MockLayersService extends _i1.Mock implements _i11.LayersService {
 /// See the documentation for Mockito's code generation for more information.
 class MockNodegraphsService extends _i1.Mock implements _i13.NodegraphsService {
   @override
-  Map<String, _i3.NodeBase> get nodes => (super.noSuchMethod(
+  Map<String, _i3.Node> get nodes => (super.noSuchMethod(
         Invocation.getter(#nodes),
-        returnValue: <String, _i3.NodeBase>{},
-        returnValueForMissingStub: <String, _i3.NodeBase>{},
-      ) as Map<String, _i3.NodeBase>);
+        returnValue: <String, _i3.Node>{},
+        returnValueForMissingStub: <String, _i3.Node>{},
+      ) as Map<String, _i3.Node>);
 
   @override
   List<_i14.ListenableServiceMixin> get listenableServices => (super.noSuchMethod(
@@ -1056,7 +1056,7 @@ class MockNodegraphsService extends _i1.Mock implements _i13.NodegraphsService {
       ) as int);
 
   @override
-  void selectNode(_i3.NodeBase? node) => super.noSuchMethod(
+  void selectNode(_i3.Node? node) => super.noSuchMethod(
         Invocation.method(
           #selectNode,
           [node],
@@ -1066,7 +1066,7 @@ class MockNodegraphsService extends _i1.Mock implements _i13.NodegraphsService {
 
   @override
   void moveNode(
-    _i3.NodeBase? node,
+    _i3.Node? node,
     _i7.Offset? newPosition,
   ) =>
       super.noSuchMethod(
@@ -1511,14 +1511,14 @@ class MockIdService extends _i1.Mock implements _i16.IdService {
 /// See the documentation for Mockito's code generation for more information.
 class MockNodeRegistryService extends _i1.Mock implements _i17.NodeRegistryService {
   @override
-  Map<String, _i3.NodeBase> get nodeRegistry => (super.noSuchMethod(
+  Map<String, _i3.Node> get nodeRegistry => (super.noSuchMethod(
         Invocation.getter(#nodeRegistry),
-        returnValue: <String, _i3.NodeBase>{},
-        returnValueForMissingStub: <String, _i3.NodeBase>{},
-      ) as Map<String, _i3.NodeBase>);
+        returnValue: <String, _i3.Node>{},
+        returnValueForMissingStub: <String, _i3.Node>{},
+      ) as Map<String, _i3.Node>);
 
   @override
-  void registerNodeType(_i3.NodeBase? node) => super.noSuchMethod(
+  void registerNodeType(_i3.Node? node) => super.noSuchMethod(
         Invocation.method(
           #registerNodeType,
           [node],
@@ -1527,7 +1527,7 @@ class MockNodeRegistryService extends _i1.Mock implements _i17.NodeRegistryServi
       );
 
   @override
-  _i3.NodeBase createNode(
+  _i3.Node createNode(
     String? idname,
     _i7.Offset? position,
   ) =>
@@ -1559,7 +1559,7 @@ class MockNodeRegistryService extends _i1.Mock implements _i17.NodeRegistryServi
             ],
           ),
         ),
-      ) as _i3.NodeBase);
+      ) as _i3.Node);
 }
 
 /// A class which mocks [DocumentService].

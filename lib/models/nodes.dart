@@ -4,7 +4,7 @@ import 'package:gimelstudio/models/eval_info.dart';
 import 'package:gimelstudio/models/node_base.dart';
 import 'package:gimelstudio/models/node_property.dart';
 
-class IntegerNode extends NodeBase {
+class IntegerNode extends Node {
   IntegerNode({
     super.id = '',
     super.idname = 'integer_corenode',
@@ -24,7 +24,7 @@ class IntegerNode extends NodeBase {
     };
   }
 
-  factory IntegerNode.clone(NodeBase source, String id) {
+  factory IntegerNode.clone(Node source, String id) {
     return IntegerNode(
       id: id,
       idname: source.idname,
@@ -38,7 +38,7 @@ class IntegerNode extends NodeBase {
   }
 }
 
-class RectangleNode extends NodeBase {
+class RectangleNode extends Node {
   RectangleNode({
     super.id = '',
     super.idname = 'rectangle_corenode',
@@ -73,7 +73,7 @@ class RectangleNode extends NodeBase {
     };
   }
 
-  factory RectangleNode.clone(NodeBase source, String id) {
+  factory RectangleNode.clone(Node source, String id) {
     return RectangleNode(
       id: id,
       idname: source.idname,
@@ -87,7 +87,7 @@ class RectangleNode extends NodeBase {
   }
 }
 
-class TextNode extends NodeBase {
+class TextNode extends Node {
   TextNode({
     super.id = '',
     super.idname = 'text_corenode',
@@ -129,7 +129,7 @@ class TextNode extends NodeBase {
     };
   }
 
-  factory TextNode.clone(NodeBase source, String id) {
+  factory TextNode.clone(Node source, String id) {
     return TextNode(
       id: id,
       idname: source.idname,
@@ -143,7 +143,7 @@ class TextNode extends NodeBase {
   }
 }
 
-class AddNode extends NodeBase {
+class AddNode extends Node {
   AddNode({
     super.id = '',
     super.idname = 'add_corenode',
@@ -165,7 +165,7 @@ class AddNode extends NodeBase {
     };
   }
 
-  factory AddNode.clone(NodeBase source, String id) {
+  factory AddNode.clone(Node source, String id) {
     return AddNode(
       id: id,
       idname: source.idname,
@@ -179,7 +179,7 @@ class AddNode extends NodeBase {
   }
 }
 
-class OutputNode extends NodeBase {
+class OutputNode extends Node {
   OutputNode({
     super.id = '',
     super.idname = 'output_corenode',
@@ -192,12 +192,12 @@ class OutputNode extends NodeBase {
   });
 
   @override
-  (NodeBase, String)? get connectedNode {
+  (Node, String)? get connectedNode {
     Property prop = properties.values.firstWhere((item) => item.idname == 'layer');
     return prop.connection;
   }
 
-  factory OutputNode.clone(NodeBase source, String id) {
+  factory OutputNode.clone(Node source, String id) {
     return OutputNode(
       id: id,
       idname: source.idname,
@@ -211,7 +211,7 @@ class OutputNode extends NodeBase {
   }
 }
 
-class OutputNode2 extends NodeBase {
+class OutputNode2 extends Node {
   OutputNode2({
     super.id = '',
     super.idname = 'output2_corenode',
@@ -224,12 +224,12 @@ class OutputNode2 extends NodeBase {
   });
 
   @override
-  (NodeBase, String)? get connectedNode {
+  (Node, String)? get connectedNode {
     Property prop = properties.values.firstWhere((item) => item.idname == 'layer');
     return prop.connection;
   }
 
-  factory OutputNode2.clone(NodeBase source, String id) {
+  factory OutputNode2.clone(Node source, String id) {
     return OutputNode2(
       id: id,
       idname: source.idname,

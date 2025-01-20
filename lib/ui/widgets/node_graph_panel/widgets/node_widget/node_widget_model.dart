@@ -13,7 +13,7 @@ class NodeWidgetModel extends BaseViewModel {
     return 8.0 + list.indexOf(item) * 20.0;
   }
 
-  void onPanDown(DragDownDetails event, NodeBase node) {
+  void onPanDown(DragDownDetails event, Node node) {
     _draggingStartPosition = event.localPosition;
     _draggingInitialNodePosition = node.position;
     rebuildUi();
