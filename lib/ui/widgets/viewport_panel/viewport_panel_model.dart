@@ -35,7 +35,15 @@ class ViewportPanelModel extends ReactiveViewModel {
 
   Node? itemNode;
 
-  // TODO: should be refactored into the viewport service, etc.
+  Offset? _draggingStartPosition;
+  Offset? get draggingStartPosition => _draggingStartPosition;
+  Offset? _draggingInitialPosition;
+  Offset? get draggingInitialPosition => _draggingInitialPosition;
+
+  Offset? _lastPosition;
+  Offset? get lastPosition => _lastPosition;
+
+  // TODO: this logic is WIP. It should be refactored and moved into the viewport service, etc.
 
   void setPropertyValue(Property property, dynamic value) {
     _nodegraphsService.onEditNodePropertyValue(property, value);
@@ -43,20 +51,17 @@ class ViewportPanelModel extends ReactiveViewModel {
 
   void setItemNode(Offset position) {
     Layer? layer;
-    String type = 'rectangle';
     if (activeTool == Tool.cursor) {
       CanvasItem? item =
           items.cast<CanvasItem?>().lastWhere((CanvasItem? item) => item!.isInside(position), orElse: () => null);
 
       if (item != null) {
-        type = item.type;
-
         List<Layer> documentLayers = List.from(layers.where((item) => item.visible == true));
         documentLayers.sort((Layer a, Layer b) => a.index.compareTo(b.index));
         layer = documentLayers.firstWhere((layer) => layer.id == item.layerId);
 
         // TODO: this assumes there is only one CanvasItem node in the nodegraph
-        itemNode = layer.nodegraph.nodes.values.firstWhere((node) => node.idname == '${type}_corenode');
+        itemNode = layer.nodegraph.nodes.values.firstWhere((node) => node.idname == '${item.type}_corenode');
         _layersService.setSelectedLayer(layer);
       } else {
         itemNode = null;
@@ -65,11 +70,6 @@ class ViewportPanelModel extends ReactiveViewModel {
   }
 
   void selectCanvasItem(Layer layer) {}
-
-  Offset? _draggingStartPosition;
-  Offset? get draggingStartPosition => _draggingStartPosition;
-  Offset? _draggingInitialPosition;
-  Offset? get draggingInitialPosition => _draggingInitialPosition;
 
   void onTapDown(TapDownDetails event) {
     print('onTapDown');
@@ -80,15 +80,36 @@ class ViewportPanelModel extends ReactiveViewModel {
   void onPanDown(DragDownDetails event) {
     if (activeTool == Tool.cursor) {
       setItemNode(event.localPosition);
+
+      if (itemNode != null) {
+        _draggingStartPosition = event.localPosition;
+
+        Property xProp = itemNode!.getPropertyByIdname('x');
+        Property yProp = itemNode!.getPropertyByIdname('y');
+
+        _draggingInitialPosition = Offset(xProp.value, yProp.value);
+      }
     }
 
-    if (itemNode != null) {
+    if (activeTool == Tool.rectangle) {
+      Layer layer = _layersService.addNewLayer(type: 'rectangle');
+
+      // TODO: this assumes there is only one CanvasItem node in the nodegraph
+      itemNode = layer.nodegraph.nodes.values.firstWhere((node) => node.idname == 'rectangle_corenode');
+      _layersService.setSelectedLayer(layer);
+
       _draggingStartPosition = event.localPosition;
 
       Property xProp = itemNode!.getPropertyByIdname('x');
       Property yProp = itemNode!.getPropertyByIdname('y');
 
+      setPropertyValue(xProp, event.localPosition!.dx);
+      setPropertyValue(yProp, event.localPosition!.dy);
+
       _draggingInitialPosition = Offset(xProp.value, yProp.value);
+      _lastPosition = event.localPosition;
+
+      _evaluationService.evaluate();
     }
 
     rebuildUi();
@@ -105,20 +126,40 @@ class ViewportPanelModel extends ReactiveViewModel {
         setPropertyValue(xProp, pos.dx);
         setPropertyValue(yProp, pos.dy);
       }
+
+      if (activeTool == Tool.rectangle && _lastPosition != null) {
+        Property widthProp = itemNode!.getPropertyByIdname('width');
+        Property heightProp = itemNode!.getPropertyByIdname('height');
+
+        var pos = Offset(event.localPosition.dx - _lastPosition!.dx, event.localPosition.dy - _lastPosition!.dy);
+
+        setPropertyValue(widthProp, widthProp.value + (pos.dx));
+        setPropertyValue(heightProp, heightProp.value + (pos.dy));
+
+        _lastPosition = event.localPosition;
+      }
+
       _evaluationService.evaluate();
     }
     rebuildUi();
   }
 
   void onPanCancel() {
+    _lastPosition = null;
     _draggingStartPosition = null;
     _draggingInitialPosition = null;
     rebuildUi();
   }
 
   void onPanEnd(DragEndDetails event) {
+    _lastPosition = null;
     _draggingStartPosition = null;
     _draggingInitialPosition = null;
+
+    if (activeTool == Tool.rectangle) {
+      _viewportService.setActiveTool(Tool.cursor);
+    }
+
     rebuildUi();
   }
 

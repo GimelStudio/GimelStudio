@@ -58,12 +58,12 @@ class Node {
   }
 
   void setPropertyValue(String idname, Object newValue) {
-    Property property = properties.values.firstWhere((item) => item.idname == idname);
+    Property property = getPropertyByIdname(idname);
     property.setValue(newValue);
   }
 
   void setConnection(String idname, Node connectedNode, String connectedNodeOutputName) {
-    Property property = properties.values.firstWhere((item) => item.idname == idname);
+    Property property = getPropertyByIdname(idname);
     property.setConnection((connectedNode, connectedNodeOutputName));
   }
 
