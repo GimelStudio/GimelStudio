@@ -1,13 +1,17 @@
+import 'package:gimelstudio/app/app.locator.dart';
 import 'package:gimelstudio/models/tool.dart';
+import 'package:gimelstudio/services/viewport_service.dart';
 import 'package:stacked/stacked.dart';
 
-class ToolBarModel extends BaseViewModel {
-  Tool _currentTool = Tool.cursor;
-  Tool get currentTool => _currentTool;
+class ToolBarModel extends ReactiveViewModel {
+  final _viewportService = locator<ViewportService>();
 
-  // TODO: move to viewport service
+  Tool get activeTool => _viewportService.activeTool;
+
   void onSelectTool(Tool tool) {
-    _currentTool = tool;
-    rebuildUi();
+    _viewportService.setActiveTool(tool);
   }
+
+  @override
+  List<ListenableServiceMixin> get listenableServices => [_viewportService];
 }

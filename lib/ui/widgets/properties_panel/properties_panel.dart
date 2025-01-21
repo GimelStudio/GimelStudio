@@ -133,25 +133,27 @@ class PropertiesPanel extends StackedView<PropertiesPanelModel> {
                                     ],
                                   );
                                 } else if (property.dataType == item.CanvasItemFill) {
-                                  return Container();
-                                  // item.CanvasItemFill val = property.value as item.CanvasItemFill;
-                                  // return Row(
-                                  //   children: [
-                                  //     Expanded(
-                                  //       child: HueRingPicker(
-                                  //         pickerColor: val.solidColor,
-                                  //         onColorChanged: (Color color) {
-                                  //           var c =
-                                  //               item.CanvasItemFill(fillType: item.FillType.solid, solidColor: color);
-                                  //           viewModel.setPropertyValue(property, c);
-                                  //         },
-                                  //       ),
-                                  //     ),
-                                  //   ],
-                                  // );
+                                  //return Container();
+                                  // TODO: temporary
+                                  item.CanvasItemFill val = property.value as item.CanvasItemFill;
+                                  return Row(
+                                    children: [
+                                      Expanded(
+                                        child: HueRingPicker(
+                                          pickerColor: val.solidColor,
+                                          onColorChanged: (Color color) {
+                                            var c =
+                                                item.CanvasItemFill(fillType: item.FillType.solid, solidColor: color);
+                                            viewModel.setPropertyValue(property, c);
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  );
                                 } else if (property.dataType == Photo) {
                                   return InkWell(
                                     onTap: () async {
+                                      // TODO: temporary
                                       File file = File('C:/Users/Acer/Downloads/tree-7881297_1280.jpg');
                                       Uint8List bytes = await file.readAsBytes();
                                       var photo = Photo(filePath: file.path, data: bytes);

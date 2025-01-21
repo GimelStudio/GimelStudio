@@ -54,7 +54,7 @@ class StartupViewModel extends BaseViewModel {
           idname: 'x',
           label: 'X',
           dataType: double,
-          value: 11.0,
+          value: 0.0,
           isExposed: false,
         ),
         'y': DoubleProperty(
@@ -62,7 +62,7 @@ class StartupViewModel extends BaseViewModel {
           idname: 'y',
           label: 'Y',
           dataType: double,
-          value: 11.0,
+          value: 0.0,
           isExposed: false,
         ),
         'width': DoubleProperty(
@@ -70,7 +70,7 @@ class StartupViewModel extends BaseViewModel {
           idname: 'width',
           label: 'W',
           dataType: double,
-          value: 400.0,
+          value: 1.0,
           isExposed: false,
         ),
         'height': DoubleProperty(
@@ -78,7 +78,7 @@ class StartupViewModel extends BaseViewModel {
           idname: 'height',
           label: 'H',
           dataType: double,
-          value: 400.0,
+          value: 1.0,
           isExposed: false,
         ),
         'fill': CanvasItemFillProperty(
@@ -102,7 +102,7 @@ class StartupViewModel extends BaseViewModel {
           idname: 'x',
           label: 'X',
           dataType: double,
-          value: 11.0,
+          value: 0.0,
           isExposed: false,
         ),
         'y': DoubleProperty(
@@ -110,7 +110,7 @@ class StartupViewModel extends BaseViewModel {
           idname: 'y',
           label: 'Y',
           dataType: double,
-          value: 11.0,
+          value: 0.0,
           isExposed: false,
         ),
         'width': DoubleProperty(
@@ -118,7 +118,7 @@ class StartupViewModel extends BaseViewModel {
           idname: 'width',
           label: 'W',
           dataType: double,
-          value: 400.0,
+          value: 100.0,
           isExposed: false,
         ),
         'height': DoubleProperty(
@@ -126,7 +126,7 @@ class StartupViewModel extends BaseViewModel {
           idname: 'height',
           label: 'H',
           dataType: double,
-          value: 400.0,
+          value: 100.0,
           isExposed: false,
         ),
         //'text':
@@ -167,7 +167,7 @@ class StartupViewModel extends BaseViewModel {
           idname: 'x',
           label: 'X',
           dataType: double,
-          value: 11.0,
+          value: 0.0,
           isExposed: false,
         ),
         'y': DoubleProperty(
@@ -175,7 +175,7 @@ class StartupViewModel extends BaseViewModel {
           idname: 'y',
           label: 'Y',
           dataType: double,
-          value: 11.0,
+          value: 0.0,
           isExposed: false,
         ),
         'width': DoubleProperty(

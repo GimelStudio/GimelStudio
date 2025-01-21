@@ -116,7 +116,7 @@ class MainView extends StackedView<MainViewModel> {
                             ),
                           ),
                           Area(
-                            size: 220.0,
+                            size: 320.0,
                             max: 350.0,
                             min: 180.0,
                             builder: (context, area) {
