@@ -34,9 +34,6 @@ class EvaluationService with ListenableServiceMixin {
 
         //print(outputNode.connectedNode);
         //print(firstLayerNodes);
-
-        layer.opacity = (100 - (layer.index + 1).toDouble() * 10.0).toInt(); // TODO: For testing
-
         Renderer renderer = Renderer(nodes: layerNodes);
         dynamic r = renderer.render('output_corenode');
 

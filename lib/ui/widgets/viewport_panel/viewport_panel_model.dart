@@ -37,21 +37,20 @@ class ViewportPanelModel extends ReactiveViewModel {
   }
 
   void setItemNode(Offset position) {
-    for (CanvasItem item in items) {
-      if (item.isInside(position) == true) {
-        print('$item');
-        List<Layer> documentLayers = List.from(layers.where((item) => item.visible == true));
-        documentLayers.sort((Layer a, Layer b) => b.index.compareTo(a.index));
+    CanvasItem? item = items.cast<CanvasItem?>().lastWhere((item) => item!.isInside(position), orElse: () => null);
 
-        Layer layer = documentLayers.firstWhere((layer) => layer.id == item.layerId);
+    if (item != null) {
+      print('$item');
+      List<Layer> documentLayers = List.from(layers.where((item) => item.visible == true));
+      documentLayers.sort((Layer a, Layer b) => a.index.compareTo(b.index));
 
-        // TODO: this assumes there is only one CanvasItem node in the nodegraph
-        itemNode = layer.nodegraph.nodes.values.firstWhere((node) => node.idname == '${item.type}_corenode');
-        _layersService.setSelectedLayer(layer);
-        break;
-      } else {
-        itemNode = null;
-      }
+      Layer layer = documentLayers.firstWhere((layer) => layer.id == item.layerId);
+
+      // TODO: this assumes there is only one CanvasItem node in the nodegraph
+      itemNode = layer.nodegraph.nodes.values.firstWhere((node) => node.idname == '${item.type}_corenode');
+      _layersService.setSelectedLayer(layer);
+    } else {
+      itemNode = null;
     }
   }
 
