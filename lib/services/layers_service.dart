@@ -89,7 +89,7 @@ class LayersService with ListenableServiceMixin {
     return defaultNodes;
   }
 
-  void addNewLayer({String type = 'rectangle'}) {
+  Layer addNewLayer({String type = 'rectangle'}) {
     int insertAt = 0;
     if (layers.isNotEmpty) {
       // Note for the future: Layers are added underneath the selected layer.
@@ -133,6 +133,7 @@ class LayersService with ListenableServiceMixin {
     //print(layers);
     syncLayerIndexes();
     notifyListeners();
+    return newLayer;
   }
 
   /// Delete the selected layer.

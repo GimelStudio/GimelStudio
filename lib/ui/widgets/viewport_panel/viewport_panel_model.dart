@@ -3,11 +3,13 @@ import 'package:gimelstudio/models/canvas_item.dart';
 import 'package:gimelstudio/models/layer.dart';
 import 'package:gimelstudio/models/node_base.dart';
 import 'package:gimelstudio/models/node_property.dart';
+import 'package:gimelstudio/models/tool.dart';
 import 'package:gimelstudio/services/evaluation_service.dart';
 import 'package:gimelstudio/services/image_service.dart';
 import 'package:gimelstudio/services/layers_service.dart';
 import 'package:gimelstudio/services/export_service.dart';
 import 'package:gimelstudio/services/nodegraphs_service.dart';
+import 'package:gimelstudio/services/viewport_service.dart';
 import 'package:gimelstudio/ui/widgets/viewport_panel/viewport_panel.dart';
 
 import '../../../app/app.locator.dart';
@@ -19,6 +21,9 @@ class ViewportPanelModel extends ReactiveViewModel {
   final _layersService = locator<LayersService>();
   final _exportService = locator<ExportService>();
   final _nodegraphsService = locator<NodegraphsService>();
+  final _viewportService = locator<ViewportService>();
+
+  Tool get activeTool => _viewportService.activeTool;
 
   List<CanvasItem>? get result => _evaluationService.result;
 
@@ -28,36 +33,43 @@ class ViewportPanelModel extends ReactiveViewModel {
 
   List<Layer> get layers => _layersService.layers;
 
-  // When an item is selected on the canvas, the layer should be selected
-
   Node? itemNode;
+
+  // TODO: should be refactored into the viewport service, etc.
 
   void setPropertyValue(Property property, dynamic value) {
     _nodegraphsService.onEditNodePropertyValue(property, value);
   }
 
   void setItemNode(Offset position) {
-    CanvasItem? item = items.cast<CanvasItem?>().lastWhere((item) => item!.isInside(position), orElse: () => null);
+    Layer? layer;
+    String type = 'rectangle';
+    if (activeTool == Tool.cursor) {
+      CanvasItem? item =
+          items.cast<CanvasItem?>().lastWhere((CanvasItem? item) => item!.isInside(position), orElse: () => null);
 
-    if (item != null) {
-      print('$item');
-      List<Layer> documentLayers = List.from(layers.where((item) => item.visible == true));
-      documentLayers.sort((Layer a, Layer b) => a.index.compareTo(b.index));
+      if (item != null) {
+        type = item.type;
 
-      Layer layer = documentLayers.firstWhere((layer) => layer.id == item.layerId);
+        List<Layer> documentLayers = List.from(layers.where((item) => item.visible == true));
+        documentLayers.sort((Layer a, Layer b) => a.index.compareTo(b.index));
+        layer = documentLayers.firstWhere((layer) => layer.id == item.layerId);
 
-      // TODO: this assumes there is only one CanvasItem node in the nodegraph
-      itemNode = layer.nodegraph.nodes.values.firstWhere((node) => node.idname == '${item.type}_corenode');
-      _layersService.setSelectedLayer(layer);
-    } else {
-      itemNode = null;
+        // TODO: this assumes there is only one CanvasItem node in the nodegraph
+        itemNode = layer.nodegraph.nodes.values.firstWhere((node) => node.idname == '${type}_corenode');
+        _layersService.setSelectedLayer(layer);
+      } else {
+        itemNode = null;
+      }
     }
   }
 
+  void selectCanvasItem(Layer layer) {}
+
   Offset? _draggingStartPosition;
   Offset? get draggingStartPosition => _draggingStartPosition;
-  Offset? _draggingInitialNodePosition;
-  Offset? get draggingInitialNodePosition => _draggingInitialNodePosition;
+  Offset? _draggingInitialPosition;
+  Offset? get draggingInitialPosition => _draggingInitialPosition;
 
   void onTapDown(TapDownDetails event) {
     print('onTapDown');
@@ -66,46 +78,47 @@ class ViewportPanelModel extends ReactiveViewModel {
   }
 
   void onPanDown(DragDownDetails event) {
-    setItemNode(event.localPosition);
+    if (activeTool == Tool.cursor) {
+      setItemNode(event.localPosition);
+    }
 
     if (itemNode != null) {
       _draggingStartPosition = event.localPosition;
 
-      var xProp = itemNode?.properties.values.firstWhere((item) => item.idname == 'x');
-      var yProp = itemNode?.properties.values.firstWhere((item) => item.idname == 'y');
+      Property xProp = itemNode!.getPropertyByIdname('x');
+      Property yProp = itemNode!.getPropertyByIdname('y');
 
-      _draggingInitialNodePosition = Offset(xProp!.value as double, yProp!.value as double);
+      _draggingInitialPosition = Offset(xProp.value, yProp.value);
     }
 
     rebuildUi();
   }
 
   void onPanUpdate(DragUpdateDetails event) {
-    if (itemNode != null && _draggingStartPosition != null && _draggingInitialNodePosition != null) {
-      Offset pos = draggingInitialNodePosition! + event.localPosition - draggingStartPosition!;
+    if (itemNode != null && _draggingStartPosition != null && _draggingInitialPosition != null) {
+      Offset pos = draggingInitialPosition! + event.localPosition - draggingStartPosition!;
 
-      var xProp = itemNode?.properties.values.firstWhere((item) => item.idname == 'x');
-      var yProp = itemNode?.properties.values.firstWhere((item) => item.idname == 'y');
+      Property xProp = itemNode!.getPropertyByIdname('x');
+      Property yProp = itemNode!.getPropertyByIdname('y');
 
-      setPropertyValue(xProp!, pos.dx);
-      setPropertyValue(yProp!, pos.dy);
+      if (activeTool == Tool.cursor) {
+        setPropertyValue(xProp, pos.dx);
+        setPropertyValue(yProp, pos.dy);
+      }
       _evaluationService.evaluate();
     }
     rebuildUi();
   }
 
   void onPanCancel() {
-    //onNodeMoved(draggingInitialNodePosition!);
-
     _draggingStartPosition = null;
-    _draggingInitialNodePosition = null;
+    _draggingInitialPosition = null;
     rebuildUi();
   }
 
   void onPanEnd(DragEndDetails event) {
     _draggingStartPosition = null;
-    _draggingInitialNodePosition = null;
-
+    _draggingInitialPosition = null;
     rebuildUi();
   }
 

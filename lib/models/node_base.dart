@@ -53,6 +53,10 @@ class Node {
     return null;
   }
 
+  Property getPropertyByIdname(String idname) {
+    return properties.values.firstWhere((item) => item.idname == idname);
+  }
+
   void setPropertyValue(String idname, Object newValue) {
     Property property = properties.values.firstWhere((item) => item.idname == idname);
     property.setValue(newValue);
