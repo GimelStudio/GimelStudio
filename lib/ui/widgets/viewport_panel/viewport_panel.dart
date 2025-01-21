@@ -248,7 +248,8 @@ class ViewportPanel extends StackedView<ViewportPanelModel> {
             },
             child: RepaintBoundary(
               child: GestureDetector(
-                behavior: HitTestBehavior.translucent,
+                behavior: HitTestBehavior.opaque,
+                onTapDown: (event) => viewModel.onTapDown(event),
                 onPanDown: (event) => viewModel.onPanDown(event),
                 onPanUpdate: (event) => viewModel.onPanUpdate(event),
                 onPanCancel: () => viewModel.onPanCancel(),

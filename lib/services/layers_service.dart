@@ -65,25 +65,22 @@ class LayersService with ListenableServiceMixin {
     notifyListeners();
   }
 
-  Map<String, Node> newDefaultNodes(String outputLabel) {
+  Map<String, Node> newDefaultNodes(String type, String outputLabel) {
     Map<String, Node> defaultNodes = {};
 
-    // Node integerNode = _nodeRegistryService.createNode('integer_corenode', Offset(100, 80));
-    // integerNode.selected = true;
-    // defaultNodes[integerNode.id] = integerNode;
-
-    // Node addNode = _nodeRegistryService.createNode('add_corenode', Offset(200, 80));
-    // defaultNodes[addNode.id] = addNode;
-
-    Node imageNode = _nodeRegistryService.createNode('image_corenode', Offset(200, 80));
-    imageNode.selected = true;
-    defaultNodes[imageNode.id] = imageNode;
-
-    // Node rectangleNode = _nodeRegistryService.createNode('rectangle_corenode', Offset(200, 80));
-    // defaultNodes[rectangleNode.id] = rectangleNode;
-
-    Node textNode = _nodeRegistryService.createNode('text_corenode', Offset(300, 80));
-    defaultNodes[textNode.id] = textNode;
+    if (type == 'rectangle') {
+      Node rectangleNode = _nodeRegistryService.createNode('rectangle_corenode', Offset(200, 80));
+      rectangleNode.selected = true;
+      defaultNodes[rectangleNode.id] = rectangleNode;
+    } else if (type == 'image') {
+      Node imageNode = _nodeRegistryService.createNode('image_corenode', Offset(100, 80));
+      imageNode.selected = true;
+      defaultNodes[imageNode.id] = imageNode;
+    } else if (type == 'text') {
+      Node textNode = _nodeRegistryService.createNode('text_corenode', Offset(300, 80));
+      textNode.selected = true;
+      defaultNodes[textNode.id] = textNode;
+    }
 
     Node outputNode = _nodeRegistryService.createNode('output_corenode', Offset(410, 80));
     defaultNodes[outputNode.id] = outputNode;
@@ -92,7 +89,7 @@ class LayersService with ListenableServiceMixin {
     return defaultNodes;
   }
 
-  void addNewLayer() {
+  void addNewLayer({String type = 'rectangle'}) {
     int insertAt = 0;
     if (layers.isNotEmpty) {
       // Note for the future: Layers are added underneath the selected layer.
@@ -103,25 +100,36 @@ class LayersService with ListenableServiceMixin {
 
     // Default nodes
     // TODO: refactor
-    Map<String, Node> defaultNodes = newDefaultNodes('Untitled ${layers.length + 1}');
+    Map<String, Node> defaultNodes = newDefaultNodes(type, 'Untitled ${layers.length + 1}');
+
+    Layer newLayer = Layer(
+      id: _idService.newId(),
+      index: layers.length + 1,
+      name: 'Untitled ${layers.length + 1}',
+      selected: layers.isNotEmpty ? false : true, // If this is the first layer it should be automatically selected
+      visible: true,
+      locked: false,
+      opacity: 100,
+      blend: BlendMode.normal,
+      nodegraph: NodeGraph(
+        id: _idService.newId(),
+        nodes: defaultNodes,
+      ),
+    );
+
+    // Automatically connect nodes
+    Map<String, Node> layerNodes = newLayer.nodegraph.nodes;
+
+    Node outputNode = layerNodes.values.firstWhere((item) => item.isOutput == true);
+    Node inNode = layerNodes.values.firstWhere((item) => item.idname == '${type}_corenode');
+
+    outputNode.setConnection('layer', inNode, 'output');
 
     layers.insert(
       insertAt,
-      Layer(
-        id: _idService.newId(),
-        index: layers.length + 1,
-        name: 'Untitled ${layers.length + 1}',
-        selected: layers.isNotEmpty ? false : true, // If this is the first layer it should be automatically selected
-        visible: true,
-        locked: false,
-        opacity: 100,
-        blend: BlendMode.normal,
-        nodegraph: NodeGraph(
-          id: _idService.newId(),
-          nodes: defaultNodes,
-        ),
-      ),
+      newLayer,
     );
+
     //print(layers);
     syncLayerIndexes();
     notifyListeners();

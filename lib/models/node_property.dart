@@ -1,5 +1,7 @@
 import 'package:gimelstudio/models/node_base.dart';
 
+// TODO: min and max values for integer/double
+
 /// Base class for all properties.
 ///
 /// A Property is the representation of a single point of

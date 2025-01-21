@@ -28,27 +28,22 @@ class EvaluationService with ListenableServiceMixin {
       List<Layer> documentLayers = List.from(layers.where((item) => item.visible == true));
       documentLayers.sort((Layer a, Layer b) => b.index.compareTo(a.index));
 
+      // TODO: implement layer and node caching
       for (Layer layer in documentLayers) {
         Map<String, Node> layerNodes = layer.nodegraph.nodes;
 
-        Node outputNode = layerNodes.values.firstWhere((item) => item.isOutput == true);
-        Node inNode;
-        if (layer.index == 0) {
-          inNode = layerNodes.values.firstWhere((item) => item.idname == 'text_corenode');
-        } else {
-          inNode = layerNodes.values.firstWhere((item) => item.idname == 'image_corenode');
-        }
-
-        // TODO
-        outputNode.setConnection('layer', inNode, 'output');
         //print(outputNode.connectedNode);
         //print(firstLayerNodes);
 
         Renderer renderer = Renderer(nodes: layerNodes);
-        CanvasItem result = renderer.render('output_corenode');
-        result.opacity = (layer.opacity * 2.55).toInt();
-        print(result.opacity);
-        finalResult.add(result);
+        dynamic r = renderer.render('output_corenode');
+
+        if (r != -1) { // -1 means that there is no node connected to the output.
+          CanvasItem result = r; // Maybe instead, the layer itself should be returned from each render
+
+          result.opacity = (layer.opacity * 2.55).toInt();
+          finalResult.add(result);
+        }
       }
     }
     _result = finalResult;
