@@ -67,8 +67,8 @@ class PropertiesPanel extends StackedView<PropertiesPanelModel> {
                                           maintainAnimation: true,
                                           maintainState: true,
                                           child: Slider(
-                                            min: 0.0,
-                                            max: 500.0,
+                                            min: -2000.0,
+                                            max: 2000.0, // TODO: use document size
                                             value: property.value.toDouble(),
                                             onChanged: (double value) =>
                                                 viewModel.setPropertyValue(property, value.toInt()),
@@ -109,8 +109,8 @@ class PropertiesPanel extends StackedView<PropertiesPanelModel> {
                                           maintainAnimation: true,
                                           maintainState: true,
                                           child: Slider(
-                                            min: 0.0,
-                                            max: 500.0,
+                                            min: -2000.0,
+                                            max: 2000.0, // TODO: use document size
                                             value: property.value,
                                             onChanged: (double value) => viewModel.setPropertyValue(property, value),
                                           ),
@@ -150,7 +150,26 @@ class PropertiesPanel extends StackedView<PropertiesPanelModel> {
                                   //   ],
                                   // );
                                 } else if (property.dataType == Photo) {
-                                  return Container();
+                                  return InkWell(
+                                    onTap: () async {
+                                      File file = File('C:/Users/Acer/Downloads/tree-7881297_1280.jpg');
+                                      Uint8List bytes = await file.readAsBytes();
+                                      var photo = Photo(filePath: file.path, data: bytes);
+
+                                      photo.uiData = await photo.toCanvasImageData();
+
+                                      viewModel.setPropertyValue(property, photo);
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(
+                                        'open image',
+                                        style: TextStyle(
+                                          color: Colors.white70,
+                                        ),
+                                      ),
+                                    ),
+                                  );
                                 } else {
                                   return Container();
                                 }

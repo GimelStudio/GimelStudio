@@ -13,6 +13,7 @@ class LayersPanelModel extends ReactiveViewModel {
   final _evaluationService = locator<EvaluationService>();
 
   List<Layer> get layers => _layersService.layers;
+  Layer? get selectedLayer => _layersService.selectedLayer;
 
   void onSelectLayer(Layer layer) {
     _layersService.setSelectedLayer(layer);

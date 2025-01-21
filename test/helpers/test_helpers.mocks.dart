@@ -906,20 +906,28 @@ class MockLayersService extends _i1.Mock implements _i11.LayersService {
       );
 
   @override
-  Map<String, _i3.Node> newDefaultNodes(String? outputLabel) => (super.noSuchMethod(
+  Map<String, _i3.Node> newDefaultNodes(
+    String? type,
+    String? outputLabel,
+  ) =>
+      (super.noSuchMethod(
         Invocation.method(
           #newDefaultNodes,
-          [outputLabel],
+          [
+            type,
+            outputLabel,
+          ],
         ),
         returnValue: <String, _i3.Node>{},
         returnValueForMissingStub: <String, _i3.Node>{},
       ) as Map<String, _i3.Node>);
 
   @override
-  void addNewLayer() => super.noSuchMethod(
+  void addNewLayer({String? type = 'rectangle'}) => super.noSuchMethod(
         Invocation.method(
           #addNewLayer,
           [],
+          {#type: type},
         ),
         returnValueForMissingStub: null,
       );

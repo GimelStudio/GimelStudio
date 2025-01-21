@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gimelstudio/models/canvas_item.dart';
+import 'package:gimelstudio/models/layer.dart';
 import 'package:gimelstudio/models/node_base.dart';
 import 'package:gimelstudio/models/node_property.dart';
 import 'package:gimelstudio/services/evaluation_service.dart';
@@ -25,12 +26,33 @@ class ViewportPanelModel extends ReactiveViewModel {
 
   CanvasItem? get selectedItem => items.isEmpty ? null : items[_layersService.selectedLayerIndex];
 
+  List<Layer> get layers => _layersService.layers;
+
   // When an item is selected on the canvas, the layer should be selected
 
-  Node? get selectedNode => _nodegraphsService.selectedNode;
+  Node? itemNode;
 
   void setPropertyValue(Property property, dynamic value) {
     _nodegraphsService.onEditNodePropertyValue(property, value);
+  }
+
+  void setItemNode(Offset position) {
+    for (CanvasItem item in items) {
+      if (item.isInside(position) == true) {
+        print('$item');
+        List<Layer> documentLayers = List.from(layers.where((item) => item.visible == true));
+        documentLayers.sort((Layer a, Layer b) => b.index.compareTo(a.index));
+
+        Layer layer = documentLayers.firstWhere((layer) => layer.id == item.layerId);
+
+        // TODO: this assumes there is only one CanvasItem node in the nodegraph
+        itemNode = layer.nodegraph.nodes.values.firstWhere((node) => node.idname == '${item.type}_corenode');
+        _layersService.setSelectedLayer(layer);
+        break;
+      } else {
+        itemNode = null;
+      }
+    }
   }
 
   Offset? _draggingStartPosition;
@@ -39,20 +61,19 @@ class ViewportPanelModel extends ReactiveViewModel {
   Offset? get draggingInitialNodePosition => _draggingInitialNodePosition;
 
   void onTapDown(TapDownDetails event) {
-    // for (var item in items) {
-    //   if (item.isInside(event.localPosition) == true) {
-    //     selectedItem = item;
-    // Need to get node from canvasitem
-    //   }
-    // }
+    print('onTapDown');
+    setItemNode(event.localPosition);
+    rebuildUi();
   }
 
   void onPanDown(DragDownDetails event) {
-    if (selectedNode != null) {
+    setItemNode(event.localPosition);
+
+    if (itemNode != null) {
       _draggingStartPosition = event.localPosition;
 
-      var xProp = selectedNode?.properties.values.firstWhere((item) => item.idname == 'x');
-      var yProp = selectedNode?.properties.values.firstWhere((item) => item.idname == 'y');
+      var xProp = itemNode?.properties.values.firstWhere((item) => item.idname == 'x');
+      var yProp = itemNode?.properties.values.firstWhere((item) => item.idname == 'y');
 
       _draggingInitialNodePosition = Offset(xProp!.value as double, yProp!.value as double);
     }
@@ -61,11 +82,11 @@ class ViewportPanelModel extends ReactiveViewModel {
   }
 
   void onPanUpdate(DragUpdateDetails event) {
-    if (selectedNode != null && _draggingStartPosition != null && _draggingInitialNodePosition != null) {
+    if (itemNode != null && _draggingStartPosition != null && _draggingInitialNodePosition != null) {
       Offset pos = draggingInitialNodePosition! + event.localPosition - draggingStartPosition!;
 
-      var xProp = selectedNode?.properties.values.firstWhere((item) => item.idname == 'x');
-      var yProp = selectedNode?.properties.values.firstWhere((item) => item.idname == 'y');
+      var xProp = itemNode?.properties.values.firstWhere((item) => item.idname == 'x');
+      var yProp = itemNode?.properties.values.firstWhere((item) => item.idname == 'y');
 
       setPropertyValue(xProp!, pos.dx);
       setPropertyValue(yProp!, pos.dy);

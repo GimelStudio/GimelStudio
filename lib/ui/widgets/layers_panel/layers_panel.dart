@@ -127,7 +127,7 @@ class LayersPanel extends StackedView<LayersPanelModel> {
                         child: Padding(
                           padding: const EdgeInsets.only(left: 8.0),
                           child: Text(
-                            '100%',
+                            '${viewModel.selectedLayer?.opacity ?? '100'}%',
                             style: TextStyle(
                               color: Colors.white70,
                               fontSize: 12.0,

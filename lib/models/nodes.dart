@@ -95,6 +95,7 @@ class RectangleNode extends Node {
 
     return {
       'output': CanvasRectangle(
+        layerId: '',
         opacity: 100,
         blendMode: BlendMode.srcOver,
         x: x,
@@ -145,6 +146,7 @@ class TextNode extends Node {
 
     return {
       'output': CanvasText(
+        layerId: '',
         opacity: 100,
         blendMode: BlendMode.srcOver,
         x: x,
@@ -198,6 +200,7 @@ class ImageNode extends Node {
 
     return {
       'output': CanvasImage(
+        layerId: '',
         opacity: 100,
         blendMode: BlendMode.srcOver,
         x: x,

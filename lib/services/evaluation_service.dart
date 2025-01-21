@@ -35,13 +35,21 @@ class EvaluationService with ListenableServiceMixin {
         //print(outputNode.connectedNode);
         //print(firstLayerNodes);
 
+        layer.opacity = (100 - (layer.index + 1).toDouble() * 10.0).toInt(); // TODO: For testing
+
         Renderer renderer = Renderer(nodes: layerNodes);
         dynamic r = renderer.render('output_corenode');
 
-        if (r != -1) { // -1 means that there is no node connected to the output.
+        //print(r);
+
+        if (r != -1) {
+          // -1 means that there is no node connected to the output.
           CanvasItem result = r; // Maybe instead, the layer itself should be returned from each render
 
-          result.opacity = (layer.opacity * 2.55).toInt();
+          result.opacity = ((layer.opacity * 2.55)).toInt();
+
+          //result.blendMode = layer.blend;
+          result.layerId = layer.id;
           finalResult.add(result);
         }
       }

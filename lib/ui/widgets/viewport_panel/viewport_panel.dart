@@ -19,7 +19,7 @@ class ViewportCanvasPainter extends CustomPainter {
     for (int index = 0; index < items.length; index++) {
       CanvasItem item = items[index];
 
-      if (item.type == 'rect') {
+      if (item.type == 'rectangle') {
         item = item as CanvasRectangle;
 
         final paint = Paint()

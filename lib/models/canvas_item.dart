@@ -33,12 +33,16 @@ class CanvasItemBorder {
 abstract class CanvasItem {
   CanvasItem({
     required this.type,
+    required this.layerId,
     required this.opacity,
     required this.blendMode,
   });
 
   /// A string representing the type of canvas item.
   final String type;
+
+  /// The id of the layer that "owns" this CanvasItem.
+  String layerId;
 
   /// Opacity of the canvas item.
   int opacity;
@@ -62,7 +66,8 @@ abstract class CanvasItem {
 // TODO
 class CanvasRectangle extends CanvasItem {
   CanvasRectangle({
-    super.type = 'rect',
+    super.type = 'rectangle',
+    required super.layerId,
     required super.opacity,
     required super.blendMode,
     required this.x,
@@ -92,6 +97,7 @@ class CanvasRectangle extends CanvasItem {
 class CanvasOval extends CanvasItem {
   CanvasOval({
     super.type = 'oval',
+    required super.layerId,
     required super.opacity,
     required super.blendMode,
     required this.x,
@@ -126,6 +132,7 @@ class CanvasOval extends CanvasItem {
 class CanvasText extends CanvasItem {
   CanvasText({
     super.type = 'text',
+    required super.layerId,
     required super.opacity,
     required super.blendMode,
     required this.x,
@@ -167,6 +174,7 @@ class CanvasText extends CanvasItem {
 class CanvasImage extends CanvasItem {
   CanvasImage({
     super.type = 'image',
+    required super.layerId,
     required super.opacity,
     required super.blendMode,
     required this.x,
