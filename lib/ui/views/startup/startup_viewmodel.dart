@@ -140,7 +140,7 @@ class StartupViewModel extends BaseViewModel {
           idname: 'width',
           label: 'W',
           dataType: double,
-          value: 100.0,
+          value: 0.0,
           isExposed: false,
         ),
         'height': DoubleProperty(
@@ -148,7 +148,7 @@ class StartupViewModel extends BaseViewModel {
           idname: 'height',
           label: 'H',
           dataType: double,
-          value: 100.0,
+          value: 0.0,
           isExposed: false,
         ),
         //'text':
@@ -173,7 +173,7 @@ class StartupViewModel extends BaseViewModel {
           idname: 'fill',
           label: 'Fill',
           dataType: CanvasItemFill,
-          value: CanvasItemFill(fillType: FillType.solid, solidColor: Colors.yellow),
+          value: CanvasItemFill(fillType: FillType.solid, solidColor: Colors.black),
           isExposed: false,
         ),
       },
@@ -205,7 +205,7 @@ class StartupViewModel extends BaseViewModel {
           idname: 'width',
           label: 'W',
           dataType: double,
-          value: 400.0,
+          value: 0.0,
           isExposed: false,
         ),
         'height': DoubleProperty(
@@ -213,7 +213,7 @@ class StartupViewModel extends BaseViewModel {
           idname: 'height',
           label: 'H',
           dataType: double,
-          value: 400.0,
+          value: 0.0,
           isExposed: false,
         ),
         'photo': PhotoProperty(

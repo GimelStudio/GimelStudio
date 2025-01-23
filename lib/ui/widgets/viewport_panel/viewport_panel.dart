@@ -38,28 +38,32 @@ class ViewportCanvasPainter extends CustomPainter {
         );
 
         // Fill
+        final FillType fillType = item.fill.fillType;
+        final List<Color> fillGradientColors = item.fill.gradientColors;
+        final List<double> fillGradientStops = item.fill.gradientStops;
+
         Paint fillPaint = Paint()
           ..color = item.fill.solidColor.withAlpha(item.opacity)
           ..style = PaintingStyle.fill
           ..blendMode = item.blendMode;
 
-        if (item.fill.fillType == FillType.linearGradient) {
+        if (fillType == FillType.linearGradient) {
           fillPaint.shader = LinearGradient(
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
-            colors: item.fill.gradientColors,
-            stops: item.fill.gradientStops,
+            colors: fillGradientColors,
+            stops: fillGradientStops,
           ).createShader(item.bounds);
-        } else if (item.fill.fillType == FillType.radialGradient) {
+        } else if (fillType == FillType.radialGradient) {
           fillPaint.shader = RadialGradient(
-            colors: item.fill.gradientColors,
-            stops: item.fill.gradientStops,
+            colors: fillGradientColors,
+            stops: fillGradientStops,
             focal: Alignment(item.width / 2.0, item.height / 2.0),
             focalRadius: 2.0,
           ).createShader(item.bounds);
         }
 
-        if (item.fill.fillType != FillType.none) {
+        if (fillType != FillType.none) {
           canvas.drawRRect(
             roundedRect,
             fillPaint,
@@ -67,29 +71,34 @@ class ViewportCanvasPainter extends CustomPainter {
         }
 
         // Border
+        final FillType borderFillType = item.border.fill.fillType;
+        final double borderThickness = item.border.thickness;
+        final List<Color> borderGradientColors = item.border.fill.gradientColors;
+        final List<double> borderGradientStops = item.border.fill.gradientStops;
+
         Paint borderPaint = Paint()
           ..color = item.border.fill.solidColor.withAlpha(item.opacity)
           ..style = PaintingStyle.stroke
-          ..strokeWidth = item.border.thickness
+          ..strokeWidth = borderThickness
           ..blendMode = item.blendMode;
 
-        if (item.border.fill.fillType == FillType.linearGradient) {
+        if (borderFillType == FillType.linearGradient) {
           borderPaint.shader = LinearGradient(
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
-            colors: item.border.fill.gradientColors,
-            stops: item.border.fill.gradientStops,
+            colors: borderGradientColors,
+            stops: borderGradientStops,
           ).createShader(item.bounds);
-        } else if (item.border.fill.fillType == FillType.radialGradient) {
+        } else if (borderFillType == FillType.radialGradient) {
           borderPaint.shader = RadialGradient(
-            colors: item.border.fill.gradientColors,
-            stops: item.border.fill.gradientStops,
+            colors: borderGradientColors,
+            stops: borderGradientStops,
             focal: Alignment(item.width / 2.0, item.height / 2.0),
             focalRadius: 2.0,
           ).createShader(item.bounds);
         }
 
-        if (item.border.fill.fillType != FillType.none) {
+        if (borderFillType != FillType.none && borderThickness != 0.0) {
           canvas.drawRRect(
             roundedRect,
             borderPaint,
@@ -98,8 +107,10 @@ class ViewportCanvasPainter extends CustomPainter {
       } else if (item.type == 'text') {
         item = item as CanvasText;
 
-        final paint = Paint()
+        // Fill
+        Paint fillPaint = Paint()
           ..color = item.fill.solidColor.withAlpha(item.opacity)
+          ..style = PaintingStyle.fill
           ..blendMode = item.blendMode;
 
         final TextPainter textPainter = TextPainter(
@@ -111,12 +122,16 @@ class ViewportCanvasPainter extends CustomPainter {
               letterSpacing: item.letterSpacing,
             ),
           ),
+          strutStyle: const StrutStyle(
+            leading: null,
+          ),
           textAlign: TextAlign.left,
           textDirection: TextDirection.ltr,
         )..layout(maxWidth: item.width);
 
         final RRect boxRect = RRect.fromRectAndCorners(Rect.fromLTRB(0, 0, size.width, size.height));
-        canvas.saveLayer(boxRect.outerRect, paint);
+        canvas.saveLayer(boxRect.outerRect, fillPaint);
+        canvas.clipRect(item.bounds);
         textPainter.paint(canvas, Offset(item.x, item.y));
         canvas.restore();
       } else if (item.type == 'image') {
@@ -352,6 +367,7 @@ class CanvasWidget extends StatelessWidget {
       painter: ViewportCanvasPainter(
         items: items,
       ),
+      child: const SizedBox.expand(),
     );
   }
 }
@@ -373,6 +389,7 @@ class CanvasOverlaysWidget extends StatelessWidget {
         selectedItem: selectedItem,
         selectionOverlay: selectionOverlay,
       ),
+      child: const SizedBox.expand(),
     );
   }
 }
