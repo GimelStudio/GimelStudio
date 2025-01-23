@@ -143,7 +143,7 @@ class TextNode extends Node {
     double y = eval.evaluateProperty('y');
     double width = eval.evaluateProperty('width');
     double height = eval.evaluateProperty('height');
-    // String text = eval.evaluateProperty('text'); // TODO
+    //String text = eval.evaluateProperty('text'); // TODO: this should not be shown in the properties panel
     CanvasItemFill fill = eval.evaluateProperty('fill');
     double size = eval.evaluateProperty('size');
     double letterSpacing = eval.evaluateProperty('letter_spacing');

@@ -220,6 +220,7 @@ class CanvasImage extends CanvasItem {
     required this.y,
     required this.width,
     required this.height,
+    this.lockAspectRatio = true,
     required this.imageData,
   });
 
@@ -227,6 +228,7 @@ class CanvasImage extends CanvasItem {
   double y;
   double width;
   double height;
+  bool lockAspectRatio;
   ui.Image? imageData;
 
   @override

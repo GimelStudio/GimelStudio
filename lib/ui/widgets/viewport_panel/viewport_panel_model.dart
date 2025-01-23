@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gimelstudio/models/canvas_item.dart';
+import 'package:gimelstudio/models/document.dart';
 import 'package:gimelstudio/models/layer.dart';
 import 'package:gimelstudio/models/node_base.dart';
 import 'package:gimelstudio/models/node_property.dart';
 import 'package:gimelstudio/models/tool.dart';
+import 'package:gimelstudio/services/document_service.dart';
 import 'package:gimelstudio/services/evaluation_service.dart';
 import 'package:gimelstudio/services/image_service.dart';
 import 'package:gimelstudio/services/layers_service.dart';
@@ -23,10 +25,11 @@ class ViewportPanelModel extends ReactiveViewModel {
   final _exportService = locator<ExportService>();
   final _nodegraphsService = locator<NodegraphsService>();
   final _viewportService = locator<ViewportService>();
+  final _documentService = locator<DocumentService>();
 
   Tool get activeTool => _viewportService.activeTool;
 
-  MouseCursor _mouseCursor = SystemMouseCursors.resizeUpRight;
+  MouseCursor _mouseCursor = SystemMouseCursors.basic;
   MouseCursor get mouseCursor => _mouseCursor;
 
   List<CanvasItem>? get result => _evaluationService.result;
@@ -36,6 +39,8 @@ class ViewportPanelModel extends ReactiveViewModel {
   CanvasItem? get selectedItem => items.isEmpty ? null : items.reversed.toList()[_layersService.selectedLayerIndex];
 
   List<Layer> get layers => _layersService.layers;
+
+  Document? get selectedDocument => _documentService.selectedDocument;
 
   Node? itemNode;
 

@@ -138,16 +138,16 @@ class ViewportCanvasPainter extends CustomPainter {
         item = item as CanvasImage;
 
         ui.Image? image = item.imageData;
-        if (image != null) {
-          // paintImage(
-          //   canvas: canvas,
-          //   rect: Rect.fromLTRB(item.x, item.y, item.width, item.height),
-          //   image: image,
-          //   fit: BoxFit.scaleDown,
-          //   );
-          final paint = Paint()..blendMode = item.blendMode;
 
-          canvas.drawImage(image, Offset(item.x, item.y), paint);
+        if (image != null) {
+          paintImage(
+            canvas: canvas,
+            rect: item.bounds, // Rect.fromLTRB(item.x, item.y, item.width, item.height),
+            image: image,
+            fit: BoxFit.cover,
+          );
+          //final paint = Paint()..blendMode = item.blendMode;
+          //canvas.drawImage(image, Offset(item.x, item.y), paint);
         }
       } else if (item.type == 'oval') {
         item = item as CanvasOval;
@@ -250,8 +250,8 @@ class SelectionOverlayHandle {
     required this.itemBounds,
   });
 
-  double handleSize = 8.0;
-  double sideHandleSize = 4.0;
+  double handleSize = 16.0;
+  double sideHandleSize = 8.0;
 
   final SelectionOverlayHandleSide side;
   Rect itemBounds;
@@ -415,29 +415,37 @@ class ViewportPanel extends StackedView<ViewportPanelModel> {
             onInteractionEnd: (ScaleEndDetails details) {
               print('Interaction ended: $details');
             },
-            child: RepaintBoundary(
-              child: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTapDown: (event) => viewModel.onTapDown(event),
-                onPanDown: (event) => viewModel.onPanDown(event),
-                onPanUpdate: (event) => viewModel.onPanUpdate(event),
-                onPanCancel: () => viewModel.onPanCancel(),
-                onPanEnd: (event) => viewModel.onPanEnd(event),
-                child: MouseRegion(
-                  cursor: viewModel.mouseCursor,
-                  onHover: (event) => viewModel.onHover(event),
-                  child: Container(
-                    width: 1920,
-                    height: 1080,
-                    decoration: BoxDecoration(color: Colors.white, border: Border.all()),
-                    child: Stack(
-                      children: [
-                        CanvasWidget(items: viewModel.items),
-                        CanvasOverlaysWidget(
-                          selectedItem: viewModel.selectedItem,
-                          selectionOverlay: viewModel.selectionOverlay,
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: FittedBox(
+                child: RepaintBoundary(
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTapDown: (event) => viewModel.onTapDown(event),
+                    onPanDown: (event) => viewModel.onPanDown(event),
+                    onPanUpdate: (event) => viewModel.onPanUpdate(event),
+                    onPanCancel: () => viewModel.onPanCancel(),
+                    onPanEnd: (event) => viewModel.onPanEnd(event),
+                    child: MouseRegion(
+                      cursor: viewModel.mouseCursor,
+                      onHover: (event) => viewModel.onHover(event),
+                      child: Container(
+                        width: viewModel.selectedDocument?.size.width,
+                        height: viewModel.selectedDocument?.size.height,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(color: Colors.black),
                         ),
-                      ],
+                        child: Stack(
+                          children: [
+                            ClipRect(child: CanvasWidget(items: viewModel.items)),
+                            CanvasOverlaysWidget(
+                              selectedItem: viewModel.selectedItem,
+                              selectionOverlay: viewModel.selectionOverlay,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ),
