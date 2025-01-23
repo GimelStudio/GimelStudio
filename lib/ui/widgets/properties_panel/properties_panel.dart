@@ -43,6 +43,8 @@ class PropertiesPanel extends StackedView<PropertiesPanelModel> {
                       ],
                     ),
 
+                    // TODO: each property will have its own widget with any local state it needs.
+
                     if (viewModel.selectedNode != null && viewModel.selectedNode?.isOutput == false)
                       Column(
                         children: [
@@ -171,6 +173,24 @@ class PropertiesPanel extends StackedView<PropertiesPanelModel> {
                                         ),
                                       ),
                                     ),
+                                  );
+                                } else if (property.dataType == item.CanvasItemBorder) {
+                                  return Row(
+                                    children: [
+                                      Slider(
+                                        min: 0.0,
+                                        max: 100.0,
+                                        value: property.value.thickness,
+                                        onChanged: (double value) => viewModel.setPropertyValue(
+                                          property,
+                                          item.CanvasItemBorder(
+                                            fill: item.CanvasItemFill(
+                                                fillType: item.FillType.solid, solidColor: Colors.black),
+                                            thickness: value,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   );
                                 } else {
                                   return Container();

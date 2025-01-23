@@ -92,6 +92,8 @@ class RectangleNode extends Node {
     double width = eval.evaluateProperty('width');
     double height = eval.evaluateProperty('height');
     CanvasItemFill fill = eval.evaluateProperty('fill');
+    CanvasItemBorder border = eval.evaluateProperty('border');
+    CanvasItemBorderRadius borderRadius = eval.evaluateProperty('border_radius');
 
     return {
       'output': CanvasRectangle(
@@ -103,6 +105,8 @@ class RectangleNode extends Node {
         width: width,
         height: height,
         fill: fill,
+        border: border,
+        borderRadius: borderRadius,
       ),
     };
   }
@@ -155,7 +159,8 @@ class TextNode extends Node {
         height: height,
         text: 'Example text',
         fill: fill,
-        border: CanvasItemBorder(thickness: 1.0),
+        border:
+            CanvasItemBorder(fill: CanvasItemFill(fillType: FillType.solid, solidColor: Colors.black), thickness: 1.0),
         font: '',
         size: size,
         letterSpacing: letterSpacing,

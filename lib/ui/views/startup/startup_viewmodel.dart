@@ -89,6 +89,28 @@ class StartupViewModel extends BaseViewModel {
           value: CanvasItemFill(fillType: FillType.solid, solidColor: Colors.purple),
           isExposed: false,
         ),
+        'border': CanvasItemBorderProperty(
+          id: '',
+          idname: 'border',
+          label: 'Border',
+          dataType: CanvasItemBorder,
+          value: CanvasItemBorder(
+            fill: CanvasItemFill(fillType: FillType.solid, solidColor: Colors.black),
+            thickness: 1.0,
+          ),
+          isExposed: false,
+        ),
+        'border_radius': CanvasItemBorderRadiusProperty(
+          id: '',
+          idname: 'border_radius',
+          label: 'Border Radius',
+          dataType: CanvasItemBorderRadius,
+          value: CanvasItemBorderRadius(
+            cornerRadi: (0.0, 0.0, 0.0, 0.0),
+            smoothCorners: false,
+          ),
+          isExposed: false,
+        )
       },
       outputs: {
         'output': Output(id: '', idname: 'output', dataType: CanvasItem),

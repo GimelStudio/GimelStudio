@@ -192,3 +192,49 @@ class CanvasItemFillProperty<CanvasItemFill> extends Property {
     );
   }
 }
+
+// For CanvasItemBorder values.
+class CanvasItemBorderProperty<CanvasItemBorder> extends Property {
+  CanvasItemBorderProperty({
+    required super.id,
+    required super.idname,
+    required super.label,
+    required super.dataType,
+    required super.value,
+    required super.isExposed,
+  }) : assert(value is CanvasItemBorder);
+
+  factory CanvasItemBorderProperty.clone(Property source, String id) {
+    return CanvasItemBorderProperty<CanvasItemBorder>(
+      id: id,
+      idname: source.idname,
+      label: source.label,
+      dataType: source.dataType,
+      value: source.value,
+      isExposed: source.isExposed,
+    );
+  }
+}
+
+// For CanvasItemBorder values.
+class CanvasItemBorderRadiusProperty<CanvasItemBorderRadius> extends Property {
+  CanvasItemBorderRadiusProperty({
+    required super.id,
+    required super.idname,
+    required super.label,
+    required super.dataType,
+    required super.value,
+    required super.isExposed,
+  }) : assert(value is CanvasItemBorderRadius);
+
+  factory CanvasItemBorderRadiusProperty.clone(Property source, String id) {
+    return CanvasItemBorderRadiusProperty<CanvasItemBorderRadius>(
+      id: id,
+      idname: source.idname,
+      label: source.label,
+      dataType: source.dataType,
+      value: source.value,
+      isExposed: source.isExposed,
+    );
+  }
+}

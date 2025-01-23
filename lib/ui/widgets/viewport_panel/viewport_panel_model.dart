@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gimelstudio/models/canvas_item.dart';
 import 'package:gimelstudio/models/layer.dart';
 import 'package:gimelstudio/models/node_base.dart';
@@ -25,15 +26,21 @@ class ViewportPanelModel extends ReactiveViewModel {
 
   Tool get activeTool => _viewportService.activeTool;
 
+  MouseCursor _mouseCursor = SystemMouseCursors.resizeUpRight;
+  MouseCursor get mouseCursor => _mouseCursor;
+
   List<CanvasItem>? get result => _evaluationService.result;
 
   List<CanvasItem> get items => result == null ? [] : result ?? [];
 
-  CanvasItem? get selectedItem => items.isEmpty ? null : items[_layersService.selectedLayerIndex];
+  CanvasItem? get selectedItem => items.isEmpty ? null : items.reversed.toList()[_layersService.selectedLayerIndex];
 
   List<Layer> get layers => _layersService.layers;
 
   Node? itemNode;
+
+  SelectionBoxOverlay? get selectionOverlay =>
+      items.isEmpty ? null : SelectionBoxOverlay(itemBounds: selectedItem!.bounds);
 
   Offset? _draggingStartPosition;
   Offset? get draggingStartPosition => _draggingStartPosition;
@@ -43,7 +50,12 @@ class ViewportPanelModel extends ReactiveViewModel {
   Offset? _lastPosition;
   Offset? get lastPosition => _lastPosition;
 
-  // TODO: this logic is WIP. It should be refactored and moved into the viewport service, etc.
+  // TODO: this logic is WIP. Think of this like a "first draft".
+  // It should be refactored and moved into the viewport service, etc.
+
+  // TODO: selecting a layer in the layers panel doesn't update the viewport selection.
+
+  // How should grouping work?
 
   void setPropertyValue(Property property, dynamic value) {
     _nodegraphsService.onEditNodePropertyValue(property, value);
@@ -70,6 +82,36 @@ class ViewportPanelModel extends ReactiveViewModel {
   }
 
   void selectCanvasItem(Layer layer) {}
+
+  void onHover(PointerHoverEvent event) {
+    Offset hoverPosition = event.localPosition;
+
+    if (selectedItem != null && selectionOverlay != null) {
+      SelectionOverlayHandleSide? handle = selectionOverlay!.getHandle(hoverPosition);
+
+      switch (handle) {
+        case SelectionOverlayHandleSide.top:
+          _mouseCursor = SystemMouseCursors.resizeUp;
+        case SelectionOverlayHandleSide.topLeft:
+          _mouseCursor = SystemMouseCursors.resizeUpLeft;
+        case SelectionOverlayHandleSide.left:
+          _mouseCursor = SystemMouseCursors.resizeLeft;
+        case SelectionOverlayHandleSide.bottomLeft:
+          _mouseCursor = SystemMouseCursors.resizeDownLeft;
+        case SelectionOverlayHandleSide.bottom:
+          _mouseCursor = SystemMouseCursors.resizeDown;
+        case SelectionOverlayHandleSide.topRight:
+          _mouseCursor = SystemMouseCursors.resizeDownLeft;
+        case SelectionOverlayHandleSide.right:
+          _mouseCursor = SystemMouseCursors.resizeRight;
+        case SelectionOverlayHandleSide.bottomRight:
+          _mouseCursor = SystemMouseCursors.resizeUpLeft;
+        default:
+          _mouseCursor = SystemMouseCursors.basic;
+      }
+    }
+    rebuildUi();
+  }
 
   void onTapDown(TapDownDetails event) {
     print('onTapDown');
@@ -111,6 +153,8 @@ class ViewportPanelModel extends ReactiveViewModel {
 
       _evaluationService.evaluate();
     }
+
+    _mouseCursor = SystemMouseCursors.basic;
 
     rebuildUi();
   }

@@ -68,6 +68,10 @@ class NodeRegistryService {
           newProperty = PhotoProperty.clone(property, newPropertyId);
         case CanvasItemFill:
           newProperty = CanvasItemFillProperty.clone(property, newPropertyId);
+        case CanvasItemBorder:
+          newProperty = CanvasItemBorderProperty.clone(property, newPropertyId);
+        case CanvasItemBorderRadius:
+          newProperty = CanvasItemBorderRadiusProperty.clone(property, newPropertyId);
         default:
           newProperty = IntegerProperty.clone(property, newPropertyId);
       }
