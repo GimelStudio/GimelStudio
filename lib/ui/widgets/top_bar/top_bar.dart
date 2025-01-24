@@ -21,13 +21,13 @@ class TopBar extends StackedView<TopBarModel> {
       child: Row(
         children: [
           Image.asset(
-            'assets/Icon.png',
+            'assets/gimel-studio-icon.png',
             width: 16.0,
             height: 16.0,
             isAntiAlias: true,
-            cacheHeight: 100,
-            cacheWidth: 100,
-            filterQuality: FilterQuality.high,
+            cacheHeight: 70,
+            cacheWidth: 70,
+            filterQuality: FilterQuality.medium,
           ),
           const SizedBox(width: 2.0),
           InkWell(
