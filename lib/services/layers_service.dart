@@ -73,6 +73,12 @@ class LayersService with ListenableServiceMixin {
       rectangleNode.selected = true;
       defaultNodes[rectangleNode.id] = rectangleNode;
     } else if (type == 'image') {
+      Node photoNode = _nodeRegistryService.createNode('photo_corenode', Offset(120, 80));
+      defaultNodes[photoNode.id] = photoNode;
+
+      Node blurNode = _nodeRegistryService.createNode('blur_corenode', Offset(110, 80));
+      defaultNodes[blurNode.id] = blurNode;
+
       Node imageNode = _nodeRegistryService.createNode('image_corenode', Offset(100, 80));
       imageNode.selected = true;
       defaultNodes[imageNode.id] = imageNode;
@@ -110,7 +116,7 @@ class LayersService with ListenableServiceMixin {
       visible: true,
       locked: false,
       opacity: 100,
-      blend: BlendMode.normal,
+      blend: LayerBlendMode.normal,
       nodegraph: NodeGraph(
         id: _idService.newId(),
         nodes: defaultNodes,
@@ -121,9 +127,22 @@ class LayersService with ListenableServiceMixin {
     Map<String, Node> layerNodes = newLayer.nodegraph.nodes;
 
     Node outputNode = layerNodes.values.firstWhere((item) => item.isOutput == true);
-    Node inNode = layerNodes.values.firstWhere((item) => item.idname == '${type}_corenode');
 
-    outputNode.setConnection('layer', inNode, 'output');
+    if (type == 'image') {
+      Node photoNode = layerNodes.values.firstWhere((item) => item.idname == 'photo_corenode');
+      Node blurNode = layerNodes.values.firstWhere((item) => item.idname == 'blur_corenode');
+      Node imageNode = layerNodes.values.firstWhere((item) => item.idname == 'image_corenode');
+
+      blurNode.setConnection('photo', photoNode, 'output');
+
+      imageNode.setConnection('photo', blurNode, 'output');
+
+      outputNode.setConnection('layer', imageNode, 'output');
+    } else {
+      Node inNode = layerNodes.values.firstWhere((item) => item.idname == '${type}_corenode');
+
+      outputNode.setConnection('layer', inNode, 'output');
+    }
 
     layers.insert(
       insertAt,

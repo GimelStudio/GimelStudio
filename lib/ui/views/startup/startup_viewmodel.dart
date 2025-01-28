@@ -96,7 +96,7 @@ class StartupViewModel extends BaseViewModel {
           dataType: CanvasItemBorder,
           value: CanvasItemBorder(
             fill: CanvasItemFill(fillType: FillType.solid, solidColor: Colors.black),
-            thickness: 1.0,
+            thickness: 0.0,
           ),
           isExposed: false,
         ),
@@ -230,6 +230,46 @@ class StartupViewModel extends BaseViewModel {
       },
     );
 
+    final photoNode = PhotoNode(
+      properties: {
+        'photo': PhotoProperty(
+          id: '',
+          idname: 'photo',
+          label: 'Photo',
+          dataType: Photo,
+          value: Photo(filePath: '', data: null),
+          isExposed: false,
+        ),
+      },
+      outputs: {
+        'output': Output(id: '', idname: 'output', dataType: Photo),
+      },
+    );
+
+    final blurNode = BlurNode(
+      properties: {
+        'radius': DoubleProperty(
+          id: '',
+          idname: 'radius',
+          label: 'Radius',
+          dataType: double,
+          value: 0.0,
+          isExposed: false,
+        ),
+        'photo': PhotoProperty(
+          id: '',
+          idname: 'photo',
+          label: 'Photo',
+          dataType: Photo,
+          value: Photo(filePath: '', data: null),
+          isExposed: false,
+        ),
+      },
+      outputs: {
+        'output': Output(id: '', idname: 'output', dataType: Photo),
+      },
+    );
+
     final addNode = AddNode(
       properties: {
         'a': IntegerProperty(
@@ -272,6 +312,8 @@ class StartupViewModel extends BaseViewModel {
     _nodeRegistryService.registerNodeType(rectangleNode);
     _nodeRegistryService.registerNodeType(textNode);
     _nodeRegistryService.registerNodeType(imageNode);
+    _nodeRegistryService.registerNodeType(photoNode);
+    _nodeRegistryService.registerNodeType(blurNode);
     _nodeRegistryService.registerNodeType(addNode);
     _nodeRegistryService.registerNodeType(doubleNode);
     _nodeRegistryService.registerNodeType(outputNode);

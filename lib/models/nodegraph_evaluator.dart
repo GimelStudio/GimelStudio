@@ -1,14 +1,14 @@
 import 'package:gimelstudio/models/eval_info.dart';
 import 'package:gimelstudio/models/node_base.dart';
 
-class Renderer {
-  Renderer({
+class NodeGraphEvaluator {
+  NodeGraphEvaluator({
     required this.nodes,
   });
 
   final Map<String, Node> nodes;
 
-  dynamic render(String outputNodeIdname) {
+  dynamic evaluate(String outputNodeIdname) {
     Node outputNode = getOutputNode(outputNodeIdname);
     //print('${outputNode.idname} connection -> ${outputNode.properties['layer']?.connection}');
 

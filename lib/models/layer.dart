@@ -1,6 +1,6 @@
 import 'package:gimelstudio/models/nodegraph.dart';
 
-enum BlendMode {
+ enum LayerBlendMode {
   normal,
   darken,
   multiply,
@@ -28,9 +28,11 @@ class Layer {
   bool visible;
   bool locked;
   int opacity;
-  BlendMode blend;
+  dynamic blend;
   NodeGraph nodegraph;
 
+  dynamic lastCache = null;
+  bool needsEvaluation = true;
   dynamic thumbnail = null;
 
   void setIndex(int newIndex) {
@@ -71,7 +73,7 @@ class Layer {
         visible = json['visible'] as bool,
         locked = json['locked'] as bool,
         opacity = json['opacity'] as int,
-        blend = BlendMode.values.byName(json['blend'] as String),
+        blend = LayerBlendMode.values.byName(json['blend'] as String),
         nodegraph = NodeGraph.fromJson(json['nodegraph'] as Map<String, dynamic>);
 
   @override

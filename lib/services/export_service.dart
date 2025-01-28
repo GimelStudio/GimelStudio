@@ -106,7 +106,9 @@ class ExportService {
     painter.paint(canvas, canvasSize);
 
     ui.Picture picture = recorder.endRecording();
-    return await picture.toImage(canvasSize.width.floor(), canvasSize.height.floor());
+    ui.Image image = await picture.toImage(canvasSize.width.floor(), canvasSize.height.floor());
+    picture.dispose();
+    return image;
   }
 
   /// Converts the given ui.Image [uiImage] to an img.Image.
@@ -119,11 +121,7 @@ class ExportService {
     }
 
     img.Image image = img.Image.fromBytes(
-      width: uiImage.width,
-      height: uiImage.height,
-      bytes: uiBytes.buffer,
-      numChannels: 4,
-    );
+        width: uiImage.width, height: uiImage.height, bytes: uiBytes.buffer, numChannels: 4, format: img.Format.uint8);
     return image;
   }
 }

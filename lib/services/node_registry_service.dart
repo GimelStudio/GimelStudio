@@ -40,6 +40,10 @@ class NodeRegistryService {
         node = TextNode.clone(protoNode, newNodeId);
       case 'image_corenode':
         node = ImageNode.clone(protoNode, newNodeId);
+      case 'photo_corenode':
+        node = PhotoNode.clone(protoNode, newNodeId);
+      case 'blur_corenode':
+        node = BlurNode.clone(protoNode, newNodeId);
       case 'add_corenode':
         node = AddNode.clone(protoNode, newNodeId);
       case 'output_corenode':

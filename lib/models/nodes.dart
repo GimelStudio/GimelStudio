@@ -231,6 +231,79 @@ class ImageNode extends Node {
   }
 }
 
+class PhotoNode extends Node {
+  PhotoNode({
+    super.id = '',
+    super.idname = 'photo_corenode',
+    super.isOutput = false,
+    super.label = 'Photo',
+    super.selected,
+    required super.properties,
+    required super.outputs,
+    super.position,
+  });
+
+  @override
+  Map<String, Photo> evaluateNode(EvalInfo eval) {
+    Photo photo = eval.evaluateProperty('photo');
+
+    return {
+      'output': photo,
+    };
+  }
+
+  factory PhotoNode.clone(Node source, String id) {
+    return PhotoNode(
+      id: id,
+      idname: source.idname,
+      isOutput: source.isOutput,
+      label: source.label,
+      selected: source.selected,
+      properties: source.properties,
+      outputs: source.outputs,
+      position: source.position,
+    );
+  }
+}
+
+class BlurNode extends Node {
+  BlurNode({
+    super.id = '',
+    super.idname = 'blur_corenode',
+    super.isOutput = false,
+    super.label = 'Blur',
+    super.selected,
+    required super.properties,
+    required super.outputs,
+    super.position,
+  });
+
+  @override
+  Map<String, Photo> evaluateNode(EvalInfo eval) {
+    double radius = eval.evaluateProperty('radius');
+    Photo photo = eval.evaluateProperty('photo');
+
+    // TODO: Currently does nothing.
+    return {
+      'output': photo,
+    };
+  }
+
+  factory BlurNode.clone(Node source, String id) {
+    return BlurNode(
+      id: id,
+      idname: source.idname,
+      isOutput: source.isOutput,
+      label: source.label,
+      selected: source.selected,
+      properties: source.properties,
+      outputs: source.outputs,
+      position: source.position,
+    );
+  }
+}
+
+
 class AddNode extends Node {
   AddNode({
     super.id = '',
@@ -267,6 +340,7 @@ class AddNode extends Node {
   }
 }
 
+// TODO: maybe rename to LayerOutputNode
 class OutputNode extends Node {
   OutputNode({
     super.id = '',
@@ -283,6 +357,16 @@ class OutputNode extends Node {
   (Node, String)? get connectedNode {
     Property prop = properties.values.firstWhere((item) => item.idname == 'layer');
     return prop.connection;
+  }
+
+  @override
+  Map<String, CanvasItem> evaluateNode(EvalInfo eval) {
+    // TODO: add blend mode and opacity
+    CanvasItem canvasItem = evaluateProperty(eval, 'layer');
+
+    return {
+      'output': canvasItem,
+    };
   }
 
   factory OutputNode.clone(Node source, String id) {

@@ -124,7 +124,7 @@ class DoubleProperty<double> extends Property {
   }
 }
 
-/// For double values.
+/// For Photo values.
 class PhotoProperty<Photo> extends Property {
   PhotoProperty({
     required super.id,

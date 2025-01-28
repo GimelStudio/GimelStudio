@@ -2,7 +2,7 @@ import 'package:gimelstudio/app/app.locator.dart';
 import 'package:gimelstudio/models/canvas_item.dart';
 import 'package:gimelstudio/models/layer.dart';
 import 'package:gimelstudio/models/node_base.dart';
-import 'package:gimelstudio/models/renderer.dart';
+import 'package:gimelstudio/models/nodegraph_evaluator.dart';
 import 'package:gimelstudio/services/layers_service.dart';
 import 'package:stacked/stacked.dart';
 
@@ -49,7 +49,7 @@ class EvaluationService with ListenableServiceMixin {
   /// to show that processing is taking place is displayed in the UI. Perhaps there could also
   /// be a spinner or loading progress bar.
   ///
-  /// Layer caching:
+  /// Layer caching (implemented):
   /// Each layer has lastCache and needsEvaluation parameters.
   /// 1. The last evaluation for the layer is saved to the cache (lastCache).
   /// 2. When a node in the layer is edited needsEvaluation is marked true.
@@ -62,7 +62,10 @@ class EvaluationService with ListenableServiceMixin {
   /// The evaluator only needs to re-evaluate the node properties that have changed. This
   /// could work in a similar fashion to the layer caching.
 
-  void evaluate() {
+
+  /// If [evaluateLayer] is provided, only the Layer [evaluateLayer] will be evaluated. 
+  /// The rest of the layers will use the cache.
+  void evaluate({Layer? evaluateLayer}) {
     List<CanvasItem> finalResult = [];
     if (layers.isNotEmpty) {
       // Sort layers and exclude hidden
@@ -71,26 +74,39 @@ class EvaluationService with ListenableServiceMixin {
       List<Layer> documentLayers = List.from(layers.where((item) => item.visible == true));
       documentLayers.sort((Layer a, Layer b) => b.index.compareTo(a.index));
 
-      // TODO: implement layer and node caching
+      // TODO: implement node caching
       for (Layer layer in documentLayers) {
-        Map<String, Node> layerNodes = layer.nodegraph.nodes;
+        if (layer.id == evaluateLayer?.id) {
+          layer.needsEvaluation = true;
+        }
 
-        //print(outputNode.connectedNode);
-        //print(firstLayerNodes);
-        Renderer renderer = Renderer(nodes: layerNodes);
-        dynamic r = renderer.render('output_corenode');
+        if (layer.needsEvaluation == true) {
+          Map<String, Node> layerNodes = layer.nodegraph.nodes;
 
-        //print(r);
+          //print(outputNode.connectedNode);
+          //print(firstLayerNodes);
+          NodeGraphEvaluator nodeGraphEvaluator = NodeGraphEvaluator(nodes: layerNodes);
+          dynamic r = nodeGraphEvaluator.evaluate('output_corenode');
 
-        if (r != -1) {
-          // -1 means that there is no node connected to the output.
-          CanvasItem result = r; // Maybe instead, the layer itself should be returned from each render
+          //print(r);
 
-          result.opacity = ((layer.opacity * 2.55)).toInt();
+          if (r != -1) {
+            // -1 means that there is no node connected to the output.
+            CanvasItem result = r; // Maybe instead, the layer itself should be returned from each render
 
-          //result.blendMode = layer.blend;
-          result.layerId = layer.id;
-          finalResult.add(result);
+            result.opacity = ((layer.opacity * 2.55)).toInt();
+
+            //result.blendMode = layer.blend;
+            result.layerId = layer.id;
+
+            layer.needsEvaluation = false;
+            layer.lastCache = result;
+
+            finalResult.add(result);
+          }
+        } else {
+          // Use cache
+          finalResult.add(layer.lastCache);
         }
       }
     }

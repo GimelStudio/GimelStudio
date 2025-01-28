@@ -42,6 +42,9 @@ class ViewportPanelModel extends ReactiveViewModel {
 
   Document? get selectedDocument => _documentService.selectedDocument;
 
+  Layer? get selectedLayer => _layersService.selectedLayer;
+
+
   Node? itemNode;
 
   SelectionBoxOverlay? get selectionOverlay =>
@@ -156,7 +159,7 @@ class ViewportPanelModel extends ReactiveViewModel {
       _draggingInitialPosition = Offset(xProp.value, yProp.value);
       _lastPosition = event.localPosition;
 
-      _evaluationService.evaluate();
+      _evaluationService.evaluate(evaluateLayer: selectedLayer);
     }
 
     _mouseCursor = SystemMouseCursors.basic;
@@ -188,7 +191,7 @@ class ViewportPanelModel extends ReactiveViewModel {
         _lastPosition = event.localPosition;
       }
 
-      _evaluationService.evaluate();
+      _evaluationService.evaluate(evaluateLayer: selectedLayer);
     }
     rebuildUi();
   }
