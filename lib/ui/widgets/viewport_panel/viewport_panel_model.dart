@@ -34,9 +34,9 @@ class ViewportPanelModel extends ReactiveViewModel {
 
   List<CanvasItem>? get result => _evaluationService.result;
 
-  List<CanvasItem> get items => result == null ? [] : result?.reversed.toList() ?? [];
+  List<CanvasItem> get items => result == null ? [] : result ?? [];
 
-  CanvasItem? get selectedItem => items.isEmpty ? null : items[_layersService.selectedLayerIndex];
+  CanvasItem? get selectedItem => items.isEmpty ? null : items.reversed.toList()[_layersService.selectedLayerIndex];
 
   List<Layer> get layers => _layersService.layers;
 
