@@ -9,6 +9,7 @@ Generally, a "direct" contribution includes contributing code, documentation, an
 
 *(Sorted alphabetically)*
 
+```
 @benn1S
 @Carlosbogo
 @Correct-Syntax
@@ -22,11 +23,14 @@ Generally, a "direct" contribution includes contributing code, documentation, an
 @vdepizzol
 @yasuomaidana
 @yonMaor
+```
 
 ### v0.5.x series and prior
 
 *(Sorted alphabetically)*
 
+```
 @Correct-Syntax
 @iwoithe
 @Metallicow
+```
