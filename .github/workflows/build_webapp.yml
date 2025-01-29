@@ -1,0 +1,32 @@
+on:
+  push:
+    branches:
+      - master
+
+name: app.gimelstudio.com
+jobs:
+  web-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - name: Get latest code
+      uses: actions/checkout@v4
+
+    - name: Set up Flutter and build web application
+      uses: subosito/flutter-action@v2
+      with:
+        channel: stable
+        flutter-version: 3.27.3
+    - run: flutter pub get
+    - run: flutter build web
+    
+    - name: Push build files to branch
+      uses: s0/git-publish-subdir-action@develop
+      env:
+        REPO: self
+        BRANCH: webapp-build
+        FOLDER: build/web
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        MESSAGE: "Build ({sha}) {msg}"
