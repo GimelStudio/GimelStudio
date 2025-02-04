@@ -1,0 +1,83 @@
+import 'package:flutter/material.dart';
+import 'package:gimelstudio/models/canvas_item.dart';
+import 'package:gimelstudio/models/node_property.dart';
+import 'package:gimelstudio/ui/widgets/common/gs_double_input/gs_double_input.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:stacked/stacked.dart';
+
+import 'canvasitem_border_widgetgroup_model.dart';
+
+class CanvasitemBorderWidgetgroup extends StackedView<CanvasitemBorderWidgetgroupModel> {
+  const CanvasitemBorderWidgetgroup({
+    super.key,
+    required this.property,
+    required this.onChangeValue,
+    required this.onToggle,
+  });
+
+  final CanvasItemBorderProperty property;
+  final Function(CanvasItemBorderProperty, CanvasItemBorder) onChangeValue;
+  final Function(CanvasItemBorderProperty) onToggle;
+
+  @override
+  Widget builder(
+    BuildContext context,
+    CanvasitemBorderWidgetgroupModel viewModel,
+    Widget? child,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 2.0),
+      child: Row(
+        spacing: 4.0,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            property.label,
+            style: const TextStyle(
+              color: Colors.white70,
+              fontSize: 14.0,
+            ),
+          ),
+          Expanded(
+            child: Visibility(
+              visible: property.isExposed == false,
+              maintainSize: true,
+              maintainAnimation: true,
+              maintainState: true,
+              child: GsDoubleInput(
+                currentValue: property.value.thickness,
+                minValue: 0.0,
+                maxValue: 500.0,
+                onChange: (value) => onChangeValue(
+                  property,
+                  CanvasItemBorder(
+                    fill: CanvasItemFill(fillType: FillType.solid, solidColor: Colors.black),
+                    thickness: value,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          InkWell(
+            // TODO: eventually this will be a menu with the option to reset to the default value as well.
+            onTap: () => onToggle(property),
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: PhosphorIcon(
+                PhosphorIcons.diamond(property.isExposed ? PhosphorIconsStyle.fill : PhosphorIconsStyle.light),
+                color: Colors.white70,
+                size: 10.0,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  CanvasitemBorderWidgetgroupModel viewModelBuilder(
+    BuildContext context,
+  ) =>
+      CanvasitemBorderWidgetgroupModel();
+}

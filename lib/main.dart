@@ -21,6 +21,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       title: 'Gimel Studio',
       debugShowCheckedModeBanner: false,
+      //showPerformanceOverlay: true,
       initialRoute: Routes.startupView,
       onGenerateRoute: StackedRouter().onGenerateRoute,
       navigatorKey: StackedService.navigatorKey,
@@ -34,6 +35,11 @@ class MainApp extends StatelessWidget {
           activeTrackColor: Colors.white,
           inactiveTrackColor: Colors.white30,
           overlayColor: Colors.transparent,
+        ),
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: Colors.white,
+          selectionColor: Color.fromARGB(67, 255, 255, 255),
+          selectionHandleColor: Colors.white,
         ),
       ),
     );

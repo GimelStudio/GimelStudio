@@ -23,6 +23,8 @@ class StartupViewModel extends BaseViewModel {
           label: 'Number',
           dataType: int,
           value: 21,
+          min: 0,
+          max: 100,
           isExposed: false,
         ),
       },
@@ -39,6 +41,8 @@ class StartupViewModel extends BaseViewModel {
           label: 'Number',
           dataType: double,
           value: 1.0,
+          min: 0.0,
+          max: 100.0,
           isExposed: false,
         ),
       },
@@ -55,6 +59,8 @@ class StartupViewModel extends BaseViewModel {
           label: 'X',
           dataType: double,
           value: 0.0,
+          min: -10000.0,
+          max: 10000.0,
           isExposed: false,
         ),
         'y': DoubleProperty(
@@ -63,6 +69,8 @@ class StartupViewModel extends BaseViewModel {
           label: 'Y',
           dataType: double,
           value: 0.0,
+          min: -10000.0,
+          max: 10000.0,
           isExposed: false,
         ),
         'width': DoubleProperty(
@@ -71,6 +79,8 @@ class StartupViewModel extends BaseViewModel {
           label: 'W',
           dataType: double,
           value: 1.0,
+          min: -0.0,
+          max: 10000.0,
           isExposed: false,
         ),
         'height': DoubleProperty(
@@ -79,6 +89,18 @@ class StartupViewModel extends BaseViewModel {
           label: 'H',
           dataType: double,
           value: 1.0,
+          min: 0.0,
+          max: 10000.0,
+          isExposed: false,
+        ),
+        'rotation': DoubleProperty(
+          id: '',
+          idname: 'rotation',
+          label: 'Rotation',
+          dataType: double,
+          value: 0.0,
+          min: 0.0,
+          max: 180.0,
           isExposed: false,
         ),
         'fill': CanvasItemFillProperty(
@@ -125,6 +147,8 @@ class StartupViewModel extends BaseViewModel {
           label: 'X',
           dataType: double,
           value: 0.0,
+          min: -10000.0,
+          max: 10000.0,
           isExposed: false,
         ),
         'y': DoubleProperty(
@@ -133,6 +157,8 @@ class StartupViewModel extends BaseViewModel {
           label: 'Y',
           dataType: double,
           value: 0.0,
+          min: -10000.0,
+          max: 10000.0,
           isExposed: false,
         ),
         'width': DoubleProperty(
@@ -141,6 +167,8 @@ class StartupViewModel extends BaseViewModel {
           label: 'W',
           dataType: double,
           value: 0.0,
+          min: 0.0,
+          max: 10000.0,
           isExposed: false,
         ),
         'height': DoubleProperty(
@@ -149,6 +177,8 @@ class StartupViewModel extends BaseViewModel {
           label: 'H',
           dataType: double,
           value: 0.0,
+          min: 0.0,
+          max: 10000.0,
           isExposed: false,
         ),
         //'text':
@@ -157,7 +187,9 @@ class StartupViewModel extends BaseViewModel {
           idname: 'size',
           label: 'Size',
           dataType: double,
-          value: 16.0,
+          value: 0.0,
+          min: -10000.0,
+          max: 10000.0,
           isExposed: false,
         ),
         'letter_spacing': DoubleProperty(
@@ -166,6 +198,8 @@ class StartupViewModel extends BaseViewModel {
           label: 'Letter spacing',
           dataType: double,
           value: 0.0,
+          min: 0.0,
+          max: 10.0,
           isExposed: false,
         ),
         'fill': CanvasItemFillProperty(
@@ -190,6 +224,8 @@ class StartupViewModel extends BaseViewModel {
           label: 'X',
           dataType: double,
           value: 0.0,
+          min: -10000.0,
+          max: 10000.0,
           isExposed: false,
         ),
         'y': DoubleProperty(
@@ -198,6 +234,8 @@ class StartupViewModel extends BaseViewModel {
           label: 'Y',
           dataType: double,
           value: 0.0,
+          min: -10000.0,
+          max: 10000.0,
           isExposed: false,
         ),
         'width': DoubleProperty(
@@ -206,6 +244,8 @@ class StartupViewModel extends BaseViewModel {
           label: 'W',
           dataType: double,
           value: 0.0,
+          min: 0.0,
+          max: 10000.0,
           isExposed: false,
         ),
         'height': DoubleProperty(
@@ -214,6 +254,8 @@ class StartupViewModel extends BaseViewModel {
           label: 'H',
           dataType: double,
           value: 0.0,
+          min: 0.0,
+          max: 10000.0,
           isExposed: false,
         ),
         'photo': PhotoProperty(
@@ -254,6 +296,8 @@ class StartupViewModel extends BaseViewModel {
           label: 'Radius',
           dataType: double,
           value: 0.0,
+          min: 0.0,
+          max: 10.0,
           isExposed: false,
         ),
         'photo': PhotoProperty(
@@ -278,6 +322,8 @@ class StartupViewModel extends BaseViewModel {
           label: 'a',
           dataType: int,
           value: 1,
+          min: 0,
+          max: 100,
           isExposed: true,
         ),
         'b': IntegerProperty(
@@ -286,6 +332,8 @@ class StartupViewModel extends BaseViewModel {
           label: 'b',
           dataType: int,
           value: 1,
+          min: 0,
+          max: 100,
           isExposed: true,
         ),
       },

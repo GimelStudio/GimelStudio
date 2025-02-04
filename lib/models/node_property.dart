@@ -86,16 +86,24 @@ class IntegerProperty<int> extends Property {
     required super.label,
     required super.dataType,
     required super.value,
+    required this.min,
+    required this.max,
     required super.isExposed,
   }) : assert(value is int);
 
+  double min;
+  double max;
+
   factory IntegerProperty.clone(Property source, String id) {
+    source as IntegerProperty;
     return IntegerProperty<int>(
       id: id,
       idname: source.idname,
       label: source.label,
       dataType: source.dataType,
       value: source.value,
+      min: source.min,
+      max: source.max,
       isExposed: source.isExposed,
     );
   }
@@ -109,16 +117,24 @@ class DoubleProperty<double> extends Property {
     required super.label,
     required super.dataType,
     required super.value,
+    required this.min,
+    required this.max,
     required super.isExposed,
   }) : assert(value is double);
 
+  double min;
+  double max;
+
   factory DoubleProperty.clone(Property source, String id) {
+    source as DoubleProperty;
     return DoubleProperty<double>(
       id: id,
       idname: source.idname,
       label: source.label,
       dataType: source.dataType,
       value: source.value,
+      min: source.min,
+      max: source.max,
       isExposed: source.isExposed,
     );
   }
