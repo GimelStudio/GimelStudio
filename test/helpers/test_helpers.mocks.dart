@@ -898,11 +898,11 @@ class MockImageService extends _i1.Mock implements _i12.ImageService {
 /// See the documentation for Mockito's code generation for more information.
 class MockLayersService extends _i1.Mock implements _i13.LayersService {
   @override
-  int get selectedLayerIndex => (super.noSuchMethod(
-        Invocation.getter(#selectedLayerIndex),
-        returnValue: 0,
-        returnValueForMissingStub: 0,
-      ) as int);
+  List<_i2.Layer> get selectedLayers => (super.noSuchMethod(
+        Invocation.getter(#selectedLayers),
+        returnValue: <_i2.Layer>[],
+        returnValueForMissingStub: <_i2.Layer>[],
+      ) as List<_i2.Layer>);
 
   @override
   List<_i2.Layer> get layers => (super.noSuchMethod(
@@ -919,10 +919,28 @@ class MockLayersService extends _i1.Mock implements _i13.LayersService {
       ) as int);
 
   @override
-  void setSelectedLayer(_i2.Layer? selectedLayer) => super.noSuchMethod(
+  void setLayerSelected(_i2.Layer? selectedLayer) => super.noSuchMethod(
         Invocation.method(
-          #setSelectedLayer,
+          #setLayerSelected,
           [selectedLayer],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void addLayerToSelected(_i2.Layer? layer) => super.noSuchMethod(
+        Invocation.method(
+          #addLayerToSelected,
+          [layer],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void removeFromSelected(_i2.Layer? layer) => super.noSuchMethod(
+        Invocation.method(
+          #removeFromSelected,
+          [layer],
         ),
         returnValueForMissingStub: null,
       );
@@ -1861,10 +1879,11 @@ class MockEvaluationService extends _i1.Mock implements _i21.EvaluationService {
       ) as int);
 
   @override
-  void evaluate() => super.noSuchMethod(
+  void evaluate({List<_i2.Layer>? evaluateLayers = const []}) => super.noSuchMethod(
         Invocation.method(
           #evaluate,
           [],
+          {#evaluateLayers: evaluateLayers},
         ),
         returnValueForMissingStub: null,
       );
