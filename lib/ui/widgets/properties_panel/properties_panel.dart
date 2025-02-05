@@ -4,6 +4,7 @@ import 'package:gimelstudio/models/node_property.dart';
 import 'package:gimelstudio/ui/widgets/properties_panel/properties_panel_model.dart';
 import 'package:gimelstudio/ui/widgets/properties_panel/widgets/canvasitem_border_widgetgroup/canvasitem_border_widgetgroup.dart';
 import 'package:gimelstudio/ui/widgets/properties_panel/widgets/canvasitem_fill_widgetgroup/canvasitem_fill_widgetgroup.dart';
+import 'package:gimelstudio/ui/widgets/properties_panel/widgets/canvasitem_widgetgroup/canvasitem_widgetgroup.dart';
 import 'package:gimelstudio/ui/widgets/properties_panel/widgets/double_widgetgroup/double_widgetgroup.dart';
 import 'package:gimelstudio/ui/widgets/properties_panel/widgets/integer_widgetgroup/integer_widgetgroup.dart';
 import 'package:stacked/stacked.dart';
@@ -21,67 +22,87 @@ class PropertiesPanel extends StackedView<PropertiesPanelModel> {
       children: [
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.only(top: 8.0, left: 5.0, bottom: 5.0),
+            padding: const EdgeInsets.only(bottom: 5.0),
             child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.only(right: 10.0), // Avoid scrollbar
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 10.0),
-                      child: Row(
-                        children: [
-                          Text(
-                            viewModel.selectedNode?.label.toUpperCase() ?? '',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 12.0,
-                              fontWeight: FontWeight.w500,
-                            ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Node name
+                  Container(
+                    padding: const EdgeInsets.only(top: 6.0, bottom: 10.0, left: 6.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          viewModel.selectedNode?.label.toUpperCase() ?? '',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w500,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    if (viewModel.selectedNode != null && viewModel.selectedNode?.isOutput == false)
-                      Column(
-                        children: [
-                          for (Property property in viewModel.selectedNode!.properties.values)
-                            Builder(
-                              builder: (context) {
-                                if (property.dataType == int) {
-                                  return IntegerWidgetgroup(
-                                    property: property as IntegerProperty,
-                                    onChangeValue: viewModel.setPropertyValue,
-                                    onToggle: viewModel.onTogglePropertyExposed,
-                                  );
-                                } else if (property.dataType == double) {
-                                  return DoubleWidgetgroup(
-                                    property: property as DoubleProperty,
-                                    onChangeValue: viewModel.setPropertyValue,
-                                    onToggle: viewModel.onTogglePropertyExposed,
-                                  );
-                                } else if (property.dataType == CanvasItemFill) {
-                                  return CanvasitemFillWidgetgroup(
-                                    property: property as CanvasItemFillProperty,
-                                    onChangeValue: viewModel.setPropertyValue,
-                                    onToggle: viewModel.onTogglePropertyExposed,
-                                  );
-                                } else if (property.dataType == CanvasItemBorder) {
-                                  return CanvasitemBorderWidgetgroup(
-                                    property: property as CanvasItemBorderProperty,
-                                    onChangeValue: viewModel.setPropertyValue,
-                                    onToggle: viewModel.onTogglePropertyExposed,
-                                  );
-                                } else {
-                                  return Container();
-                                }
-                              },
-                            ),
-                        ],
-                      ),
-                  ],
-                ),
+                  ),
+                  // Common CanvasItem node properties
+                  Builder(
+                    builder: (context) {
+                      if (viewModel.selectedNode != null && viewModel.selectedNode?.isCanvasItemNode == true) {
+                        Map<String, Property<dynamic>> nodeProperties = viewModel.selectedNode!.properties;
+
+                        return CanvasitemWidgetgroup(
+                          xProperty: nodeProperties['x'] as DoubleProperty?,
+                          yProperty: nodeProperties['y'] as DoubleProperty?,
+                          widthProperty: nodeProperties['width'] as DoubleProperty?,
+                          heightProperty: nodeProperties['height'] as DoubleProperty?,
+                          rotationProperty: nodeProperties['rotation'] as DoubleProperty?,
+                          borderRadiusProperty: nodeProperties['border_radius'] as CanvasItemBorderRadiusProperty?,
+                          onChangeValue: viewModel.setPropertyValue,
+                          onToggle: viewModel.onTogglePropertyExposed,
+                        );
+                      } else {
+                        return const SizedBox();
+                      }
+                    },
+                  ),
+                  // The rest of the properties
+                  if (viewModel.selectedNode != null && viewModel.selectedNode?.isLayerOutput == false)
+                    Column(
+                      children: [
+                        for (Property property in viewModel.getProperties())
+                          Builder(
+                            builder: (context) {
+                              if (property.dataType == int) {
+                                return IntegerWidgetgroup(
+                                  property: property as IntegerProperty,
+                                  onChangeValue: viewModel.setPropertyValue,
+                                  onToggle: viewModel.onTogglePropertyExposed,
+                                );
+                              } else if (property.dataType == double) {
+                                return DoubleWidgetgroup(
+                                  property: property as DoubleProperty,
+                                  onChangeValue: viewModel.setPropertyValue,
+                                  onToggle: viewModel.onTogglePropertyExposed,
+                                );
+                              } else if (property.dataType == CanvasItemFill) {
+                                return CanvasitemFillWidgetgroup(
+                                  property: property as CanvasItemFillProperty,
+                                  onChangeValue: viewModel.setPropertyValue,
+                                  onToggle: viewModel.onTogglePropertyExposed,
+                                );
+                              } else if (property.dataType == CanvasItemBorder) {
+                                return CanvasitemBorderWidgetgroup(
+                                  property: property as CanvasItemBorderProperty,
+                                  onChangeValue: viewModel.setPropertyValue,
+                                  onToggle: viewModel.onTogglePropertyExposed,
+                                );
+                              } else {
+                                return Container();
+                              }
+                            },
+                          ),
+                      ],
+                    ),
+                ],
               ),
             ),
           ),

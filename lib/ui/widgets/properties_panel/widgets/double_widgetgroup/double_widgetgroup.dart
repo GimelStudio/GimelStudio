@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gimelstudio/models/node_property.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:gimelstudio/ui/widgets/properties_panel/widgets/expose_property_btn/expose_property_btn.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../common/gs_double_input/gs_double_input.dart';
@@ -24,8 +24,8 @@ class DoubleWidgetgroup extends StackedView<DoubleWidgetgroupModel> {
     DoubleWidgetgroupModel viewModel,
     Widget? child,
   ) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 2.0),
+    return Container(
+      padding: const EdgeInsets.only(top: 3.0, bottom: 3.0, left: 3.0, right: 8.0), // Avoid scrollbar
       child: Row(
         spacing: 4.0,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,17 +45,9 @@ class DoubleWidgetgroup extends StackedView<DoubleWidgetgroupModel> {
               ),
             ),
           ),
-          InkWell(
-            // TODO: eventually this will be a menu with the option to reset to the default value as well.
+          ExposePropertyBtn(
+            isExposed: property.isExposed,
             onTap: () => onToggle(property),
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: PhosphorIcon(
-                PhosphorIcons.diamond(property.isExposed ? PhosphorIconsStyle.fill : PhosphorIconsStyle.light),
-                color: Colors.white70,
-                size: 10.0,
-              ),
-            ),
           ),
         ],
       ),

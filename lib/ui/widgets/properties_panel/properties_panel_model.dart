@@ -1,6 +1,3 @@
-import 'dart:async';
-import 'dart:ui';
-
 import 'package:gimelstudio/app/app.locator.dart';
 import 'package:gimelstudio/models/document.dart';
 import 'package:gimelstudio/models/layer.dart';
@@ -21,10 +18,29 @@ class PropertiesPanelModel extends ReactiveViewModel {
   Node? get selectedNode => _nodegraphsService.selectedNode;
 
   Document? get selectedDocument => _documentService.selectedDocument;
-  Layer? get selectedLayer => _layersService.selectedLayer;
+  List<Layer> get selectedLayers => _layersService.selectedLayers;
+
+  List<Property> getProperties() {
+    if (selectedNode == null) {
+      return [];
+    }
+
+    List<Property> properties = List.from(selectedNode!.properties.values);
+    for (Property property in selectedNode!.properties.values) {
+      // Remove common Canvas Item properties since they are handled seperately.
+      List<String> commonCanvasItemPropertyIdnames = ['x', 'y', 'width', 'height', 'rotation', 'border_radius'];
+      if (selectedNode?.isCanvasItemNode == true && commonCanvasItemPropertyIdnames.contains(property.idname)) {
+        properties.remove(property);
+      }
+    }
+
+    return properties;
+  }
 
   void setPropertyValue(Property property, dynamic value) {
-    selectedLayer?.needsEvaluation = true;
+    for (Layer layer in selectedLayers) {
+      layer.needsEvaluation = true;
+    }
     _nodegraphsService.onEditNodePropertyValue(property, value);
     _evaluationService.evaluate();
     rebuildUi();

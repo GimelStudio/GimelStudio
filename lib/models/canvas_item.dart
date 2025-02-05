@@ -102,6 +102,7 @@ class CanvasRectangle extends CanvasItem {
     required this.y,
     required this.width,
     required this.height,
+    required this.rotation,
     required this.fill,
     required this.border,
     required this.borderRadius,
@@ -111,9 +112,13 @@ class CanvasRectangle extends CanvasItem {
   double y;
   double width;
   double height;
+  double rotation; // In degrees
   CanvasItemFill fill;
   CanvasItemBorder border;
   CanvasItemBorderRadius borderRadius;
+
+  @override
+  Offset get origin => Offset(x + (width / 2.0), y + (height / 2.0)); // For now, place it at the center
 
   @override
   Rect get bounds => Rect.fromLTWH(x, y, width, height);

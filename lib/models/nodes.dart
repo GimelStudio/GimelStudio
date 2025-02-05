@@ -9,7 +9,6 @@ class IntegerNode extends Node {
   IntegerNode({
     super.id = '',
     super.idname = 'integer_corenode',
-    super.isOutput = false,
     super.label = 'Integer',
     super.selected,
     required super.properties,
@@ -29,7 +28,6 @@ class IntegerNode extends Node {
     return IntegerNode(
       id: id,
       idname: source.idname,
-      isOutput: source.isOutput,
       label: source.label,
       selected: source.selected,
       properties: source.properties,
@@ -43,7 +41,6 @@ class DoubleNode extends Node {
   DoubleNode({
     super.id = '',
     super.idname = 'double_corenode',
-    super.isOutput = false,
     super.label = 'Double',
     super.selected,
     required super.properties,
@@ -63,7 +60,6 @@ class DoubleNode extends Node {
     return DoubleNode(
       id: id,
       idname: source.idname,
-      isOutput: source.isOutput,
       label: source.label,
       selected: source.selected,
       properties: source.properties,
@@ -77,7 +73,6 @@ class RectangleNode extends Node {
   RectangleNode({
     super.id = '',
     super.idname = 'rectangle_corenode',
-    super.isOutput = false,
     super.label = 'Rectangle',
     super.selected,
     required super.properties,
@@ -86,11 +81,15 @@ class RectangleNode extends Node {
   });
 
   @override
+  bool get isCanvasItemNode => true;
+
+  @override
   Map<String, CanvasRectangle> evaluateNode(EvalInfo eval) {
     double x = eval.evaluateProperty('x');
     double y = eval.evaluateProperty('y');
     double width = eval.evaluateProperty('width');
     double height = eval.evaluateProperty('height');
+    double rotation = eval.evaluateProperty('rotation');
     CanvasItemFill fill = eval.evaluateProperty('fill');
     CanvasItemBorder border = eval.evaluateProperty('border');
     CanvasItemBorderRadius borderRadius = eval.evaluateProperty('border_radius');
@@ -104,6 +103,7 @@ class RectangleNode extends Node {
         y: y,
         width: width,
         height: height,
+        rotation: rotation,
         fill: fill,
         border: border,
         borderRadius: borderRadius,
@@ -115,7 +115,6 @@ class RectangleNode extends Node {
     return RectangleNode(
       id: id,
       idname: source.idname,
-      isOutput: source.isOutput,
       label: source.label,
       selected: source.selected,
       properties: source.properties,
@@ -129,13 +128,15 @@ class TextNode extends Node {
   TextNode({
     super.id = '',
     super.idname = 'text_corenode',
-    super.isOutput = false,
     super.label = 'Text',
     super.selected,
     required super.properties,
     required super.outputs,
     super.position,
   });
+
+  @override
+  bool get isCanvasItemNode => true;
 
   @override
   Map<String, CanvasText> evaluateNode(EvalInfo eval) {
@@ -173,7 +174,6 @@ class TextNode extends Node {
     return TextNode(
       id: id,
       idname: source.idname,
-      isOutput: source.isOutput,
       label: source.label,
       selected: source.selected,
       properties: source.properties,
@@ -187,13 +187,15 @@ class ImageNode extends Node {
   ImageNode({
     super.id = '',
     super.idname = 'image_corenode',
-    super.isOutput = false,
     super.label = 'Image',
     super.selected,
     required super.properties,
     required super.outputs,
     super.position,
   });
+
+  @override
+  bool get isCanvasItemNode => true;
 
   @override
   Map<String, CanvasImage> evaluateNode(EvalInfo eval) {
@@ -221,7 +223,6 @@ class ImageNode extends Node {
     return ImageNode(
       id: id,
       idname: source.idname,
-      isOutput: source.isOutput,
       label: source.label,
       selected: source.selected,
       properties: source.properties,
@@ -235,7 +236,6 @@ class PhotoNode extends Node {
   PhotoNode({
     super.id = '',
     super.idname = 'photo_corenode',
-    super.isOutput = false,
     super.label = 'Photo',
     super.selected,
     required super.properties,
@@ -256,7 +256,6 @@ class PhotoNode extends Node {
     return PhotoNode(
       id: id,
       idname: source.idname,
-      isOutput: source.isOutput,
       label: source.label,
       selected: source.selected,
       properties: source.properties,
@@ -270,7 +269,6 @@ class BlurNode extends Node {
   BlurNode({
     super.id = '',
     super.idname = 'blur_corenode',
-    super.isOutput = false,
     super.label = 'Blur',
     super.selected,
     required super.properties,
@@ -293,7 +291,6 @@ class BlurNode extends Node {
     return BlurNode(
       id: id,
       idname: source.idname,
-      isOutput: source.isOutput,
       label: source.label,
       selected: source.selected,
       properties: source.properties,
@@ -303,12 +300,10 @@ class BlurNode extends Node {
   }
 }
 
-
 class AddNode extends Node {
   AddNode({
     super.id = '',
     super.idname = 'add_corenode',
-    super.isOutput = false,
     super.label = 'Add',
     super.selected,
     required super.properties,
@@ -330,7 +325,6 @@ class AddNode extends Node {
     return AddNode(
       id: id,
       idname: source.idname,
-      isOutput: source.isOutput,
       label: source.label,
       selected: source.selected,
       properties: source.properties,
@@ -345,13 +339,15 @@ class OutputNode extends Node {
   OutputNode({
     super.id = '',
     super.idname = 'output_corenode',
-    super.isOutput = true,
     super.label = 'Output',
     super.selected,
     required super.properties,
     required super.outputs,
     super.position,
   });
+
+  @override
+  bool get isLayerOutput => true;
 
   @override
   (Node, String)? get connectedNode {
@@ -373,39 +369,6 @@ class OutputNode extends Node {
     return OutputNode(
       id: id,
       idname: source.idname,
-      isOutput: source.isOutput,
-      label: source.label,
-      selected: source.selected,
-      properties: source.properties,
-      outputs: source.outputs,
-      position: source.position,
-    );
-  }
-}
-
-class OutputNode2 extends Node {
-  OutputNode2({
-    super.id = '',
-    super.idname = 'output2_corenode',
-    super.isOutput = true,
-    super.label = 'Output2',
-    super.selected,
-    required super.properties,
-    required super.outputs,
-    super.position,
-  });
-
-  @override
-  (Node, String)? get connectedNode {
-    Property prop = properties.values.firstWhere((item) => item.idname == 'layer');
-    return prop.connection;
-  }
-
-  factory OutputNode2.clone(Node source, String id) {
-    return OutputNode2(
-      id: id,
-      idname: source.idname,
-      isOutput: source.isOutput,
       label: source.label,
       selected: source.selected,
       properties: source.properties,

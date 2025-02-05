@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:gimelstudio/ui/widgets/properties_panel/widgets/expose_property_btn/expose_property_btn.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../../../models/canvas_item.dart';
@@ -25,60 +25,69 @@ class CanvasitemFillWidgetgroup extends StackedView<CanvasitemFillWidgetgroupMod
     CanvasitemFillWidgetgroupModel viewModel,
     Widget? child,
   ) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 2.0),
-      child: Row(
-        spacing: 4.0,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Container(
+      padding: const EdgeInsets.only(top: 3.0, bottom: 3.0, left: 3.0, right: 8.0), // Avoid scrollbar
+      child: Column(
+        spacing: 2.0,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            property.label,
-            style: const TextStyle(
-              color: Colors.white70,
-              fontSize: 14.0,
+          Padding(
+            padding: const EdgeInsets.only(left: 7.0, bottom: 5.0, top: 2.0),
+            child: Row(
+              spacing: 4.0,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  property.label.toUpperCase(),
+                  style: const TextStyle(
+                    color: Colors.white54,
+                    letterSpacing: -0.03,
+                    fontSize: 13.0,
+                  ),
+                ),
+                ExposePropertyBtn(
+                  isExposed: property.isExposed,
+                  onTap: () => onToggle(property),
+                ),
+              ],
             ),
           ),
-          Expanded(
-            child: Visibility(
-              visible: property.isExposed == false,
-              maintainSize: true,
-              maintainAnimation: true,
-              maintainState: true,
-              child: GsColorPicker(
-                // canvasFill: CanvasItemFill(
-                //   fillType: FillType.linearGradient,
-                //   solidColor: Colors.red.withAlpha(100),
-                // ),
-                canvasFill: property.value as CanvasItemFill,
-                onChange: (value) {},
+          Row(
+            spacing: 4.0,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Visibility(
+                  visible: property.isExposed == false,
+                  maintainSize: true,
+                  maintainAnimation: true,
+                  maintainState: true,
+                  child: GsColorPicker(
+                    // canvasFill: CanvasItemFill(
+                    //   fillType: FillType.linearGradient,
+                    //   solidColor: Colors.red.withAlpha(100),
+                    // ),
+                    canvasFill: property.value as CanvasItemFill,
+                    onChange: (value) {},
+                  ),
+                  // Row(
+                  //   children: [
+                  //     Expanded(
+                  //       child: HueRingPicker(
+                  //         pickerColor: val.solidColor,
+                  //         onColorChanged: (Color color) {
+                  //           var c = item.CanvasItemFill(
+                  //               fillType: item.FillType.solid, solidColor: color);
+                  //           viewModel.setPropertyValue(property, c);
+                  //         },
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                ),
               ),
-              // Row(
-              //   children: [
-              //     Expanded(
-              //       child: HueRingPicker(
-              //         pickerColor: val.solidColor,
-              //         onColorChanged: (Color color) {
-              //           var c = item.CanvasItemFill(
-              //               fillType: item.FillType.solid, solidColor: color);
-              //           viewModel.setPropertyValue(property, c);
-              //         },
-              //       ),
-              //     ),
-              //   ],
-              // ),
-            ),
-          ),
-          InkWell(
-            // TODO: eventually this will be a menu with the option to reset to the default value as well.
-            onTap: () => onToggle(property),
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: PhosphorIcon(
-                PhosphorIcons.diamond(property.isExposed ? PhosphorIconsStyle.fill : PhosphorIconsStyle.light),
-                color: Colors.white70,
-                size: 10.0,
-              ),
-            ),
+            ],
           ),
         ],
       ),
