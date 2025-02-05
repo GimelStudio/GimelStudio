@@ -8,7 +8,6 @@ class Node {
   Node({
     this.id = '', // Id will be assigned when created in the node graph.
     required this.idname,
-    required this.isOutput,
     this.label = '...',
     this.selected = false,
     required this.properties,
@@ -24,9 +23,6 @@ class Node {
   /// This should be unique among all nodes.
   /// Example: 'integer_node'
   final String idname;
-
-  /// Whether this node is the output node in the node graph.
-  final bool isOutput;
 
   /// The node's displayed label.
   String label;
@@ -47,6 +43,12 @@ class Node {
   Offset position;
 
   //PhosphorIconData icon = PhosphorIcons.notepad(PhosphorIconsStyle.light);
+
+  /// Whether this node is the output node in the node graph.
+  bool get isLayerOutput => false;
+
+  /// Whether this node is a Canvas Item node (a node that returns a CanvasItem).
+  bool get isCanvasItemNode => false;
 
   /// Use for the output node only.
   (Node, String)? get connectedNode {
@@ -79,7 +81,6 @@ class Node {
     return {
       'id': id,
       'idname': idname,
-      'isOutput': isOutput,
       'label': label,
       'selected': selected,
       'properties': {for (Property property in properties.values) property.idname: property.toJson()},
@@ -92,7 +93,6 @@ class Node {
   Node.fromJson(Map<String, dynamic> json)
       : id = json['id'] as String,
         idname = json['idname'] as String,
-        isOutput = json['isOutput'] as bool,
         label = json['label'] as String,
         selected = json['selected'] as bool,
         properties = {
@@ -107,6 +107,6 @@ class Node {
 
   @override
   String toString() {
-    return 'Node{id: $id, idname: $idname, isOutput: $isOutput, label: $label, selected: $selected, properties: $properties, outputs: $outputs, size: (${size.width}, ${size.height}), position: (${position.dx}, ${position.dy})}';
+    return 'Node{id: $id, idname: $idname, isLayerOutput: $isLayerOutput, label: $label, selected: $selected, properties: $properties, outputs: $outputs, size: (${size.width}, ${size.height}), position: (${position.dx}, ${position.dy})}';
   }
 }

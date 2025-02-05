@@ -20,7 +20,9 @@ class NodeGraphEvaluator {
     if (nodeConnectedToOutput == null || connectedOutputIdname == null) {
       // No node is connected to the output node.
       print('No node is connected to the output node. $nodeConnectedToOutput | $connectedOutputIdname');
-      return -1;
+      // TODO
+      EvalInfo evalInfo = EvalInfo(node: outputNode);
+      return outputNode.evaluateNode(evalInfo)['output'];
     }
 
     EvalInfo evalInfo = EvalInfo(node: nodeConnectedToOutput);
@@ -32,7 +34,7 @@ class NodeGraphEvaluator {
   Node getOutputNode(String outputNodeIdname) {
     Node? outputNode;
     for (String key in nodes.keys) {
-      if (nodes[key]?.isOutput == true && nodes[key]?.idname == outputNodeIdname) {
+      if (nodes[key]?.isLayerOutput == true && nodes[key]?.idname == outputNodeIdname) {
         outputNode = nodes[key];
       }
     }
