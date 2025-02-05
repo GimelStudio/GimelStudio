@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gimelstudio/models/canvas_item.dart';
 import 'package:gimelstudio/models/node_property.dart';
 import 'package:gimelstudio/ui/widgets/common/gs_double_input/gs_double_input.dart';
+import 'package:gimelstudio/ui/widgets/common/gs_icon_btn/gs_icon_btn.dart';
 import 'package:gimelstudio/ui/widgets/properties_panel/widgets/expose_property_btn/expose_property_btn.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stacked/stacked.dart';
@@ -75,6 +76,9 @@ class CanvasitemWidgetgroup extends StackedView<CanvasitemWidgetgroupModel> {
                       ],
                     ),
                   ),
+
+              // Spacer
+              const SizedBox(width: 28.0, height: 24.0),
             ],
           ),
           // W, H
@@ -111,6 +115,19 @@ class CanvasitemWidgetgroup extends StackedView<CanvasitemWidgetgroupModel> {
                       ],
                     ),
                   ),
+
+              // Lock aspect ratio
+              // TODO:
+              // - This needs a BoolProperty
+              // - Locking aspect ratio needs to be implemented
+              GsIconBtn(
+                icon: PhosphorIcon(
+                  PhosphorIcons.lockSimpleOpen(PhosphorIconsStyle.light),
+                  color: Colors.white,
+                  size: 16.0,
+                ),
+                onTap: () {},
+              ),
             ],
           ),
 
@@ -187,6 +204,9 @@ class CanvasitemWidgetgroup extends StackedView<CanvasitemWidgetgroupModel> {
                     ],
                   ),
                 ),
+
+              // Spacer
+              const SizedBox(width: 28.0, height: 24.0),
             ],
           ),
         ],
