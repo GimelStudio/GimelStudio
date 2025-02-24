@@ -14,7 +14,6 @@ enum Tool {
   eyedropper,
 }
 
-
 class ToolModeEventHandler {
   /// Called when the user enters the tool mode
   void activate() {}

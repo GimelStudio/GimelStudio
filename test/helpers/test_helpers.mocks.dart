@@ -1501,6 +1501,15 @@ class MockDocumentService extends _i1.Mock implements _i19.DocumentService {
       );
 
   @override
+  void setEvaluationResult(List<_i14.CanvasItem>? result) => super.noSuchMethod(
+        Invocation.method(
+          #setEvaluationResult,
+          [result],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void listenToReactiveValues(List<dynamic>? reactiveValues) => super.noSuchMethod(
         Invocation.method(
           #listenToReactiveValues,
@@ -1547,13 +1556,6 @@ class MockEvaluationService extends _i1.Mock implements _i21.EvaluationService {
         returnValue: <_i3.Layer>[],
         returnValueForMissingStub: <_i3.Layer>[],
       ) as List<_i3.Layer>);
-
-  @override
-  List<_i14.CanvasItem> get result => (super.noSuchMethod(
-        Invocation.getter(#result),
-        returnValue: <_i14.CanvasItem>[],
-        returnValueForMissingStub: <_i14.CanvasItem>[],
-      ) as List<_i14.CanvasItem>);
 
   @override
   int get listenersCount => (super.noSuchMethod(
