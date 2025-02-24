@@ -1,12 +1,11 @@
-import 'dart:io';
-import 'dart:typed_data';
 import 'dart:ui' as ui;
-
 import 'package:flutter/material.dart';
 import 'package:gimelstudio/models/canvas_item.dart';
+import 'package:gimelstudio/models/layer.dart';
 import 'package:gimelstudio/ui/widgets/viewport_panel/viewport_panel_model.dart';
 import 'package:stacked/stacked.dart';
 
+// TODO: these should be moved to their own files.
 class ViewportCanvasPainter extends CustomPainter {
   const ViewportCanvasPainter({
     required this.items,
@@ -167,17 +166,23 @@ class ViewportCanvasPainter extends CustomPainter {
 
 class ViewportOverlaysPainter extends CustomPainter {
   const ViewportOverlaysPainter({
-    required this.selectedItem,
+    required this.selectedLayers,
     required this.selectionOverlay,
   });
 
-  final CanvasItem? selectedItem;
+  final List<Layer> selectedLayers;
   final SelectionBoxOverlay? selectionOverlay;
 
   @override
   void paint(Canvas canvas, Size size) {
-    if (selectedItem != null && selectionOverlay != null) {
-      CanvasItem item = selectedItem!;
+    if (selectedLayers.isNotEmpty && selectionOverlay != null) {
+      Rect bounds;
+      if (selectedLayers.length == 1) {
+        bounds = selectedLayers.first.value.bounds;
+      } else {
+        // Use the calculated min bounds of the selected items.
+        bounds = selectionOverlay!.itemBounds;
+      }
 
       // Selection overlay
       Paint paint = Paint()
@@ -186,10 +191,10 @@ class ViewportOverlaysPainter extends CustomPainter {
         ..style = PaintingStyle.stroke;
 
       Rect rect = Rect.fromLTWH(
-        item.bounds.left,
-        item.bounds.top,
-        item.bounds.width,
-        item.bounds.height,
+        bounds.left,
+        bounds.top,
+        bounds.width,
+        bounds.height,
       );
 
       canvas.drawRect(rect, paint);
@@ -375,18 +380,18 @@ class CanvasWidget extends StatelessWidget {
 class CanvasOverlaysWidget extends StatelessWidget {
   const CanvasOverlaysWidget({
     super.key,
-    required this.selectedItem,
+    required this.selectedLayers,
     required this.selectionOverlay,
   });
 
-  final CanvasItem? selectedItem;
+  final List<Layer> selectedLayers;
   final SelectionBoxOverlay? selectionOverlay;
 
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
       painter: ViewportOverlaysPainter(
-        selectedItem: selectedItem,
+        selectedLayers: selectedLayers,
         selectionOverlay: selectionOverlay,
       ),
       child: const SizedBox.expand(),
@@ -421,14 +426,14 @@ class ViewportPanel extends StackedView<ViewportPanelModel> {
                 child: RepaintBoundary(
                   child: GestureDetector(
                     behavior: HitTestBehavior.opaque,
-                    onTapDown: (event) => viewModel.onTapDown(event),
-                    onPanDown: (event) => viewModel.onPanDown(event),
-                    onPanUpdate: (event) => viewModel.onPanUpdate(event),
-                    onPanCancel: () => viewModel.onPanCancel(),
-                    onPanEnd: (event) => viewModel.onPanEnd(event),
+                    onTapDown: (event) => viewModel.toolModeHandler.onTapDown(event),
+                    onPanDown: (event) => viewModel.toolModeHandler.onPanDown(event),
+                    onPanUpdate: (event) => viewModel.toolModeHandler.onPanUpdate(event),
+                    onPanCancel: () => viewModel.toolModeHandler.onPanCancel(),
+                    onPanEnd: (event) => viewModel.toolModeHandler.onPanEnd(event),
                     child: MouseRegion(
                       cursor: viewModel.mouseCursor,
-                      onHover: (event) => viewModel.onHover(event),
+                      onHover: (event) => viewModel.toolModeHandler.onHover(event),
                       child: Container(
                         width: viewModel.selectedDocument?.size.width,
                         height: viewModel.selectedDocument?.size.height,
@@ -440,7 +445,7 @@ class ViewportPanel extends StackedView<ViewportPanelModel> {
                           children: [
                             ClipRect(child: CanvasWidget(items: viewModel.items)),
                             CanvasOverlaysWidget(
-                              selectedItem: viewModel.selectedItem,
+                              selectedLayers: viewModel.selectedLayers,
                               selectionOverlay: viewModel.selectionOverlay,
                             ),
                           ],

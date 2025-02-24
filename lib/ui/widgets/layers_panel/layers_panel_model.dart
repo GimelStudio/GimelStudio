@@ -13,10 +13,10 @@ class LayersPanelModel extends ReactiveViewModel {
   final _evaluationService = locator<EvaluationService>();
 
   List<Layer> get layers => _layersService.layers;
-  Layer? get selectedLayer => _layersService.selectedLayer;
+  List<Layer> get selectedLayers => _layersService.selectedLayers;
 
   void onSelectLayer(Layer layer) {
-    _layersService.setSelectedLayer(layer);
+    _layersService.setLayerSelected(layer);
   }
 
   void onToggleLayerVisibility(Layer layer) {
@@ -39,7 +39,7 @@ class LayersPanelModel extends ReactiveViewModel {
   }
 
   void onDeleteLayer() {
-    _layersService.deleteLayer();
+    _layersService.deleteLayers(selectedLayers);
     _evaluationService.evaluate();
   }
 

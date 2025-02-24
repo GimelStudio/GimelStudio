@@ -50,8 +50,8 @@ class EvaluationService with ListenableServiceMixin {
   /// be a spinner or loading progress bar.
   ///
   /// Layer caching (implemented):
-  /// Each layer has lastCache and needsEvaluation parameters.
-  /// 1. The last evaluation for the layer is saved to the cache (lastCache).
+  /// Each layer has value and needsEvaluation parameters.
+  /// 1. The last evaluation for the layer is saved to the cache (value).
   /// 2. When a node in the layer is edited needsEvaluation is marked true.
   /// 3. The layer is evaluated, the cache is updated, and needsEvaluation is marked false.
   /// On a normal evaluation (i.e: a document wasn't just opened which would require a full evaluation),
@@ -62,21 +62,20 @@ class EvaluationService with ListenableServiceMixin {
   /// The evaluator only needs to re-evaluate the node properties that have changed. This
   /// could work in a similar fashion to the layer caching.
 
-
-  /// If [evaluateLayer] is provided, only the Layer [evaluateLayer] will be evaluated. 
+  /// If [evaluateLayer] is provided, only the Layer [evaluateLayer] will be evaluated.
   /// The rest of the layers will use the cache.
-  void evaluate({Layer? evaluateLayer}) {
+  void evaluate({List<Layer> evaluateLayers = const []}) {
     List<CanvasItem> finalResult = [];
     if (layers.isNotEmpty) {
       // Sort layers and exclude hidden
       // TODO: hidden layers should probably be disregarded during drawing to the canvas
       // rather than removed before evaluation.
       List<Layer> documentLayers = List.from(layers.where((item) => item.visible == true));
-      documentLayers.sort((Layer a, Layer b) => b.index.compareTo(a.index));
+      //documentLayers.sort((Layer a, Layer b) => b.index.compareTo(a.index));
 
       // TODO: implement node caching
       for (Layer layer in documentLayers) {
-        if (layer.id == evaluateLayer?.id) {
+        if ([for (Layer l in evaluateLayers) l.id].contains(layer.id)) {
           layer.needsEvaluation = true;
         }
 
@@ -100,17 +99,18 @@ class EvaluationService with ListenableServiceMixin {
             result.layerId = layer.id;
 
             layer.needsEvaluation = false;
-            layer.lastCache = result;
+            layer.value = result;
 
             finalResult.add(result);
           }
         } else {
           // Use cache
-          finalResult.add(layer.lastCache);
+          finalResult.add(layer.value);
         }
       }
     }
-    _result = finalResult;
+    // Reverse the stack so that it is bottom up
+    _result = finalResult.reversed.toList();
     notifyListeners();
   }
 }

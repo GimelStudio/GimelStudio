@@ -11,15 +11,21 @@ import 'package:stacked_services/src/dialog/dialog_service.dart';
 import 'package:stacked_services/src/navigation/navigation_service.dart';
 import 'package:stacked_shared/stacked_shared.dart';
 
+import '../services/canvas_service.dart';
+import '../services/cursor_tool_service.dart';
 import '../services/document_service.dart';
 import '../services/evaluation_service.dart';
 import '../services/export_service.dart';
 import '../services/file_service.dart';
+import '../services/hand_tool_service.dart';
 import '../services/id_service.dart';
 import '../services/image_service.dart';
 import '../services/layers_service.dart';
 import '../services/node_registry_service.dart';
 import '../services/nodegraphs_service.dart';
+import '../services/overlays_service.dart';
+import '../services/rectangle_tool_service.dart';
+import '../services/tool_service.dart';
 import '../services/viewport_service.dart';
 
 final locator = StackedLocator.instance;
@@ -45,4 +51,10 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => DocumentService());
   locator.registerLazySingleton(() => EvaluationService());
   locator.registerLazySingleton(() => ExportService());
+  locator.registerLazySingleton(() => CursorToolService());
+  locator.registerLazySingleton(() => RectangleToolService());
+  locator.registerLazySingleton(() => ToolService());
+  locator.registerLazySingleton(() => OverlaysService());
+  locator.registerLazySingleton(() => HandToolService());
+  locator.registerLazySingleton(() => CanvasService());
 }

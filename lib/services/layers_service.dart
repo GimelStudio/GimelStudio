@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:gimelstudio/app/app.locator.dart';
+import 'package:gimelstudio/models/canvas_item.dart';
 import 'package:gimelstudio/models/node_base.dart';
 import 'package:gimelstudio/models/nodegraph.dart';
 import 'package:gimelstudio/services/document_service.dart';
@@ -10,6 +11,15 @@ import 'package:stacked/stacked.dart';
 
 import '../models/layer.dart';
 
+/// The layer stack is from bottom up:
+/// ...
+/// 3
+/// 2
+/// 1
+/// 0
+///
+/// Layers are always inserted at the top.
+
 class LayersService with ListenableServiceMixin {
   final _idService = locator<IdService>();
   final _documentsService = locator<DocumentService>();
@@ -17,27 +27,34 @@ class LayersService with ListenableServiceMixin {
 
   LayersService() {
     listenToReactiveValues([
-      selectedLayerIndex,
-      selectedLayer,
+      _selectedLayers,
       layers,
     ]);
   }
 
-  int get selectedLayerIndex => layers.isEmpty ? 0 : layers.indexWhere((item) => item.selected == true);
-
-  Layer? get selectedLayer => layers.isEmpty ? null : layers[selectedLayerIndex];
+  List<Layer> _selectedLayers = [];
+  List<Layer> get selectedLayers => _selectedLayers;
 
   List<Layer> get layers =>
       _documentsService.selectedDocument == null ? [] : _documentsService.selectedDocument!.layers;
 
-  void setSelectedLayer(Layer selectedLayer) {
-    for (Layer layer in layers) {
-      if (selectedLayer == layer) {
-        layer.setSelected(true);
-      } else {
-        layer.setSelected(false);
-      }
-    }
+  void setLayerSelected(Layer selectedLayer) {
+    _selectedLayers = [selectedLayer];
+    notifyListeners();
+  }
+
+  void addLayerToSelected(Layer layer) {
+    _selectedLayers.add(layer);
+    notifyListeners();
+  }
+
+  void removeFromSelected(Layer layer) {
+    _selectedLayers.remove(layer);
+    notifyListeners();
+  }
+
+  void deselectAllLayers() {
+    _selectedLayers = [];
     notifyListeners();
   }
 
@@ -95,14 +112,11 @@ class LayersService with ListenableServiceMixin {
     return defaultNodes;
   }
 
+  /// Add a new layer of [type] to the layer stack.
   Layer addNewLayer({String type = 'rectangle'}) {
+    // When working with a vector layer stack, the next layer
+    // is placed above the current layer.
     int insertAt = 0;
-    if (layers.isNotEmpty) {
-      // Note for the future: Layers are added underneath the selected layer.
-      // When working with a vector layer stack, the next layer
-      // would be placed above the current layer rather than underneath.
-      insertAt = selectedLayerIndex + 1;
-    }
 
     // Default nodes
     // TODO: refactor
@@ -126,7 +140,7 @@ class LayersService with ListenableServiceMixin {
     // Automatically connect nodes
     Map<String, Node> layerNodes = newLayer.nodegraph.nodes;
 
-    Node outputNode = layerNodes.values.firstWhere((item) => item.isOutput == true);
+    Node outputNode = layerNodes.values.firstWhere((item) => item.isLayerOutput == true);
 
     if (type == 'image') {
       Node photoNode = layerNodes.values.firstWhere((item) => item.idname == 'photo_corenode');
@@ -155,41 +169,23 @@ class LayersService with ListenableServiceMixin {
     return newLayer;
   }
 
-  /// Delete the selected layer.
-  void deleteLayer() {
-    int oldSelectedLayerIndex = selectedLayerIndex;
+  /// Delete the selected layers [selectedLayers].
+  void deleteLayers(List<Layer> selectedLayers) {
+    deselectAllLayers();
 
-    if (layers.isNotEmpty) {
-      int newSelectedIndex = 0;
+    List<Layer> layersToDelete = List.of(selectedLayers);
 
-      // If this is the last layer, there will be no selection.
-      if (selectedLayerIndex == 0 && layers.length == 1) {
-        newSelectedIndex = 0;
-      } else if (oldSelectedLayerIndex == layers.indexOf(layers.last)) {
-        // If the selected layer is the last in the stack, select the next layer above.
-        newSelectedIndex = oldSelectedLayerIndex - 1;
-      } else if (oldSelectedLayerIndex == layers.indexOf(layers.first)) {
-        // If the selected layer is the first in the stack, select the next layer below.
-        newSelectedIndex = oldSelectedLayerIndex + 1;
-      } else if (oldSelectedLayerIndex != 0 &&
-          oldSelectedLayerIndex != layers.indexOf(layers.last) &&
-          oldSelectedLayerIndex != layers.indexOf(layers.first) &&
-          layers.length >= 2) {
-        // if the selected layer in in the middle of the stack, select the
-        // next layer below it until there are none below to select.
-        newSelectedIndex = oldSelectedLayerIndex + 1;
-      }
-
-      // Select the other layer.
-      setSelectedLayer(layers.firstWhere((item) => layers.indexOf(item) == newSelectedIndex));
-
-      // Finally delete the selected layer.
-      layers.removeAt(oldSelectedLayerIndex);
+    for (Layer layer in layersToDelete) {
+      layers.remove(layer);
     }
+    syncLayerIndexes();
     notifyListeners();
   }
 
-  void renameLayer() {
+  /// Rename the [layer] as [newName].
+  void renameLayer(Layer layer, String newName) {
+    layer.name = newName;
+
     notifyListeners();
   }
 
@@ -197,6 +193,23 @@ class LayersService with ListenableServiceMixin {
   void syncLayerIndexes() {
     for (Layer layer in layers) {
       layer.index = layers.indexOf(layer);
+    }
+  }
+
+  Node? canvasItemNodeFromLayer(Layer layer) {
+    // This assumes there is only one CanvasItem node in the nodegraph.
+    return layer.nodegraph.nodes.values.firstWhere((node) => node.isCanvasItemNode == true);
+  }
+
+  Layer? getLayerFromPosition(Offset position, List<CanvasItem> items, List<Layer> layers) {
+    CanvasItem? item =
+        items.cast<CanvasItem?>().lastWhere((CanvasItem? item) => item!.isInside(position), orElse: () => null);
+
+    if (item != null) {
+      List<Layer> documentLayers = List.from(layers.where((item) => item.visible == true));
+      return documentLayers.firstWhere((layer) => layer.id == item.layerId);
+    } else {
+      return null;
     }
   }
 }

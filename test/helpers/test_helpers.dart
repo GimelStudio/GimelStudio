@@ -12,6 +12,12 @@ import 'package:gimelstudio/services/node_registry_service.dart';
 import 'package:gimelstudio/services/document_service.dart';
 import 'package:gimelstudio/services/evaluation_service.dart';
 import 'package:gimelstudio/services/export_service.dart';
+import 'package:gimelstudio/services/cursor_tool_service.dart';
+import 'package:gimelstudio/services/rectangle_tool_service.dart';
+import 'package:gimelstudio/services/tool_service.dart';
+import 'package:gimelstudio/services/overlays_service.dart';
+import 'package:gimelstudio/services/hand_tool_service.dart';
+import 'package:gimelstudio/services/canvas_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -30,6 +36,12 @@ import 'test_helpers.mocks.dart';
   MockSpec<DocumentService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<EvaluationService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<ExportService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<CursorToolService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<RectangleToolService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<ToolService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<OverlaysService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<HandToolService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<CanvasService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -46,6 +58,12 @@ void registerServices() {
   getAndRegisterDocumentService();
   getAndRegisterEvaluationService();
   getAndRegisterExportService();
+  getAndRegisterCursorToolService();
+  getAndRegisterRectangleToolService();
+  getAndRegisterToolService();
+  getAndRegisterOverlaysService();
+  getAndRegisterHandToolService();
+  getAndRegisterCanvasService();
 // @stacked-mock-register
 }
 
@@ -165,6 +183,48 @@ MockExportService getAndRegisterExportService() {
   _removeRegistrationIfExists<ExportService>();
   final service = MockExportService();
   locator.registerSingleton<ExportService>(service);
+  return service;
+}
+
+MockCursorToolService getAndRegisterCursorToolService() {
+  _removeRegistrationIfExists<CursorToolService>();
+  final service = MockCursorToolService();
+  locator.registerSingleton<CursorToolService>(service);
+  return service;
+}
+
+MockRectangleToolService getAndRegisterRectangleToolService() {
+  _removeRegistrationIfExists<RectangleToolService>();
+  final service = MockRectangleToolService();
+  locator.registerSingleton<RectangleToolService>(service);
+  return service;
+}
+
+MockToolService getAndRegisterToolService() {
+  _removeRegistrationIfExists<ToolService>();
+  final service = MockToolService();
+  locator.registerSingleton<ToolService>(service);
+  return service;
+}
+
+MockOverlaysService getAndRegisterOverlaysService() {
+  _removeRegistrationIfExists<OverlaysService>();
+  final service = MockOverlaysService();
+  locator.registerSingleton<OverlaysService>(service);
+  return service;
+}
+
+MockHandToolService getAndRegisterHandToolService() {
+  _removeRegistrationIfExists<HandToolService>();
+  final service = MockHandToolService();
+  locator.registerSingleton<HandToolService>(service);
+  return service;
+}
+
+MockCanvasService getAndRegisterCanvasService() {
+  _removeRegistrationIfExists<CanvasService>();
+  final service = MockCanvasService();
+  locator.registerSingleton<CanvasService>(service);
   return service;
 }
 // @stacked-mock-create

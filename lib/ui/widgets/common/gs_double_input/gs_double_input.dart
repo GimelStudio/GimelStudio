@@ -292,16 +292,19 @@ class _GsDoubleInputState extends State<GsDoubleInput> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Expanded(
-                                    child: Text(
-                                      getValueText(widget.currentValue),
-                                      maxLines: 1,
-                                      softWrap: false,
-                                      overflow: TextOverflow.fade,
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontSize: 14.0,
-                                        height: 1.0,
-                                        color: _theme.valueColor,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                                      child: Text(
+                                        getValueText(widget.currentValue),
+                                        maxLines: 1,
+                                        softWrap: false,
+                                        overflow: TextOverflow.fade,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 14.0,
+                                          height: 1.0,
+                                          color: _theme.valueColor,
+                                        ),
                                       ),
                                     ),
                                   ),

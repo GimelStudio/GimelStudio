@@ -1,6 +1,6 @@
 import 'package:gimelstudio/models/nodegraph.dart';
 
- enum LayerBlendMode {
+enum LayerBlendMode {
   normal,
   darken,
   multiply,
@@ -24,14 +24,15 @@ class Layer {
   final String id;
   int index;
   String name;
-  bool selected;
+  bool selected; // TODO: could be unused
   bool visible;
   bool locked;
   int opacity;
   dynamic blend;
   NodeGraph nodegraph;
 
-  dynamic lastCache = null;
+  /// ``value`` holds the cached CanvasItem from the last time this layer was evaluated.
+  dynamic value = null;
   bool needsEvaluation = true;
   dynamic thumbnail = null;
 
@@ -78,6 +79,6 @@ class Layer {
 
   @override
   String toString() {
-    return 'Layer{id: $id, index: $index, name: $name, selected: $selected, visible: $visible, locked: $locked, opacity: $opacity, blend: ${blend.name} nodegraph: $nodegraph}';
+    return 'Layer{id: $id, index: $index, name: $name, selected: $selected, visible: $visible, locked: $locked, opacity: $opacity, blend: ${blend} nodegraph: $nodegraph}';
   }
 }

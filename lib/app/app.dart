@@ -18,6 +18,12 @@ import 'package:gimelstudio/ui/dialogs/startup/startup_dialog.dart';
 import 'package:gimelstudio/services/export_service.dart';
 import 'package:gimelstudio/ui/dialogs/preferences/preferences_dialog.dart';
 import 'package:gimelstudio/ui/dialogs/about/about_dialog.dart';
+import 'package:gimelstudio/services/cursor_tool_service.dart';
+import 'package:gimelstudio/services/rectangle_tool_service.dart';
+import 'package:gimelstudio/services/tool_service.dart';
+import 'package:gimelstudio/services/overlays_service.dart';
+import 'package:gimelstudio/services/hand_tool_service.dart';
+import 'package:gimelstudio/services/canvas_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -40,6 +46,12 @@ import 'package:gimelstudio/ui/dialogs/about/about_dialog.dart';
     LazySingleton(classType: DocumentService),
     LazySingleton(classType: EvaluationService),
     LazySingleton(classType: ExportService),
+    LazySingleton(classType: CursorToolService),
+    LazySingleton(classType: RectangleToolService),
+    LazySingleton(classType: ToolService),
+    LazySingleton(classType: OverlaysService),
+    LazySingleton(classType: HandToolService),
+    LazySingleton(classType: CanvasService),
 // @stacked-service
   ],
   bottomsheets: [

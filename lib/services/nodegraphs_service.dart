@@ -7,8 +7,7 @@ import 'package:gimelstudio/models/nodegraph.dart';
 import 'package:gimelstudio/services/layers_service.dart';
 import 'package:stacked/stacked.dart';
 
-// TODO: rename to NodegraphService
-class NodegraphsService extends ReactiveViewModel with ListenableServiceMixin {
+class NodegraphsService with ListenableServiceMixin {
   final _layersService = locator<LayersService>();
 
   NodegraphsService() {
@@ -19,7 +18,13 @@ class NodegraphsService extends ReactiveViewModel with ListenableServiceMixin {
     ]);
   }
 
-  NodeGraph? get nodegraph => _layersService.layers.isEmpty ? null : _layersService.selectedLayer?.nodegraph;
+  NodeGraph? get nodegraph => _layersService.layers.isEmpty
+      ? null
+      : _layersService.selectedLayers.length > 1
+          ? null
+          : _layersService.selectedLayers.isEmpty
+              ? null
+              : _layersService.selectedLayers.first.nodegraph; // TODO: should not use first?
 
   Map<String, Node> get nodes => nodegraph == null ? {} : nodegraph!.nodes;
 
@@ -50,7 +55,4 @@ class NodegraphsService extends ReactiveViewModel with ListenableServiceMixin {
     property.isExposed = isExposed;
     notifyListeners();
   }
-
-  @override
-  List<ListenableServiceMixin> get listenableServices => [_layersService];
 }

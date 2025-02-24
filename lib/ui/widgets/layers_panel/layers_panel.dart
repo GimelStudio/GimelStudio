@@ -26,7 +26,7 @@ class LayersPanel extends StackedView<LayersPanelModel> {
             key: Key(layer.id),
             index: layer.index,
             name: layer.name,
-            isSelected: layer.selected,
+            isSelected: viewModel.selectedLayers.contains(layer),
             isVisible: layer.visible,
             isLocked: layer.locked,
             onToggleVisibility: () => viewModel.onToggleLayerVisibility(layer),
@@ -61,7 +61,16 @@ class LayersPanel extends StackedView<LayersPanelModel> {
       padding: const EdgeInsets.all(5.0),
       child: Column(
         children: [
-          // TODO: disable the opacity and blend mode widgets if there are no layers
+          // TODO: disable the opacity and blend mode widgets if there are no layers or multiple layer selected
+
+          Text(
+            '${[for (var i in viewModel.selectedLayers) i.name]}',
+            style: TextStyle(
+              color: Colors.white70,
+              fontSize: 12.0,
+            ),
+          ),
+
           Row(
             spacing: 5.0,
             children: [
@@ -127,7 +136,7 @@ class LayersPanel extends StackedView<LayersPanelModel> {
                         child: Padding(
                           padding: const EdgeInsets.only(left: 8.0),
                           child: Text(
-                            '${viewModel.selectedLayer?.opacity ?? '100'}%',
+                            '', //'${viewModel.selectedLayers.first.opacity ?? '100'}%',
                             style: TextStyle(
                               color: Colors.white70,
                               fontSize: 12.0,
