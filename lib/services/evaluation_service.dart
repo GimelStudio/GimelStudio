@@ -3,23 +3,21 @@ import 'package:gimelstudio/models/canvas_item.dart';
 import 'package:gimelstudio/models/layer.dart';
 import 'package:gimelstudio/models/node_base.dart';
 import 'package:gimelstudio/models/nodegraph_evaluator.dart';
+import 'package:gimelstudio/services/document_service.dart';
 import 'package:gimelstudio/services/layers_service.dart';
 import 'package:stacked/stacked.dart';
 
 class EvaluationService with ListenableServiceMixin {
   final _layersService = locator<LayersService>();
+  final _documentsService = locator<DocumentService>();
 
   EvaluationService() {
     listenToReactiveValues([
       layers,
-      _result,
     ]);
   }
 
   List<Layer> get layers => _layersService.layers;
-
-  List<CanvasItem> _result = [];
-  List<CanvasItem> get result => _result;
 
   /// Implementation ideas "in theory"
   ///
@@ -110,7 +108,9 @@ class EvaluationService with ListenableServiceMixin {
       }
     }
     // Reverse the stack so that it is bottom up
-    _result = finalResult.reversed.toList();
+    List<CanvasItem> result = finalResult.reversed.toList();
+    _documentsService.setEvaluationResult(result);
+
     notifyListeners();
   }
 }

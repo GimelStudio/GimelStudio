@@ -6,6 +6,7 @@ import 'package:gimelstudio/models/layer.dart';
 import 'package:gimelstudio/models/node_base.dart';
 import 'package:gimelstudio/models/node_property.dart';
 import 'package:gimelstudio/models/tool.dart';
+import 'package:gimelstudio/services/document_service.dart';
 import 'package:gimelstudio/services/evaluation_service.dart';
 import 'package:gimelstudio/services/layers_service.dart';
 import 'package:gimelstudio/services/nodegraphs_service.dart';
@@ -16,6 +17,7 @@ class RectangleToolService implements ToolModeEventHandler {
   final _evaluationService = locator<EvaluationService>();
   final _nodegraphsService = locator<NodegraphsService>();
   final _overlaysService = locator<OverlaysService>();
+  final _documentService = locator<DocumentService>();
 
   Offset? draggingStartPosition;
   Offset? lastPosition;
@@ -23,7 +25,7 @@ class RectangleToolService implements ToolModeEventHandler {
   List<Layer> get layers => _layersService.layers;
   List<Layer> get selectedLayers => _layersService.selectedLayers;
 
-  List<CanvasItem> get items => _evaluationService.result;
+  List<CanvasItem> get items => _documentService.activeDocument?.result ?? [];
 
   @override
   void activate() {

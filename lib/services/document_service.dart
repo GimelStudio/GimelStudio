@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:gimelstudio/app/app.locator.dart';
+import 'package:gimelstudio/models/canvas_item.dart';
 import 'package:gimelstudio/models/document.dart';
 import 'package:gimelstudio/services/file_service.dart';
 import 'package:gimelstudio/services/id_service.dart';
@@ -13,24 +14,24 @@ class DocumentService with ListenableServiceMixin {
 
   DocumentService() {
     listenToReactiveValues([
-      selectedDocument,
-      _selectedDocumentIndex,
+      activeDocument,
+      _activeDocumentIndex,
       _documents,
     ]);
   }
 
   /// The current, active document in the interface.
-  Document? get selectedDocument => _documents.isEmpty ? null : _documents[_selectedDocumentIndex];
+  Document? get activeDocument => _documents.isEmpty ? null : _documents[_activeDocumentIndex];
 
-  int _selectedDocumentIndex = 0;
-  int get selectedDocumentIndex => _selectedDocumentIndex;
+  int _activeDocumentIndex = 0;
+  int get selectedDocumentIndex => _activeDocumentIndex;
 
   /// Documents that are currently open.
   final List<Document> _documents = [];
   List<Document> get documents => _documents;
 
   void setSelectedDocumentTab(Document selectedDocument) {
-    _selectedDocumentIndex = _documents.indexOf(selectedDocument);
+    _activeDocumentIndex = _documents.indexOf(selectedDocument);
     notifyListeners();
   }
 
@@ -41,7 +42,7 @@ class DocumentService with ListenableServiceMixin {
       newIndex -= 1;
     }
     final Document item = _documents.removeAt(oldIndex);
-    _selectedDocumentIndex = newIndex;
+    _activeDocumentIndex = newIndex;
     _documents.insert(newIndex, item);
 
     notifyListeners();
@@ -53,6 +54,7 @@ class DocumentService with ListenableServiceMixin {
       name: name,
       size: size,
       layers: [],
+      selectedLayers: [],
     );
     _documents.add(newDocument);
     notifyListeners();
@@ -68,13 +70,13 @@ class DocumentService with ListenableServiceMixin {
   void closeDocument(Document document) {
     _documents.remove(document);
     // TODO: set _selectedDocumentIndex similarily to how removing a layer works.
-    _selectedDocumentIndex = 0;
+    _activeDocumentIndex = 0;
     notifyListeners();
   }
 
   Future<void> saveDocument(Document document) async {
-    if (selectedDocument != null) {
-      await saveDocumentToFile(selectedDocument!);
+    if (activeDocument != null) {
+      await saveDocumentToFile(activeDocument!);
     }
     notifyListeners();
   }
@@ -98,6 +100,11 @@ class DocumentService with ListenableServiceMixin {
 
   void renameDocument(Document document, String newName) {
     // TODO
+    notifyListeners();
+  }
+
+  void setEvaluationResult(List<CanvasItem> result) {
+    activeDocument?.result = result;
     notifyListeners();
   }
 }

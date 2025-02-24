@@ -1,5 +1,4 @@
 import 'package:gimelstudio/app/app.locator.dart';
-import 'package:gimelstudio/models/document.dart';
 import 'package:gimelstudio/models/layer.dart';
 import 'package:gimelstudio/models/node_base.dart';
 import 'package:gimelstudio/models/node_property.dart';
@@ -17,7 +16,6 @@ class PropertiesPanelModel extends ReactiveViewModel {
 
   Node? get selectedNode => _nodegraphsService.selectedNode;
 
-  Document? get selectedDocument => _documentService.selectedDocument;
   List<Layer> get selectedLayers => _layersService.selectedLayers;
 
   List<Property> getProperties() {

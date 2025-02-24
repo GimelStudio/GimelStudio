@@ -28,12 +28,12 @@ class ViewportPanelModel extends ReactiveViewModel {
 
   MouseCursor get mouseCursor => _canvasService.mouseCursor;
 
-  Document? get selectedDocument => _documentService.selectedDocument;
+  Document? get activeDocument => _documentService.activeDocument;
 
   List<Layer> get layers => _layersService.layers;
   List<Layer> get selectedLayers => _layersService.selectedLayers;
 
-  List<CanvasItem> get items => _evaluationService.result;
+  List<CanvasItem> get items => activeDocument?.result ?? [];
 
   SelectionBoxOverlay? get selectionOverlay => _overlaysService.selectionOverlay;
 
@@ -41,6 +41,7 @@ class ViewportPanelModel extends ReactiveViewModel {
   List<ListenableServiceMixin> get listenableServices => [
         _imageService,
         _evaluationService,
+        _documentService,
         _layersService,
         _viewportService,
         _overlaysService,

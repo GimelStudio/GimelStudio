@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gimelstudio/models/canvas_item.dart';
 import 'package:gimelstudio/models/layer.dart';
 
 class Document {
@@ -8,6 +9,8 @@ class Document {
     required this.size,
     this.isSaved = false,
     required this.layers,
+    required this.selectedLayers,
+    this.result = const [],
   });
 
   final String id;
@@ -15,6 +18,8 @@ class Document {
   final Size size;
   bool isSaved;
   List<Layer> layers;
+  List<Layer> selectedLayers;
+  List<CanvasItem> result; // Only used for the evaluation
 
   Map<String, dynamic> toJson() {
     return {
@@ -30,7 +35,9 @@ class Document {
         name = json['name'] as String,
         size = Size(json['size'][0] as double, json['size'][1] as double),
         isSaved = true,
-        layers = [for (Map<String, dynamic> layer in json['layers']) Layer.fromJson(layer)];
+        layers = [for (Map<String, dynamic> layer in json['layers']) Layer.fromJson(layer)],
+        selectedLayers = [],
+        result = [];
 
   @override
   String toString() {

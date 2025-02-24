@@ -7,6 +7,7 @@ import 'package:gimelstudio/models/node_base.dart';
 import 'package:gimelstudio/models/node_property.dart';
 import 'package:gimelstudio/models/tool.dart';
 import 'package:gimelstudio/services/canvas_service.dart';
+import 'package:gimelstudio/services/document_service.dart';
 import 'package:gimelstudio/services/evaluation_service.dart';
 import 'package:gimelstudio/services/layers_service.dart';
 import 'package:gimelstudio/services/nodegraphs_service.dart';
@@ -19,13 +20,14 @@ class CursorToolService implements ToolModeEventHandler {
   final _nodegraphsService = locator<NodegraphsService>();
   final _overlaysService = locator<OverlaysService>();
   final _canvasService = locator<CanvasService>();
+  final _documentService = locator<DocumentService>();
 
   List<Layer> get layers => _layersService.layers;
   List<Layer> get selectedLayers => _layersService.selectedLayers;
 
   SelectionBoxOverlay? get selectionOverlay => _overlaysService.selectionOverlay;
 
-  List<CanvasItem> get items => _evaluationService.result;
+  List<CanvasItem> get items => _documentService.activeDocument?.result ?? [];
 
   Map<String, Offset> draggingStartPositions = {};
   Offset? lastPosition;

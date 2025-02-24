@@ -16,23 +16,38 @@ class TopBarMenubarModel extends BaseViewModel {
   final _evaluationService = locator<EvaluationService>();
   final _dialogService = locator<DialogService>();
 
-  Document? get document => _documentsService.selectedDocument;
+  List<Document> get documents => _documentsService.documents;
+  Document? get activeDocument => _documentsService.activeDocument;
 
-  List<CanvasItem>? get items => _evaluationService.result;
+  List<CanvasItem>? get items => activeDocument?.result;
 
   ShortcutRegistryEntry? shortcutsEntry;
 
   /// Menu item and keybinding event to create a new document in a tab.
-  void onNew() {}
+  Future<void> onNew() async {
+    // TODO
+    await _dialogService.showCustomDialog(
+      variant: DialogType.startup,
+    );
+  }
 
   /// Menu item and keybinding event to open a document or image file.
   void onOpen() {}
 
   /// Menu item and keybinding event to close the current document tab.
-  void onClose() {}
+  void onClose() {
+    if (activeDocument == null) {
+      return;
+    }
+    _documentsService.closeDocument(activeDocument!);
+  }
 
   /// Menu item and keybinding event to close all open document tabs.
-  void onCloseAll() {}
+  void onCloseAll() {
+    for (Document document in documents) {
+      _documentsService.closeDocument(document);
+    }
+  }
 
   /// Menu item and keybinding event to save the current document.
   ///
@@ -44,9 +59,9 @@ class TopBarMenubarModel extends BaseViewModel {
 
   /// Menu item and keybinding event to export to an image.
   Future<void> onExport() async {
-    if (document != null && items != null) {
+    if (activeDocument != null && items != null) {
       _evaluationService.evaluate();
-      await _exportService.export(items!, document!.size);
+      await _exportService.export(items!, activeDocument!.size);
     }
   }
 

@@ -27,34 +27,34 @@ class LayersService with ListenableServiceMixin {
 
   LayersService() {
     listenToReactiveValues([
-      _selectedLayers,
+      selectedLayers,
       layers,
     ]);
   }
 
-  List<Layer> _selectedLayers = [];
-  List<Layer> get selectedLayers => _selectedLayers;
+  List<Layer> get selectedLayers =>
+      _documentsService.activeDocument == null ? [] : _documentsService.activeDocument!.selectedLayers;
 
-  List<Layer> get layers =>
-      _documentsService.selectedDocument == null ? [] : _documentsService.selectedDocument!.layers;
+  List<Layer> get layers => _documentsService.activeDocument == null ? [] : _documentsService.activeDocument!.layers;
 
   void setLayerSelected(Layer selectedLayer) {
-    _selectedLayers = [selectedLayer];
+    selectedLayers.clear();
+    selectedLayers.add(selectedLayer);
     notifyListeners();
   }
 
   void addLayerToSelected(Layer layer) {
-    _selectedLayers.add(layer);
+    selectedLayers.add(layer);
     notifyListeners();
   }
 
   void removeFromSelected(Layer layer) {
-    _selectedLayers.remove(layer);
+    selectedLayers.remove(layer);
     notifyListeners();
   }
 
   void deselectAllLayers() {
-    _selectedLayers = [];
+    selectedLayers.clear();
     notifyListeners();
   }
 

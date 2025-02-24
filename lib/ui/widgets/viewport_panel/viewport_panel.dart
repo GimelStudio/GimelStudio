@@ -435,8 +435,8 @@ class ViewportPanel extends StackedView<ViewportPanelModel> {
                       cursor: viewModel.mouseCursor,
                       onHover: (event) => viewModel.toolModeHandler.onHover(event),
                       child: Container(
-                        width: viewModel.selectedDocument?.size.width,
-                        height: viewModel.selectedDocument?.size.height,
+                        width: viewModel.activeDocument?.size.width,
+                        height: viewModel.activeDocument?.size.height,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           border: Border.all(color: Colors.black),
