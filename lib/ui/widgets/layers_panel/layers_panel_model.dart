@@ -15,6 +15,16 @@ class LayersPanelModel extends ReactiveViewModel {
   List<Layer> get layers => _layersService.layers;
   List<Layer> get selectedLayers => _layersService.selectedLayers;
 
+  bool get isLayerBlendModeDropdownEnabled => selectedLayers.isNotEmpty && selectedLayers.length <= 1;
+  bool get isLayerOpacitySliderEnabled => selectedLayers.isNotEmpty && selectedLayers.length <= 1;
+  bool get isAddNewLayerBtnEnabled => true;
+  bool get isDeleteLayerBtnEnabled => selectedLayers.isNotEmpty;
+
+  void onChangeLayerOpacity(int opacity) {
+    _layersService.setLayerOpacity(selectedLayers.first, opacity);
+    _evaluationService.evaluate(evaluateLayers: [selectedLayers.first]);
+  }
+
   void onSelectLayer(Layer layer) {
     _layersService.setLayerSelected(layer);
   }

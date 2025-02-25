@@ -13,12 +13,14 @@ class GsIconBtnTheme {
 class GsIconBtn extends StatefulWidget {
   const GsIconBtn({
     super.key,
+    this.isEnabled = true,
     required this.icon,
     this.selected = false,
     required this.onTap,
     this.theme,
   });
 
+  final bool isEnabled;
   final Widget icon;
   final bool selected;
   final Function() onTap;
@@ -62,18 +64,24 @@ class _GsIconBtnState extends State<GsIconBtn> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: widget.onTap,
-      child: MouseRegion(
-        onHover: (event) => onHover(event),
-        onExit: (event) => onExitHover(event),
-        child: Container(
-          decoration: BoxDecoration(
-            color: _hover || widget.selected ? _theme.selectedColor : Colors.transparent,
-            borderRadius: BorderRadius.circular(4.0),
+    return IgnorePointer(
+      ignoring: widget.isEnabled == false,
+      child: Opacity(
+        opacity: widget.isEnabled ? 1.0 : 0.6,
+        child: InkWell(
+          onTap: widget.onTap,
+          child: MouseRegion(
+            onHover: (event) => onHover(event),
+            onExit: (event) => onExitHover(event),
+            child: Container(
+              decoration: BoxDecoration(
+                color: _hover || widget.selected ? _theme.selectedColor : Colors.transparent,
+                borderRadius: BorderRadius.circular(4.0),
+              ),
+              padding: const EdgeInsets.all(6.0),
+              child: widget.icon,
+            ),
           ),
-          padding: const EdgeInsets.all(6.0),
-          child: widget.icon,
         ),
       ),
     );

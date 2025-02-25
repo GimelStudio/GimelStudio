@@ -58,6 +58,11 @@ class LayersService with ListenableServiceMixin {
     notifyListeners();
   }
 
+  void setLayerOpacity(Layer layer, int opacity) {
+    layer.opacity = opacity;
+    notifyListeners();
+  }
+
   void setLayerVisibility(Layer layer, bool isVisible) {
     layer.setVisibility(isVisible);
     notifyListeners();

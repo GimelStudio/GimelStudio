@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:gimelstudio/models/layer.dart';
+import 'package:gimelstudio/ui/widgets/common/gs_icon_btn/gs_icon_btn.dart';
+import 'package:gimelstudio/ui/widgets/common/gs_percent_slider/gs_percent_slider.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stacked/stacked.dart';
 
@@ -61,104 +63,52 @@ class LayersPanel extends StackedView<LayersPanelModel> {
       padding: const EdgeInsets.all(5.0),
       child: Column(
         children: [
-          // TODO: disable the opacity and blend mode widgets if there are no layers or multiple layer selected
-
-          Text(
-            '${[for (var i in viewModel.selectedLayers) i.name]}',
-            style: TextStyle(
-              color: Colors.white70,
-              fontSize: 12.0,
-            ),
-          ),
-
           Row(
             spacing: 5.0,
             children: [
               // Layer blend
               Expanded(
-                child: Container(
-                  height: 30,
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  decoration: BoxDecoration(
-                    color: Color(0xFF1F1F1F),
-                    borderRadius: BorderRadius.circular(4.0),
-                    border: Border.all(
-                      color: Color(0xFF363636),
+                child: Opacity(
+                  opacity: viewModel.isLayerBlendModeDropdownEnabled ? 1.0 : 0.6,
+                  child: Container(
+                    height: 30,
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    decoration: BoxDecoration(
+                      color: Color(0xFF1F1F1F),
+                      borderRadius: BorderRadius.circular(4.0),
+                      border: Border.all(
+                        color: Color(0xFF363636),
+                      ),
                     ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Normal',
-                        style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 12.0,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Normal',
+                          style: TextStyle(
+                            color: Colors.white70,
+                            fontSize: 12.0,
+                          ),
                         ),
-                      ),
-                      PhosphorIcon(
-                        PhosphorIcons.caretDown(PhosphorIconsStyle.light),
-                        color: Colors.white70,
-                        size: 12.0,
-                      ),
-                    ],
+                        PhosphorIcon(
+                          PhosphorIcons.caretDown(PhosphorIconsStyle.light),
+                          color: Colors.white70,
+                          size: 12.0,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
 
               // Opacity
               Expanded(
-                child: Container(
-                  height: 30,
-                  //width: 140,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF1F1F1F),
-                    borderRadius: BorderRadius.circular(4.0),
-                    border: Border.all(
-                      color: Color(0xFF363636),
-                    ),
-                  ),
-                  child: Stack(
-                    children: [
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Container(
-                          width: double.infinity,
-                          height: 30,
-                          decoration: BoxDecoration(
-                            color: Color(0xFF363636),
-                            borderRadius: BorderRadius.circular(4.0),
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: Text(
-                            '', //'${viewModel.selectedLayers.first.opacity ?? '100'}%',
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 12.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: Text(
-                            'Opacity',
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 12.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                child: GsPercentSlider(
+                  isEnabled: viewModel.isLayerOpacitySliderEnabled,
+                  label: 'Opacity',
+                  currentValue: viewModel.selectedLayers.firstOrNull?.opacity ?? -1,
+                  maxValue: 100,
+                  onChange: (value) => viewModel.onChangeLayerOpacity(value),
                 ),
               ),
             ],
@@ -183,28 +133,24 @@ class LayersPanel extends StackedView<LayersPanelModel> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               // Add new layer
-              InkWell(
-                onTap: viewModel.onAddNewLayer,
-                child: Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: PhosphorIcon(
-                    PhosphorIcons.plus(PhosphorIconsStyle.light),
-                    color: Colors.white70,
-                    size: 16.0,
-                  ),
+              GsIconBtn(
+                isEnabled: viewModel.isAddNewLayerBtnEnabled,
+                icon: PhosphorIcon(
+                  PhosphorIcons.plus(PhosphorIconsStyle.light),
+                  color: Colors.white70,
+                  size: 16.0,
                 ),
+                onTap: viewModel.onAddNewLayer,
               ),
               // Delete layer
-              InkWell(
-                onTap: viewModel.onDeleteLayer,
-                child: Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: PhosphorIcon(
-                    PhosphorIcons.trash(PhosphorIconsStyle.light),
-                    color: Colors.white70,
-                    size: 16.0,
-                  ),
+              GsIconBtn(
+                isEnabled: viewModel.isDeleteLayerBtnEnabled,
+                icon: PhosphorIcon(
+                  PhosphorIcons.trash(PhosphorIconsStyle.light),
+                  color: Colors.white70,
+                  size: 16.0,
                 ),
+                onTap: viewModel.onDeleteLayer,
               ),
             ],
           ),
