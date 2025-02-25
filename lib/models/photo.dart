@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ui' as ui;
 import 'dart:typed_data';
+import 'package:image/image.dart' as img;
 
 // TODO: maybe find a better name. This is named "Photo" because
 // "Image" is  way too overused in the namespaces.
@@ -13,6 +14,8 @@ class Photo {
 
   String filePath;
   Uint8List? data;
+
+  /// This variable stores the image that will be displayed on the canvas.
   ui.Image? uiData;
 
   Future<ui.Image?> toCanvasImageData() async {

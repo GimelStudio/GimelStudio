@@ -140,6 +140,7 @@ class ViewportCanvasPainter extends CustomPainter {
 
         if (image != null) {
           paintImage(
+            opacity: item.opacity / 255.0,
             canvas: canvas,
             rect: item.bounds, // Rect.fromLTRB(item.x, item.y, item.width, item.height),
             image: image,

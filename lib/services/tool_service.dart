@@ -2,6 +2,7 @@ import 'package:gimelstudio/app/app.locator.dart';
 import 'package:gimelstudio/models/tool.dart';
 import 'package:gimelstudio/services/cursor_tool_service.dart';
 import 'package:gimelstudio/services/hand_tool_service.dart';
+import 'package:gimelstudio/services/image_tool_service.dart';
 import 'package:gimelstudio/services/rectangle_tool_service.dart';
 import 'package:stacked/stacked.dart';
 
@@ -9,6 +10,7 @@ class ToolService with ListenableServiceMixin {
   final _cursorToolService = locator<CursorToolService>();
   final _handToolService = locator<HandToolService>();
   final _rectangleToolService = locator<RectangleToolService>();
+  final _imageToolService = locator<ImageToolService>();
 
   ToolService() {
     listenToReactiveValues([
@@ -39,6 +41,8 @@ class ToolService with ListenableServiceMixin {
         return _handToolService;
       case Tool.rectangle:
         return _rectangleToolService;
+      case Tool.image:
+        return _imageToolService;
       default:
         return _cursorToolService;
     }

@@ -95,13 +95,13 @@ class LayersService with ListenableServiceMixin {
       rectangleNode.selected = true;
       defaultNodes[rectangleNode.id] = rectangleNode;
     } else if (type == 'image') {
-      Node photoNode = _nodeRegistryService.createNode('photo_corenode', Offset(120, 80));
+      Node photoNode = _nodeRegistryService.createNode('photo_corenode', Offset(100, 80));
       defaultNodes[photoNode.id] = photoNode;
 
-      Node blurNode = _nodeRegistryService.createNode('blur_corenode', Offset(110, 80));
-      defaultNodes[blurNode.id] = blurNode;
+      // Node blurNode = _nodeRegistryService.createNode('blur_corenode', Offset(110, 80));
+      // defaultNodes[blurNode.id] = blurNode;
 
-      Node imageNode = _nodeRegistryService.createNode('image_corenode', Offset(100, 80));
+      Node imageNode = _nodeRegistryService.createNode('image_corenode', Offset(250, 80));
       imageNode.selected = true;
       defaultNodes[imageNode.id] = imageNode;
     } else if (type == 'text') {
@@ -149,12 +149,12 @@ class LayersService with ListenableServiceMixin {
 
     if (type == 'image') {
       Node photoNode = layerNodes.values.firstWhere((item) => item.idname == 'photo_corenode');
-      Node blurNode = layerNodes.values.firstWhere((item) => item.idname == 'blur_corenode');
+      //Node blurNode = layerNodes.values.firstWhere((item) => item.idname == 'blur_corenode');
       Node imageNode = layerNodes.values.firstWhere((item) => item.idname == 'image_corenode');
 
-      blurNode.setConnection('photo', photoNode, 'output');
+      //blurNode.setConnection('photo', photoNode, 'output');
 
-      imageNode.setConnection('photo', blurNode, 'output');
+      imageNode.setConnection('photo', photoNode, 'output');
 
       outputNode.setConnection('layer', imageNode, 'output');
     } else {

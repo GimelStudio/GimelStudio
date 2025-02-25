@@ -18,6 +18,7 @@ import 'package:gimelstudio/services/tool_service.dart';
 import 'package:gimelstudio/services/overlays_service.dart';
 import 'package:gimelstudio/services/hand_tool_service.dart';
 import 'package:gimelstudio/services/canvas_service.dart';
+import 'package:gimelstudio/services/image_tool_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -42,6 +43,7 @@ import 'test_helpers.mocks.dart';
   MockSpec<OverlaysService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<HandToolService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<CanvasService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<ImageToolService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -64,6 +66,7 @@ void registerServices() {
   getAndRegisterOverlaysService();
   getAndRegisterHandToolService();
   getAndRegisterCanvasService();
+  getAndRegisterImageToolService();
 // @stacked-mock-register
 }
 
@@ -225,6 +228,13 @@ MockCanvasService getAndRegisterCanvasService() {
   _removeRegistrationIfExists<CanvasService>();
   final service = MockCanvasService();
   locator.registerSingleton<CanvasService>(service);
+  return service;
+}
+
+MockImageToolService getAndRegisterImageToolService() {
+  _removeRegistrationIfExists<ImageToolService>();
+  final service = MockImageToolService();
+  locator.registerSingleton<ImageToolService>(service);
   return service;
 }
 // @stacked-mock-create

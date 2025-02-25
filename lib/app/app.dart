@@ -24,6 +24,7 @@ import 'package:gimelstudio/services/tool_service.dart';
 import 'package:gimelstudio/services/overlays_service.dart';
 import 'package:gimelstudio/services/hand_tool_service.dart';
 import 'package:gimelstudio/services/canvas_service.dart';
+import 'package:gimelstudio/services/image_tool_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -52,6 +53,7 @@ import 'package:gimelstudio/services/canvas_service.dart';
     LazySingleton(classType: OverlaysService),
     LazySingleton(classType: HandToolService),
     LazySingleton(classType: CanvasService),
+    LazySingleton(classType: ImageToolService),
 // @stacked-service
   ],
   bottomsheets: [

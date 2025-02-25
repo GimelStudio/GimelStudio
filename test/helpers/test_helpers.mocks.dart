@@ -13,6 +13,7 @@ import 'package:gimelstudio/models/document.dart' as _i20;
 import 'package:gimelstudio/models/layer.dart' as _i3;
 import 'package:gimelstudio/models/node_base.dart' as _i4;
 import 'package:gimelstudio/models/node_property.dart' as _i16;
+import 'package:gimelstudio/models/photo.dart' as _i34;
 import 'package:gimelstudio/models/tool.dart' as _i2;
 import 'package:gimelstudio/services/canvas_service.dart' as _i32;
 import 'package:gimelstudio/services/cursor_tool_service.dart' as _i25;
@@ -23,6 +24,7 @@ import 'package:gimelstudio/services/file_service.dart' as _i11;
 import 'package:gimelstudio/services/hand_tool_service.dart' as _i31;
 import 'package:gimelstudio/services/id_service.dart' as _i17;
 import 'package:gimelstudio/services/image_service.dart' as _i12;
+import 'package:gimelstudio/services/image_tool_service.dart' as _i33;
 import 'package:gimelstudio/services/layers_service.dart' as _i13;
 import 'package:gimelstudio/services/node_registry_service.dart' as _i18;
 import 'package:gimelstudio/services/nodegraphs_service.dart' as _i15;
@@ -993,6 +995,22 @@ class MockLayersService extends _i1.Mock implements _i13.LayersService {
         Invocation.method(
           #deselectAllLayers,
           [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void setLayerOpacity(
+    _i3.Layer? layer,
+    int? opacity,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #setLayerOpacity,
+          [
+            layer,
+            opacity,
+          ],
         ),
         returnValueForMissingStub: null,
       );
@@ -2309,6 +2327,131 @@ class MockCanvasService extends _i1.Mock implements _i32.CanvasService {
         Invocation.method(
           #notifyListeners,
           [],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
+/// A class which mocks [ImageToolService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockImageToolService extends _i1.Mock implements _i33.ImageToolService {
+  @override
+  set draggingStartPosition(_i5.Offset? _draggingStartPosition) => super.noSuchMethod(
+        Invocation.setter(
+          #draggingStartPosition,
+          _draggingStartPosition,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  set lastPosition(_i5.Offset? _lastPosition) => super.noSuchMethod(
+        Invocation.setter(
+          #lastPosition,
+          _lastPosition,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  set photo(_i34.Photo? _photo) => super.noSuchMethod(
+        Invocation.setter(
+          #photo,
+          _photo,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  List<_i3.Layer> get layers => (super.noSuchMethod(
+        Invocation.getter(#layers),
+        returnValue: <_i3.Layer>[],
+        returnValueForMissingStub: <_i3.Layer>[],
+      ) as List<_i3.Layer>);
+
+  @override
+  List<_i3.Layer> get selectedLayers => (super.noSuchMethod(
+        Invocation.getter(#selectedLayers),
+        returnValue: <_i3.Layer>[],
+        returnValueForMissingStub: <_i3.Layer>[],
+      ) as List<_i3.Layer>);
+
+  @override
+  List<_i14.CanvasItem> get items => (super.noSuchMethod(
+        Invocation.getter(#items),
+        returnValue: <_i14.CanvasItem>[],
+        returnValueForMissingStub: <_i14.CanvasItem>[],
+      ) as List<_i14.CanvasItem>);
+
+  @override
+  void activate() => super.noSuchMethod(
+        Invocation.method(
+          #activate,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void deactivate() => super.noSuchMethod(
+        Invocation.method(
+          #deactivate,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onHover(_i26.PointerHoverEvent? event) => super.noSuchMethod(
+        Invocation.method(
+          #onHover,
+          [event],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onTapDown(_i6.TapDownDetails? event) => super.noSuchMethod(
+        Invocation.method(
+          #onTapDown,
+          [event],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onPanDown(_i6.DragDownDetails? event) => super.noSuchMethod(
+        Invocation.method(
+          #onPanDown,
+          [event],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onPanUpdate(_i6.DragUpdateDetails? event) => super.noSuchMethod(
+        Invocation.method(
+          #onPanUpdate,
+          [event],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onPanCancel() => super.noSuchMethod(
+        Invocation.method(
+          #onPanCancel,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onPanEnd(_i6.DragEndDetails? event) => super.noSuchMethod(
+        Invocation.method(
+          #onPanEnd,
+          [event],
         ),
         returnValueForMissingStub: null,
       );

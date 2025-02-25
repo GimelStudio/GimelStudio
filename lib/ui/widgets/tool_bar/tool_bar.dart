@@ -86,7 +86,7 @@ class ToolBar extends StackedView<ToolBarModel> {
                   ),
                   ToolBarBtn(
                     isSelected: viewModel.activeTool == Tool.image,
-                    isDisabled: true,
+                    isDisabled: false,
                     normalIcon: PhosphorIcons.imageSquare(PhosphorIconsStyle.light),
                     selectedIcon: PhosphorIcons.imageSquare(PhosphorIconsStyle.fill),
                     onTap: () => viewModel.onSelectTool(Tool.image),
