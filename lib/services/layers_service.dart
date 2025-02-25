@@ -171,12 +171,12 @@ class LayersService with ListenableServiceMixin {
 
   /// Delete the selected layers [selectedLayers].
   void deleteLayers(List<Layer> selectedLayers) {
-    deselectAllLayers();
-
     List<Layer> layersToDelete = List.of(selectedLayers);
 
+    deselectAllLayers();
+
     for (Layer layer in layersToDelete) {
-      layers.remove(layer);
+      layers.removeWhere((l) => layer.id == l.id);
     }
     syncLayerIndexes();
     notifyListeners();
