@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:gimelstudio/ui/widgets/properties_panel/widgets/expose_property_btn/expose_property_btn.dart';
 import 'package:stacked/stacked.dart';
 
@@ -58,33 +59,34 @@ class CanvasitemFillWidgetgroup extends StackedView<CanvasitemFillWidgetgroupMod
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                child: Visibility(
-                  visible: property.isExposed == false,
-                  maintainSize: true,
-                  maintainAnimation: true,
-                  maintainState: true,
-                  child: GsColorPicker(
-                    // canvasFill: CanvasItemFill(
-                    //   fillType: FillType.linearGradient,
-                    //   solidColor: Colors.red.withAlpha(100),
-                    // ),
-                    canvasFill: property.value as CanvasItemFill,
-                    onChange: (value) {},
-                  ),
-                  // Row(
-                  //   children: [
-                  //     Expanded(
-                  //       child: HueRingPicker(
-                  //         pickerColor: val.solidColor,
-                  //         onColorChanged: (Color color) {
-                  //           var c = item.CanvasItemFill(
-                  //               fillType: item.FillType.solid, solidColor: color);
-                  //           viewModel.setPropertyValue(property, c);
-                  //         },
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
+                child:
+
+                    // Visibility(
+                    //   visible: property.isExposed == false,
+                    //   maintainSize: true,
+                    //   maintainAnimation: true,
+                    //   maintainState: true,
+                    //   child: GsColorPicker(
+                    //     // canvasFill: CanvasItemFill(
+                    //     //   fillType: FillType.linearGradient,
+                    //     //   solidColor: Colors.red.withAlpha(100),
+                    //     // ),
+                    //     canvasFill: property.value as CanvasItemFill,
+                    //     onChange: (value) {},
+                    //   ),
+                    Row(
+                  children: [
+                    Expanded(
+                      child: HueRingPicker(
+                        portraitOnly: true,
+                        pickerColor: property.value.solidColor,
+                        onColorChanged: (Color color) {
+                          var c = CanvasItemFill(fillType: FillType.solid, solidColor: color);
+                          onChangeValue(property, c);
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
