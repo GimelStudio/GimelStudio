@@ -1,7 +1,7 @@
-import 'package:expressions/expressions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:math_expressions/math_expressions.dart';
 
 class GsDoubleInputTheme {
   GsDoubleInputTheme({
@@ -152,12 +152,12 @@ class _GsDoubleInputState extends State<GsDoubleInput> {
   }
 
   void onSubmitTextFieldValue(String text) {
-    // Evaluate any math expressions.
+    // Evaluate any math expressions from the input.
     double value = 0.0;
     try {
-      var expression = Expression.parse(text);
-      ExpressionEvaluator evaluator = const ExpressionEvaluator();
-      dynamic evalValue = evaluator.eval(expression, {});
+      ExpressionParser parser = GrammarParser();
+      Expression expression = parser.parse(text);
+      dynamic evalValue = expression.evaluate(EvaluationType.REAL, ContextModel());
 
       if (evalValue is double) {
         value = evalValue;

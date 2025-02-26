@@ -24,8 +24,8 @@ dependencies:
   image: ^4.5.2
   file_selector: ^1.0.3
 
-  # Used for evaluating math expressions within inputs
-  expressions: ^0.2.5+2
+  # Used for evaluating math expressions within inputs and for other math.
+  math_expressions: ^2.7.0
 
   # Icons
   phosphor_flutter: ^2.1.0
