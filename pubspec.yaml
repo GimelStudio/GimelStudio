@@ -25,7 +25,7 @@ dependencies:
   file_selector: ^1.0.3
 
   # Used for evaluating math expressions within inputs and for other math.
-  math_expressions: ^2.7.0
+  math_expressions: ^2.6.0
 
   # Icons
   phosphor_flutter: ^2.1.0
