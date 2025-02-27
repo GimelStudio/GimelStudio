@@ -8,7 +8,7 @@ jobs:
 
   linux:
     name: Linux (Debian) build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04-arm
     permissions:
       contents: write
     steps:
