@@ -31,7 +31,7 @@ jobs:
         run: flutter doctor -v
 
       - name: Build application
-      - run: |
+        run: |
           flutter pub get
           flutter build linux --release
 
