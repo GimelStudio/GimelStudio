@@ -16,20 +16,23 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: sudo apt-get update
-        run: sudo apt-get install -y clang cmake libgtk-3-dev ninja-build
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang cmake libgtk-3-dev ninja-build
 
       - name: Set up Flutter and build application
         uses: subosito/flutter-action@v2
         with:
           channel: stable
           flutter-version: 3.29.0
-        run: flutter pub get
-        run: flutter build linux --release
+        run: |
+          flutter pub get
+          flutter build linux --release
 
       - name: Create tar.gz archive
-        run: cd build/linux/x64/release/bundle
-        run: tar -czvf ../../../../../GimelStudio.tar.gz *
+        run: |
+          cd build/linux/x64/release/bundle
+          tar -czvf ../../../../../GimelStudio.tar.gz *
 
       - name: Upload tar.gz archive
         uses: actions/upload-artifact@v4
@@ -52,12 +55,14 @@ jobs:
         with:
           channel: stable
           flutter-version: 3.29.0
-        run: flutter pub get
-        run: flutter build windows --release
+        run: |
+          flutter pub get
+          flutter build windows --release
 
       - name: Zip application files
-        run: cd build/windows/x64/runner/
-        run: zip -yr GimelStudio.zip Release
+        run: |
+          cd build/windows/x64/runner/
+          zip -yr GimelStudio.zip Release
 
       - name: Upload zip
         uses: actions/upload-artifact@v4
@@ -79,12 +84,14 @@ jobs:
         with:
           channel: stable
           flutter-version: 3.29.0
-        run: flutter pub get
-        run: flutter build macos --release
+        run: |
+          flutter pub get
+          flutter build macos --release
 
       - name: Zip application files
-        run: cd build/macos/Build/Products/Release
-        run: zip -yr GimelStudio.zip GimelStudio.app
+        run: |
+          cd build/macos/Build/Products/Release
+          zip -yr GimelStudio.zip GimelStudio.app
 
       - name: Upload zip
         uses: actions/upload-artifact@v4
