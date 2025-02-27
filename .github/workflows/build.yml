@@ -1,72 +1,93 @@
-name: Build Gimel Studio
-
-# Controls when the action will run
 on:
   push:
-    tags: 'v*'
+    branches:
+      - master
 
-  workflow_dispatch:
-
-
+name: Gimel Studio CI Build
 jobs:
 
   linux:
-    runs-on: ubuntu-20.04
+    name: Linux (Debian) build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
-      with:
-        python-version: "3.9"
-    - run: sudo apt-get install libsdl2-2.0-0
-    - run: python -m pip install --upgrade pip setuptools wheel
+      - name: Get latest code
+        uses: actions/checkout@v4
 
-    # Run the build.py script
-    - name: Run the build.py script
-      run: python3 build.py
+      - name: Install dependencies
+        run: sudo apt-get update
+        run: sudo apt-get install -y clang cmake libgtk-3-dev ninja-build
 
-    # Prepare the release
-    - name: Prepare release
-      uses: papeloto/action-zip@v1
-      with:
-        files: ./dist/GimelStudio/
-        dest: GimelStudio-Linux64.zip
+      - name: Set up Flutter and build application
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.29.0
+        run: flutter pub get
+        run: flutter build linux --release
 
-    # Actually make the release
-    - name: Uploading release
-      uses: svenstaro/upload-release-action@v2
-      with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: ./GimelStudio-Linux64.zip
-        asset_name: GimelStudio-Linux64.zip
-        tag: ${{ github.ref }}
+      - name: Create tar.gz archive
+        run: cd build/linux/x64/release/bundle
+        run: tar -czvf ../../../../../GimelStudio.tar.gz *
+
+      - name: Upload tar.gz archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: Linux (Debian) binary
+          path: ./*.tar.gz
+
+
+  windows:
+    name: Windows build
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Get latest code
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter and build application
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.29.0
+        run: flutter pub get
+        run: flutter build windows --release
+
+      - name: Zip application files
+        run: cd build/windows/x64/runner/
+        run: zip -yr GimelStudio.zip Release
+
+      - name: Upload zip
+        uses: actions/upload-artifact@v4
+        with:
+          path: build/windows/x64/runner/GimelStudio.zip
 
 
   macos:
-    runs-on: macos-10.15
+    name: macOs build
+    runs-on: macos-latest
+    permissions:
+      contents: write
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
-      with:
-        python-version: "3.9"
-    - run: python -m pip install --upgrade pip setuptools wheel
+      - name: Get latest code
+        uses: actions/checkout@v4
 
-    # Run the build.py script
-    - name: Run the build.py script
-      run: python3 build.py
+      - name: Set up Flutter and build application
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.29.0
+        run: flutter pub get
+        run: flutter build macos --release
 
-    # Prepare the release
-    - name: Prepare release
-      uses: papeloto/action-zip@v1
-      with:
-        files: ./dist/GimelStudio/
-        dest: GimelStudio-MacOs64.zip
+      - name: Zip application files
+        run: cd build/macos/Build/Products/Release
+        run: zip -yr GimelStudio.zip GimelStudio.app
 
-    # Actually make the release
-    - name: Uploading release
-      uses: svenstaro/upload-release-action@v2
-      with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: ./GimelStudio-MacOs64.zip
-        asset_name: GimelStudio-MacOs64.zip
-        tag: ${{ github.ref }}
-        
+      - name: Upload zip
+        uses: actions/upload-artifact@v4
+        with:
+          path: build/macos/Build/Products/Release/GimelStudio.zip
+    
