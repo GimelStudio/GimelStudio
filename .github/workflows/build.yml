@@ -25,7 +25,7 @@ jobs:
         with:
           channel: stable
           flutter-version: 3.29.0
-        run: |
+      - run: |
           flutter pub get
           flutter build linux --release
 
@@ -55,7 +55,7 @@ jobs:
         with:
           channel: stable
           flutter-version: 3.29.0
-        run: |
+      - run: |
           flutter pub get
           flutter build windows --release
 
@@ -84,7 +84,7 @@ jobs:
         with:
           channel: stable
           flutter-version: 3.29.0
-        run: |
+      - run: |
           flutter pub get
           flutter build macos --release
 
