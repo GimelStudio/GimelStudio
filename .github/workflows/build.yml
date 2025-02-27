@@ -18,7 +18,6 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y clang cmake libgtk-3-dev ninja-build
 
       - name: Set up Flutter and build application
         uses: subosito/flutter-action@v2
