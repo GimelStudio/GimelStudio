@@ -91,7 +91,7 @@ jobs:
       - name: Zip application files
         run: |
           cd build/macos/Build/Products/Release
-          zip -yr GimelStudio.zip GimelStudio.app
+          zip -yr GimelStudio.zip gimelstudio.app
 
       - name: Upload zip
         uses: actions/upload-artifact@v4
