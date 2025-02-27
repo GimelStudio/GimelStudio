@@ -59,15 +59,13 @@ jobs:
           flutter pub get
           flutter build windows --release
 
-      - name: Zip application files
-        run: |
-          cd build/windows/x64/runner/
-          zip -yr GimelStudio.zip Release
+      - name: Build Windows Installer
+        run: dart run msix:create
 
-      - name: Upload zip
+      - name: Upload MSIX
         uses: actions/upload-artifact@v4
         with:
-          path: build/windows/x64/runner/GimelStudio.zip
+          path: build\windows\x64\runner\Release\GimelStudio.msix
 
 
   macos:
