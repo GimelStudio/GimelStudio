@@ -37,7 +37,7 @@ jobs:
       - name: Upload tar.gz archive
         uses: actions/upload-artifact@v4
         with:
-          name: Linux (Debian) binary
+          name: GimelStudio-Linux
           path: ./*.tar.gz
 
 
@@ -62,11 +62,12 @@ jobs:
       - name: Zip application files
         run: |
           cd build\windows\x64\runner\Release\
-          powershell Compress-Archive . GimelStudio.zip
+          powershell Compress-Archive .\* GimelStudio.zip
 
       - name: Upload zip
         uses: actions/upload-artifact@v4
         with:
+          name: GimelStudio-Windows
           path: build\windows\x64\runner\Release\GimelStudio.zip
 
 
@@ -91,10 +92,11 @@ jobs:
       - name: Zip application files
         run: |
           cd build/macos/Build/Products/Release
-          zip -yr GimelStudio.zip Gimelstudio.app
+          zip -r GimelStudio.zip .
 
       - name: Upload zip
         uses: actions/upload-artifact@v4
         with:
+          name: GimelStudio-macOs
           path: build/macos/Build/Products/Release/GimelStudio.zip
     
