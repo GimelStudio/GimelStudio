@@ -37,9 +37,18 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   mockito: ^5.4.1
   stacked_generator: ^1.3.3
+  msix: ^2.7.3
 
 flutter:
   uses-material-design: true
 
   assets:
     - assets/
+
+msix_config:
+  display_name: Gimel Studio
+  publisher_display_name: Gimel Studio contributors
+  identity_name: com.gimelstudio.gimelstudio
+  msix_version: 0.7.0.0
+  logo_path: .\windows\runner\resources\app_icon.ico
+  install_certificate: false
