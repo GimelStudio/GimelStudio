@@ -27,7 +27,12 @@ class ImageToolService implements ToolModeEventHandler {
 
   List<CanvasItem> get items => _documentService.activeDocument?.result ?? [];
 
-  Photo? photo = null;
+  Photo? photo;
+  int photoWidth = 0;
+  int photoHeight = 0;
+
+  // Aspect ratio is locked by default.
+  bool lockAspectRatio = true;
 
   @override
   void activate() async {
@@ -46,6 +51,8 @@ class ImageToolService implements ToolModeEventHandler {
     photo = Photo(filePath: file.path, data: bytes);
 
     photo?.uiData = await photo?.toCanvasImageData();
+    photoWidth = photo?.uiData!.width ?? 0;
+    photoHeight = photo?.uiData!.height ?? 0;
   }
 
   @override
@@ -111,8 +118,17 @@ class ImageToolService implements ToolModeEventHandler {
           event.localPosition.dy - lastPosition!.dy,
         );
 
-        _nodegraphsService.onEditNodePropertyValue(widthProp, widthProp.value + (pos.dx));
-        _nodegraphsService.onEditNodePropertyValue(heightProp, heightProp.value + (pos.dy));
+        double newWidth = widthProp.value + (pos.dx);
+        double newHeight = heightProp.value + (pos.dy);
+
+        if (lockAspectRatio == true) {
+          double aspectRatio = photoWidth / photoHeight;
+
+          newHeight = newWidth / aspectRatio;
+        }
+
+        _nodegraphsService.onEditNodePropertyValue(widthProp, newWidth);
+        _nodegraphsService.onEditNodePropertyValue(heightProp, newHeight);
 
         lastPosition = event.localPosition;
       }
