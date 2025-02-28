@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class GsPercentSliderPainter extends CustomPainter {
   const GsPercentSliderPainter({
@@ -78,14 +78,14 @@ class _GsPercentSliderState extends State<GsPercentSlider> {
   /// The current widget theme.
   late GsPercentSliderTheme _theme;
 
-  /// The current mouse cursor.
-  MouseCursor _mouseCursor = SystemMouseCursors.basic;
-
   /// Initial position of the widget
   double _startPosition = 0;
 
   /// Initial value of the widget
   int _startValue = 0;
+
+  /// The current mouse cursor.
+  MouseCursor _mouseCursor = SystemMouseCursors.basic;
 
   @override
   void initState() {
@@ -101,6 +101,19 @@ class _GsPercentSliderState extends State<GsPercentSlider> {
       _theme = widget.theme!;
     }
     super.initState();
+  }
+
+  void onHover(PointerHoverEvent event) {
+    setState(() {
+      _mouseCursor = SystemMouseCursors.resizeUpDown;
+    });
+  }
+
+  void onExitHover(PointerExitEvent event) {
+    setState(() {
+      _mouseCursor = SystemMouseCursors.basic;
+
+    });
   }
 
   void onHorizontalDragStart(DragStartDetails event) {
