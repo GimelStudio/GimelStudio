@@ -8,24 +8,30 @@ jobs:
 
   linux:
     name: Linux (Debian) build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     permissions:
       contents: write
     steps:
       - name: Get latest code
         uses: actions/checkout@v4
 
-      - name: Install dependencies
+      - name: Install Flutter dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y clang cmake libgtk-3-dev ninja-build
+          sudo apt-get update -y && sudo apt-get upgrade -y;
+          sudo apt-get install -y curl git unzip xz-utils zip libglu1-mesa
+          sudo apt-get install clang cmake git ninja-build pkg-config libgtk-3-dev liblzma-dev libstdc++-12-dev
 
-      - name: Set up Flutter and build application
+      - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: stable
           flutter-version: 3.29.0
-      - run: |
+
+      - name: Check Flutter install
+        run: flutter doctor -v
+
+      - name: Build application
+        run: |
           flutter pub get
           flutter build linux --release
 
