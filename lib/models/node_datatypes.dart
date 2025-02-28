@@ -5,6 +5,7 @@ import 'package:gimelstudio/models/photo.dart';
 Map<dynamic, Color> nodeDatatypeColors = {
   int: Colors.blueGrey,
   double: Colors.grey,
+  bool: Colors.lightGreen,
   Photo: Colors.pink,
   CanvasItem: const Color(0xFFCBCE17),
   CanvasItemFill: Colors.lightBlue,

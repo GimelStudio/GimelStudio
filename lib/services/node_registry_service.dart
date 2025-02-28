@@ -68,6 +68,8 @@ class NodeRegistryService {
           newProperty = IntegerProperty.clone(property, newPropertyId);
         case double:
           newProperty = DoubleProperty.clone(property, newPropertyId);
+        case bool:
+          newProperty = BooleanProperty.clone(property, newPropertyId);
         case Photo:
           newProperty = PhotoProperty.clone(property, newPropertyId);
         case CanvasItem:
@@ -79,7 +81,7 @@ class NodeRegistryService {
         case CanvasItemBorderRadius:
           newProperty = CanvasItemBorderRadiusProperty.clone(property, newPropertyId);
         default:
-          throw ('Property was not registered. Did you forget to register it?');
+          throw ('Property for datatype ${property.dataType} was not registered. Did you forget to register it?');
       }
       node.properties[property.idname] = newProperty;
     }

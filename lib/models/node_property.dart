@@ -140,6 +140,30 @@ class DoubleProperty<double> extends Property {
   }
 }
 
+/// For boolean values.
+class BooleanProperty<bool> extends Property {
+  BooleanProperty({
+    required super.id,
+    required super.idname,
+    required super.label,
+    required super.dataType,
+    required super.value,
+    required super.isExposed,
+  }) : assert(value is bool);
+
+  factory BooleanProperty.clone(Property source, String id) {
+    source as BooleanProperty;
+    return BooleanProperty<bool>(
+      id: id,
+      idname: source.idname,
+      label: source.label,
+      dataType: source.dataType,
+      value: source.value,
+      isExposed: source.isExposed,
+    );
+  }
+}
+
 /// For Photo values.
 class PhotoProperty<Photo> extends Property {
   PhotoProperty({
