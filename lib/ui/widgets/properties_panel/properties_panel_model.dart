@@ -35,13 +35,15 @@ class PropertiesPanelModel extends ReactiveViewModel {
     return properties;
   }
 
-  void setPropertyValue(Property property, dynamic value) {
+  void setPropertyValue(Property property, dynamic value, {bool evaluate = true}) {
     for (Layer layer in selectedLayers) {
       layer.needsEvaluation = true;
     }
     _nodegraphsService.onEditNodePropertyValue(property, value);
-    _evaluationService.evaluate();
-    rebuildUi();
+    if (evaluate == true) {
+      _evaluationService.evaluate();
+      rebuildUi();
+    }
   }
 
   void onTogglePropertyExposed(Property property) {
