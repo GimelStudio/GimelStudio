@@ -58,6 +58,11 @@ class LayersService with ListenableServiceMixin {
     notifyListeners();
   }
 
+  void setLayerBlendMode(Layer layer, String blendMode) {
+    layer.blend = blendMode;
+    notifyListeners();
+  }
+
   void setLayerOpacity(Layer layer, int opacity) {
     layer.opacity = opacity;
     notifyListeners();
@@ -135,7 +140,7 @@ class LayersService with ListenableServiceMixin {
       visible: true,
       locked: false,
       opacity: 100,
-      blend: LayerBlendMode.normal,
+      blend: 'Normal',
       nodegraph: NodeGraph(
         id: _idService.newId(),
         nodes: defaultNodes,

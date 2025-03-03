@@ -5,6 +5,7 @@ import 'package:gimelstudio/models/node_base.dart';
 import 'package:gimelstudio/models/nodegraph_evaluator.dart';
 import 'package:gimelstudio/services/document_service.dart';
 import 'package:gimelstudio/services/layers_service.dart';
+import 'package:gimelstudio/ui/common/constants.dart';
 import 'package:stacked/stacked.dart';
 
 class EvaluationService with ListenableServiceMixin {
@@ -93,7 +94,7 @@ class EvaluationService with ListenableServiceMixin {
 
             result.opacity = ((layer.opacity * 2.55)).toInt();
 
-            //result.blendMode = layer.blend;
+            result.blendMode = Constants.layerBlendModes[layer.blend]!;
             result.layerId = layer.id;
 
             layer.needsEvaluation = false;

@@ -20,6 +20,11 @@ class LayersPanelModel extends ReactiveViewModel {
   bool get isAddNewLayerBtnEnabled => true;
   bool get isDeleteLayerBtnEnabled => selectedLayers.isNotEmpty;
 
+  void onChangeLayerBlendMode(String blendMode) {
+    _layersService.setLayerBlendMode(selectedLayers.first, blendMode);
+    _evaluationService.evaluate(evaluateLayers: [selectedLayers.first]);
+  }
+
   void onChangeLayerOpacity(int opacity) {
     _layersService.setLayerOpacity(selectedLayers.first, opacity);
     _evaluationService.evaluate(evaluateLayers: [selectedLayers.first]);

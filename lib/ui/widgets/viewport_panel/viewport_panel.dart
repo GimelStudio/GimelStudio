@@ -121,9 +121,6 @@ class ViewportCanvasPainter extends CustomPainter {
               letterSpacing: item.letterSpacing,
             ),
           ),
-          strutStyle: const StrutStyle(
-            leading: null,
-          ),
           textAlign: TextAlign.left,
           textDirection: TextDirection.ltr,
         )..layout(maxWidth: item.width);
@@ -145,6 +142,7 @@ class ViewportCanvasPainter extends CustomPainter {
             rect: item.bounds, // Rect.fromLTRB(item.x, item.y, item.width, item.height),
             image: image,
             fit: BoxFit.cover,
+            blendMode: item.blendMode,
           );
           //final paint = Paint()..blendMode = item.blendMode;
           //canvas.drawImage(image, Offset(item.x, item.y), paint);
@@ -186,11 +184,6 @@ class ViewportOverlaysPainter extends CustomPainter {
       }
 
       // Selection overlay
-      Paint paint = Paint()
-        ..color = Colors.blueAccent
-        ..strokeWidth = 1.0
-        ..style = PaintingStyle.stroke;
-
       Rect rect = Rect.fromLTWH(
         bounds.left,
         bounds.top,
@@ -198,41 +191,50 @@ class ViewportOverlaysPainter extends CustomPainter {
         bounds.height,
       );
 
-      canvas.drawRect(rect, paint);
-
-      for (SelectionOverlayHandle handle in selectionOverlay!.cornerHandles) {
-        paint = Paint()
-          ..color = Colors.white
-          ..style = PaintingStyle.fill;
-
-        RRect handleRRect = RRect.fromRectAndRadius(handle.handleBounds, const Radius.circular(1.0));
-
-        canvas.drawRRect(handleRRect, paint);
-
-        paint = Paint()
-          ..color = Colors.blueAccent
-          ..strokeWidth = 1.0
-          ..style = PaintingStyle.stroke;
-
-        canvas.drawRRect(handleRRect, paint);
-      }
-
-      // For testing invisible handles
-      // for (SelectionOverlayHandle handle in selectionOverlay!.sideHandles) {
-      //   paint = Paint()
-      //     ..color = Colors.transparent
-      //     ..style = PaintingStyle.fill;
-
-      //   canvas.drawRect(handle.handleBounds, paint);
-
-      //   paint = Paint()
-      //     ..color = Colors.red
-      //     ..strokeWidth = 1.0
-      //     ..style = PaintingStyle.stroke;
-
-      //   canvas.drawRect(handle.handleBounds, paint);
-      // }
+      drawSelectionOverlay(canvas, rect);
     }
+  }
+
+  void drawSelectionOverlay(Canvas canvas, Rect rect) {
+    Paint paint = Paint()
+      ..color = Colors.blueAccent
+      ..strokeWidth = 1.0
+      ..style = PaintingStyle.stroke;
+
+    canvas.drawRect(rect, paint);
+
+    for (SelectionOverlayHandle handle in selectionOverlay!.cornerHandles) {
+      paint = Paint()
+        ..color = Colors.white
+        ..style = PaintingStyle.fill;
+
+      RRect handleRRect = RRect.fromRectAndRadius(handle.handleBounds, const Radius.circular(1.0));
+
+      canvas.drawRRect(handleRRect, paint);
+
+      paint = Paint()
+        ..color = Colors.blueAccent
+        ..strokeWidth = 1.0
+        ..style = PaintingStyle.stroke;
+
+      canvas.drawRRect(handleRRect, paint);
+    }
+
+    // For testing invisible handles
+    // for (SelectionOverlayHandle handle in selectionOverlay!.sideHandles) {
+    //   paint = Paint()
+    //     ..color = Colors.transparent
+    //     ..style = PaintingStyle.fill;
+
+    //   canvas.drawRect(handle.handleBounds, paint);
+
+    //   paint = Paint()
+    //     ..color = Colors.red
+    //     ..strokeWidth = 1.0
+    //     ..style = PaintingStyle.stroke;
+
+    //   canvas.drawRect(handle.handleBounds, paint);
+    // }
   }
 
   @override

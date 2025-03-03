@@ -34,7 +34,7 @@ class _GsDropdownState extends State<GsDropdown> {
       enableSearch: false,
       enableFilter: true,
       expandedInsets: EdgeInsets.zero,
-      onSelected: widget.onChange,
+      onSelected: (String? value) => widget.onChange.call(value),
       // ignore: body_might_complete_normally_nullable
       searchCallback: (entries, query) {},
       trailingIcon: PhosphorIcon(
@@ -54,9 +54,9 @@ class _GsDropdownState extends State<GsDropdown> {
       ),
       menuStyle: MenuStyle(
         backgroundColor: WidgetStatePropertyAll(Color(0xFF1F1F1F)),
-          visualDensity: VisualDensity.compact,
-          padding: WidgetStatePropertyAll(EdgeInsets.zero),
-          surfaceTintColor: WidgetStatePropertyAll(Colors.transparent),
+        visualDensity: VisualDensity.compact,
+        padding: WidgetStatePropertyAll(EdgeInsets.zero),
+        surfaceTintColor: WidgetStatePropertyAll(Colors.transparent),
       ),
       inputDecorationTheme: InputDecorationTheme(
         suffixIconConstraints: BoxConstraints.tightFor(height: 30.0),

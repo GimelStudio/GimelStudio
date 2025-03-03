@@ -1,13 +1,5 @@
 import 'package:gimelstudio/models/nodegraph.dart';
 
-enum LayerBlendMode {
-  normal,
-  darken,
-  multiply,
-  colorBurn,
-  // ...
-}
-
 class Layer {
   Layer({
     required this.id,
@@ -28,7 +20,7 @@ class Layer {
   bool visible;
   bool locked;
   int opacity;
-  dynamic blend;
+  String blend;
   NodeGraph nodegraph;
 
   /// ``value`` holds the cached CanvasItem from the last time this layer was evaluated.
@@ -61,7 +53,7 @@ class Layer {
       'visible': visible,
       'locked': locked,
       'opacity': opacity,
-      'blend': blend.name,
+      'blend': blend,
       'nodegraph': nodegraph.toJson(),
     };
   }
@@ -74,11 +66,11 @@ class Layer {
         visible = json['visible'] as bool,
         locked = json['locked'] as bool,
         opacity = json['opacity'] as int,
-        blend = LayerBlendMode.values.byName(json['blend'] as String),
+        blend = json['blend'] as String,
         nodegraph = NodeGraph.fromJson(json['nodegraph'] as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'Layer{id: $id, index: $index, name: $name, selected: $selected, visible: $visible, locked: $locked, opacity: $opacity, blend: ${blend} nodegraph: $nodegraph}';
+    return 'Layer{id: $id, index: $index, name: $name, selected: $selected, visible: $visible, locked: $locked, opacity: $opacity, blend: $blend nodegraph: $nodegraph}';
   }
 }

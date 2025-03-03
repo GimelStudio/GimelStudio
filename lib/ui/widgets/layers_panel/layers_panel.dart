@@ -1,7 +1,8 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:gimelstudio/models/layer.dart';
+import 'package:gimelstudio/ui/common/constants.dart';
+import 'package:gimelstudio/ui/widgets/common/gs_dropdown/gs_dropdown.dart';
 import 'package:gimelstudio/ui/widgets/common/gs_icon_btn/gs_icon_btn.dart';
 import 'package:gimelstudio/ui/widgets/common/gs_percent_slider/gs_percent_slider.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -66,41 +67,16 @@ class LayersPanel extends StackedView<LayersPanelModel> {
           Row(
             spacing: 5.0,
             children: [
-              // Layer blend
+              // Blend mode
               Expanded(
-                child: Opacity(
-                  opacity: viewModel.isLayerBlendModeDropdownEnabled ? 1.0 : 0.6,
-                  child: Container(
-                    height: 30,
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF1F1F1F),
-                      borderRadius: BorderRadius.circular(4.0),
-                      border: Border.all(
-                        color: Color(0xFF363636),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Normal',
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 12.0,
-                          ),
-                        ),
-                        PhosphorIcon(
-                          PhosphorIcons.caretDown(PhosphorIconsStyle.light),
-                          color: Colors.white70,
-                          size: 12.0,
-                        ),
-                      ],
-                    ),
-                  ),
+                child: GsDropdown(
+                  isEnabled: viewModel.isLayerBlendModeDropdownEnabled,
+                  width: 200.0,
+                  currentItem: viewModel.selectedLayers.firstOrNull?.blend ?? 'Normal',
+                  items: Constants.layerBlendModes.keys.toList(),
+                  onChange: (value) => viewModel.onChangeLayerBlendMode(value ?? 'Normal'),
                 ),
               ),
-
               // Opacity
               Expanded(
                 child: GsPercentSlider(
