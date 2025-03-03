@@ -112,7 +112,6 @@ class _GsPercentSliderState extends State<GsPercentSlider> {
   void onExitHover(PointerExitEvent event) {
     setState(() {
       _mouseCursor = SystemMouseCursors.basic;
-
     });
   }
 
@@ -156,7 +155,7 @@ class _GsPercentSliderState extends State<GsPercentSlider> {
             onHorizontalDragStart: (event) => onHorizontalDragStart(event),
             onHorizontalDragUpdate: (event) => onHorizontalDragUpdate(event),
             child: Container(
-              height: 30,
+              height: 30.0,
               decoration: BoxDecoration(
                 color: _theme.backgroundColor,
                 borderRadius: BorderRadius.circular(4.0),
