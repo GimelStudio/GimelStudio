@@ -26,6 +26,7 @@ import '../services/node_registry_service.dart';
 import '../services/nodegraphs_service.dart';
 import '../services/overlays_service.dart';
 import '../services/rectangle_tool_service.dart';
+import '../services/text_tool_service.dart';
 import '../services/tool_service.dart';
 import '../services/viewport_service.dart';
 
@@ -59,4 +60,5 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => HandToolService());
   locator.registerLazySingleton(() => CanvasService());
   locator.registerLazySingleton(() => ImageToolService());
+  locator.registerLazySingleton(() => TextToolService());
 }

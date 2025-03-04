@@ -164,6 +164,31 @@ class BooleanProperty<bool> extends Property {
   }
 }
 
+/// For String values.
+/// TODO: Called TextProperty to avoid conflicts with imports
+class TextProperty extends Property {
+  TextProperty({
+    required super.id,
+    required super.idname,
+    required super.label,
+    required super.dataType,
+    required super.value,
+    required super.isExposed,
+  }) : assert(value is String);
+
+  factory TextProperty.clone(Property source, String id) {
+    source as TextProperty;
+    return TextProperty(
+      id: id,
+      idname: source.idname,
+      label: source.label,
+      dataType: source.dataType,
+      value: source.value,
+      isExposed: source.isExposed,
+    );
+  }
+}
+
 /// For Photo values.
 class PhotoProperty<Photo> extends Property {
   PhotoProperty({

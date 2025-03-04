@@ -189,7 +189,14 @@ class StartupViewModel extends BaseViewModel {
           max: 10000.0,
           isExposed: false,
         ),
-        //'text':
+        'text': TextProperty(
+          id: '',
+          idname: 'text',
+          label: 'Text',
+          dataType: String,
+          value: '',
+          isExposed: false,
+        ),
         'size': DoubleProperty(
           id: '',
           idname: 'size',

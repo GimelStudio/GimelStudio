@@ -24,6 +24,14 @@ class OverlaysService with ListenableServiceMixin {
   SelectionBoxOverlay? get selectionOverlay =>
       _showOverlays == true ? calculateSelectionBoxOverlay(selectedLayers) : null;
 
+  String textInputOverlayText = '';
+  TextInputOverlay? get textInputOverlay => TextInputOverlay(text: textInputOverlayText);
+
+  void changeText(String text) {
+    textInputOverlayText = text;
+    notifyListeners();
+  }
+
   bool isWithinSelectionBounds(Offset position) {
     return selectionOverlay?.itemBounds.contains(position) ?? false;
   }

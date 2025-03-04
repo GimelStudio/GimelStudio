@@ -36,6 +36,11 @@ class ViewportPanelModel extends ReactiveViewModel {
   List<CanvasItem> get items => activeDocument?.result ?? [];
 
   SelectionBoxOverlay? get selectionOverlay => _overlaysService.selectionOverlay;
+  TextInputOverlay? get textInputOverlay => _overlaysService.textInputOverlay;
+
+  void onChangeText(String text) {
+    _overlaysService.changeText(text);
+  }
 
   @override
   List<ListenableServiceMixin> get listenableServices => [

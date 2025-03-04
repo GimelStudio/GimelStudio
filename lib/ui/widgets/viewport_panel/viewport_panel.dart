@@ -386,6 +386,14 @@ class SelectionBoxOverlay {
   }
 }
 
+class TextInputOverlay {
+  TextInputOverlay({
+    required this.text,
+  });
+
+  final String text;
+}
+
 class CanvasWidget extends StatelessWidget {
   const CanvasWidget({
     super.key,
@@ -423,6 +431,61 @@ class CanvasOverlaysWidget extends StatelessWidget {
         selectionOverlay: selectionOverlay,
       ),
       child: const SizedBox.expand(),
+    );
+  }
+}
+
+class TextInputOverlayWidget extends StatefulWidget {
+  const TextInputOverlayWidget({
+    super.key,
+    required this.textInputOverlay,
+    required this.onChangeText,
+  });
+
+  final TextInputOverlay? textInputOverlay;
+  final ValueChanged<String> onChangeText;
+
+  @override
+  State<TextInputOverlayWidget> createState() => _TextInputOverlayWidgetState();
+}
+
+class _TextInputOverlayWidgetState extends State<TextInputOverlayWidget> {
+  final TextEditingController _textController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      left: 0.0,
+      top: 0.0,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(minWidth: 48),
+        child: IntrinsicWidth(
+          child: TextField(
+            controller: _textController,
+            style: TextStyle(
+              color: Colors.black.withAlpha(120),
+              fontSize: 124.0,
+            ),
+            cursorColor: Colors.black,
+            cursorHeight: 124.0,
+            decoration: null,
+            textAlignVertical: TextAlignVertical.center,
+            textAlign: TextAlign.start,
+            onChanged: (value) => widget.onChangeText.call(value),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -475,6 +538,10 @@ class ViewportPanel extends StackedView<ViewportPanelModel> {
                             CanvasOverlaysWidget(
                               selectedLayers: viewModel.selectedLayers,
                               selectionOverlay: viewModel.selectionOverlay,
+                            ),
+                            TextInputOverlayWidget(
+                              textInputOverlay: viewModel.textInputOverlay,
+                              onChangeText: viewModel.onChangeText,
                             ),
                           ],
                         ),

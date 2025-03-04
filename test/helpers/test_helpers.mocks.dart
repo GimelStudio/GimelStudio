@@ -30,6 +30,7 @@ import 'package:gimelstudio/services/node_registry_service.dart' as _i18;
 import 'package:gimelstudio/services/nodegraphs_service.dart' as _i15;
 import 'package:gimelstudio/services/overlays_service.dart' as _i29;
 import 'package:gimelstudio/services/rectangle_tool_service.dart' as _i27;
+import 'package:gimelstudio/services/text_tool_service.dart' as _i35;
 import 'package:gimelstudio/services/tool_service.dart' as _i28;
 import 'package:gimelstudio/services/viewport_service.dart' as _i10;
 import 'package:gimelstudio/ui/common/enums.dart' as _i23;
@@ -2094,33 +2095,23 @@ class MockToolService extends _i1.Mock implements _i28.ToolService {
 /// See the documentation for Mockito's code generation for more information.
 class MockOverlaysService extends _i1.Mock implements _i29.OverlaysService {
   @override
-  double get aspectRatioWidth => (super.noSuchMethod(
-        Invocation.getter(#aspectRatioWidth),
-        returnValue: 0.0,
-        returnValueForMissingStub: 0.0,
-      ) as double);
-
-  @override
-  set aspectRatioWidth(double? _aspectRatioWidth) => super.noSuchMethod(
-        Invocation.setter(
-          #aspectRatioWidth,
-          _aspectRatioWidth,
+  String get textInputOverlayText => (super.noSuchMethod(
+        Invocation.getter(#textInputOverlayText),
+        returnValue: _i8.dummyValue<String>(
+          this,
+          Invocation.getter(#textInputOverlayText),
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValueForMissingStub: _i8.dummyValue<String>(
+          this,
+          Invocation.getter(#textInputOverlayText),
+        ),
+      ) as String);
 
   @override
-  double get aspectRatioHeight => (super.noSuchMethod(
-        Invocation.getter(#aspectRatioHeight),
-        returnValue: 0.0,
-        returnValueForMissingStub: 0.0,
-      ) as double);
-
-  @override
-  set aspectRatioHeight(double? _aspectRatioHeight) => super.noSuchMethod(
+  set textInputOverlayText(String? _textInputOverlayText) => super.noSuchMethod(
         Invocation.setter(
-          #aspectRatioHeight,
-          _aspectRatioHeight,
+          #textInputOverlayText,
+          _textInputOverlayText,
         ),
         returnValueForMissingStub: null,
       );
@@ -2145,6 +2136,15 @@ class MockOverlaysService extends _i1.Mock implements _i29.OverlaysService {
         returnValue: 0,
         returnValueForMissingStub: 0,
       ) as int);
+
+  @override
+  void changeText(String? text) => super.noSuchMethod(
+        Invocation.method(
+          #changeText,
+          [text],
+        ),
+        returnValueForMissingStub: null,
+      );
 
   @override
   bool isWithinSelectionBounds(_i5.Offset? position) => (super.noSuchMethod(
@@ -2455,6 +2455,122 @@ class MockImageToolService extends _i1.Mock implements _i33.ImageToolService {
         Invocation.setter(
           #lockAspectRatio,
           _lockAspectRatio,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  List<_i3.Layer> get layers => (super.noSuchMethod(
+        Invocation.getter(#layers),
+        returnValue: <_i3.Layer>[],
+        returnValueForMissingStub: <_i3.Layer>[],
+      ) as List<_i3.Layer>);
+
+  @override
+  List<_i3.Layer> get selectedLayers => (super.noSuchMethod(
+        Invocation.getter(#selectedLayers),
+        returnValue: <_i3.Layer>[],
+        returnValueForMissingStub: <_i3.Layer>[],
+      ) as List<_i3.Layer>);
+
+  @override
+  List<_i14.CanvasItem> get items => (super.noSuchMethod(
+        Invocation.getter(#items),
+        returnValue: <_i14.CanvasItem>[],
+        returnValueForMissingStub: <_i14.CanvasItem>[],
+      ) as List<_i14.CanvasItem>);
+
+  @override
+  void activate() => super.noSuchMethod(
+        Invocation.method(
+          #activate,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void deactivate() => super.noSuchMethod(
+        Invocation.method(
+          #deactivate,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onHover(_i26.PointerHoverEvent? event) => super.noSuchMethod(
+        Invocation.method(
+          #onHover,
+          [event],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onTapDown(_i6.TapDownDetails? event) => super.noSuchMethod(
+        Invocation.method(
+          #onTapDown,
+          [event],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onPanDown(_i6.DragDownDetails? event) => super.noSuchMethod(
+        Invocation.method(
+          #onPanDown,
+          [event],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onPanUpdate(_i6.DragUpdateDetails? event) => super.noSuchMethod(
+        Invocation.method(
+          #onPanUpdate,
+          [event],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onPanCancel() => super.noSuchMethod(
+        Invocation.method(
+          #onPanCancel,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onPanEnd(_i6.DragEndDetails? event) => super.noSuchMethod(
+        Invocation.method(
+          #onPanEnd,
+          [event],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
+/// A class which mocks [TextToolService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTextToolService extends _i1.Mock implements _i35.TextToolService {
+  @override
+  set draggingStartPosition(_i5.Offset? _draggingStartPosition) => super.noSuchMethod(
+        Invocation.setter(
+          #draggingStartPosition,
+          _draggingStartPosition,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  set lastPosition(_i5.Offset? _lastPosition) => super.noSuchMethod(
+        Invocation.setter(
+          #lastPosition,
+          _lastPosition,
         ),
         returnValueForMissingStub: null,
       );

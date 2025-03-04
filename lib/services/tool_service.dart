@@ -4,12 +4,14 @@ import 'package:gimelstudio/services/cursor_tool_service.dart';
 import 'package:gimelstudio/services/hand_tool_service.dart';
 import 'package:gimelstudio/services/image_tool_service.dart';
 import 'package:gimelstudio/services/rectangle_tool_service.dart';
+import 'package:gimelstudio/services/text_tool_service.dart';
 import 'package:stacked/stacked.dart';
 
 class ToolService with ListenableServiceMixin {
   final _cursorToolService = locator<CursorToolService>();
   final _handToolService = locator<HandToolService>();
   final _rectangleToolService = locator<RectangleToolService>();
+  final _textToolService = locator<TextToolService>();
   final _imageToolService = locator<ImageToolService>();
 
   ToolService() {
@@ -41,6 +43,8 @@ class ToolService with ListenableServiceMixin {
         return _handToolService;
       case Tool.rectangle:
         return _rectangleToolService;
+      case Tool.text:
+        return _textToolService;
       case Tool.image:
         return _imageToolService;
       default:

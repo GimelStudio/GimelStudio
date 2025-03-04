@@ -70,6 +70,8 @@ class NodeRegistryService {
           newProperty = DoubleProperty.clone(property, newPropertyId);
         case bool:
           newProperty = BooleanProperty.clone(property, newPropertyId);
+        case String:
+          newProperty = TextProperty.clone(property, newPropertyId);
         case Photo:
           newProperty = PhotoProperty.clone(property, newPropertyId);
         case CanvasItem:
