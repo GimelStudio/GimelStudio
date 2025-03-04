@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 import 'dart:ui' as ui;
-// TODO
 import 'package:flutter/material.dart';
+import 'package:gimelstudio/common/utils.dart';
 
 enum FillType {
   none,
@@ -83,6 +83,14 @@ abstract class CanvasItem {
   /// This is used for the selection box.
   Rect bounds = const Rect.fromLTWH(0, 0, 0, 0);
 
+  // TODO
+  /// Whether to lock the current aspect ratio of the CanvasItem.
+  //bool lockAspectRatio = false;
+
+  // TODO
+  /// The current aspect ratio of the CanvasItem.
+  //double aspectRatio = 0.0;
+
   /// Whether [point] is inside the CanvasItem.
   ///
   /// This is used for selection hittests.
@@ -102,6 +110,7 @@ class CanvasRectangle extends CanvasItem {
     required this.y,
     required this.width,
     required this.height,
+    required this.lockAspectRatio,
     required this.rotation,
     required this.fill,
     required this.border,
@@ -112,7 +121,8 @@ class CanvasRectangle extends CanvasItem {
   double y;
   double width;
   double height;
-  double rotation; // In degrees
+  bool lockAspectRatio;
+  double rotation;
   CanvasItemFill fill;
   CanvasItemBorder border;
   CanvasItemBorderRadius borderRadius;
@@ -121,7 +131,10 @@ class CanvasRectangle extends CanvasItem {
   Offset get origin => Offset(x + (width / 2.0), y + (height / 2.0)); // For now, place it at the center
 
   @override
-  Rect get bounds => Rect.fromLTWH(x, y, width, height);
+  Rect get bounds => calculateRectWithRotation(Rect.fromLTWH(x, y, width, height), origin, rotation);
+
+  // @override
+  // double get aspectRatio => 0.0;
 
   @override
   bool isInside(Offset point) {
@@ -225,7 +238,8 @@ class CanvasImage extends CanvasItem {
     required this.y,
     required this.width,
     required this.height,
-    this.lockAspectRatio = true,
+    required this.lockAspectRatio,
+    required this.rotation,
     required this.imageData,
   });
 
@@ -234,10 +248,14 @@ class CanvasImage extends CanvasItem {
   double width;
   double height;
   bool lockAspectRatio;
+  double rotation;
   ui.Image? imageData;
 
   @override
-  Rect get bounds => Rect.fromLTWH(x, y, width, height);
+  Offset get origin => Offset(x + (width / 2.0), y + (height / 2.0)); // For now, place it at the center
+
+  @override
+  Rect get bounds => calculateRectWithRotation(Rect.fromLTWH(x, y, width, height), origin, rotation);
 
   @override
   bool isInside(Offset point) {
