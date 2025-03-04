@@ -23,6 +23,7 @@ dependencies:
   #image_picker: ^1.0.7
   image: ^4.5.2
   file_selector: ^1.0.3
+  matrix4_transform: ^4.0.1
 
   # Used for evaluating math expressions within inputs and for other math.
   math_expressions: ^2.7.0
