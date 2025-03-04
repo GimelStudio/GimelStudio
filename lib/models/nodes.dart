@@ -89,6 +89,7 @@ class RectangleNode extends Node {
     double y = eval.evaluateProperty('y');
     double width = eval.evaluateProperty('width');
     double height = eval.evaluateProperty('height');
+    bool lockAspectRatio = eval.evaluateProperty('lock_aspect_ratio');
     double rotation = eval.evaluateProperty('rotation');
     CanvasItemFill fill = eval.evaluateProperty('fill');
     CanvasItemBorder border = eval.evaluateProperty('border');
@@ -103,6 +104,7 @@ class RectangleNode extends Node {
         y: y,
         width: width,
         height: height,
+        lockAspectRatio: lockAspectRatio,
         rotation: rotation,
         fill: fill,
         border: border,
@@ -203,6 +205,8 @@ class ImageNode extends Node {
     double y = eval.evaluateProperty('y');
     double width = eval.evaluateProperty('width');
     double height = eval.evaluateProperty('height');
+    bool lockAspectRatio = eval.evaluateProperty('lock_aspect_ratio');
+    double rotation = eval.evaluateProperty('rotation');
     Photo photo = eval.evaluateProperty('photo');
 
     return {
@@ -214,6 +218,8 @@ class ImageNode extends Node {
         y: y,
         width: width,
         height: height,
+        lockAspectRatio: lockAspectRatio,
+        rotation: rotation,
         imageData: photo.uiData,
       ),
     };

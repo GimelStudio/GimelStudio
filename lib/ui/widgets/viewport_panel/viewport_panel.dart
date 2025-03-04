@@ -1,9 +1,30 @@
+import 'dart:math' as math;
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:gimelstudio/models/canvas_item.dart';
 import 'package:gimelstudio/models/layer.dart';
 import 'package:gimelstudio/ui/widgets/viewport_panel/viewport_panel_model.dart';
 import 'package:stacked/stacked.dart';
+
+void drawRotated(
+  Canvas canvas,
+  Offset center,
+  double degrees,
+  VoidCallback drawFunction,
+) {
+  // canvas.save() can be expensive so we skip it
+  // if rotation doesn't need to be applied.
+  if (degrees == 0.0) {
+    drawFunction();
+  } else {
+    canvas.save();
+    canvas.translate(center.dx, center.dy);
+    canvas.rotate(degrees * (math.pi / 180));
+    canvas.translate(-center.dx, -center.dy);
+    drawFunction();
+    canvas.restore();
+  }
+}
 
 // TODO: these should be moved to their own files.
 class ViewportCanvasPainter extends CustomPainter {
@@ -19,7 +40,7 @@ class ViewportCanvasPainter extends CustomPainter {
       CanvasItem item = items[index];
 
       if (item.type == 'rectangle') {
-        item = item as CanvasRectangle;
+        item as CanvasRectangle;
 
         final Rect rect = Rect.fromLTWH(
           item.x,
@@ -63,10 +84,12 @@ class ViewportCanvasPainter extends CustomPainter {
         }
 
         if (fillType != FillType.none) {
-          canvas.drawRRect(
-            roundedRect,
-            fillPaint,
-          );
+          drawRotated(canvas, item.origin, item.rotation, () {
+            canvas.drawRRect(
+              roundedRect,
+              fillPaint,
+            );
+          });
         }
 
         // Border
@@ -98,13 +121,15 @@ class ViewportCanvasPainter extends CustomPainter {
         }
 
         if (borderFillType != FillType.none && borderThickness != 0.0) {
-          canvas.drawRRect(
-            roundedRect,
-            borderPaint,
-          );
+          drawRotated(canvas, item.origin, item.rotation, () {
+            canvas.drawRRect(
+              roundedRect,
+              borderPaint,
+            );
+          });
         }
       } else if (item.type == 'text') {
-        item = item as CanvasText;
+        item as CanvasText;
 
         // Fill
         Paint fillPaint = Paint()
@@ -131,24 +156,24 @@ class ViewportCanvasPainter extends CustomPainter {
         textPainter.paint(canvas, Offset(item.x, item.y));
         canvas.restore();
       } else if (item.type == 'image') {
-        item = item as CanvasImage;
+        item as CanvasImage;
 
         ui.Image? image = item.imageData;
 
         if (image != null) {
-          paintImage(
-            opacity: item.opacity / 255.0,
-            canvas: canvas,
-            rect: item.bounds, // Rect.fromLTRB(item.x, item.y, item.width, item.height),
-            image: image,
-            fit: BoxFit.cover,
-            blendMode: item.blendMode,
-          );
-          //final paint = Paint()..blendMode = item.blendMode;
-          //canvas.drawImage(image, Offset(item.x, item.y), paint);
+          drawRotated(canvas, item.origin, item.rotation, () {
+            paintImage(
+              opacity: item.opacity / 255.0,
+              canvas: canvas,
+              rect: Rect.fromLTRB(item.x, item.y, item.x + item.width, item.y + item.height),
+              image: image,
+              fit: BoxFit.cover,
+              blendMode: item.blendMode,
+            );
+          });
         }
       } else if (item.type == 'oval') {
-        item = item as CanvasOval;
+        item as CanvasOval;
 
         final paint = Paint()
           ..color = item.fill.solidColor.withAlpha(item.opacity)

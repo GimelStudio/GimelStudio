@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:gimelstudio/app/app.locator.dart';
 import 'package:gimelstudio/models/layer.dart';
@@ -40,8 +39,10 @@ class OverlaysService with ListenableServiceMixin {
   Rect calculateMinBounds(List<Layer> selectedLayers) {
     List<Offset> points = [];
     for (Layer item in selectedLayers) {
-      points.add(item.value.bounds.topLeft);
-      points.add(item.value.bounds.bottomRight);
+      Rect rectBounds = item.value.bounds;
+
+      points.add(rectBounds.topLeft);
+      points.add(rectBounds.bottomRight);
     }
 
     if (points.isEmpty) return Rect.zero;
