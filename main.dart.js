@@ -83835,23 +83835,24 @@ new A.aC(l,A.l(l).h("aC<2>")).hZ(0,new A.a9u()).fQ("photo").e=k.r
 m.a0()
 k.f=p
 k.b.mE(0,s.gbk())},
-vg(a){var s,r,q,p,o,n,m,l,k,j,i,h,g,f=this,e=f.a
-if(e.gbk().length===0||f.e==null||f.f==null||f.r==null)return
-for(s=e.gbk(),r=s.length,q=a.e,p=q.a,o=q.b,n=f.c,m=0;m<s.length;s.length===r||(0,A.E)(s),++m){l=e.o0(s[m])
+vg(a){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e=this,d=e.a
+if(d.gbk().length===0||e.e==null||e.f==null||e.r==null)return
+for(s=d.gbk(),r=s.length,q=a.e,p=q.a,o=q.b,n=e.c,m=0;m<s.length;s.length===r||(0,A.E)(s),++m){l=d.o0(s[m])
 k=l.fQ("width")
 j=l.fQ("height")
-i=f.f
+i=e.f
 h=i.a
 i=i.b
 g=J.yM(k.e,p-h)
 J.yM(j.e,o-i)
-i=f.w
-h=f.x
+f=g/(e.w/e.x)
+if(g===0?1/g<0:g<0)g=Math.abs(g)
+if(f===0?1/f<0:f<0)f=Math.abs(f)
 k.e=g
 n.a0()
-j.e=g/(i/h)
+j.e=f
 n.a0()
-f.f=q}f.b.mE(0,e.gbk())},
+e.f=q}e.b.mE(0,d.gbk())},
 vd(){this.e=this.f=null},
 vf(a){this.e=this.f=null}}
 A.a9u.prototype={
