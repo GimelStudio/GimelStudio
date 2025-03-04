@@ -31,7 +31,7 @@ class ImageToolService implements ToolModeEventHandler {
   int photoWidth = 0;
   int photoHeight = 0;
 
-  // Aspect ratio is locked by default.
+  /// Aspect ratio is locked by default.
   bool lockAspectRatio = true;
 
   @override
@@ -125,6 +125,13 @@ class ImageToolService implements ToolModeEventHandler {
           double aspectRatio = photoWidth / photoHeight;
 
           newHeight = newWidth / aspectRatio;
+        }
+
+        if (newWidth.isNegative) {
+          newWidth = newWidth.abs();
+        }
+        if (newHeight.isNegative) {
+          newHeight = newHeight.abs();
         }
 
         _nodegraphsService.onEditNodePropertyValue(widthProp, newWidth);
