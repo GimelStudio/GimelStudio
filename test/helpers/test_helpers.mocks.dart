@@ -1000,6 +1000,22 @@ class MockLayersService extends _i1.Mock implements _i13.LayersService {
       );
 
   @override
+  void setLayerBlendMode(
+    _i3.Layer? layer,
+    String? blendMode,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #setLayerBlendMode,
+          [
+            layer,
+            blendMode,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void setLayerOpacity(
     _i3.Layer? layer,
     int? opacity,
@@ -2078,6 +2094,38 @@ class MockToolService extends _i1.Mock implements _i28.ToolService {
 /// See the documentation for Mockito's code generation for more information.
 class MockOverlaysService extends _i1.Mock implements _i29.OverlaysService {
   @override
+  double get aspectRatioWidth => (super.noSuchMethod(
+        Invocation.getter(#aspectRatioWidth),
+        returnValue: 0.0,
+        returnValueForMissingStub: 0.0,
+      ) as double);
+
+  @override
+  set aspectRatioWidth(double? _aspectRatioWidth) => super.noSuchMethod(
+        Invocation.setter(
+          #aspectRatioWidth,
+          _aspectRatioWidth,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  double get aspectRatioHeight => (super.noSuchMethod(
+        Invocation.getter(#aspectRatioHeight),
+        returnValue: 0.0,
+        returnValueForMissingStub: 0.0,
+      ) as double);
+
+  @override
+  set aspectRatioHeight(double? _aspectRatioHeight) => super.noSuchMethod(
+        Invocation.setter(
+          #aspectRatioHeight,
+          _aspectRatioHeight,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   List<_i3.Layer> get selectedLayers => (super.noSuchMethod(
         Invocation.getter(#selectedLayers),
         returnValue: <_i3.Layer>[],
@@ -2359,6 +2407,54 @@ class MockImageToolService extends _i1.Mock implements _i33.ImageToolService {
         Invocation.setter(
           #photo,
           _photo,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  int get photoWidth => (super.noSuchMethod(
+        Invocation.getter(#photoWidth),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+
+  @override
+  set photoWidth(int? _photoWidth) => super.noSuchMethod(
+        Invocation.setter(
+          #photoWidth,
+          _photoWidth,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  int get photoHeight => (super.noSuchMethod(
+        Invocation.getter(#photoHeight),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+
+  @override
+  set photoHeight(int? _photoHeight) => super.noSuchMethod(
+        Invocation.setter(
+          #photoHeight,
+          _photoHeight,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  bool get lockAspectRatio => (super.noSuchMethod(
+        Invocation.getter(#lockAspectRatio),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  set lockAspectRatio(bool? _lockAspectRatio) => super.noSuchMethod(
+        Invocation.setter(
+          #lockAspectRatio,
+          _lockAspectRatio,
         ),
         returnValueForMissingStub: null,
       );
