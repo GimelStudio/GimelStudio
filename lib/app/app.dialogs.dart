@@ -23,14 +23,10 @@ void setupDialogUi() {
   final dialogService = locator<DialogService>();
 
   final Map<DialogType, DialogBuilder> builders = {
-    DialogType.infoAlert: (context, request, completer) =>
-        InfoAlertDialog(request: request, completer: completer),
-    DialogType.newDocument: (context, request, completer) =>
-        NewDocumentDialog(request: request, completer: completer),
-    DialogType.preferences: (context, request, completer) =>
-        PreferencesDialog(request: request, completer: completer),
-    DialogType.about: (context, request, completer) =>
-        AboutDialog(request: request, completer: completer),
+    DialogType.infoAlert: (context, request, completer) => InfoAlertDialog(request: request, completer: completer),
+    DialogType.newDocument: (context, request, completer) => NewDocumentDialog(request: request, completer: completer),
+    DialogType.preferences: (context, request, completer) => PreferencesDialog(request: request, completer: completer),
+    DialogType.about: (context, request, completer) => AboutDialog(request: request, completer: completer),
   };
 
   dialogService.registerCustomDialogBuilders(builders);

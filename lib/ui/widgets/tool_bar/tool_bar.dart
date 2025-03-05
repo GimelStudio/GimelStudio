@@ -33,6 +33,8 @@ class ToolBar extends StackedView<ToolBarModel> {
                     isDisabled: false,
                     normalIcon: PhosphorIcons.cursor(PhosphorIconsStyle.light),
                     selectedIcon: PhosphorIcons.cursor(PhosphorIconsStyle.fill),
+                    tooltipText: 'Move Tool',
+                    //tooltipKeyboardShortcut: 'V',
                     onTap: () => viewModel.onSelectTool(Tool.cursor),
                   ),
                   ToolBarBtn(
@@ -40,6 +42,7 @@ class ToolBar extends StackedView<ToolBarModel> {
                     isDisabled: false,
                     normalIcon: PhosphorIcons.hand(PhosphorIconsStyle.light),
                     selectedIcon: PhosphorIcons.hand(PhosphorIconsStyle.fill),
+                    tooltipText: 'Hand Tool',
                     onTap: () => viewModel.onSelectTool(Tool.hand),
                   ),
                   ToolBarBtn(
@@ -47,6 +50,7 @@ class ToolBar extends StackedView<ToolBarModel> {
                     isDisabled: true,
                     normalIcon: PhosphorIcons.navigationArrow(PhosphorIconsStyle.light),
                     selectedIcon: PhosphorIcons.navigationArrow(PhosphorIconsStyle.fill),
+                    tooltipText: 'Node Tool',
                     onTap: () => viewModel.onSelectTool(Tool.node),
                   ),
                   ToolBarBtn(
@@ -54,13 +58,16 @@ class ToolBar extends StackedView<ToolBarModel> {
                     isDisabled: false,
                     normalIcon: PhosphorIcons.rectangle(PhosphorIconsStyle.light),
                     selectedIcon: PhosphorIcons.rectangle(PhosphorIconsStyle.fill),
+                    tooltipText: 'Rectangle Tool',
+                    //tooltipKeyboardShortcut: 'R',
                     onTap: () => viewModel.onSelectTool(Tool.rectangle),
                   ),
                   ToolBarBtn(
-                    isSelected: viewModel.activeTool == Tool.circle,
+                    isSelected: viewModel.activeTool == Tool.circle, // TODO: rename to oval
                     isDisabled: true,
                     normalIcon: PhosphorIcons.circle(PhosphorIconsStyle.light),
                     selectedIcon: PhosphorIcons.circle(PhosphorIconsStyle.fill),
+                    tooltipText: 'Oval Tool',
                     onTap: () => viewModel.onSelectTool(Tool.circle),
                   ),
                   ToolBarBtn(
@@ -68,6 +75,7 @@ class ToolBar extends StackedView<ToolBarModel> {
                     isDisabled: true,
                     normalIcon: PhosphorIcons.triangle(PhosphorIconsStyle.light),
                     selectedIcon: PhosphorIcons.triangle(PhosphorIconsStyle.fill),
+                    tooltipText: 'Triangle Tool',
                     onTap: () => viewModel.onSelectTool(Tool.triangle),
                   ),
                   ToolBarBtn(
@@ -75,6 +83,7 @@ class ToolBar extends StackedView<ToolBarModel> {
                     isDisabled: true,
                     normalIcon: PhosphorIcons.pentagon(PhosphorIconsStyle.light),
                     selectedIcon: PhosphorIcons.pentagon(PhosphorIconsStyle.fill),
+                    tooltipText: 'Polygon Tool',
                     onTap: () => viewModel.onSelectTool(Tool.polygon),
                   ),
                   ToolBarBtn(
@@ -82,6 +91,7 @@ class ToolBar extends StackedView<ToolBarModel> {
                     isDisabled: true,
                     normalIcon: PhosphorIcons.textT(PhosphorIconsStyle.light),
                     selectedIcon: PhosphorIcons.textT(PhosphorIconsStyle.fill),
+                    tooltipText: 'Text Tool',
                     onTap: () => viewModel.onSelectTool(Tool.text),
                   ),
                   ToolBarBtn(
@@ -89,6 +99,8 @@ class ToolBar extends StackedView<ToolBarModel> {
                     isDisabled: false,
                     normalIcon: PhosphorIcons.imageSquare(PhosphorIconsStyle.light),
                     selectedIcon: PhosphorIcons.imageSquare(PhosphorIconsStyle.fill),
+                    tooltipText: 'Image Tool',
+                    //tooltipKeyboardShortcut: 'M',
                     onTap: () => viewModel.onSelectTool(Tool.image),
                   ),
                   ToolBarBtn(
@@ -96,6 +108,7 @@ class ToolBar extends StackedView<ToolBarModel> {
                     isDisabled: true,
                     normalIcon: PhosphorIcons.eyedropper(PhosphorIconsStyle.light),
                     selectedIcon: PhosphorIcons.eyedropper(PhosphorIconsStyle.fill),
+                    tooltipText: 'Eyedropper Tool',
                     onTap: () => viewModel.onSelectTool(Tool.eyedropper),
                   ),
                 ],
