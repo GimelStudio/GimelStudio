@@ -19,6 +19,7 @@ class DocumentTabs extends StackedView<DocumentTabsModel> {
         InkWell(
           key: Key(document.id),
           onTapDown: (event) => viewModel.onSelectDocumentTab(document),
+          overlayColor: WidgetStatePropertyAll(Colors.transparent),
           child: DocumentTabItem(
             key: Key(document.id),
             index: viewModel.documents.indexWhere((i) => document.id == i.id),

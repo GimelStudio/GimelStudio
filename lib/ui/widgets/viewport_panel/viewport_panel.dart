@@ -538,10 +538,7 @@ class ViewportPanel extends StackedView<ViewportPanelModel> {
                       child: Container(
                         width: viewModel.activeDocument?.size.width,
                         height: viewModel.activeDocument?.size.height,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.black),
-                        ),
+                        color: Colors.white,
                         child: Stack(
                           children: [
                             ClipRect(child: CanvasWidget(items: viewModel.items)),
