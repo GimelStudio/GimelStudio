@@ -196,29 +196,61 @@ class NewDocumentDialog extends StackedView<NewDocumentDialogModel> {
             ),
             Padding(
               padding: const EdgeInsets.only(right: 20.0, bottom: 10.0),
-              child: InkWell(
-                onTap: () {
-                  Document newDocument = viewModel.onCreateNewDocument();
-                  completer(
-                    DialogResponse(confirmed: true, data: newDocument),
-                  );
-                },
-                child: Container(
-                  width: 100.0,
-                  height: 34.0,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF303030),
-                    borderRadius: BorderRadius.circular(4.0),
-                  ),
-                  child: const Text(
-                    'Create',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14.0,
+              child: Row(
+                spacing: 8.0,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  if (request.data == true)
+                    FilledButton(
+                      onPressed: () => completer(DialogResponse(confirmed: false)),
+                      style: ButtonStyle(
+                        overlayColor: WidgetStatePropertyAll(Colors.transparent),
+                        shape: WidgetStatePropertyAll(
+                          RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
+                        ),
+                        backgroundColor: WidgetStateProperty.fromMap(<WidgetStatesConstraint, Color>{
+                          WidgetState.focused: Color(0xFF3B3B3B),
+                          WidgetState.pressed | WidgetState.hovered: Color(0xFF3B3B3B),
+                          WidgetState.any: Color(0xFF303030),
+                        }),
+                      ),
+                      child: const Text(
+                        'Cancel',
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 14.0,
+                        ),
+                      ),
+                    ),
+                  FilledButton(
+                    onPressed: () {
+                      Document newDocument = viewModel.onCreateNewDocument();
+                      completer(
+                        DialogResponse(confirmed: true, data: newDocument),
+                      );
+                    },
+                    style: ButtonStyle(
+                      overlayColor: WidgetStatePropertyAll(Colors.transparent),
+                      shape: WidgetStatePropertyAll(
+                        RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
+                      ),
+                      backgroundColor: WidgetStateProperty.fromMap(<WidgetStatesConstraint, Color>{
+                        WidgetState.focused: Color(0xFF3B3B3B),
+                        WidgetState.pressed | WidgetState.hovered: Color(0xFF3B3B3B),
+                        WidgetState.any: Color(0xFF303030),
+                      }),
+                    ),
+                    child: const Text(
+                      'Create',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 14.0,
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
             ),
           ],
