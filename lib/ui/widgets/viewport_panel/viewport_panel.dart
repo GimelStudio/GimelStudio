@@ -293,7 +293,7 @@ class SelectionOverlayHandle {
 
   Rect get handleBounds {
     // Scale the handles when the viewport scale is smaller.
-    handleSize = 8.0 + (14.0 / scale);
+    handleSize = 8.0 + (7.0 / scale);
     switch (side) {
       case SelectionOverlayHandleSide.top:
         return Rect.fromLTWH(
@@ -498,6 +498,13 @@ class _TextInputOverlayWidgetState extends State<TextInputOverlayWidget> {
 
 class ViewportPanel extends StackedView<ViewportPanelModel> {
   const ViewportPanel({super.key});
+
+
+@override
+  void onDispose(ViewportPanelModel viewModel) {
+    viewModel.onDispose();
+    super.onDispose(viewModel);
+  }
 
   @override
   Widget builder(

@@ -40,6 +40,10 @@ class ViewportPanelModel extends ReactiveViewModel {
 
   TransformationController transformationController = TransformationController();
 
+  void onDispose() {
+    transformationController.dispose();
+  }
+
   void setViewportScale(double scale) {
     _overlaysService.setViewportScale(scale);
   }
