@@ -1,4 +1,4 @@
-import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
 import 'package:gimelstudio/app/app.locator.dart';
 import 'package:gimelstudio/models/canvas_item.dart';
 import 'package:gimelstudio/models/document.dart';
@@ -37,6 +37,12 @@ class ViewportPanelModel extends ReactiveViewModel {
 
   SelectionBoxOverlay? get selectionOverlay => _overlaysService.selectionOverlay;
   TextInputOverlay? get textInputOverlay => _overlaysService.textInputOverlay;
+
+  TransformationController transformationController = TransformationController();
+
+  void setViewportScale(double scale) {
+    _overlaysService.setViewportScale(scale);
+  }
 
   void onChangeText(String text) {
     _overlaysService.changeText(text);

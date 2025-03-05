@@ -22,10 +22,18 @@ class OverlaysService with ListenableServiceMixin {
   bool get showOverlays => _showOverlays;
 
   SelectionBoxOverlay? get selectionOverlay =>
-      _showOverlays == true ? calculateSelectionBoxOverlay(selectedLayers) : null;
+      _showOverlays == true ? calculateSelectionBoxOverlay(selectedLayers, viewportScale) : null;
+
+  double _viewportScale = 1.0;
+  double get viewportScale => _viewportScale;
 
   String textInputOverlayText = '';
   TextInputOverlay? get textInputOverlay => TextInputOverlay(text: textInputOverlayText);
+
+  void setViewportScale(double scale) {
+    _viewportScale = scale;
+    notifyListeners();
+  }
 
   void changeText(String text) {
     textInputOverlayText = text;
@@ -36,11 +44,11 @@ class OverlaysService with ListenableServiceMixin {
     return selectionOverlay?.itemBounds.contains(position) ?? false;
   }
 
-  SelectionBoxOverlay? calculateSelectionBoxOverlay(List<Layer> selectedLayers) {
+  SelectionBoxOverlay? calculateSelectionBoxOverlay(List<Layer> selectedLayers, double viewportScale) {
     if (selectedLayers.isEmpty) {
       return null;
     } else {
-      return SelectionBoxOverlay(itemBounds: calculateMinBounds(selectedLayers));
+      return SelectionBoxOverlay(scale: viewportScale, itemBounds: calculateMinBounds(selectedLayers));
     }
   }
 

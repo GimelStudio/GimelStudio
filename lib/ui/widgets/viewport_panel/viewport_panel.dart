@@ -279,10 +279,12 @@ enum SelectionOverlayHandleSide {
 
 class SelectionOverlayHandle {
   SelectionOverlayHandle({
+    required this.scale,
     required this.side,
     required this.itemBounds,
   });
 
+  final double scale;
   double handleSize = 16.0;
   double sideHandleSize = 8.0;
 
@@ -290,6 +292,8 @@ class SelectionOverlayHandle {
   Rect itemBounds;
 
   Rect get handleBounds {
+    // Scale the handles when the viewport scale is smaller.
+    handleSize = 8.0 + (14.0 / scale);
     switch (side) {
       case SelectionOverlayHandleSide.top:
         return Rect.fromLTWH(
@@ -357,23 +361,25 @@ class SelectionOverlayHandle {
 
 class SelectionBoxOverlay {
   SelectionBoxOverlay({
+    required this.scale,
     required this.itemBounds,
   });
 
+  double scale;
   Rect itemBounds;
 
   List<SelectionOverlayHandle> get sideHandles => [
-        SelectionOverlayHandle(side: SelectionOverlayHandleSide.top, itemBounds: itemBounds),
-        SelectionOverlayHandle(side: SelectionOverlayHandleSide.left, itemBounds: itemBounds),
-        SelectionOverlayHandle(side: SelectionOverlayHandleSide.bottom, itemBounds: itemBounds),
-        SelectionOverlayHandle(side: SelectionOverlayHandleSide.right, itemBounds: itemBounds),
+        SelectionOverlayHandle(scale: scale, side: SelectionOverlayHandleSide.top, itemBounds: itemBounds),
+        SelectionOverlayHandle(scale: scale, side: SelectionOverlayHandleSide.left, itemBounds: itemBounds),
+        SelectionOverlayHandle(scale: scale, side: SelectionOverlayHandleSide.bottom, itemBounds: itemBounds),
+        SelectionOverlayHandle(scale: scale, side: SelectionOverlayHandleSide.right, itemBounds: itemBounds),
       ];
 
   List<SelectionOverlayHandle> get cornerHandles => [
-        SelectionOverlayHandle(side: SelectionOverlayHandleSide.topLeft, itemBounds: itemBounds),
-        SelectionOverlayHandle(side: SelectionOverlayHandleSide.bottomLeft, itemBounds: itemBounds),
-        SelectionOverlayHandle(side: SelectionOverlayHandleSide.topRight, itemBounds: itemBounds),
-        SelectionOverlayHandle(side: SelectionOverlayHandleSide.bottomRight, itemBounds: itemBounds),
+        SelectionOverlayHandle(scale: scale, side: SelectionOverlayHandleSide.topLeft, itemBounds: itemBounds),
+        SelectionOverlayHandle(scale: scale, side: SelectionOverlayHandleSide.bottomLeft, itemBounds: itemBounds),
+        SelectionOverlayHandle(scale: scale, side: SelectionOverlayHandleSide.topRight, itemBounds: itemBounds),
+        SelectionOverlayHandle(scale: scale, side: SelectionOverlayHandleSide.bottomRight, itemBounds: itemBounds),
       ];
 
   SelectionOverlayHandleSide? getHandle(Offset point) {
@@ -503,14 +509,12 @@ class ViewportPanel extends StackedView<ViewportPanelModel> {
       children: [
         Expanded(
           child: InteractiveViewer(
-            minScale: 0.01,
+            minScale: 0.1,
             maxScale: 5.0,
-            onInteractionStart: (ScaleStartDetails details) {
-              print('Interaction started: $details');
-            },
-            onInteractionEnd: (ScaleEndDetails details) {
-              print('Interaction ended: $details');
-            },
+            transformationController: viewModel.transformationController,
+            onInteractionEnd: (ScaleEndDetails details) =>
+                viewModel.setViewportScale(viewModel.transformationController.value.getMaxScaleOnAxis()),
+            boundaryMargin: const EdgeInsets.all(double.infinity),
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: FittedBox(
@@ -539,10 +543,10 @@ class ViewportPanel extends StackedView<ViewportPanelModel> {
                               selectedLayers: viewModel.selectedLayers,
                               selectionOverlay: viewModel.selectionOverlay,
                             ),
-                            TextInputOverlayWidget(
-                              textInputOverlay: viewModel.textInputOverlay,
-                              onChangeText: viewModel.onChangeText,
-                            ),
+                            // TextInputOverlayWidget(
+                            //   textInputOverlay: viewModel.textInputOverlay,
+                            //   onChangeText: viewModel.onChangeText,
+                            // ),
                           ],
                         ),
                       ),

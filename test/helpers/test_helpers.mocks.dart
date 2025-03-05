@@ -2131,11 +2131,27 @@ class MockOverlaysService extends _i1.Mock implements _i29.OverlaysService {
       ) as bool);
 
   @override
+  double get viewportScale => (super.noSuchMethod(
+        Invocation.getter(#viewportScale),
+        returnValue: 0.0,
+        returnValueForMissingStub: 0.0,
+      ) as double);
+
+  @override
   int get listenersCount => (super.noSuchMethod(
         Invocation.getter(#listenersCount),
         returnValue: 0,
         returnValueForMissingStub: 0,
       ) as int);
+
+  @override
+  void setViewportScale(double? scale) => super.noSuchMethod(
+        Invocation.method(
+          #setViewportScale,
+          [scale],
+        ),
+        returnValueForMissingStub: null,
+      );
 
   @override
   void changeText(String? text) => super.noSuchMethod(
@@ -2157,10 +2173,17 @@ class MockOverlaysService extends _i1.Mock implements _i29.OverlaysService {
       ) as bool);
 
   @override
-  _i30.SelectionBoxOverlay? calculateSelectionBoxOverlay(List<_i3.Layer>? selectedLayers) => (super.noSuchMethod(
+  _i30.SelectionBoxOverlay? calculateSelectionBoxOverlay(
+    List<_i3.Layer>? selectedLayers,
+    double? viewportScale,
+  ) =>
+      (super.noSuchMethod(
         Invocation.method(
           #calculateSelectionBoxOverlay,
-          [selectedLayers],
+          [
+            selectedLayers,
+            viewportScale,
+          ],
         ),
         returnValueForMissingStub: null,
       ) as _i30.SelectionBoxOverlay?);
