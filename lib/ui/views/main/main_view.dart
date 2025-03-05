@@ -13,7 +13,7 @@ import '../../widgets/properties_panel/properties_panel.dart';
 import 'main_viewmodel.dart';
 
 class MainView extends StackedView<MainViewModel> {
-  const MainView({Key? key}) : super(key: key);
+  const MainView({super.key});
 
   @override
   void onViewModelReady(MainViewModel viewModel) =>

@@ -4,7 +4,7 @@ import 'package:gimelstudio/app/app.locator.dart';
 import '../helpers/test_helpers.dart';
 
 void main() {
-  group('StartupDialogModel Tests -', () {
+  group('GsFlatIconBtnModel Tests -', () {
     setUp(() => registerServices());
     tearDown(() => locator.reset());
   });

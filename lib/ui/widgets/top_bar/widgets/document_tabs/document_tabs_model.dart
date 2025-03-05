@@ -20,7 +20,7 @@ class DocumentTabsModel extends ReactiveViewModel {
     _documentsService.closeDocument(document);
     if (documents.isEmpty) {
       await _dialogService.showCustomDialog(
-        variant: DialogType.startup,
+        variant: DialogType.newDocument,
       );
     }
   }

@@ -17,7 +17,8 @@ void setupBottomSheetUi() {
   final bottomsheetService = locator<BottomSheetService>();
 
   final Map<BottomSheetType, SheetBuilder> builders = {
-    BottomSheetType.notice: (context, request, completer) => NoticeSheet(request: request, completer: completer),
+    BottomSheetType.notice: (context, request, completer) =>
+        NoticeSheet(request: request, completer: completer),
   };
 
   bottomsheetService.setCustomSheetBuilders(builders);

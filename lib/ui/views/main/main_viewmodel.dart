@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:gimelstudio/app/app.bottomsheets.dart';
 import 'package:gimelstudio/app/app.dialogs.dart';
 import 'package:gimelstudio/app/app.locator.dart';
@@ -15,7 +16,7 @@ class MainViewModel extends ReactiveViewModel {
 
   Future<void> showStartupDialog() async {
     await _dialogService.showCustomDialog(
-      variant: DialogType.startup,
+      variant: DialogType.newDocument,
     );
   }
 

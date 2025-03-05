@@ -14,7 +14,6 @@ import 'package:gimelstudio/services/node_registry_service.dart';
 import 'package:gimelstudio/services/document_service.dart';
 import 'package:gimelstudio/services/evaluation_service.dart';
 import 'package:gimelstudio/ui/dialogs/new_document/new_document_dialog.dart';
-import 'package:gimelstudio/ui/dialogs/startup/startup_dialog.dart';
 import 'package:gimelstudio/services/export_service.dart';
 import 'package:gimelstudio/ui/dialogs/preferences/preferences_dialog.dart';
 import 'package:gimelstudio/ui/dialogs/about/about_dialog.dart';
@@ -65,7 +64,6 @@ import 'package:gimelstudio/services/text_tool_service.dart';
   dialogs: [
     StackedDialog(classType: InfoAlertDialog),
     StackedDialog(classType: NewDocumentDialog),
-    StackedDialog(classType: StartupDialog),
     StackedDialog(classType: PreferencesDialog),
     StackedDialog(classType: AboutDialog),
 // @stacked-dialog

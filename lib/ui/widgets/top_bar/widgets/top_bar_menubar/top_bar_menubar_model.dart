@@ -26,9 +26,13 @@ class TopBarMenubarModel extends BaseViewModel {
   /// Menu item and keybinding event to create a new document in a tab.
   Future<void> onNew() async {
     // TODO
-    await _dialogService.showCustomDialog(
-      variant: DialogType.startup,
+    DialogResponse? response = await _dialogService.showCustomDialog(
+      variant: DialogType.newDocument,
     );
+
+    if (response?.confirmed == true) {
+      _documentsService.setSelectedDocumentTab(response?.data);
+    }
   }
 
   /// Menu item and keybinding event to open a document or image file.

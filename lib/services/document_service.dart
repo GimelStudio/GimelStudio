@@ -48,7 +48,7 @@ class DocumentService with ListenableServiceMixin {
     notifyListeners();
   }
 
-  void createNewDocument(String name, Size size) {
+  Document createNewDocument(String name, Size size) {
     Document newDocument = Document(
       id: _idsService.newId(),
       name: name,
@@ -58,6 +58,7 @@ class DocumentService with ListenableServiceMixin {
     );
     _documents.add(newDocument);
     notifyListeners();
+    return newDocument;
   }
 
   void openExistingDocument() {

@@ -57,8 +57,8 @@ class DocumentTabItem extends StackedView<DocumentTabItemModel> {
               onTap: onCloseDocument,
               child: PhosphorIcon(
                 PhosphorIcons.x(PhosphorIconsStyle.bold),
-                color: isSelected ? Colors.white60 : Colors.white30,
-                size: 12.0,
+                color: isSelected ? Colors.white54 : Colors.white30,
+                size: 10.0,
               ),
             ),
           ],

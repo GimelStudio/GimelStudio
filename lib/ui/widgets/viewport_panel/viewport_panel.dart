@@ -499,8 +499,7 @@ class _TextInputOverlayWidgetState extends State<TextInputOverlayWidget> {
 class ViewportPanel extends StackedView<ViewportPanelModel> {
   const ViewportPanel({super.key});
 
-
-@override
+  @override
   void onDispose(ViewportPanelModel viewModel) {
     viewModel.onDispose();
     super.onDispose(viewModel);
@@ -516,7 +515,7 @@ class ViewportPanel extends StackedView<ViewportPanelModel> {
       children: [
         Expanded(
           child: InteractiveViewer(
-            minScale: 0.1,
+            minScale: 0.01,
             maxScale: 5.0,
             transformationController: viewModel.transformationController,
             onInteractionEnd: (ScaleEndDetails details) =>
