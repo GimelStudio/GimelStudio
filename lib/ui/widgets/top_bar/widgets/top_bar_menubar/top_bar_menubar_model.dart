@@ -51,10 +51,16 @@ class TopBarMenubarModel extends BaseViewModel {
   }
 
   /// Menu item and keybinding event to close all open document tabs.
-  void onCloseAll() {
-    for (Document document in documents) {
+  Future<void> onCloseAll() async {
+    List<Document> documentsToClose = List.of(documents);
+    for (Document document in documentsToClose) {
       _documentsService.closeDocument(document);
     }
+
+    await _dialogService.showCustomDialog(
+      variant: DialogType.newDocument,
+      data: false,
+    );
   }
 
   /// Menu item and keybinding event to save the current document.
