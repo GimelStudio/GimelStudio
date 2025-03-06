@@ -55,3 +55,9 @@ class Constants {
     'ico',
   ];
 }
+
+// Environment variables passed in during build.
+const String envPlatform = String.fromEnvironment('PLATFORM', defaultValue: '');
+const String envBuildDateTime = String.fromEnvironment('BUILD_DATETIME', defaultValue: '');
+const String envBuildBranch = String.fromEnvironment('BUILD_BRANCH', defaultValue: '(unknown)');
+const String envBuildCommit = String.fromEnvironment('BUILD_COMMIT', defaultValue: '(unknown)');

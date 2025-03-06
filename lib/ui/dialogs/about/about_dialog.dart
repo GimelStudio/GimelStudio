@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gimelstudio/ui/common/constants.dart';
 import 'package:gimelstudio/ui/widgets/common/gs_flat_icon_btn/gs_flat_icon_btn.dart';
 import 'package:gimelstudio/ui/widgets/common/gs_tooltip/gs_tooltip.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -98,7 +99,7 @@ class AboutDialog extends StackedView<AboutDialogModel> {
                                   ),
                                 ),
                                 Text(
-                                  'Version ${viewModel.getApplicationVersion()} ${viewModel.platform == '' ? '' : 'for ${viewModel.platform}'}',
+                                  'Version ${viewModel.getApplicationVersion()} ${envPlatform == '' ? '' : 'for $envPlatform'}',
                                   style: TextStyle(
                                     height: 1.0,
                                     color: Colors.white,
@@ -109,7 +110,7 @@ class AboutDialog extends StackedView<AboutDialogModel> {
                                 ),
                                 // Build information
                                 Text(
-                                  'Built on ${viewModel.getBuildDate()} from branch ${viewModel.buildBranch}, commit ${viewModel.buildCommit == '(unknown)' ? viewModel.buildCommit : viewModel.buildCommit.substring(0, 7)}.',
+                                  'Built on ${viewModel.getBuildDate()} from branch $envBuildBranch, commit ${envBuildCommit == '(unknown)' ? envBuildCommit : envBuildCommit.substring(0, 7)}.',
                                   style: TextStyle(
                                     height: 2.5,
                                     color: Colors.white54,

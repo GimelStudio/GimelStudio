@@ -1,13 +1,9 @@
 import 'package:flutter/services.dart';
+import 'package:gimelstudio/ui/common/constants.dart';
 import 'package:stacked/stacked.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutDialogModel extends BaseViewModel {
-  String platform = String.fromEnvironment('PLATFORM', defaultValue: '');
-  String buildDateTime = String.fromEnvironment('BUILD_DATETIME', defaultValue: '');
-  String buildBranch = String.fromEnvironment('BUILD_BRANCH', defaultValue: '(unknown)');
-  String buildCommit = String.fromEnvironment('BUILD_COMMIT', defaultValue: '(unknown)');
-
   bool infoCopied = false;
 
   String getApplicationVersion() {
@@ -16,16 +12,16 @@ class AboutDialogModel extends BaseViewModel {
   }
 
   String getBuildDate() {
-    if (buildDateTime == '') {
+    if (envBuildDateTime == '') {
       return '(unknown)';
     }
-    DateTime datetime = DateTime.parse(buildDateTime);
+    DateTime datetime = DateTime.parse(envBuildDateTime);
     return datetime.toIso8601String().split('T')[0];
   }
 
   Future<void> copyInfoToClipBoard() async {
     String applicationInfo =
-        'Gimel Studio v${getApplicationVersion()} for $platform built on ${getBuildDate()} from branch $buildBranch, commit $buildCommit.';
+        'Gimel Studio v${getApplicationVersion()} for $envPlatform built on ${getBuildDate()} from branch $envBuildBranch, commit $envBuildCommit.';
     await Clipboard.setData(ClipboardData(text: applicationInfo));
 
     infoCopied = true;
