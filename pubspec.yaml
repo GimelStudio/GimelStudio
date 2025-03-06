@@ -19,14 +19,15 @@ dependencies:
   flutter_colorpicker: ^1.1.0
 
   # Core
+  uuid: ^4.5.1
+  image: ^4.5.2
+  url_launcher: ^6.3.1
+  matrix4_transform: ^4.0.1
+
+  # File
   cross_file: ^0.3.4+2
   file_picker: ^9.0.2
   file_selector: ^1.0.3
-  
-  uuid: ^4.5.1
-  image: ^4.5.2
-
-  matrix4_transform: ^4.0.1
 
   # Used for evaluating math expressions within inputs and for other math.
   math_expressions: ^2.7.0

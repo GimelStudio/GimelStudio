@@ -9,6 +9,7 @@ import 'package:gimelstudio/services/evaluation_service.dart';
 import 'package:gimelstudio/services/export_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TopBarMenubarModel extends BaseViewModel {
   final _documentsService = locator<DocumentService>();
@@ -90,14 +91,34 @@ class TopBarMenubarModel extends BaseViewModel {
     // }
   }
 
-  /// Menu item and keybinding event to open the preferences dialog.
+  /// Menu item to open the preferences dialog.
   Future<void> onPreferences() async {
     await _dialogService.showCustomDialog(
       variant: DialogType.preferences,
     );
   }
 
-  /// Menu item and keybinding event to open the about dialog.
+  /// Menu item to launch the Gimel Studio website in a browser.
+  Future<void> onVisitWebsite() async {
+    await launchUrl(Uri.https('gimelstudio.com'));
+  }
+
+  /// Menu item to launch the Gimel Studio community chat in a browser.
+  Future<void> onCommunityChat() async {
+    await launchUrl(Uri.https('gimelstudio.zulipchat.com', '/join/sif32f3gjpnikveonzgc7zhw/'));
+  }
+
+  /// Menu item to launch the Gimel Studio GitHub repository in a browser.
+  Future<void> onGitHubRepository() async {
+    await launchUrl(Uri.https('github.com', '/GimelStudio/GimelStudio'));
+  }
+
+  /// Menu item to launch the GitHub repository to report a bug.
+  Future<void> onReportABug() async {
+    await launchUrl(Uri.https('github.com', '/GimelStudio/GimelStudio/issues/new/choose'));
+  }
+
+  /// Menu item to open the about dialog.
   Future<void> onAbout() async {
     await _dialogService.showCustomDialog(
       variant: DialogType.about,

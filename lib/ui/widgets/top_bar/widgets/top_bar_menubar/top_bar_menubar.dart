@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:gimelstudio/ui/common/app_styles.dart';
 import 'package:gimelstudio/ui/common/platform.dart';
 import 'package:gimelstudio/ui/menubar/button.dart';
+import 'package:gimelstudio/ui/menubar/divider.dart';
 import 'package:gimelstudio/ui/menubar/entry.dart';
 import 'package:gimelstudio/ui/menubar/submenu.dart';
 import 'package:stacked/stacked.dart';
@@ -50,6 +51,7 @@ class TopBarMenubar extends StackedView<TopBarMenubarModel> {
               shortcutText: 'Ctrl+O',
               shortcut: const SingleActivator(LogicalKeyboardKey.keyO, control: true),
             ),
+            MenuDivider(height: 2.0, color: Colors.white12),
             MenuButton(
               onTap: viewModel.onClose,
               text: Text(
@@ -68,6 +70,7 @@ class TopBarMenubar extends StackedView<TopBarMenubarModel> {
               shortcutText: 'Ctrl+Alt+W',
               shortcut: const SingleActivator(LogicalKeyboardKey.keyW, control: true, alt: true),
             ),
+            MenuDivider(height: 2.0, color: Colors.white12),
             MenuButton(
               onTap: viewModel.onSave,
               text: Text(
@@ -86,6 +89,7 @@ class TopBarMenubar extends StackedView<TopBarMenubarModel> {
               shortcutText: 'Ctrl+Shift+S',
               shortcut: const SingleActivator(LogicalKeyboardKey.keyS, control: true, shift: true),
             ),
+            MenuDivider(height: 2.0, color: Colors.white12),
             MenuButton(
               onTap: viewModel.onExport,
               text: Text(
@@ -95,6 +99,7 @@ class TopBarMenubar extends StackedView<TopBarMenubarModel> {
               shortcutText: 'Ctrl+Alt+Shift+S',
               shortcut: const SingleActivator(LogicalKeyboardKey.keyS, control: true, alt: true, shift: true),
             ),
+            if (!isWeb) MenuDivider(height: 2.0, color: Colors.white12),
             if (!isWeb)
               MenuButton(
                 onTap: viewModel.onExit,
@@ -131,9 +136,39 @@ class TopBarMenubar extends StackedView<TopBarMenubarModel> {
         submenu: SubMenu(
           menuItems: [
             MenuButton(
+              onTap: viewModel.onVisitWebsite,
+              text: Text(
+                'Visit Website',
+                style: AppStyles.menuTextStyle,
+              ),
+            ),
+            MenuButton(
+              onTap: viewModel.onCommunityChat,
+              text: Text(
+                'Join Community Chat',
+                style: AppStyles.menuTextStyle,
+              ),
+            ),
+            MenuDivider(height: 2.0, color: Colors.white12),
+            MenuButton(
+              onTap: viewModel.onGitHubRepository,
+              text: Text(
+                'Visit GitHub Repository',
+                style: AppStyles.menuTextStyle,
+              ),
+            ),
+            MenuButton(
+              onTap: viewModel.onReportABug,
+              text: Text(
+                'Report a Bug',
+                style: AppStyles.menuTextStyle,
+              ),
+            ),
+            MenuDivider(height: 2.0, color: Colors.white12),
+            MenuButton(
               onTap: viewModel.onAbout,
               text: Text(
-                'About',
+                'About Gimel Studio',
                 style: AppStyles.menuTextStyle,
               ),
             ),
