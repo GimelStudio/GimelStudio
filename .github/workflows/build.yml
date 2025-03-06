@@ -33,7 +33,7 @@ jobs:
       - name: Build application
         run: |
           flutter pub get
-          flutter build linux --release
+          flutter build linux --release --dart-define=PLATFORM=Linux BUILD_DATETIME=${{ github.event.repository.updated_at}} BUILD_BRANCH=${{ github.head_ref || github.ref_name }} BUILD_COMMIT=${{ github.sha }}
 
       - name: Create tar.gz archive
         run: |
@@ -63,7 +63,7 @@ jobs:
           flutter-version: 3.29.0
       - run: |
           flutter pub get
-          flutter build windows --release
+          flutter build windows --release --dart-define=PLATFORM=Windows BUILD_DATETIME=${{ github.event.repository.updated_at}} BUILD_BRANCH=${{ github.head_ref || github.ref_name }} BUILD_COMMIT=${{ github.sha }}
 
       - name: Zip application files
         run: |
@@ -93,7 +93,7 @@ jobs:
           flutter-version: 3.29.0
       - run: |
           flutter pub get
-          flutter build macos --release
+          flutter build macos --release --dart-define=PLATFORM=macOs BUILD_DATETIME=${{ github.event.repository.updated_at}} BUILD_BRANCH=${{ github.head_ref || github.ref_name }}  BUILD_COMMIT=${{ github.sha }}
 
       - name: Zip application files
         run: |
