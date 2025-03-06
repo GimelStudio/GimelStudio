@@ -109,7 +109,7 @@ class AboutDialog extends StackedView<AboutDialogModel> {
                                 ),
                                 // Build information
                                 Text(
-                                  'Built on ${viewModel.getBuildDate()} from branch ${viewModel.buildBranch}, commit ${viewModel.buildCommit.substring(0, 7)}.',
+                                  'Built on ${viewModel.getBuildDate()} from branch ${viewModel.buildBranch}, commit ${viewModel.buildCommit == '(unknown)' ? viewModel.buildCommit : viewModel.buildCommit.substring(0, 7)}.',
                                   style: TextStyle(
                                     height: 2.5,
                                     color: Colors.white54,
