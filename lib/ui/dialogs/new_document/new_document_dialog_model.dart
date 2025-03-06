@@ -12,6 +12,14 @@ class NewDocumentDialogModel extends BaseViewModel {
   double get documentWidth => _documentWidth;
   double get documentHeight => _documentHeight;
 
+  Future<bool> onOpenFile() async {
+    Document? document = await _documentsService.openDocument();
+    if (document == null) {
+      return false;
+    }
+    return true;
+  }
+
   void onDocumentWidthChange(double width) {
     _documentWidth = width;
     rebuildUi();

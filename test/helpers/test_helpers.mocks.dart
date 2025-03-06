@@ -8,32 +8,33 @@ import 'dart:ui' as _i6;
 
 import 'package:flutter/material.dart' as _i7;
 import 'package:flutter/services.dart' as _i26;
-import 'package:gimelstudio/models/canvas_item.dart' as _i15;
+import 'package:gimelstudio/models/canvas_item.dart' as _i16;
 import 'package:gimelstudio/models/document.dart' as _i5;
 import 'package:gimelstudio/models/layer.dart' as _i3;
 import 'package:gimelstudio/models/node_base.dart' as _i4;
-import 'package:gimelstudio/models/node_property.dart' as _i17;
+import 'package:gimelstudio/models/node_property.dart' as _i18;
 import 'package:gimelstudio/models/photo.dart' as _i34;
 import 'package:gimelstudio/models/tool.dart' as _i2;
 import 'package:gimelstudio/services/canvas_service.dart' as _i32;
 import 'package:gimelstudio/services/cursor_tool_service.dart' as _i25;
-import 'package:gimelstudio/services/document_service.dart' as _i20;
-import 'package:gimelstudio/services/evaluation_service.dart' as _i21;
-import 'package:gimelstudio/services/export_service.dart' as _i22;
+import 'package:gimelstudio/services/document_service.dart' as _i21;
+import 'package:gimelstudio/services/evaluation_service.dart' as _i22;
+import 'package:gimelstudio/services/export_service.dart' as _i23;
 import 'package:gimelstudio/services/file_service.dart' as _i12;
 import 'package:gimelstudio/services/hand_tool_service.dart' as _i31;
-import 'package:gimelstudio/services/id_service.dart' as _i18;
-import 'package:gimelstudio/services/image_service.dart' as _i13;
+import 'package:gimelstudio/services/id_service.dart' as _i19;
+import 'package:gimelstudio/services/image_service.dart' as _i14;
 import 'package:gimelstudio/services/image_tool_service.dart' as _i33;
-import 'package:gimelstudio/services/layers_service.dart' as _i14;
-import 'package:gimelstudio/services/node_registry_service.dart' as _i19;
-import 'package:gimelstudio/services/nodegraphs_service.dart' as _i16;
+import 'package:gimelstudio/services/layers_service.dart' as _i15;
+import 'package:gimelstudio/services/node_registry_service.dart' as _i20;
+import 'package:gimelstudio/services/nodegraphs_service.dart' as _i17;
+import 'package:gimelstudio/services/open_file_service.dart' as _i36;
 import 'package:gimelstudio/services/overlays_service.dart' as _i29;
 import 'package:gimelstudio/services/rectangle_tool_service.dart' as _i27;
 import 'package:gimelstudio/services/text_tool_service.dart' as _i35;
 import 'package:gimelstudio/services/tool_service.dart' as _i28;
 import 'package:gimelstudio/services/viewport_service.dart' as _i11;
-import 'package:gimelstudio/ui/common/enums.dart' as _i23;
+import 'package:gimelstudio/ui/common/enums.dart' as _i13;
 import 'package:gimelstudio/ui/widgets/viewport_panel/viewport_panel.dart' as _i30;
 import 'package:image/image.dart' as _i24;
 import 'package:mockito/mockito.dart' as _i1;
@@ -858,7 +859,17 @@ class MockViewportService extends _i1.Mock implements _i11.ViewportService {
 /// See the documentation for Mockito's code generation for more information.
 class MockFileService extends _i1.Mock implements _i12.FileService {
   @override
-  _i10.Future<String?> getSaveFilePath({dynamic suggestedName = 'untitled'}) => (super.noSuchMethod(
+  _i10.Future<String?> selectFile() => (super.noSuchMethod(
+        Invocation.method(
+          #selectFile,
+          [],
+        ),
+        returnValue: _i10.Future<String?>.value(),
+        returnValueForMissingStub: _i10.Future<String?>.value(),
+      ) as _i10.Future<String?>);
+
+  @override
+  _i10.Future<String?> getSaveFilePath({dynamic suggestedName = 'untitled.jpg'}) => (super.noSuchMethod(
         Invocation.method(
           #getSaveFilePath,
           [],
@@ -877,12 +888,21 @@ class MockFileService extends _i1.Mock implements _i12.FileService {
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
+  @override
+  _i13.SupportedFileFormat? fileExtensionToFileFormat(String? extension) => (super.noSuchMethod(
+        Invocation.method(
+          #fileExtensionToFileFormat,
+          [extension],
+        ),
+        returnValueForMissingStub: null,
+      ) as _i13.SupportedFileFormat?);
 }
 
 /// A class which mocks [ImageService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockImageService extends _i1.Mock implements _i13.ImageService {
+class MockImageService extends _i1.Mock implements _i14.ImageService {
   @override
   String get imagePath => (super.noSuchMethod(
         Invocation.getter(#imagePath),
@@ -952,7 +972,7 @@ class MockImageService extends _i1.Mock implements _i13.ImageService {
 /// A class which mocks [LayersService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLayersService extends _i1.Mock implements _i14.LayersService {
+class MockLayersService extends _i1.Mock implements _i15.LayersService {
   @override
   List<_i3.Layer> get selectedLayers => (super.noSuchMethod(
         Invocation.getter(#selectedLayers),
@@ -1178,7 +1198,7 @@ class MockLayersService extends _i1.Mock implements _i14.LayersService {
   @override
   _i3.Layer? getLayerFromPosition(
     _i6.Offset? position,
-    List<_i15.CanvasItem>? items,
+    List<_i16.CanvasItem>? items,
     List<_i3.Layer>? layers,
   ) =>
       (super.noSuchMethod(
@@ -1233,7 +1253,7 @@ class MockLayersService extends _i1.Mock implements _i14.LayersService {
 /// A class which mocks [NodegraphsService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNodegraphsService extends _i1.Mock implements _i16.NodegraphsService {
+class MockNodegraphsService extends _i1.Mock implements _i17.NodegraphsService {
   @override
   Map<String, _i4.Node> get nodes => (super.noSuchMethod(
         Invocation.getter(#nodes),
@@ -1275,7 +1295,7 @@ class MockNodegraphsService extends _i1.Mock implements _i16.NodegraphsService {
 
   @override
   void onEditNodePropertyValue(
-    _i17.Property<dynamic>? property,
+    _i18.Property<dynamic>? property,
     dynamic value,
   ) =>
       super.noSuchMethod(
@@ -1291,7 +1311,7 @@ class MockNodegraphsService extends _i1.Mock implements _i16.NodegraphsService {
 
   @override
   void onSetPropertyExposed(
-    _i17.Property<dynamic>? property,
+    _i18.Property<dynamic>? property,
     bool? isExposed,
   ) =>
       super.noSuchMethod(
@@ -1345,7 +1365,7 @@ class MockNodegraphsService extends _i1.Mock implements _i16.NodegraphsService {
 /// A class which mocks [IdService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIdService extends _i1.Mock implements _i18.IdService {
+class MockIdService extends _i1.Mock implements _i19.IdService {
   @override
   String newId() => (super.noSuchMethod(
         Invocation.method(
@@ -1372,7 +1392,7 @@ class MockIdService extends _i1.Mock implements _i18.IdService {
 /// A class which mocks [NodeRegistryService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNodeRegistryService extends _i1.Mock implements _i19.NodeRegistryService {
+class MockNodeRegistryService extends _i1.Mock implements _i20.NodeRegistryService {
   @override
   Map<String, _i4.Node> get nodeRegistry => (super.noSuchMethod(
         Invocation.getter(#nodeRegistry),
@@ -1428,7 +1448,7 @@ class MockNodeRegistryService extends _i1.Mock implements _i19.NodeRegistryServi
 /// A class which mocks [DocumentService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockDocumentService extends _i1.Mock implements _i20.DocumentService {
+class MockDocumentService extends _i1.Mock implements _i21.DocumentService {
   @override
   int get selectedDocumentIndex => (super.noSuchMethod(
         Invocation.getter(#selectedDocumentIndex),
@@ -1462,8 +1482,9 @@ class MockDocumentService extends _i1.Mock implements _i20.DocumentService {
   @override
   void reorderDocumentTabs(
     int? oldIndex,
-    int? newIndex,
-  ) =>
+    int? newIndex, {
+    dynamic flutterWorkaround = true,
+  }) =>
       super.noSuchMethod(
         Invocation.method(
           #reorderDocumentTabs,
@@ -1471,6 +1492,7 @@ class MockDocumentService extends _i1.Mock implements _i20.DocumentService {
             oldIndex,
             newIndex,
           ],
+          {#flutterWorkaround: flutterWorkaround},
         ),
         returnValueForMissingStub: null,
       );
@@ -1511,13 +1533,14 @@ class MockDocumentService extends _i1.Mock implements _i20.DocumentService {
       ) as _i5.Document);
 
   @override
-  void openExistingDocument() => super.noSuchMethod(
+  _i10.Future<_i5.Document?> openDocument(String? path) => (super.noSuchMethod(
         Invocation.method(
-          #openExistingDocument,
-          [],
+          #openDocument,
+          [path],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i10.Future<_i5.Document?>.value(),
+        returnValueForMissingStub: _i10.Future<_i5.Document?>.value(),
+      ) as _i10.Future<_i5.Document?>);
 
   @override
   void closeDocument(_i5.Document? document) => super.noSuchMethod(
@@ -1565,7 +1588,7 @@ class MockDocumentService extends _i1.Mock implements _i20.DocumentService {
       );
 
   @override
-  void setEvaluationResult(List<_i15.CanvasItem>? result) => super.noSuchMethod(
+  void setEvaluationResult(List<_i16.CanvasItem>? result) => super.noSuchMethod(
         Invocation.method(
           #setEvaluationResult,
           [result],
@@ -1613,7 +1636,7 @@ class MockDocumentService extends _i1.Mock implements _i20.DocumentService {
 /// A class which mocks [EvaluationService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockEvaluationService extends _i1.Mock implements _i21.EvaluationService {
+class MockEvaluationService extends _i1.Mock implements _i22.EvaluationService {
   @override
   List<_i3.Layer> get layers => (super.noSuchMethod(
         Invocation.getter(#layers),
@@ -1678,10 +1701,10 @@ class MockEvaluationService extends _i1.Mock implements _i21.EvaluationService {
 /// A class which mocks [ExportService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockExportService extends _i1.Mock implements _i22.ExportService {
+class MockExportService extends _i1.Mock implements _i23.ExportService {
   @override
   _i10.Future<bool> export(
-    List<_i15.CanvasItem>? canvasItems,
+    List<_i16.CanvasItem>? canvasItems,
     _i6.Size? canvasSize,
   ) =>
       (super.noSuchMethod(
@@ -1699,8 +1722,8 @@ class MockExportService extends _i1.Mock implements _i22.ExportService {
   @override
   _i10.Future<bool> exportToImageFormat(
     String? exportPath,
-    _i23.ExportImageFormat? exportFormat,
-    List<_i15.CanvasItem>? canvasItems,
+    _i13.SupportedFileFormat? exportFormat,
+    List<_i16.CanvasItem>? canvasItems,
     _i6.Size? canvasSize,
   ) =>
       (super.noSuchMethod(
@@ -1718,17 +1741,8 @@ class MockExportService extends _i1.Mock implements _i22.ExportService {
       ) as _i10.Future<bool>);
 
   @override
-  _i23.ExportImageFormat? extensionToExportImageFormat(String? imageExtension) => (super.noSuchMethod(
-        Invocation.method(
-          #extensionToExportImageFormat,
-          [imageExtension],
-        ),
-        returnValueForMissingStub: null,
-      ) as _i23.ExportImageFormat?);
-
-  @override
   _i10.Future<_i6.Image> getUiImageFromCanvas(
-    List<_i15.CanvasItem>? canvasItems,
+    List<_i16.CanvasItem>? canvasItems,
     _i6.Size? canvasSize,
   ) =>
       (super.noSuchMethod(
@@ -1816,11 +1830,11 @@ class MockCursorToolService extends _i1.Mock implements _i25.CursorToolService {
       ) as List<_i3.Layer>);
 
   @override
-  List<_i15.CanvasItem> get items => (super.noSuchMethod(
+  List<_i16.CanvasItem> get items => (super.noSuchMethod(
         Invocation.getter(#items),
-        returnValue: <_i15.CanvasItem>[],
-        returnValueForMissingStub: <_i15.CanvasItem>[],
-      ) as List<_i15.CanvasItem>);
+        returnValue: <_i16.CanvasItem>[],
+        returnValueForMissingStub: <_i16.CanvasItem>[],
+      ) as List<_i16.CanvasItem>);
 
   @override
   void activate() => super.noSuchMethod(
@@ -1932,11 +1946,11 @@ class MockRectangleToolService extends _i1.Mock implements _i27.RectangleToolSer
       ) as List<_i3.Layer>);
 
   @override
-  List<_i15.CanvasItem> get items => (super.noSuchMethod(
+  List<_i16.CanvasItem> get items => (super.noSuchMethod(
         Invocation.getter(#items),
-        returnValue: <_i15.CanvasItem>[],
-        returnValueForMissingStub: <_i15.CanvasItem>[],
-      ) as List<_i15.CanvasItem>);
+        returnValue: <_i16.CanvasItem>[],
+        returnValueForMissingStub: <_i16.CanvasItem>[],
+      ) as List<_i16.CanvasItem>);
 
   @override
   void activate() => super.noSuchMethod(
@@ -2526,11 +2540,11 @@ class MockImageToolService extends _i1.Mock implements _i33.ImageToolService {
       ) as List<_i3.Layer>);
 
   @override
-  List<_i15.CanvasItem> get items => (super.noSuchMethod(
+  List<_i16.CanvasItem> get items => (super.noSuchMethod(
         Invocation.getter(#items),
-        returnValue: <_i15.CanvasItem>[],
-        returnValueForMissingStub: <_i15.CanvasItem>[],
-      ) as List<_i15.CanvasItem>);
+        returnValue: <_i16.CanvasItem>[],
+        returnValueForMissingStub: <_i16.CanvasItem>[],
+      ) as List<_i16.CanvasItem>);
 
   @override
   void activate() => super.noSuchMethod(
@@ -2642,11 +2656,11 @@ class MockTextToolService extends _i1.Mock implements _i35.TextToolService {
       ) as List<_i3.Layer>);
 
   @override
-  List<_i15.CanvasItem> get items => (super.noSuchMethod(
+  List<_i16.CanvasItem> get items => (super.noSuchMethod(
         Invocation.getter(#items),
-        returnValue: <_i15.CanvasItem>[],
-        returnValueForMissingStub: <_i15.CanvasItem>[],
-      ) as List<_i15.CanvasItem>);
+        returnValue: <_i16.CanvasItem>[],
+        returnValueForMissingStub: <_i16.CanvasItem>[],
+      ) as List<_i16.CanvasItem>);
 
   @override
   void activate() => super.noSuchMethod(
@@ -2719,4 +2733,51 @@ class MockTextToolService extends _i1.Mock implements _i35.TextToolService {
         ),
         returnValueForMissingStub: null,
       );
+}
+
+/// A class which mocks [OpenFileService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockOpenFileService extends _i1.Mock implements _i36.OpenFileService {
+  @override
+  _i10.Future<_i5.Document?> openFilePathAsDocument(String? filePath) => (super.noSuchMethod(
+        Invocation.method(
+          #openFilePathAsDocument,
+          [filePath],
+        ),
+        returnValue: _i10.Future<_i5.Document?>.value(),
+        returnValueForMissingStub: _i10.Future<_i5.Document?>.value(),
+      ) as _i10.Future<_i5.Document?>);
+
+  @override
+  _i10.Future<_i5.Document?> openRasterFileAsDocument(String? filePath) => (super.noSuchMethod(
+        Invocation.method(
+          #openRasterFileAsDocument,
+          [filePath],
+        ),
+        returnValue: _i10.Future<_i5.Document?>.value(),
+        returnValueForMissingStub: _i10.Future<_i5.Document?>.value(),
+      ) as _i10.Future<_i5.Document?>);
+
+  @override
+  _i10.Future<_i5.Document> openGimelFileAsDocument(String? filePath) => (super.noSuchMethod(
+        Invocation.method(
+          #openGimelFileAsDocument,
+          [filePath],
+        ),
+        returnValue: _i10.Future<_i5.Document>.value(_FakeDocument_3(
+          this,
+          Invocation.method(
+            #openGimelFileAsDocument,
+            [filePath],
+          ),
+        )),
+        returnValueForMissingStub: _i10.Future<_i5.Document>.value(_FakeDocument_3(
+          this,
+          Invocation.method(
+            #openGimelFileAsDocument,
+            [filePath],
+          ),
+        )),
+      ) as _i10.Future<_i5.Document>);
 }

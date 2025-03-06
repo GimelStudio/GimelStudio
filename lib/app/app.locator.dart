@@ -24,6 +24,7 @@ import '../services/image_tool_service.dart';
 import '../services/layers_service.dart';
 import '../services/node_registry_service.dart';
 import '../services/nodegraphs_service.dart';
+import '../services/open_file_service.dart';
 import '../services/overlays_service.dart';
 import '../services/rectangle_tool_service.dart';
 import '../services/text_tool_service.dart';
@@ -61,4 +62,5 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => CanvasService());
   locator.registerLazySingleton(() => ImageToolService());
   locator.registerLazySingleton(() => TextToolService());
+  locator.registerLazySingleton(() => OpenFileService());
 }

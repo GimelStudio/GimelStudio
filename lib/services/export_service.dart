@@ -18,7 +18,7 @@ class ExportService {
 
     if (filePath != null) {
       String extension = filePath.split('.').last;
-      ExportImageFormat? exportFormat = extensionToExportImageFormat(extension);
+      SupportedFileFormat? exportFormat = _fileService.fileExtensionToFileFormat(extension);
 
       if (exportFormat == null) {
         // We don't allow "custom" file extensions.
@@ -34,7 +34,7 @@ class ExportService {
   /// Export the canvas contents to [exportPath] in the given [exportFormat].
   Future<bool> exportToImageFormat(
     String exportPath,
-    ExportImageFormat exportFormat,
+    SupportedFileFormat exportFormat,
     List<CanvasItem> canvasItems,
     ui.Size canvasSize,
   ) async {
@@ -47,53 +47,25 @@ class ExportService {
       return exportSuccessful;
     }
 
-    if (exportFormat == ExportImageFormat.jpg) {
+    if (exportFormat == SupportedFileFormat.jpg) {
       exportSuccessful = await img.encodeJpgFile(exportPath, image);
-    } else if (exportFormat == ExportImageFormat.png) {
+    } else if (exportFormat == SupportedFileFormat.png) {
       exportSuccessful = await img.encodePngFile(exportPath, image);
-    } else if (exportFormat == ExportImageFormat.gif) {
+    } else if (exportFormat == SupportedFileFormat.gif) {
       exportSuccessful = await img.encodeGifFile(exportPath, image);
-    } else if (exportFormat == ExportImageFormat.bmp) {
+    } else if (exportFormat == SupportedFileFormat.bmp) {
       exportSuccessful = await img.encodeBmpFile(exportPath, image);
-    } else if (exportFormat == ExportImageFormat.tiff) {
+    } else if (exportFormat == SupportedFileFormat.tiff) {
       exportSuccessful = await img.encodeTiffFile(exportPath, image);
-    } else if (exportFormat == ExportImageFormat.tga) {
+    } else if (exportFormat == SupportedFileFormat.tga) {
       exportSuccessful = await img.encodeTgaFile(exportPath, image);
-    } else if (exportFormat == ExportImageFormat.ico) {
+    } else if (exportFormat == SupportedFileFormat.ico) {
       exportSuccessful = await img.encodeIcoFile(exportPath, image);
     }
     return exportSuccessful;
   }
 
   // Utility methods
-
-  /// Converts an image extension [imageExtension] to a value of the ExportImageFormat enum.
-  ///
-  /// null is returned if there is no matching image format in ExportImageFormat.
-  /// The parameter [imageExtension] should not include the period.
-  ExportImageFormat? extensionToExportImageFormat(String imageExtension) {
-    ExportImageFormat? exportFormat;
-
-    switch (imageExtension.toLowerCase()) {
-      case 'jpg':
-        exportFormat = ExportImageFormat.jpg;
-      case 'jpeg':
-        exportFormat = ExportImageFormat.jpg;
-      case 'png':
-        exportFormat = ExportImageFormat.png;
-      case 'gif':
-        exportFormat = ExportImageFormat.gif;
-      case 'bmp':
-        exportFormat = ExportImageFormat.bmp;
-      case 'tiff':
-        exportFormat = ExportImageFormat.tiff;
-      case 'tga':
-        exportFormat = ExportImageFormat.tga;
-      case 'ico':
-        exportFormat = ExportImageFormat.ico;
-    }
-    return exportFormat;
-  }
 
   /// Records the canvas painting operations and returns a ui.Image.
   ///

@@ -1,4 +1,5 @@
-enum ExportImageFormat {
+enum SupportedFileFormat {
+  gimel,
   jpg,
   png,
   gif,

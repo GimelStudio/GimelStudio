@@ -113,6 +113,12 @@ class NewDocumentDialog extends StackedView<NewDocumentDialogModel> {
                             color: Colors.white,
                             size: 18.0,
                           ),
+                          onTap: () async {
+                            bool success = await viewModel.onOpenFile();
+                            if (success == true) {
+                              completer(DialogResponse(confirmed: false));
+                            }
+                          },
                         ),
                         const SizedBox(height: 26.0),
                         // Recent files
@@ -130,6 +136,7 @@ class NewDocumentDialog extends StackedView<NewDocumentDialogModel> {
                             const SizedBox(height: 4.0),
                             // TODO
                             GsFlatIconBtn(
+                              onTap: () {},
                               label: 'website-design.gimel',
                               icon: PhosphorIcon(
                                 PhosphorIcons.file(PhosphorIconsStyle.light),
@@ -138,6 +145,7 @@ class NewDocumentDialog extends StackedView<NewDocumentDialogModel> {
                               ),
                             ),
                             GsFlatIconBtn(
+                              onTap: () {},
                               label: 'test.gimel',
                               icon: PhosphorIcon(
                                 PhosphorIcons.file(PhosphorIconsStyle.light),

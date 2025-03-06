@@ -20,4 +20,38 @@ class Constants {
     'Color': BlendMode.color,
     'Luminosity': BlendMode.luminosity,
   };
+
+  static List<String> supportedReadFileFormats = [
+    'gimel',
+    'jpg',
+    'jpeg',
+    'png',
+    'gif',
+    'bmp',
+    'tiff',
+    'tga',
+    'ico',
+  ];
+
+  static List<String> supportedExportFileFormats = [
+    'jpg',
+    'jpeg',
+    'png',
+    'gif',
+    'bmp',
+    'tiff',
+    'tga',
+    'ico',
+  ];
+
+  static List<String> supportedRasterFileFormats = [
+    'jpg',
+    'jpeg',
+    'png',
+    'gif',
+    'bmp',
+    'tiff',
+    'tga',
+    'ico',
+  ];
 }

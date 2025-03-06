@@ -20,6 +20,7 @@ import 'package:gimelstudio/services/hand_tool_service.dart';
 import 'package:gimelstudio/services/canvas_service.dart';
 import 'package:gimelstudio/services/image_tool_service.dart';
 import 'package:gimelstudio/services/text_tool_service.dart';
+import 'package:gimelstudio/services/open_file_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -46,6 +47,7 @@ import 'test_helpers.mocks.dart';
   MockSpec<CanvasService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<ImageToolService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<TextToolService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<OpenFileService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -70,6 +72,7 @@ void registerServices() {
   getAndRegisterCanvasService();
   getAndRegisterImageToolService();
   getAndRegisterTextToolService();
+  getAndRegisterOpenFileService();
 // @stacked-mock-register
 }
 
@@ -245,6 +248,13 @@ MockTextToolService getAndRegisterTextToolService() {
   _removeRegistrationIfExists<TextToolService>();
   final service = MockTextToolService();
   locator.registerSingleton<TextToolService>(service);
+  return service;
+}
+
+MockOpenFileService getAndRegisterOpenFileService() {
+  _removeRegistrationIfExists<OpenFileService>();
+  final service = MockOpenFileService();
+  locator.registerSingleton<OpenFileService>(service);
   return service;
 }
 // @stacked-mock-create
