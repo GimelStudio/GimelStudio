@@ -78,17 +78,32 @@ class _GsTooltipState extends State<GsTooltip> {
   /// A key to uniquely identify the child widget and calculate its position on the screen.
   final GlobalKey _key = GlobalKey();
 
+  /// A key to measure the tooltip dimensions.
+  final GlobalKey _tooltipKey = GlobalKey();
+
   /// The overlay entry used to display the tooltip above other widgets.
   OverlayEntry? _overlayEntry;
 
   /// Tracks whether the tooltip is currently visible.
   bool _isTooltipVisible = false;
 
+  /// The space between the tooltip and the child widget.
+  double spaceBetween = 6.0;
+
   /// The current position of the tooltip, updated dynamically.
   late TooltipPosition currentTooltipPosition;
 
   /// The current widget theme.
   late GsTooltipTheme _theme;
+
+  /// The tooltip content.
+  late Widget tooltipContent;
+
+  /// Tracks the dynamically calculated width of the tooltip.
+  double tooltipWidth = 0.0;
+
+  /// Tracks the dynamically calculated height of the tooltip.
+  double tooltipHeight = 0.0;
 
   @override
   void initState() {
@@ -104,7 +119,53 @@ class _GsTooltipState extends State<GsTooltip> {
     } else {
       _theme = widget.theme!;
     }
+    // Set the tooltip content.
+    tooltipContent = Padding(
+      padding: EdgeInsets.all(_theme.padding),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text.rich(TextSpan(
+            children: [
+              TextSpan(text: widget.text, style: _theme.textStyle),
+              if (widget.keyboardShortcut != null) TextSpan(text: '   '),
+              if (widget.keyboardShortcut != null)
+                TextSpan(text: widget.keyboardShortcut, style: _theme.keyboardShortcutTextStyle),
+              if (widget.description != null)
+                TextSpan(text: '\n${widget.description}', style: _theme.descriptionTextStyle),
+            ],
+          ))
+        ],
+      ),
+    );
+
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _overlayEntry?.remove();
+    _overlayEntry?.dispose();
+    super.dispose();
+  }
+
+  void _calculateTooltipSize(VoidCallback onComplete) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Find the RenderBox of the tooltip using its global key
+      final tooltipRenderBox = _tooltipKey.currentContext?.findRenderObject() as RenderBox?;
+
+      // If the RenderBox exists, calculate the tooltip size
+      if (tooltipRenderBox != null) {
+        setState(() {
+          tooltipWidth = tooltipRenderBox.size.width;
+          tooltipHeight = tooltipRenderBox.size.height;
+        });
+        // Execute the callback after size calculation
+        onComplete();
+      }
+    });
   }
 
   /// Displays the tooltip above the overlay.
@@ -133,220 +194,214 @@ class _GsTooltipState extends State<GsTooltip> {
     final screenWidth = overlay.size.width;
     final screenHeight = overlay.size.height;
 
-    // Prepare the tooltip text for rendering.
-    final textSpan = TextSpan(
-      children: [
-        TextSpan(text: widget.text, style: _theme.textStyle),
-        if (widget.keyboardShortcut != null) TextSpan(text: '   '),
-        if (widget.keyboardShortcut != null)
-          TextSpan(text: widget.keyboardShortcut, style: _theme.keyboardShortcutTextStyle),
-        if (widget.description != null) TextSpan(text: '\n${widget.description}', style: _theme.descriptionTextStyle),
-      ],
-    );
-
-    // Use TextPainter to measure and layout the text.
-    final textPainter = TextPainter(
-      text: textSpan,
-      textDirection: TextDirection.ltr, // Default to left-to-right text direction.
-    );
-
-    // Constrain the text layout to a maximum of 90% of the screen width.
-    final maxTooltipWidth = screenWidth * 0.90;
-    textPainter.layout(maxWidth: maxTooltipWidth);
-
-    // Add padding to the tooltip dimensions.
-    final tooltipWidth = textPainter.size.width + (_theme.padding * 4.0); // Calculate total horizontal padding.
-    final tooltipHeight = textPainter.size.height + (_theme.padding * 2.6); // Calculate total vertical padding.
-
-    // Initialize tooltip position variables.
-    double top = 0.0;
-    double left = 0.0;
-
-    // Calculate available space in each direction.
-    double topSpace = offset.dy; // Space above the child widget.
-    double bottomSpace = screenHeight - (offset.dy + size.height); // Space below.
-    double leftSpace = offset.dx; // Space to the left of the child widget.
-    double rightSpace = screenWidth - (offset.dx + size.width); // Space to the right.
-
-    // Logic to determine the best position and adjust placement would follow here.
-
-    // Tooltip shape logic based on position
-    switch (widget.position) {
-      case TooltipPosition.top:
-        if (topSpace >= tooltipHeight && tooltipWidth / 2 <= offset.dx && offset.dx <= screenWidth - tooltipWidth / 2) {
-          top = offset.dy - tooltipHeight - 13.0;
-          left = offset.dx + (size.width / 2) - (tooltipWidth / 2);
-        } else {
-          // Not enough space at top, check left or right
-          if (leftSpace >= rightSpace) {
-            // Place it to the left
-            left = offset.dx - tooltipWidth - 13.0;
-            top = offset.dy + (size.height / 2) - (tooltipHeight / 2);
-            currentTooltipPosition = TooltipPosition.left;
-          } else {
-            // Place it to the right
-            left = offset.dx + size.width + 13.0;
-            top = offset.dy + (size.height / 2) - (tooltipHeight / 2);
-            currentTooltipPosition = TooltipPosition.right;
-          }
-        }
-        break;
-      case TooltipPosition.bottom:
-        if (bottomSpace >= tooltipHeight &&
-            tooltipWidth / 2 <= offset.dx &&
-            offset.dx <= screenWidth - tooltipWidth / 2) {
-          top = offset.dy + size.height + 13.0;
-          left = offset.dx + (size.width / 2) - (tooltipWidth / 2);
-        } else {
-          if (topSpace >= tooltipHeight &&
-              tooltipWidth / 2 <= offset.dx &&
-              offset.dx <= screenWidth - tooltipWidth / 2) {
-            top = offset.dy - tooltipHeight - 13.0;
-            left = offset.dx + (size.width / 2) - (tooltipWidth / 2);
-
-            currentTooltipPosition = TooltipPosition.top;
-          } else {
-            // Not enough space at bottom, check left or right
-            if (leftSpace >= rightSpace) {
-              // Place it to the left
-              left = offset.dx - tooltipWidth - 13.0;
-              top = offset.dy + (size.height / 2) - (tooltipHeight / 2);
-              currentTooltipPosition = TooltipPosition.left;
-            } else {
-              // Place it to the right
-              left = offset.dx + size.width + 13.0;
-              top = offset.dy + (size.height / 2) - (tooltipHeight / 2);
-              currentTooltipPosition = TooltipPosition.right;
-            }
-          }
-        }
-        break;
-      case TooltipPosition.left:
-        if (leftSpace >= tooltipWidth && tooltipHeight / 2 <= bottomSpace && tooltipHeight / 2 <= topSpace) {
-          top = offset.dy + (size.height / 2) - (tooltipHeight / 2);
-          left = offset.dx - tooltipWidth - 13.0;
-        } else {
-          if (rightSpace >= tooltipWidth && tooltipHeight / 2 <= bottomSpace && tooltipHeight / 2 <= topSpace) {
-            left = offset.dx + size.width + 13.0;
-            top = offset.dy + (size.height / 2) - (tooltipHeight / 2);
-
-            currentTooltipPosition = TooltipPosition.right;
-          } else {
-            // Not enough space at left, check top or bottom
-            if (topSpace >= bottomSpace &&
-                tooltipWidth / 2 <= offset.dx &&
-                offset.dx <= screenWidth - tooltipWidth / 2) {
-              // Place it above
-              left = offset.dx + (size.width / 2) - (tooltipWidth / 2);
-              top = offset.dy - tooltipHeight - 13.0;
-              currentTooltipPosition = TooltipPosition.top;
-            } else {
-              if (bottomSpace >= tooltipHeight &&
-                  tooltipWidth / 2 <= offset.dx &&
-                  offset.dx <= screenWidth - tooltipWidth / 2) {
-                left = offset.dx + (size.width / 2) - (tooltipWidth / 2);
-                top = offset.dy + size.height + 13.0;
-                currentTooltipPosition = TooltipPosition.bottom;
-              } else {
-                // Not enough space at bottom, check left or right
-                if (leftSpace >= rightSpace) {
-                  // Place it to the left
-                  left = offset.dx - tooltipWidth - 13.0;
-                  top = offset.dy + (size.height / 2) - (tooltipHeight / 2);
-                  currentTooltipPosition = TooltipPosition.left;
-                } else {
-                  // Place it to the right
-                  left = offset.dx + size.width + 13.0;
-                  top = offset.dy + (size.height / 2) - (tooltipHeight / 2);
-                  currentTooltipPosition = TooltipPosition.right;
-                }
-              }
-            }
-          }
-        }
-        break;
-      case TooltipPosition.right:
-        if (rightSpace >= tooltipWidth && tooltipHeight / 2 <= bottomSpace && tooltipHeight / 2 <= topSpace) {
-          top = offset.dy + (size.height / 2) - (tooltipHeight / 2);
-          left = offset.dx + size.width + 13.0;
-        } else {
-          if (leftSpace >= tooltipWidth && tooltipHeight / 2 <= bottomSpace && tooltipHeight / 2 <= topSpace) {
-            left = offset.dx - tooltipWidth - 13.0;
-            top = offset.dy + (size.height / 2) - (tooltipHeight / 2);
-            currentTooltipPosition = TooltipPosition.left;
-          } else {
-            // Not enough space at right, check top or bottom
-            if (topSpace >= bottomSpace &&
-                tooltipWidth / 2 <= offset.dx &&
-                offset.dx <= screenWidth - tooltipWidth / 2) {
-              // Place it above
-              left = offset.dx + (size.width / 2) - (tooltipWidth / 2);
-              top = offset.dy - tooltipHeight - 13.0;
-              currentTooltipPosition = TooltipPosition.top;
-            } else {
-              // Place it below
-              if (bottomSpace >= tooltipHeight &&
-                  tooltipWidth / 2 <= offset.dx &&
-                  offset.dx <= screenWidth - tooltipWidth / 2) {
-                left = offset.dx + (size.width / 2) - (tooltipWidth / 2);
-                top = offset.dy + size.height + 13.0;
-                currentTooltipPosition = TooltipPosition.bottom;
-              } else {
-                // Not enough space at bottom, check left or right
-                if (leftSpace >= rightSpace) {
-                  // Place it to the left
-                  left = offset.dx - tooltipWidth - 13.0;
-                  top = offset.dy + (size.height / 2) - (tooltipHeight / 2);
-                  currentTooltipPosition = TooltipPosition.left;
-                } else {
-                  // Place it to the right
-                  left = offset.dx + size.width + 13.0;
-                  top = offset.dy + (size.height / 2) - (tooltipHeight / 2);
-                  currentTooltipPosition = TooltipPosition.right;
-                }
-              }
-            }
-          }
-        }
-        break;
-    }
-
-    // Clamp to stay within screen bounds
-    // Ensures the tooltip's position stays within the visible screen area.
-    top = top.clamp(0.0, screenHeight - tooltipHeight);
-    left = left.clamp(0.0, screenWidth - tooltipWidth);
-
-    // Create an OverlayEntry to render the tooltip above other UI elements.
+    // Temporarily insert a dummy tooltip off-screen to calculate its size
     _overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
-        top: top, // Tooltip's vertical position
-        left: left, // Tooltip's horizontal position
+        top: -9999, // Off-screen
+        left: -9999,
         child: Material(
-          color: Colors.transparent, // Keeps the tooltip background transparent
+          color: Colors.transparent,
           child: Container(
-            decoration: BoxDecoration(
-              color: _theme.backgroundColor, // Tooltip background color
-              borderRadius: BorderRadius.circular(4.0), // Rounded corners
-            ),
-            width: tooltipWidth, // Width of the tooltip based on text
-            height: tooltipHeight, // Height of the tooltip based on text
-            padding: EdgeInsets.all(_theme.padding),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [Text.rich(textSpan)],
-            ), // Text.rich(textSpan),
+            key: _tooltipKey, // Assign the tooltip key for size calculation
+            child: tooltipContent,
           ),
         ),
       ),
     );
-
-    // Insert the OverlayEntry into the Overlay stack to render the tooltip
     Overlay.of(context).insert(_overlayEntry!);
 
-    // Update the state to indicate the tooltip is visible
-    _isTooltipVisible = true;
+    // Calculate tooltip size and determine its position
+    _calculateTooltipSize(() {
+      // Remove the dummy tooltip after size calculation
+      _overlayEntry?.remove();
+
+      // Initialize tooltip position variables.
+      double top = 0.0;
+      double left = 0.0;
+
+      // Calculate available space in each direction.
+      double topSpace = offset.dy; // Space above the child widget.
+      double bottomSpace = screenHeight - (offset.dy + size.height); // Space below.
+      double leftSpace = offset.dx; // Space to the left of the child widget.
+      double rightSpace = screenWidth - (offset.dx + size.width); // Space to the right.
+
+      // Tooltip shape logic based on position
+      switch (widget.position) {
+        case TooltipPosition.top:
+          if (topSpace >= tooltipHeight &&
+              tooltipWidth / 2 <= offset.dx &&
+              offset.dx <= screenWidth - tooltipWidth / 2) {
+            top = offset.dy - tooltipHeight - spaceBetween;
+            left = offset.dx + (size.width / 2) - (tooltipWidth / 2);
+          } else {
+            // Not enough space at top, check left or right
+            if (leftSpace >= rightSpace) {
+              // Place it to the left
+              left = offset.dx - tooltipWidth - spaceBetween;
+              top = offset.dy + (size.height / 2) - (tooltipHeight / 2);
+              currentTooltipPosition = TooltipPosition.left;
+            } else {
+              // Place it to the right
+              left = offset.dx + size.width + spaceBetween;
+              top = offset.dy + (size.height / 2) - (tooltipHeight / 2);
+              currentTooltipPosition = TooltipPosition.right;
+            }
+          }
+          break;
+        case TooltipPosition.bottom:
+          if (bottomSpace >= tooltipHeight &&
+              tooltipWidth / 2 <= offset.dx &&
+              offset.dx <= screenWidth - tooltipWidth / 2) {
+            top = offset.dy + size.height + spaceBetween;
+            left = offset.dx + (size.width / 2) - (tooltipWidth / 2);
+          } else {
+            if (topSpace >= tooltipHeight &&
+                tooltipWidth / 2 <= offset.dx &&
+                offset.dx <= screenWidth - tooltipWidth / 2) {
+              top = offset.dy - tooltipHeight - spaceBetween;
+              left = offset.dx + (size.width / 2) - (tooltipWidth / 2);
+
+              currentTooltipPosition = TooltipPosition.top;
+            } else {
+              // Not enough space at bottom, check left or right
+              if (leftSpace >= rightSpace) {
+                // Place it to the left
+                left = offset.dx - tooltipWidth - spaceBetween;
+                top = offset.dy + (size.height / 2) - (tooltipHeight / 2);
+                currentTooltipPosition = TooltipPosition.left;
+              } else {
+                // Place it to the right
+                left = offset.dx + size.width + spaceBetween;
+                top = offset.dy + (size.height / 2) - (tooltipHeight / 2);
+                currentTooltipPosition = TooltipPosition.right;
+              }
+            }
+          }
+          break;
+        case TooltipPosition.left:
+          if (leftSpace >= tooltipWidth && tooltipHeight / 2 <= bottomSpace && tooltipHeight / 2 <= topSpace) {
+            top = offset.dy + (size.height / 2) - (tooltipHeight / 2);
+            left = offset.dx - tooltipWidth - spaceBetween;
+          } else {
+            if (rightSpace >= tooltipWidth && tooltipHeight / 2 <= bottomSpace && tooltipHeight / 2 <= topSpace) {
+              left = offset.dx + size.width + spaceBetween;
+              top = offset.dy + (size.height / 2) - (tooltipHeight / 2);
+
+              currentTooltipPosition = TooltipPosition.right;
+            } else {
+              // Not enough space at left, check top or bottom
+              if (topSpace >= bottomSpace &&
+                  tooltipWidth / 2 <= offset.dx &&
+                  offset.dx <= screenWidth - tooltipWidth / 2) {
+                // Place it above
+                left = offset.dx + (size.width / 2) - (tooltipWidth / 2);
+                top = offset.dy - tooltipHeight - spaceBetween;
+                currentTooltipPosition = TooltipPosition.top;
+              } else {
+                if (bottomSpace >= tooltipHeight &&
+                    tooltipWidth / 2 <= offset.dx &&
+                    offset.dx <= screenWidth - tooltipWidth / 2) {
+                  left = offset.dx + (size.width / 2) - (tooltipWidth / 2);
+                  top = offset.dy + size.height + spaceBetween;
+                  currentTooltipPosition = TooltipPosition.bottom;
+                } else {
+                  // Not enough space at bottom, check left or right
+                  if (leftSpace >= rightSpace) {
+                    // Place it to the left
+                    left = offset.dx - tooltipWidth - spaceBetween;
+                    top = offset.dy + (size.height / 2) - (tooltipHeight / 2);
+                    currentTooltipPosition = TooltipPosition.left;
+                  } else {
+                    // Place it to the right
+                    left = offset.dx + size.width + spaceBetween;
+                    top = offset.dy + (size.height / 2) - (tooltipHeight / 2);
+                    currentTooltipPosition = TooltipPosition.right;
+                  }
+                }
+              }
+            }
+          }
+          break;
+        case TooltipPosition.right:
+          if (rightSpace >= tooltipWidth && tooltipHeight / 2 <= bottomSpace && tooltipHeight / 2 <= topSpace) {
+            top = offset.dy + (size.height / 2) - (tooltipHeight / 2);
+            left = offset.dx + size.width + spaceBetween;
+          } else {
+            if (leftSpace >= tooltipWidth && tooltipHeight / 2 <= bottomSpace && tooltipHeight / 2 <= topSpace) {
+              left = offset.dx - tooltipWidth - spaceBetween;
+              top = offset.dy + (size.height / 2) - (tooltipHeight / 2);
+              currentTooltipPosition = TooltipPosition.left;
+            } else {
+              // Not enough space at right, check top or bottom
+              if (topSpace >= bottomSpace &&
+                  tooltipWidth / 2 <= offset.dx &&
+                  offset.dx <= screenWidth - tooltipWidth / 2) {
+                // Place it above
+                left = offset.dx + (size.width / 2) - (tooltipWidth / 2);
+                top = offset.dy - tooltipHeight - spaceBetween;
+                currentTooltipPosition = TooltipPosition.top;
+              } else {
+                // Place it below
+                if (bottomSpace >= tooltipHeight &&
+                    tooltipWidth / 2 <= offset.dx &&
+                    offset.dx <= screenWidth - tooltipWidth / 2) {
+                  left = offset.dx + (size.width / 2) - (tooltipWidth / 2);
+                  top = offset.dy + size.height + spaceBetween;
+                  currentTooltipPosition = TooltipPosition.bottom;
+                } else {
+                  // Not enough space at bottom, check left or right
+                  if (leftSpace >= rightSpace) {
+                    // Place it to the left
+                    left = offset.dx - tooltipWidth - spaceBetween;
+                    top = offset.dy + (size.height / 2) - (tooltipHeight / 2);
+                    currentTooltipPosition = TooltipPosition.left;
+                  } else {
+                    // Place it to the right
+                    left = offset.dx + size.width + spaceBetween;
+                    top = offset.dy + (size.height / 2) - (tooltipHeight / 2);
+                    currentTooltipPosition = TooltipPosition.right;
+                  }
+                }
+              }
+            }
+          }
+          break;
+      }
+
+      // Clamp to stay within screen bounds
+      // Ensures the tooltip's position stays within the visible screen area.
+      top = top.clamp(0.0, screenHeight - tooltipHeight);
+      left = left.clamp(0.0, screenWidth - tooltipWidth);
+
+      // Create an OverlayEntry to render the tooltip above other UI elements.
+      _overlayEntry = OverlayEntry(
+        builder: (context) => Positioned(
+          top: top, // Tooltip's vertical position
+          left: left, // Tooltip's horizontal position
+          child: TapRegion(
+            onTapOutside: (event) => hideTooltip(), // This is necessary to make sure tooltips close
+            child: Material(
+              color: Colors.transparent, // Keeps the tooltip background transparent
+              child: Container(
+                decoration: BoxDecoration(
+                  color: _theme.backgroundColor, // Tooltip background color
+                  borderRadius: BorderRadius.circular(4.0), // Rounded corners
+                ),
+                width: tooltipWidth, // Width of the tooltip based on text
+                height: tooltipHeight, // Height of the tooltip based on text
+                child: tooltipContent,
+              ),
+            ),
+          ),
+        ),
+      );
+
+      // Insert the OverlayEntry into the Overlay stack to render the tooltip
+      Overlay.of(context).insert(_overlayEntry!);
+
+      // Update the state to indicate the tooltip is visible
+      _isTooltipVisible = true;
+    });
   }
 
   /// Hides the tooltip by removing the `OverlayEntry` from the overlay stack.

@@ -1533,9 +1533,19 @@ class MockDocumentService extends _i1.Mock implements _i21.DocumentService {
       ) as _i5.Document);
 
   @override
-  _i10.Future<_i5.Document?> openDocument(String? path) => (super.noSuchMethod(
+  _i10.Future<_i5.Document?> openDocument() => (super.noSuchMethod(
         Invocation.method(
           #openDocument,
+          [],
+        ),
+        returnValue: _i10.Future<_i5.Document?>.value(),
+        returnValueForMissingStub: _i10.Future<_i5.Document?>.value(),
+      ) as _i10.Future<_i5.Document?>);
+
+  @override
+  _i10.Future<_i5.Document?> openDocumentFromPath(String? path) => (super.noSuchMethod(
+        Invocation.method(
+          #openDocumentFromPath,
           [path],
         ),
         returnValue: _i10.Future<_i5.Document?>.value(),
