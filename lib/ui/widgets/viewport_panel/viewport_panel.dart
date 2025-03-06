@@ -514,43 +514,46 @@ class ViewportPanel extends StackedView<ViewportPanelModel> {
     return Row(
       children: [
         Expanded(
-          child: InteractiveViewer(
-            minScale: 0.01,
-            maxScale: 5.0,
-            transformationController: viewModel.transformationController,
-            onInteractionEnd: (ScaleEndDetails details) =>
-                viewModel.setViewportScale(viewModel.transformationController.value.getMaxScaleOnAxis()),
-            boundaryMargin: const EdgeInsets.all(double.infinity),
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: FittedBox(
-                child: RepaintBoundary(
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    onTapDown: (event) => viewModel.toolModeHandler.onTapDown(event),
-                    onPanDown: (event) => viewModel.toolModeHandler.onPanDown(event),
-                    onPanUpdate: (event) => viewModel.toolModeHandler.onPanUpdate(event),
-                    onPanCancel: () => viewModel.toolModeHandler.onPanCancel(),
-                    onPanEnd: (event) => viewModel.toolModeHandler.onPanEnd(event),
-                    child: MouseRegion(
-                      cursor: viewModel.mouseCursor,
-                      onHover: (event) => viewModel.toolModeHandler.onHover(event),
-                      child: Container(
-                        width: viewModel.activeDocument?.size.width,
-                        height: viewModel.activeDocument?.size.height,
-                        color: Colors.white,
-                        child: Stack(
-                          children: [
-                            ClipRect(child: CanvasWidget(items: viewModel.items)),
-                            CanvasOverlaysWidget(
-                              selectedLayers: viewModel.selectedLayers,
-                              selectionOverlay: viewModel.selectionOverlay,
-                            ),
-                            // TextInputOverlayWidget(
-                            //   textInputOverlay: viewModel.textInputOverlay,
-                            //   onChangeText: viewModel.onChangeText,
-                            // ),
-                          ],
+          child: GestureDetector(
+            onTap: () => viewModel.onTapOutside(),
+            child: InteractiveViewer(
+              minScale: 0.01,
+              maxScale: 5.0,
+              transformationController: viewModel.transformationController,
+              onInteractionEnd: (ScaleEndDetails details) =>
+                  viewModel.setViewportScale(viewModel.transformationController.value.getMaxScaleOnAxis()),
+              boundaryMargin: const EdgeInsets.all(double.infinity),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: FittedBox(
+                  child: RepaintBoundary(
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTapDown: (event) => viewModel.toolModeHandler.onTapDown(event),
+                      onPanDown: (event) => viewModel.toolModeHandler.onPanDown(event),
+                      onPanUpdate: (event) => viewModel.toolModeHandler.onPanUpdate(event),
+                      onPanCancel: () => viewModel.toolModeHandler.onPanCancel(),
+                      onPanEnd: (event) => viewModel.toolModeHandler.onPanEnd(event),
+                      child: MouseRegion(
+                        cursor: viewModel.mouseCursor,
+                        onHover: (event) => viewModel.toolModeHandler.onHover(event),
+                        child: Container(
+                          width: viewModel.activeDocument?.size.width,
+                          height: viewModel.activeDocument?.size.height,
+                          color: Colors.white,
+                          child: Stack(
+                            children: [
+                              ClipRect(child: CanvasWidget(items: viewModel.items)),
+                              CanvasOverlaysWidget(
+                                selectedLayers: viewModel.selectedLayers,
+                                selectionOverlay: viewModel.selectionOverlay,
+                              ),
+                              // TextInputOverlayWidget(
+                              //   textInputOverlay: viewModel.textInputOverlay,
+                              //   onChangeText: viewModel.onChangeText,
+                              // ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

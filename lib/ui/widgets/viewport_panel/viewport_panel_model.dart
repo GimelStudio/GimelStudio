@@ -52,6 +52,10 @@ class ViewportPanelModel extends ReactiveViewModel {
     _overlaysService.changeText(text);
   }
 
+  void onTapOutside() {
+    _layersService.deselectAllLayers();
+  }
+
   @override
   List<ListenableServiceMixin> get listenableServices => [
         _imageService,
