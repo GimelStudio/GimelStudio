@@ -4,7 +4,9 @@ import 'package:gimelstudio/models/node_output.dart';
 import 'package:gimelstudio/models/node_property.dart';
 import 'package:gimelstudio/models/nodes.dart';
 import 'package:gimelstudio/models/photo.dart';
+import 'package:gimelstudio/models/tool.dart';
 import 'package:gimelstudio/services/node_registry_service.dart';
+import 'package:gimelstudio/services/tool_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:gimelstudio/app/app.locator.dart';
 import 'package:gimelstudio/app/app.router.dart';
@@ -13,6 +15,7 @@ import 'package:stacked_services/stacked_services.dart';
 class StartupViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _nodeRegistryService = locator<NodeRegistryService>();
+  final _toolService = locator<ToolService>();
 
   void registerNodes() {
     final integerNode = IntegerNode(
@@ -403,6 +406,8 @@ class StartupViewModel extends BaseViewModel {
   // Place anything here that needs to happen before we get into the application
   Future runStartupLogic() async {
     registerNodes();
+
+    _toolService.setToolEventHandler(Tool.cursor);
 
     _navigationService.replaceWithMainView();
   }
