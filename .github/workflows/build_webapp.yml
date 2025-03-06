@@ -20,7 +20,7 @@ jobs:
         channel: stable
         flutter-version: 3.29.0
     - run: flutter pub get
-    - run: flutter build web
+    - run: flutter build web --dart-define=PLATFORM=Web BUILD_DATETIME=${{ github.event.repository.updated_at}} BUILD_BRANCH=${{ github.head_ref || github.ref_name }} BUILD_COMMIT=${{ github.sha }}
     
     - name: Push build files to branch
       uses: s0/git-publish-subdir-action@develop
