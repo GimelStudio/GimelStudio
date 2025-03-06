@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:gimelstudio/app/app.locator.dart';
 import 'package:gimelstudio/models/document.dart';
 import 'package:gimelstudio/services/document_service.dart';
+import 'package:gimelstudio/services/evaluation_service.dart';
 import 'package:stacked/stacked.dart';
 
 class NewDocumentDialogModel extends BaseViewModel {
   final _documentsService = locator<DocumentService>();
+  final _evaluationService = locator<EvaluationService>();
 
   double _documentWidth = 1920.0;
   double _documentHeight = 1080.0;
@@ -17,6 +19,7 @@ class NewDocumentDialogModel extends BaseViewModel {
     if (document == null) {
       return false;
     }
+    _evaluationService.evaluate();
     return true;
   }
 

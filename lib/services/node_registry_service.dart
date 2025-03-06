@@ -96,4 +96,34 @@ class NodeRegistryService {
 
     return node;
   }
+
+  Map<String, Node> newDefaultNodes(String type, String outputLabel) {
+    Map<String, Node> defaultNodes = {};
+
+    if (type == 'rectangle') {
+      Node rectangleNode = createNode('rectangle_corenode', Offset(200, 80));
+      rectangleNode.selected = true;
+      defaultNodes[rectangleNode.id] = rectangleNode;
+    } else if (type == 'image') {
+      Node photoNode = createNode('photo_corenode', Offset(100, 80));
+      defaultNodes[photoNode.id] = photoNode;
+
+      // Node blurNode = createNode('blur_corenode', Offset(110, 80));
+      // defaultNodes[blurNode.id] = blurNode;
+
+      Node imageNode = createNode('image_corenode', Offset(250, 80));
+      imageNode.selected = true;
+      defaultNodes[imageNode.id] = imageNode;
+    } else if (type == 'text') {
+      Node textNode = createNode('text_corenode', Offset(300, 80));
+      textNode.selected = true;
+      defaultNodes[textNode.id] = textNode;
+    }
+
+    Node outputNode = createNode('output_corenode', Offset(410, 80));
+    defaultNodes[outputNode.id] = outputNode;
+    outputNode.label = outputLabel; // TODO: need to keep this in sync with the layer name
+
+    return defaultNodes;
+  }
 }

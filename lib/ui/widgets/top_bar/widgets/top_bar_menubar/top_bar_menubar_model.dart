@@ -37,7 +37,9 @@ class TopBarMenubarModel extends BaseViewModel {
 
   /// Menu item and keybinding event to open a document or image file.
   Future<void> onOpen() async {
-    await _documentsService.openDocument();
+    Document? document = await _documentsService.openDocument();
+    if (document == null) return;
+    _evaluationService.evaluate();
   }
 
   /// Menu item and keybinding event to close the current document tab.

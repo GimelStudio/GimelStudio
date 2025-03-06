@@ -53,7 +53,7 @@ class NodeWidget extends StackedView<NodeWidgetModel> {
                 clipBehavior: Clip.none,
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(left: 14.0),
+                    margin: const EdgeInsets.only(left: 14.0, right: 14.0),
                     child: Row(
                       spacing: 4.0,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -63,11 +63,15 @@ class NodeWidget extends StackedView<NodeWidgetModel> {
                         //   color: Colors.white70,
                         //   size: 14.0,
                         // ),
-                        Text(
-                          node.label,
-                          style: TextStyle(
-                            color: node.selected ? Colors.white : Colors.white70,
-                            fontSize: 12.0,
+                        Expanded(
+                          child: Text(
+                            node.label,
+                            maxLines: 1,
+                            style: TextStyle(
+                              color: node.selected ? Colors.white : Colors.white70,
+                              fontSize: 12.0,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ),
                       ],

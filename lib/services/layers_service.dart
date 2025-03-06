@@ -92,36 +92,6 @@ class LayersService with ListenableServiceMixin {
     notifyListeners();
   }
 
-  Map<String, Node> newDefaultNodes(String type, String outputLabel) {
-    Map<String, Node> defaultNodes = {};
-
-    if (type == 'rectangle') {
-      Node rectangleNode = _nodeRegistryService.createNode('rectangle_corenode', Offset(200, 80));
-      rectangleNode.selected = true;
-      defaultNodes[rectangleNode.id] = rectangleNode;
-    } else if (type == 'image') {
-      Node photoNode = _nodeRegistryService.createNode('photo_corenode', Offset(100, 80));
-      defaultNodes[photoNode.id] = photoNode;
-
-      // Node blurNode = _nodeRegistryService.createNode('blur_corenode', Offset(110, 80));
-      // defaultNodes[blurNode.id] = blurNode;
-
-      Node imageNode = _nodeRegistryService.createNode('image_corenode', Offset(250, 80));
-      imageNode.selected = true;
-      defaultNodes[imageNode.id] = imageNode;
-    } else if (type == 'text') {
-      Node textNode = _nodeRegistryService.createNode('text_corenode', Offset(300, 80));
-      textNode.selected = true;
-      defaultNodes[textNode.id] = textNode;
-    }
-
-    Node outputNode = _nodeRegistryService.createNode('output_corenode', Offset(410, 80));
-    defaultNodes[outputNode.id] = outputNode;
-    outputNode.label = outputLabel; // TODO: need to keep this in sync with the layer name
-
-    return defaultNodes;
-  }
-
   /// Add a new layer of [type] to the layer stack.
   Layer addNewLayer({String type = 'rectangle'}) {
     // When working with a vector layer stack, the next layer
@@ -130,7 +100,7 @@ class LayersService with ListenableServiceMixin {
 
     // Default nodes
     // TODO: refactor
-    Map<String, Node> defaultNodes = newDefaultNodes(type, 'Untitled ${layers.length + 1}');
+    Map<String, Node> defaultNodes = _nodeRegistryService.newDefaultNodes(type, 'Untitled ${layers.length + 1}');
 
     Layer newLayer = Layer(
       id: _idService.newId(),
