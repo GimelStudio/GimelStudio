@@ -29,13 +29,22 @@ void drawRotated(
 // TODO: these should be moved to their own files.
 class ViewportCanvasPainter extends CustomPainter {
   const ViewportCanvasPainter({
+    required this.background,
     required this.items,
   });
 
+  final Color background;
   final List<CanvasItem> items;
 
   @override
   void paint(Canvas canvas, Size size) {
+    // Draw the background
+    final Paint paint = Paint()..color = background;
+    if (background != Colors.transparent) {
+      canvas.drawRect(Rect.fromLTWH(0.0, 0.0, size.width, size.height), paint);
+    }
+
+    // Draw the canvas items.
     for (int index = 0; index < items.length; index++) {
       CanvasItem item = items[index];
 
@@ -403,15 +412,18 @@ class TextInputOverlay {
 class CanvasWidget extends StatelessWidget {
   const CanvasWidget({
     super.key,
+    required this.background,
     required this.items,
   });
 
+  final Color background;
   final List<CanvasItem> items;
 
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
       painter: ViewportCanvasPainter(
+        background: background,
         items: items,
       ),
       child: const SizedBox.expand(),
@@ -537,13 +549,17 @@ class ViewportPanel extends StackedView<ViewportPanelModel> {
                       child: MouseRegion(
                         cursor: viewModel.mouseCursor,
                         onHover: (event) => viewModel.toolModeHandler.onHover(event),
-                        child: Container(
+                        child: SizedBox(
                           width: viewModel.activeDocument?.size.width,
                           height: viewModel.activeDocument?.size.height,
-                          color: Colors.white,
                           child: Stack(
                             children: [
-                              ClipRect(child: CanvasWidget(items: viewModel.items)),
+                              ClipRect(
+                                child: CanvasWidget(
+                                  background: viewModel.activeDocument?.background ?? Colors.transparent,
+                                  items: viewModel.items,
+                                ),
+                              ),
                               CanvasOverlaysWidget(
                                 selectedLayers: viewModel.selectedLayers,
                                 selectionOverlay: viewModel.selectionOverlay,

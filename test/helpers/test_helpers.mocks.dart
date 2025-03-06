@@ -1111,23 +1111,6 @@ class MockLayersService extends _i1.Mock implements _i15.LayersService {
       );
 
   @override
-  Map<String, _i4.Node> newDefaultNodes(
-    String? type,
-    String? outputLabel,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #newDefaultNodes,
-          [
-            type,
-            outputLabel,
-          ],
-        ),
-        returnValue: <String, _i4.Node>{},
-        returnValueForMissingStub: <String, _i4.Node>{},
-      ) as Map<String, _i4.Node>);
-
-  @override
   _i3.Layer addNewLayer({String? type = 'rectangle'}) => (super.noSuchMethod(
         Invocation.method(
           #addNewLayer,
@@ -1443,6 +1426,23 @@ class MockNodeRegistryService extends _i1.Mock implements _i20.NodeRegistryServi
           ),
         ),
       ) as _i4.Node);
+
+  @override
+  Map<String, _i4.Node> newDefaultNodes(
+    String? type,
+    String? outputLabel,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #newDefaultNodes,
+          [
+            type,
+            outputLabel,
+          ],
+        ),
+        returnValue: <String, _i4.Node>{},
+        returnValueForMissingStub: <String, _i4.Node>{},
+      ) as Map<String, _i4.Node>);
 }
 
 /// A class which mocks [DocumentService].
@@ -1714,6 +1714,7 @@ class MockEvaluationService extends _i1.Mock implements _i22.EvaluationService {
 class MockExportService extends _i1.Mock implements _i23.ExportService {
   @override
   _i10.Future<bool> export(
+    _i6.Color? canvasBackground,
     List<_i16.CanvasItem>? canvasItems,
     _i6.Size? canvasSize,
   ) =>
@@ -1721,6 +1722,7 @@ class MockExportService extends _i1.Mock implements _i23.ExportService {
         Invocation.method(
           #export,
           [
+            canvasBackground,
             canvasItems,
             canvasSize,
           ],
@@ -1733,6 +1735,7 @@ class MockExportService extends _i1.Mock implements _i23.ExportService {
   _i10.Future<bool> exportToImageFormat(
     String? exportPath,
     _i13.SupportedFileFormat? exportFormat,
+    _i6.Color? canvasBackground,
     List<_i16.CanvasItem>? canvasItems,
     _i6.Size? canvasSize,
   ) =>
@@ -1742,6 +1745,7 @@ class MockExportService extends _i1.Mock implements _i23.ExportService {
           [
             exportPath,
             exportFormat,
+            canvasBackground,
             canvasItems,
             canvasSize,
           ],
@@ -1752,6 +1756,7 @@ class MockExportService extends _i1.Mock implements _i23.ExportService {
 
   @override
   _i10.Future<_i6.Image> getUiImageFromCanvas(
+    _i6.Color? canvasBackground,
     List<_i16.CanvasItem>? canvasItems,
     _i6.Size? canvasSize,
   ) =>
@@ -1759,6 +1764,7 @@ class MockExportService extends _i1.Mock implements _i23.ExportService {
         Invocation.method(
           #getUiImageFromCanvas,
           [
+            canvasBackground,
             canvasItems,
             canvasSize,
           ],
@@ -1768,6 +1774,7 @@ class MockExportService extends _i1.Mock implements _i23.ExportService {
           Invocation.method(
             #getUiImageFromCanvas,
             [
+              canvasBackground,
               canvasItems,
               canvasSize,
             ],
@@ -1778,6 +1785,7 @@ class MockExportService extends _i1.Mock implements _i23.ExportService {
           Invocation.method(
             #getUiImageFromCanvas,
             [
+              canvasBackground,
               canvasItems,
               canvasSize,
             ],

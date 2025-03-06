@@ -1,8 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
-import 'dart:ui';
-
 import 'package:file_selector/file_selector.dart';
+import 'package:flutter/material.dart';
 import 'package:gimelstudio/app/app.locator.dart';
 import 'package:gimelstudio/models/document.dart';
 import 'package:gimelstudio/models/layer.dart';
@@ -87,6 +86,7 @@ class OpenFileService {
       name: fileName,
       path: filePath,
       size: Size(imageWidth, imageHeight),
+      background: Colors.transparent, // For directly opened images, set the background to transparent
       layers: [layer],
       selectedLayers: [layer],
     );

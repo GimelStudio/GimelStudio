@@ -8,6 +8,7 @@ class Document {
     required this.name,
     required this.size,
     this.isSaved = false,
+    this.background = Colors.white,
     this.path = '',
     required this.layers,
     required this.selectedLayers,
@@ -19,6 +20,7 @@ class Document {
   final Size size;
   String path;
   bool isSaved;
+  Color background;
   List<Layer> layers;
   List<Layer> selectedLayers;
   List<CanvasItem> result; // Only used for the evaluation
@@ -32,11 +34,13 @@ class Document {
     };
   }
 
+  // TODO
   Document.fromJson(Map<String, dynamic> json)
       : id = json['id'] as String,
         name = json['name'] as String,
         size = Size(json['size'][0] as double, json['size'][1] as double),
         isSaved = true,
+        background = Colors.white,
         path = '',
         layers = [for (Map<String, dynamic> layer in json['layers']) Layer.fromJson(layer)],
         selectedLayers = [],

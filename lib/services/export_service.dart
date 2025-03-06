@@ -11,6 +11,7 @@ class ExportService {
   final _fileService = locator<FileService>();
 
   Future<bool> export(
+    ui.Color canvasBackground,
     List<CanvasItem> canvasItems,
     ui.Size canvasSize,
   ) async {
@@ -25,7 +26,7 @@ class ExportService {
         return false;
       }
 
-      return await exportToImageFormat(filePath, exportFormat, canvasItems, canvasSize);
+      return await exportToImageFormat(filePath, exportFormat, canvasBackground, canvasItems, canvasSize);
     } else {
       return false;
     }
@@ -35,12 +36,13 @@ class ExportService {
   Future<bool> exportToImageFormat(
     String exportPath,
     SupportedFileFormat exportFormat,
+    ui.Color canvasBackground,
     List<CanvasItem> canvasItems,
     ui.Size canvasSize,
   ) async {
     bool exportSuccessful = false;
 
-    ui.Image uiImage = await getUiImageFromCanvas(canvasItems, canvasSize);
+    ui.Image uiImage = await getUiImageFromCanvas(canvasBackground, canvasItems, canvasSize);
     img.Image? image = await convertUiImageToImage(uiImage);
 
     if (image == null) {
@@ -70,11 +72,12 @@ class ExportService {
   /// Records the canvas painting operations and returns a ui.Image.
   ///
   /// This is the first step in exporting the canvas to a raster image.
-  Future<ui.Image> getUiImageFromCanvas(List<CanvasItem> canvasItems, ui.Size canvasSize) async {
+  Future<ui.Image> getUiImageFromCanvas(
+      ui.Color canvasBackground, List<CanvasItem> canvasItems, ui.Size canvasSize) async {
     ui.PictureRecorder recorder = ui.PictureRecorder();
 
     ui.Canvas canvas = ui.Canvas(recorder);
-    ViewportCanvasPainter painter = ViewportCanvasPainter(items: canvasItems);
+    ViewportCanvasPainter painter = ViewportCanvasPainter(background: canvasBackground, items: canvasItems);
     painter.paint(canvas, canvasSize);
 
     ui.Picture picture = recorder.endRecording();

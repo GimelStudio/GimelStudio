@@ -75,7 +75,7 @@ class TopBarMenubarModel extends BaseViewModel {
   Future<void> onExport() async {
     if (activeDocument != null && items != null) {
       _evaluationService.evaluate();
-      await _exportService.export(items!, activeDocument!.size);
+      await _exportService.export(activeDocument!.background, items!, activeDocument!.size);
     }
   }
 
