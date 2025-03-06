@@ -235,7 +235,7 @@ class _GsDoubleInputState extends State<GsDoubleInput> {
                 padding:
                     widget.isSubwidget ? null : const EdgeInsets.only(top: 4.0, left: 8.0, bottom: 4.0, right: 8.0),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(3.0),
+                  borderRadius: BorderRadius.circular(4.0),
                   border: Border.all(
                     color: (_hover && !widget.isSubwidget) || (_isEditingText && !widget.isSubwidget)
                         ? _theme.borderColor

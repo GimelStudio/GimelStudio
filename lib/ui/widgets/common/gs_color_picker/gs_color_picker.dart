@@ -109,9 +109,9 @@ class _GsColorPickerState extends State<GsColorPicker> {
       onHover: (event) => onHover(event),
       onExit: (event) => onExitHover(event),
       child: Container(
-        padding: const EdgeInsets.only(top: 4.0, left: 6.0, bottom: 4.0, right: 6.0),
+        padding: const EdgeInsets.only(top: 4.0, left: 8.0, bottom: 4.0, right: 8.0),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(3.0),
+          borderRadius: BorderRadius.circular(4.0),
           border: Border.all(color: _hover ? _theme.borderColor : Colors.transparent),
         ),
         child: Row(

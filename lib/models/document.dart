@@ -8,6 +8,7 @@ class Document {
     required this.name,
     required this.size,
     this.isSaved = false,
+    this.path = '',
     required this.layers,
     required this.selectedLayers,
     this.result = const [],
@@ -16,6 +17,7 @@ class Document {
   final String id;
   final String name;
   final Size size;
+  String path;
   bool isSaved;
   List<Layer> layers;
   List<Layer> selectedLayers;
@@ -35,6 +37,7 @@ class Document {
         name = json['name'] as String,
         size = Size(json['size'][0] as double, json['size'][1] as double),
         isSaved = true,
+        path = '',
         layers = [for (Map<String, dynamic> layer in json['layers']) Layer.fromJson(layer)],
         selectedLayers = [],
         result = [];

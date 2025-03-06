@@ -23,7 +23,9 @@ class DocumentTabs extends StackedView<DocumentTabsModel> {
           child: DocumentTabItem(
             key: Key(document.id),
             index: viewModel.documents.indexWhere((i) => document.id == i.id),
-            name: '${document.isSaved ? '' : '*'}${document.name}',
+            documentName: document.name,
+            documentPath: document.path,
+            documentIsSaved: document.isSaved,
             isSelected: viewModel.documents.indexOf(document) == viewModel.selectedDocumentIndex,
             onCloseDocument: () => viewModel.onCloseDocumentTab(document),
           ),

@@ -6,10 +6,12 @@ class GsFlatIconBtn extends StatefulWidget {
     super.key,
     required this.label,
     required this.icon,
+    required this.onTap,
   });
 
   final String label;
   final Widget icon;
+  final Function() onTap;
 
   @override
   State<GsFlatIconBtn> createState() => _GsFlatIconBtnState();
@@ -34,15 +36,16 @@ class _GsFlatIconBtnState extends State<GsFlatIconBtn> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: widget.onTap,
+      overlayColor: WidgetStatePropertyAll(Colors.transparent),
       child: MouseRegion(
         onHover: (event) => onHover(event),
         onExit: (event) => onExitHover(event),
         child: Container(
-          padding: const EdgeInsets.only(top: 4.0, left: 6.0, bottom: 4.0, right: 6.0),
+          padding: const EdgeInsets.only(top: 4.0, left: 8.0, bottom: 4.0, right: 8.0),
           decoration: BoxDecoration(
             color: _hover ? Color(0xFF303030) : Colors.transparent,
-            borderRadius: BorderRadius.circular(3.0),
+            borderRadius: BorderRadius.circular(4.0),
           ),
           child: Row(
             spacing: 6.0,
