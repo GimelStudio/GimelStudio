@@ -24921,7 +24921,7 @@ q0:function q0(a,b){this.e=a
 this.a=b},
 a54:function a54(a){this.a=a},
 q1:function q1(a,b,c,d,e,f){var _=this
-_.ay=!1
+_.Q=!1
 _.cT$=a
 _.cH$=b
 _.b_$=c
@@ -87631,12 +87631,8 @@ A.xg.prototype={}
 A.ls.prototype={
 K(){return"SupportedFileFormat."+this.b}}
 A.q0.prototype={
-bC(a,b,c){var s=null,r=A.cy(12),q=A.au(4279834905),p=t.D,o=A.bY(A.a([A.acv(A.hb(!1,A.cy(20),!0,new A.bL(B.hu,A.dC(A.aLW(B.w1),B.c_,18),s),s,!0,s,s,s,s,s,s,s,s,s,s,new A.a54(this),s,s,s,s,s),s,B.m6,"Close")],p),B.w,B.ib,B.x,0),n=A.aEZ("assets/gimel-studio-icon.png",170,170,B.br,80,!0,80),m=A.bM("Gimel Studio",s,s,s,s,A.cE(s,s,B.j,s,s,s,s,s,s,s,s,33,s,s,B.eZ,s,1.3,!0,s,-0.01,s,s,s,s,s,s),s,s),l=A.bM("Version 0.7.0-alpha for Web",s,s,s,s,A.cE(s,s,B.j,s,s,s,s,s,s,s,s,13,s,s,B.aw,s,1,!0,s,-0.01,s,s,s,s,s,s),s,s),k=b.M6(),j=B.e.af("b5530acd858225280057ddea3910f3e9a3a7c89c",0,7)
-m=A.cR(A.a([m,l,A.bM("Built on "+k+" from branch master, commit "+j+".",s,s,s,s,A.cE(s,s,B.c_,s,s,s,s,s,s,s,s,10,s,s,s,s,2.5,!0,s,s,s,s,s,s,s,s),s,s)],p),B.ag,B.y,B.x,0)
-l=A.cy(20)
-k=b.ay?4:0
-j=A.a([A.dC(A.aYw(B.w1),B.c_,16)],p)
-if(b.ay)j.push(A.bM("Copied!",s,s,s,s,A.cE(s,s,B.c_,s,s,s,s,s,s,s,s,11,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s))
+bC(a,b,c){var s=null,r=A.cy(12),q=A.au(4279834905),p=t.D,o=A.bY(A.a([A.acv(A.hb(!1,A.cy(20),!0,new A.bL(B.hu,A.dC(A.aLW(B.w1),B.c_,18),s),s,!0,s,s,s,s,s,s,s,s,s,s,new A.a54(this),s,s,s,s,s),s,B.m6,"Close")],p),B.w,B.ib,B.x,0),n=A.aEZ("assets/gimel-studio-icon.png",170,170,B.br,80,!0,80),m=A.cR(A.a([A.bM("Gimel Studio",s,s,s,s,A.cE(s,s,B.j,s,s,s,s,s,s,s,s,33,s,s,B.eZ,s,1.3,!0,s,-0.01,s,s,s,s,s,s),s,s),A.bM("Version 0.7.0-alpha for Web",s,s,s,s,A.cE(s,s,B.j,s,s,s,s,s,s,s,s,13,s,s,B.aw,s,1,!0,s,-0.01,s,s,s,s,s,s),s,s),A.bM("Built on "+b.M6()+" from branch master, commit "+B.e.af("ce111f4c2358fcd3bde3d510c8c226c2437d2506",0,7)+".",s,s,s,s,A.cE(s,s,B.c_,s,s,s,s,s,s,s,s,10,s,s,s,s,2.5,!0,s,s,s,s,s,s,s,s),s,s)],p),B.ag,B.y,B.x,0),l=A.cy(20),k=b.Q?4:0,j=A.a([A.dC(A.aYw(B.w1),B.c_,16)],p)
+if(b.Q)j.push(A.bM("Copied!",s,s,s,s,A.cE(s,s,B.c_,s,s,s,s,s,s,s,s,11,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s))
 return A.aDZ(q,s,new A.eZ(B.Dm,A.cR(A.a([o,A.cf(A.bY(A.a([A.cf(A.cR(A.a([A.bY(A.a([n,B.a1n,m,A.cR(A.a([A.acv(A.hb(!1,l,!0,new A.bL(B.hu,A.bY(j,B.w,B.y,B.x,k),s),s,!0,s,s,s,s,s,s,s,s,s,s,b.ganw(),s,s,s,s,s),s,B.m6,"Copy application info to the clipboard")],p),B.w,B.y,B.x,0)],p),B.ag,B.y,B.x,0),A.cf(new A.bL(B.Hz,A.bY(A.a([A.cf(A.cR(A.a([new A.iV("Contribute",A.dC(A.aYH(B.S),B.j,18),b.gasT(),s),new A.iV("Visit Website",A.dC(A.aYB(B.S),B.j,18),b.gL5(),s),new A.iV("Join Community Chat",A.dC(A.aYu(B.S),B.j,18),b.gate(),s)],p),B.ag,B.y,B.x,4)),A.cf(A.cR(A.a([new A.iV("Credits",A.dC(A.aYp(B.S),B.j,18),b.gasU(),s),new A.iV("Licenses",A.dC(A.aYz(B.S),B.j,18),b.gatf(),s)],p),B.ag,B.y,B.x,4))],p),B.w,B.y,B.ar,18),s))],p),B.ag,B.y,B.ar,0))],p),B.w,B.y,B.x,0)),A.bM("Gimel Studio is free software licensed under the terms of the GPL-3.0 license.\n\xa9 2025 Gimel Studio contributors.",s,s,s,s,A.cE(s,s,B.c_,s,s,s,s,s,s,s,s,11,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s)],p),B.ag,B.y,B.ar,0),s),B.dS,new A.cU(r,B.v))},
 e4(a){var s=t.S
 return new A.q1(A.p(s,t.y),A.p(s,t.z),!1,!1,!1,$.af())}}
@@ -87644,12 +87640,12 @@ A.a54.prototype={
 $0(){this.a.e.$1(new A.dz(!0,null,t.qs))},
 $S:0}
 A.q1.prototype={
-M6(){return A.aV8("2025-03-06T22:44:58Z").avF().split("T")[0]},
+M6(){return A.aV8("2025-03-06T22:53:19Z").avF().split("T")[0]},
 Ba(){var s=0,r=A.H(t.H),q=this
 var $async$Ba=A.I(function(a,b){if(a===1)return A.E(b,r)
 while(true)switch(s){case 0:s=2
-return A.Q(A.Bx(new A.qp("Gimel Studio v0.7.0-alpha for Web built on "+q.M6()+" from branch master, commit b5530acd858225280057ddea3910f3e9a3a7c89c.")),$async$Ba)
-case 2:q.ay=!0
+return A.Q(A.Bx(new A.qp("Gimel Studio v0.7.0-alpha for Web built on "+q.M6()+" from branch master, commit ce111f4c2358fcd3bde3d510c8c226c2437d2506.")),$async$Ba)
+case 2:q.Q=!0
 if(!q.b_$)q.eC()
 return A.F(null,r)}})
 return A.G($async$Ba,r)},
