@@ -20,14 +20,18 @@ class TopBar extends StackedView<TopBarModel> {
       padding: const EdgeInsets.symmetric(horizontal: 14.0),
       child: Row(
         children: [
-          Image.asset(
-            'assets/gimel-studio-icon.png',
-            width: 16.0,
-            height: 16.0,
-            isAntiAlias: true,
-            cacheHeight: 70,
-            cacheWidth: 70,
-            filterQuality: FilterQuality.medium,
+          InkWell(
+            onTap: viewModel.onIcon,
+            overlayColor: WidgetStatePropertyAll(Colors.transparent),
+            child: Image.asset(
+              'assets/gimel-studio-icon.png',
+              width: 16.0,
+              height: 16.0,
+              isAntiAlias: true,
+              cacheHeight: 70,
+              cacheWidth: 70,
+              filterQuality: FilterQuality.medium,
+            ),
           ),
           const SizedBox(width: 2.0),
           InkWell(
