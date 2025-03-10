@@ -134,25 +134,26 @@ class NewDocumentDialog extends StackedView<NewDocumentDialogModel> {
                               ),
                             ),
                             const SizedBox(height: 4.0),
-                            // TODO
-                            GsFlatIconBtn(
-                              onTap: () {},
-                              label: 'website-design.gimel',
-                              icon: PhosphorIcon(
-                                PhosphorIcons.file(PhosphorIconsStyle.light),
-                                color: Colors.white,
-                                size: 18.0,
-                              ),
-                            ),
-                            GsFlatIconBtn(
-                              onTap: () {},
-                              label: 'test.gimel',
-                              icon: PhosphorIcon(
-                                PhosphorIcons.file(PhosphorIconsStyle.light),
-                                color: Colors.white,
-                                size: 18.0,
-                              ),
-                            ),
+                            // TODO: Implement recent files
+                            const SizedBox(height: 40.0),
+                            // GsFlatIconBtn(
+                            //   onTap: () {},
+                            //   label: 'website-design.gimel',
+                            //   icon: PhosphorIcon(
+                            //     PhosphorIcons.file(PhosphorIconsStyle.light),
+                            //     color: Colors.white,
+                            //     size: 18.0,
+                            //   ),
+                            // ),
+                            // GsFlatIconBtn(
+                            //   onTap: () {},
+                            //   label: 'test.gimel',
+                            //   icon: PhosphorIcon(
+                            //     PhosphorIcons.file(PhosphorIconsStyle.light),
+                            //     color: Colors.white,
+                            //     size: 18.0,
+                            //   ),
+                            // ),
                           ],
                         ),
                       ],
