@@ -7,7 +7,7 @@ import 'dart:async' as _i10;
 import 'dart:ui' as _i6;
 
 import 'package:flutter/material.dart' as _i7;
-import 'package:flutter/services.dart' as _i26;
+import 'package:flutter/services.dart' as _i27;
 import 'package:gimelstudio/models/canvas_item.dart' as _i16;
 import 'package:gimelstudio/models/document.dart' as _i5;
 import 'package:gimelstudio/models/layer.dart' as _i3;
@@ -29,13 +29,13 @@ import 'package:gimelstudio/services/layers_service.dart' as _i15;
 import 'package:gimelstudio/services/node_registry_service.dart' as _i20;
 import 'package:gimelstudio/services/nodegraphs_service.dart' as _i17;
 import 'package:gimelstudio/services/open_file_service.dart' as _i36;
-import 'package:gimelstudio/services/overlays_service.dart' as _i29;
-import 'package:gimelstudio/services/rectangle_tool_service.dart' as _i27;
+import 'package:gimelstudio/services/overlays_service.dart' as _i30;
+import 'package:gimelstudio/services/rectangle_tool_service.dart' as _i28;
 import 'package:gimelstudio/services/text_tool_service.dart' as _i35;
-import 'package:gimelstudio/services/tool_service.dart' as _i28;
+import 'package:gimelstudio/services/tool_service.dart' as _i29;
 import 'package:gimelstudio/services/viewport_service.dart' as _i11;
 import 'package:gimelstudio/ui/common/enums.dart' as _i13;
-import 'package:gimelstudio/ui/widgets/viewport_panel/viewport_panel.dart' as _i30;
+import 'package:gimelstudio/ui/widgets/viewport_panel/viewport_panel.dart' as _i26;
 import 'package:image/image.dart' as _i24;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i9;
@@ -1079,17 +1079,53 @@ class MockLayersService extends _i1.Mock implements _i15.LayersService {
       );
 
   @override
-  void setLayerLocked(
+  void setLayersVisible(List<_i3.Layer>? layers) => super.noSuchMethod(
+        Invocation.method(
+          #setLayersVisible,
+          [layers],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void setLayersHidden(List<_i3.Layer>? layers) => super.noSuchMethod(
+        Invocation.method(
+          #setLayersHidden,
+          [layers],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void setLayerLock(
     _i3.Layer? layer,
     bool? isLocked,
   ) =>
       super.noSuchMethod(
         Invocation.method(
-          #setLayerLocked,
+          #setLayerLock,
           [
             layer,
             isLocked,
           ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void setLayersLocked(List<_i3.Layer>? layers) => super.noSuchMethod(
+        Invocation.method(
+          #setLayersLocked,
+          [layers],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void setLayersUnlocked(List<_i3.Layer>? layers) => super.noSuchMethod(
+        Invocation.method(
+          #setLayersUnlocked,
+          [layers],
         ),
         returnValueForMissingStub: null,
       );
@@ -1834,6 +1870,31 @@ class MockCursorToolService extends _i1.Mock implements _i25.CursorToolService {
       );
 
   @override
+  set currentSelectionHandleSide(_i26.SelectionOverlayHandleSide? _currentSelectionHandleSide) => super.noSuchMethod(
+        Invocation.setter(
+          #currentSelectionHandleSide,
+          _currentSelectionHandleSide,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  Map<String, _i6.Rect> get lastRects => (super.noSuchMethod(
+        Invocation.getter(#lastRects),
+        returnValue: <String, _i6.Rect>{},
+        returnValueForMissingStub: <String, _i6.Rect>{},
+      ) as Map<String, _i6.Rect>);
+
+  @override
+  set lastRects(Map<String, _i6.Rect>? _lastRects) => super.noSuchMethod(
+        Invocation.setter(
+          #lastRects,
+          _lastRects,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   List<_i3.Layer> get layers => (super.noSuchMethod(
         Invocation.getter(#layers),
         returnValue: <_i3.Layer>[],
@@ -1855,6 +1916,15 @@ class MockCursorToolService extends _i1.Mock implements _i25.CursorToolService {
       ) as List<_i16.CanvasItem>);
 
   @override
+  _i26.SelectionOverlayHandleSide? getCurrentHandleSide(_i6.Offset? position) => (super.noSuchMethod(
+        Invocation.method(
+          #getCurrentHandleSide,
+          [position],
+        ),
+        returnValueForMissingStub: null,
+      ) as _i26.SelectionOverlayHandleSide?);
+
+  @override
   void activate() => super.noSuchMethod(
         Invocation.method(
           #activate,
@@ -1873,7 +1943,7 @@ class MockCursorToolService extends _i1.Mock implements _i25.CursorToolService {
       );
 
   @override
-  void onHover(_i26.PointerHoverEvent? event) => super.noSuchMethod(
+  void onHover(_i27.PointerHoverEvent? event) => super.noSuchMethod(
         Invocation.method(
           #onHover,
           [event],
@@ -1930,7 +2000,7 @@ class MockCursorToolService extends _i1.Mock implements _i25.CursorToolService {
 /// A class which mocks [RectangleToolService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRectangleToolService extends _i1.Mock implements _i27.RectangleToolService {
+class MockRectangleToolService extends _i1.Mock implements _i28.RectangleToolService {
   @override
   set draggingStartPosition(_i6.Offset? _draggingStartPosition) => super.noSuchMethod(
         Invocation.setter(
@@ -1989,7 +2059,7 @@ class MockRectangleToolService extends _i1.Mock implements _i27.RectangleToolSer
       );
 
   @override
-  void onHover(_i26.PointerHoverEvent? event) => super.noSuchMethod(
+  void onHover(_i27.PointerHoverEvent? event) => super.noSuchMethod(
         Invocation.method(
           #onHover,
           [event],
@@ -2046,7 +2116,7 @@ class MockRectangleToolService extends _i1.Mock implements _i27.RectangleToolSer
 /// A class which mocks [ToolService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockToolService extends _i1.Mock implements _i28.ToolService {
+class MockToolService extends _i1.Mock implements _i29.ToolService {
   @override
   _i2.Tool get activeTool => (super.noSuchMethod(
         Invocation.getter(#activeTool),
@@ -2154,7 +2224,7 @@ class MockToolService extends _i1.Mock implements _i28.ToolService {
 /// A class which mocks [OverlaysService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockOverlaysService extends _i1.Mock implements _i29.OverlaysService {
+class MockOverlaysService extends _i1.Mock implements _i30.OverlaysService {
   @override
   String get textInputOverlayText => (super.noSuchMethod(
         Invocation.getter(#textInputOverlayText),
@@ -2234,7 +2304,7 @@ class MockOverlaysService extends _i1.Mock implements _i29.OverlaysService {
       ) as bool);
 
   @override
-  _i30.SelectionBoxOverlay? calculateSelectionBoxOverlay(
+  _i26.SelectionBoxOverlay? calculateSelectionBoxOverlay(
     List<_i3.Layer>? selectedLayers,
     double? viewportScale,
   ) =>
@@ -2247,7 +2317,7 @@ class MockOverlaysService extends _i1.Mock implements _i29.OverlaysService {
           ],
         ),
         returnValueForMissingStub: null,
-      ) as _i30.SelectionBoxOverlay?);
+      ) as _i26.SelectionBoxOverlay?);
 
   @override
   _i6.Rect calculateMinBounds(List<_i3.Layer>? selectedLayers) => (super.noSuchMethod(
@@ -2340,7 +2410,7 @@ class MockHandToolService extends _i1.Mock implements _i31.HandToolService {
       );
 
   @override
-  void onHover(_i26.PointerHoverEvent? event) => super.noSuchMethod(
+  void onHover(_i27.PointerHoverEvent? event) => super.noSuchMethod(
         Invocation.method(
           #onHover,
           [event],
@@ -2583,7 +2653,7 @@ class MockImageToolService extends _i1.Mock implements _i33.ImageToolService {
       );
 
   @override
-  void onHover(_i26.PointerHoverEvent? event) => super.noSuchMethod(
+  void onHover(_i27.PointerHoverEvent? event) => super.noSuchMethod(
         Invocation.method(
           #onHover,
           [event],
@@ -2699,7 +2769,7 @@ class MockTextToolService extends _i1.Mock implements _i35.TextToolService {
       );
 
   @override
-  void onHover(_i26.PointerHoverEvent? event) => super.noSuchMethod(
+  void onHover(_i27.PointerHoverEvent? event) => super.noSuchMethod(
         Invocation.method(
           #onHover,
           [event],

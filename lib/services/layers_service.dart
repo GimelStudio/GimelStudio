@@ -73,8 +73,36 @@ class LayersService with ListenableServiceMixin {
     notifyListeners();
   }
 
-  void setLayerLocked(Layer layer, bool isLocked) {
+  void setLayersVisible(List<Layer> layers) {
+    for (Layer layer in layers) {
+      layer.setVisibility(true);
+    }
+    notifyListeners();
+  }
+
+  void setLayersHidden(List<Layer> layers) {
+    for (Layer layer in layers) {
+      layer.setVisibility(false);
+    }
+    notifyListeners();
+  }
+
+  void setLayerLock(Layer layer, bool isLocked) {
     layer.setLocked(isLocked);
+    notifyListeners();
+  }
+
+  void setLayersLocked(List<Layer> layers) {
+    for (Layer layer in layers) {
+      layer.setLocked(true);
+    }
+    notifyListeners();
+  }
+
+  void setLayersUnlocked(List<Layer> layers) {
+    for (Layer layer in layers) {
+      layer.setLocked(false);
+    }
     notifyListeners();
   }
 

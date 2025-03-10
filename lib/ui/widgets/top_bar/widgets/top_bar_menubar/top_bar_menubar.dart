@@ -130,6 +130,77 @@ class TopBarMenubar extends StackedView<TopBarMenubarModel> {
       ),
       BarButton(
         text: Text(
+          'Layer',
+          style: AppStyles.menubarItemTextStyle,
+        ),
+        submenu: SubMenu(
+          menuItems: [
+            MenuButton(
+              onTap: viewModel.onLock,
+              text: Text(
+                'Lock',
+                style: AppStyles.menuTextStyle,
+              ),
+              shortcutText: 'Ctrl+L',
+              shortcut: const SingleActivator(LogicalKeyboardKey.keyL, control: true),
+            ),
+            MenuButton(
+              onTap: viewModel.onUnlock,
+              text: Text(
+                'Unlock',
+                style: AppStyles.menuTextStyle,
+              ),
+              shortcutText: 'Ctrl+Shift+L',
+              shortcut: const SingleActivator(LogicalKeyboardKey.keyL, control: true, shift: true),
+            ),
+            MenuButton(
+              onTap: viewModel.onUnlockAll,
+              text: Text(
+                'Unlock All',
+                style: AppStyles.menuTextStyle,
+              ),
+              shortcutText: 'Ctrl+Alt+Shift+L',
+              shortcut: const SingleActivator(LogicalKeyboardKey.keyL, control: true, alt: true, shift: true),
+            ),
+            MenuDivider(height: 2.0, color: Colors.white12),
+            MenuButton(
+              onTap: viewModel.onHide,
+              text: Text(
+                'Hide',
+                style: AppStyles.menuTextStyle,
+              ),
+            ),
+            MenuButton(
+              onTap: viewModel.onShow,
+              text: Text(
+                'Show',
+                style: AppStyles.menuTextStyle,
+              ),
+            ),
+            MenuButton(
+              onTap: viewModel.onShowAll,
+              text: Text(
+                'Show All',
+                style: AppStyles.menuTextStyle,
+              ),
+              shortcutText: 'Ctrl+Alt+Shift+H',
+              shortcut: const SingleActivator(LogicalKeyboardKey.keyH, control: true, alt: true, shift: true),
+            ),
+            MenuDivider(height: 2.0, color: Colors.white12),
+            MenuButton(
+              onTap: viewModel.onDelete,
+              text: Text(
+                'Delete',
+                style: AppStyles.menuTextStyle,
+              ),
+              shortcutText: 'Del',
+              shortcut: const SingleActivator(LogicalKeyboardKey.delete),
+            ),
+          ],
+        ),
+      ),
+      BarButton(
+        text: Text(
           'Help',
           style: AppStyles.menubarItemTextStyle,
         ),

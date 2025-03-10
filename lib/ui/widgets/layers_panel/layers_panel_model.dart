@@ -40,7 +40,7 @@ class LayersPanelModel extends ReactiveViewModel {
   }
 
   void onToggleLayerLocked(Layer layer) {
-    _layersService.setLayerLocked(layer, !layer.locked);
+    _layersService.setLayerLock(layer, !layer.locked);
   }
 
   void onReorderLayers(int oldIndex, int newIndex) {

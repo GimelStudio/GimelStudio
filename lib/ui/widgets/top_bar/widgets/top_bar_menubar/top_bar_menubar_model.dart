@@ -4,9 +4,11 @@ import 'package:gimelstudio/app/app.dialogs.dart';
 import 'package:gimelstudio/app/app.locator.dart';
 import 'package:gimelstudio/models/canvas_item.dart';
 import 'package:gimelstudio/models/document.dart';
+import 'package:gimelstudio/models/layer.dart';
 import 'package:gimelstudio/services/document_service.dart';
 import 'package:gimelstudio/services/evaluation_service.dart';
 import 'package:gimelstudio/services/export_service.dart';
+import 'package:gimelstudio/services/layers_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -16,13 +18,19 @@ class TopBarMenubarModel extends BaseViewModel {
   final _exportService = locator<ExportService>();
   final _evaluationService = locator<EvaluationService>();
   final _dialogService = locator<DialogService>();
+  final _layersService = locator<LayersService>();
 
   List<Document> get documents => _documentsService.documents;
   Document? get activeDocument => _documentsService.activeDocument;
 
   List<CanvasItem>? get items => activeDocument?.result;
 
+  List<Layer> get layers => _layersService.layers;
+  List<Layer> get selectedLayers => _layersService.selectedLayers;
+
   ShortcutRegistryEntry? shortcutsEntry;
+
+  /// FILE
 
   /// Menu item and keybinding event to create a new document in a tab.
   Future<void> onNew() async {
@@ -91,12 +99,60 @@ class TopBarMenubarModel extends BaseViewModel {
     // }
   }
 
+  /// EDIT
+
   /// Menu item to open the preferences dialog.
   Future<void> onPreferences() async {
     await _dialogService.showCustomDialog(
       variant: DialogType.preferences,
     );
   }
+
+  /// LAYER
+
+  /// Menu item and keybinding event to lock the currently selected layers, if any.
+  void onLock() {
+    _layersService.setLayersLocked(selectedLayers);
+    _evaluationService.evaluate();
+  }
+
+  /// Menu item and keybinding event to unlock the currently selected layers, if any.
+  void onUnlock() {
+    _layersService.setLayersUnlocked(selectedLayers);
+    _evaluationService.evaluate();
+  }
+
+  /// Menu item and keybinding event to unlock all layers, if any.
+  void onUnlockAll() {
+    _layersService.setLayersUnlocked(layers);
+    _evaluationService.evaluate();
+  }
+
+  /// Menu item and keybinding event to hide the currently selected layers, if any.
+  void onHide() {
+    _layersService.setLayersHidden(selectedLayers);
+    _evaluationService.evaluate();
+  }
+
+  /// Menu item and keybinding event to show the currently selected layers, if any.
+  void onShow() {
+    _layersService.setLayersVisible(selectedLayers);
+    _evaluationService.evaluate();
+  }
+
+  /// Menu item and keybinding event to show all layers, if any.
+  void onShowAll() {
+    _layersService.setLayersVisible(layers);
+    _evaluationService.evaluate();
+  }
+
+  /// Menu item and keybinding event to delete the currently selected layers, if any.
+  void onDelete() {
+    _layersService.deleteLayers(selectedLayers);
+    _evaluationService.evaluate();
+  }
+
+  /// HELP
 
   /// Menu item to launch the Gimel Studio website in a browser.
   Future<void> onVisitWebsite() async {
