@@ -76,6 +76,6 @@ class MenuButton extends MenuEntry {
     super.icon,
     super.shortcut,
     super.shortcutText,
-    TextStyle shortcutStyle = const TextStyle(fontWeight: FontWeight.w400, color: Colors.white54, fontSize: 13.0),
+    TextStyle shortcutStyle = const TextStyle(fontWeight: FontWeight.normal, color: Colors.white54, fontSize: 13.0),
   }) : super(menuEntryType: MenuEntryType.menuButton, text: text, shortcutStyle: shortcutStyle);
 }

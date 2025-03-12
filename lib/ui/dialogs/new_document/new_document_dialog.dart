@@ -65,7 +65,7 @@ class NewDocumentDialog extends StackedView<NewDocumentDialogModel> {
                         'Gimel Studio',
                         style: TextStyle(
                           color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                           fontSize: 40.0,
                           letterSpacing: -0.3,
                         ),
@@ -75,7 +75,7 @@ class NewDocumentDialog extends StackedView<NewDocumentDialogModel> {
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.normal,
-                          fontSize: 14.0,
+                          fontSize: 13.0,
                           letterSpacing: 0.5,
                           height: 0.8,
                         ),

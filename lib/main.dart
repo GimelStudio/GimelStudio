@@ -31,6 +31,7 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Color(0xFF292929),
         brightness: Brightness.dark,
+        fontFamily: 'Roboto',
         sliderTheme: const SliderThemeData(
           thumbColor: Colors.white,
           activeTrackColor: Colors.white,
