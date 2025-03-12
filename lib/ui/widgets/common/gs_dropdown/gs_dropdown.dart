@@ -35,8 +35,6 @@ class _GsDropdownState extends State<GsDropdown> {
       enableFilter: true,
       expandedInsets: EdgeInsets.zero,
       onSelected: (String? value) => widget.onChange.call(value),
-      // ignore: body_might_complete_normally_nullable
-      searchCallback: (entries, query) {},
       trailingIcon: PhosphorIcon(
         PhosphorIcons.caretDown(PhosphorIconsStyle.light),
         color: widget.isEnabled ? Colors.white70 : Colors.white70.withAlpha(153),

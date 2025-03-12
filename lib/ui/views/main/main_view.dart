@@ -61,8 +61,8 @@ class MainView extends StackedView<MainViewModel> {
                                 ),
                                 Area(
                                   size: 170.0,
-                                  max: 250.0,
-                                  min: 50.0,
+                                  max: 700.0,
+                                  min: 30.0,
                                   builder: (context, area) {
                                     return Column(
                                       children: [
@@ -117,16 +117,13 @@ class MainView extends StackedView<MainViewModel> {
                           ),
                           Area(
                             size: 320.0,
-                            max: 350.0,
+                            max: 700.0,
                             min: 180.0,
                             builder: (context, area) {
                               return MultiSplitView(
                                 axis: Axis.vertical,
                                 initialAreas: [
                                   Area(
-                                    // size: 70.0,
-                                    // max: 250.0,
-                                    // min: 50.0,
                                     builder: (context, area) {
                                       return const PropertiesPanel();
                                     },

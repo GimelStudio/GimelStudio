@@ -70,25 +70,25 @@ class TopBarMenubar extends StackedView<TopBarMenubarModel> {
               shortcutText: 'Ctrl+Alt+W',
               shortcut: const SingleActivator(LogicalKeyboardKey.keyW, control: true, alt: true),
             ),
-            MenuDivider(height: 2.0, color: Colors.white12),
-            MenuButton(
-              onTap: viewModel.onSave,
-              text: Text(
-                'Save',
-                style: AppStyles.menuTextStyle,
-              ),
-              shortcutText: 'Ctrl+S',
-              shortcut: const SingleActivator(LogicalKeyboardKey.keyS, control: true),
-            ),
-            MenuButton(
-              onTap: viewModel.onSaveAs,
-              text: Text(
-                'Save As…',
-                style: AppStyles.menuTextStyle,
-              ),
-              shortcutText: 'Ctrl+Shift+S',
-              shortcut: const SingleActivator(LogicalKeyboardKey.keyS, control: true, shift: true),
-            ),
+            // MenuDivider(height: 2.0, color: Colors.white12),
+            // MenuButton(
+            //   onTap: viewModel.onSave,
+            //   text: Text(
+            //     'Save',
+            //     style: AppStyles.menuTextStyle,
+            //   ),
+            //   shortcutText: 'Ctrl+S',
+            //   shortcut: const SingleActivator(LogicalKeyboardKey.keyS, control: true),
+            // ),
+            // MenuButton(
+            //   onTap: viewModel.onSaveAs,
+            //   text: Text(
+            //     'Save As…',
+            //     style: AppStyles.menuTextStyle,
+            //   ),
+            //   shortcutText: 'Ctrl+Shift+S',
+            //   shortcut: const SingleActivator(LogicalKeyboardKey.keyS, control: true, shift: true),
+            // ),
             MenuDivider(height: 2.0, color: Colors.white12),
             MenuButton(
               onTap: viewModel.onExport,
