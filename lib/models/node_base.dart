@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:gimelstudio/models/eval_info.dart';
+import 'package:gimelstudio/models/node_categories.dart';
 import 'package:gimelstudio/models/node_output.dart';
 import 'package:gimelstudio/models/node_property.dart';
 
@@ -8,11 +9,12 @@ class Node {
   Node({
     this.id = '', // Id will be assigned when created in the node graph.
     required this.idname,
+    required this.category,
     this.label = '...',
     this.selected = false,
     required this.properties,
     required this.outputs,
-    this.size = const Size(36.0, 130.0),
+    this.size = const Size(130.0, 36.0),
     this.position = const Offset(10.0, 10.0),
   });
 
@@ -23,6 +25,9 @@ class Node {
   /// This should be unique among all nodes.
   /// Example: 'integer_node'
   final String idname;
+
+  /// The category that this node belongs to.
+  final NodeCategory category;
 
   /// The node's displayed label.
   String label;
@@ -53,6 +58,11 @@ class Node {
   /// Use for the output node only.
   (Node, String)? get connectedNode {
     return null;
+  }
+
+  /// Get the node category color
+  Color get categoryColor {
+    return nodeDatatypeColors[category]!;
   }
 
   Property getPropertyByIdname(String idname) {
@@ -93,6 +103,7 @@ class Node {
   Node.fromJson(Map<String, dynamic> json)
       : id = json['id'] as String,
         idname = json['idname'] as String,
+        category = json['category'], // TODO
         label = json['label'] as String,
         selected = json['selected'] as bool,
         properties = {
