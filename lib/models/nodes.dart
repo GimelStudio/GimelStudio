@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gimelstudio/models/canvas_item.dart';
 import 'package:gimelstudio/models/eval_info.dart';
 import 'package:gimelstudio/models/node_base.dart';
+import 'package:gimelstudio/models/node_categories.dart';
 import 'package:gimelstudio/models/node_property.dart';
 import 'package:gimelstudio/models/photo.dart';
 
@@ -9,6 +10,7 @@ class IntegerNode extends Node {
   IntegerNode({
     super.id = '',
     super.idname = 'integer_corenode',
+    super.category = NodeCategory.input,
     super.label = 'Integer',
     super.selected,
     required super.properties,
@@ -41,6 +43,7 @@ class DoubleNode extends Node {
   DoubleNode({
     super.id = '',
     super.idname = 'double_corenode',
+    super.category = NodeCategory.input,
     super.label = 'Double',
     super.selected,
     required super.properties,
@@ -73,6 +76,7 @@ class RectangleNode extends Node {
   RectangleNode({
     super.id = '',
     super.idname = 'rectangle_corenode',
+    super.category = NodeCategory.canvasItem,
     super.label = 'Rectangle',
     super.selected,
     required super.properties,
@@ -130,6 +134,7 @@ class TextNode extends Node {
   TextNode({
     super.id = '',
     super.idname = 'text_corenode',
+    super.category = NodeCategory.canvasItem,
     super.label = 'Text',
     super.selected,
     required super.properties,
@@ -189,6 +194,7 @@ class ImageNode extends Node {
   ImageNode({
     super.id = '',
     super.idname = 'image_corenode',
+    super.category = NodeCategory.canvasItem,
     super.label = 'Image',
     super.selected,
     required super.properties,
@@ -242,6 +248,7 @@ class PhotoNode extends Node {
   PhotoNode({
     super.id = '',
     super.idname = 'photo_corenode',
+    super.category = NodeCategory.input,
     super.label = 'Photo',
     super.selected,
     required super.properties,
@@ -275,6 +282,7 @@ class BlurNode extends Node {
   BlurNode({
     super.id = '',
     super.idname = 'blur_corenode',
+    super.category = NodeCategory.effect,
     super.label = 'Blur',
     super.selected,
     required super.properties,
@@ -310,6 +318,7 @@ class AddNode extends Node {
   AddNode({
     super.id = '',
     super.idname = 'add_corenode',
+    super.category = NodeCategory.effect, // TODO
     super.label = 'Add',
     super.selected,
     required super.properties,
@@ -345,6 +354,7 @@ class OutputNode extends Node {
   OutputNode({
     super.id = '',
     super.idname = 'output_corenode',
+    super.category = NodeCategory.output,
     super.label = 'Output',
     super.selected,
     required super.properties,
