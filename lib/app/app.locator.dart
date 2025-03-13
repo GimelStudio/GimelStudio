@@ -11,6 +11,7 @@ import 'package:stacked_services/src/dialog/dialog_service.dart';
 import 'package:stacked_services/src/navigation/navigation_service.dart';
 import 'package:stacked_shared/stacked_shared.dart';
 
+import '../services/canvas_item_service.dart';
 import '../services/canvas_service.dart';
 import '../services/cursor_tool_service.dart';
 import '../services/document_service.dart';
@@ -63,4 +64,5 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => ImageToolService());
   locator.registerLazySingleton(() => TextToolService());
   locator.registerLazySingleton(() => OpenFileService());
+  locator.registerLazySingleton(() => CanvasItemService());
 }

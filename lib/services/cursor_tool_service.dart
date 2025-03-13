@@ -29,8 +29,10 @@ class CursorToolService implements ToolModeEventHandler {
 
   List<CanvasItem> get items => _documentService.activeDocument?.result ?? [];
 
-  Map<String, Offset> draggingStartPositions = {};
+  Map<String, Rect> lastRects = {};
   Offset? lastPosition;
+  Map<String, Offset> draggingStartPositions = {};
+  SelectionOverlayHandleSide? currentSelectionHandleSide;
 
   @override
   void activate() {}
@@ -44,6 +46,8 @@ class CursorToolService implements ToolModeEventHandler {
 
     if (selectedLayers.isNotEmpty && selectionOverlay != null) {
       SelectionOverlayHandleSide? handle = selectionOverlay!.getHandle(hoverPosition);
+      // Set the current overlay handle.
+      currentSelectionHandleSide = handle;
 
       switch (handle) {
         case SelectionOverlayHandleSide.top:
@@ -65,6 +69,8 @@ class CursorToolService implements ToolModeEventHandler {
         default:
           _canvasService.setMouseCursor(SystemMouseCursors.basic);
       }
+    } else {
+      _canvasService.setMouseCursor(SystemMouseCursors.basic);
     }
   }
 
@@ -73,16 +79,23 @@ class CursorToolService implements ToolModeEventHandler {
     Layer? layer = _layersService.getLayerFromPosition(event.localPosition, items, layers);
 
     if (layer == null) {
-      if (selectedLayers.length <= 1) {
+      if (selectedLayers.length <= 1 && currentSelectionHandleSide == null) {
         // User clicked in an empty area of the canvas.
         _layersService.deselectAllLayers();
       } else {
         // If the mouse down is not within the selection bounds, then deselect all.
         if (_overlaysService.isWithinSelectionBounds(event.localPosition) == false) {
-          _layersService.deselectAllLayers();
+          if (currentSelectionHandleSide == null) {
+            _layersService.deselectAllLayers();
+          }
         }
       }
       return;
+    } else {
+      // Don't allow a locked layer to be selected.
+      if (layer.locked == true) {
+        return;
+      }
     }
 
     // Multi-selection mode (LMB+Shift).
@@ -98,7 +111,9 @@ class CursorToolService implements ToolModeEventHandler {
     } else {
       // Single item selection.
       if (selectedLayers.length <= 1) {
-        _layersService.setLayerSelected(layer);
+        if (currentSelectionHandleSide == null) {
+          _layersService.setLayerSelected(layer);
+        }
       } else {
         // Multiple items are selected, but we are no longer in
         // multi-select mode so we change the selection to the
@@ -116,13 +131,18 @@ class CursorToolService implements ToolModeEventHandler {
 
         // Deselect all if mouse down was outside of the bounds of a canvas item.
         if (itemNode == null) {
-          _layersService.deselectAllLayers();
+          if (currentSelectionHandleSide == null) {
+            _layersService.deselectAllLayers();
+          }
           return;
         }
 
         Property xProp = itemNode.getPropertyByIdname('x');
         Property yProp = itemNode.getPropertyByIdname('y');
+        Property widthProp = itemNode.getPropertyByIdname('width');
+        Property heightProp = itemNode.getPropertyByIdname('height');
 
+        lastRects[layer.id] = Rect.fromLTWH(xProp.value, yProp.value, widthProp.value, heightProp.value);
         draggingStartPositions[layer.id] = Offset(xProp.value, yProp.value);
       }
     }
@@ -136,9 +156,14 @@ class CursorToolService implements ToolModeEventHandler {
     if (selectedLayers.length <= 1 && HardwareKeyboard.instance.isShiftPressed == false) {
       Layer? layer = _layersService.getLayerFromPosition(event.localPosition, items, layers);
       if (layer == null) {
-        _layersService.deselectAllLayers();
+        if (currentSelectionHandleSide == null) {
+          _layersService.deselectAllLayers();
+        }
       } else {
-        _layersService.setLayerSelected(layer);
+        // Don't allow a locked layer to be selected.
+        if (currentSelectionHandleSide == null && layer.locked == false) {
+          _layersService.setLayerSelected(layer);
+        }
       }
     }
 
@@ -148,13 +173,18 @@ class CursorToolService implements ToolModeEventHandler {
 
         // Deselect all if mouse down was outside of the bounds of a canvas item.
         if (itemNode == null) {
-          _layersService.deselectAllLayers();
+          if (currentSelectionHandleSide == null) {
+            _layersService.deselectAllLayers();
+          }
           return;
         }
 
         Property xProp = itemNode.getPropertyByIdname('x');
         Property yProp = itemNode.getPropertyByIdname('y');
+        Property widthProp = itemNode.getPropertyByIdname('width');
+        Property heightProp = itemNode.getPropertyByIdname('height');
 
+        lastRects[layer.id] = Rect.fromLTWH(xProp.value, yProp.value, widthProp.value, heightProp.value);
         draggingStartPositions[layer.id] = Offset(xProp.value, yProp.value);
       }
     }
@@ -165,7 +195,9 @@ class CursorToolService implements ToolModeEventHandler {
   @override
   void onPanUpdate(DragUpdateDetails event) {
     if (selectedLayers.isEmpty || draggingStartPositions.isEmpty || lastPosition == null) {
-      _layersService.deselectAllLayers();
+      if (currentSelectionHandleSide == null) {
+        _layersService.deselectAllLayers();
+      }
       return;
     }
 
@@ -176,14 +208,104 @@ class CursorToolService implements ToolModeEventHandler {
         if (itemNode != null) {
           Property xProp = itemNode.getPropertyByIdname('x');
           Property yProp = itemNode.getPropertyByIdname('y');
+          Property widthProp = itemNode.getPropertyByIdname('width');
+          Property heightProp = itemNode.getPropertyByIdname('height');
 
           Offset pos = Offset(
             event.localPosition.dx - lastPosition!.dx,
             event.localPosition.dy - lastPosition!.dy,
           );
 
-          _nodegraphsService.onEditNodePropertyValue(xProp, draggingStartPositions[layer.id]!.dx + (pos.dx));
-          _nodegraphsService.onEditNodePropertyValue(yProp, draggingStartPositions[layer.id]!.dy + (pos.dy));
+          Rect lastRect = lastRects[layer.id]!;
+          Rect newRect = Rect.fromLTRB(
+            lastRect.left,
+            lastRect.top,
+            lastRect.right,
+            lastRect.bottom,
+          );
+
+          switch (currentSelectionHandleSide) {
+            case SelectionOverlayHandleSide.top:
+              newRect = Rect.fromLTRB(
+                lastRect.left,
+                lastRect.top + pos.dy,
+                lastRect.right,
+                lastRect.bottom,
+              );
+            case SelectionOverlayHandleSide.topRight:
+              newRect = Rect.fromLTRB(
+                lastRect.left,
+                lastRect.top + pos.dy,
+                lastRect.right + pos.dx,
+                lastRect.bottom,
+              );
+            case SelectionOverlayHandleSide.right:
+              newRect = Rect.fromLTWH(
+                lastRect.left,
+                lastRect.top,
+                lastRect.width + pos.dx,
+                lastRect.height,
+              );
+            case SelectionOverlayHandleSide.bottomRight:
+              newRect = Rect.fromLTWH(
+                lastRect.left,
+                lastRect.top,
+                lastRect.width + pos.dx,
+                lastRect.height + pos.dy,
+              );
+            case SelectionOverlayHandleSide.bottom:
+              newRect = Rect.fromLTRB(
+                lastRect.left,
+                lastRect.top,
+                lastRect.right,
+                lastRect.bottom + pos.dy,
+              );
+            case SelectionOverlayHandleSide.bottomLeft:
+              newRect = Rect.fromLTRB(
+                lastRect.left + pos.dx,
+                lastRect.top,
+                lastRect.right,
+                lastRect.bottom + pos.dy,
+              );
+            case SelectionOverlayHandleSide.left:
+              newRect = Rect.fromLTWH(
+                lastRect.left + pos.dx,
+                lastRect.top,
+                lastRect.width - pos.dx,
+                lastRect.height,
+              );
+            case SelectionOverlayHandleSide.topLeft:
+              newRect = Rect.fromLTRB(
+                lastRect.left + pos.dx,
+                lastRect.top + pos.dy,
+                lastRect.right,
+                lastRect.bottom,
+              );
+            default:
+              Offset startPosition = draggingStartPositions[layer.id]!;
+
+              newRect = Rect.fromLTWH(
+                startPosition.dx + (pos.dx),
+                startPosition.dy + (pos.dy),
+                lastRect.width,
+                lastRect.height,
+              );
+          }
+
+          // TODO: proportionally scale if there is more than one selection
+          if (selectedLayers.length > 1) {
+            newRect = Rect.fromLTWH(
+              newRect.left,
+              newRect.top,
+              newRect.width,
+              newRect.height,
+            );
+          }
+
+          _nodegraphsService.onEditNodePropertyValue(xProp, newRect.topLeft.dx);
+          _nodegraphsService.onEditNodePropertyValue(yProp, newRect.topLeft.dy);
+          _nodegraphsService.onEditNodePropertyValue(widthProp, newRect.width);
+          _nodegraphsService.onEditNodePropertyValue(heightProp, newRect.height);
         }
       }
     }
@@ -193,13 +315,17 @@ class CursorToolService implements ToolModeEventHandler {
 
   @override
   void onPanCancel() {
+    lastRects = {};
     lastPosition = null;
     draggingStartPositions = {};
+    currentSelectionHandleSide = null;
   }
 
   @override
   void onPanEnd(DragEndDetails event) {
+    lastRects = {};
     lastPosition = null;
     draggingStartPositions = {};
+    currentSelectionHandleSide = null;
   }
 }

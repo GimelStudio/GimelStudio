@@ -21,6 +21,7 @@ import 'package:gimelstudio/services/canvas_service.dart';
 import 'package:gimelstudio/services/image_tool_service.dart';
 import 'package:gimelstudio/services/text_tool_service.dart';
 import 'package:gimelstudio/services/open_file_service.dart';
+import 'package:gimelstudio/services/canvas_item_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -48,6 +49,7 @@ import 'test_helpers.mocks.dart';
   MockSpec<ImageToolService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<TextToolService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<OpenFileService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<CanvasItemService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -73,6 +75,7 @@ void registerServices() {
   getAndRegisterImageToolService();
   getAndRegisterTextToolService();
   getAndRegisterOpenFileService();
+  getAndRegisterCanvasItemService();
 // @stacked-mock-register
 }
 
@@ -255,6 +258,13 @@ MockOpenFileService getAndRegisterOpenFileService() {
   _removeRegistrationIfExists<OpenFileService>();
   final service = MockOpenFileService();
   locator.registerSingleton<OpenFileService>(service);
+  return service;
+}
+
+MockCanvasItemService getAndRegisterCanvasItemService() {
+  _removeRegistrationIfExists<CanvasItemService>();
+  final service = MockCanvasItemService();
+  locator.registerSingleton<CanvasItemService>(service);
   return service;
 }
 // @stacked-mock-create

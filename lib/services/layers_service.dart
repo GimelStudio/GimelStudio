@@ -89,6 +89,7 @@ class LayersService with ListenableServiceMixin {
 
   void setLayerLock(Layer layer, bool isLocked) {
     layer.setLocked(isLocked);
+    setLayerSelected(layer);
     notifyListeners();
   }
 

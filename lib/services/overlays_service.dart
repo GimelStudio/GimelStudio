@@ -44,6 +44,13 @@ class OverlaysService with ListenableServiceMixin {
     return selectionOverlay?.itemBounds.contains(position) ?? false;
   }
 
+  SelectionOverlayHandleSide? getCurrentHandleSide(Offset position) {
+    if (selectedLayers.isNotEmpty && selectionOverlay != null) {
+      return selectionOverlay!.getHandle(position);
+    }
+    return null;
+  }
+
   SelectionBoxOverlay? calculateSelectionBoxOverlay(List<Layer> selectedLayers, double viewportScale) {
     if (selectedLayers.isEmpty) {
       return null;

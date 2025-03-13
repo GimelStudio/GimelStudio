@@ -6,6 +6,7 @@ import 'package:gimelstudio/models/layer.dart';
 import 'package:gimelstudio/models/node_base.dart';
 import 'package:gimelstudio/models/node_property.dart';
 import 'package:gimelstudio/models/tool.dart';
+import 'package:gimelstudio/services/canvas_item_service.dart';
 import 'package:gimelstudio/services/document_service.dart';
 import 'package:gimelstudio/services/evaluation_service.dart';
 import 'package:gimelstudio/services/layers_service.dart';
@@ -18,7 +19,9 @@ class RectangleToolService implements ToolModeEventHandler {
   final _nodegraphsService = locator<NodegraphsService>();
   final _overlaysService = locator<OverlaysService>();
   final _documentService = locator<DocumentService>();
+  final _canvasItemService = locator<CanvasItemService>();
 
+  Node? itemNode;
   Offset? draggingStartPosition;
   Offset? lastPosition;
 
@@ -46,26 +49,21 @@ class RectangleToolService implements ToolModeEventHandler {
   @override
   void onPanDown(DragDownDetails event) {
     Layer layer = _layersService.addNewLayer(type: 'rectangle');
-
-    Node? itemNode = _layersService.canvasItemNodeFromLayer(layer);
-
-    if (itemNode == null) {
-      return;
-    }
-
     _layersService.setLayerSelected(layer);
+    itemNode = _layersService.canvasItemNodeFromLayer(layer);
 
-    draggingStartPosition = event.localPosition;
+    if (itemNode != null) {
+      Property xProp = itemNode!.getPropertyByIdname('x');
+      Property yProp = itemNode!.getPropertyByIdname('y');
 
-    Property xProp = itemNode.getPropertyByIdname('x');
-    Property yProp = itemNode.getPropertyByIdname('y');
+      _nodegraphsService.onEditNodePropertyValue(xProp, event.localPosition.dx);
+      _nodegraphsService.onEditNodePropertyValue(yProp, event.localPosition.dy);
 
-    _nodegraphsService.onEditNodePropertyValue(xProp, event.localPosition.dx);
-    _nodegraphsService.onEditNodePropertyValue(yProp, event.localPosition.dy);
+      draggingStartPosition = event.localPosition;
+      lastPosition = event.localPosition;
 
-    lastPosition = event.localPosition;
-
-    _evaluationService.evaluate(evaluateLayers: selectedLayers);
+      _evaluationService.evaluate(evaluateLayers: selectedLayers);
+    }
   }
 
   @override
@@ -74,36 +72,54 @@ class RectangleToolService implements ToolModeEventHandler {
       return;
     }
 
-    for (Layer layer in selectedLayers) {
-      Node? itemNode = _layersService.canvasItemNodeFromLayer(layer);
+    if (itemNode != null) {
+      Property xProp = itemNode!.getPropertyByIdname('x');
+      Property yProp = itemNode!.getPropertyByIdname('y');
+      Property widthProp = itemNode!.getPropertyByIdname('width');
+      Property heightProp = itemNode!.getPropertyByIdname('height');
 
-      if (itemNode != null) {
-        Property widthProp = itemNode.getPropertyByIdname('width');
-        Property heightProp = itemNode.getPropertyByIdname('height');
+      Offset pos = Offset(
+        event.localPosition.dx - lastPosition!.dx,
+        event.localPosition.dy - lastPosition!.dy,
+      );
 
-        Offset pos = Offset(
-          event.localPosition.dx - lastPosition!.dx,
-          event.localPosition.dy - lastPosition!.dy,
-        );
+      double newX = xProp.value;
+      double newY = yProp.value;
+      double newWidth = widthProp.value + (pos.dx);
+      double newHeight = heightProp.value + (pos.dy);
 
-        _nodegraphsService.onEditNodePropertyValue(widthProp, widthProp.value + (pos.dx));
-        _nodegraphsService.onEditNodePropertyValue(heightProp, heightProp.value + (pos.dy));
+      Rect newRect = Rect.fromLTWH(newX, newY, newWidth, newHeight);
 
-        lastPosition = event.localPosition;
-      }
+      newX = newRect.topLeft.dx;
+      newY = newRect.topLeft.dy;
+      newWidth = newRect.width;
+      newHeight = newRect.height;
+
+      _nodegraphsService.onEditNodePropertyValue(xProp, newX);
+      _nodegraphsService.onEditNodePropertyValue(yProp, newY);
+      _nodegraphsService.onEditNodePropertyValue(widthProp, newWidth);
+      _nodegraphsService.onEditNodePropertyValue(heightProp, newHeight);
+
+      lastPosition = event.localPosition;
+
+      _evaluationService.evaluate(evaluateLayers: selectedLayers);
     }
-
-    _evaluationService.evaluate(evaluateLayers: selectedLayers);
   }
 
   @override
   void onPanCancel() {
+    _canvasItemService.normalizeNegativeCanvasItemCoords(itemNode, lastPosition!);
+
+    itemNode = null;
     lastPosition = null;
     draggingStartPosition = null;
   }
 
   @override
   void onPanEnd(DragEndDetails event) {
+    _canvasItemService.normalizeNegativeCanvasItemCoords(itemNode, lastPosition!);
+
+    itemNode = null;
     lastPosition = null;
     draggingStartPosition = null;
   }

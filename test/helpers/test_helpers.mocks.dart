@@ -15,6 +15,7 @@ import 'package:gimelstudio/models/node_base.dart' as _i4;
 import 'package:gimelstudio/models/node_property.dart' as _i18;
 import 'package:gimelstudio/models/photo.dart' as _i34;
 import 'package:gimelstudio/models/tool.dart' as _i2;
+import 'package:gimelstudio/services/canvas_item_service.dart' as _i37;
 import 'package:gimelstudio/services/canvas_service.dart' as _i32;
 import 'package:gimelstudio/services/cursor_tool_service.dart' as _i25;
 import 'package:gimelstudio/services/document_service.dart' as _i21;
@@ -2002,6 +2003,15 @@ class MockCursorToolService extends _i1.Mock implements _i25.CursorToolService {
 /// See the documentation for Mockito's code generation for more information.
 class MockRectangleToolService extends _i1.Mock implements _i28.RectangleToolService {
   @override
+  set itemNode(_i4.Node? _itemNode) => super.noSuchMethod(
+        Invocation.setter(
+          #itemNode,
+          _itemNode,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   set draggingStartPosition(_i6.Offset? _draggingStartPosition) => super.noSuchMethod(
         Invocation.setter(
           #draggingStartPosition,
@@ -2869,3 +2879,8 @@ class MockOpenFileService extends _i1.Mock implements _i36.OpenFileService {
         )),
       ) as _i10.Future<_i5.Document>);
 }
+
+/// A class which mocks [CanvasItemService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockCanvasItemService extends _i1.Mock implements _i37.CanvasItemService {}
