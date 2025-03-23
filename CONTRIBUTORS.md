@@ -10,15 +10,15 @@ Generally, a "direct" contribution includes contributing code, documentation, an
 *(Sorted alphabetically)*
 
 ```
-@benn1S
+@benn1S (Bernard Breljak)
 @Carlosbogo
-@Correct-Syntax
-@hudakjakub
+@Correct-Syntax (Noah Rahm)
+@hudakjakub (Jakub Hudák)
 @instance-id
-@iwoithe
-@jmherbst
-@JohJakob
-@tristanpoland
+@iwoithe (Ilias Woithe)
+@jmherbst (Jake Herbst)
+@JohJakob (Johannes Jakob)
+@tristanpoland (Tristan Poland)
 @ttddee
 @vdepizzol
 @yasuomaidana
@@ -30,7 +30,7 @@ Generally, a "direct" contribution includes contributing code, documentation, an
 *(Sorted alphabetically)*
 
 ```
-@Correct-Syntax
-@iwoithe
+@Correct-Syntax (Noah Rahm)
+@iwoithe (Ilias Woithe)
 @Metallicow
 ```
