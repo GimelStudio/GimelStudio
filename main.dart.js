@@ -7536,15 +7536,14 @@ case 3:return"video/*"
 case 1:return"video/*|image/*"
 case 5:return B.d.l_(b,"",new A.aaH())}},
 aaG:function aaG(){this.a=$},
-aaK:function aaK(a,b,c,d,e,f,g,h){var _=this
+aaK:function aaK(a,b,c,d,e,f,g){var _=this
 _.a=a
 _.b=b
 _.c=c
 _.d=d
 _.e=e
 _.f=f
-_.r=g
-_.w=h},
+_.r=g},
 aaL:function aaL(a,b,c,d){var _=this
 _.a=a
 _.b=b
@@ -7558,10 +7557,8 @@ _.a=a
 _.b=b
 _.c=c
 _.d=d},
-aaI:function aaI(a,b){this.a=a
-this.b=b},
-aaJ:function aaJ(a,b){this.a=a
-this.b=b},
+aaI:function aaI(a){this.a=a},
+aaJ:function aaJ(a){this.a=a},
 aaH:function aaH(){},
 Pk:function Pk(a,b){this.a=a
 this.b=b},
@@ -44624,40 +44621,41 @@ $1(a){if(J.f(a.type,"error"))this.a.pC(new A.IH("Could not load Blob from its UR
 $S:49}
 A.aaG.prototype={
 D5(a,b,c){return this.auF(!1,b,c)},
-auF(a,b,c){var s=0,r=A.H(t.fW),q,p=this,o,n,m,l,k,j,i,h,g
+auF(a,b,c){var s=0,r=A.H(t.fW),q,p=this,o,n,m,l,k,j,i,h
 var $async$D5=A.I(function(d,e){if(d===1)return A.E(e,r)
-while(true)switch(s){case 0:g={}
+while(true)switch(s){case 0:h={}
 if(c!==B.oK)throw A.d(A.dJ("You are setting a type ["+c.j(0)+"]. Custom extension filters are only allowed with FileType.custom, please change it or remove filters."))
-o=new A.bK(new A.aD($.az,t.SP),t.Eq)
-n=A.aWj(c,b)
-m=self
-l=m.document.createElement("input")
-l.type="file"
-l.draggable=!0
-l.multiple=!1
-l.accept=n
-l.style.display="none"
-g.a=!1
-k=new A.aaK(g,p,l,null,o,!1,!0,!1)
-j=new A.aaI(g,o)
-A.IG(l,"change",k,!1)
-l.addEventListener("change",A.bT(k))
-l.addEventListener("cancel",A.bT(j))
-m.window.addEventListener("focus",A.bT(j))
-m=p.a
-m===$&&A.b()
-i=m.firstChild
-for(;i!=null;){m.removeChild(i)
-m=p.a
-i=m.firstChild}l.click()
-m=p.a
-i=m.firstChild
-for(;i!=null;){m.removeChild(i)
-m=p.a
-i=m.firstChild}s=3
-return A.Q(o.a,$async$D5)
-case 3:h=e
-q=h==null?null:new A.CM(h)
+h.a=new A.bK(new A.aD($.az,t.SP),t.Eq)
+o=A.aWj(c,b)
+n=self
+m=n.document.createElement("input")
+m.type="file"
+m.draggable=!0
+m.multiple=!1
+m.accept=o
+m.style.display="none"
+h.b=!1
+l=new A.aaK(h,p,m,null,!1,!0,!1)
+k=new A.aaI(h)
+A.IG(m,"change",l,!1)
+m.addEventListener("change",A.bT(l))
+m.addEventListener("cancel",A.bT(k))
+n.window.addEventListener("focus",A.bT(k))
+n=p.a
+n===$&&A.b()
+j=n.firstChild
+for(;j!=null;){n.removeChild(j)
+n=p.a
+j=n.firstChild}m.click()
+n=p.a
+j=n.firstChild
+for(;j!=null;){n.removeChild(j)
+n=p.a
+j=n.firstChild}s=3
+return A.Q(h.a.a,$async$D5)
+case 3:i=e
+h.a=null
+q=i==null?null:new A.CM(i)
 s=1
 break
 case 1:return A.F(q,r)}})
@@ -44666,19 +44664,19 @@ A.aaK.prototype={
 a06(a){var s=0,r=A.H(t.H),q,p=this,o,n,m,l,k,j,i,h,g
 var $async$$1=A.I(function(b,c){if(b===1)return A.E(c,r)
 while(true)switch(s){case 0:g=p.a
-if(g.a){s=1
-break}g.a=!0
-g=p.c.files
-g.toString
-o=new A.aaL(A.a([],t.M7),g,p.d,p.e)
-for(n=t.d,m=t.gR,l=!p.r,k=0;k<g.length;++k){j=g.item(k)
+if(g.b){s=1
+break}g.b=!0
+o=p.c.files
+o.toString
+n=new A.aaL(g,A.a([],t.M7),o,p.d)
+for(g=t.d,m=t.gR,l=!p.f,k=0;k<o.length;++k){j=o.item(k)
 if(j==null)continue
 if(l){i=new self.FileReader()
-A.IG(i,"loadend",new A.aaM(i,o,j),!1)
+A.IG(i,"loadend",new A.aaM(i,n,j),!1)
 i.readAsDataURL(j)
 continue}h=$.az
 i=new self.FileReader()
-A.IG(i,"loadend",new A.aaN(i,o,j,new A.bK(new A.aD(h,n),m)),!1)
+A.IG(i,"loadend",new A.aaN(i,n,j,new A.bK(new A.aD(h,g),m)),!1)
 i.readAsArrayBuffer(j)}case 1:return A.F(q,r)}})
 return A.G($async$$1,r)},
 $1(a){return this.a06(a)},
@@ -44688,11 +44686,12 @@ $4(a,b,c,d){var s,r,q,p,o,n=b!=null
 if(n&&!B.m.ga1(b)){s=self
 r=new s.Blob(A.a([b],t.vs),{type:a.type})
 q=s.URL.createObjectURL(r)}else q=null
-s=this.a
+s=this.b
 p=a.name
 o=c==null?q:c
 s.push(new A.th(o,p,b,d,n?b.length:a.size))
-if(s.length>=this.b.length)this.d.fM(0,s)},
+if(s.length>=this.c.length){n=this.a.a
+if(n!=null)n.fM(0,s)}},
 $S:601}
 A.aaM.prototype={
 $1(a){var s=A.dg(this.a.result)
@@ -44708,12 +44707,13 @@ r.d.hT(0)},
 $S:49}
 A.aaI.prototype={
 $1(a){self.window.removeEventListener("focus",A.bT(this))
-A.r2(A.dY(0,0,1),null,t.z).cc(new A.aaJ(this.a,this.b),t.P)},
+A.r2(A.dY(0,0,1),null,t.z).cc(new A.aaJ(this.a),t.P)},
 $S:49}
 A.aaJ.prototype={
 $1(a){var s=this.a
-if(!s.a){s.a=!0
-this.b.fM(0,null)}},
+if(!s.b){s.b=!0
+s=s.a
+if(s!=null)s.fM(0,null)}},
 $S:33}
 A.aaH.prototype={
 $2(a,b){return(a.length===0?"":a+",")+" ."+b},
@@ -87767,7 +87767,7 @@ A.xj.prototype={}
 A.ls.prototype={
 K(){return"SupportedFileFormat."+this.b}}
 A.q0.prototype={
-bD(a,b,c){var s=null,r=A.cy(12),q=A.au(4279834905),p=t.D,o=A.bY(A.a([A.acy(A.fH(!1,A.cy(20),!0,new A.bM(B.ht,A.dM(A.aLW(B.wb),B.c_,18),s),s,!0,s,s,s,s,s,s,s,s,s,s,new A.a56(this),s,s,s,s,s),s,B.mf,"Close")],p),B.w,B.ib,B.x,0),n=A.aEZ("assets/gimel-studio-icon.png",170,170,B.bs,80,!0,80),m=A.cR(A.a([A.bz("Gimel Studio",s,s,s,s,A.cF(s,s,B.j,s,s,s,s,s,s,s,s,33,s,s,B.hM,s,1.3,!0,s,-0.01,s,s,s,s,s,s),s,s),A.bz("Version 0.7.0-alpha for Web",s,s,s,s,A.cF(s,s,B.j,s,s,s,s,s,s,s,s,13,s,s,B.as,s,1,!0,s,-0.01,s,s,s,s,s,s),s,s),A.bz("Built on "+b.M7()+" from branch master, commit "+B.e.af("7f5df52d7cf887a02f1f90b42f184cb42be47e20",0,7)+".",s,s,s,s,A.cF(s,s,B.c_,s,s,s,s,s,s,s,s,10,s,s,s,s,2.5,!0,s,s,s,s,s,s,s,s),s,s)],p),B.ag,B.y,B.x,0),l=A.cy(20),k=b.Q?4:0,j=A.a([A.dM(A.aYw(B.wb),B.c_,16)],p)
+bD(a,b,c){var s=null,r=A.cy(12),q=A.au(4279834905),p=t.D,o=A.bY(A.a([A.acy(A.fH(!1,A.cy(20),!0,new A.bM(B.ht,A.dM(A.aLW(B.wb),B.c_,18),s),s,!0,s,s,s,s,s,s,s,s,s,s,new A.a56(this),s,s,s,s,s),s,B.mf,"Close")],p),B.w,B.ib,B.x,0),n=A.aEZ("assets/gimel-studio-icon.png",170,170,B.bs,80,!0,80),m=A.cR(A.a([A.bz("Gimel Studio",s,s,s,s,A.cF(s,s,B.j,s,s,s,s,s,s,s,s,33,s,s,B.hM,s,1.3,!0,s,-0.01,s,s,s,s,s,s),s,s),A.bz("Version 0.7.0-alpha for Web",s,s,s,s,A.cF(s,s,B.j,s,s,s,s,s,s,s,s,13,s,s,B.as,s,1,!0,s,-0.01,s,s,s,s,s,s),s,s),A.bz("Built on "+b.M7()+" from branch master, commit "+B.e.af("962e7c3fbc90ce7b78ec2bb836be807bf2bfabb6",0,7)+".",s,s,s,s,A.cF(s,s,B.c_,s,s,s,s,s,s,s,s,10,s,s,s,s,2.5,!0,s,s,s,s,s,s,s,s),s,s)],p),B.ag,B.y,B.x,0),l=A.cy(20),k=b.Q?4:0,j=A.a([A.dM(A.aYw(B.wb),B.c_,16)],p)
 if(b.Q)j.push(A.bz("Copied!",s,s,s,s,A.cF(s,s,B.c_,s,s,s,s,s,s,s,s,11,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s))
 return A.aE_(q,s,new A.eZ(B.Dp,A.cR(A.a([o,A.cd(A.bY(A.a([A.cd(A.cR(A.a([A.bY(A.a([n,B.a1i,m,A.cR(A.a([A.acy(A.fH(!1,l,!0,new A.bM(B.ht,A.bY(j,B.w,B.y,B.x,k),s),s,!0,s,s,s,s,s,s,s,s,s,s,b.ganE(),s,s,s,s,s),s,B.mf,"Copy application info to the clipboard")],p),B.w,B.y,B.x,0)],p),B.ag,B.y,B.x,0),A.cd(new A.bM(B.HC,A.bY(A.a([A.cd(A.cR(A.a([new A.kU("Contribute",A.dM(A.aYH(B.Z),B.j,18),b.gat_(),s),new A.kU("Visit Website",A.dM(A.aYB(B.Z),B.j,18),b.gL6(),s),new A.kU("Join Community Chat",A.dM(A.aYu(B.Z),B.j,18),b.gatq(),s)],p),B.ag,B.y,B.x,4)),A.cd(A.cR(A.a([new A.kU("Credits",A.dM(A.aYp(B.Z),B.j,18),b.gat0(),s),new A.kU("Licenses",A.dM(A.aYz(B.Z),B.j,18),b.gatr(),s)],p),B.ag,B.y,B.x,4))],p),B.w,B.y,B.at,18),s))],p),B.ag,B.y,B.at,0))],p),B.w,B.y,B.x,0)),A.bz("Gimel Studio is free software licensed under the terms of the GPL-3.0 license.\n\xa9 2025 Gimel Studio contributors.",s,s,s,s,A.cF(s,s,B.c_,s,s,s,s,s,s,s,s,11,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s)],p),B.ag,B.y,B.at,0),s),B.dS,new A.cU(r,B.v))},
 e5(a){var s=t.S
@@ -87776,11 +87776,11 @@ A.a56.prototype={
 $0(){this.a.e.$1(new A.dz(!0,null,t.qs))},
 $S:0}
 A.q1.prototype={
-M7(){return A.aV8("2025-04-19T17:09:24Z").avX().split("T")[0]},
+M7(){return A.aV8("2025-05-11T09:40:32Z").avX().split("T")[0]},
 Ba(){var s=0,r=A.H(t.H),q=this
 var $async$Ba=A.I(function(a,b){if(a===1)return A.E(b,r)
 while(true)switch(s){case 0:s=2
-return A.Q(A.BB(new A.qp("Gimel Studio v0.7.0-alpha for Web built on "+q.M7()+" from branch master, commit 7f5df52d7cf887a02f1f90b42f184cb42be47e20.")),$async$Ba)
+return A.Q(A.BB(new A.qp("Gimel Studio v0.7.0-alpha for Web built on "+q.M7()+" from branch master, commit 962e7c3fbc90ce7b78ec2bb836be807bf2bfabb6.")),$async$Ba)
 case 2:q.Q=!0
 if(!q.b_$)q.eD()
 return A.F(null,r)}})
