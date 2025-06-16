@@ -513,10 +513,10 @@ packages:
     dependency: "direct main"
     description:
       name: math_expressions
-      sha256: "218dc65bed4726562bb31c53d8daa3cc824664b26fb72d77bc592757edf74ba0"
+      sha256: b5f6ffb67a558d564ff6fd433661640d13c7582ac80efbe6fc89c54e0a6ed580
       url: "https://pub.dev"
     source: hosted
-    version: "2.7.0"
+    version: "3.0.0"
   matrix4_transform:
     dependency: "direct main"
     description:
