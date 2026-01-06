@@ -30,6 +30,7 @@ So far, the code has been tested on Windows 10, Zorin OS (Linux), and the web.
 
 Gimel Studio aims to run fully cross-platform on desktop (Linux, Windows, and macOS) with "best-effort" support for running in the browser as a web application.
 
+A somewhat broken, alpha version demo of the web version is available at [app.gimelstudio.com](https://app.gimelstudio.com)
 
 ### Looking for the v0.6.x series?
 
