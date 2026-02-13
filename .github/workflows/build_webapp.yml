@@ -18,7 +18,7 @@ jobs:
       uses: subosito/flutter-action@v2
       with:
         channel: stable
-        flutter-version: 3.29.0
+        flutter-version: 3.41.0
     - run: flutter pub get
     - run: flutter build web --dart-define=PLATFORM=Web --dart-define=BUILD_DATETIME=${{ github.event.repository.updated_at}} --dart-define=BUILD_BRANCH=${{ github.head_ref || github.ref_name }} --dart-define=BUILD_COMMIT=${{ github.sha }}
     

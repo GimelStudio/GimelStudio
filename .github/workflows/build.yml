@@ -25,7 +25,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: 3.29.0
+          flutter-version: 3.41.0
 
       - name: Check Flutter install
         run: flutter doctor -v
@@ -60,7 +60,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: 3.29.0
+          flutter-version: 3.41.0
       - run: |
           flutter pub get
           flutter build windows --release --dart-define=PLATFORM=Windows --dart-define=BUILD_DATETIME=${{ github.event.repository.updated_at}} --dart-define=BUILD_BRANCH=${{ github.head_ref || github.ref_name }} --dart-define=BUILD_COMMIT=${{ github.sha }}
@@ -89,7 +89,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: 3.29.0
+          flutter-version: 3.41.0
       - run: |
           flutter pub get
           flutter build macos --release --dart-define=PLATFORM=macOs --dart-define=BUILD_DATETIME=${{ github.event.repository.updated_at}} --dart-define=BUILD_BRANCH=${{ github.head_ref || github.ref_name }} --dart-define=BUILD_COMMIT=${{ github.sha }}
