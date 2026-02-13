@@ -39,39 +39,44 @@ class NodeWidget extends StackedView<NodeWidgetModel> {
             onPanCancel: () => viewModel.onPanCancel(onNodeMoved),
             onPanEnd: (event) => viewModel.onPanEnd(event),
             child: Container(
-              height: node.size.width,
-              width: node.size.height,
+              width: node.size.width,
+              height: viewModel.getNodeHeight(node.properties.keys.toList()), // node.size.height,
               decoration: BoxDecoration(
                 color: Color(0xFF333333),
-                borderRadius: BorderRadius.circular(8.0),
+                borderRadius: BorderRadius.circular(6.0),
                 border: Border.all(
                   color: node.selected ? Colors.white70 : Color(0xFF1F1F1F),
                 ),
               ),
               child: Stack(
-                alignment: Alignment.center,
+                alignment: Alignment.topLeft,
                 clipBehavior: Clip.none,
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(left: 14.0, right: 14.0),
+                    padding: const EdgeInsets.only(left: 6.0, right: 6.0),
+                    decoration: BoxDecoration(
+                      color: node.categoryColor,
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(6.0), topRight: Radius.circular(6.0)),
+                    ),
                     child: Row(
-                      spacing: 4.0,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        // PhosphorIcon(
-                        //   widget.node.icon,
-                        //   color: Colors.white70,
-                        //   size: 14.0,
-                        // ),
                         Expanded(
                           child: Text(
                             node.label,
                             maxLines: 1,
                             style: TextStyle(
-                              color: node.selected ? Colors.white : Colors.white70,
-                              fontSize: 12.0,
-                              overflow: TextOverflow.ellipsis,
-                            ),
+                                color: Colors.white,
+                                fontSize: 11.0,
+                                overflow: TextOverflow.ellipsis,
+                                letterSpacing: -0.03,
+                                shadows: [
+                                  Shadow(
+                                    color: Colors.black26,
+                                    offset: Offset(1.0, 1.0),
+                                    blurRadius: 3.0,
+                                  ),
+                                ]),
                           ),
                         ),
                       ],
@@ -85,9 +90,24 @@ class NodeWidget extends StackedView<NodeWidgetModel> {
                         left: -6.0,
                         child: Align(
                           alignment: Alignment.centerLeft,
-                          child: NodeSocketWidget(
-                            type: property.dataType,
-                            isOutput: false,
+                          child: Row(
+                            spacing: 2.0,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              NodeSocketWidget(
+                                type: property.dataType,
+                                isOutput: false,
+                              ),
+                              Text(
+                                property.label,
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 11.0,
+                                  overflow: TextOverflow.ellipsis,
+                                  letterSpacing: -0.03,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),

@@ -8,9 +8,16 @@ class NodeWidgetModel extends BaseViewModel {
   Offset? _draggingInitialNodePosition;
   Offset? get draggingInitialNodePosition => _draggingInitialNodePosition;
 
+  double topHeight = 22.0;
+  double bottomHeight = 8.0;
+
   double layoutSocketsVertically(List<dynamic> list, dynamic item) {
     // TODO
-    return 8.0 + list.indexOf(item) * 20.0;
+    return topHeight + (list.indexOf(item) * 18.0);
+  }
+
+  double getNodeHeight(List<dynamic> list) {
+    return topHeight + (list.length * 18.0) + bottomHeight;
   }
 
   void onPanDown(DragDownDetails event, Node node) {

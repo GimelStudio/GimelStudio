@@ -101,7 +101,7 @@ class NodeRegistryService {
     Map<String, Node> defaultNodes = {};
 
     if (type == 'rectangle') {
-      Node rectangleNode = createNode('rectangle_corenode', Offset(200, 80));
+      Node rectangleNode = createNode('rectangle_corenode', Offset(200, 120));
       rectangleNode.selected = true;
       defaultNodes[rectangleNode.id] = rectangleNode;
     } else if (type == 'image') {
