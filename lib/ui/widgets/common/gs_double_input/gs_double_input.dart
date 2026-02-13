@@ -157,7 +157,9 @@ class _GsDoubleInputState extends State<GsDoubleInput> {
     try {
       ExpressionParser parser = GrammarParser();
       Expression expression = parser.parse(text);
-      dynamic evalValue = expression.evaluate(EvaluationType.REAL, ContextModel());
+
+      var evaluator = RealEvaluator(ContextModel());
+      dynamic evalValue = evaluator.evaluate(expression);
 
       if (evalValue is double) {
         value = evalValue;
