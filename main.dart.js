@@ -91493,7 +91493,7 @@ A.xy.prototype={}
 A.lt.prototype={
 I(){return"SupportedFileFormat."+this.b}}
 A.pR.prototype={
-bH(a,b,c){var s=null,r=A.cp(12),q=A.aj(4279834905),p=t.D,o=A.bS(A.b([A.adg(A.fR(!1,A.cp(20),!0,new A.bI(B.i_,A.dO(A.aO4(B.xp),B.c8,18),s),s,!0,s,s,s,s,s,s,s,new A.a5D(this),s,s,s,s,s),s,B.ng,"Close")],p),B.w,B.iH,B.x,0),n=A.aH_("assets/gimel-studio-icon.png",170,170,B.by,80,!0,80),m=A.cR(A.b([A.bt("Gimel Studio",s,s,s,s,A.co(s,s,B.j,s,s,s,s,s,s,s,s,33,s,s,B.ih,s,1.3,!0,s,-0.01,s,s,s,s,s,s),s,s),A.bt("Version 0.7.0-alpha for Web",s,s,s,s,A.co(s,s,B.j,s,s,s,s,s,s,s,s,13,s,s,B.ay,s,1,!0,s,-0.01,s,s,s,s,s,s),s,s),A.bt("Built on "+b.O5()+" from branch master, commit "+B.e.ai("1ac1e56577132ddf05430811210a12deb00b5e60",0,7)+".",s,s,s,s,A.co(s,s,B.c8,s,s,s,s,s,s,s,s,10,s,s,s,s,2.5,!0,s,s,s,s,s,s,s,s),s,s)],p),B.aa,B.z,B.x,0),l=A.cp(20),k=b.Q?4:0,j=A.b([A.dO(A.b_u(B.xp),B.c8,16)],p)
+bH(a,b,c){var s=null,r=A.cp(12),q=A.aj(4279834905),p=t.D,o=A.bS(A.b([A.adg(A.fR(!1,A.cp(20),!0,new A.bI(B.i_,A.dO(A.aO4(B.xp),B.c8,18),s),s,!0,s,s,s,s,s,s,s,new A.a5D(this),s,s,s,s,s),s,B.ng,"Close")],p),B.w,B.iH,B.x,0),n=A.aH_("assets/gimel-studio-icon.png",170,170,B.by,80,!0,80),m=A.cR(A.b([A.bt("Gimel Studio",s,s,s,s,A.co(s,s,B.j,s,s,s,s,s,s,s,s,33,s,s,B.ih,s,1.3,!0,s,-0.01,s,s,s,s,s,s),s,s),A.bt("Version 0.7.0-alpha for Web",s,s,s,s,A.co(s,s,B.j,s,s,s,s,s,s,s,s,13,s,s,B.ay,s,1,!0,s,-0.01,s,s,s,s,s,s),s,s),A.bt("Built on "+b.O5()+" from branch master, commit "+B.e.ai("d45e0534e505fe7b58c83cd1ca91c8d1ca0bbee2",0,7)+".",s,s,s,s,A.co(s,s,B.c8,s,s,s,s,s,s,s,s,10,s,s,s,s,2.5,!0,s,s,s,s,s,s,s,s),s,s)],p),B.aa,B.z,B.x,0),l=A.cp(20),k=b.Q?4:0,j=A.b([A.dO(A.b_u(B.xp),B.c8,16)],p)
 if(b.Q)j.push(A.bt("Copied!",s,s,s,s,A.co(s,s,B.c8,s,s,s,s,s,s,s,s,11,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s))
 return A.aG1(q,s,new A.f0(B.EB,A.cR(A.b([o,A.cd(A.bS(A.b([A.cd(A.cR(A.b([A.bS(A.b([n,B.a3t,m,A.cR(A.b([A.adg(A.fR(!1,l,!0,new A.bI(B.i_,A.bS(j,B.w,B.z,B.x,k),s),s,!0,s,s,s,s,s,s,s,b.garN(),s,s,s,s,s),s,B.ng,"Copy application info to the clipboard")],p),B.w,B.z,B.x,0)],p),B.aa,B.z,B.x,0),A.cd(new A.bI(B.J0,A.bS(A.b([A.cd(A.cR(A.b([new A.kS("Contribute",A.dO(A.b_F(B.a3),B.j,18),b.gaxP(),s),new A.kS("Visit Website",A.dO(A.b_z(B.a3),B.j,18),b.gN_(),s),new A.kS("Join Community Chat",A.dO(A.b_s(B.a3),B.j,18),b.gayf(),s)],p),B.aa,B.z,B.x,4)),A.cd(A.cR(A.b([new A.kS("Credits",A.dO(A.b_n(B.a3),B.j,18),b.gaxQ(),s),new A.kS("Licenses",A.dO(A.b_x(B.a3),B.j,18),b.gayg(),s)],p),B.aa,B.z,B.x,4))],p),B.w,B.z,B.az,18),s))],p),B.aa,B.z,B.az,0))],p),B.w,B.z,B.x,0)),A.bt("Gimel Studio is free software licensed under the terms of the GPL-3.0 license.\n\xa9 2025 Gimel Studio contributors.",s,s,s,s,A.co(s,s,B.c8,s,s,s,s,s,s,s,s,11,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s)],p),B.aa,B.z,B.az,0),s),B.ea,new A.cU(r,B.u))},
 e9(a){var s=t.S
@@ -91502,11 +91502,11 @@ A.a5D.prototype={
 $0(){this.a.e.$1(new A.dt(!0,null,t.qs))},
 $S:0}
 A.pS.prototype={
-O5(){return A.aX4("2026-02-13T01:28:00Z").aAS().split("T")[0]},
+O5(){return A.aX4("2026-02-22T21:06:25Z").aAS().split("T")[0]},
 C_(){var s=0,r=A.G(t.H),q=this
 var $async$C_=A.H(function(a,b){if(a===1)return A.D(b,r)
 for(;;)switch(s){case 0:s=2
-return A.O(A.BT(new A.qe("Gimel Studio v0.7.0-alpha for Web built on "+q.O5()+" from branch master, commit 1ac1e56577132ddf05430811210a12deb00b5e60.")),$async$C_)
+return A.O(A.BT(new A.qe("Gimel Studio v0.7.0-alpha for Web built on "+q.O5()+" from branch master, commit d45e0534e505fe7b58c83cd1ca91c8d1ca0bbee2.")),$async$C_)
 case 2:q.Q=!0
 if(!q.bF$)q.ev()
 return A.E(null,r)}})
