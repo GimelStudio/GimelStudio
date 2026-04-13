@@ -10,16 +10,6 @@
 
 !["Gimel Studio"](/assets/banner/gimel-studio.jpg "Gimel Studio")
 
-
-### Contributing
-
-Much of the application is in very heavy development at the moment, and there is plenty to do and figure out. If you would like to help out, feel free to join our [community chat](https://gimelstudio.zulipchat.com/join/sif32f3gjpnikveonzgc7zhw/). Additionally take a look at the [GitHub Issues](https://github.com/GimelStudio/GimelStudio/issues) for tasks to be done if you would like to contribute code. Issues labeled “Good first issue” will be the best for new contributors. 
-
-**Pull requests are welcome. :)**
-
-Please see the [CONTRIBUTING.md](CONTRIBUTING.md) for some details on contributing.
-
-
 ### Running the code
 
 - Install Flutter and Dart for your system following the instructions at [docs.flutter.dev](https://docs.flutter.dev/get-started/install),
