@@ -673,10 +673,10 @@ packages:
     dependency: "direct dev"
     description:
       name: stacked_generator
-      sha256: "5678872bea389e606846a143d1f9026298bab0ebb283d11461b722c02d902988"
+      sha256: "7c55ee711c8217c7561257599e57158b928d68888e9ab35d3ace58c5f7ef4929"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.1"
+    version: "2.0.3"
   stacked_services:
     dependency: "direct main"
     description:
