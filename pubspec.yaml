@@ -15,7 +15,7 @@ dependencies:
   stacked_services: ^1.1.0
 
   # Interface
-  multi_split_view: ^3.6.0
+  multi_split_view: ^3.6.2
   flutter_colorpicker: ^1.1.0
 
   # Core
