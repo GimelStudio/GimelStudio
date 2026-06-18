@@ -8,6 +8,14 @@
 </p>
 
 
+
+2026 Update: I've always disliked when maintainers just "abandon" a project without any notes, so that's what this is. This is the end of Gimel Studio for me. I've moved on and I don't see myself working on it anymore. 
+
+"The end of a matter is better than its beginning" (Ecclesiastes 7:8a AMP) It's sad and I'm still more attached to the project than I ought to be, but five years working on a project is **really** hard to forget. However, the end of a thing is where we truly learn, grow, and reflect on the journey we’ve taken. I've reflected a lot and I'm really thankful for the friendships I've formed from this project, the people I came in contact with, and everyone that supported my (sometimes crazy) ideas. So, **thank you.** :slight_smile: 
+
+*As a note: if someone wants to continue the project under the same name (Gimel Studio), let me know.*
+
+
 !["Gimel Studio"](/assets/banner/gimel-studio.jpg "Gimel Studio")
 
 ### Running the code
