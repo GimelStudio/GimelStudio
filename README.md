@@ -15,7 +15,7 @@
 
 "The end of a matter is better than its beginning" (Ecclesiastes 7:8a AMP) It's sad and I'm still more attached to the project than I ought to be, but five years working on a project is **really** hard to forget. However, the end of a thing is where we truly learn, grow, and reflect on the journey we’ve taken. I've reflected a lot and I'm really thankful for the friendships I've formed from this project, the people I came in contact with, and everyone that supported my (sometimes crazy) ideas. So, **thank you.** :slight_smile: 
 
-*As a note: if someone wants to continue the project under the same name (Gimel Studio), please let me know.*
+*Please note that after Jan. 2027, gimelstudio.com will expire and no longer be in the control of the project maintainers. The gimelstudio.github.io domain will remain.*
 
 ### Running the code
 
